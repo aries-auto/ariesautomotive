@@ -120,7 +120,7 @@ aI("text=GLO STEP;url=/applications/glo-step.html;");
 aI("text=WHEEL TO WHEEL;url=/applications/wheeltowheel.html;");
 aI("text=KIA SOUL ACC.;url=/applications/kia-soul.html;");
 aI("text=FIAT 500;url=/applications/fiat-500.html;");
-aI("text=MINI COOPER ACC.;url=/applications/MiniCooper.html;");
+aI("text=MINI COOPER ACC.;url=/applications/mini-cooper.html;");
 aI("text=SMART CAR ACC.;url=/applications/Smart-Car.html;");
 aI("text=MISC ACCESSORIES;url=/applications/misc-accessories.html;");
 aI("text=COMM.STEEL ACC.;url=/applications/commercial.html;");
