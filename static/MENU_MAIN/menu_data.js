@@ -47,22 +47,22 @@ subimagepadding=8;
 
 with(menuStyle=new mm_style()){
 styleid=1;
-bgimage="http://www.ariesautomotive.com/MENU_MAIN/baseline_button_off.gif";
+bgimage="/images/baseline_button_off.gif";
 bordercolor="#4D4D4D";
 borderstyle="solid";
 fontfamily="Verdana, Tahoma, Arial";
 fontsize="10px";
 fontstyle="normal";
 fontweight="bold";
-//image="http://www.ariesautomotive.com/MENU_MAIN/folder.gif";
+//image="/MENU_MAIN/folder.gif";
 itemheight=30;
 itemwidth=139;
 offcolor="#000000";
 oncolor="#660000";
-overbgimage="http://www.ariesautomotive.com/MENU_MAIN/baseline_button_off_over.gif";
-//overimage="http://www.ariesautomotive.com/MENU_MAIN/openfolder.gif";
+overbgimage="/images/baseline_button_off_over.gif";
+//overimage="/MENU_MAIN/openfolder.gif";
 subimagepadding=2;
-clickbgimage="http://www.ariesautomotive.com/MENU_MAIN/baseline_button_on.gif";
+clickbgimage="/images/baseline_button_on.gif";
 }
 
 with(milonic=new menuname("Main Menu")){
@@ -71,13 +71,13 @@ left=17;
 orientation="horizontal";
 style=menuStyle;
 top=17;
-aI("align=center;showmenu=Home;bgimage=/MENU_MAIN/baseline_back.gif;fontsize=12;fontstyle=bold;fontweight=bold;image=/MENU_MAIN/transparent.gif;itemwidth=100;overbgimage=/MENU_MAIN/baseline_back.gif;overimage=/MENU_MAIN/transparent.gif;status=Aries Automotive Home Page;text=HOME PAGE;url=http://www.ariesautomotive.com;");
+aI("align=center;showmenu=Home;bgimage=/images/baseline_back.gif;fontsize=12;fontstyle=bold;fontweight=bold;image=/images/transparent.gif;itemwidth=100;overbgimage=/images/baseline_back.gif;overimage=/images/transparent.gif;status=Aries Automotive Home Page;text=HOME PAGE;url=/;");
 aI("align=center;showmenu=NewItems;status=NEW ARIES PRODUCTS;text=New Products;");
 aI("align=center;showmenu=Bars;status=ALL ARIES BARS;text=All Aries Bars;");
 aI("align=center;showmenu=Vehicle;status=VEHICLE SPECIFIC;text=Vehicle Specific;");
-aI("align=center;status=PRO-SERIES;text=PRO-Series Sides;url=http://www.ariesautomotive.com/pro_series.html;");
-aI("align=center;status=GLO STEP;text=GLO Step Ovals;url=http://www.ariesautomotive.com/glostep.html;");
-aI("align=center;status=4'' OVAL SIDES;text=4'' Oval Sides;url=http://www.ariesautomotive.com/ovals.html;");
+aI("align=center;status=PRO-SERIES;text=PRO-Series Sides;url=/pro_series.html;");
+aI("align=center;status=GLO STEP;text=GLO Step Ovals;url=/glostep.html;");
+aI("align=center;status=4'' OVAL SIDES;text=4'' Oval Sides;url=/ovals.html;");
 aI("align=center;status=MISC ITEMS;showmenu=Misc Items;text=Misc Items;");
 aI("align=center;status=APPLICATION GUIDES;showmenu=Applications;text=Application Guides;");
 }
@@ -86,19 +86,19 @@ with(milonic=new menuname("Home")){
 left="offset=2";
 openstyle="down";
 style=submenuStyleHome;
-aI("text=Terms/Conditions;url=http://www.ariesautomotive.com/terms.html;status=TERMS AND CONDITIONS;");
-aI("text=Online Warranty Registration;url=http://ariesautomotive.com/warranty/registration.html;status=ONLINE WARRANTY REGISTRATION;");
+aI("text=Terms/Conditions;url=/terms.html;status=TERMS AND CONDITIONS;");
+aI("text=Online Warranty Registration;url=/warranty/registration.html;status=ONLINE WARRANTY REGISTRATION;");
 }
 
 with(milonic=new menuname("Vehicle")){
 left="offset=2";
 openstyle="down";
 style=submenuStyle;
-aI("text=Fiat 500;url=http://www.ariesautomotive.com/Fiat500.html;");
-aI("text=Mini Cooper;url=http://www.ariesautomotive.com/MiniCooper.html;");
-aI("text=Smart Car;url=http://www.ariesautomotive.com/SmartCar.html;");
-aI("text=Transit Connect;url=http://www.ariesautomotive.com/transit.html;");
-aI("text=Toyota FJ;url=http://www.ariesautomotive.com/fj.html;");
+aI("text=Fiat 500;url=/Fiat500.html;");
+aI("text=Mini Cooper;url=/MiniCooper.html;");
+aI("text=Smart Car;url=/SmartCar.html;");
+aI("text=Transit Connect;url=/transit.html;");
+aI("text=Toyota FJ;url=/fj.html;");
 aI("text=Jeep Products;url=http://www.ariesjeep.com;");
 }
 
@@ -106,45 +106,45 @@ with(milonic=new menuname("Applications")){
 left="offset=2";
 openstyle="down";
 style=submenuStyle;
-aI("text=GRILL/BRUSH GUARD;url=http://www.ariesautomotive.com/applications/grill-brush-guard.html;");
-aI("text=PRO-SERIES GG;url=http://www.ariesautomotive.com/applications/pro-seriesgg.html;");
-aI("text=3'' BULL BAR;url=http://www.ariesautomotive.com/applications/bullbar.html;");
-aI("text=4'' BIG HORN BULL BAR;url=http://www.ariesautomotive.com/applications/big-horn.html;");
-aI("text=SPORT BAR;url=http://www.ariesautomotive.com/applications/sportbar.html;");
-aI("text=SIDEBARS;url=http://www.ariesautomotive.com/applications/sidebars.html;");
-aI("text=BIG STEP BAR;url=http://www.ariesautomotive.com/applications/big-step.html;");
-aI("text=4'' OVAL TUBES;url=http://www.ariesautomotive.com/applications/oval-tubes.html;");
-aI("text=6'' OVAL TUBES;url=http://www.ariesautomotive.com/applications/6''-oval-tubes.html;");
-aI("text=PRO-SERIES;url=http://www.ariesautomotive.com/applications/pro-series.html;");
-aI("text=GLO STEP;url=http://www.ariesautomotive.com/applications/glo-step.html;");
-aI("text=WHEEL TO WHEEL;url=http://www.ariesautomotive.com/applications/wheeltowheel.html;");
-aI("text=KIA SOUL ACC.;url=http://www.ariesautomotive.com/applications/kia-soul.html;");
-aI("text=FIAT 500;url=http://www.ariesautomotive.com/applications/fiat-500.html;");
-aI("text=MINI COOPER ACC.;url=http://www.ariesautomotive.com/applications/MiniCooper.html;");
-aI("text=SMART CAR ACC.;url=http://www.ariesautomotive.com/applications/Smart-Car.html;");
-aI("text=MISC ACCESSORIES;url=http://www.ariesautomotive.com/applications/misc-accessories.html;");
-aI("text=COMM.STEEL ACC.;url=http://www.ariesautomotive.com/applications/commercial.html;");
+aI("text=GRILL/BRUSH GUARD;url=/applications/grill-brush-guard.html;");
+aI("text=PRO-SERIES GG;url=/applications/pro-seriesgg.html;");
+aI("text=3'' BULL BAR;url=/applications/bullbar.html;");
+aI("text=4'' BIG HORN BULL BAR;url=/applications/big-horn.html;");
+aI("text=SPORT BAR;url=/applications/sportbar.html;");
+aI("text=SIDEBARS;url=/applications/sidebars.html;");
+aI("text=BIG STEP BAR;url=/applications/big-step.html;");
+aI("text=4'' OVAL TUBES;url=/applications/oval-tubes.html;");
+aI("text=6'' OVAL TUBES;url=/applications/6''-oval-tubes.html;");
+aI("text=PRO-SERIES;url=/applications/pro-series.html;");
+aI("text=GLO STEP;url=/applications/glo-step.html;");
+aI("text=WHEEL TO WHEEL;url=/applications/wheeltowheel.html;");
+aI("text=KIA SOUL ACC.;url=/applications/kia-soul.html;");
+aI("text=FIAT 500;url=/applications/fiat-500.html;");
+aI("text=MINI COOPER ACC.;url=/applications/MiniCooper.html;");
+aI("text=SMART CAR ACC.;url=/applications/Smart-Car.html;");
+aI("text=MISC ACCESSORIES;url=/applications/misc-accessories.html;");
+aI("text=COMM.STEEL ACC.;url=/applications/commercial.html;");
 }
 
 with(milonic=new menuname("Misc Items")){
 left="offset=2";
 openstyle="down";
 style=submenuStyle;
-aI("text=Headache Racks;url=http://www.ariesautomotive.com/headacheracks.html;");
-aI("text=Security Lock Box;url=http://www.ariesautomotive.com/securitybox.html;");
-aI("text=Universal Mud Flaps;url=http://www.ariesautomotive.com/universalmudflaps.html;");
-aI("text=Specialty Items;url=http://www.ariesautomotive.com/specialty.html;");
-aI("text=Sales Support;url=http://www.ariesautomotive.com/salessupport.html;");
+aI("text=Headache Racks;url=/headacheracks.html;");
+aI("text=Security Lock Box;url=/securitybox.html;");
+aI("text=Universal Mud Flaps;url=/universalmudflaps.html;");
+aI("text=Specialty Items;url=/specialty.html;");
+aI("text=Sales Support;url=/salessupport.html;");
 }
 
 with(milonic=new menuname("NewItems")){
 left="offset=2";
 openstyle="down";
 style=submenuStyle;
-aI("text=6'' Oval Sides;url=http://www.ariesautomotive.com/6ovals.html;");
-aI("text=GLO-Step;url=http://www.ariesautomotive.com/glostep.html;");
-aI("text=PRO-Series;url=http://www.ariesautomotive.com/proseriesgrill.html;");
-aI("text=Universal Mud Flaps;url=http://www.ariesautomotive.com/universalmudflaps.html;");
+aI("text=6'' Oval Sides;url=/6ovals.html;");
+aI("text=GLO-Step;url=/glostep.html;");
+aI("text=PRO-Series;url=/proseriesgrill.html;");
+aI("text=Universal Mud Flaps;url=/universalmudflaps.html;");
 aI("text=Jeep Products;url=http://www.ariesjeep.com;");
 aI("text=Interior Products;url=http://www.ariesautomotiveinterior.com;");
 }
@@ -153,16 +153,16 @@ with(milonic=new menuname("Bars")){
 left="offset=2";
 openstyle="down";
 style=submenuStyle;
-aI("text=One Piece Grill Guard;url=http://ariesautomotive.com/aries_bar.html;");
-aI("text=Bull Bar;url=http://www.ariesautomotive.com/bull_bar.html;");
-aI("text=Big Horn;url=http://www.ariesautomotive.com/big_horn.html;");
-aI("text=Sport Bar;url=http://www.ariesautomotive.com/sport_bar.html;");
-aI("text=3'' Side Bars;url=http://www.ariesautomotive.com/sidebars.html;");
-aI("text=4'' Big Step;url=http://www.ariesautomotive.com/big_step.html;");
-aI("text=4'' Oval Sides;url=http://www.ariesautomotive.com/ovals.html;");
-aI("text=6'' Oval Sides;url=http://www.ariesautomotive.com/6ovals.html;");
-aI("text=GLO-Step;url=http://www.ariesautomotive.com/glostep.html;");
-aI("text=PRO-Series;url=http://www.ariesautomotive.com/proseriesgrill.html;");
+aI("text=One Piece Grill Guard;url=/aries_bar.html;");
+aI("text=Bull Bar;url=/bull_bar.html;");
+aI("text=Big Horn;url=/big_horn.html;");
+aI("text=Sport Bar;url=/sport_bar.html;");
+aI("text=3'' Side Bars;url=/sidebars.html;");
+aI("text=4'' Big Step;url=/big_step.html;");
+aI("text=4'' Oval Sides;url=/ovals.html;");
+aI("text=6'' Oval Sides;url=/6ovals.html;");
+aI("text=GLO-Step;url=/glostep.html;");
+aI("text=PRO-Series;url=/proseriesgrill.html;");
 }
 
 with(milonic=new menuname("MyMilonic")){
