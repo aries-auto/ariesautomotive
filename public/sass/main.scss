@@ -1,3 +1,4 @@
+$topHeaderBackColor: #1c0104;
 $headerMenuBackColor: #31070C;
 $headerColor: #26090D;
 $headerCallLinkColor: #b2312b;
@@ -21,6 +22,20 @@ body{
 			background-color: $headerMenuBackColor;
 			border: 0;
 			margin: 0;
+
+			.topnav{
+				background-color: $topHeaderBackColor;
+
+				.navbar-nav{
+					margin-right: 40px;
+					a{
+						color: $white;
+					}
+					a:hover{
+						color: $red;
+					}
+				}
+			}
 
 			.navbar-header{
 				border: 0;
