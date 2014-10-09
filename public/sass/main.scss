@@ -25,9 +25,11 @@ body{
 
 			.topnav{
 				background-color: $topHeaderBackColor;
-
+				margin: 0;
 				.navbar-nav{
-					margin-right: 40px;
+					ul{
+						margin-right: 40px;
+					}
 					a{
 						color: $white;
 					}
