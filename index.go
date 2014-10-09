@@ -2,38 +2,53 @@ package main
 
 import (
 	"flag"
-	"github.com/curt-labs/ariesautomotive/controllers"
-	"github.com/go-martini/martini"
 	"log"
 	"net/http"
-	"os"
+	"time"
+
+	"github.com/curt-labs/ariesautomotive/controllers"
+	"github.com/curt-labs/ariesautomotive/helpers/funcmap"
+	"github.com/go-martini/martini"
+	"github.com/martini-contrib/render"
 )
 
 var (
-	listenAddr = flag.String("http", ":3000", "http listen address")
+	port = flag.String("port", "8000", "Port for the application to start on")
 )
-
-var m *martini.Martini
 
 func main() {
 	flag.Parse()
 
-	m = martini.New()
+	m := martini.New()
 
-	os.Setenv("PORT", *listenAddr)
+	//middlewares
+	m.Use(martini.Static("public"))
+	m.Use(render.Renderer(render.Options{
+		Directory:       "templates",
+		Layout:          "layout",
+		Extensions:      []string{".tmpl", ".html"},
+		Funcs:           funcmap.FuncMap,
+		Delims:          render.Delims{"{{", "}}"},
+		Charset:         "UTF-8",
+		IndentJSON:      true,
+		HTMLContentType: "text/html",
+	}))
 
-	// Setup Middleware
-	m.Use(martini.Recovery())
-	m.Use(martini.Logger())
-	// m.Use(gzip.All())
-	m.Use(martini.Static("static"))
-
+	//routing
 	r := martini.NewRouter()
 
-	r.Get("/(.*)", controllers.Index)
+	r.Get("/", controllers.Index)
 
+	m.Map(make(map[string]interface{}, 0))
 	m.Action(r.Handle)
 
-	log.Printf("Starting server on 127.0.0.1:%s\n", *listenAddr)
-	log.Println(http.ListenAndServe(*listenAddr, m))
+	srv := http.Server{
+		Addr:           ":" + *port,
+		Handler:        m,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+	log.Printf("Server started on :%s\n", *port)
+	srv.ListenAndServe()
 }

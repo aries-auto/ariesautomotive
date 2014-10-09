@@ -1,6 +1,4 @@
 ariesautomotive
 ===============
 
-Aries Automotive Website
-
-http://www.ariesautomotive.com
+Aries Automotive Website Redesign

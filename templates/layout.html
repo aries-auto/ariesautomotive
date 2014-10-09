@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Aries Automotive</title>
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/css/main.css">
+	</head>
+	<body>
+		<header>
+			<nav role="navigation" class="navbar navbar-default">
+		        <div class="navbar-header">
+		            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+		                <span class="sr-only">Toggle navigation</span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </button>
+		            <a href="#" class="navbar-brand">
+		            	<div class="brand-logo"></div>
+		            	<img src="/img/header-logo.png" alt="Aries Automotive Logo">
+		            </a>
+		        </div>
+		        <div id="navbarCollapse" class="collapse navbar-collapse">
+		            <ul class="nav navbar-nav">
+		                <li><a href="#" title="Front Ends">FRONT ENDS <b class="caret"></b></a></li>
+		                <li><a href="#" title="Sides">SIDES <b class="caret"></b></a></li>
+		                <li><a href="#" title="By Vehicle">BY VEHICLE <b class="caret"></b></a></li>
+		                <li><a href="#" title="Misc Items">MISC ITEMS <b class="caret"></b></a></li>
+		                <li class="visible-lg visible-md"><a href="tel:+18888002743" title="CALL" class="call-link">CALL (888) 800-2743</a></li>
+		            </ul>
+		        </div>
+		    </nav>
+		</header>
+		{{yield}}
+		<footer>
+			<div class="container">
+				<div class="row footer-outter-row">
+					<div class="col-xs-3 col-md-3 col-lg-3">
+						<h4>REACH US</h4>
+						<address itemscope itemtype="//schema.org/Organization">
+							<div class="body">
+								<div class="phone-number-div">
+									<img src="/img/phone.png" alt="phone image">
+									<span class="phone-text">
+										CALL
+										<a itemprop="telephone" href="tel:+18888002743" title="Call Us">
+											(888) 800-2743
+										</a>
+									</span>
+								</div>
+								<span itemprop="name">Aries Automotive</span>
+								<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
+									<span itemprop="streetAddress">23935 Madison St., Unit B</span>
+									<br>
+									<span itemprop="addressLocality">Torrance,</span>
+									<span itemprop="addressRegion">CA</span>
+									<span itemprop="postalCode">90505</span>
+								</div>	
+							</div>
+						</address>
+					</div>
+					<div class="col-xs-3 col-md-3 col-lg-3">
+						<ul class="nav">
+			                <li><a href="#" title="About Us">ABOUT</a></li>
+			                <li><a href="#" title="Application Guides">APPLICATION GUIDES</a></li>
+			                <li><a href="#" title="Technical Support">TECH SUPPORT</a></li>
+			                <li><a href="#" title="Online Warranties">ONLINE WARRANTIES</a></li>
+			                <li><a href="#" title="Contact Us">CONTACT</a></li>
+		           		</ul>
+					</div>
+
+					<div class="col-xs-3 col-md-3 col-lg-3">
+						<h4>GET THE LATEST</h4>	
+						<div class="row">
+							<div class="col-xs-12 col-md-12 col-lg-12">
+								<a href="#" title="Visit us on Facebook">
+									<img src="/img/facebook-icon.png" alt="Facebook Logo">
+								</a>
+								<a href="#" title="Visit us on Twitter">
+									<img src="/img/twitter-icon.png" alt="Twitter Logo">
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-12 col-lg-12 sema-logo-div">
+								<img src="/img/sema-logo.png" alt="SEMA Logo">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-3 col-md-3 col-lg-3">
+						<img src="/img/footer-logo.png" alt="Aries Automotive" class="img-responsive">
+						<br>
+						<span>&copy; 1997 - {{CurrentYear}} ARIES AUTOMOTIVE <a href="#">TERMS & CONDITIONS</a></span>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script data-main="/js/bootstrapper" src="/js/lib/requirejs/require.js"></script>
+	</body>
+</html>

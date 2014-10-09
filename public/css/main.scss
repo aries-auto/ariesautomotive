@@ -1,0 +1,97 @@
+$headerMenuBackColor: #31070C;
+$headerColor: #26090D;
+$headerCallLinkColor: #b2312b;
+$footerColor: #999999;
+$footerNavColor: #b2312b;
+$white: #ffffff;
+$red: #ff0000;
+
+$icon-font-path: "../fonts/bootstrap/";
+@import "../js/lib/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "./homepage.scss";
+
+body{
+	background: url('/img/bgtexture.png');
+
+	header{
+		background-color: $headerMenuBackColor;
+		border: 0;
+		margin: 0;
+		.navbar{
+			background-color: $headerMenuBackColor;
+			border: 0;
+			margin: 0;
+
+			.navbar-header{
+				border: 0;
+				.navbar-toggle{
+					border: 0;
+				}
+				.navbar-brand{
+					height: 110px;
+				}
+			}
+
+			#navbarCollapse{
+				margin: 0;
+				border: 0;
+				.navbar-nav{
+					border: 0;
+					margin-top: 28px;
+
+					a{
+						color: $white;
+					}
+					a:hover{
+						color: $red;
+					}
+					a.call-link{
+						color: $headerCallLinkColor;
+					}
+					a.call-link:hover{
+						color: $headerCallLinkColor;
+					}
+				}
+			}
+		}
+	}
+
+	footer{
+		background: url('/img/footer-back.png');
+		color: $footerColor;
+
+		.container{
+			.footer-outter-row{
+				margin-top: 30px;
+				margin-bottom: 30px;
+			}
+
+			.sema-logo-div{
+				margin-top: 10px;
+			}
+		}
+
+		address{
+			.phone-number-div{
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+
+			.phone-text{
+				margin-left: 5px;
+			}
+		}
+
+		h4{
+			color: $white;
+		}
+		a{
+			color: $footerColor;
+		}
+		.nav{
+			a{
+				color: $footerNavColor;
+			}
+		}
+	}
+}
