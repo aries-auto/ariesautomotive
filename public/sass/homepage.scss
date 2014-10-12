@@ -6,20 +6,16 @@
 		font-weight: bold;
 	}
 
-	.hero-image{
-		position: relative;
-		width: 100%;
-		img{
-			width: 100%;
-		}
-
-		.hero-image-inner{
-			position: absolute;
-			top: 5px;
-			left: 20%;
-			p{
-				padding: 10px;
-				margin: 0;
+	#hero-image-carousel{
+		.carousel-inner{
+			.item{
+				.carousel-caption{
+					top: 0;
+					bottom: auto;
+					h2{
+						color: $headerColor;
+					}
+				}
 			}
 		}
 	}
