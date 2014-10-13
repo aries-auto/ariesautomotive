@@ -15,6 +15,10 @@ $icon-font-path: "../fonts/bootstrap/";
 body{
 	background: url('/img/bgtexture.png');
 
+	h1, h2, h3{
+		color: $headerColor;
+	}
+
 	header{
 		background-color: $headerMenuBackColor;
 		border: 0;
