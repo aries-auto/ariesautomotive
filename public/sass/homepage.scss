@@ -9,6 +9,9 @@
 	#hero-image-carousel{
 		.carousel-inner{
 			.item{
+				img{
+					width: 100%;
+				}
 				.carousel-caption{
 					top: 0;
 					bottom: auto;

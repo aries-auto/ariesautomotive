@@ -38,6 +38,7 @@ func main() {
 	r := martini.NewRouter()
 
 	r.Get("/", controllers.Index)
+	r.Get("/about", controllers.AboutUs)
 
 	m.Map(make(map[string]interface{}, 0))
 	m.Action(r.Handle)
