@@ -7,28 +7,23 @@ define([
 	'ui.router',
 	'./config',
 	'./controllers/index/index',
-	'./controllers/lookup/index',
-	'./controllers/parts/index',
-	'./controllers/category/index',
-	'./directives/integer',
-	'./directives/inView',
-	'./services/lookup'
+	'./controllers/contact/index',
+	'./services/geography'
 ], function (angular) {
 	'use strict';
 
 	return angular.module('app', [
 		'app.constants',
 		'app.index',
-		'app.lookup',
-		'app.parts',
-		'app.category',
+		'app.contact',
 		'app.services',
-		'app.directives',
 		'ui.router'
 	]).config(function ($urlRouterProvider,$interpolateProvider) {
 		$urlRouterProvider.otherwise('/');
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
+	}).value('AppConfig', {
+		APIURL : 'http://ariesautoapi.curtmfg.com',
+		APIKEY : 'eef1922f-2cba-11e4-8758-42010af0fd79'
 	});
-
 });

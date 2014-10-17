@@ -39,6 +39,7 @@ func main() {
 
 	r.Get("/", controllers.Index)
 	r.Get("/about", controllers.AboutUs)
+	r.Get("/contact", controllers.ContactUs)
 
 	m.Map(make(map[string]interface{}, 0))
 	m.Action(r.Handle)

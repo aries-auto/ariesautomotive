@@ -5,18 +5,14 @@ define([
 ], function (angular) {
 	'use strict';
 
-	return angular.module('app.index', [
+	return angular.module('app.contact', [
 		'app.constants',
 		'ui.router'
 	]).config(function ($stateProvider) {
 		$stateProvider
-			.state('index', {
-				templateUrl: 'js/modules/index/index.html',
-				controller: function ($scope, $inject) {
-				},
-				resolve: {
-				}
-		});
+			.state('contact', {
+				url: '/contact',
+				controller: 'ContactController'
+			});
 	});
-
 });
