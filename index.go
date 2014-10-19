@@ -40,6 +40,11 @@ func main() {
 	r.Get("/", controllers.Index)
 	r.Get("/about", controllers.AboutUs)
 	r.Get("/contact", controllers.ContactUs)
+	r.Get("/techsupport", controllers.TechSupport)
+	r.Get("/becomedealer", controllers.BecomeDealer)
+	r.Get("/appguides", controllers.AppGuides)
+	r.Get("/warranties", controllers.Warranties)
+	r.Get("/terms", controllers.TermsAndConditions)
 
 	m.Map(make(map[string]interface{}, 0))
 	m.Action(r.Handle)
