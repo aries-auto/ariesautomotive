@@ -8,7 +8,10 @@ define([
 	'./config',
 	'./controllers/index/index',
 	'./controllers/contact/index',
-	'./services/geography'
+	'./controllers/category/index',
+	'./services/geography',
+	'./services/category',
+
 ], function (angular) {
 	'use strict';
 
@@ -23,7 +26,7 @@ define([
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
 	}).value('AppConfig', {
-		APIURL : 'http://ariesautoapi.curtmfg.com',
+		APIURL : 'http://goapi.curtmfg.com',
 		APIKEY : 'eef1922f-2cba-11e4-8758-42010af0fd79'
 	});
 });
