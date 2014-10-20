@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"app/controllers"
+	"app/controllers/index"
 	"app/helpers/funcmap"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
@@ -37,14 +37,14 @@ func main() {
 	//routing
 	r := martini.NewRouter()
 
-	r.Get("/", controllers.Index)
-	r.Get("/about", controllers.AboutUs)
-	r.Get("/contact", controllers.ContactUs)
-	r.Get("/techsupport", controllers.TechSupport)
-	r.Get("/becomedealer", controllers.BecomeDealer)
-	r.Get("/appguides", controllers.AppGuides)
-	r.Get("/warranties", controllers.Warranties)
-	r.Get("/terms", controllers.TermsAndConditions)
+	r.Get("/", index.Index)
+	r.Get("/about", index.AboutUs)
+	r.Get("/contact", index.ContactUs)
+	r.Get("/techsupport", index.TechSupport)
+	r.Get("/becomedealer", index.BecomeDealer)
+	r.Get("/appguides", index.AppGuides)
+	r.Get("/warranties", index.Warranties)
+	r.Get("/terms", index.TermsAndConditions)
 
 	m.Map(make(map[string]interface{}, 0))
 	m.Action(r.Handle)
