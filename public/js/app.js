@@ -25,7 +25,7 @@ define([
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
 	}).value('AppConfig', {
-		APIURL : 'http://goapi.curtmfg.com',
+		APIURL : 'http://ariesautoapi.curtmfg.com',
 		APIKEY : 'eef1922f-2cba-11e4-8758-42010af0fd79'
 	});
 });
