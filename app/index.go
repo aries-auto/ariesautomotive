@@ -1,10 +1,8 @@
-package main
+package ariesauto
 
 import (
 	"flag"
-	"log"
 	"net/http"
-	"time"
 
 	"app/controllers/index"
 	"app/helpers/funcmap"
@@ -16,7 +14,7 @@ var (
 	port = flag.String("port", "8000", "Port for the application to start on")
 )
 
-func main() {
+func init() {
 	flag.Parse()
 
 	m := martini.New()
@@ -49,13 +47,5 @@ func main() {
 	m.Map(make(map[string]interface{}, 0))
 	m.Action(r.Handle)
 
-	srv := http.Server{
-		Addr:           ":" + *port,
-		Handler:        m,
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
-		MaxHeaderBytes: 1 << 20,
-	}
-	log.Printf("Server started on :%s\n", *port)
-	srv.ListenAndServe()
+	http.Handle("/", m)
 }
