@@ -4,8 +4,8 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('ContactController', ['$scope', 'Geography', function(scope, Geography){
-		Geography.GetCountryStates(function(countries, err){
+	module.controller('ContactController', ['$scope', 'GeographyService', function(scope, GeographyService){
+		GeographyService.GetCountryStates(function(countries, err){
 			if(err){
 				console.log(err);
 				return;

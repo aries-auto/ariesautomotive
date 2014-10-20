@@ -9,17 +9,16 @@ define([
 	'./controllers/index/index',
 	'./controllers/contact/index',
 	'./controllers/category/index',
-	'./services/geography',
-	'./services/category',
-
+	'./services/services'
 ], function (angular) {
 	'use strict';
 
 	return angular.module('app', [
 		'app.constants',
+		'app.services',
 		'app.index',
 		'app.contact',
-		'app.services',
+		'app.category',
 		'ui.router'
 	]).config(function ($urlRouterProvider,$interpolateProvider) {
 		$urlRouterProvider.otherwise('/');
