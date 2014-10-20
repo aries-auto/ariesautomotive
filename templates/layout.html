@@ -10,7 +10,7 @@
 		<header>
 			<nav role="navigation" class="navbar navbar-default">
 				<div class="row topnav visible-sm visible-md visible-lg">
-		        	<ul class="nav navbar-nav pull-right">
+		        	<ul class="nav navbar-nav pull-right top-right-nav">
 		        		<li><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a>
 		        		<li><a href="/about" title="About Us">ABOUT</a>
 		        		<li><a href="/techsupport" title="Technical Support">TECH SUPPORT</a>
@@ -34,14 +34,17 @@
 		        </div>
 		        <div id="navbarCollapse" class="collapse navbar-collapse" ng-controller="CategoryController">
 		            <ul class="nav navbar-nav">
-		            	<li ng-repeat="c in parentCats"><a href="/Category/[[c.id]]" title="">[[c.title]]<i class="caret"></i></a></li>
-		            	<!--
-		                <li><a href="#" title="Front Ends">FRONT ENDS <b class="caret"></b></a></li>
-		                <li><a href="#" title="Sides">SIDES <b class="caret"></b></a></li>
-		                <li><a href="#" title="By Vehicle">BY VEHICLE <b class="caret"></b></a></li>
-		                <li><a href="#" title="Miscellaneous Items">MISC ITEMS <b class="caret"></b></a></li>
-		            	-->
+		            	<li ng-repeat="c in parentCats" class="dropdown">
+		            		<a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown">[[c.title | uppercase]]
+								<i class="caret"></i>
+		            		</a>
+		            		<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="sc in c.sub_categories"><a href="/Category/[[sc.id]]">[[sc.title]]</a></li>
+		            		</ul>
+		            	</li>
 		                <li><a href="#" title="Application Guides">APPLICATION GUIDES <b class="caret"></b></a></li>
+		            </ul>
+		            <ul class="nav navbar-nav phoneNum">
 		                <li class="visible-sm visible-md visible-lg"><a href="tel:+18888002743" title="Call Us (888) 900-2743" class="call-link">CALL (888) 800-2743</a></li>
 		            </ul>
 		        </div>

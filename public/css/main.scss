@@ -10,10 +10,14 @@ $red: #ff0000;
 $icon-font-path: "../fonts/bootstrap/";
 @import "../js/lib/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "./homepage.scss";
+@import "./aboutus.scss";
 
 body{
 	background: url('/img/bgtexture.png');
 
+	h1, h2, h3{
+		color: $headerColor;
+	}
 
 	header{
 		background-color: $headerMenuBackColor;
@@ -27,15 +31,18 @@ body{
 			.topnav{
 				background-color: $topHeaderBackColor;
 				margin: 0;
+				font-size:13px;
 				.navbar-nav{
 					ul{
 						margin-right: 40px;
 					}
 					a{
 						color: $white;
+						padding-top:10px;
+						padding-bottom:10px;
 					}
 					a:hover{
-						color: $red;
+						color: $dddddd;
 					}
 				}
 			}
@@ -46,24 +53,33 @@ body{
 					border: 0;
 				}
 				.navbar-brand{
-					height: 90px;
 					padding: 0;
-					margin-top: 10px;
+					.brand-logo{
+						img{
+							margin: 10px;
+						}
+					}
 				}
 			}
 
 			#navbarCollapse{
 				margin: 0;
 				border: 0;
+
+				-moz-box-shadow: inset 0px 0px 25px #57111A;
+				-webkit-box-shadow: inset 0px 0px 25px #57111A;
+				box-shadow: inset 0px 0px 25px #57111A;
+				font-size:15px;
+
 				.navbar-nav{
 					border: 0;
-					margin-top: 28px;
+					margin-top: 15px;
 
 					a{
 						color: $white;
 					}
 					a:hover{
-						color: $red;
+						color: $dddddd;
 					}
 					a.call-link{
 						color: $headerCallLinkColor;
@@ -71,6 +87,37 @@ body{
 					a.call-link:hover{
 						color: $headerCallLinkColor;
 					}
+
+					li{
+						.dropdown-toggle{
+							background-color: $headerMenuBackColor;
+
+						}
+						.dropdown-menu{
+							margin-top:17px;
+							li{
+								a{
+									color: $headerMenuBackColor;
+								}
+							}
+							li:hover{
+								background-color:#cccccc;
+							}
+							
+						}
+
+					}
+				}
+				.phoneNum{
+					margin-top: 0px;
+					border-left: 1px solid #000000;
+					padding-top: 15px;
+					/* margin-right: 0px; */
+					margin-bottom: 0px;
+					padding-bottom: 0px;
+					height: 80px;
+					min-height: 100%;
+					box-shadow: inset 1px 0px 0px #57111A;	
 				}
 			}
 		}
