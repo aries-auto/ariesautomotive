@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aries-auto/ariesautomotive/controllers"
-	"github.com/aries-auto/ariesautomotive/helpers/funcmap"
+	"app/controllers"
+	"app/helpers/funcmap"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 )
