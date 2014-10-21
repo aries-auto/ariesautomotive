@@ -9,6 +9,7 @@ define([
 	'./controllers/index/index',
 	'./controllers/contact/index',
 	'./controllers/category/index',
+	'./controllers/part/index',
 	'./services/services'
 ], function (angular) {
 	'use strict';
@@ -19,6 +20,7 @@ define([
 		'app.index',
 		'app.contact',
 		'app.category',
+		'app.part',
 		'ui.router'
 	]).config(function ($urlRouterProvider,$interpolateProvider) {
 		$urlRouterProvider.otherwise('/');

@@ -62,6 +62,11 @@ body{
 				}
 			}
 
+			#navbarSeperator{
+				height:2px;
+				background-color:#cccccc;
+			}
+
 			#navbarCollapse{
 				margin: 0;
 				border: 0;
@@ -102,6 +107,7 @@ body{
 							background-color:#ffffff;
 							margin-top:17px;
 							border-bottom: 4px solid #af231c;
+							margin-right:5px;
 							li{
 								a{
 									color: $headerMenuBackColor;
@@ -164,6 +170,10 @@ body{
 		.nav{
 			a{
 				color: $footerNavColor;
+				background-color:transparent;
+			}
+			a:hover{
+				background-color:transparent;
 			}
 		}
 	}
@@ -172,11 +182,13 @@ body{
 
 .open > .dropdown-menu {
   -webkit-transform: scale(1, 1);
-  transform: scale(1, 1);  
+  transform: scale(1, 1);
+  min-width:100%;
   
 }
 .open > .dropdown-menu li a {
-  color: #000;  
+  color: #000;
+  min-width:100%;  
 }
 .dropdown-menu li a{
   color: #fff;
