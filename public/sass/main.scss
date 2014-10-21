@@ -15,9 +15,13 @@ $icon-font-path: "../fonts/bootstrap/";
 
 body{
 	background: url('/img/bgtexture.png');
-
+	font-family: "proxima-nova-condensed",sans-serif;
 	h1, h2, h3{
 		color: $headerColor;
+		font-family: "ff-good-headline-web-pro-con",sans-serif; 
+	}
+	p{
+		font-family: "proxima-nova-condensed",sans-serif;
 	}
 
 	header{
