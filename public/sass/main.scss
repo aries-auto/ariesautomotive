@@ -153,6 +153,22 @@ body{
 			.sema-logo-div{
 				margin-top: 10px;
 			}
+			.footerNav{
+				padding:0px 0px;
+				padding-bottom:16px;
+				ul{
+					li{
+						padding:0px;
+						padding-top:10px;
+						a{
+							padding:0px;
+						}
+						a:hover{
+							color:#ccc;
+						}
+					}
+				}
+			}
 		}
 
 		address{
@@ -166,6 +182,20 @@ body{
 			}
 		}
 
+		.conditions{
+			font-size:12px;
+			.terms{
+				text-decoration:underline;
+			}
+
+		}
+
+		.social{
+			padding-left:0px;
+			h4{
+				padding-left:15px;
+			}
+		}
 		h4{
 			color: $white;
 		}
