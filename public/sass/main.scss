@@ -34,9 +34,10 @@ body{
 			margin: 0;
 
 			.topnav{
+
 				background-color: $topHeaderBackColor;
 				margin: 0;
-				font-size:13px;
+				font-size:20px;
 				.navbar-nav{
 					ul{
 						margin-right: 40px;
@@ -79,7 +80,7 @@ body{
 				-moz-box-shadow: inset 0px 0px 25px #57111A;
 				-webkit-box-shadow: inset 0px 0px 25px #57111A;
 				box-shadow: inset 0px 0px 25px #57111A;
-				font-size:16px;
+				font-size:24px;
 
 				.navbar-nav{
 					border: 0;
@@ -107,6 +108,9 @@ body{
 
 						a{
 							padding: 10px 9px;
+							font-family: "ff-good-headline-web-pro-con","ff-good-headline-web-pro-con-n4",serif;
+							font-weight:400;
+							font-style:normal
 						}
 						.dropdown-toggle{
 							background-color: $headerMenuBackColor;
@@ -115,6 +119,7 @@ body{
 						.dropdown-menu{
 							background-color:#ffffff;
 							margin-top:17px;
+							font-size:18px;
 							border-bottom: 4px solid $altRed;
 							margin-right:5px;
 							li{
@@ -172,6 +177,9 @@ body{
 						}
 					}
 				}
+			}
+			.footerLogo{
+				max-height:110px;
 			}
 		}
 
