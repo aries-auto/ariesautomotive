@@ -50,5 +50,21 @@ define(['angular'], function(angular){
 				});
 			}
 		};
+	}]).factory('TestimonialService', ['$http', 'AppConfig', function($http, AppConfig){
+		return {
+			GetRandom : function(callback){
+				$http({
+					method: 'GET',
+					url: AppConfig.APIURL + '/testimonials?key=' + AppConfig.APIKEY,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+					}
+				}).success(function(data, status, headers, config){
+					callback(data, null);
+				}).error(function(data, status, headers, config){
+					callback(null, data);
+				});
+			}
+		};
 	}]);
 });

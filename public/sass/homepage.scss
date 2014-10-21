@@ -1,7 +1,7 @@
 .home-container{
 	.red-transparent-button{
 		background: transparent;
-		color: #af231c;
+		color: $altRed;
 		font-weight: bold;
 		border:0px;
 	}
@@ -16,6 +16,43 @@
 					top: 0;
 					bottom: auto;
 				}
+			}
+		}
+	}
+
+	.featuredProducts {
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:8px;
+		background-color:#ffffff;
+		text-align:center;
+		-webkit-box-shadow: 1px 0 10px 2px #ccc;
+		-moz-box-shadow: 1px 0 10px 2px #ccc;
+		box-shadow: 1px 0 10px 2px #ccc;
+		.featuredProd{
+			h4{
+				color: $altRed;
+				font-size:18px;
+				font-weight:bold;
+			}
+		}
+	}
+
+	.testimonials {
+		.testimonial{
+			h4{
+				color: $altRed;
+				font-size:18px;
+				font-weight:bold;
+			}
+			p{
+				margin: 0 0 2px;
+			}
+			.customerName{
+				color: #000000;
+				font-weight:bold;
+				margin-top:0px;
+				font-size:16px;
 			}
 		}
 	}
