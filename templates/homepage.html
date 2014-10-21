@@ -63,7 +63,7 @@
 	<div class="container">
 		<div class="row">
 		  <div class="col-md-12" ng-controller="PartController">
-		  	<h3>Featured Products</h3>
+		  	<h3>FEATURED PRODUCTS</h3>
 		  	<!--
 				<ul>
 					<li ng-repeat="p in latestParts">[[p.short_description]]</li>
@@ -73,19 +73,19 @@
 			<!-- Featured Products is just for presentation, it will be replaced with real products once better images are available. -->
 			<div class="col-md-12 featuredProducts">
 				<div class="featuredProd col-md-3">
-					<h4>Bull Bar</h4>
+					<h4>BULL BAR</h4>
 					<img src="/img/BullBar.jpg" alt="Aries Bull Bar" />
 				</div>
 				<div class="featuredProd col-md-3">
-					<h4>Grill Guard</h4>
+					<h4>GRILL GUARD</h4>
 					<img src="/img/GrillGuard.jpg" alt="Aries Grill Guard" />
 				</div>
 				<div class="featuredProd col-md-3">
-					<h4>Sports Bar</h4>
+					<h4>SPORTS BAR</h4>
 					<img src="/img/sportsbar.jpg" alt="Aries Sports Bar" />
 				</div>
 				<div class="featuredProd col-md-3">
-					<h4>Interior</h4>
+					<h4>INTERIOR</h4>
 					<img src="/img/interiorFeaturedProd.jpg" alt="Aries Interior" />
 				</div>
 			</div>
@@ -93,29 +93,20 @@
 		</div>
 	</div>
 
-
 	<div class="container">
 		<div class="row">
 		  <div class="col-md-12" ng-controller="HomeController">
-		  	<h3>From our Customers</h3>
-		  	<!--
-				<ul>
-					<li ng-repeat="p in latestParts">[[p.short_description]]</li>
-				</ul>
-			-->
-
-			<!-- Featured Products is just for presentation, it will be replaced with real products once better images are available. -->
+		  	<h3>FROM OUR CUSTOMERS</h3>
 			<div class="col-md-12 testimonials">
 				<div ng-repeat="t in testimonials | limitTo:2" class="testimonial col-md-6">
-					<h4>[[t.title]]</h4>
+					<h4>[[t.title | uppercase]]</h4>
 					<p>[[t.content]]</p>
-					<span class="customerName">- [[t.firstName]] [[t.lastName]], [[t.location]]</span>
+					<span class="customerName">- [[t.firstName | uppercase]] [[t.lastName | uppercase]], [[t.location | uppercase]]</span>
 				</div>
 			</div>
 		  </div>
 		</div>
 	</div>
 	<br />
-
 
 </div>

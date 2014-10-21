@@ -55,7 +55,7 @@ define(['angular'], function(angular){
 			GetRandom : function(callback){
 				$http({
 					method: 'GET',
-					url: AppConfig.APIURL + '/testimonials?key=' + AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/testimonials?randomize=true&count=2&key=' + AppConfig.APIKEY,
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
