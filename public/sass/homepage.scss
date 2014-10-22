@@ -3,18 +3,27 @@
 		background: transparent;
 		color: $altRed;
 		font-weight: bold;
-		border:0px;
+		border:1px solid $altRed;
+		padding-left:15px;
+		padding-right:15px;
 	}
 
 	#hero-image-carousel{
 		.carousel-inner{
 			.item{
 				img{
-					width: 100%;
+					width:100%;
 				}
 				.carousel-caption{
 					top: 0;
 					bottom: auto;
+					.bigText{
+						font-size:40px;
+						color:$headerColor;
+						font-family: "proxima-nova-condensed",sans-serif;
+						text-shadow: 0 0 4px rgba(255, 255, 255, 1);
+						font-weight:700;
+					}
 				}
 			}
 		}
@@ -42,8 +51,8 @@
 		.testimonial{
 			h4{
 				color: $altRed;
-				font-size:18px;
-				font-weight:bold;
+				font-size:24px;
+				font-weight:700;
 			}
 			p{
 				margin: 0 0 2px;

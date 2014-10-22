@@ -10,7 +10,8 @@
 			<div class="item active">
 				<img src="/img/truck.png" alt="PRO SERIES Grill Guards">
 				<div class="carousel-caption">
-					<h2>A NEW ERA OF GRILL GUARDS IS HERE</h2>
+					<span class="bigText pull-right">A NEW ERA OF GRILL GUARDS IS HERE</span>
+					<div class="clearfix">&nbsp;</div>
 					<button class="pull-right red-transparent-button">VIEW PRO SERIES</button>
 				</div>
 			</div>
@@ -99,7 +100,7 @@
 		  	<h3>FROM OUR CUSTOMERS</h3>
 			<div class="col-md-12 testimonials">
 				<div ng-repeat="t in testimonials | limitTo:2" class="testimonial col-md-6">
-					<h4>[[t.title | uppercase]]</h4>
+					<h4>"[[t.title | uppercase]]"</h4>
 					<p>[[t.content]]</p>
 					<span class="customerName">- [[t.firstName | uppercase]] [[t.lastName | uppercase]], [[t.location | uppercase]]</span>
 				</div>

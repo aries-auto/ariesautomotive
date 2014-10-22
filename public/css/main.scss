@@ -15,9 +15,13 @@ $icon-font-path: "../fonts/bootstrap/";
 
 body{
 	background: url('/img/bgtexture.png');
-
+	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",serif;
 	h1, h2, h3{
 		color: $headerColor;
+		font-family: "ff-good-headline-web-pro-con",sans-serif; 
+	}
+	p{
+		font-family: "proxima-nova-condensed",sans-serif;
 	}
 
 	header{
@@ -30,9 +34,10 @@ body{
 			margin: 0;
 
 			.topnav{
+
 				background-color: $topHeaderBackColor;
 				margin: 0;
-				font-size:13px;
+				font-size:20px;
 				.navbar-nav{
 					ul{
 						margin-right: 40px;
@@ -41,13 +46,14 @@ body{
 						color: $white;
 						padding-top:10px;
 						padding-bottom:10px;
+						-webkit-font-smoothing: antialiased;
+						font-size:18px;
 					}
 					a:hover{
 						color: #dddddd;
 					}
 				}
 			}
-			.
 
 			.navbar-header{
 				border: 0;
@@ -76,7 +82,12 @@ body{
 				-moz-box-shadow: inset 0px 0px 25px #57111A;
 				-webkit-box-shadow: inset 0px 0px 25px #57111A;
 				box-shadow: inset 0px 0px 25px #57111A;
-				font-size:16px;
+				font-size:24px;
+
+				.extraMenu{
+					background-color:#cccccc;
+					color:$headerMenuBackColor:;
+				}
 
 				.navbar-nav{
 					border: 0;
@@ -84,6 +95,7 @@ body{
 
 					a{
 						color: $white;
+						-webkit-font-smoothing: antialiased;
 					}
 					a:hover{
 						color: #dddddd;
@@ -103,7 +115,7 @@ body{
 					li{
 
 						a{
-							padding: 10px 9px;
+
 						}
 						.dropdown-toggle{
 							background-color: $headerMenuBackColor;
@@ -112,6 +124,7 @@ body{
 						.dropdown-menu{
 							background-color:#ffffff;
 							margin-top:17px;
+							font-size:18px;
 							border-bottom: 4px solid $altRed;
 							margin-right:5px;
 							li{
@@ -154,6 +167,25 @@ body{
 			.sema-logo-div{
 				margin-top: 10px;
 			}
+			.footerNav{
+				padding:0px 0px;
+				padding-bottom:16px;
+				ul{
+					li{
+						padding:0px;
+						padding-top:10px;
+						a{
+							padding:0px;
+						}
+						a:hover{
+							color:#ccc;
+						}
+					}
+				}
+			}
+			.footerLogo{
+				max-height:110px;
+			}
 		}
 
 		address{
@@ -167,6 +199,20 @@ body{
 			}
 		}
 
+		.conditions{
+			font-size:12px;
+			.terms{
+				text-decoration:underline;
+			}
+
+		}
+
+		.social{
+			padding-left:0px;
+			h4{
+				padding-left:15px;
+			}
+		}
 		h4{
 			color: $white;
 		}
@@ -184,6 +230,7 @@ body{
 		}
 	}
 }
+
 
 
 .open > .dropdown-menu {

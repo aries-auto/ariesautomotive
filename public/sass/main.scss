@@ -15,13 +15,16 @@ $icon-font-path: "../fonts/bootstrap/";
 
 body{
 	background: url('/img/bgtexture.png');
-	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",serif;
+	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
+	-webkit-font-smoothing: antialiased;
 	h1, h2, h3{
 		color: $headerColor;
-		font-family: "ff-good-headline-web-pro-con",sans-serif; 
+		font-family: "ff-good-headline-web-pro-con",sans-serif;
+		font-weight:700;
 	}
 	p{
 		font-family: "proxima-nova-condensed",sans-serif;
+		font-size:18px;
 	}
 
 	header{
@@ -34,7 +37,6 @@ body{
 			margin: 0;
 
 			.topnav{
-
 				background-color: $topHeaderBackColor;
 				margin: 0;
 				font-size:20px;
@@ -46,6 +48,8 @@ body{
 						color: $white;
 						padding-top:10px;
 						padding-bottom:10px;
+						-webkit-font-smoothing: antialiased;
+						font-size:20px;
 					}
 					a:hover{
 						color: #dddddd;
@@ -81,6 +85,11 @@ body{
 				-webkit-box-shadow: inset 0px 0px 25px #57111A;
 				box-shadow: inset 0px 0px 25px #57111A;
 				font-size:24px;
+
+				.extraMenu{
+					color:#cccccc;
+					background-color:$topHeaderBackColor;
+				}
 
 				.navbar-nav{
 					border: 0;
@@ -151,24 +160,44 @@ body{
 		background: url('/img/footer-back.png');
 		color: $footerColor;
 
+
 		.container{
 			.footer-outter-row{
 				margin-top: 30px;
 				margin-bottom: 30px;
 			}
 
+			.addressInfo{
+				font-size:18px;
+			}
+			.addressName{
+				font-size:18px;
+				font-weight:700;
+			}
+
+			font-family: "proxima-nova-condensed",sans-serif;
+
+			h4{
+						font-family: "ff-good-headline-web-pro-con",sans-serif;
+						font-weight:700;
+						font-size:28px;
+			}
+
+
 			.sema-logo-div{
 				margin-top: 10px;
 			}
 			.footerNav{
 				padding:0px 0px;
-				padding-bottom:16px;
+				padding-bottom:55px;
 				ul{
 					li{
 						padding:0px;
 						padding-top:10px;
+						font-size:20px;
 						a{
 							padding:0px;
+
 						}
 						a:hover{
 							color:#ccc;
@@ -189,11 +218,12 @@ body{
 
 			.phone-text{
 				margin-left: 5px;
+				font-size:20px;
 			}
 		}
 
 		.conditions{
-			font-size:12px;
+			font-size:16px;
 			.terms{
 				text-decoration:underline;
 			}
