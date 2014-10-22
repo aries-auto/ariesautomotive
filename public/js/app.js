@@ -29,5 +29,13 @@ define([
 	}).value('AppConfig', {
 		APIURL : 'http://ariesautoapi.curtmfg.com',
 		APIKEY : 'eef1922f-2cba-11e4-8758-42010af0fd79'
-	});
+	}).controller('AppController', ['$scope','CategoryService', function(scope, CategoryService){
+		CategoryService.GetParents(function(parentCats, err){
+			if(err){
+				console.log(err);
+				return;
+			}
+			scope.parentCats = parentCats;
+		});
+	}])
 });

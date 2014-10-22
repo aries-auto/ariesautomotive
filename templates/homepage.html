@@ -1,4 +1,4 @@
-<div class="home-container">
+<div class="home-container" ng-controller="HomeController">
 	<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			<li data-target="#hero-image-carousel" data-slide-to="0" class="active"></li>
@@ -101,7 +101,7 @@
 
 	<div class="container">
 		<div class="row">
-		  <div class="col-md-12" ng-controller="HomeController">
+		  <div class="col-md-12">
 		  	<h3>FROM OUR CUSTOMERS</h3>
 			<div class="col-md-12 testimonials">
 				<div ng-repeat="t in testimonials | limitTo:2" class="testimonial col-md-6">

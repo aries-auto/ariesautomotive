@@ -4,6 +4,19 @@ define(['angular'], function(angular){
 	angular.module('app.services',
 		[]).factory('CategoryService', ['$http', 'AppConfig', function($http, AppConfig){
 		return {
+			GetCategory : function(catid, callback){
+				$http({
+					method: 'GET',
+					url: AppConfig.APIURL + '/category/' + catid + '?key=' + AppConfig.APIKEY,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+					}
+				}).success(function(data, status, headers, config){
+					callback(data, null);
+				}).error(function(data, status, headers, config){
+					callback(null, data);
+				});
+			},
 			GetParents : function(callback){
 				$http({
 					method: 'GET',
