@@ -22,6 +22,20 @@ body{
 		font-family: "ff-good-headline-web-pro-con",sans-serif;
 		font-weight:700;
 	}
+
+	h1{
+		font-size:38px;
+	}
+
+	h2{
+		font-size:36px
+	}
+
+	h3{
+		font-size:32px;
+	}
+
+
 	p{
 		font-family: "proxima-nova-condensed",sans-serif;
 		font-size:18px;
@@ -300,6 +314,8 @@ body{
   border-right: 6px solid transparent;
   border-left: 6px solid transparent;
 }
+
+
 
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
