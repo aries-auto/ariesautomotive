@@ -49,7 +49,7 @@ body{
 						padding-top:10px;
 						padding-bottom:10px;
 						-webkit-font-smoothing: antialiased;
-						font-size:20px;
+						font-size:20goapppx;
 					}
 					a:hover{
 						color: #dddddd;
@@ -299,4 +299,9 @@ body{
   left: 50%;
   border-right: 6px solid transparent;
   border-left: 6px solid transparent;
+}
+
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
 }
