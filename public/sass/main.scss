@@ -15,7 +15,7 @@ $icon-font-path: "../fonts/bootstrap/";
 
 body{
 	background: url('/img/bgtexture.png');
-	font-family: "proxima-nova-condensed",sans-serif;
+	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",serif;
 	h1, h2, h3{
 		color: $headerColor;
 		font-family: "ff-good-headline-web-pro-con",sans-serif; 
@@ -88,6 +88,7 @@ body{
 
 					a{
 						color: $white;
+						-webkit-font-smoothing: antialiased;
 					}
 					a:hover{
 						color: #dddddd;
@@ -107,10 +108,7 @@ body{
 					li{
 
 						a{
-							padding: 10px 9px;
-							font-family: "ff-good-headline-web-pro-con","ff-good-headline-web-pro-con-n4",serif;
-							font-weight:400;
-							font-style:normal
+
 						}
 						.dropdown-toggle{
 							background-color: $headerMenuBackColor;
@@ -225,6 +223,7 @@ body{
 		}
 	}
 }
+
 
 
 .open > .dropdown-menu {
