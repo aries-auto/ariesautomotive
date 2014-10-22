@@ -1,0 +1,13 @@
+<div class="category-container" ng-controller="CategoryController" ng-cloak>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 col-lg-12">
+				<h1>[[category.title]]</h1>
+
+				<ul>
+					<li ng-repeat="p in category.product_listing.parts">[[p.short_description]] - [[p.id]]</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

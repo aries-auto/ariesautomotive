@@ -14,6 +14,10 @@ func AboutUs(rw http.ResponseWriter, req *http.Request, bag map[string]interface
 	ren.HTML(200, "aboutus", bag)
 }
 
+func Category(rw http.ResponseWriter, req *http.Request, bag map[string]interface{}, ren render.Render) {
+	ren.HTML(200, "category", bag)
+}
+
 func ContactUs(rw http.ResponseWriter, req *http.Request, bag map[string]interface{}, ren render.Render) {
 	ren.HTML(200, "contactus", bag)
 }

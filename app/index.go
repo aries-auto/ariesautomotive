@@ -37,6 +37,7 @@ func init() {
 
 	r.Get("/", index.Index)
 	r.Get("/about", index.AboutUs)
+	r.Get("/category/:id", index.Category)
 	r.Get("/contact", index.ContactUs)
 	r.Get("/techsupport", index.TechSupport)
 	r.Get("/becomedealer", index.BecomeDealer)
