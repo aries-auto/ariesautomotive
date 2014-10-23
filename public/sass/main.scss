@@ -57,9 +57,17 @@ body{
 			margin: 0;
 
 			.topnav{
+
+				.topNavItem{
+					font-size:20px;
+					font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
+					-webkit-font-smoothing: antialiased;
+				}
 				background-color: $topHeaderBackColor;
 				margin: 0;
 				font-size:20px;
+				font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
+				-webkit-font-smoothing: antialiased;
 				.navbar-nav{
 					ul{
 						margin-right: 40px;
@@ -125,9 +133,13 @@ body{
 					}
 					a.call-link{
 						color: $headerCallLinkColor;
+						font-size:20px;
+						font-family: "proxima-nova-condensed",sans-serif;
 					}
 					a.call-link:hover{
 						color: $headerCallLinkColor;
+						font-size:20px;
+						font-family: "proxima-nova-condensed",sans-serif;
 					}
 					.open{
 						a{
@@ -137,6 +149,10 @@ body{
 
 					.navigationItem{
 						font-size:24px;
+						padding-top:5px;
+						font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
+						-webkit-font-smoothing: antialiased;
+
 					}
 
 					li{
@@ -168,7 +184,7 @@ body{
 				.phoneNum{
 					margin-top: 0px;
 					border-left: 1px solid #000000;
-					padding-top: 15px;
+					padding-top: 20px;
 					/* margin-right: 0px; */
 					margin-bottom: 0px;
 					padding-bottom: 0px;
