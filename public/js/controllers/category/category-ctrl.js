@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('CategoryController', ['$scope', '$location', 'CategoryService', function(scope, location, CategoryService){
+	module.controller('CategoryController', ['$scope', '$sce', '$location', 'CategoryService', function(scope, $sce, location, CategoryService){
 		var path = location.absUrl();
 		var parts = path.split('/');
 		var catID = parts.length - 1 > 0 ? parseInt(parts[parts.length - 1]) : 0;
@@ -16,5 +16,13 @@ define(['./module'], function (module) {
 			}
 			scope.category = cat;
 		})
+
+		scope.renderHTML = function(content){
+			console.log("here");
+			console.log($sce.trustAsHtml(content));
+			return $sce.trustAsHtml(content);
+		};
+
+
 	}]);
 });

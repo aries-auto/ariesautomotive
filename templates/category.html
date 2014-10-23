@@ -2,8 +2,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 col-lg-12">
-				<h1>[[category.title]]</h1>
-
+				<h1>[[category.title | uppercase]]</h1>
+				<div ng-repeat="cont in category.content">
+					<p ng-bind-html="getVideo(cont.value)"></p>
+				</div>
+				<hr />
+				<h2>[[category.title | uppercase]] PARTS</h2>
 				<ul>
 					<li ng-repeat="p in category.product_listing.parts">[[p.short_description]] - [[p.id]]</li>
 				</ul>
