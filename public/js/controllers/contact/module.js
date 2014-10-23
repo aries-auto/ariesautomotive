@@ -9,10 +9,16 @@ define([
 		'app.constants',
 		'ui.router'
 	]).config(function ($stateProvider) {
-		$stateProvider
-			.state('contact', {
-				url: '/contact',
-				controller: 'ContactController'
-			});
+		var contactState = {
+			name: 'contact',
+			url: '/contact',
+			views:{
+				'body':{
+					templateUrl: '/js/controllers/contact/index.html',
+					controller: 'ContactController'
+				}
+			}
+		};
+		$stateProvider.state(contactState);
 	});
 });

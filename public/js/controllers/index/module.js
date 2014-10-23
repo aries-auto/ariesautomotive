@@ -9,14 +9,17 @@ define([
 		'app.constants',
 		'ui.router'
 	]).config(function ($stateProvider) {
-		$stateProvider
-			.state('index', {
-				templateUrl: 'js/modules/index/index.html',
-				controller: function ($scope, $inject) {
-				},
-				resolve: {
+		var homeState = {
+			name: 'index',
+			url: '/',
+			views:{
+				'body':{
+					templateUrl: '/js/controllers/index/index.html',
+					controller: 'HomeController'
 				}
-		});
+			}
+		};
+		$stateProvider.state(homeState);
 	});
 
 });

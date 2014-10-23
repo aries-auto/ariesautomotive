@@ -9,14 +9,17 @@ define([
 		'app.constants',
 		'ui.router'
 	]).config(function ($stateProvider) {
-		$stateProvider
-			.state('part', {
-				templateUrl: 'js/modules/index/index.html',
-				controller: function ($scope, $inject) {
-				},
-				resolve: {
+		var partState = {
+			name: 'part',
+			url: '/part/:id',
+			views:{
+				'body':{
+					templateUrl: '/js/controllers/part/index.html',
+					controller: 'PartController'
 				}
-		});
+			}
+		};
+		$stateProvider.state(partState);
 	});
 
 });

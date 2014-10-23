@@ -11,14 +11,17 @@ define([
 		'ui.router',
 		'ngSanitize',
 	]).config(function ($stateProvider) {
-		$stateProvider
-			.state('category', {
-				templateUrl: 'js/modules/index/index.html',
-				controller: function ($scope, $inject) {
-				},
-				resolve: {
+		var catState = {
+			name: 'category',
+			url: '/category/:id',
+			views:{
+				'body':{
+					templateUrl: '/js/controllers/category/index.html',
+					controller: 'CategoryController'
 				}
-		});
+			}
+		};
+		$stateProvider.state(catState);
 	});
 
 });
