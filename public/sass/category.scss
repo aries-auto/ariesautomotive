@@ -6,10 +6,15 @@
 		.content{
 			font-size:18px;
 			font-family: "proxima-nova-condensed",sans-serif;
+			padding-bottom:30px;
 		}
 	}
 	#catPartsContainer{
+		background-color:white;
 		.product{
+			-webkit-box-shadow: 1px 0 10px 2px #ccc;
+			-moz-box-shadow: 1px 0 10px 2px #ccc;
+			box-shadow: 1px 0 10px 2px #ccc;
 
 			.productImage{
 				max-height:180px;
