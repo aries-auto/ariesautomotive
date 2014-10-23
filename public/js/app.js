@@ -20,6 +20,7 @@ define([
 	'./services/category',
 	'./services/geography',
 	'./services/part',
+	'./services/techSupport',
 	'./services/testimonial',
 	'./directives/inView'
 ], function (angular) {
@@ -30,6 +31,7 @@ define([
 		'app.services.category',
 		'app.services.geography',
 		'app.services.part',
+		'app.services.techSupport',
 		'app.services.testimonial',
 		'app.index',
 		'app.aboutus',

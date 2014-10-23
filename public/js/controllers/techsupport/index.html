@@ -1,8 +1,62 @@
 <div class="techsupport-container" ng-controller="TechSupportController">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-md-12 col-lg-12">
+			<div class="col-xs-6 col-md-6 col-lg-6">
 				<h1>TECH SUPPORT</h1>
+				<form>
+					<div class="form-group">
+						<label for="firstName">First Name:</label>
+						<input type="text"  class="form-control" name="firstName" ng-model="techSupport.contact.firstName">
+					</div>
+					<div class="form-group">
+						<label for="lastName">Last Name:</label>
+						<input type="text"  class="form-control" name="firstName" ng-model="techSupport.contact.lastName">
+					</div>
+					<div class="form-group">
+						<label for="phone">Phone:</label>
+						<input type="text"  class="form-control" name="phone" ng-model="techSupport.contact.phone">
+					</div>
+					<div class="form-group">
+						<label for="vehicleMake">Vehicle Make:</label>
+						<input type="text"  class="form-control" name="vehicleMake" ng-model="techSupport.vehicleMake">
+					</div>
+					<div class="form-group">
+						<label for="vehicleModel">Vehicle Model:</label>
+						<input type="text"  class="form-control" name="vehicleModel" ng-model="v.vehicleModel">
+					</div>
+					<div class="form-group">
+						<label for="vehicleYear">Vehicle Year:</label>
+						<input type="text"  class="form-control" name="vehicleYear" ng-model="techSupport.vehicleYear">
+					</div>
+					<div class="form-group">
+						<label for="purchaseDate">Date Of Purchase:</label>
+						<input type="text"  class="form-control" name="purchaseDate" ng-model="techSupport.purchaseDate">
+					</div>
+					<div class="form-group">
+						<label for="purchasedFrom">Purchased From:</label>
+						<input type="text"  class="form-control" name="purchasedFrom" ng-model="techSupport.purchasedFrom">
+					</div>
+					<div class="form-group">
+						<label for="dealerName">Dealer Name:</label>
+						<input type="text"  class="form-control" name="dealerName" ng-model="techSupport.dealerName">
+					</div>
+					<div class="form-group">
+						<label for="productCode">Product Code:</label>
+						<input type="text"  class="form-control" name="productCode" ng-model="techSupport.productCode">
+					</div>
+					<div class="form-group">
+						<label for="dateCode">Date Code:</label>
+						<input type="text"  class="form-control" name="dateCode" ng-model="techSupport.dateCode">
+					</div>
+					<div class="form-group">
+						<label for="issue">Explain Issue:</label>
+						<textarea name="issue"  class="form-control" ng-model="techSupport.issue"></textarea>
+					</div>
+					<div class="form-group">
+
+					<button ng-click="submitTechSupport(techSupport)" type="submit" class="btn btn-primary" >Submit</button>
+
+				</form>
 			</div>
 		</div>
 	</div>
