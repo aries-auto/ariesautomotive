@@ -1,19 +1,78 @@
 <div class="part-container" ng-controller="PartController" ng-cloak>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-md-12 col-lg-12">
-				<h1>[[part.short_description | uppercase]]</h1>
+	<div id="productInfo" class="container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-lg-12">
+					<h1>[[part.short_description | uppercase]]</h1>
 
-				<h3>PART #[[part.id]]</h3>
+					<h3>PART #[[part.id]]</h3>
 
-				<p ng-show="part.content">
-					<p ng-repeat="c in part.content">[[c.value]]</p>
-				</p>
+					<p ng-show="part.content">
+						<p ng-repeat="c in part.content">[[c.value]]</p>
+					</p>
 
-				<ul ng-show="part.attributes">
-					<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
-				</ul>
+					<ul ng-show="part.attributes">
+						<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
+					</ul>
+				</div>
 			</div>
 		</div>
+	</div>
+	<div id="productMore" class="container-fluid" style="background-color:white;">
+		<div class="container">
+
+			<div id="prodDetailsMore" class="col-lg-12" style="padding-left:0px;">
+				<div class="col-lg-8" style="padding-left:0px;">
+					<h3>MORE DETAILS</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere, risus et tristique consequat, lectus leo condimentum erat, et dapibus nisl quam et massa. Quisque vel nunc id est commodo porttitor. Etiam ut scelerisque massa, eget sodales orci. Maecenas eget finibus lorem. Donec elementum cursus mauris sit amet tempus. Pellentesque dictum consequat suscipit. Fusce sit amet nibh in eros molestie mattis ac id urna. Quisque quis dolor non lorem viverra facilisis. Sed non nisi sed nisi rhoncus iaculis molestie vel elit. Donec cursus feugiat nulla id semper. Donec quis suscipit eros, in ullamcorper sem. Donec velit purus, hendrerit et molestie eu, auctor quis orci. Donec varius at lectus ornare mattis. Nunc ac orci vel urna volutpat condimentum vel quis dolor. Curabitur sed velit non nisl euismod interdum sit amet tincidunt urna. Nunc vehicula id elit sed dictum.</p>
+
+					<ul>
+						<li>information snippet about the product, could be part contents or attributes</li>
+						<li>another snippet would go here</li>
+					</ul>
+				</div>	
+			</div>
+
+			<hr />
+
+			<div id="application">
+				<h3>APPLICATION</h3>
+				<p><strong>Available for:</strong> Various Vehicles. Check out our Application Guides to see what fits your vehicle.</p>
+				<span id="applicationGuideLink">VIEW APPLICATION GUIDES</span>
+			</div>
+
+			<hr />
+
+			<div id="accessories">
+				<h3>[[part.short_description | uppercase]] ACCESSORIES</h3>
+
+				<div id="accessoryItems">
+					<!--<div class="accessory col-lg-4" ng-repeat="r in part.related"></div>-->
+					<div class="accessory col-md-3 col-lg-3">
+						<img src="/img/BullBar.jpg" alt="Bull Bar" />
+						<br />
+						<span class="accessoryTitle">BULL BAR</span>
+					</div>
+					<div class="accessory col-md-3 col-lg-3">
+						<img src="/img/GrillGuard.jpg" alt="Grill Guard" />
+						<br />
+						<span class="accessoryTitle">GRILL GUARD</span>
+					</div>	
+					<div class="accessory col-md-3 col-lg-3">
+						<img src="/img/interiorFeaturedProd.jpg" alt="Floor Mat" />
+						<br />
+						<span class="accessoryTitle">FLOOR MAT</span>
+					</div>	
+
+					<div class="accessory col-md-3 col-lg-3">
+						<img src="/img/sportsbar.jpg" alt="Sports Bar" />
+						<br />
+						<span class="accessoryTitle">SPORTS BAR</span>
+					</div>					
+				</div>
+			</div>
+
+
+		</div><!-- End of White Background Area -->
 	</div>
 </div>
