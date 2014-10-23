@@ -1,0 +1,118 @@
+<div class="home-container" ng-controller="HomeController">
+	<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#hero-image-carousel" data-slide-to="0" class="active"></li>
+			<li data-target="#hero-image-carousel" data-slide-to="1"></li>
+			<li data-target="#hero-image-carousel" data-slide-to="2"></li>
+		</ol>
+
+		<div class="carousel-inner">
+			<div class="item active">
+				<div class="carouselImg" style="background: url('/img/truck.png'); background-size:cover; min-height:350px;; background-repeat: no-repeat; background-position:50% 60%;"></div>
+				<!--<img src="/img/truck.png" alt="PRO SERIES Grill Guards">-->
+				<div class="carousel-caption">
+					<span class="bigText pull-right">A NEW ERA OF GRILL GUARDS IS HERE</span>
+					<div class="clearfix">&nbsp;</div>
+					<button class="pull-right red-transparent-button">VIEW PRO SERIES</button>
+				</div>
+			</div>
+			<div class="item">
+				<div class="carouselImg" style="background: url('/img/jeep.png'); background-size:cover; width:100%; min-height:350px; background-repeat: no-repeat; background-position:50% 80%;"></div>
+				<!--<img src="/img/jeep.png" alt="PRO SERIES Grill Guards">-->
+				<div class="carousel-caption">
+					<span class="bigText pull-right">A NEW ERA OF GRILL GUARDS IS HERE</span>
+					<div class="clearfix">&nbsp;</div>
+					<button class="pull-right red-transparent-button">VIEW PRO SERIES</button>
+				</div>
+			</div>
+			<div class="item">
+				<div class="carouselImg" style="background: url('/img/truck-sands.png'); background-size:cover; width:100%; min-height:350px; background-repeat: no-repeat; background-position:50% 80%;"></div>
+				<!--<img src="/img/truck-sands.png" alt="PRO SERIES Grill Guards">-->
+				<div class="carousel-caption">
+					<span class="bigText pull-right">A NEW ERA OF GRILL GUARDS IS HERE</span>
+					<div class="clearfix">&nbsp;</div>
+					<button class="pull-right red-transparent-button">VIEW PRO SERIES</button>
+				</div>
+			</div>
+		</div>
+
+		<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+	</div>
+
+	<div class="container">
+		<div class="row">
+		  <div class="col-md-6 col-lg-6">
+		  	<h1>HEADLINE ABOUT WHAT ARIES OFFERS CUSTOMERS MIGHT WRAP</h1>
+		  	<p>
+		  	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur test slack. 
+		  	</p>
+		  </div>
+		  <div class="col-md-6 col-lg-6">
+		  	<row class="row">
+		  		<div class="col-xs-6 col-md-7 col-lg-5">
+		  			<img src="/img/catalog.png" alt="catalog" class="img-responsive">
+		  		</div>
+		  		<div class="col-xs-3 col-md-3 col-lg-7">
+		  			<h3>{{CurrentYear}}<br>CATALOG</h3>
+		  			<button class="red-transparent-button">DOWNLOAD</button>
+		  		</div>
+		  	</row>
+		  </div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+		  <div class="col-md-12" ng-controller="PartController">
+		  	<h3>FEATURED PRODUCTS</h3>
+		  	<!--
+				<ul>
+					<li ng-repeat="p in latestParts">[[p.short_description]]</li>
+				</ul>
+			-->
+
+			<!-- Featured Products is just for presentation, it will be replaced with real products once better images are available. -->
+			<div class="col-md-12 featuredProducts">
+				<div class="featuredProd col-md-3">
+					<h4>BULL BAR</h4>
+					<img src="/img/BullBar.jpg" alt="Aries Bull Bar" />
+				</div>
+				<div class="featuredProd col-md-3">
+					<h4>GRILL GUARD</h4>
+					<img src="/img/GrillGuard.jpg" alt="Aries Grill Guard" />
+				</div>
+				<div class="featuredProd col-md-3">
+					<h4>SPORTS BAR</h4>
+					<img src="/img/sportsbar.jpg" alt="Aries Sports Bar" />
+				</div>
+				<div class="featuredProd col-md-3">
+					<h4>INTERIOR</h4>
+					<img src="/img/interiorFeaturedProd.jpg" alt="Aries Interior" />
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+		  <div class="col-md-12">
+		  	<h3>FROM OUR CUSTOMERS</h3>
+			<div class="col-md-12 testimonials">
+				<div ng-repeat="t in testimonials | limitTo:2" class="testimonial col-md-6">
+					<h4>"[[t.title | uppercase]]"</h4>
+					<p>[[t.content]]</p>
+					<span class="customerName">- [[t.firstName | uppercase]] [[t.lastName | uppercase]], [[t.location | uppercase]]</span>
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<br />
+
+</div>
