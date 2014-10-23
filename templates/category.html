@@ -9,7 +9,10 @@
 				<hr />
 				<h2>[[category.title | uppercase]] PARTS</h2>
 				<ul>
-					<li ng-repeat="p in category.product_listing.parts">[[p.short_description]] - [[p.id]]</li>
+					<li ng-repeat="p in category.product_listing.parts">
+						[[p.short_description]] - [[p.id]]
+						<a href="/part/[[p.id]]" title="View Details">View Details</a>
+					</li>
 				</ul>
 			</div>
 		</div>
