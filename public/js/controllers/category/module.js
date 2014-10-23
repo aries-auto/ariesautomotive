@@ -1,13 +1,15 @@
 define([
 	'angular',
 	'ui.router',
-	'../../config'
+	'../../config',
+	'ngSanitize'
 ], function (angular) {
 	'use strict';
 
 	return angular.module('app.category', [
 		'app.constants',
-		'ui.router'
+		'ui.router',
+		'ngSanitize',
 	]).config(function ($stateProvider) {
 		$stateProvider
 			.state('category', {

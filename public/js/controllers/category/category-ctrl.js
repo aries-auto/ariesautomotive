@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('CategoryController', ['$scope', '$location', 'CategoryService', function(scope, location, CategoryService){
+	module.controller('CategoryController', ['$scope', '$location', 'CategoryService', 'ngSanitize' , function(scope, location, CategoryService, ngSanitize){
 		var path = location.absUrl();
 		var parts = path.split('/');
 		var catID = parts.length - 1 > 0 ? parseInt(parts[parts.length - 1]) : 0;

@@ -5,6 +5,7 @@
 define([
 	'angular',
 	'ui.router',
+	'ngSanitize',
 	'./config',
 	'./controllers/index/index',
 	'./controllers/contact/index',
@@ -21,7 +22,8 @@ define([
 		'app.contact',
 		'app.category',
 		'app.part',
-		'ui.router'
+		'ui.router',
+		'ngSanitize'
 	]).config(function ($urlRouterProvider,$interpolateProvider) {
 		$urlRouterProvider.otherwise('/');
 		$interpolateProvider.startSymbol('[[');
