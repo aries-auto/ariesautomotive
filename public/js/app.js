@@ -17,13 +17,20 @@ define([
 	'./controllers/techsupport/index',
 	'./controllers/terms/index',
 	'./controllers/warranties/index',
-	'./services/services'
+	'./services/category',
+	'./services/geography',
+	'./services/part',
+	'./services/testimonial',
+	'./directives/inView'
 ], function (angular) {
 	'use strict';
 
 	return angular.module('app', [
 		'app.constants',
-		'app.services',
+		'app.services.category',
+		'app.services.geography',
+		'app.services.part',
+		'app.services.testimonial',
 		'app.index',
 		'app.aboutus',
 		'app.appguides',
@@ -34,6 +41,7 @@ define([
 		'app.techsupport',
 		'app.terms',
 		'app.warranties',
+		'app.directives',
 		'ui.router',
 		'ngSanitize'
 	]).config(function ($urlRouterProvider,$interpolateProvider, $locationProvider) {

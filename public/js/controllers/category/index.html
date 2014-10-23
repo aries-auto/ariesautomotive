@@ -10,12 +10,12 @@
 						</div>
 					</div>
 				</div>
-				<div id="catPartsContainer" class="container-fluid">
+				<div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
 					<div class="container">
 						<h2>[[category.title | uppercase]] PRODUCTS</h2>
-						
-						<div class="product row well col-xs-12 col-md-12 col-lg-12" ng-repeat="p in category.product_listing.parts">
-							
+
+						<div class="product row well col-xs-12 col-md-12 col-lg-12" ng-repeat="p in parts">
+
 							<div class="productImage col-xs-3 col-sm-3 col-md-3 col-lg-2">
 								<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
 							</div>
@@ -30,13 +30,18 @@
 									<span class="attrTitle">Details:</span>
 									<ul>
 										<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
-									<ul>
+									</ul>
 								</div>
 							</div>
 							<div class="productPrice col-xs-2 col-sm-2 col-md-2 col-lg-2">
 								<span class="msrp">MSRP <span class="price">$123.45</span></span>
-							</div>	
+							</div>
 						</div>
+
+						<div class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length" in-view="loadMore($index, $inview, $inviewpart, $event)">
+							<p></p>
+						</div>
+
 					</div>
 				</div>
 			</div>
