@@ -26,7 +26,8 @@
 				"angular",
 				"NProgress",
 				"module",
-				"define"
+				"define",
+				"Typekit"
 		],
 
 
