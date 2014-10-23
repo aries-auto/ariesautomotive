@@ -7,6 +7,7 @@ require(['require','./config-require'],function(require, config){
 
 	// load typekit fonts
 	(function(d) {
+		var Typekit = {};
 		var config = {
 			kitId: 'gah1dnk',
 			scriptTimeout: 3000
