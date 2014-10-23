@@ -18,5 +18,12 @@ define(['./module'], function (module) {
 			$scope.category = cat;
 			console.log($sce.trustAsHtml(cat.title));
 		})
+
+		$scope.renderHTML = function(content){
+			console.log("here");
+			console.log($sce.trustAsHtml(content));
+			return $sce.trustAsHtml(content);
+		};
+
 	}]);
 });
