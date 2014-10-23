@@ -1,0 +1,32 @@
+.part-container{
+	#productInfo{
+
+	}
+	#productMore{
+		#prodDetailsMore{
+
+		}
+		#application{
+			#applicationGuideLink{
+
+			}
+		}
+		#accessories{
+			#accessoryItems{
+				.accessory{
+					text-align:center;
+					margin-left:auto;
+					margin-right:auto;
+					.accessoryTitle{
+						text-align:center;
+						margin-left:auto;
+						margin-right:auto;
+						font-size:24px;
+						color: $altRed;
+						font-weight:900;
+					}
+				}
+			}
+		}
+	}
+}
