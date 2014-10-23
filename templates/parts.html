@@ -1,0 +1,19 @@
+<div class="part-container" ng-controller="PartController" ng-cloak>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 col-lg-12">
+				<h1>[[part.short_description | uppercase]]</h1>
+
+				<h3>PART #[[part.id]]</h3>
+
+				<p ng-show="part.content">
+					<p ng-repeat="c in part.content">[[c.value]]</p>
+				</p>
+
+				<ul ng-show="part.attributes">
+					<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

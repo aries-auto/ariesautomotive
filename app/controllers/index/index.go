@@ -18,6 +18,10 @@ func Category(rw http.ResponseWriter, req *http.Request, bag map[string]interfac
 	ren.HTML(200, "category", bag)
 }
 
+func Part(rw http.ResponseWriter, req *http.Request, bag map[string]interface{}, ren render.Render) {
+	ren.HTML(200, "parts", bag)
+}
+
 func ContactUs(rw http.ResponseWriter, req *http.Request, bag map[string]interface{}, ren render.Render) {
 	ren.HTML(200, "contactus", bag)
 }
