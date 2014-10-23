@@ -12,16 +12,34 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "../js/lib/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "./homepage.scss";
 @import "./aboutus.scss";
+@import "./category.scss";
 
 body{
 	background: url('/img/bgtexture.png');
-	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",serif;
+	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
+	-webkit-font-smoothing: antialiased;
 	h1, h2, h3{
 		color: $headerColor;
-		font-family: "ff-good-headline-web-pro-con",sans-serif; 
+		font-family: "ff-good-headline-web-pro-con",sans-serif;
+		font-weight:700;
 	}
+
+	h1{
+		font-size:38px;
+	}
+
+	h2{
+		font-size:36px
+	}
+
+	h3{
+		font-size:32px;
+	}
+
+
 	p{
 		font-family: "proxima-nova-condensed",sans-serif;
+		font-size:18px;
 	}
 
 	header{
@@ -34,7 +52,6 @@ body{
 			margin: 0;
 
 			.topnav{
-
 				background-color: $topHeaderBackColor;
 				margin: 0;
 				font-size:20px;
@@ -47,7 +64,7 @@ body{
 						padding-top:10px;
 						padding-bottom:10px;
 						-webkit-font-smoothing: antialiased;
-						font-size:18px;
+						font-size:20px;
 					}
 					a:hover{
 						color: #dddddd;
@@ -85,8 +102,8 @@ body{
 				font-size:24px;
 
 				.extraMenu{
-					background-color:#cccccc;
-					color:$headerMenuBackColor:;
+					color:#cccccc;
+					background-color:$topHeaderBackColor;
 				}
 
 				.navbar-nav{
@@ -96,6 +113,7 @@ body{
 					a{
 						color: $white;
 						-webkit-font-smoothing: antialiased;
+						padding: 10px 10px;
 					}
 					a:hover{
 						color: #dddddd;
@@ -113,7 +131,6 @@ body{
 					}
 
 					li{
-
 						a{
 
 						}
@@ -123,7 +140,7 @@ body{
 						}
 						.dropdown-menu{
 							background-color:#ffffff;
-							margin-top:17px;
+							margin-top:27px;
 							font-size:18px;
 							border-bottom: 4px solid $altRed;
 							margin-right:5px;
@@ -158,24 +175,44 @@ body{
 		background: url('/img/footer-back.png');
 		color: $footerColor;
 
+
 		.container{
 			.footer-outter-row{
 				margin-top: 30px;
 				margin-bottom: 30px;
 			}
 
+			.addressInfo{
+				font-size:18px;
+			}
+			.addressName{
+				font-size:18px;
+				font-weight:700;
+			}
+
+			font-family: "proxima-nova-condensed",sans-serif;
+
+			h4{
+						font-family: "ff-good-headline-web-pro-con",sans-serif;
+						font-weight:700;
+						font-size:28px;
+			}
+
+
 			.sema-logo-div{
 				margin-top: 10px;
 			}
 			.footerNav{
 				padding:0px 0px;
-				padding-bottom:16px;
+				padding-bottom:70px;
 				ul{
 					li{
 						padding:0px;
-						padding-top:10px;
+						padding-top:4px;
+						font-size:18px;
 						a{
 							padding:0px;
+
 						}
 						a:hover{
 							color:#ccc;
@@ -196,11 +233,12 @@ body{
 
 			.phone-text{
 				margin-left: 5px;
+				font-size:20px;
 			}
 		}
 
 		.conditions{
-			font-size:12px;
+			font-size:16px;
 			.terms{
 				text-decoration:underline;
 			}
@@ -233,47 +271,11 @@ body{
 
 
 
-.open > .dropdown-menu {
-  -webkit-transform: scale(1, 1);
-  transform: scale(1, 1);
-  min-width:100%;
-  
-}
-.open > .dropdown-menu li a {
-  color: #000;
-  min-width:100%;  
-}
-.dropdown-menu li a{
-  color: #fff;
-}
-.dropdown-menu {
-  -webkit-transform-origin: top;
-  transform-origin: top;
-  -webkit-animation-fill-mode: forwards;  
-  animation-fill-mode: forwards; 
-  -webkit-transform: scale(1, 0);
-  display: block;
-  
-  transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-}
-.dropup .dropdown-menu {
-  -webkit-transform-origin: bottom;
-  transform-origin: bottom;  
-}
- 
-.navbar .nav > li > .dropdown-menu:after {
- 
-}
-.dropup > .dropdown-menu:after {
-  border-bottom: 0;
-  border-top: 6px solid rgba(39, 45, 51, 0.9);
-  top: auto;
-  display: inline-block;
-  bottom: -6px;
-  content: '';
-  position: absolute;
-  left: 50%;
-  border-right: 6px solid transparent;
-  border-left: 6px solid transparent;
+
+
+
+
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
 }

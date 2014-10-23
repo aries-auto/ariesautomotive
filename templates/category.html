@@ -7,13 +7,34 @@
 					<p ng-bind-html="renderHTML(cont.value)"></p>
 				</div>
 				<hr />
-				<h2>[[category.title | uppercase]] PARTS</h2>
-				<ul>
-					<li ng-repeat="p in category.product_listing.parts">
-						[[p.short_description]] - [[p.id]]
-						<a href="/part/[[p.id]]" title="View Details">View Details</a>
-					</li>
-				</ul>
+
+				<div id="catPartsContainer">
+					<h2>[[category.title | uppercase]] PARTS</h2>
+
+					<div class="product row well" ng-repeat="p in category.product_listing.parts">
+						<div class="productImage col-md-3 col-lg-3">
+							<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
+						</div>
+						<div class="productInfo col-md-6 col-lg-6">
+							<span class="productDesc">
+								<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
+									<span class="productID">[[p.id]]</span>
+								</a>
+							</span>
+
+							<div class="productAttr">
+								<span class="attrTitle">Details:</span>
+								<ul>
+									<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
+								<ul>
+							</div>
+						</div>
+						<div class="productPrice col-md-3 col-lg-3">
+
+						</div>	
+					</div>
+					
+				</div>
 			</div>
 		</div>
 	</div>

@@ -20,8 +20,6 @@ define(['./module'], function (module) {
 		})
 
 		$scope.renderHTML = function(content){
-			console.log("here");
-			console.log($sce.trustAsHtml(content));
 			return $sce.trustAsHtml(content);
 		};
 
