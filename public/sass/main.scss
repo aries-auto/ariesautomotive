@@ -14,6 +14,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "./aboutus.scss";
 @import "./category.scss";
 
+
 body{
 	background: url('/img/bgtexture.png');
 	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
@@ -41,6 +42,9 @@ body{
 		font-family: "proxima-nova-condensed",sans-serif;
 		font-size:18px;
 	}
+
+
+
 
 	header{
 		background-color: $headerMenuBackColor;

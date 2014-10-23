@@ -1,16 +1,32 @@
 
 .category-container{
+	background: url('/img/bgtexture.png');
+
+	#categoryContent{
+		.content{
+			font-size:18px;
+			font-family: "proxima-nova-condensed",sans-serif;
+		}
+	}
 	#catPartsContainer{
 		.product{
 
 			.productImage{
 				max-height:180px;
 				max-width:180px;
+				min-width:140px;
+				min-height:140px;
+				padding:0px;
 				img{
-
+						-webkit-box-shadow: 1px 0 10px 2px #ccc;
+						-moz-box-shadow: 1px 0 10px 2px #ccc;
+						box-shadow: 1px 0 10px 2px #ccc;
 				}
+				margin-bottom:0px;
 			}
 			.productInfo{
+				padding-left:15px;
+
 				.productDesc{
 					font-size:28px;
 					font-family: "ff-good-headline-web-pro-con",sans-serif;
@@ -39,6 +55,18 @@
 						font-weight:900;
 						font-size:18px;
 					}
+				}
+			}
+			.productPrice{
+				.msrp{
+					font-size:20px;
+				}
+
+				.price{
+					font-size: 28px;
+					color: $altRed;
+					font-family: "proxima-nova-condensed",sans-serif;
+					font-weight:900;
 				}
 			}
 		}

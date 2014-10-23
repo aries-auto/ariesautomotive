@@ -1,39 +1,43 @@
 <div class="category-container" ng-controller="CategoryController" ng-cloak>
-	<div class="container">
+	<div>
 		<div class="row">
 			<div class="col-xs-12 col-md-12 col-lg-12">
-				<h1>[[category.title | uppercase]]</h1>
-				<div ng-repeat="cont in category.content">
-					<p ng-bind-html="renderHTML(cont.value)"></p>
-				</div>
-				<hr />
-
-				<div id="catPartsContainer">
-					<h2>[[category.title | uppercase]] PARTS</h2>
-
-					<div class="product row well" ng-repeat="p in category.product_listing.parts">
-						<div class="productImage col-md-3 col-lg-3">
-							<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
+				<div id="categoryContent" class="container-fluid">
+					<div class="container">
+						<h1>[[category.title | uppercase]]</h1>
+						<div ng-repeat="cont in category.content">
+							<div class="content" ng-bind-html="renderHTML(cont.value)"></div>
 						</div>
-						<div class="productInfo col-md-6 col-lg-6">
-							<span class="productDesc">
-								<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
-									<span class="productID">[[p.id]]</span>
-								</a>
-							</span>
-
-							<div class="productAttr">
-								<span class="attrTitle">Details:</span>
-								<ul>
-									<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
-								<ul>
-							</div>
-						</div>
-						<div class="productPrice col-md-3 col-lg-3">
-
-						</div>	
 					</div>
-					
+				</div>
+				<div id="catPartsContainer" class="container-fluid" style="background-color:white;">
+					<div class="container">
+						<h2>[[category.title | uppercase]] Products</h2>
+
+						<div class="product row well col-xs-12 col-md-12 col-lg-12" ng-repeat="p in category.product_listing.parts">
+							
+							<div class="productImage col-xs-3 col-sm-3 col-md-3 col-lg-2">
+								<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
+							</div>
+							<div class="productInfo col-xs-6 col-sm-6 col-md-6 col-lg-8">
+								<span class="productDesc">
+									<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
+										<span class="productID">[[p.id]]</span>
+									</a>
+								</span>
+
+								<div class="productAttr">
+									<span class="attrTitle">Details:</span>
+									<ul>
+										<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
+									<ul>
+								</div>
+							</div>
+							<div class="productPrice col-xs-1 col-sm-1 col-md-1 col-lg-2">
+								<span class="msrp">MSRP <span class="price">$123.45</span></span>
+							</div>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
