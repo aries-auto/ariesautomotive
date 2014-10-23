@@ -5,10 +5,10 @@ define([
 ], function (angular) {
 	'use strict';
 
-	return angular.module('app.category', ['ngSanitize'], [
+	return angular.module('app.category', [
 		'app.constants',
-		'ui.router',
-	]).config(function ($stateProvider, $sceDelegateProvider) {
+		'ui.router'
+	]).config(function ($stateProvider) {
 		$stateProvider
 			.state('category', {
 				templateUrl: 'js/modules/index/index.html',
