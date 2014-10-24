@@ -22,6 +22,7 @@ define([
 	'./services/part',
 	'./services/techSupport',
 	'./services/testimonial',
+	'./services/warranties',
 	'./directives/inView'
 ], function (angular) {
 	'use strict';
@@ -33,6 +34,7 @@ define([
 		'app.services.part',
 		'app.services.techSupport',
 		'app.services.testimonial',
+		'app.services.warranties',
 		'app.index',
 		'app.aboutus',
 		'app.appguides',
