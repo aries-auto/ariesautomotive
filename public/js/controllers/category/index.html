@@ -14,31 +14,42 @@
 					<div class="container">
 						<h2>[[category.title | uppercase]] PRODUCTS</h2>
 
-						<div class="product row well col-xs-12 col-md-12 col-lg-12" ng-repeat="p in parts">
+						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12">
+							<!-- Products -->
+							<div class="product row well" ng-repeat="p in parts">
+								<div class="product-header">
+									<span class="product-desc">
+										<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
+											<span class="product-id">[[p.id]]</span>
+										</a>
+									</span>
+								</div>
 
-							<div class="productImage col-xs-3 col-sm-3 col-md-3 col-lg-2">
-								<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
-							</div>
-							<div class="productInfo col-xs-4 col-sm-6 col-md-6 col-lg-8">
-								<span class="productDesc">
-									<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
-										<span class="productID">[[p.id]]</span>
-									</a>
-								</span>
+								<!-- Image -->
+								<div class="product-image col-xs-12 col-sm-12 col-md-3 col-lg-2">
+									<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
+								</div>
 
-								<div class="productAttr">
-									<span class="attrTitle">Details:</span>
-									<ul>
-										<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
-									</ul>
+								<div class=" col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
+									<!-- Price -->
+									<div class="product-price">
+										<span class="msrp">MSRP <span class="price">$123.45</span></span>
+									</div>
+
+									<!-- Attributes -->
+									<div class="product-attr">
+										<span class="title">Details:</span>
+										<ul>
+											<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
+										</ul>
+									</div>
 								</div>
 							</div>
-							<div class="productPrice col-xs-2 col-sm-2 col-md-2 col-lg-2">
-								<span class="msrp">MSRP <span class="price">$123.45</span></span>
-							</div>
+
+							<div class="clearfix"></div>
 						</div>
 
-						<div class="clearfix"></div>
+						<!-- Pagination -->
 						<div class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length" in-view="loadMore($index, $inview, $inviewpart, $event)">
 							<p></p>
 						</div>
