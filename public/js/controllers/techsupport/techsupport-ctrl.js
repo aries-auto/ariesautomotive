@@ -8,17 +8,22 @@ define(['./module'], function (module) {
 		$scope.techSupport = {};
 		$scope.techSupport.contact = {};
 		$scope.message = "Submit when ready:";
-		$scope.dateMessage;
+		$scope.dateMessage = "test";
 		
 		$scope.years = [3333,444];
 
-
-
 		$scope.submitTechSupport = function(techSupport){
-			if(techSupport.purchaseDate == null){$scope.dateMessage = "This field cannot be empty"; return;}
+			if(techSupport.purchaseDate === null){
+				$scope.dateMessage = "This field cannot be empty";
+				return;
+			}
 			techSupport.purchaseDate = new Date(techSupport.purchaseDate);
 			
-			if(techSupport.vehicleYear != null && isNaN(techSupport.vehicleYear)){alert("Vehicle year must be a number.")};
+			if(techSupport.vehicleYear !== null && isNaN(techSupport.vehicleYear)){
+				alert("Vehicle year must be a number.");
+				return;
+			}
+
 			techSupport.vehicleYear = parseInt(techSupport.vehicleYear);
 			
 			TechSupportService.SubmitTechSupport(techSupport)
@@ -28,6 +33,5 @@ define(['./module'], function (module) {
 				$scope.message = "Request sent.";
 			});
 		}
-		
 	}]);
 });
