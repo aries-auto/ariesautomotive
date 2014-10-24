@@ -7,7 +7,7 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'POST',
-					url: AppConfig.APIURL + '/techSupport/232/true?key='+AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/techSupport/11/true?key='+AppConfig.APIKEY, //11 is tech services contactType
 					// url:'http://localhost:8081/techSupport/232/true?key='+AppConfig.APIKEY,
 					data:techSupport,
 					headers: {
