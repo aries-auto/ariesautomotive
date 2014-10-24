@@ -24,8 +24,8 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'GET',
-					// url: AppConfig.APIURL + '/geography/states?key='+AppConfig.APIKEY,
-					url:'http://localhost:8081/geography/countrystates?key='+AppConfig.APIKEY
+					url: AppConfig.APIURL + '/geography/countrystates?key='+AppConfig.APIKEY,
+					// url:'http://localhost:8081/geography/countrystates?key='+AppConfig.APIKEY
 				}).success(function(data){
 					def.resolve(data);
 				}).error(function(){
@@ -38,8 +38,8 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'GET',
-					// url: AppConfig.APIURL + '/part/'+id+'?key='+AppConfig.APIKEY,
-					url:'http://localhost:8081/part/'+id+'?key='+AppConfig.APIKEY
+					url: AppConfig.APIURL + '/part/'+id+'?key='+AppConfig.APIKEY,
+					// url:'http://localhost:8081/part/'+id+'?key='+AppConfig.APIKEY
 				}).success(function(data){
 					def.resolve(data);
 				}).error(function(){
@@ -51,8 +51,8 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'GET',
-					// url: AppConfig.APIURL + '/part/'+id+'?key='+AppConfig.APIKEY,
-					url:'http://localhost:8081/part/old/'+id+'?key='+AppConfig.APIKEY
+					url: AppConfig.APIURL + '/part/old/'+id+'?key='+AppConfig.APIKEY,
+					// url:'http://localhost:8081/part/old/'+id+'?key='+AppConfig.APIKEY
 				}).success(function(data){
 					def.resolve(data);
 				}).error(function(){
