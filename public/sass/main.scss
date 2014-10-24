@@ -20,7 +20,7 @@ body{
 	background: url('/img/bgtexture.png');
 	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
 	-webkit-font-smoothing: antialiased;
-	h1, h2, h3{
+	h1, h2, h3, h4{
 		color: $headerColor;
 		font-family: "ff-good-headline-web-pro-con",sans-serif;
 		font-weight:700;
@@ -37,15 +37,15 @@ body{
 	h3{
 		font-size:32px;
 	}
+	h4{
+		font-size:28px;
+	}
 
 
 	p,li{
 		font-family: "proxima-nova-condensed",sans-serif;
 		font-size:18px;
 	}
-
-
-
 
 	header{
 		background-color: $headerMenuBackColor;
