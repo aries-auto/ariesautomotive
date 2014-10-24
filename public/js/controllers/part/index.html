@@ -2,18 +2,49 @@
 	<div id="productInfo" class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
+				<div id="productDetails" class="col-xs-12 col-md-6 col-lg-6">
+					<div id="breadcrumbs">
+						<ol class="breadcrumb">
+							<li ng-repeat="cat in part.categories.slice().reverse()">
+								<a href="/category/[[cat.id]]">[[cat.title | uppercase]]</a>
+							</li>
+							<li class="active">Part# [[part.id]]</li>
+						</ol>
+					</div>
 					<h1>[[part.short_description | uppercase]]</h1>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="socialPartContainer">
+						<div id="social">
+							<span class="partNumSmall">PART #[[part.id]]</span>
+							<span id="share">SHARE</span>
+							<div class="socialIcon"><a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook"><img src="/img/facebook-icon.png" alt="Facebook" /></a></div>
+							<div class="socialIcon"><a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter"><img src="/img/twitter-icon.png" alt="Twitter" /></a></div>
+							<div class="socialIcon"><a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+"><img src="/img/twitter-icon.png" alt="Google Plus" /></a></div>
+						</div>
+					</div>
 
-					<h3>PART #[[part.id]]</h3>
-
-					<p ng-show="part.content">
+					<div id="partContent" ng-show="part.content">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere, risus et tristique consequat, lectus leo condimentum erat, et dapibus nisl quam et massa. Quisque vel nunc id est commodo porttitor. Etiam ut scelerisque massa, eget sodales orci. Maecenas eget finibus lorem. Donec elementum cursus mauris sit amet tempus. Pellentesque dictum consequat suscipit. Fusce sit amet nibh in eros molestie mattis ac id urna. Quisque quis dolor non lorem viverra facilisis. Sed non nisi sed nisi rhoncus iaculis molestie vel elit. Donec cursus feugiat nulla id semper.</p>
 						<p ng-repeat="c in part.content">[[c.value]]</p>
-					</p>
-
-					<ul ng-show="part.attributes">
-						<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
-					</ul>
+					</div>
+					<div id="partAttr">
+						<ul ng-show="part.attributes">
+							<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
+						</ul>
+					</div>
+				</div>
+				<div id="productMedia" class="col-xs-12 col-md-6 col-lg-6">
+					<div class="pull-right">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<img src="/img/partImgPlaceholder.jpg" alt="Part Image" />
+						</div>
+						<br />
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
