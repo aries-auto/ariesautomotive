@@ -6,32 +6,36 @@
 				<div class="col-xs-6 col-md-6 col-lg-6">
 					<h1>CONTACT</h1>
 
-					<form action="" method="POST" role="form">				
-						<div class="form-group">
+					<form action="" method="POST" role="form">
+						<div class="form-group col-xs-6">
 							<label for="firstname">Enter your first name:</label>
 							<input type="text" class="form-control" id="firstname" placeholder="Enter your first name.">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-xs-6">
 							<label for="lastname">Enter your last name:</label>
 							<input type="text" class="form-control" id="lastname" placeholder="Enter your last name.">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-xs-6">
+							<label for="phone">Enter your phone number:</label>
+							<input type="text" class="form-control" id="phone" placeholder="Enter your phone number. (optional)">
+						</div>
+						<div class="form-group col-xs-6">
 							<label for="email">Enter your email address:</label>
 							<div class="input-group">
 								<div class="input-group-addon">@</div>
 								<input type="text" class="form-control" id="email" placeholder="Enter your email address.">
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group col-xs-12">
 							<label for="address">Enter your street address:</label>
-							<input type="text" class="form-control" id="address" placeholder="Enter your street address. (optional)">
+							<input type="text" class="form-control" id="address" placeholder="Enter your street address. (optional)"><br>
 							<input type="text" class="form-control" id="address2" placeholder="Address line 2. (optional)">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-xs-12">
 							<label for="city">Enter your city:</label>
 							<input type="text" class="form-control" id="city" placeholder="Enter your city. (optional)">
 						</div>
-						<div class="form-group">
+						<div class="form-group col-xs-6 col-offset-xs-1">
 							<label for="state">Select your state/province:</label>
 							<select name="state" id="state" class="form-control">
 								<option value="0">- Select State / Province -</option>
@@ -40,27 +44,24 @@
 								</optgroup>
 							</select>
 						</div>
-						<div class="form-group">
+						<div class="form-group col-xs-6">
 							<label for="postalcode">Enter your postal code:</label>
 							<input type="text" class="form-control" id="postalcode" placeholder="Enter your postal code. (optional)">
 						</div>
 
-						<div class="form-group">
-							<label for="phone">Enter your phone number:</label>
-							<input type="text" class="form-control" id="phone" placeholder="Enter your phone number. (optional)">
-						</div>
-
-						<div class="form-group">
+						<div class="form-group col-xs-12">
 							<label for="subject">Enter the subject:</label>
 							<input type="text" class="form-control" id="subject" placeholder="Enter the subject.">
 						</div>
 
-						<div class="form-group">
+						<div class="form-group col-xs-12">
 							<label for="message">Enter the message:</label>
 							<textarea class="form-control" name="message" id="message" cols="60" rows="10" placeholder="Enter the message."></textarea>
 						</div>
 
-						<button type="submit" class="btn btn-primary">SEND</button>
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-primary">SEND</button>
+						</div>
 					</form>
 				</div>
 				<div class="col-xs-6 col-md-6 col-lg-6">

@@ -1,75 +1,68 @@
 <div class="techsupport-container" ng-controller="TechSupportController">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-6 col-md-6 col-lg-6"  ng-form="formvalidation">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 cl-offset-lg-1"  ng-form="formvalidation">
 				<h1>TECH SUPPORT</h1>
-				
+
 				<form>
 					<div class="form-group col-xs-6">
 						<label for="firstName">First Name:</label>
-						<input type="text"  class="form-control" name="firstName" ng-model="techSupport.contact.firstName" placeholder="Enter your first name." required>
+						<input type="text"  class="form-control" name="firstName" ng-model="techSupport.contact.firstName" placeholder="Enter your first name" required>
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="lastName">Last Name:</label>
-						<input type="text"  class="form-control" name="firstName" ng-model="techSupport.contact.lastName" placeholder="Enter your last name." required>
+						<input type="text"  class="form-control" name="firstName" ng-model="techSupport.contact.lastName" placeholder="Enter your last name" required>
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="phone">Phone:</label>
-						<input type="text"  class="form-control" name="phone" ng-model="techSupport.contact.phone" placeholder="Enter your phone number." required>
+						<input type="text"  class="form-control" name="phone" ng-model="techSupport.contact.phone" placeholder="Enter your phone number" required>
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="email">Email:</label>
 						<div class="input-group">
 							<span class="input-group-addon">@</span>
-							<input type="text"  class="form-control" name="email" ng-model="techSupport.contact.email" placeholder="Enter your email." required>
+							<input type="text"  class="form-control" name="email" ng-model="techSupport.contact.email" placeholder="Enter your email" required>
 						</div>
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="vehicleMake">Vehicle Make:</label>
-						<input type="text"  class="form-control" name="vehicleMake" ng-model="techSupport.vehicleMake" placeholder="Enter make.">
+						<input type="text"  class="form-control" name="vehicleMake" ng-model="techSupport.vehicleMake" placeholder="Enter make">
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="vehicleModel">Vehicle Model:</label>
-						<input type="text"  class="form-control" name="vehicleModel" ng-model="techSupport.vehicleModel" placeholder="Enter model.">
+						<input type="text"  class="form-control" name="vehicleModel" ng-model="techSupport.vehicleModel" placeholder="Enter model">
 					</div>
-				<!-- 	<div class="form-group col-xs-6">
-						<label for="vehicleYear">Vehicle Year:</label>
-						<input type="text"  class="form-control" name="vehicleYear" ng-model="techSupport.vehicleYear" placeholder="Enter year.">
-					</div> -->
 					<div class="form-group col-xs-6">
 						<label for="vehicleYear">Vehicle Year:</label>
-						<select name="vehicleYear" ng-model="techSupport.vehicleYear" ng-options="year for year in years">
-							<option value="">--Select--</option>
-						</select>
+						<input type="number" class="form-control" name="vehicleYear" ng-model="techSupport.vehicleYear" placeholder="Enter year">
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="purchaseDate">Date Of Purchase:</label><span ng-model="dateMessage" ng-if="dateMessage" class="danger"> [[dateMessage]]</span>
-						<input type="date"  class="form-control" name="purchaseDate" ng-model="techSupport.purchaseDate" placeholder="Date of purchase." ng-required>
+						<input type="date"  class="form-control" name="purchaseDate" ng-model="techSupport.purchaseDate" placeholder="Date of purchase" ng-required>
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="purchasedFrom">Purchased From:</label>
-						<input type="text"  class="form-control" name="purchasedFrom" ng-model="techSupport.purchasedFrom" placeholder="Purchased from.">
+						<input type="text"  class="form-control" name="purchasedFrom" ng-model="techSupport.purchasedFrom" placeholder="Purchased from">
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="dealerName">Dealer Name:</label>
-						<input type="text"  class="form-control" name="dealerName" ng-model="techSupport.dealerName" placeholder="Dealer name.">
+						<input type="text"  class="form-control" name="dealerName" ng-model="techSupport.dealerName" placeholder="Dealer name">
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="productCode">Product Code:</label>
-						<input type="text"  class="form-control" name="productCode" ng-model="techSupport.productCode" placeholder="Product code.">
+						<input type="text"  class="form-control" name="productCode" ng-model="techSupport.productCode" placeholder="Product code">
 					</div>
 					<div class="form-group col-xs-6">
 						<label for="dateCode">Date Code:</label>
-						<input type="text"  class="form-control" name="dateCode" ng-model="techSupport.dateCode" placeholder="Date code.">
+						<input type="text"  class="form-control" name="dateCode" ng-model="techSupport.dateCode" placeholder="Date code">
 					</div>
-					<div class="form-group col-xs-9">
+					<div class="form-group col-xs-12">
 						<label for="issue">Explain Issue:</label>
 						<textarea name="issue"  class="form-control" ng-model="techSupport.issue" required></textarea>
 					</div>
-					<div class="form-group col-xs-3">
+					<div class="form-group col-xs-12">
 						<label for="submit" ng-if="message" ng-bind="message"></label>
-						<button ng-click="submitTechSupport(techSupport)" ng-disabled="!formvalidation.$valid" name="submit" type="submit" class="btn btn-primary" >Submit</button>
-						
+						<button ng-click="submitTechSupport(techSupport)" ng-disabled="!formvalidation.$valid" name="submit" type="submit" class="btn btn-large btn-primary" >Submit</button>
 					</div>
 				</form>
 			</div>
