@@ -15,6 +15,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "./category.scss";
 @import "./part.scss";
 @import "./contactus.scss";
+@import "./becomedealer.scss";
 
 body{
 	background: url('/img/bgtexture.png');
@@ -45,6 +46,15 @@ body{
 	p,li{
 		font-family: "proxima-nova-condensed",sans-serif;
 		font-size:18px;
+	}
+
+	a{
+		color:$altRed;
+	}
+
+	a:hover{
+		color:$headerColor;
+
 	}
 
 	header{
@@ -177,7 +187,7 @@ body{
 							li:hover{
 								background-color:#cccccc;
 							}
-							
+
 						}
 					}
 				}
@@ -190,7 +200,7 @@ body{
 					padding-bottom: 0px;
 					height: 80px;
 					min-height: 100%;
-					box-shadow: inset 1px 0px 0px #57111A;	
+					box-shadow: inset 1px 0px 0px #57111A;
 				}
 			}
 		}
@@ -259,6 +269,9 @@ body{
 			.phone-text{
 				margin-left: 5px;
 				font-size:20px;
+				a:hover{
+					color: #666666;
+				}
 			}
 		}
 
@@ -266,6 +279,10 @@ body{
 			font-size:16px;
 			.terms{
 				text-decoration:underline;
+
+			}
+			a:hover{
+				color: #666666;
 			}
 
 		}
@@ -292,14 +309,27 @@ body{
 			}
 		}
 	}
+
+	input.form-control:focus,textarea.form-control:focus,select.form-control:focus{
+		border-color: rgb(51,51,51);
+		border-color: rgba(51,51,51,0.4);
+		box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(51,51,51,0.6);
+	}
+
+	button[type=submit]{
+		text-transform: uppercase;
+		background-color: #57111a;
+		border-color: #31070c;
+		color: #fff;
+		font-size: 18px;
+		cursor: pointer;
+		letter-spacing: 0.05em;
+		&[disabled], &:hover, &:active, &:focus{
+			border-color: #b2312b;
+			background-color:#b2312b;
+		}
+	}
 }
-
-
-
-
-
-
-
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;

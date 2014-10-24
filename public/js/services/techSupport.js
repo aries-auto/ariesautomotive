@@ -7,17 +7,13 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'POST',
-					// url: AppConfig.APIURL + '/techSupport/232/true?key='+AppConfig.APIKEY,
-					url:'http://localhost:8081/techSupport/232/true?key='+AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/techSupport/232/true?key='+AppConfig.APIKEY,
+					// url:'http://localhost:8081/techSupport/232/true?key='+AppConfig.APIKEY,
 					data:techSupport,
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
 					},
-				}).success(function(data){
-					def.resolve(data);
-				}).error(function(){
-					def.reject("Error");
-				})
+				}).success(def.resolve).error(def.reject);
 				return def.promise;
 			}
 
