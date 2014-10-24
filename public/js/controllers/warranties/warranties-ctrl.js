@@ -28,7 +28,10 @@ define(['./module'], function (module) {
 			});
 
 		$scope.submitWarranty = function(warranty){
-			if(warranty.date == null){$scope.dateMessage = "This field cannot be empty."; return;}
+			if(warranty.date === null){
+				$scope.dateMessage = "This field cannot be empty.";
+				return;
+			}
 			warranty.date = new Date(warranty.date);
 			console.log(warranty)
 
