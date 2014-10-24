@@ -17,6 +17,8 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "./contactus.scss";
 
 body{
+
+
 	background: url('/img/bgtexture.png');
 	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -45,6 +47,15 @@ body{
 	p,li{
 		font-family: "proxima-nova-condensed",sans-serif;
 		font-size:18px;
+	}
+
+	a{
+		color:$altRed;
+	}
+
+	a:hover{
+		color:$headerColor;
+
 	}
 
 	header{
@@ -259,6 +270,9 @@ body{
 			.phone-text{
 				margin-left: 5px;
 				font-size:20px;
+				a:hover{
+					color: #666666;
+				}
 			}
 		}
 
@@ -266,6 +280,10 @@ body{
 			font-size:16px;
 			.terms{
 				text-decoration:underline;
+
+			}
+			a:hover{
+				color: #666666;
 			}
 
 		}

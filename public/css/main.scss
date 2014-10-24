@@ -17,6 +17,8 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "./contactus.scss";
 
 body{
+
+
 	background: url('/img/bgtexture.png');
 	font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -45,6 +47,14 @@ body{
 	p,li{
 		font-family: "proxima-nova-condensed",sans-serif;
 		font-size:18px;
+	}
+
+	a{
+		color:$headerColor;
+	}
+
+	a:hover{
+		color $altRed;
 	}
 
 	header{
