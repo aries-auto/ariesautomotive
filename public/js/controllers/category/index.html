@@ -27,7 +27,12 @@
 
 								<!-- Image -->
 								<div class="product-image col-xs-12 col-sm-12 col-md-3 col-lg-2">
-									<img src="/img/partImgPlaceholder.jpg" class="img-responsive" alt="Image for [[p.title]]" />
+									<div ng-if="p.images.length > 1">
+										<img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
+									</div>
+									<div ng-if="!p.images">
+										<img class="img-responsive" src="/img/partImgPlaceholder.jpg" alt="Image for [[p.title]]" />
+									</div>
 								</div>
 
 								<div class=" col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
