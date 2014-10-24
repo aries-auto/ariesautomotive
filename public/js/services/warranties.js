@@ -32,6 +32,33 @@ define(['angular'], function(angular){
 					def.reject("Error");
 				})
 				return def.promise;
+			},
+
+			GetPart: function(id){
+				var def = $q.defer();
+				$http({
+					method:'GET',
+					// url: AppConfig.APIURL + '/part/'+id+'?key='+AppConfig.APIKEY,
+					url:'http://localhost:8081/part/'+id+'?key='+AppConfig.APIKEY
+				}).success(function(data){
+					def.resolve(data);
+				}).error(function(){
+					def.reject("Error");
+				})
+				return def.promise;
+			},
+			GetOldPart: function(id){
+				var def = $q.defer();
+				$http({
+					method:'GET',
+					// url: AppConfig.APIURL + '/part/'+id+'?key='+AppConfig.APIKEY,
+					url:'http://localhost:8081/part/old/'+id+'?key='+AppConfig.APIKEY
+				}).success(function(data){
+					def.resolve(data);
+				}).error(function(){
+					def.reject("Error");
+				})
+				return def.promise;
 			}
 
 

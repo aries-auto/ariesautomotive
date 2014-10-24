@@ -24,22 +24,24 @@
 							<input type="text"  class="form-control" name="city" ng-model="warranty.contact.city" placeholder="Enter city." required>
 						</div>
 
+
 						<div class="form-group col-xs-6">
 							<label for="country">Country:</label>
-							<select class="form-control" name="country" ng-model="warranty.contact.country" ng-options="country as country.country for country in countrystates" ng-change="update()" required>
+							<select class="form-control" name="country" ng-model="form.country" ng-options=" country.country for country in countrystates" ng-change="updateStates()"required>
 								<option value="" selected>--Choose a Country--</option>
 							</select>
 						</div>
+
 						<div class="form-group col-xs-6">
 							<label for="state">State/Province:</label>
-							<select class="form-control" name="state" ng-model="warranty.contact.state" ng-options="state.state for state in states" required>
+							<select class="form-control" name="state" ng-model="form.state" ng-options="state.state for state in states" ng-change="updateState()" required>
 								<option value="">--Select a State--</option>
 							</select>
 						</div>
 
 	
 						<div class="form-group col-xs-6">
-							<label for="postalCode">Zip:/Postal Code</label>
+							<label for="postalCode">Zip/Postal Code:</label>
 							<input type="text"  class="form-control" name="postalCode" ng-model="warranty.contact.postalCode" placeholder="Enter zip." required>
 						</div>
 		
@@ -58,8 +60,8 @@
 					<div class="col-xs-12 col-md-6">
 						<h3>STEP 2 OF 4: PRODUCT REGISTRATION INFORMATION</h3>
 						<div class="form-group col-xs-6">
-							<label for="partNumber">Part Number</label>
-							<input type="text"  class="form-control" name="partNumber" ng-model="warranty.partNumber" placeholder="Enter part number." required>
+							<label for="partNumber">Part Number:</label>&nbsp;&nbsp;&nbsp;<span ng-if="!partConfirm"><em>Enter a valid part number.</em></span>
+							<input type="text"  class="form-control" name="partNumber" ng-model="warranty.partNumber" placeholder="Enter part number." ng-change="matchPart(warranty)" required>
 						</div>
 						<div class="form-group col-xs-6">
 							<label for="date">Date:</label><span ng-model="dateMessage" ng-if="dateMessage" class="danger"> [[dateMessage]]</span>
@@ -72,7 +74,7 @@
 						<h3 class="col-xs-12 col-md-12">STEP 3 OF 4: CLICK SUBMIT BELOW.</h3>
 						<div class="form-group col-xs-3">
 							<label for="submit" ng-if="message" ng-bind="message"></label>
-							<button ng-click="submitWarranty(warranty)" ng-disabled="!formvalidation.$valid" name="submit" type="submit" class="btn btn-primary" >Submit</button>
+							<button ng-click="submitWarranty(warranty)" ng-disabled="!formvalidation.$valid || !partConfirm" name="submit" type="submit" class="btn btn-primary" >Submit</button>
 						</div>
 					</div>
 					<div class="col-xs-12 col-md-12">
