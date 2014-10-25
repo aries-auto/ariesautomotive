@@ -4,8 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('WarrantiesController',  ['$scope', 'WarrantyService',function($scope, WarrantyService){
-
+	module.controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', function($scope, WarrantyService, GeographyService, PartService){
 		$scope.message = "Click this button:"
 		$scope.partConfirm = false;
 		$scope.warranty = {};
@@ -22,10 +21,13 @@ define(['./module'], function (module) {
 			$scope.warranty.contact.state = this.form.state.state;
 		}
 
-		$scope.countrystates = WarrantyService.GetCountryStates()
-			.then(function(data){
-				$scope.countrystates = data;
-			});
+		GeographyService.GetCountryStates(function(countries, err){
+			if(err){
+				console.log(err);
+				return;
+			}
+			$scope.countrystates = countries;
+		});
 
 		$scope.submitWarranty = function(warranty){
 			if(warranty.date === null){
@@ -45,21 +47,27 @@ define(['./module'], function (module) {
 
 		$scope.matchPart = function(warranty){
 			$scope.partConfirm = false;
-			WarrantyService.GetPart(warranty.partNumber)
-				.then(function(data){
-					if (data.status > 0){
-						$scope.warranty.partNumber = data.id;
-						$scope.partConfirm = true;
-					}else{
-						WarrantyService.GetOldPart(warranty.partNumber)
-							.then(function(data){
-								if (data.status > 0){
-									$scope.warranty.oldPartNumber = data.oldPartNumber;
-									$scope.partConfirm = true;
-								}
-							});
-					}
-				});
+			PartService.GetPart(warranty.partNumber, function(part, err){
+				if(err){
+					console.log(err);
+					return;
+				}
+				if(part.status > 0){
+					$scope.warranty.partNumber = part.id;
+					$scope.partConfirm = true;
+				} else{
+					PartService.GetOldPart(warranty.partNumber, function(part, err){
+						if(err){
+							console.log(err);
+							return;
+						}
+						if(part.status > 0){
+							$scope.warranty.oldPartNumber = part.oldPartNumber;
+							$scope.partConfirm = true;
+						}
+					});
+				}
+			});
 		}
 		
 	}]);
