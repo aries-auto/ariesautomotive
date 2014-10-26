@@ -4,13 +4,21 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('ContactController', ['$scope', 'GeographyService', function(scope, GeographyService){
+	module.controller('ContactController', ['$scope', 'ContactService', 'GeographyService', function($scope, ContactService, GeographyService){
+		ContactService.GetContactTypes(function(types, err){
+			if(err){
+				console.log(err);
+				return;
+			}
+			$scope.contactTypes = types;
+		});
+		
 		GeographyService.GetCountryStates(function(countries, err){
 			if(err){
 				console.log(err);
 				return;
 			}
-			scope.countries = countries;
+			$scope.countries = countries;
 		});
 	}]);
 });
