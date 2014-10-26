@@ -11,7 +11,7 @@
 							<label for="contacttype">What would you like to contact us about?</label>
 							<select name="contact_type" class="form-control">
 								<option value="">- Select reason -</option>
-								<option ng-repeat="type in contactTypes | filter:{show:true}"" value="[[type.id]]">[[type.name]]</option>
+								<option ng-repeat="type in contactTypes | filter:{show:true} | orderBy:'name'" value="[[type.id]]">[[type.name]]</option>
 							</select>
 						</div>
 
