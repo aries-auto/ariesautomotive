@@ -1,3 +1,11 @@
 .right{
-	float:right
+	float:right;
+	a{
+		text-decoration:none;
+	}
+}
+.fakeIcon{
+	border: #999 1px solid; 
+	padding:2px 3px 6px 3px; 
+	border-radius:4px;
 }
