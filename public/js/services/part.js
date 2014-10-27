@@ -17,6 +17,16 @@ define(['angular'], function(angular){
 					callback(null, data);
 				});
 			},
+			GetOldPart: function(oldPartID, callback){
+				$http({
+					method: 'GET',
+					url: AppConfig.APIURL + '/part/old/' + oldPartID + '?key=' + AppConfig.APIKEY,
+				}).success(function(data, status, headers, config){
+					callback(data, null);
+				}).error(function(data, status, headers, config){
+					callback(null, data);
+				});
+			},
 			GetLatest : function(callback){
 				$http({
 					method: 'GET',
