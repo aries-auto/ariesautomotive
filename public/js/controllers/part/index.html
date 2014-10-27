@@ -35,7 +35,31 @@
 				<div id="productMedia" class="col-xs-12 col-md-6 col-lg-6">
 					<div class="pull-right">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<img src="/img/partImgPlaceholder.jpg" alt="Part Image" />
+							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#hero-image-carousel" data-slide-to="0" class="active"></li>
+									<li data-target="#hero-image-carousel" data-slide-to="1"></li>
+									<li data-target="#hero-image-carousel" data-slide-to="2"></li>
+								</ol>
+								<div class="carousel-inner">
+									<div class="item active">
+										<div class="carouselImg"><img src="/img/partImgPlaceholder.jpg" /></div>
+									</div>
+									<div class="item">
+											<div class="carouselImg"><img src="/img/partImgPlaceholder.jpg" /></div>
+									</div>
+									<div class="item">
+											<div class="carouselImg"><img src="/img/partImgPlaceholder.jpg" /></div>
+									</div>
+								</div>
+
+								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
 						</div>
 						<br />
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

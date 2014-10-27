@@ -39,6 +39,19 @@ define(['angular'], function(angular){
 				}).error(function(data, status, headers, config){
 					callback(null, data);
 				});
+			},
+			GetFeatured : function(callback){
+				$http({
+					method: 'GET',
+					url: AppConfig.APIURL + '/part/featured?count=4&key=' + AppConfig.APIKEY,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+					}
+				}).success(function(data, status, headers, config){
+					callback(data, null);
+				}).error(function(data, status, headers, config){
+					callback(null, data);
+				});
 			}
 		};
 	}]);

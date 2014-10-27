@@ -78,21 +78,9 @@
 
 			<!-- Featured Products is just for presentation, it will be replaced with real products once better images are available. -->
 			<div class="col-md-12 featuredProducts">
-				<div class="featuredProd col-md-3">
-					<h4>BULL BAR</h4>
-					<img src="/img/BullBar.jpg" alt="Aries Bull Bar" />
-				</div>
-				<div class="featuredProd col-md-3">
-					<h4>GRILL GUARD</h4>
-					<img src="/img/GrillGuard.jpg" alt="Aries Grill Guard" />
-				</div>
-				<div class="featuredProd col-md-3">
-					<h4>SPORTS BAR</h4>
-					<img src="/img/sportsbar.jpg" alt="Aries Sports Bar" />
-				</div>
-				<div class="featuredProd col-md-3">
-					<h4>INTERIOR</h4>
-					<img src="/img/interiorFeaturedProd.jpg" alt="Aries Interior" />
+				<div ng-repeat="p in featuredProducts" class="featuredProd col-md-3">
+					<h4><a href="/part/[[p.id]]">[[p.short_description]]</a></h4>
+					<a href="/part/[[p.id]]"><img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" /></a>
 				</div>
 			</div>
 		  </div>
