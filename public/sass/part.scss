@@ -69,12 +69,21 @@
 			}
 		}
 		#productMedia{
-			img{
-				max-width:430px;
+			carouselImg{
+				max-width:500px;
+				min-width:250px;
 			}
-			.thumbnail{
-				max-width:100px;
+			.thumbs{
+				min-height:80px;
+				max-height:140px;
+				
+				.thumb{
+					padding:0px;
+					max-width:140px;
+					min-width:80px;
+				}
 			}
+
 		}
 	}
 	#productMore{
