@@ -82,8 +82,26 @@
 
 		}
 		#application{
-			#applicationGuideLink{
+			.vehicle{
+				margin-bottom:0px;
+				font-size:14px;
+				.year{
 
+				}
+				.make{
+
+				}
+				.model{
+
+				}
+				.subModel{
+
+				}
+			}
+			#applicationGuideLink{
+				margin-top:10px;
+				font-size:18px;
+				color: $altRed;
 			}
 		}
 		#accessories{
