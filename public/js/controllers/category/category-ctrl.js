@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService' , function($scope, $stateParams, $sce, CategoryService){
+	module.controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll' , function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll){
 		$scope.category = {};
 		$scope.loadingMore = false;
 		$scope.parts = []
@@ -41,6 +41,10 @@ define(['./module'], function (module) {
 					$scope.loadingMore = false;
 					$('.pagination').css('opacity','1.0');
 			});
+		};
+		$scope.scrollTo = function(elementId){
+			$location.hash(elementId);
+			$anchorScroll();
 		};
 
 	}]);
