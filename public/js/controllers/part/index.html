@@ -35,14 +35,25 @@
 				<div id="productMedia" class="col-xs-12 col-md-6 col-lg-6">
 					<div class="pull-right">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<img src="/img/partImgPlaceholder.jpg" alt="Part Image" />
-						</div>
-						<br />
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
-							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
-							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
-							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><img class="thumbnail" src="/img/partImgPlaceholder.jpg"/></div>
+							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
+										<div class="carouselImg">
+											<img class="img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" width="400px" height="400px" />
+										</div>
+									</div>
+								</div>
+								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
+									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" /><li>
+								</ol>
+
+								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -69,6 +80,20 @@
 			<div id="application">
 				<h3>APPLICATION</h3>
 				<p><strong>Available for:</strong> Various Vehicles. Check out our Application Guides to see what fits your vehicle.</p>
+				<div ng-if="p.images.length > 1">
+
+				</div>
+				<div class="vehicle">
+					<ul class="list-group">
+						<li ng-repeat="v in part.vehicles | orderBy:'Year'" class="list-group-item">
+							<span class="year">[[v.Year]] </span> 
+							<span class="make">[[v.Make]] </span>
+							<span class="model">[[v.Model]] </span> 
+							<span class="submodel">[[v.SubModel]]</span>
+						</li>
+					</ul>
+				</div>
+				<br />
 				<span id="applicationGuideLink">VIEW APPLICATION GUIDES</span>
 			</div>
 
