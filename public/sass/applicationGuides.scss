@@ -1,11 +1,16 @@
-.right{
-	float:right;
-	a{
-		text-decoration:none;
+
+.category{
+	font-size:2em;
+	.right{
+		float:right;
+		a{
+			text-decoration:none;
+
+			.icon{
+				font-size: .8em;
+				border:none;
+			}
+		}
 	}
-}
-.fakeIcon{
-	border: #999 1px solid; 
-	padding:2px 3px 6px 3px; 
-	border-radius:4px;
+	
 }
