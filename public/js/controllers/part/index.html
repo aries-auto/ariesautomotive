@@ -1,8 +1,35 @@
 <div class="part-container" ng-controller="PartController" ng-cloak>
 	<div id="productInfo" class="container-fluid">
 		<div class="container">
-			<div class="row">
-				<div id="productDetails" class="col-xs-12 col-md-6 col-lg-6">
+			<div id="topContainer" class="row">
+
+				<div id="productMedia" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-push-6 col-md-push-6 col-lg-push-6">
+					<div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
+										<div class="carouselImg">
+											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" width="400px" height="400px" />
+										</div>
+									</div>
+								</div>
+								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
+									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" /><li>
+								</ol>
+
+								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="productDetails" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-pull-6 col-md-pull-6 col-lg-pull-6">
 					<div id="breadcrumbs">
 						<ol class="breadcrumb">
 							<li ng-repeat="cat in part.categories.slice().reverse()">
@@ -23,40 +50,10 @@
 					</div>
 
 					<div id="partContent" ng-show="part.content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere, risus et tristique consequat, lectus leo condimentum erat, et dapibus nisl quam et massa. Quisque vel nunc id est commodo porttitor. Etiam ut scelerisque massa, eget sodales orci. Maecenas eget finibus lorem. Donec elementum cursus mauris sit amet tempus. Pellentesque dictum consequat suscipit. Fusce sit amet nibh in eros molestie mattis ac id urna. Quisque quis dolor non lorem viverra facilisis. Sed non nisi sed nisi rhoncus iaculis molestie vel elit. Donec cursus feugiat nulla id semper.</p>
 						<p ng-repeat="c in part.content">[[c.value]]</p>
 					</div>
-					<div id="partAttr">
-						<ul ng-show="part.attributes">
-							<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
-						</ul>
-					</div>
 				</div>
-				<div id="productMedia" class="col-xs-12 col-md-6 col-lg-6">
-					<div class="pull-right">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
-								<div class="carousel-inner">
-									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
-										<div class="carouselImg">
-											<img class="img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" width="400px" height="400px" />
-										</div>
-									</div>
-								</div>
-								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
-									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" /><li>
-								</ol>
-
-								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left"></span>
-								</a>
-								<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
-									<span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -66,12 +63,13 @@
 			<div id="prodDetailsMore" class="col-lg-12" style="padding-left:0px;">
 				<div class="col-lg-8" style="padding-left:0px;">
 					<h3>MORE DETAILS</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere, risus et tristique consequat, lectus leo condimentum erat, et dapibus nisl quam et massa. Quisque vel nunc id est commodo porttitor. Etiam ut scelerisque massa, eget sodales orci. Maecenas eget finibus lorem. Donec elementum cursus mauris sit amet tempus. Pellentesque dictum consequat suscipit. Fusce sit amet nibh in eros molestie mattis ac id urna. Quisque quis dolor non lorem viverra facilisis. Sed non nisi sed nisi rhoncus iaculis molestie vel elit. Donec cursus feugiat nulla id semper. Donec quis suscipit eros, in ullamcorper sem. Donec velit purus, hendrerit et molestie eu, auctor quis orci. Donec varius at lectus ornare mattis. Nunc ac orci vel urna volutpat condimentum vel quis dolor. Curabitur sed velit non nisl euismod interdum sit amet tincidunt urna. Nunc vehicula id elit sed dictum.</p>
 
-					<ul>
-						<li>information snippet about the product, could be part contents or attributes</li>
-						<li>another snippet would go here</li>
-					</ul>
+					<div id="partAttr">
+						<ul ng-show="part.attributes">
+							<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
+						</ul>
+					</div>
+
 				</div>	
 			</div>
 
@@ -84,17 +82,26 @@
 
 				</div>
 				<div class="vehicle">
-					<ul class="list-group">
-						<li ng-repeat="v in part.vehicles | orderBy:'Year'" class="list-group-item">
-							<span class="year">[[v.Year]] </span> 
-							<span class="make">[[v.Make]] </span>
-							<span class="model">[[v.Model]] </span> 
-							<span class="submodel">[[v.SubModel]]</span>
-						</li>
-					</ul>
+					<table class="table table-striped table-responsive table-condensed">
+						<thead>
+							<tr>
+								<th>Year</th>
+								<th>Make</th>
+								<th>Model</th>
+								<th>Sub Model</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="v in part.vehicles | orderBy:'Year'">
+								<td class="year">[[v.Year]]</td>
+								<td class="make">[[v.Make]]</td>
+								<td class="model">[[v.Model]]</td>
+								<td class="submodel">[[v.SubModel]]</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<br />
-				<span id="applicationGuideLink">VIEW APPLICATION GUIDES</span>
+				<span id="applicationGuideLink"><a href="/appguides">VIEW APPLICATION GUIDES</a></span>
 			</div>
 
 			<hr />
@@ -104,24 +111,24 @@
 
 				<div id="accessoryItems">
 					<!--<div class="accessory col-lg-4" ng-repeat="r in part.related"></div>-->
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/BullBar.jpg" alt="Bull Bar" />
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/BullBar.jpg" alt="Bull Bar" />
 						<br />
 						<span class="accessoryTitle">BULL BAR</span>
 					</div>
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/GrillGuard.jpg" alt="Grill Guard" />
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/GrillGuard.jpg" alt="Grill Guard" />
 						<br />
 						<span class="accessoryTitle">GRILL GUARD</span>
-					</div>	
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/interiorFeaturedProd.jpg" alt="Floor Mat" />
+					</div>
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/interiorFeaturedProd.jpg" alt="Floor Mat" />
 						<br />
 						<span class="accessoryTitle">FLOOR MAT</span>
 					</div>	
 
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/sportsbar.jpg" alt="Sports Bar" />
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/sportsbar.jpg" alt="Sports Bar" />
 						<br />
 						<span class="accessoryTitle">SPORTS BAR</span>
 					</div>					
