@@ -16,6 +16,20 @@ define(['angular'], function(angular){
 				}).error(function(data, status, headers, config){
 					callback(null, data);
 				});
+			},
+			PostContactData : function(data, callback){
+				$http({
+					method: 'POST',
+					url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
+					data: data,
+					headers: {
+						'Content-Type': 'application/json'
+					}					
+				}).success(function(data, status, headers, config){
+					callback(data, null);
+				}).error(function(data, status, headers, config){
+					callback(null, data);
+				});
 			}
 		};
 	}]);
