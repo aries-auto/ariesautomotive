@@ -20,25 +20,34 @@
 				#socialPartContainer{
 					padding-left:0px;
 					padding-bottom:30px;
-					.partNumSmall{
-						font-size: 18px;
-						color: $headerColor;
-						font-weight:900;
-						padding-right:15px;
-					}
+
+
+
+
 
 					#social{
-						#share{
-							font-size: 18px;
-							color: #666666;
-							font-weight:900;
-							padding-right:4px;
+						#partNumContainer{
+							padding:0px;
+							.partNumSmall{
+								font-size: 18px;
+								color: $headerColor;
+								font-weight:900;
+							}
 						}
-						.socialIcon{
-							display:inline;
-							img{
-								width:35px;
-								height:35px;
+						#shareContainer{
+							padding:0px;
+							#share{
+								font-size: 18px;
+								color: #666666;
+								font-weight:900;
+								padding-right:4px;
+							}
+							.socialIcon{
+								display:inline;
+								img{
+									width:35px;
+									height:35px;
+								}
 							}
 						}
 					}
