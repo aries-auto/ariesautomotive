@@ -22,7 +22,7 @@
 								<div class="carousel-inner">
 									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
 										<div class="carouselImg">
-											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" width="400px" height="400px" />
+											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" />
 										</div>
 									</div>
 								</div>
