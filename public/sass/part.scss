@@ -1,18 +1,9 @@
 
-
-
-
 .part-container{
-
-
-
 	#productInfo{
 		padding-bottom:0px;
 
-
-
 		#topContainer{
-
 			#titleBreadCrumbContainer{
 				#breadcrumbs{
 					.breadcrumb{
@@ -58,10 +49,6 @@
 					padding-left:0px;
 					padding-bottom:30px;
 
-
-
-
-
 					#social{
 						#partNumContainer{
 							padding:0px;
@@ -93,28 +80,44 @@
 				
 			}
 			#productMedia{
-				background-color:#ffffff;
-				.carouselImg{
-					.largeImg{
-						margin-left:auto;
-						margin-right:auto;
+				background:none;
+				.carousel{
+					max-width:450px;
+					-webkit-box-shadow: 1px 0 10px -2px #ccc;
+					-moz-box-shadow: 1px 0 10px -2px #ccc;
+					box-shadow: 1px 0 10px -2px #ccc;
 
+					.carousel-inner{
+						.item{
+							background:none;
+						}
+					}
+
+				}
+				.carouselImg{
+						max-width:450px;
+						max-height:450px;
+					.largeImg{
 					}
 				}
 				.thumbs{
 					min-height:80px;
 					max-height:140px;
+					max-width:450px;
+					padding:10px;
 					padding-left:0px;
-					padding-right:0px;
-					padding-bottom:0px;
 					margin-bottom:0px;
-					background-color:#ffffff;
+					list-style:none;
 
 
 					.thumb{
 						padding:0px;
 						max-width:140px;
 						min-width:80px;
+						-webkit-box-shadow: 1px 0 10px 2px #ccc;
+						-moz-box-shadow: 1px 0 10px 2px #ccc;
+						box-shadow: 1px 0 10px 2px #ccc;
+						margin-right:10px;
 					}
 				}
 				.carousel-control{
