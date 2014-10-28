@@ -10,7 +10,6 @@
 		background-color: rgba(0,0,0,.1);
 	}
 	tr{
-		// border: 1px solid black;
 		td, th{
 			text-align: left;
 			padding:1em 2em 1em 2em;
@@ -19,5 +18,18 @@
 			background-color: rgba(0,0,0,.1);
 			font-size: 1.3em;
 		}
+	}
+	
+}
+#techSupportContent{
+	padding-left:2em;
+	p{
+		font-size:.8em;
+	}
+}
+.link{
+	a:hover{
+		color:#333;
+		text-decoration: none;
 	}
 }

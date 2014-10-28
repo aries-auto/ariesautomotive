@@ -7,7 +7,21 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 cl-offset-lg-1"  ng-form="formvalidation">
 
 						<h1>TECH SUPPORT</h1>
+						<p ><em>For tech support, you may:</em></p>
+						<div class="row">
+							<div id="techSupportContent" class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
 
+								<p>Contact our tech support hotline, 844-278-HELP(4357).</p>
+
+								<p>Submit an email to: <a href="mailto:customer_service@ariesoffroad.com">customer_service@ariesoffroad.com</a>.</p>
+
+								<p>Submit the form below:</p>
+							</div>
+							<div  class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> 
+								<p>--Warranty Badge--</p>
+								<p class="link"><a href="/warranties">ONLINE WARRANTIES</a></p>
+							</div>
+						</div>
 						<form>
 
 							<div class="form-group col-xs-6">
@@ -71,7 +85,7 @@
 							</div>
 						</form>
 						<div >
-							<table id="contactReceivers">
+							<table id="contactReceivers" ng-if="len(contactReceivers)">
 								<tr><td class="headerRow" colspan="3">Email Tech Support</td></tr>
 								<tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>
 								<tr ng-repeat="cr in contactReceivers" ng-class-even="'darken'">

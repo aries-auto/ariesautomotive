@@ -21,8 +21,8 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'GET',
-					// url: AppConfig.APIURL + '/contact/types/receivers/11?key='+AppConfig.APIKEY, //11 is tech services contactType
-					url:'http://localhost:8081/contact/types/receivers/11?key='+AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/contact/types/receivers/11?key='+AppConfig.APIKEY, //11 is tech services contactType
+					// url:'http://localhost:8081/contact/types/receivers/11?key='+AppConfig.APIKEY,
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
 					},
