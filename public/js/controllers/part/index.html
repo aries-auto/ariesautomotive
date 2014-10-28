@@ -3,6 +3,18 @@
 		<div class="container">
 			<div id="topContainer" class="row">
 
+				<div id="titleBreadCrumbContainer" class="visible-xs-block">
+					<div id="breadcrumbs">
+						<ol class="breadcrumb">
+							<li ng-repeat="cat in part.categories.slice().reverse()">
+								<a href="/category/[[cat.id]]">[[cat.title | uppercase]]</a>
+							</li>
+							<li class="active">Part# [[part.id]]</li>
+						</ol>
+					</div>
+					<h1>[[part.short_description | uppercase]]</h1>
+				</div>
+
 				<div id="productMedia" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-push-6 col-md-push-6 col-lg-push-6">
 					<div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -30,21 +42,23 @@
 				</div>
 
 				<div id="productDetails" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-pull-6 col-md-pull-6 col-lg-pull-6">
-					<div id="breadcrumbs">
-						<ol class="breadcrumb">
-							<li ng-repeat="cat in part.categories.slice().reverse()">
-								<a href="/category/[[cat.id]]">[[cat.title | uppercase]]</a>
-							</li>
-							<li class="active">Part# [[part.id]]</li>
-						</ol>
+					<div id="titleBreadCrumbContainer" class="hidden-xs">
+						<div id="breadcrumbs">
+							<ol class="breadcrumb">
+								<li ng-repeat="cat in part.categories.slice().reverse()">
+									<a href="/category/[[cat.id]]">[[cat.title | uppercase]]</a>
+								</li>
+								<li class="active">Part# [[part.id]]</li>
+							</ol>
+						</div>
+						<h1>[[part.short_description | uppercase]]</h1>
 					</div>
-					<h1>[[part.short_description | uppercase]]</h1>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="socialPartContainer">
 						<div id="social">
-							<div id="partNumContainer" class="col-xs-12">
+							<div id="partNumContainer" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 								<span class="partNumSmall">PART #[[part.id]]</span>
 							</div>
-							<div id="shareContainer" class="col-xs-12">
+							<div id="shareContainer" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 								<span id="share">SHARE</span>
 								<div class="socialIcon"><a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook"><img src="/img/facebook-icon.png" alt="Facebook" /></a></div>
 								<div class="socialIcon"><a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter"><img src="/img/twitter-icon.png" alt="Twitter" /></a></div>
