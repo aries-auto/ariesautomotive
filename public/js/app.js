@@ -17,6 +17,7 @@ define([
 	'./controllers/techsupport/index',
 	'./controllers/terms/index',
 	'./controllers/warranties/index',
+	'./services/applicationGuide',
 	'./services/becomedealer',
 	'./services/category',
 	'./services/contact',
@@ -31,6 +32,7 @@ define([
 
 	return angular.module('app', [
 		'app.constants',
+		'app.services.applicationGuide',
 		'app.services.becomedealer',
 		'app.services.category',
 		'app.services.contact',
