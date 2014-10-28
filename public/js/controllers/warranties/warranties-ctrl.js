@@ -5,7 +5,7 @@ define(['./module'], function (module) {
 	'use strict';
 
 	module.controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', function($scope, WarrantyService, GeographyService, PartService){
-		$scope.message = "Click this button:"
+		$scope.message = "Click this button:";
 		$scope.partConfirm = false;
 		$scope.warranty = {};
 		$scope.warranty.contact = {};
@@ -15,15 +15,14 @@ define(['./module'], function (module) {
 		$scope.updateStates = function(){
 			$scope.states = this.form.country.states;
 			$scope.warranty.contact.country = this.form.country.country;
-		}
+		};
 
 		$scope.updateState = function(){
 			$scope.warranty.contact.state = this.form.state.state;
-		}
+		};
 
 		GeographyService.GetCountryStates(function(countries, err){
 			if(err){
-				console.log(err);
 				return;
 			}
 			$scope.countrystates = countries;
@@ -35,15 +34,14 @@ define(['./module'], function (module) {
 				return;
 			}
 			warranty.date = new Date(warranty.date);
-			console.log(warranty)
 
 			WarrantyService.SubmitWarranty(warranty)
 				.then(function(data){
 					$scope.warranty = {};
 					$scope.dateMessage = "";
-					$scope.message = "Request sent."
+					$scope.message = "Request sent.";
 				});
-		}
+		};
 
 		$scope.matchPart = function(warranty){
 			$scope.partConfirm = false;
@@ -68,7 +66,7 @@ define(['./module'], function (module) {
 					});
 				}
 			});
-		}
+		};
 		
 	}]);
 });
