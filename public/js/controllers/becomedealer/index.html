@@ -8,18 +8,18 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><b class="glyphicon glyphicon-user"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your first name.">
-							<input type="text" class="form-control" placeholder="Enter your last name.">
+							<input type="text" class="form-control" placeholder="Enter your first name." ng-model="contact.firstName">
+							<input type="text" class="form-control" placeholder="Enter your last name." ng-model="contact.lastName">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><b class="glyphicon glyphicon-briefcase"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your business name.">
-							<select name="business_type" class="form-control">
+							<input type="text" class="form-control" placeholder="Enter your business name." ng-model="contact.businessName">
+							<select name="business_type" class="form-control" ng-model="contact.businessType" ng-options="bc.id as bc.name for bc in businessClasses">
 								<option value="">Select your business type.</option>
-								<option ng-repeat="bc in businessClasses" value="[[bc.id]]">[[bc.name]]</option>
+								<!-- <option ng-repeat="bc in businessClasses" value="[[bc.id]]">[[bc.name]]</option> -->
 							</select>
 						</div>
 					</div>
@@ -27,38 +27,38 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><b class="glyphicon glyphicon-book"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your email address.">
-							<input type="text" class="form-control" placeholder="Enter your phone number.">
+							<input type="text" class="form-control" placeholder="Enter your email address." ng-model="contact.email">
+							<input type="text" class="form-control" placeholder="Enter your phone number." ng-model="contact.phone">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><b class="glyphicon glyphicon-globe"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your street address.">
-							<input type="text" class="form-control" placeholder="Address line 2.">
-							<select name="state" id="state" class="form-control">
+							<input type="text" class="form-control" placeholder="Enter your street address." ng-model="contact.address1">
+							<input type="text" class="form-control" placeholder="Address line 2." ng-model="contact.address2">
+							<select name="state" id="state" class="form-control" ng-model="contact.state">
 								<option value="0">Select your state or province.</option>
 								<optgroup ng-repeat="c in countries" label="[[c.country]]">
 									<option ng-repeat="s in c.states" value="[[s.state_id]]">[[s.abbreviation]] - [[s.state]]</option>
 								</optgroup>
 							</select>
-							<input type="text" class="form-control" id="postal_code" placeholder="Enter your postal code.">
+							<input type="text" class="form-control" id="postal_code" placeholder="Enter your postal code." ng-model="contact.postal_code">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><b class="glyphicon glyphicon-envelope"></b></div>
-							<textarea class="form-control" name="message" cols="60" rows="10" placeholder="If you would like to leave us a message, we'd love to hear from you!"></textarea>
+							<textarea class="form-control" name="message" cols="60" rows="10" placeholder="If you would like to leave us a message, we'd love to hear from you!" ng-model="contact.message"></textarea>
 						</div>
 					</div>
 				
-					<button type="submit" class="btn btn-primary">SEND</button>
+					<button type="submit" class="btn btn-primary" ng-click="saveDealer(contact)">SEND</button><span ng-if="message">[message]]</span>
 				</form>
 			</div>
 			<div class="col-xs-6 col-md-6 col-lg-6">
-	
+				
 			</div>
 		</div>
 	</div>
