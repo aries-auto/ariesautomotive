@@ -15,7 +15,7 @@ define(['./module'], function (module) {
 				if(err){
 					console.log(err);
 					var errMessage = 'Uh Oh! An error occurred while processing your request.\n';
-					errorMessage += err.message;
+					errMessage += err.message;
 					$scope.errorMessage = errMessage;
 
 					return;

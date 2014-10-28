@@ -66,54 +66,15 @@
 							<input type="text" class="form-control" id="postalcode" placeholder="Enter your postal code." ng-model="formData.postalCode">
 						</div>
 
-						<div class="form-group col-xs-12" ng-show="formData.contactType != 11 && formData.contactType != 15">
+						<div class="form-group col-xs-12" ng-show="formData.contactType != 15">
 							<label for="subject">Enter the subject:</label>
 							<input type="text" class="form-control" id="subject" placeholder="Enter the subject." ng-model="formData.subject" required>
 						</div>
 
-						<div class="form-group col-xs-12" ng-show="formData.contactType != 11">
+						<div class="form-group col-xs-12">
 							<label for="message">Enter the message:</label>
 							<textarea class="form-control" name="message" id="message" cols="60" rows="10" placeholder="Enter the message." ng-model="formData.message" required></textarea>
 						</div>
-
-						<!-- tech support -->
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="vehicleYear">Vehicle Year:</label>
-							<input type="number" class="form-control" ng-model="formData.vehicleYear" placeholder="Enter year">
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="vehicleMake">Vehicle Make:</label>
-							<input type="text"  class="form-control" ng-model="formData.vehicleMake" placeholder="Enter make">
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="vehicleModel">Vehicle Model:</label>
-							<input type="text"  class="form-control" ng-model="formData.vehicleModel" placeholder="Enter model">
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="purchaseDate">Date Of Purchase:</label><span ng-model="dateMessage" ng-if="dateMessage" class="danger"> [[dateMessage]]</span>
-							<input type="date"  class="form-control" ng-model="formData.purchaseDate" placeholder="Date of purchase" ng-required>
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="purchasedFrom">Purchased From:</label>
-							<input type="text"  class="form-control" ng-model="formData.purchasedFrom" placeholder="Purchased from">
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="dealerName">Dealer Name:</label>
-							<input type="text"  class="form-control" ng-model="formData.dealerName" placeholder="Dealer name">
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="productCode">Product Code:</label>
-							<input type="text"  class="form-control" name="productCode" ng-model="formData.productCode" placeholder="Product code">
-						</div>
-						<div class="form-group col-xs-6" ng-show="formData.contactType == 11">
-							<label for="dateCode">Date Code:</label>
-							<input type="text"  class="form-control" name="dateCode" ng-model="formData.dateCode" placeholder="Date code">
-						</div>
-						<div class="form-group col-xs-12" ng-show="formData.contactType == 11">
-							<label for="issue">Explain Issue:</label>
-							<textarea name="issue"  class="form-control" ng-model="formData.issue" required></textarea>
-						</div>
-						<!-- end tech support-->
 
 						<div class="form-group col-xs-12">
 							<button type="submit" class="btn btn-primary" ng-click="postForm()">SEND</button>
