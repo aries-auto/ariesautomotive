@@ -1,8 +1,35 @@
 <div class="part-container" ng-controller="PartController" ng-cloak>
 	<div id="productInfo" class="container-fluid">
 		<div class="container">
-			<div class="row">
-				<div id="productDetails" class="col-xs-12 col-md-6 col-lg-6">
+			<div id="topContainer" class="row">
+
+				<div id="productMedia" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-push-6 col-md-push-6 col-lg-push-6">
+					<div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
+										<div class="carouselImg">
+											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" width="400px" height="400px" />
+										</div>
+									</div>
+								</div>
+								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
+									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" /><li>
+								</ol>
+
+								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="productDetails" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-pull-6 col-md-pull-6 col-lg-pull-6">
 					<div id="breadcrumbs">
 						<ol class="breadcrumb">
 							<li ng-repeat="cat in part.categories.slice().reverse()">
@@ -32,31 +59,7 @@
 						</ul>
 					</div>
 				</div>
-				<div id="productMedia" class="col-xs-12 col-md-6 col-lg-6">
-					<div>
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
-								<div class="carousel-inner">
-									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
-										<div class="carouselImg">
-											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" width="400px" height="400px" />
-										</div>
-									</div>
-								</div>
-								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
-									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" /><li>
-								</ol>
-
-								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
-									<span class="glyphicon glyphicon-chevron-left"></span>
-								</a>
-								<a class="right carousel-control" href="#hero-image-carousel" role="button" data-slide="next">
-									<span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
