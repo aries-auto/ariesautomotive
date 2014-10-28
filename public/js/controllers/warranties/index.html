@@ -5,10 +5,12 @@
 				<div class="row">
 					<div class="col-xs-12 col-md-12 col-lg-12" ng-form="formvalidation">
 						<h1>ONLINE WARRANTIES</h1>
-						<p>Please complete all fields.</p>
+						<p>In order to accept a warranty all ARIES products must have a warranty card completed with proof of purchase.</p>
+						
 						<form>
 							<div class="col-xs-12 col-md-6">
 							<h3>STEP 1 OF 4: PROVIDE PURCHASER INFORMATION</h3>
+							<p><em>Please complete all fields.</em></p>
 								<div class="form-group col-md-6 col-xs-9">
 									<label for="firstName">First Name:</label>
 									<input type="text"  class="form-control" name="firstName" ng-model="warranty.contact.firstName" placeholder="Enter your first name." required>
@@ -61,6 +63,14 @@
 							</div>
 							<div class="col-xs-12 col-md-6">
 								<h3>STEP 2 OF 4: PRODUCT REGISTRATION INFORMATION</h3>
+								<p><em>Find your registration sticker: </em>
+									<a href="https://www.curtmfg.com/assets/aries/warranty/bullbarregistrationsticker.jpg" target="blank">Bull Bar | </a>
+									<a href="https://www.curtmfg.com/assets/aries/warranty/grillguardregistrationsticker.jpg" target="blank">Grill Guard | </a>
+									<a href="https://www.curtmfg.com/assets/aries/warranty/sidebarregistrationsticker.jpg" target="blank"> Side Bar</a>
+
+
+
+								</p>
 								<div class="form-group col-xs-6">
 									<label for="partNumber">Part Number:</label>&nbsp;&nbsp;&nbsp;<span ng-if="!partConfirm"><em>Enter a valid part number.</em></span>
 									<input type="text"  class="form-control" name="partNumber" ng-model="warranty.partNumber" placeholder="Enter part number." ng-change="matchPart(warranty)" required>
@@ -91,15 +101,18 @@
 									LOMITA, CALIFORNIA 90717 USA<br>
 									</p>
 									<p>
-									PHONE: 888-800-2743
+									Phone: 888-800-2743
 									</p>
 									<p>
-									FAX: 310-784-1017
+									Fax: 310-784-1017
 									</p>
 									<p>
-									WARRANTY REGISTRATION IS VALID WITHIN 90 DAYS FROM DATE OF PURCHASE AS STATED ON THE PROOF OF PURCHASE RECEIPT.
-									</p>
+									Email: <a href="mailto:customer_service@ariesoffroad.com">customer_service@ariesoffroad.com</a>
+									
 								</div>
+								<p class="col-xs-12 col-md-12 col-md-offset-1">
+									<em>Warranty registration is valid within 90 days from the date of purchase as stated on the proof of purchase receipt.</em>
+								</p>
 							</div>
 						</form>
 
