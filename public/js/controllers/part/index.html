@@ -33,13 +33,13 @@
 					</div>
 				</div>
 				<div id="productMedia" class="col-xs-12 col-md-6 col-lg-6">
-					<div class="pull-right">
+					<div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
 								<div class="carousel-inner">
 									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
 										<div class="carouselImg">
-											<img class="img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" width="400px" height="400px" />
+											<img class="largeImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" width="400px" height="400px" />
 										</div>
 									</div>
 								</div>
@@ -94,7 +94,7 @@
 					</ul>
 				</div>
 				<br />
-				<span id="applicationGuideLink">VIEW APPLICATION GUIDES</span>
+				<span id="applicationGuideLink"><a href="/appguides">VIEW APPLICATION GUIDES</a></span>
 			</div>
 
 			<hr />
@@ -104,24 +104,24 @@
 
 				<div id="accessoryItems">
 					<!--<div class="accessory col-lg-4" ng-repeat="r in part.related"></div>-->
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/BullBar.jpg" alt="Bull Bar" />
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/BullBar.jpg" alt="Bull Bar" />
 						<br />
 						<span class="accessoryTitle">BULL BAR</span>
 					</div>
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/GrillGuard.jpg" alt="Grill Guard" />
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/GrillGuard.jpg" alt="Grill Guard" />
 						<br />
 						<span class="accessoryTitle">GRILL GUARD</span>
-					</div>	
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/interiorFeaturedProd.jpg" alt="Floor Mat" />
+					</div>
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/interiorFeaturedProd.jpg" alt="Floor Mat" />
 						<br />
 						<span class="accessoryTitle">FLOOR MAT</span>
 					</div>	
 
-					<div class="accessory col-md-3 col-lg-3">
-						<img src="/img/sportsbar.jpg" alt="Sports Bar" />
+					<div class="accessory col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<img class="img-responsive" src="/img/sportsbar.jpg" alt="Sports Bar" />
 						<br />
 						<span class="accessoryTitle">SPORTS BAR</span>
 					</div>					
