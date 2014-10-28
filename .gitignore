@@ -23,6 +23,8 @@ _testmain.go
 *.test
 
 public/js/lib
+public/css
+public/img/dest
 .sass-cache
 node_modules
 /index
