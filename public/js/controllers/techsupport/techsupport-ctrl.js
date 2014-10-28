@@ -7,11 +7,10 @@ define(['./module'], function (module) {
 	module.controller('TechSupportController', ['$scope', 'TechSupportService', function($scope, TechSupportService){
 		$scope.techSupport = {};
 		$scope.techSupport.contact = {};
+		$scope.contactReceivers = [];//tech support personel
 
 		$scope.message = "";
 		$scope.dateMessage = "";
-
-		$scope.years = [3333,444];
 
 		$scope.submitTechSupport = function(techSupport){
 
@@ -38,5 +37,14 @@ define(['./module'], function (module) {
 				$scope.message = 'Failed to submit your support request, please call our help line.';
 			});
 		}
+
+		
+		$scope.contactReceivers = TechSupportService.GetTechSupportContactReceivers()
+			.then(function(data){
+				$scope.contactReceivers = data;
+			});
+
+
+
 	}]);
 });
