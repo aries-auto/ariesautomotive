@@ -16,7 +16,7 @@ define(['./module'], function (module) {
 				//get unique cat ids
 				angular.forEach($scope.applicationGuides,function(v,k){
 					v.category.title  = (v.category.title === '')?'General Aries Applicatons':v.category.title;//set blank titles
-					if ($scope.categories.indexOf(v.category.title) == -1){
+					if ($scope.categories.indexOf(v.category.title) === -1){
 						$scope.categories.push(v.category.title);
 					}
 					
