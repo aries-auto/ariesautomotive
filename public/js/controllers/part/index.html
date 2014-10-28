@@ -39,12 +39,12 @@
 								<div class="carousel-inner">
 									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
 										<div class="carouselImg">
-											<img class="largeImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" width="400px" height="400px" />
+											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" width="400px" height="400px" />
 										</div>
 									</div>
 								</div>
 								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
-									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" /><li>
+									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" /><li>
 								</ol>
 
 								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
