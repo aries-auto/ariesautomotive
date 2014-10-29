@@ -7,7 +7,7 @@ define(['./module'], function (module) {
 	module.controller('TechSupportController', ['$scope', 'TechSupportService', function($scope, TechSupportService){
 		$scope.techSupport = {};
 		$scope.techSupport.contact = {};
-		$scope.contactReceivers = [];//tech support personel
+		// $scope.contactReceivers = {};//tech support personel
 
 		$scope.message = "";
 		$scope.dateMessage = "";
@@ -39,7 +39,7 @@ define(['./module'], function (module) {
 		}
 
 		
-		$scope.contactReceivers = TechSupportService.GetTechSupportContactReceivers()
+		TechSupportService.GetTechSupportContactReceivers()
 			.then(function(data){
 				$scope.contactReceivers = data;
 			});

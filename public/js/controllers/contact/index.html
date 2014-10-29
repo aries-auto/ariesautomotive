@@ -17,17 +17,17 @@
 
 						<div class="form-group col-xs-6">
 							<label for="firstname">Enter your first name:</label>
-							<input type="text" class="form-control" id="firstname" placeholder="Enter your first name." ng-model="formData.firstName" required>
+							<input type="text" class="form-control" id="firstname" placeholder="Enter your first name." ng-model="formData.firstName" name="firstName" required>
 						</div>
 						<div class="form-group col-xs-6">
 							<label for="lastname">Enter your last name:</label>
-							<input type="text" class="form-control" id="lastname" placeholder="Enter your last name." ng-model="formData.lastName" required>
+							<input type="text" class="form-control" id="lastname" placeholder="Enter your last name." ng-model="formData.lastName" name="lastName" required>
 						</div>
 
 						<!--become a dealer-->
 						<div class="form-group col-xs-12" ng-show="formData.contactType == 15">
 							<label for="businessname">Enter your business name:</label>
-							<input type="text" class="form-control" id="businessname" placeholder="Enter your business name." ng-model="formData.businessName" required>
+							<input type="text" class="form-control" id="businessname" placeholder="Enter your business name." ng-model="formData.businessName" name="businessName" required>
 							<label for="businesstype">Select your business type:</label>
 							<select id="businesstype" class="form-control" ng-model="formData.businessType" required>
 								<option value="">-Select your business type-</option>
@@ -37,24 +37,30 @@
 						<!--end become a dealer -->
 						<div class="form-group col-xs-6">
 							<label for="email">Enter your email address:</label>
-							<input type="email" class="form-control" id="email" placeholder="Enter your email address." ng-model="formData.email" required>
+							<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address." ng-model="formData.email" name="email" required>	
+
+							<div ng-show="contactForm.email.$dirty && contactForm.email.$invalid">Invalid:
+						      <span ng-show="contactForm.email.$error.required">Tell us your email.</span>
+						      <span ng-show="contactForm.email.$error.email">This is not a valid email.</span>
+						    </div>
+
 						</div>
 						<div class="form-group col-xs-6">
 							<label for="phone">Enter your phone number:</label>
-							<input type="text" class="form-control" id="phone" placeholder="Enter your phone number." ng-model="formData.phone">
+							<input type="text" class="form-control" id="phone" placeholder="Enter your phone number." ng-model="formData.phone" name="phone">
 						</div>
 						<div class="form-group col-xs-12">
 							<label for="address">Enter your street address:</label>
-							<input type="text" class="form-control" id="address" placeholder="Enter your street address." ng-model="formData.address1"><br>
-							<input type="text" class="form-control" id="address2" placeholder="Address line 2." ng-model="formData.address2">
+							<input type="text" class="form-control" id="address" placeholder="Enter your street address." ng-model="formData.address1" name="address1"><br>
+							<input type="text" class="form-control" id="address2" placeholder="Address line 2." ng-model="formData.address2" name="address2">
 						</div>
 						<div class="form-group col-xs-12">
 							<label for="city">Enter your city:</label>
-							<input type="text" class="form-control" id="city" placeholder="Enter your city." ng-model="formData.city">
+							<input type="text" class="form-control" id="city" placeholder="Enter your city." ng-model="formData.city" name="city">
 						</div>
 						<div class="form-group col-xs-6 col-offset-xs-1">
 							<label for="state">Select your state/province:</label>
-							<select id="state" class="form-control" ng-model="formData.state">
+							<select id="state" class="form-control" ng-model="formData.state" name="state">
 								<option value="">- Select State / Province -</option>
 								<optgroup ng-repeat="c in countries" label="[[c.country]]">
 									<option ng-repeat="s in c.states" value="[[s.state_id]]">[[s.abbreviation]] - [[s.state]]</option>
@@ -63,22 +69,23 @@
 						</div>
 						<div class="form-group col-xs-6">
 							<label for="postalcode">Enter your postal code:</label>
-							<input type="text" class="form-control" id="postalcode" placeholder="Enter your postal code." ng-model="formData.postalCode">
+							<input type="text" class="form-control" id="postalcode" placeholder="Enter your postal code." ng-model="formData.postalCode" name="postalCode">
 						</div>
 
 						<div class="form-group col-xs-12" ng-show="formData.contactType != 15">
 							<label for="subject">Enter the subject:</label>
-							<input type="text" class="form-control" id="subject" placeholder="Enter the subject." ng-model="formData.subject" required>
+							<input type="text" class="form-control" id="subject" placeholder="Enter the subject." ng-model="formData.subject" name="subject" required>
 						</div>
 
 						<div class="form-group col-xs-12">
 							<label for="message">Enter the message:</label>
-							<textarea class="form-control" name="message" id="message" cols="60" rows="10" placeholder="Enter the message." ng-model="formData.message" required></textarea>
+							<textarea class="form-control" name="message" id="message" cols="60" rows="10" placeholder="Enter the message." ng-model="formData.message" name="message" required></textarea>
 						</div>
 
 						<div class="form-group col-xs-12">
 							<button type="submit" class="btn btn-primary" ng-click="postForm()">SEND</button>
 						</div>
+
 
 						<div class="form-group col-xs-12 alert alert-danger" role="alert" ng-show="errorMessage">
 							[[errorMessage]]

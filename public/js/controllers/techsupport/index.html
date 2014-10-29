@@ -82,9 +82,9 @@
 							</div>
 						</form>
 						<div >
-							<table id="contactReceivers" ng-if="len(contactReceivers)">
+							<table id="contactReceivers" ng-if="contactReceivers.length" class="responsiveTable">
 								<tr><td class="headerRow" colspan="3">Email Tech Support</td></tr>
-								<tr><th>First Name</th><th>Last Name</th><th>Email</th></tr>
+								<thead><tr><th>First Name</th><th>Last Name</th><th>Email</th></tr></thead>
 								<tr ng-repeat="cr in contactReceivers" ng-class-even="'darken'">
 									<td>[[cr.FirstName]]</td>
 									<td>[[cr.LastName]]</td>
