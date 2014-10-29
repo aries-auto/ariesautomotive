@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('BecomeDealerController', ['$scope','BecomeDealerService','GeographyService', function($scope, BecomeDealerService, GeographyService){
+	module.controller('BecomeDealerController', ['$scope','BecomeDealerService','GeographyService',function($scope, BecomeDealerService, GeographyService){
 		$scope.contact = {};
 		$scope.message = "";
 		BecomeDealerService.GetBusinessClasses(function(classes, err){
