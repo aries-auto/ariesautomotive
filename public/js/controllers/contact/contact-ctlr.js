@@ -6,7 +6,7 @@ define(['./module'], function (module) {
 
 	module.controller('ContactController', ['$scope', 'ContactService','BecomeDealerService', 'GeographyService', 
 		function($scope, ContactService, BecomeDealerService, GeographyService){
-		$scope.formData = {'sendEmail': 'true'};
+		$scope.formData = {'sendEmail': true};
 
 		$scope.postForm = function(){
 			$scope.errorMessage = '';
@@ -21,7 +21,7 @@ define(['./module'], function (module) {
 					return;
 				}
 				if(result.id > 0){
-					$scope.formData = {'sendEmail': 'true'};
+					$scope.formData = {'sendEmail': true};
 					$scope.successMessage = 'Thank you. We have received your request.\n'; 
 				}
 			});

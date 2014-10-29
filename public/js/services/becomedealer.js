@@ -21,8 +21,8 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method: 'POST',
-					// url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
-					url: 'http://localhost:8081/contact' + '?key=' + AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
+					// url: 'http://localhost:8081/contact' + '?key=' + AppConfig.APIKEY,
 					data: contact,
 					headers: {
 						'Content-Type': 'application/json'

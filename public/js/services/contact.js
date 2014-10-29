@@ -21,6 +21,7 @@ define(['angular'], function(angular){
 				$http({
 					method: 'POST',
 					url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
+					// url: 'http://localhost:8081/contact' + '?key=' + AppConfig.APIKEY,
 					data: data,
 					headers: {
 						'Content-Type': 'application/json'

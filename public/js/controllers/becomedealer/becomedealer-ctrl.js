@@ -23,7 +23,7 @@ define(['./module'], function (module) {
 		});
 
 		$scope.saveDealer = function(contact){
-			contact.contactType = 15; //becoming a dealer
+			contact.contactType = "15"; //becoming a dealer
 			contact.sendEmail = true;
 			contact.subject = "Becoming a Dealer";
 
