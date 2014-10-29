@@ -1,65 +1,72 @@
 <div class="becomedealer-container" ng-controller="BecomeDealerController" ng-cloak>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-6 col-md-6 col-lg-6">
-				<h1>BECOME A DEALER</h1>
+    <div class="container-fluid" style="padding-left:0px;padding-right:0px;">
+        <div class="visible-sm visible-md visible-lg" style="background: url('http://storage.googleapis.com/aries-website/hero-images/truck-sands.png'); background-size:cover; width:100%; height:250px; background-repeat: no-repeat; background-position:50% -270px;background-attachment:fixed;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-md-6 col-lg-6">
+                    <h1>BECOME A DEALER</h1>
 
-				<form role="form">
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon"><b class="glyphicon glyphicon-user"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your first name." ng-model="contact.firstName">
-							<input type="text" class="form-control" placeholder="Enter your last name." ng-model="contact.lastName">
-						</div>
-					</div>
+                    <form role="form">
+                        <div class="form-group col-xs-6">
+                            <label for="firstname">Enter your first name:</label>
+                            <input type="text" class="form-control" id="firstname" placeholder="Enter your first name." ng-model="contact.firstName">
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label for="lastname">Enter your last name:</label>
+                            <input type="text" class="form-control" id="lastname" placeholder="Enter your last name." ng-model="contact.lastName">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="businessname">Enter your business name:</label>
+                            <input type="text" class="form-control" id="businessname" placeholder="Enter your business name." ng-model="cpntact.businessName">
+                            <label for="businesstype">Select your business type:</label>
+                            <select id="businesstype" class="form-control" ng-model="contact.businessType" ng-options="bc.id as bc.name for bc in businessClasses">
+                                <option value="">-Select your business type-</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label for="email">Enter your email address:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email address." ng-model="contact.email">
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label for="phone">Enter your phone number:</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Enter your phone number." ng-model="contact.phone">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="address">Enter your street address:</label>
+                            <input type="text" class="form-control" id="address" placeholder="Enter your street address." ng-model="contact.address1"><br>
+                            <input type="text" class="form-control" id="address2" placeholder="Address line 2." ng-model="contact.address2">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="city">Enter your city:</label>
+                            <input type="text" class="form-control" id="city" placeholder="Enter your city." ng-model="contact.city">
+                        </div>
+                        <div class="form-group col-xs-6 col-offset-xs-1">
+                            <label for="state">Select your state/province:</label>
+                            <select id="state" class="form-control" ng-model="contact.state">
+                                <option value="">- Select State / Province -</option>
+                                <optgroup ng-repeat="c in countries" label="[[c.country]]">
+                                    <option ng-repeat="s in c.states" value="[[s.state_id]]">[[s.abbreviation]] - [[s.state]]</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-6">
+                            <label for="postalCode">Enter your postal code:</label>
+                            <input type="text" class="form-control" id="postalcode" placeholder="Enter your postal code." ng-model="contact.postal_code">
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="message">If you would like to leave us a message, we'd love to hear from you!</label>
+                            <textarea id="message" class="form-control" cols="60" rows="10" placeholder="Enter your message here." ng-model="contact.message"></textarea>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-primary" ng-click="saveDealer(contact)">SEND</button>
+                            <span ng-if="message">[[message]]</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-6 col-md-6 col-lg-6">
+                
+                </div>
+            </div>
+        </div>
 
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon"><b class="glyphicon glyphicon-briefcase"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your business name." ng-model="contact.businessName">
-							<select name="business_type" class="form-control" ng-model="contact.businessType.id" ng-options="bc.id as bc.name for bc in businessClasses">
-								<option value="">Select your business type.</option>
-								<!-- <option ng-repeat="bc in businessClasses" value="[[bc.id]]">[[bc.name]]</option> -->
-							</select>
-						</div>
-					</div>
-				
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon"><b class="glyphicon glyphicon-book"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your email address." ng-model="contact.email">
-							<input type="text" class="form-control" placeholder="Enter your phone number." ng-model="contact.phone">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon"><b class="glyphicon glyphicon-globe"></b></div>
-							<input type="text" class="form-control" placeholder="Enter your street address." ng-model="contact.address1">
-							<input type="text" class="form-control" placeholder="Address line 2." ng-model="contact.address2">
-							<select name="state" id="state" class="form-control" ng-model="contact.state">
-								<option value="0">Select your state or province.</option>
-								<optgroup ng-repeat="c in countries" label="[[c.country]]">
-									<option ng-repeat="s in c.states" value="[[s.state_id]]">[[s.abbreviation]] - [[s.state]]</option>
-								</optgroup>
-							</select>
-							<input type="text" class="form-control" id="postal_code" placeholder="Enter your postal code." ng-model="contact.postal_code">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon"><b class="glyphicon glyphicon-envelope"></b></div>
-							<textarea class="form-control" name="message" cols="60" rows="10" placeholder="If you would like to leave us a message, we'd love to hear from you!" ng-model="contact.message"></textarea>
-						</div>
-					</div>
-				
-					<button type="submit" class="btn btn-primary" ng-click="saveDealer(contact)">SEND</button><span ng-if="message">[message]]</span>
-				</form>
-			</div>
-			<div class="col-xs-6 col-md-6 col-lg-6">
-				
-			</div>
-		</div>
-	</div>
 </div>

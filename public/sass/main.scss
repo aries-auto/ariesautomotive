@@ -59,6 +59,11 @@ body{
 
 	}
 
+	/** main content div on layout **/
+	.content{
+		margin-bottom: 10px;
+	}
+
 	header{
 		background-color: $headerMenuBackColor;
 		border: 0;
@@ -335,4 +340,79 @@ body{
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
+}
+
+
+/* To use responsive table, make sure you include responsivleTable as a class on your table, as well has creating your own class to fill out the table headings content for your media query. An example of this can be found below:
+
+				.applicationsTbl{
+					@media 
+					only screen and (max-width: 760px),
+					(min-device-width: 768px) and (max-device-width: 1024px)  {
+						td:nth-of-type(1):before { content: "Year"; font-weight:900; }
+						td:nth-of-type(2):before { content: "Make"; font-weight:900; }
+						td:nth-of-type(3):before { content: "Model"; font-weight:900; }
+						td:nth-of-type(4):before { content: "SubModel"; font-weight:900; }
+					}
+				}
+ */
+
+
+.responsiveTable{
+  width: 100%; 
+  border-collapse: collapse;
+
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+	  background: #eee; 
+	}
+	th { 
+	  background: #333; 
+	  color: white; 
+	  font-weight: bold; 
+	}
+	td, th { 
+	  padding: 2px; 
+	  border: 1px solid #ccc; 
+	  text-align: left;
+	}
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #E1E1E1; 
+			position: relative;
+			padding-left: 50%;
+			line-height:20px; 
+		}
+		
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+		}
+
+	}
 }
