@@ -17,7 +17,7 @@
 						<div class="input-group">
 							<div class="input-group-addon"><b class="glyphicon glyphicon-briefcase"></b></div>
 							<input type="text" class="form-control" placeholder="Enter your business name." ng-model="contact.businessName">
-							<select name="business_type" class="form-control" ng-model="contact.businessType" ng-options="bc.id as bc.name for bc in businessClasses">
+							<select name="business_type" class="form-control" ng-model="contact.businessType.id" ng-options="bc.id as bc.name for bc in businessClasses">
 								<option value="">Select your business type.</option>
 								<!-- <option ng-repeat="bc in businessClasses" value="[[bc.id]]">[[bc.name]]</option> -->
 							</select>

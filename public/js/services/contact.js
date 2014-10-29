@@ -20,8 +20,8 @@ define(['angular'], function(angular){
 			PostContactData : function(data, callback){
 				$http({
 					method: 'POST',
-					url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
-					// url: 'http://localhost:8081/contact' + '?key=' + AppConfig.APIKEY,
+					// url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
+					url: 'http://localhost:8081/contact/dealer/6' + '?key=' + AppConfig.APIKEY,
 					data: data,
 					headers: {
 						'Content-Type': 'application/json'
