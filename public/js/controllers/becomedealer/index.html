@@ -19,7 +19,7 @@
                             <label for="businessname">Enter your business name:</label>
                             <input type="text" class="form-control" id="businessname" placeholder="Enter your business name." ng-model="cpntact.businessName">
                             <label for="businesstype">Select your business type:</label>
-                            <select id="businesstype" class="form-control" ng-model="contact.businessType" ng-options="bc.id as bc.name for bc in businessClasses">
+                            <select id="businesstype" class="form-control" ng-model="contact.businessType.id" ng-options="bc.id as bc.name for bc in businessClasses">
                                 <option value="">-Select your business type-</option>
                             </select>
                         </div>

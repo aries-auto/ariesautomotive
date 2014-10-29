@@ -17,11 +17,11 @@ define(['angular'], function(angular){
 					callback(null, data);
 				});
 			},
-			PostContactData : function(data, callback){
+			PostContactData : function(data,contactType, callback){
 				$http({
 					method: 'POST',
-					// url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
-					url: 'http://localhost:8081/contact/dealer/6' + '?key=' + AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/contact/'+contactType+'/' + '?key=' + AppConfig.APIKEY,
+					// url: 'http://localhost:8081/contact/'+contactType+'/' + '?key=' + AppConfig.APIKEY,
 					data: data,
 					headers: {
 						'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ define(['./module'], function (module) {
 		$scope.postForm = function(){
 			$scope.errorMessage = '';
 			$scope.successMessage = '';
-			ContactService.PostContactData(JSON.stringify($scope.formData), function(result, err){
+			ContactService.PostContactData(JSON.stringify($scope.formData),$scope.formData.type, function(result, err){
 				if(err){
 					console.log(err);
 					var errMessage = 'Uh Oh! An error occurred while processing your request.\n';
