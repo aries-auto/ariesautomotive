@@ -22,12 +22,12 @@
 								<div class="carousel-inner">
 									<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
 										<div class="carouselImg">
-											<img class="largeImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" />
+											<img class="largeImg img-responsive" src="http://[[i.path.Host]][[i.path.Path]]" />
 										</div>
 									</div>
 								</div>
 								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
-									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="thumbImg img-responsive" src="[[i.path.Scheme]]://[[i.path.Host]][[i.path.Path]]" /><li>
+									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" /><li>
 								</ol>
 
 								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
@@ -69,7 +69,9 @@
 					</div>
 
 					<div id="partContent" ng-show="part.content">
-						<p ng-repeat="c in part.content">[[c.value]]</p>
+						<div ng-repeat="c in part.content | filter:{key:'HTMLDescription'}">
+							<div ng-bind-html="renderHTML(c.value)"></div>
+						</div>
 					</div>
 				</div>
 				
@@ -79,18 +81,24 @@
 	<div id="productMore" class="container-fluid" style="background-color:white;">
 		<div class="container">
 
-			<div id="prodDetailsMore" class="col-lg-12" style="padding-left:0px;">
-				<div class="col-lg-8" style="padding-left:0px;">
+			<div id="prodDetailsMore" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left:0px;">
+				<div class="col-lg-12" style="padding-left:0px;">
 					<h3>MORE DETAILS</h3>
-
-					<div id="partAttr">
+					
+					<div id="partBullets" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">	
+						<ul>
+							<li ng-repeat="c in part.content | filter:{key:'Bullet'}" ng-bind-html="renderHTML(c.value)">
+							</li>
+						</ul>
+					</div>
+					<div id="partAttr" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 						<ul ng-show="part.attributes">
 							<li ng-repeat="a in part.attributes">[[a.key]] - [[a.value]]</li>
 						</ul>
 					</div>
-
 				</div>	
 			</div>
+
 
 			<hr />
 
