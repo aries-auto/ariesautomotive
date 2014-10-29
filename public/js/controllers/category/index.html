@@ -52,13 +52,11 @@
 							</div>
 							<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 							<div class="clearfix"></div>
-
-							
 						</div>
 
 						<!-- Pagination -->
-						<div class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length" in-view="loadMore($index, $inview, $inviewpart, $event)">
-							<p></p>
+						<div class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length">
+							<p>Load more</p>
 						</div>
 
 					</div>

@@ -26,8 +26,7 @@ define([
 	'./services/part',
 	'./services/techSupport',
 	'./services/testimonial',
-	'./services/warranties',
-	'./directives/inView'
+	'./services/warranties'
 ], function (angular) {
 	'use strict';
 
@@ -52,7 +51,6 @@ define([
 		'app.techsupport',
 		'app.terms',
 		'app.warranties',
-		'app.directives',
 		'ui.router',
 		'ngSanitize'
 	]).config(function ($urlRouterProvider,$interpolateProvider, $locationProvider) {
