@@ -344,10 +344,10 @@ body{
 					@media 
 					only screen and (max-width: 760px),
 					(min-device-width: 768px) and (max-device-width: 1024px)  {
-						td:nth-of-type(1):before { content: "Year"; }
-						td:nth-of-type(2):before { content: "Make"; }
-						td:nth-of-type(3):before { content: "Model"; }
-						td:nth-of-type(4):before { content: "SubModel"; }
+						td:nth-of-type(1):before { content: "Year"; font-weight:900; }
+						td:nth-of-type(2):before { content: "Make"; font-weight:900; }
+						td:nth-of-type(3):before { content: "Model"; font-weight:900; }
+						td:nth-of-type(4):before { content: "SubModel"; font-weight:900; }
 					}
 				}
  */
