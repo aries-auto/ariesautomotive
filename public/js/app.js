@@ -6,6 +6,7 @@ define([
 	'angular',
 	'ui.router',
 	'ngSanitize',
+	'pace',
 	'./config',
 	'./controllers/index/index',
 	'./controllers/aboutus/index',
