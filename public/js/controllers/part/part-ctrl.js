@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('PartController', ['$scope', 'PartService', '$stateParams', function($scope, PartService, $stateParams){
+	module.controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', function($scope, PartService, $stateParams, $sce){
 		$scope.part = {};
 		$scope.latestParts = {};
 		if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
@@ -20,5 +20,10 @@ define(['./module'], function (module) {
 				$scope.latestParts = latestParts;
 			}
 		});
+
+		$scope.renderHTML = function(content){
+			return $sce.trustAsHtml(content);
+		};
+
 	}]);
 });
