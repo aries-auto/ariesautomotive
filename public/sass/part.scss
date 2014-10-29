@@ -137,6 +137,21 @@
 			.vehicle{
 				margin-bottom:0px;
 				font-size:18px;
+
+
+				.applicationsTbl{
+					@media 
+					only screen and (max-width: 760px),
+					(min-device-width: 768px) and (max-device-width: 1024px)  {
+						td:nth-of-type(1):before { content: "Year"; }
+						td:nth-of-type(2):before { content: "Make"; }
+						td:nth-of-type(3):before { content: "Model"; }
+						td:nth-of-type(4):before { content: "SubModel"; }
+					}
+				}
+
+
+
 				.year{
 
 				}
