@@ -1,134 +1,131 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Aries Automotive</title>
-		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="/css/main.css">
-	</head>
-	<body ng-controller="AppController" ng-cloak>
-		<header>
-			<nav role="navigation" class="navbar navbar-default">
-				<div class="row topnav visible-sm visible-md visible-lg">
-							<ul class="nav navbar-nav pull-right top-right-nav">
-								<li class="topNavItem"><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a>
-								<li class="topNavItem"><a href="/about" title="About Us">ABOUT</a>
-								<li class="topNavItem"><a href="/techsupport" title="Technical Support">TECH SUPPORT</a>
-								<li class="topNavItem"><a href="/contact" title="Contact Us">CONTACT</a></li>
-							</ul>
-						</div>
-						<div class="navbar-header">
-								<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-										<span class="sr-only">Toggle navigation</span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-								</button>
-								<a href="#" class="navbar-brand">
-									<div class="brand-logo">
-										<a href="/">
-											<img src="/img/header-logo.png" alt="Aries Automotive Logo" class="AriesLogo">
-										</a>
-									</div>
-								</a>
-						</div>
-						<div id="navbarSeperator" class="visible-xs"></div>
-						<div id="navbarCollapse" class="collapse navbar-collapse">
-								<ul class="nav navbar-nav">
-									<li ng-repeat="c in parentCats" class="dropdown navigationItem">
-										<a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown">[[c.title | uppercase]]
-											<i class="caret"></i>
-										</a>
-										<ul class="dropdown-menu" role="menu">
-											<li ng-repeat="sc in c.sub_categories">
-												<a href="/category/[[sc.id]]">[[sc.title]]</a>
-											</li>
-										</ul>
-									</li>
-									<li class="navigationItem">
-										<a href="/appguides" title="Application Guides">APPLICATION GUIDES</b></a>
-									</li>
-								</ul>
-								<ul class="nav navbar-nav phoneNum pull-right hidden-xs">
-										<li class="visible-md visible-lg"><a href="tel:+18888002743" title="Call Us (888) 900-2743" class="call-link">CALL (888) 800-2743</a></li>
-								</ul>
-						</div>
-				</nav>
-		</header>
-		<div ui-view="body"></div>
-		<footer>
-			<div class="container">
-				<div class="row footer-outter-row">
-					<div class="col-xs-6 col-md-3 col-lg-3">
-						<h4>REACH US</h4>
-						<address itemscope itemtype="//schema.org/Organization">
-							<div>
-								<div class="phone-number-div">
-									<img src="/img/phone.png" alt="phone image">
-									<span class="phone-text">
-										CALL
-										<a itemprop="telephone" href="tel:+18888002743" title="Call Us">
-											(888) 800-2743
-										</a>
-									</span>
-								</div>
-								<span itemprop="name" class="addressName">Aries Automotive</span>
-								<div class="addressInfo" itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-									<span itemprop="streetAddress">23935 Madison St., Unit B</span>
-									<br>
-									<span itemprop="addressLocality">Torrance,</span>
-									<span itemprop="addressRegion">CA</span>
-									<span itemprop="postalCode">90505</span>
-								</div>
-							</div>
-						</address>
-					</div>
-					<div class="col-xs-6 col-md-2 col-lg-2 footerNav">
-						<ul class="nav">
-											<li><a href="/about" title="About Us">ABOUT</a></li>
-											<li><a href="/appguides" title="Application Guides">APPLICATION GUIDES</a></li>
-											<li><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a>
-											<li><a href="/techsupport" title="Technical Support">TECH SUPPORT</a></li>
-											<li><a href="/warranties" title="Online Warranties">ONLINE WARRANTIES</a></li>
-											<li><a href="/contact" title="Contact Us">CONTACT</a></li>
-									</ul>
-					</div>
+    <head>
+        <title>Aries Automotive</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body ng-controller="AppController" ng-cloak>
+        <header>
+            <nav role="navigation" class="navbar navbar-default">
+                <div class="row topnav visible-sm visible-md visible-lg">
+                    <ul class="nav navbar-nav pull-right top-right-nav">
+                        <li class="topNavItem"><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a>
+                        <li class="topNavItem"><a href="/about" title="About Us">ABOUT</a>
+                        <li class="topNavItem"><a href="/techsupport" title="Technical Support">TECH SUPPORT</a>
+                        <li class="topNavItem"><a href="/contact" title="Contact Us">CONTACT</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-header">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand">
+                        <div class="brand-logo">
+                            <a href="/" title="Aries Automotive">
+                                <img src="/img/header-logo.png" alt="Aries Automotive Logo" class="AriesLogo">
+                            </a>
+                        </div>
+                    </a>
+                </div>
+                <div id="navbarSeperator" class="visible-xs"></div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-repeat="c in parentCats" class="dropdown navigationItem">
+                            <a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown">[[c.title | uppercase]]
+                                <i class="caret"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="sc in c.sub_categories">
+                                    <a href="/category/[[sc.id]]">[[sc.title]]</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="navigationItem">
+                            <a href="/appguides" title="Application Guides">APPLICATION GUIDES</b></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav phoneNum pull-right hidden-xs">
+                        <li class="visible-md visible-lg"><a href="tel:+18888002743" title="Call Us (888) 900-2743" class="call-link">CALL (888) 800-2743</a></li>
+                    </ul>
+                 </div>
+            </nav>
+        </header>
+        <div class="content" ui-view="body"></div>
+        <footer>
+            <div class="container">
+                <div class="row footer-outter-row">
+                    <div class="col-xs-6 col-md-3 col-lg-3">
+                        <h4>REACH US</h4>
+                        <address itemscope itemtype="//schema.org/Organization">
+                            <div>
+                                <div class="phone-number-div">
+                                    <img src="/img/phone.png" alt="phone image">
+                                    <span class="phone-text">
+                                        CALL
+                                        <a itemprop="telephone" href="tel:+18888002743" title="Call Us">
+                                            (888) 800-2743
+                                        </a>
+                                    </span>
+                                </div>
+                                <span itemprop="name" class="addressName">Aries Automotive</span>
+                                <div class="addressInfo" itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
+                                    <span itemprop="streetAddress">23935 Madison St., Unit B</span>
+                                    <br>
+                                    <span itemprop="addressLocality">Torrance,</span>
+                                    <span itemprop="addressRegion">CA</span>
+                                    <span itemprop="postalCode">90505</span>
+                                </div>
+                            </div>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 col-md-2 col-lg-2 footerNav">
+                        <ul class="nav">
+                            <li><a href="/about" title="About Us">ABOUT</a></li>
+                            <li><a href="/appguides" title="Application Guides">APPLICATION GUIDES</a></li>
+                            <li><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a>
+                            <li><a href="/techsupport" title="Technical Support">TECH SUPPORT</a></li>
+                            <li><a href="/warranties" title="Online Warranties">ONLINE WARRANTIES</a></li>
+                            <li><a href="/contact" title="Contact Us">CONTACT</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-md-4 col-lg-3">
+                        <div class="row col-lg-10 col-md-10 col-xs-8 social">
+                            <h4>GET THE LATEST</h4>
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
+                                    <img src="/img/facebook-icon.png" alt="Facebook Logo">
+                                </a>
+                                <a href="https://twitter.com/ariesautomotive" title="Visit us on Twitter">
+                                    <img src="/img/twitter-icon.png" alt="Twitter Logo">
+                                </a>
+                                <a href="http://www.youtube.com/user/AriesAutomotive" title="Visit us on YouTube">
+                                    <img src="/img/youtube-icon.png" alt="YouTube Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row col-lg-2 col-md-2 col-xs-4">
+                            <div class="sema-logo-div">
+                                <a href="http://www.sema.org" title="SEMA Website">
+                                    <img src="/img/sema-logo.png" alt="SEMA Logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3 col-lg-4">
+                        <img src="/img/footer-logo.png" alt="Aries Automotive" class="img-responsive pull-right footerLogo">
+                        <div class="clearfix">&nbsp;</div>
+                        <br>
+                        <span class="conditions pull-right">&copy; 1997 - {{CurrentYear}} ARIES AUTOMOTIVE <a href="/terms" class="terms">TERMS & CONDITIONS</a></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
-					<div class="col-xs-6 col-md-4 col-lg-3">
-
-						<div class="row col-lg-10 col-md-10 col-xs-8 social">
-							<h4>GET THE LATEST</h4>
-							<div class="col-xs-12 col-md-12 col-lg-12">
-								<a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
-									<img src="/img/facebook-icon.png" alt="Facebook Logo">
-								</a>
-								<a href="https://twitter.com/ariesautomotive" title="Visit us on Twitter">
-									<img src="/img/twitter-icon.png" alt="Twitter Logo">
-								</a>
-								<a href="http://www.youtube.com/user/AriesAutomotive" title="Visit us on YouTube">
-									<img src="/img/youtube-icon.png" alt="YouTube Logo">
-								</a>
-							</div>
-						</div>
-						<div class="row col-lg-2 col-md-2 col-xs-4">
-							<div class="sema-logo-div">
-								<a href="http://www.sema.org" title="SEMA Website">
-									<img src="/img/sema-logo.png" alt="SEMA Logo">
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-xs-6 col-md-3 col-lg-4">
-						<img src="/img/footer-logo.png" alt="Aries Automotive" class="img-responsive pull-right footerLogo">
-						<div class="clearfix">&nbsp;</div>
-						<br>
-						<span class="conditions pull-right">&copy; 1997 - {{CurrentYear}} ARIES AUTOMOTIVE <a href="/terms" class="terms">TERMS & CONDITIONS</a></span>
-					</div>
-				</div>
-			</div>
-		</footer>
-
-		<script data-main="/js/bootstrapper" src="/js/lib/requirejs/require.js"></script>
-	</body>
+        <script data-main="/js/bootstrapper" src="/js/lib/requirejs/require.js"></script>
+    </body>
 </html>

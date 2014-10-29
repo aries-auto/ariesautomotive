@@ -59,6 +59,11 @@ body{
 
 	}
 
+	/** main content div on layout **/
+	.content{
+		margin-bottom: 10px;
+	}
+
 	header{
 		background-color: $headerMenuBackColor;
 		border: 0;
