@@ -2,7 +2,7 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('app.services.becomedealer',
-		[]).factory('BecomeDealerService', ['$http', 'AppConfig', function($http, AppConfig){
+		[]).factory('BecomeDealerService', ['$http', 'AppConfig','$q', function($http, AppConfig,$q){
 		return {
 			GetBusinessClasses : function(callback){
 				$http({
@@ -16,6 +16,20 @@ define(['angular'], function(angular){
 				}).error(function(data, status, headers, config){
 					callback(null, data);
 				});
+			},
+			PostContactData : function(contact){
+				var def = $q.defer();
+				$http({
+					method: 'POST',
+					// url: AppConfig.APIURL + '/contact' + '?key=' + AppConfig.APIKEY,
+					url: 'http://localhost:8081/contact' + '?key=' + AppConfig.APIKEY,
+					data: contact,
+					headers: {
+						'Content-Type': 'application/json'
+					}					
+				}).success(def.resolve)
+					.error(def.reject);
+					return def.promise;
 			}
 		};
 	}]);
