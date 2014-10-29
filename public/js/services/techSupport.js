@@ -8,7 +8,6 @@ define(['angular'], function(angular){
 				$http({
 					method:'POST',
 					url: AppConfig.APIURL + '/techSupport/11/true?key='+AppConfig.APIKEY, //11 is tech services contactType
-					// url:'http://localhost:8081/techSupport/232/true?key='+AppConfig.APIKEY,
 					data:techSupport,
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
@@ -22,7 +21,6 @@ define(['angular'], function(angular){
 				$http({
 					method:'GET',
 					url: AppConfig.APIURL + '/contact/types/receivers/11?key='+AppConfig.APIKEY, //11 is tech services contactType
-					// url:'http://localhost:8081/contact/types/receivers/11?key='+AppConfig.APIKEY,
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
 					},
