@@ -9,7 +9,7 @@
 					<form name="contactForm" role="form" novalidate>
 						<div class="form-group col-xs-12">
 							<label for="contact_type">What would you like to contact us about?</label>
-							<select ng-model="formData.contactType" name="contact_type" class="form-control" required>
+							<select ng-model="formData.type" name="contact_type" class="form-control" required>
 								<option value="">- Select reason -</option>
 								<option ng-repeat="type in contactTypes | filter:{show:true} | orderBy:'name'" value="[[type.id]]">[[type.name]]</option>
 							</select>
@@ -41,7 +41,7 @@
 						</div>
 						<div class="form-group col-xs-6">
 							<label for="phone">Enter your phone number:</label>
-							<input type="text" class="form-control" id="phone" placeholder="Enter your phone number." ng-model="formData.phoneNumber">
+							<input type="text" class="form-control" id="phone" placeholder="Enter your phone number." ng-model="formData.phone">
 						</div>
 						<div class="form-group col-xs-12">
 							<label for="address">Enter your street address:</label>

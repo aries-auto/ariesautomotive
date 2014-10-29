@@ -8,7 +8,8 @@ define({
 		'ngResource': './lib/angular-resource/angular-resource.min',
 		'ui.router': './lib/angular-ui-router/release/angular-ui-router',
 		'bootstrap':'./lib/bootstrap-sass-official/assets/javascripts/bootstrap',
-		'ngSanitize':'./lib/angular-sanitize/angular-sanitize.min'
+		'ngSanitize':'./lib/angular-sanitize/angular-sanitize.min',
+		'pace':'./lib/pace/pace.min'
 	},
 	shim: {
 		'angular': {
