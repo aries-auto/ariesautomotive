@@ -4,24 +4,24 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-var wiredep = require('wiredep');
+var wiredep = require('wiredep').stream;
 
 gulp.task('test', function() {
-  var bowerDeps = wiredep({
-    directory: 'pubic/js/lib',
-    exclude: ['bootstrap-sass-official'],
-    dependencies: true,
-    devDependencies: true
-  });
+  // var bowerDeps = wiredep({
+  //   directory: 'pubic/js/lib',
+  //   exclude: ['bootstrap-sass-official'],
+  //   dependencies: true,
+  //   devDependencies: true
+  // });
+  // console.log(bowerDeps);
+  // var testFiles = bowerDeps.js.concat([
+  //   'public/js/**/*.js',
+  //   'test/unit/**/*.js'
+  // ]);
 
-  var testFiles = bowerDeps.js.concat([
-    'public/js/**/*.js',
-    'test/unit/**/*.js'
-  ]);
-
-  return gulp.src(testFiles)
+  return gulp.src('./foobar')
     .pipe($.karma({
-      configFile: 'test/karma.conf.js',
+      configFile: 'karma.conf.js',
       action: 'run'
     }))
     .on('error', function(err) {
