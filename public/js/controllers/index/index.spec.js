@@ -2,7 +2,6 @@ define([
 	'angular',
 	'angular-mocks',
 	'Source/app'
-	// 'Source/controllers/index/home-ctrl'
 ], function () {
 	describe('HomeController in app.index', function () {
 
@@ -63,29 +62,22 @@ define([
 			});
 		});
 
-		describe('check if controller is on it\'s place', function () {
+		describe('check if controller is in it\'s place', function () {
 			it('should have loaded the subject', function () {
 				expect(subject).toBeDefined();
 			});
 		});
 
-		describe('check if scope is also on it\'s place', function () {
+		describe('check if scope is also in it\'s place', function () {
 			it('should test scope to be defined', function () {
 				expect(scope).toBeDefined();
-				expect(scope.featuredProducts).toEqual([]);
+				expect(typeof scope.featuredProducts).toBe(typeof {});
 				expect(scope.testimonials).toEqual([]);
-
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?count=4&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProducts);
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/testimonials?randomize=true&count=2&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedTestimonials);
-				httpBackend.flush();
-
-				expect(scope.featuredProducts).toEqual(mockedProducts);
-				expect(scope.testimonials).toEqual(mockedTestimonials);
 			});
 		});
 
 		describe('check if scope is in it\'s place after mocked HTTP requests', function () {
-			it('should test scope to be defined', function () {
+			it('should test scope to be equal to mocked data', function () {
 
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProducts);
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/testimonials?randomize=true&count=2&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedTestimonials);

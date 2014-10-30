@@ -29,6 +29,7 @@ require(['base/public/js/config-require.js'],function(config){
 	config.deps = window.tests;
 	config.callback = window.__karma__.start;
 
+	console.log(config.paths);
 	for (var i in config.paths){
 		config.paths[i] = config.paths[i].replace('../lib','./lib');
 	}
