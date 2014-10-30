@@ -7,6 +7,7 @@ define(['./module'], function (module) {
 	module.controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', function($scope, PartService, $stateParams, $sce){
 		$scope.part = {};
 		$scope.latestParts = {};
+		$scope.featuredProducts = {};
 		if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 			PartService.GetPart($stateParams.id,function(part, err){
 				if(!err){
@@ -19,6 +20,13 @@ define(['./module'], function (module) {
 			if(!err){
 				$scope.latestParts = latestParts;
 			}
+		});
+
+		PartService.GetFeatured(function(featured, err){
+			if(err){
+				return;
+			}
+			$scope.featuredProducts = featured;
 		});
 
 		$scope.renderHTML = function(content){

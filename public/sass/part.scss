@@ -166,19 +166,23 @@
 			}
 		}
 		#accessories{
-			#accessoryItems{
-				.accessory{
-					text-align:center;
+			@media (min-width: 992px){
+				.col-5{
+					width:20%;
+				}
+			}
+			margin-left:auto;
+			margin-right:auto;
+			.featuredProd{
+				img{
 					margin-left:auto;
 					margin-right:auto;
-					.accessoryTitle{
-						text-align:center;
-						margin-left:auto;
-						margin-right:auto;
-						font-size:24px;
-						color: $altRed;
-						font-weight:900;
-					}
+				}
+				h4{
+					color: $altRed;
+					font-size:20px;
+					font-weight:bold;
+					text-align:center;
 				}
 			}
 		}
