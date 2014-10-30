@@ -1,6 +1,6 @@
 <div class="contactus-container" ng-controller="ContactController">
 	<div class="container-fluid" style="padding-left:0px;padding-right:0px;">
-		<div class="pageCoverPhoto visible-sm visible-md visible-lg" style="background: url('http://storage.googleapis.com/aries-website/hero-images/truck.png'); background-size:cover; width:100%; height:250px; background-repeat: no-repeat; background-position:50% -190px;background-attachment:fixed;"></div>
+		<div class="visible-sm visible-md visible-lg internal-hero" style="background-image: url('http://storage.googleapis.com/aries-website/hero-images/truck.png')"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 col-md-6 col-lg-6">
@@ -24,7 +24,7 @@
 							<input type="text" class="form-control" id="lastname" placeholder="Enter your last name." ng-model="formData.lastName" name="lastName" required>
 						</div>
 
-						
+
 						<div class="form-group col-xs-12" ng-if="formData.contactType == 15">
 							<label for="businessname">Enter your business name:</label>
 							<input type="text" class="form-control" id="businessname" placeholder="Enter your business name." ng-model="formData.businessName" name="businessName" required>
@@ -34,10 +34,10 @@
 								<option ng-repeat="bc in businessClasses" value="[[bc.name]]">[[bc.name]]</option>
 							</select>
 						</div>
-				
+
 						<div class="form-group col-xs-6">
 							<label for="email">Enter your email address:</label>
-							<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address." ng-model="formData.email" name="email" required>	
+							<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address." ng-model="formData.email" name="email" required>
 
 							<div ng-show="contactForm.email.$dirty && contactForm.email.$invalid">Invalid:
 						      <span ng-show="contactForm.email.$error.required">Tell us your email.</span>
