@@ -36,17 +36,20 @@
                 <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li ng-repeat="c in parentCats" class="dropdown navigationItem">
-                            <a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown">[[c.title | uppercase]]
+                            <a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown" ng-if="c.sub_categories !== undefined">[[c.title | uppercase]]
                                 <i class="caret"></i>
                             </a>
-                            <ul class="dropdown-menu" role="menu">
+                            <a href="/category/[[c.id]]" title="[[c.title]]" ng-if="c.sub_categories === undefined">
+                            	[[c.title | uppercase]]
+                            </a>
+                            <ul class="dropdown-menu" role="menu" ng-if="c.sub_categories !== undefined">
                                 <li ng-repeat="sc in c.sub_categories">
                                     <a href="/category/[[sc.id]]">[[sc.title]]</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="navigationItem">
-                            <a href="/appguides" title="Application Guides">APPLICATION GUIDES</b></a>
+                            <a href="/appguides" title="Application Guides">APPLICATION GUIDES</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav phoneNum pull-right hidden-xs">
