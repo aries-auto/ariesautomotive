@@ -98,6 +98,25 @@
 				}
 			}
 		}
+
+		.pagination{
+			display:block;
+			width: 60%;
+			height:50px;
+			background-color: #f5f5f5;
+			border: 1px solid #e3e3e3;
+			text-align: center;
+			transition: all 0.2s ease-in;
+			margin: 15px auto;
+			&:hover{
+				box-shadow: 1px 1px 4px #ccc;
+			}
+			span{
+				line-height:50px;
+				font-size: 16px;
+				text-decoration: none;
+			}
+		}
 		.scrollButton{
 			background-color:$footerNavColor;
 			color: $white;

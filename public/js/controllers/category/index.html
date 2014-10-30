@@ -55,9 +55,10 @@
 						</div>
 
 						<!-- Pagination -->
-						<div class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length">
-							<p>Load more</p>
-						</div>
+						<div class="clearfix"></div>
+						<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length">
+							<span>Load more</span>
+						</a>
 
 					</div>
 				</div>
