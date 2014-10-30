@@ -11,6 +11,7 @@ describe('E2E: Testing App', function () {
 	describe('Home page', function () {
 		it('should have proper title text', function () {
 			expect(browser.getTitle()).toEqual('Aries Automotive');
+			expect(element.all(by.css('.testimonial')).count()).toBe(2);
 		});
 	});
 
