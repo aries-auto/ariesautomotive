@@ -81,7 +81,7 @@ body{
 					font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
 					-webkit-font-smoothing: antialiased;
 				}
-				background-color: $topHeaderBackColor;
+				background: url("/img/footer-back.png");
 				margin: 0;
 				font-size:20px;
 				font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
@@ -150,12 +150,12 @@ body{
 						color: #dddddd;
 					}
 					a.call-link{
-						color: $headerCallLinkColor;
+						color: #ABABAB;
 						font-size:20px;
 						font-family: "proxima-nova-condensed",sans-serif;
 					}
 					a.call-link:hover{
-						color: $headerCallLinkColor;
+						color: #D4D4D4;
 						font-size:20px;
 						font-family: "proxima-nova-condensed",sans-serif;
 					}
@@ -415,5 +415,20 @@ body{
 			white-space: nowrap;
 		}
 
+	}
+}
+
+.pageCoverPhoto{
+	background-size:cover; width:100%;
+	height:250px;
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+}
+	@media
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+	.pageCoverPhoto{
+		background-position:center !important;
+		background-attachment:scroll !important;
 	}
 }
