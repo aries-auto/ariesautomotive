@@ -67,10 +67,11 @@
 		<div class="row">
 		  <div class="col-md-12" ng-controller="PartController">
 		  	<h3>FEATURED PRODUCTS</h3>
-			<div class="col-md-12 featuredProducts">
-				<div ng-repeat="p in featuredProducts | limitTo:5" class="featuredProd col-xs-6 col-md-2 col-5">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 featuredProducts">
+				<div ng-repeat="p in featuredProducts | limitTo:5" class="featuredProd col-xs-12 col-md-2 col-5">
 					<h4><a href="/part/[[p.id]]">[[p.short_description]]</a></h4>
 					<a href="/part/[[p.id]]"><img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" /></a>
+					<hr class="visible-xs-block" />
 				</div>
 			</div>
 
