@@ -16,7 +16,7 @@
 				</div>
 
 				<div id="productMedia" class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-push-6 col-md-push-6 col-lg-push-6">
-					<div>
+					<div ng-if="(part.images | filter:{size:'Venti'}).length > 0">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
 								<div class="carousel-inner">
@@ -61,6 +61,7 @@
 							</div>
 							<div id="shareContainer" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<div class="pull-right">
+																	<span id="share" class="hidden-xs">Share</span>
 									<div class="socialIcon"><a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook"><img src="/img/facebook-icon.png" alt="Facebook" /></a></div>
 									<div class="socialIcon"><a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter"><img src="/img/twitter-icon.png" alt="Twitter" /></a></div>
 									<div class="socialIcon"><a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+"><img src="/img/googleplus-icon.png" alt="Google Plus" /></a></div>
@@ -108,7 +109,7 @@
 				<div ng-if="p.images.length > 1">
 
 				</div>
-				<div class="vehicle">
+				<div class="vehicle" ng-if="part.vehicles.length > 0">
 					<table class="responsiveTable applicationsTbl">
 						<thead>
 							<tr>
