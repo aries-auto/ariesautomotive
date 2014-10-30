@@ -43,7 +43,7 @@ define(['angular'], function(angular){
 			GetFeatured : function(callback){
 				$http({
 					method: 'GET',
-					url: AppConfig.APIURL + '/part/featured?count=4&key=' + AppConfig.APIKEY,
+					url: AppConfig.APIURL + '/part/featured?key=' + AppConfig.APIKEY,
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}

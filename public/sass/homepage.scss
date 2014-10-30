@@ -41,9 +41,13 @@
 		-moz-box-shadow: 1px 0 10px 2px #ccc;
 		box-shadow: 1px 0 10px 2px #ccc;
 		.featuredProd{
+			img{
+				margin-left:auto;
+				margin-right:auto;
+			}
 			h4{
 				color: $altRed;
-				font-size:24px;
+				font-size:20px;
 				font-weight:bold;
 			}
 		}

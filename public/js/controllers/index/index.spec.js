@@ -87,7 +87,7 @@ define([
 		describe('check if scope is in it\'s place after mocked HTTP requests', function () {
 			it('should test scope to be defined', function () {
 
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?count=4&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProducts);
+				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProducts);
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/testimonials?randomize=true&count=2&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedTestimonials);
 				httpBackend.flush();
 
