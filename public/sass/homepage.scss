@@ -40,7 +40,14 @@
 		-webkit-box-shadow: 1px 0 10px 2px #ccc;
 		-moz-box-shadow: 1px 0 10px 2px #ccc;
 		box-shadow: 1px 0 10px 2px #ccc;
+
+		@media (min-width: 992px){
+			.col-5{
+				width:20%;
+			}
+		}
 		.featuredProd{
+
 			img{
 				margin-left:auto;
 				margin-right:auto;
