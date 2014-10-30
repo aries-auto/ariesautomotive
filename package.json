@@ -47,7 +47,8 @@
     "requirejs": "^2.1.15",
     "run-sequence": "0.3.7",
     "uglify-save-license": "^0.4.1",
-    "wiredep": "^1.4.3"
+    "wiredep": "^1.4.3",
+    "selenium-webdriver":"2.44.0"
   },
   "engines": {
     "node": ">=0.10.0"
