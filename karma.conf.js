@@ -17,29 +17,12 @@ module.exports = function(config) {
 			'public/js/lib/**/*spec.coffee'
 		],
 
-		browsers: ['Chrome'],
-		// Chrome, ChromeCanary, Firefox, IE (only Windows), Opera, PhantomJS, Safari (only Mac)
+		// browsers: ['Chrome'],
+		browsers: ['Chrome', 'ChromeCanary', 'Firefox', 'Safari', 'PhantomJS'],
 
 		reporters: [
-			'dots',
-			// 'coverage',
+			'dots'
 		],
-		preprocessors: {
-			// 'public/js/**/*.js': 'coverage',
-			'public/js/**/*.spec.coffee': 'coffee'
-		},
-		coffeePreprocessor: {
-			options: { sourceMap: true },
-			transformPath: function (filepath) {
-				return filepath.replace(/spec\.coffee$/, 'coffee.spec.js');
-			}
-		},
-		// Optionally, configure the reporter:
-		//
-		// coverageReporter: {
-		//   type: 'html',
-		//   dir: 'coverage/',
-		// },
 
 		basePath: './',
 		captureTimeout: 60000,
