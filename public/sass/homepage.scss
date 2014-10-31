@@ -5,9 +5,14 @@
 		color: $altRed;
 		font-weight: bold;
 		border:1px solid $altRed;
+		padding-top: 2px;
+		padding-bottom: 3px;
 		padding-left:15px;
 		padding-right:15px;
 		font-size:18px;
+	}
+	a.red-transparent-button:hover{
+		text-decoration: none;
 	}
 
 	#hero-image-carousel{
