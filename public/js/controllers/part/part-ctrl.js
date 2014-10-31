@@ -33,5 +33,9 @@ define(['./module'], function (module) {
 			return $sce.trustAsHtml(content);
 		};
 
+		$scope.getIframeSrc = function(videoID){
+			return $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + videoID);
+		};
+
 	}]);
 });
