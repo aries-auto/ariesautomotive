@@ -34,7 +34,7 @@ define(['./module'], function (module) {
 		};
 
 		$scope.getIframeSrc = function(videoID){
-			return $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + videoID);
+			return $sce.trustAsResourceUrl('//www.youtube.com/embed/' + videoID);
 		};
 
 	}]);
