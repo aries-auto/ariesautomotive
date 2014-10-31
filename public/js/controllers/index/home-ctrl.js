@@ -7,7 +7,8 @@ define(['./module'], function (module) {
 	module.controller('HomeController', ['$scope', 'TestimonialService', 'PartService' , function($scope, TestimonialService, PartService){
 		$scope.testimonials = [];
 		$scope.featuredProducts = [];
-		TestimonialService.GetRandom(function(testimonials, err){
+		var params = {count: 2, randomize: true};
+		TestimonialService.GetRandom(params,function(testimonials, err){
 			if(err){
 				return;
 			}
