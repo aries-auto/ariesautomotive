@@ -80,7 +80,7 @@ define([
 			it('should test scope to be equal to mocked data', function () {
 
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProducts);
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/testimonials?randomize=true&count=2&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedTestimonials);
+				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/testimonials?key=eef1922f-2cba-11e4-8758-42010af0fd79&count=2&randomize=true').respond(mockedTestimonials);
 				httpBackend.flush();
 
 				expect(scope.featuredProducts).toEqual(mockedProducts);

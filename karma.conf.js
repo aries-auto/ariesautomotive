@@ -17,8 +17,8 @@ module.exports = function(config) {
 			'public/js/lib/**/*spec.coffee'
 		],
 
-		// browsers: ['Chrome'],
-		browsers: ['Chrome', 'ChromeCanary', 'Firefox', 'Safari', 'PhantomJS'],
+		 browsers: ['Chrome'],
+		//browsers: ['Chrome', 'ChromeCanary', 'Firefox', 'Safari', 'PhantomJS'],
 
 		reporters: [
 			'dots'
