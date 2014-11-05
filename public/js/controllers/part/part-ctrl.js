@@ -6,8 +6,8 @@ define(['./module'], function (module) {
 
 	module.controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', function($scope, PartService, $stateParams, $sce){
 		$scope.part = {};
-		$scope.latestParts = {};
-		$scope.featuredProducts = {};
+		$scope.latestParts = [];
+		$scope.featuredProducts = [];
 		if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 			PartService.GetPart($stateParams.id,function(part, err){
 				if(!err){
