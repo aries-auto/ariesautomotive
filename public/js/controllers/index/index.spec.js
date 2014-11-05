@@ -62,13 +62,13 @@ define([
 			});
 		});
 
-		describe('check if controller is in it\'s place', function () {
+		describe('check if controller is in its place', function () {
 			it('should have loaded the subject', function () {
 				expect(subject).toBeDefined();
 			});
 		});
 
-		describe('check if scope is also in it\'s place', function () {
+		describe('check if scope is also in its place', function () {
 			it('should test scope to be defined', function () {
 				expect(scope).toBeDefined();
 				expect(typeof scope.featuredProducts).toBe(typeof {});
@@ -76,9 +76,8 @@ define([
 			});
 		});
 
-		describe('check if scope is in it\'s place after mocked HTTP requests', function () {
+		describe('check if scope is in its place after mocked HTTP requests', function () {
 			it('should test scope to be equal to mocked data', function () {
-
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProducts);
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/testimonials?key=eef1922f-2cba-11e4-8758-42010af0fd79&count=2&randomize=true').respond(mockedTestimonials);
 				httpBackend.flush();
