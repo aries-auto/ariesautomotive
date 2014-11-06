@@ -16,6 +16,10 @@ describe('E2E: Testing App', function () {
 		it('should have 2 testimonials', function(){
 			expect(element.all(by.css('.testimonial')).count()).toBe(2);
 		});
+
+		it('should have 5 featured products', function(){
+			expect(element.all(by.css('.featuredProd')).count()).toBe(5);
+		});
 	});
 
 });
