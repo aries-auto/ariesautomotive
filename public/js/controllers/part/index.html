@@ -57,11 +57,11 @@
 						<div id="social">
 							<div id="partNumContainer" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<span class="partNumSmall">PART #[[part.id]]</span>
-								<div ng-repeat="a in part.attributes | filter:{key:'UPC'}">[[a.key]] - [[a.value]]</div>
+								<div id="upc" ng-repeat="a in part.attributes | filter:{key:'UPC'}">[[a.key]] - [[a.value]]</div>
 							</div>
 							<div id="shareContainer" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<div class="pull-right">
-																	<span id="share" class="hidden-xs">Share</span>
+									<span id="share" class="hidden-xs">Share</span>
 									<div class="socialIcon"><a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook"><img src="/img/facebook-icon.png" alt="Facebook" /></a></div>
 									<div class="socialIcon"><a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter"><img src="/img/twitter-icon.png" alt="Twitter" /></a></div>
 									<div class="socialIcon"><a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+"><img src="/img/googleplus-icon.png" alt="Google Plus" /></a></div>
