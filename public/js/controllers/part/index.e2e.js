@@ -29,6 +29,9 @@ describe('E2E: Testing Part Page', function () {
 			expect(element(by.css('#upc')).getText()).not.toEqual("");
 		});
 
+		it('should have a h1 with a short description inside it', function(){
+			expect(element(by.css('.partShortDesc')).getText()).not.toEqual("");
+		});
 	});
 
 });
