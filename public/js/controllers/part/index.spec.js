@@ -43,13 +43,13 @@ define([
 			});
 		});
 
-		describe('check if controller is in it\'s place', function () {
+		describe('check if controller is in its place', function () {
 			it('should have loaded the subject', function () {
 				expect(subject).toBeDefined();
 			});
 		});
 
-		describe('check if scope is also in it\'s place', function () {
+		describe('check if scope is also in its place', function () {
 			it('should test scope to be defined', function () {
 				expect(scope).toBeDefined();
 				expect(scope.featuredProducts).toEqual([]);
@@ -57,19 +57,17 @@ define([
 			});
 		});
 
-		describe('check if scope is in it\'s place after mocked HTTP requests', function () {
+		describe('check if scope is in its place after mocked HTTP requests', function () {
 			it('should test scope to be equal to mocked data', function () {
 
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedFeaturedProds);
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part?id=2010051&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProduct);
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/latest?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProds);
 
 				httpBackend.flush();
 
 				expect(scope.featuredProducts).toEqual(mockedFeaturedProds);
 				// part is not fullfilled like normal service calls, and this test fails, now to figure out why :)
 				//expect(scope.part).toEqual(mockedProduct);
-				expect(scope.latestParts).toEqual(mockedProds);
 			});
 		});
 
