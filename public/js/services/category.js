@@ -3,18 +3,19 @@ define(['angular'], function(angular){
 
 	angular.module('app.services.category',[]).factory('CategoryService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 		return {
-			GetCategory: function(catid, callback){
+			GetCategory: function(catid){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/category/' + catid + '?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/category/'+catid,
+					params: {
+						'key' : AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			},
 			parts: function(id,page,count){
 				var def = $q.defer();
@@ -34,17 +35,18 @@ define(['angular'], function(angular){
 				return def.promise;
 			},
 			GetParents: function(callback){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/category?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/category',
+					params: {
+						'key': AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			}
 		};
 	}]);

@@ -28,7 +28,6 @@ define(['./module'], function (module) {
 			techSupport.vehicleYear = parseInt(techSupport.vehicleYear);
 
 			var def = TechSupportService.SubmitTechSupport(techSupport);
-			console.log(def);
 			def.then(function(data){
 				$scope.techSupport = {};
 
@@ -38,13 +37,8 @@ define(['./module'], function (module) {
 			});
 		}
 
-		
-		TechSupportService.GetTechSupportContactReceivers()
-			.then(function(data){
-				$scope.contactReceivers = data;
-			});
-
-
-
+		TechSupportService.GetTechSupportContactReceivers().then(function(data){
+			$scope.contactReceivers = data;
+		});
 	}]);
 });

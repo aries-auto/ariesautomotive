@@ -2,56 +2,63 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('app.services.part',
-		[]).factory('PartService', ['$http', 'AppConfig', function($http, AppConfig){
+		[]).factory('PartService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 		return {
-			GetPart : function(partID, callback){
+			GetPart : function(partID){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/part/' + partID + '?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/part/'+partID,
+					params: {
+						'key' : AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			},
-			GetOldPart: function(oldPartID, callback){
+			GetOldPart: function(oldPartID){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/part/old/' + oldPartID + '?key=' + AppConfig.APIKEY,
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
-			},
-			GetLatest : function(callback){
-				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/part/latest?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/part/old/'+oldPartID,
+					params: {
+						'key': AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			},
-			GetFeatured : function(callback){
+			GetLatest : function(){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/part/featured?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/part/latest',
+					params: {
+						'key' : AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
+			},
+			GetFeatured : function(){
+				var def = $q.defer();
+				$http({
+					method: 'get',
+					url: AppConfig.APIURL + '/part/featured',
+					params: {
+						'key': AppConfig.APIKEY
+					},
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+					}
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			}
 		};
 	}]);

@@ -63,10 +63,7 @@ define([
 		APIKEY : 'eef1922f-2cba-11e4-8758-42010af0fd79'
 	}).controller('AppController', ['$scope','CategoryService', function($scope, CategoryService){
 		$scope.parentCats = [];
-		CategoryService.GetParents(function(parentCats, err){
-			if(err){
-				return;
-			}
+		CategoryService.GetParents().then(function(parentCats){
 			$scope.parentCats = parentCats;
 		});
 	}])

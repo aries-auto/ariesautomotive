@@ -21,10 +21,7 @@ define(['./module'], function (module) {
 			$scope.warranty.contact.state = this.form.state.state;
 		};
 
-		GeographyService.GetCountryStates(function(countries, err){
-			if(err){
-				return;
-			}
+		GeographyService.GetCountryStates().then(function(countries){
 			$scope.countrystates = countries;
 		});
 
@@ -35,30 +32,22 @@ define(['./module'], function (module) {
 			}
 			warranty.date = new Date(warranty.date);
 
-			WarrantyService.SubmitWarranty(warranty)
-				.then(function(data){
-					$scope.warranty = {};
-					$scope.dateMessage = "";
-					$scope.message = "Request sent.";
-				});
+			WarrantyService.SubmitWarranty(warranty).then(function(data){
+				$scope.warranty = {};
+				$scope.dateMessage = "";
+				$scope.message = "Request sent.";
+			});
 		};
 
 		$scope.matchPart = function(warranty){
 			$scope.partConfirm = false;
-			PartService.GetPart(warranty.partNumber, function(part, err){
-				if(err){
-					console.log(err);
-					return;
-				}
+
+			PartService.GetPart(warranty.partNumber).then(function(part){
 				if(part.status > 0){
 					$scope.warranty.partNumber = part.id;
 					$scope.partConfirm = true;
 				} else{
-					PartService.GetOldPart(warranty.partNumber, function(part, err){
-						if(err){
-							console.log(err);
-							return;
-						}
+					PartService.GetOldPart(warranty.partNumber).then(function(part){
 						if(part.status > 0){
 							$scope.warranty.oldPartNumber = part.oldPartNumber;
 							$scope.partConfirm = true;
@@ -67,6 +56,5 @@ define(['./module'], function (module) {
 				}
 			});
 		};
-		
 	}]);
 });
