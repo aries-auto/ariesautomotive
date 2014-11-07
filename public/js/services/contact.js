@@ -2,35 +2,35 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('app.services.contact',
-		[]).factory('ContactService', ['$http', 'AppConfig', function($http, AppConfig){
+		[]).factory('ContactService', ['$http','$q', 'AppConfig', function($http, $q, AppConfig){
 		return {
-			GetContactTypes : function(callback){
+			GetContactTypes : function(){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/contact/types' + '?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/contact/types',
+					params:{
+						'key' : AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-					} 
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+					}
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			},
-			PostContactData : function(data,contactType, callback){
+			PostContactData : function(data,contactType){
+				var def = $q.defer();
 				$http({
-					method: 'POST',
-					// url: AppConfig.APIURL + '/contact/'+contactType+'/' + '?key=' + AppConfig.APIKEY,
-					url: 'http://localhost:8081/contact/'+contactType+'/' + '?key=' + AppConfig.APIKEY,
-					data: data,
+					method: 'post',
+					url: AppConfig.APIURL + '/contact/' + contactType + '/',
+					params: {
+						'key': AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/json'
-					}					
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+					}
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			}
 		};
 	}]);

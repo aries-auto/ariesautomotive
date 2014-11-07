@@ -11,43 +11,27 @@ define(['./module'], function (module) {
 		$scope.postForm = function(){
 			$scope.errorMessage = '';
 			$scope.successMessage = '';
-			ContactService.PostContactData(JSON.stringify($scope.formData),$scope.formData.type, function(result, err){
-				if(err){
-					console.log(err);
-					var errMessage = 'Uh Oh! An error occurred while processing your request.\n';
-					errMessage += err.message;
-					$scope.errorMessage = errMessage;
-
-					return;
-				}
-				if(result.id > 0){
+			ContactService.PostContactData(JSON.stringify($scope.formData), $scope.formData.type).then(function(resp){
+				if(resp.id > 0){
 					$scope.formData = {'sendEmail': true};
-					$scope.successMessage = 'Thank you. We have received your request.\n'; 
+					$scope.successMessage = 'Thank you. We have received your request.\n';
 				}
+			},function(err){
+				var errMessage = 'Uh Oh! An error occurred while processing your request.\n';
+				errMessage += err.message;
+				$scope.errorMessage = errMessage;
 			});
 		};
 
-		ContactService.GetContactTypes(function(types, err){
-			if(err){
-				console.log(err);
-				return;
-			}
+		ContactService.GetContactTypes().then(function(types){
 			$scope.contactTypes = types;
 		});
 
-		BecomeDealerService.GetBusinessClasses(function(classes, err){
-			if(err !== null){
-				console.log(err);
-				return;
-			}
+		BecomeDealerService.GetBusinessClasses().then(function(classes){
 			$scope.businessClasses = classes;
 		});
-		
-		GeographyService.GetCountryStates(function(countries, err){
-			if(err){
-				console.log(err);
-				return;
-			}
+
+		GeographyService.GetCountryStates().then(function(countries){
 			$scope.countries = countries;
 		});
 	}]);

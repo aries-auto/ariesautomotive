@@ -2,20 +2,21 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('app.services.geography',
-		[]).factory('GeographyService', ['$http', 'AppConfig', function($http, AppConfig){
+		[]).factory('GeographyService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 		return {
-			GetCountryStates : function(callback){
+			GetCountryStates : function(){
+				var def = $q.defer();
 				$http({
-					method: 'GET',
-					url: AppConfig.APIURL + '/geography/countrystates?key=' + AppConfig.APIKEY,
+					method: 'get',
+					url: AppConfig.APIURL + '/geography/countrystates',
+					params: {
+						'key': AppConfig.APIKEY
+					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			}
 		};
 	}]);

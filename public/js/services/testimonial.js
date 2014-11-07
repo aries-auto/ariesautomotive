@@ -2,9 +2,9 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('app.services.testimonial',
-		[]).factory('TestimonialService', ['$http', 'AppConfig', function($http, AppConfig){
+		[]).factory('TestimonialService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 		return {
-			GetRandom : function(params, callback){
+			GetRandom : function(params){
 				var url = AppConfig.APIURL + '/testimonials?key=' + AppConfig.APIKEY;
 
 				if(params.page !== null && params.page !== undefined){
@@ -19,17 +19,15 @@ define(['angular'], function(angular){
 					url += '&randomize=' + params.randomize.toString();
 				}
 
+				var def = $q.defer();
 				$http({
-					method: 'GET',
+					method: 'get',
 					url: url,
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 					}
-				}).success(function(data, status, headers, config){
-					callback(data, null);
-				}).error(function(data, status, headers, config){
-					callback(null, data);
-				});
+				}).success(def.resolve).error(def.reject);
+				return def.promise;
 			}
 		};
 	}]);

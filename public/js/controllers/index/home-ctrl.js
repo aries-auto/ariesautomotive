@@ -7,20 +7,13 @@ define(['./module'], function (module) {
 	module.controller('HomeController', ['$scope', 'TestimonialService', 'PartService' , function($scope, TestimonialService, PartService){
 		$scope.testimonials = [];
 		$scope.featuredProducts = [];
-		var params = {count: 2, randomize: true};
-		TestimonialService.GetRandom(params,function(testimonials, err){
-			if(err){
-				return;
-			}
+
+		TestimonialService.GetRandom({count: 2, randomize: true}).then(function(testimonials){
 			$scope.testimonials = testimonials;
 		});
 
-		PartService.GetFeatured(function(featured, err){
-			if(err){
-				return;
-			}
+		PartService.GetFeatured().then(function(featured){
 			$scope.featuredProducts = featured;
 		});
-
 	}]);
 });

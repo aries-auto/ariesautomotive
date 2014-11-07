@@ -10,11 +10,9 @@ define(['./module'], function (module) {
 		$scope.parts = []
 
 		if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
-			CategoryService.GetCategory($stateParams.id,function(cat, err){
-				if(!err){
-					$scope.category = cat;
-					$scope.parts = $scope.category.product_listing.parts;
-				}
+			CategoryService.GetCategory($stateParams.id).then(function(cat){
+				$scope.category = cat;
+				$scope.parts = $scope.category.product_listing.parts;
 			});
 		}
 

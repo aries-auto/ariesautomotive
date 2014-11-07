@@ -6,7 +6,7 @@ define(['angular'], function(angular){
 			SubmitWarranty: function(warranty){
 				var def = $q.defer();
 				$http({
-					method:'POST',
+					method:'post',
 					url: AppConfig.APIURL + '/warranty/6/false?key='+AppConfig.APIKEY, //6 is cust service Contacttype; false = no email
 					data:warranty,
 					headers: {
