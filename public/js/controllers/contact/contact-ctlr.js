@@ -14,8 +14,7 @@ define(['./module'], function (module) {
 
 			ContactService.PostContactData(JSON.stringify($scope.formData), $scope.formData.type).then(function(resp){
 				if(resp.id > 0){
-					// $scope.formData = {'sendEmail': true};
-					$scope.formData = {'sendEmail': false};
+					$scope.formData = {'sendEmail': true};
 					$scope.successMessage = 'Thank you. We have received your request.\n';
 				}
 
