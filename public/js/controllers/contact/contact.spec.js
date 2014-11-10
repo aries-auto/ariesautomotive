@@ -39,6 +39,7 @@ define([
 		};
 
 		var mockForm = {
+			"type":1,
 			"name":"Test",
 			"contactType":1
 		}
@@ -93,16 +94,15 @@ define([
 			 	httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedContactTypes);
 			 	httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedBusinessClasses);
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
-				httpBackend.when('POST','http://ariesautoapi.curtmfg.com/contact/1?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(resp);
-				
-				httpBackend.flush();
+				httpBackend.expectPOST('http://ariesautoapi.curtmfg.com/contact/1?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(resp);
 
 				scope.formData = mockForm;
-				scope.postForm(scope.formData,1);
-	
+				scope.postForm();
+				httpBackend.flush();
+
 				expect(scope.formData).not.toBeEmpty;
-				// expect(scope.successMessage).toEqual('Thank you. We have received your request.\n');//TODO
-				expect(resp.id).toEqual(1);
+				expect(scope.successMessage).toEqual('Thank you. We have received your request.\n');//TODO
+				expect(scope.errorMessage).toBeNull;
 
 			});
 		});

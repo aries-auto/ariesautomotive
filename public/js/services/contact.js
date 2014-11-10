@@ -22,7 +22,7 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method: 'post',
-					url: AppConfig.APIURL + '/contact/' + contactType + '/',
+					url: AppConfig.APIURL + '/contact/' + contactType ,
 					data:data,
 					params: {
 						'key': AppConfig.APIKEY
