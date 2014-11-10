@@ -72,9 +72,10 @@ define([
 		});
 
 		describe('check if controller is in its place', function () {
-
+			it('should have loaded the subject', function () {
+				expect(subject).toBeDefined();
+			});
 		});
-
 		describe('check if scope is also in its place', function () {
 			it('should test scope to be defined', function () {
 				expect(scope).toBeDefined();
