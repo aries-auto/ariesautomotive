@@ -107,17 +107,6 @@ define([
 			});
 		});
 
-		// 	it('should NOT populate contactReceivers',function(){
-		// 		httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedContactReceivers);
-		// 		httpBackend.when('POST','http://ariesautoapi.curtmfg.com/techSupport/11/true?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond();
-		// 		scope.submitTechSupport(badTechSupport);
-		// 		httpBackend.flush();
-
-		// 		expect(scope.message).toBeEmpty;
-		// 		expect(scope.dateMessage).toEqual("This field cannot be empty");
-		// 	});
-		// });
-
 		
 
 	});
