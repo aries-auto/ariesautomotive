@@ -23,6 +23,7 @@ define(['angular'], function(angular){
 				$http({
 					method: 'post',
 					url: AppConfig.APIURL + '/contact/' + contactType + '/',
+					data:data,
 					params: {
 						'key': AppConfig.APIKEY
 					},

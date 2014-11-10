@@ -11,14 +11,17 @@ define(['./module'], function (module) {
 		$scope.postForm = function(){
 			$scope.errorMessage = '';
 			$scope.successMessage = '';
+
 			ContactService.PostContactData(JSON.stringify($scope.formData), $scope.formData.type).then(function(resp){
 				if(resp.id > 0){
-					$scope.formData = {'sendEmail': true};
+					// $scope.formData = {'sendEmail': true};
+					$scope.formData = {'sendEmail': false};
 					$scope.successMessage = 'Thank you. We have received your request.\n';
 				}
+
 			},function(err){
 				var errMessage = 'Uh Oh! An error occurred while processing your request.\n';
-				errMessage += err.message;
+				errMessage += err;
 				$scope.errorMessage = errMessage;
 			});
 		};
