@@ -1,0 +1,28 @@
+
+
+.inline-form{
+	display: inline;
+	float:left;
+	select{
+		margin:.2em .5em .2em .2em;
+	}
+	button{
+		margin-top:.2em;
+		background-color:$headerMenuBackColor;
+		color:$white;
+	}
+}
+
+
+@media(max-width: 950px){
+	.inline-form{
+		color:green;
+		display: show;
+		select{
+			display:block;
+		}
+		button{
+			margin-bottom:.5em;
+		}
+	}
+}

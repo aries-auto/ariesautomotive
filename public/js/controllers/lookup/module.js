@@ -1,29 +1,27 @@
 define([
 	'angular',
 	'ui.router',
-	'../../config'
+	'../../config',
+	'ngSanitize'
 ], function (angular) {
 	'use strict';
 
-	return angular.module('app.index', [
+	return angular.module('app.lookup', [
 		'app.constants',
-		'ui.router'
+		'ui.router',
+		'ngSanitize',
 	]).config(function ($stateProvider) {
-		var homeState = {
-			name: 'index',
-			url: '/',
+		var catState = {
+			name: 'lookup',
+			url: '/lookup',
 			views:{
 				'body':{
-					templateUrl: '/js/controllers/index/index.html',
-					controller: 'HomeController'
-				},
-				'lookup':{
 					templateUrl: '/js/controllers/lookup/index.html',
 					controller: 'LookupController'
 				}
 			}
 		};
-		$stateProvider.state(homeState);
+		$stateProvider.state(catState);
 	});
 
 });

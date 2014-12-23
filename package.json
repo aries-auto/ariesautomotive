@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "browser-sync": "1.1.x",
-    "gulp": "^3.6.0",
+    "gulp": "^3.8.10",
     "gulp-autoprefixer": "^0.0.6",
     "gulp-bower-files": "^0.2.1",
     "gulp-cache": "^0.1.1",
@@ -46,9 +46,9 @@
     "require-dir": "~0.1.0",
     "requirejs": "^2.1.15",
     "run-sequence": "0.3.7",
+    "selenium-webdriver": "2.44.0",
     "uglify-save-license": "^0.4.1",
-    "wiredep": "^1.4.3",
-    "selenium-webdriver":"2.44.0"
+    "wiredep": "^1.4.3"
   },
   "engines": {
     "node": ">=0.10.0"
