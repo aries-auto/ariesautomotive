@@ -30,7 +30,8 @@ define([
 	'./services/vehicle',
 	'./services/techSupport',
 	'./services/testimonial',
-	'./services/warranties'
+	'./services/warranties',
+	'./directives/index'
 ], function (angular) {
 	'use strict';
 
@@ -47,6 +48,7 @@ define([
 		'app.services.techSupport',
 		'app.services.testimonial',
 		'app.services.warranties',
+		'app.directives.index',
 		'app.index',
 		'app.aboutus',
 		'app.appguides',
