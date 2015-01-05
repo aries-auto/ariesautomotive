@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('VehicleController',  ['$scope', 'LookupService','PartService', function($scope, LookupService, PartService){
+	module.controller('VehicleController',  ['$scope', 'LookupService','PartService', '$location','$anchorScroll', function($scope, LookupService, PartService, $location, $anchorScroll){
 		$scope.vehicle = LookupService.get();
 
 		
@@ -14,5 +14,10 @@ define(['./module'], function (module) {
 			},function(err){
 				$scope.err = err;
 			});
+
+		$scope.scrollTo = function(elementId){
+			$location.hash(elementId);
+			$anchorScroll();
+		};
 	}]);
 });
