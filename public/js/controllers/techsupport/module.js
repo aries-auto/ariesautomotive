@@ -16,6 +16,10 @@ define([
 				'body':{
 					templateUrl: '/js/controllers/techsupport/index.html',
 					controller: 'TechSupportController'
+				},
+				'lookup':{
+					templateUrl: '/js/controllers/lookup/index.html',
+					controller: 'LookupController'
 				}
 			}
 		};

@@ -18,6 +18,10 @@ define([
 				'body':{
 					templateUrl: '/js/controllers/aboutus/index.html',
 					controller: 'AboutUsController'
+				},
+				'lookup':{
+					templateUrl: '/js/controllers/lookup/index.html',
+					controller: 'LookupController'
 				}
 			}
 		};

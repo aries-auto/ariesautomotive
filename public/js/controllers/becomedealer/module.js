@@ -18,6 +18,10 @@ define([
 				'body':{
 					templateUrl: '/js/controllers/becomedealer/index.html',
 					controller: 'BecomeDealerController'
+				},
+				'lookup':{
+					templateUrl: '/js/controllers/lookup/index.html',
+					controller: 'LookupController'
 				}
 			}
 		};

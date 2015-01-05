@@ -7,6 +7,7 @@ define(['angular'], function(angular){
 		var savedVehicle = {};
 
 		var domain = AppConfig.APIURL + '/vehicle';
+		// var domain = "http://localhost:8081/vehicle"
 
 		return {
 			set : function(vehicle){
@@ -30,6 +31,7 @@ define(['angular'], function(angular){
 					responseType: 'json',
 					params: {
 						'key': AppConfig.APIKEY
+						// 'key':'92fe956d-2ca6-11e4-8758-42010af0fd79'
 					}
 				}).success(def.resolve).error(def.reject);
 
