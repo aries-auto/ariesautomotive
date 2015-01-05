@@ -45,11 +45,11 @@ define(['./module'], function (module) {
 						};
 					});
 				}
-				console.log(data);
+				// console.log(data);
 			});
 		};
 		$scope.submitVehicle = function(){
-			var vehicle_str = JSON.stringify($scope.vehicle);
+			// var vehicle_str = JSON.stringify($scope.vehicle);
 			// console.log(vehicle_str)
 			// var input = '<input type="hidden" name="vehicle" value="'+encodeURIComponent(vehicle_str)+'">';
 			// $('<form action="/vehicle" method="POST">'+input+'</form>').submit();

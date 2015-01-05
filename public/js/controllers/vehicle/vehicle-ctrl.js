@@ -11,8 +11,6 @@ define(['./module'], function (module) {
 		$scope.parts = LookupService.query($scope.vehicle)
 			.then(function(data){
 				$scope.parts = data.parts;
-				console.log("DATA");
-				console.log(data.parts);
 			},function(err){
 				$scope.err = err;
 			});
