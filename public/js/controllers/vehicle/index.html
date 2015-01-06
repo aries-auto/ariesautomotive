@@ -27,9 +27,9 @@
 							<div class="product row well" ng-repeat="p in parts">
 								<div class="product-header">
 									<span class="product-desc">
-										<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
+										<a href="/part/[[p.oldPartNumber]]">[[p.short_description | uppercase]]
 											<span class="product-id" ng-if="p.oldPartNumber">[[p.oldPartNumber]]</span>
-											<span class="product-id" ng-if="!p.oldPartNumber">[[p.id]]</span>
+											<span class="product-id" ng-if="!p.oldPartNumber">[[p.oldPartNumber]]</span>
 										</a>
 									</span>
 								</div>
