@@ -9,7 +9,7 @@
 							<li ng-repeat="cat in part.categories.slice().reverse()">
 								<a href="/category/[[cat.id]]">[[cat.title | uppercase]]</a>
 							</li>
-							<li class="active">Part# [[part.id]]</li>
+							<li class="active">Part# [[part.oldPartNumber]]</li>
 						</ol>
 					</div>
 					<h1>[[part.short_description | uppercase]]</h1>
@@ -48,7 +48,7 @@
 								<li ng-repeat="cat in part.categories.slice().reverse()">
 									<a href="/category/[[cat.id]]">[[cat.title | uppercase]]</a>
 								</li>
-								<li class="active">Part# [[part.id]]</li>
+								<li class="active">Part# [[part.oldPartNumber]]</li>
 							</ol>
 						</div>
 						<h1 class="partShortDesc">[[part.short_description | uppercase]]</h1>
@@ -56,7 +56,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="socialPartContainer">
 						<div id="social">
 							<div id="partNumContainer" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-								<span class="partNumSmall">PART #[[part.id]]</span>
+								<span class="partNumSmall">PART #[[part.oldPartNumber]]</span>
 								<div id="upc" ng-repeat="a in part.attributes | filter:{key:'UPC'}">[[a.key]] - [[a.value]]</div>
 							</div>
 							<div id="shareContainer" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -144,8 +144,8 @@
 				<h3>YOU MAY ALSO LIKE</h3>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 featuredProducts">
 					<div ng-repeat="p in featuredProducts | limitTo:5" class="featuredProd col-xs-12 col-md-3 col-5">
-						<h4><a href="/part/[[p.id]]">[[p.short_description]]</a></h4>
-						<a href="/part/[[p.id]]"><img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" /></a>
+						<h4><a href="/part/[[p.oldPartNumber]]">[[p.short_description]]</a></h4>
+						<a href="/part/[[p.oldPartNumber]]"><img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" /></a>
 						<hr class="visible-xs-block" />
 					</div>
 				</div>

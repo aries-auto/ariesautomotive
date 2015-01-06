@@ -8,7 +8,7 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method: 'get',
-					url: AppConfig.APIURL + '/part/'+partID,
+					url: AppConfig.APIURL + '/part/old/'+partID,
 					params: {
 						'key' : AppConfig.APIKEY
 					},
