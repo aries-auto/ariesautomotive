@@ -28,7 +28,8 @@
 								<div class="product-header">
 									<span class="product-desc">
 										<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
-											<span class="product-id">[[p.oldPartNumber]]</span>
+											<span class="product-id" ng-if="p.oldPartNumber">[[p.oldPartNumber]]</span>
+											<span class="product-id" ng-if="!p.oldPartNumber">[[p.id]]</span>
 										</a>
 									</span>
 								</div>
