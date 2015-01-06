@@ -3,13 +3,13 @@
 <div class="category-container" ng-controller="VehicleController" ng-cloak>
 
 	<div ng-if="vehicle.base.year > 1900">
-		<h3>[[vehicle.base.year]] [[vehicle.base.make]] [[vehicle.base.model]] [[vehicle.submodel]] <span ng-repeat="config in vehicle.configurations">[[config.key]] - [[config.value]]</span> 
+		<h3 class="center">[[vehicle.base.year]] [[vehicle.base.make]] [[vehicle.base.model]] [[vehicle.submodel]] <span ng-repeat="config in vehicle.configurations"><span ng-if="config.value">[[config.key]] - [[config.value]]</span></span> 
 
 			<span><button class="btn " ng-click="clear()">Clear Parts</button></span></h3>
 	</div>
 
-	<div ng-if="parts.length == 0">
-		<h4>There are no parts for this vehicle.</h4>
+	<div ng-if="parts.length == 0 || parts == null">
+		<h4 class="center">There are no parts for this vehicle.</h4>
 	</div>
 
 
@@ -28,7 +28,7 @@
 								<div class="product-header">
 									<span class="product-desc">
 										<a href="/part/[[p.id]]">[[p.short_description | uppercase]]
-											<span class="product-id">[[p.id]]</span>
+											<span class="product-id">[[p.oldPartNumber]]</span>
 										</a>
 									</span>
 								</div>
