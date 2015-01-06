@@ -3,16 +3,17 @@
 <div class="category-container" ng-controller="VehicleController" ng-cloak>
 
 	<div ng-if="vehicle.base.year > 1900">
-		<h3>[[vehicle.base.year]] [[vehicle.base.make]] [[vehicle.base.model]]</h3><span><a href="/">Search Again</a></span>
-	</div>
-	<div ng-if="vehicle.base.year < 1901"><h4>&nbsp;Please <a href="/">Choose</a> a Vehicle.</h4>
+		<h3>[[vehicle.base.year]] [[vehicle.base.make]] [[vehicle.base.model]] [[vehicle.submodel]] <span ng-repeat="config in vehicle.configurations">[[config.key]] - [[config.value]]</span> 
 
-		<part-lookup></part-lookup>
-		
+			<span><button class="btn " ng-click="clear()">Clear Parts</button></span></h3>
 	</div>
 
+	<div ng-if="parts.length == 0">
+		<h4>There are no parts for this vehicle.</h4>
+	</div>
 
 
+	
 	<div>
 		<div class="row">
 			<div class="col-xs-12 col-md-12 col-lg-12">

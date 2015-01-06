@@ -4,9 +4,10 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('LookupController', ['$scope','$window', 'LookupService', '$location', function($scope, $window, LookupService, $location){
+	module.controller('LookupController', ['$scope','$window', 'LookupService',  '$location', function($scope, $window, LookupService,  $location){
 		$scope.title ='Your Vehicle';
 		// $scope.lookup = $window.lookup;
+
 
 		$scope.vehicle = {
 			base:{
@@ -45,7 +46,6 @@ define(['./module'], function (module) {
 						};
 					});
 				}
-				// console.log(data);
 			});
 		};
 		$scope.submitVehicle = function(){
@@ -53,9 +53,14 @@ define(['./module'], function (module) {
 			// console.log(vehicle_str)
 			// var input = '<input type="hidden" name="vehicle" value="'+encodeURIComponent(vehicle_str)+'">';
 			// $('<form action="/vehicle" method="POST">'+input+'</form>').submit();
-			$location.path("/vehicle")
+			var l = $location.path();
+			if (l != "/vehicle"){
+				$location.path("/vehicle")
+			}else{
+				LookupService.set($scope.vehicle);
+	
+			}
 		};
-
 
 
 		$scope.$watch('vehicle.base.year',function(n, o){

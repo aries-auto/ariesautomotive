@@ -2,16 +2,17 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('app.services.lookup',
-		[]).factory('LookupService', ['$http', '$q','AppConfig', function($http, $q, AppConfig){
+		[]).factory('LookupService', ['$http', '$q','AppConfig','$rootScope', function($http, $q, AppConfig,$rootScope){
 
 		var savedVehicle = {};
 
+
 		var domain = AppConfig.APIURL + '/vehicle';
-		// var domain = "http://localhost:8081/vehicle"
 
 		return {
 			set : function(vehicle){
 				savedVehicle = vehicle;
+				$rootScope.$broadcast('vehicleChange',savedVehicle);
 			},
 
 			get : function(){
@@ -31,7 +32,6 @@ define(['angular'], function(angular){
 					responseType: 'json',
 					params: {
 						'key': AppConfig.APIKEY
-						// 'key':'92fe956d-2ca6-11e4-8758-42010af0fd79'
 					}
 				}).success(def.resolve).error(def.reject);
 
@@ -41,4 +41,5 @@ define(['angular'], function(angular){
 
 		}
 	}]);
+
 });
