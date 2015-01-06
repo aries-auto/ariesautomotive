@@ -23,9 +23,10 @@
 			<option value="">- Select Submodel -</option>
 			<option value="[[submodel]]" ng-repeat="submodel in submodels">[[submodel]]</option>
 		</select>
-
+	</div>
+	<div ng-class="(configurations.length > 0)?'vehicle-data':'vehicle-data inline-form'">
 		<!-- Vehicle Configurations -->
-		<select ng-repeat="(i, config) in configurations" ng-model="vehicle.configurations[i].value" class="form-control">
+		<select ng-repeat="(i, config) in configurations" ng-model="vehicle.configurations[i].value" class="form-control-inline">
 			<option value="">- Select [[config.type]] -</option>
 			<option value="[[val]]" ng-repeat="val in config.options">[[val]]</option>
 		</select>
