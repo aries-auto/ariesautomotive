@@ -11,6 +11,8 @@ define(['./module'], function (module) {
 		$scope.postForm = function(){
 			$scope.errorMessage = '';
 			$scope.successMessage = '';
+			$scope.formData.brand = {};
+			$scope.formData.brand.id = "3";
 
 			ContactService.PostContactData(JSON.stringify($scope.formData), $scope.formData.type).then(function(resp){
 				if(resp.id > 0){
