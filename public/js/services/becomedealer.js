@@ -22,7 +22,7 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method: 'post',
-					url: AppConfig.APIURL + '/contact/15',
+					url: AppConfig.APIURL + '/contact/51', //51 is become a dealer contact type ID
 					data: contact,
 					params: {
 						'key': AppConfig.APIKEY

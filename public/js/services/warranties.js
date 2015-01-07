@@ -7,7 +7,7 @@ define(['angular'], function(angular){
 				var def = $q.defer();
 				$http({
 					method:'post',
-					url: AppConfig.APIURL + '/warranty/6/false?key='+AppConfig.APIKEY, //6 is cust service Contacttype; false = no email
+					url: AppConfig.APIURL + '/warranty/24/false?key='+AppConfig.APIKEY, //24 is cust service Contacttype; false = no email
 					data:warranty,
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
