@@ -6,7 +6,7 @@
 					<div class="container">
 						<h1 id="catTitle">[[category.title | uppercase]]</h1>
 						<div ng-repeat="cont in category.content">
-							<div class="content" ng-bind-html="renderHTML(cont.value)"></div>
+							<div class="content" ng-bind-html="renderHTML(cont.text)"></div>
 						</div>
 					</div>
 				</div>
