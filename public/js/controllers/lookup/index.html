@@ -1,31 +1,31 @@
 
 
-<div id="lookup" class="inline-form">
+<div id="lookup" class="inline-form" ng-controller="LookupController">
 
 	<div class="vehicle-data inline-form">
-		<!-- Vehicle Year -->
+
 		<select class="form-control-inline" integer ng-model="vehicle.base.year">
 			<option value="0">- Select Year -</option>
 			<option ng-repeat="year in years" value="[[year]]">[[year]]</option>
 		</select>
-		<!-- Vehicle Make -->
+		
 		<select class="form-control-inline" ng-model="vehicle.base.make">
 			<option value="">- Select Make -</option>
 			<option value="[[make]]" ng-repeat="make in makes">[[make]]</option>
 		</select>
-		<!-- Vehicle Model -->
+	
 		<select class="form-control-inline" ng-model="vehicle.base.model">
 			<option value="">- Select Model -</option>
 			<option value="[[model]]" ng-repeat="model in models">[[model]]</option>
 		</select>
-		<!-- Vehicle Submodel -->
+	
 		<select class="form-control-inline" ng-model="vehicle.submodel" ng-if="submodels.length > 0">
 			<option value="">- Select Submodel -</option>
 			<option value="[[submodel]]" ng-repeat="submodel in submodels">[[submodel]]</option>
 		</select>
 	</div>
 	<div ng-class="(configurations.length > 0)?'vehicle-data':'vehicle-data inline-form'">
-		<!-- Vehicle Configurations -->
+	
 		<select ng-repeat="(i, config) in configurations" ng-model="vehicle.configurations[i].value" class="form-control-inline">
 			<option value="">- Select [[config.type]] -</option>
 			<option value="[[val]]" ng-repeat="val in config.options">[[val]]</option>
