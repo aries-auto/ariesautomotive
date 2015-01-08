@@ -4,11 +4,9 @@ define(['angular'], function(angular){
 	angular.module('app.directives.index',[]).directive('partLookup',function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'js/controllers/lookup/index.html',
-			require: 'ngModel',
-			scope:{
-				ngModel:'='
-			},
+			replace:true,
+			transclude: true,
+			templateUrl: '/js/controllers/lookup/index.html',
 			controller: 'LookupController'
 		}
 	});
