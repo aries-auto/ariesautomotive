@@ -32,7 +32,7 @@ define([
 		}
 
 
-		
+
 
 		beforeEach(function () {
 			module('app',
@@ -65,9 +65,9 @@ define([
 
 		describe('Check http calls. ',function(){
 			it('should populate models',function(){
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedBusinessClasses);
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
-				
+				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBusinessClasses);
+				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
+
 				httpBackend.flush();
 
 				expect(scope.businessClasses).toEqual(mockedBusinessClasses);
@@ -79,9 +79,9 @@ define([
 
 		describe('Check postForm. ',function(){
 			it('form should submit.',function(){
-			 	httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedBusinessClasses);
-				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
-				httpBackend.expectPOST('http://ariesautoapi.curtmfg.com/contact/15?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockDealer);
+			 	httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key= 883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBusinessClasses);
+				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key= 883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
+				httpBackend.expectPOST('http://ariesautoapi.curtmfg.com/contact/15?key= 883d4046-8b96-11e4-9475-42010af00d4e').respond(mockDealer);
 
 				scope.contact = mockDealer;
 				scope.saveDealer(scope.contact);
@@ -91,7 +91,7 @@ define([
 			});
 		});
 
-		
+
 
 	});
 });
