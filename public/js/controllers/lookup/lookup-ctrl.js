@@ -54,8 +54,8 @@ define(['./module'], function (module) {
 			// var input = '<input type="hidden" name="vehicle" value="'+encodeURIComponent(vehicle_str)+'">';
 			// $('<form action="/vehicle" method="POST">'+input+'</form>').submit();
 			var l = $location.path();
-			if (l != "/vehicle"){
-				$location.path("/vehicle")
+			if (l !== "/vehicle"){
+				$location.path("/vehicle");
 			}else{
 				LookupService.set($scope.vehicle);
 	
