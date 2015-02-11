@@ -43,7 +43,7 @@
 					margin-top:10px;
 				}
 
-				.install-sheet a, .msrp span{
+				.install-sheet a{
 					color: #af231c;
 					border: 2px solid #af231c;
 					border-radius: 2px;
@@ -54,17 +54,30 @@
 					margin-bottom:10px;
 				}
 
-				.msrp span{
-					font-size: 24px;
-					border: none;
-					border-radius: none;
-					font-weight: bold;
+				.share-icons,.msrp{
+					margin-bottom:10px;
+				}
+
+				.msrp {
+					min-height:40px;
+					span{
+						font-size: 24px;
+						font-weight: bold;
+						padding:0;
+						color: #af231c;
+						line-height: 40px;
+					}
 				}
 
 				.install-video{
+					margin:auto;
 					margin-bottom:10px;
+					iframe{
+						margin:auto;
+					}
 				}
 				.share-icons{
+					min-height:40px;
 					padding:0px;
 					#share{
 						font-size: 18px;
@@ -73,10 +86,18 @@
 						padding-right:4px;
 					}
 					.socialIcon{
-						display:inline;
-						img{
-							width:35px;
-							height:35px;
+						display:inline-block;
+						width:35px;
+						height:35px;
+						a{
+							display: inline-block;
+							width:100%;
+							height:100%;
+							line-height:40px;
+							img{
+								width:100%;
+								height:100%;	
+							}
 						}
 					}
 				}
@@ -122,20 +143,24 @@
 				.thumbs{
 					min-height:80px;
 					max-width:450px;
-					padding:10px;
-					padding-left:0px;
+					padding: 10px 0 0 0;
 					margin-bottom:0px;
 					list-style:none;
 
 
 					.thumb{
-						float:left;
-						padding:0px;
-						width:82px;
-						-webkit-box-shadow: 1px 0 10px 2px #ccc;
-						-moz-box-shadow: 1px 0 10px 2px #ccc;
-						box-shadow: 1px 0 10px 2px #ccc;
-						margin-right:10px;
+						display: inline-block;
+						padding:0;
+						padding-right:10px;
+						width:50%;
+						overflow:hidden;
+						img{
+							-webkit-box-shadow: 1px 0 10px 2px #ccc;
+							-moz-box-shadow: 1px 0 10px 2px #ccc;
+							box-shadow: 1px 0 10px 2px #ccc;
+							width:100%;
+							height:100%;
+						}
 					}
 				}
 				.carousel-control{
@@ -149,6 +174,9 @@
 	}
 	#productMore{
 		.prod-attributes{
+			h3{
+				text-transform: uppercase;
+			}
 			.field{
 				display:inline-block;
 				width: 30%;
@@ -232,12 +260,25 @@
 @media(min-width: $screen-md-min){
 	body{
 		.part-container{
+			#productInfo #topContainer #productMedia{
+				.thumbs{
+					.thumb{
+						width:25%;
+					}
+				}
+			}
 			#productDetails{ 
 				.install-sheet, .install-video, .msrp, .share-icons{
 					float:left;
 					height:100px;
+					line-height: 100px;
+				}
+				.msrp{
+					// line-height: 100px;
+					margin-left:15px;
 				}
 				.share-icons{
+					text-align: right;
 					float:right;
 					clear:right;
 					.socialIcon{

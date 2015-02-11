@@ -7,9 +7,27 @@ define(['./module'], function (module) {
 	module.controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', function($scope, PartService, $stateParams, $sce){
 		$scope.part = {};
 		$scope.featuredProducts = [];
+		$scope.vehicles = [];
 		if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 			PartService.GetPart($stateParams.id).then(function(part){
 				$scope.part = part;
+
+				var exists = [];
+				var str = '';
+				angular.forEach(part.vehicles, function(vehicle, k){
+					var v = {
+						year: vehicle.Year,
+						make: vehicle.Make,
+						model: vehicle.Model,
+						submodel: vehicle.Submodel
+					};
+
+					str = v.year+v.make+v.model+v.submodel;
+					if(exists.indexOf(str) === -1){
+						$scope.vehicles.push(v);
+						exists.push(str);
+					}
+				});
 			});
 		}
 

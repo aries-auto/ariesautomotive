@@ -3,7 +3,7 @@
 		<div class="container">
 			<div id="topContainer" class="row">
 
-				<div id="titleBreadCrumbContainer" class="visible-xs-block">
+				<div id="titleBreadCrumbContainer" class="visible-xs-block" ng-if="part.categories.length > 0">
 					<div id="breadcrumbs">
 						<ol class="breadcrumb">
 							<li ng-repeat="cat in part.categories.slice().reverse()">
@@ -75,34 +75,40 @@
 						</ul>
 					</div>
 
-					<div class="install-sheet">
-						<a href="getInstallSheet()" target="_blank" ng-if="getInstallSheet() !== ''" title="Installation Sheet">
-							<span class="glyphicon glyphicon-new-window"></span>
-							Install Sheet
-						</a>
-					</div>
-					<div class="install-video" ng-if="getInstallVideo() !== ''">
-						<iframe width="125" height="87.5" ng-src="[[getIframeSrc(getInstallVideo())]]" frameborder="0" allowfullscreen></iframe>
-					</div>
-					<div class="msrp" ng-if="getPrice() !== ''">
-						<span>MSRP [[getPrice()]]</span>
-					</div>
-
-					<div class="share-icons">
-						<div class="socialIcon">
-							<a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
-								<img src="/img/facebook-icon.png" alt="Facebook" />
+					<div class="prod-actions">
+						<!-- Install Sheet -->
+						<div class="install-sheet">
+							<a href="getInstallSheet()" target="_blank" ng-if="getInstallSheet() !== ''" title="Installation Sheet">
+								<span class="glyphicon glyphicon-new-window"></span>
+								Install Sheet
 							</a>
 						</div>
-						<div class="socialIcon">
-							<a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter">
-								<img src="/img/twitter-icon.png" alt="Twitter" />
-							</a>
+						<!-- Install Video -->
+						<div class="install-video" ng-if="getInstallVideo() !== ''">
+							<iframe class="hidden-sm hidden-xs" width="125" height="87.5" ng-src="[[getIframeSrc(getInstallVideo())]]" frameborder="0" allowfullscreen></iframe>
+							<iframe class="visible-sm visible-xs" width="250" height="187.5" ng-src="[[getIframeSrc(getInstallVideo())]]" frameborder="0" allowfullscreen></iframe>
 						</div>
-						<div class="socialIcon">
-							<a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+">
-								<img src="/img/googleplus-icon.png" alt="Google Plus" />
-							</a>
+						<!-- MSRP -->
+						<div class="col-sm-5 col-xs-5 col-xs-offset-1 col-md-3 col-lg-3 col-sm-offset-1 msrp" ng-if="getPrice() !== ''">
+							<span>MSRP [[getPrice()]]</span>
+						</div>
+						<!-- Share Icons -->
+						<div class="col-sm-5 col-xs-5 share-icons">
+							<div class="socialIcon">
+								<a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
+									<img src="/img/facebook-icon.png" alt="Facebook" />
+								</a>
+							</div>
+							<div class="socialIcon">
+								<a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter">
+									<img src="/img/twitter-icon.png" alt="Twitter" />
+								</a>
+							</div>
+							<div class="socialIcon">
+								<a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+">
+									<img src="/img/googleplus-icon.png" alt="Google Plus" />
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -152,7 +158,7 @@
 			<div id="application">
 				<h3>APPLICATION</h3>
 				<p><strong>Available for:</strong> Various Vehicles. Check out our Application Guides to see what fits your vehicle.</p>
-				<div class="vehicle" ng-if="part.vehicles.length > 0">
+				<div class="vehicle" ng-if="vehicles.length > 0">
 					<table class="responsiveTable applicationsTbl">
 						<thead>
 							<tr>
@@ -163,11 +169,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="v in part.vehicles | orderBy:'Year'">
-								<td class="year">[[v.Year]]</td>
-								<td class="make">[[v.Make]]</td>
-								<td class="model">[[v.Model]]</td>
-								<td class="submodel">[[v.Submodel]]</td>
+							<tr ng-repeat="v in vehicles | orderBy:['year','make','model','submodel']">
+								<td class="year">[[v.year]]</td>
+								<td class="make">[[v.make]]</td>
+								<td class="model">[[v.model]]</td>
+								<td class="submodel">[[v.submodel]]</td>
 							</tr>
 						</tbody>
 					</table>
