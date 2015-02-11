@@ -27,7 +27,9 @@
 									</div>
 								</div>
 								<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
-									<li class="thumb col-xs-2 col-md-2 col-lg-2" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]"><img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" /><li>
+									<li class="thumb" style="list-style:none; cursor:pointer;" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]">
+										<img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" />
+									<li>
 								</ol>
 
 								<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
@@ -59,20 +61,48 @@
 								<span class="partNumSmall">PART #[[part.oldPartNumber]]</span>
 								<div id="upc" ng-repeat="a in part.attributes | filter:{key:'UPC'}">[[a.key]] - [[a.value]]</div>
 							</div>
-							<div id="shareContainer" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-								<div class="pull-right">
-									<span id="share" class="hidden-xs">Share</span>
-									<div class="socialIcon"><a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook"><img src="/img/facebook-icon.png" alt="Facebook" /></a></div>
-									<div class="socialIcon"><a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter"><img src="/img/twitter-icon.png" alt="Twitter" /></a></div>
-									<div class="socialIcon"><a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+"><img src="/img/googleplus-icon.png" alt="Google Plus" /></a></div>
-								</div>
-							</div>
 						</div>
 					</div>
 
 					<div id="partContent" ng-show="part.content">
-						<div ng-repeat="c in part.content | filter:{key:'HTMLDescription'}">
-							<div ng-bind-html="renderHTML(c.text)"></div>
+						<div>
+							<div ng-bind-html="renderHTML(getHTMLDesc())"></div>
+						</div>
+
+						<div class="clearfix"></div>
+						<ul style="margin-top:25px">
+							<li style="font-size:12px" ng-repeat="c in getBullets()">[[c]]</li>
+						</ul>
+					</div>
+
+					<div class="install-sheet">
+						<a href="getInstallSheet()" target="_blank" ng-if="getInstallSheet() !== ''" title="Installation Sheet">
+							<span class="glyphicon glyphicon-new-window"></span>
+							Install Sheet
+						</a>
+					</div>
+					<div class="install-video" ng-if="getInstallVideo() !== ''">
+						<iframe width="125" height="87.5" ng-src="[[getIframeSrc(getInstallVideo())]]" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="msrp" ng-if="getPrice() !== ''">
+						<span>MSRP [[getPrice()]]</span>
+					</div>
+
+					<div class="share-icons">
+						<div class="socialIcon">
+							<a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
+								<img src="/img/facebook-icon.png" alt="Facebook" />
+							</a>
+						</div>
+						<div class="socialIcon">
+							<a href="https://twitter.com/ariesautomotive" title="Visit Us on Twitter">
+								<img src="/img/twitter-icon.png" alt="Twitter" />
+							</a>
+						</div>
+						<div class="socialIcon">
+							<a href="https://plus.google.com/104210953182001435857/" title="Visit Us on Google+">
+								<img src="/img/googleplus-icon.png" alt="Google Plus" />
+							</a>
 						</div>
 					</div>
 				</div>
@@ -83,14 +113,12 @@
 	<div id="productMore" class="container-fluid" style="background-color:white;">
 		<div class="container">
 			
-			<div ng-if="((part.content | filter:{key:'Bullet'}).length) + ((part.attributes | filter:{key:'!' + 'UPC'}).length) > 0" id="prodDetailsMore" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-left:0px;">
+			<div ng-if="(((part.content | filter:{key:'Bullet'}).length) + ((part.attributes | filter:{key:'!' + 'UPC'}).length) > 0 || getCategoryBrief() !== '')" id="prodDetailsMore" class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="padding-left:0px;">
 				<div class="col-lg-12" style="padding-left:0px;">
 					<h3>MORE DETAILS</h3>
 					
-					<div id="partAttr" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-						<ul ng-show="part.attributes">
-							<li ng-repeat="a in part.attributes | filter:{key:'!' + 'UPC'}">[[a.key]] - [[a.value]]</li>
-						</ul>
+					<div>
+						<div ng-bind-html="renderHTML(getCategoryBrief())"></div>
 					</div>
 
 					<div id="partBullets" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">	
@@ -101,6 +129,15 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="prod-attributes col-xs-12 col-sm-12 col-md-4 col-lg-4 col-lg-offset-1 col-md-offset-1" ng-if="part.attributes.length > 0">
+				<h3>Technical Details</h3>
+				<p ng-repeat="attr in part.attributes | filter:{key:'!UPC'}">
+					<span class="field">[[attr.key]]</span>
+					<span class="value">[[attr.value]]</span>
+				</p>
+			</div>
+			<div class="clearfix"></div>
 
 			<div id="videosContainer" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="part.videos.length > 0">
 				<h3>VIDEOS</h3>

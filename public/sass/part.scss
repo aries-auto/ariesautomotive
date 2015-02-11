@@ -43,6 +43,44 @@
 					margin-top:10px;
 				}
 
+				.install-sheet a, .msrp span{
+					color: #af231c;
+					border: 2px solid #af231c;
+					border-radius: 2px;
+					padding: 5px 10px;
+					line-height: 25px;
+					position: relative;
+					top: 35px;
+					margin-bottom:10px;
+				}
+
+				.msrp span{
+					font-size: 24px;
+					border: none;
+					border-radius: none;
+					font-weight: bold;
+				}
+
+				.install-video{
+					margin-bottom:10px;
+				}
+				.share-icons{
+					padding:0px;
+					#share{
+						font-size: 18px;
+						color: #666666;
+						font-weight:900;
+						padding-right:4px;
+					}
+					.socialIcon{
+						display:inline;
+						img{
+							width:35px;
+							height:35px;
+						}
+					}
+				}
+
 				#socialPartContainer{
 					padding-left:0px;
 					padding-bottom:30px;
@@ -56,22 +94,7 @@
 								font-weight:900;
 							}
 						}
-						#shareContainer{
-							padding:0px;
-							#share{
-								font-size: 18px;
-								color: #666666;
-								font-weight:900;
-								padding-right:4px;
-							}
-							.socialIcon{
-								display:inline;
-								img{
-									width:35px;
-									height:35px;
-								}
-							}
-						}
+						
 					}
 				}
 			}
@@ -98,7 +121,6 @@
 				}
 				.thumbs{
 					min-height:80px;
-					max-height:140px;
 					max-width:450px;
 					padding:10px;
 					padding-left:0px;
@@ -107,9 +129,9 @@
 
 
 					.thumb{
+						float:left;
 						padding:0px;
-						max-width:140px;
-						min-width:80px;
+						width:82px;
 						-webkit-box-shadow: 1px 0 10px 2px #ccc;
 						-moz-box-shadow: 1px 0 10px 2px #ccc;
 						box-shadow: 1px 0 10px 2px #ccc;
@@ -126,6 +148,19 @@
 		}
 	}
 	#productMore{
+		.prod-attributes{
+			.field{
+				display:inline-block;
+				width: 30%;
+				margin-right:10%;
+				font-size:16px;
+				font-weight:bold;
+				text-align:right;
+			}
+			.value{
+				font-size: 14px;
+			}
+		}
 		#prodDetailsMore{
 
 		}
@@ -188,6 +223,29 @@
 					font-size:20px;
 					font-weight:bold;
 					text-align:center;
+				}
+			}
+		}
+	}
+}
+
+@media(min-width: $screen-md-min){
+	body{
+		.part-container{
+			#productDetails{ 
+				.install-sheet, .install-video, .msrp, .share-icons{
+					float:left;
+					height:100px;
+				}
+				.share-icons{
+					float:right;
+					clear:right;
+					.socialIcon{
+						line-height:100px;
+					}
+				}
+				#partContent{
+					min-height:350px;
 				}
 			}
 		}
