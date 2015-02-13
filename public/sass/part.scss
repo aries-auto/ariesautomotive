@@ -56,7 +56,8 @@
 
 				.install-container{
 					margin:auto 0;
-					text-align: right;
+					margin-bottom: 15px;
+					text-align: center;
 
 					.install-sheet a{
 						color: #af231c;
@@ -69,7 +70,7 @@
 			}
 
 			.title-info{
-				padding-left:0px;
+				padding:0px;
 				padding-bottom:30px;
 				display:inline-flex;
 
@@ -88,7 +89,7 @@
 
 				.share-icons{
 					min-height:40px;
-					margin:auto;
+					margin:0;
 					padding:0px;
 					text-align: right;
 
@@ -171,6 +172,12 @@
 						height:100%;
 					}
 				}
+			}
+			.mobile-help{
+				text-align: center;
+				font-size: 14px;
+				text-shadow: 1px 2px 3px #e2e2e3, 0 0 0 #000, 1px 2px 3px #e2e2e3;
+				color: #000;
 			}
 			.carousel-control{
 				background:none;
@@ -293,6 +300,13 @@
 			}
 			.part-content{
 				min-height:350px;
+			}
+
+			.part-header{
+				.install-container{
+					text-align: right;
+					margin-bottom:auto;
+				}
 			}
 		}
 	}
