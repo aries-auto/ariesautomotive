@@ -25,7 +25,8 @@ define(['angular'], function(angular){
 					url: url,
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-					}
+					},
+					responseType: 'jsonp'
 				}).success(def.resolve).error(def.reject);
 				return def.promise;
 			}

@@ -29,7 +29,7 @@ define(['angular'], function(angular){
 					headers:{
 						'Content-Type': 'application/json; charset=UTF-8'
 					},
-					responseType: 'json',
+					responseType: 'jsonp',
 					params: {
 						'key': AppConfig.APIKEY
 					}

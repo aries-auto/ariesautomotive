@@ -13,7 +13,8 @@ define(['angular'], function(angular){
 					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-					}
+					},
+					responseType: 'jsonp'
 				}).success(def.resolve).error(def.reject);
 				return def.promise;
 			},
@@ -30,7 +31,7 @@ define(['angular'], function(angular){
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
 					},
-					responseType: 'json'
+					responseType: 'jsonp'
 				}).success(def.resolve).error(def.reject);
 				return def.promise;
 			},
@@ -44,7 +45,8 @@ define(['angular'], function(angular){
 					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-					}
+					},
+					responseType: 'jsonp'
 				}).success(def.resolve).error(def.reject);
 				return def.promise;
 			}

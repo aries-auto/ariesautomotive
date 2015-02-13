@@ -12,6 +12,7 @@ define(['angular'], function(angular){
 					headers: {
 						'Content-Type':'application/json; charset=UTF-8'
 					},
+					responseType: 'jsonp'
 				}).success(function(data){
 					def.resolve(data);
 				}).error(function(){

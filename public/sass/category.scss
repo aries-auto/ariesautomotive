@@ -86,15 +86,11 @@
 
 				.product-price{
 					float:left;
-					.msrp{
-						font-size:20px;
-					}
-
+					font-size:20px;
+					
 					.price{
-						font-size: 28px;
 						color: $altRed;
 						font-family: "proxima-nova-condensed",sans-serif;
-						font-weight:900;
 					}
 				}
 			}

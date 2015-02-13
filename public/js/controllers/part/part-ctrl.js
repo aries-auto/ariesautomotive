@@ -16,10 +16,10 @@ define(['./module'], function (module) {
 				var str = '';
 				angular.forEach(part.vehicles, function(vehicle, k){
 					var v = {
-						year: vehicle.Year,
-						make: vehicle.Make,
-						model: vehicle.Model,
-						submodel: vehicle.Submodel
+						year: vehicle.year,
+						make: vehicle.make,
+						model: vehicle.nodel,
+						submodel: vehicle.submodel
 					};
 
 					str = v.year+v.make+v.model+v.submodel;
@@ -55,7 +55,7 @@ define(['./module'], function (module) {
 			return '';
 		};
 		$scope.getHTMLDesc = function(){
-			if ($scope.part.content === undefined){
+			if ($scope.part.content === undefined || $scope.part.content === null){
 				return '';
 			}
 			for (var i = $scope.part.content.length - 1; i >= 0; i--) {
@@ -85,7 +85,7 @@ define(['./module'], function (module) {
 			}
 			for (var i = $scope.part.pricing.length - 1; i >= 0; i--) {
 				var pr = $scope.part.pricing[i];
-				if(pr.type === 'Jobber'){
+				if(pr.type === 'List' && pr.price > 0){
 					return '$'+pr.price;
 				}
 			}
@@ -116,5 +116,14 @@ define(['./module'], function (module) {
 			}
 			return '';
 		};
+		$scope.shadowbox = function(obj, type){
+			switch(type){
+				case 'video':
+					console.log('implement shadowbox video');
+					break;
+				default:
+					break;
+			}
+		}
 	}]);
 });

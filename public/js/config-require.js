@@ -21,5 +21,5 @@ define({
 		'ui.router' : ['angular'],
 		'bootstrap':['jquery']
 	},
-	urlArgs: 'bust=0.0.3'
+	urlArgs: 'bust=0.0.4'
 });
