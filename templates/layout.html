@@ -11,8 +11,6 @@
         <header>
             <nav role="navigation" class="navbar navbar-default">
 
-                <!-- <part-lookup></part-lookup> -->
-                <div ui-view="lookup"></div>
 
                 <div class="row topnav visible-sm visible-md visible-lg">
 
@@ -61,7 +59,8 @@
                     <ul class="nav navbar-nav phoneNum pull-right hidden-xs">
                         <li class="visible-md visible-lg"><a href="tel:+18888002743" title="Call Us (888) 800-2743" class="call-link">CALL (888) 800-2743</a></li>
                     </ul>
-                 </div>
+                </div>
+                <div ui-view="lookup" class="lookup-container"></div>
             </nav>
         </header>
         <div class="content" ui-view="body"></div>

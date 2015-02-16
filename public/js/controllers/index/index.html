@@ -1,35 +1,14 @@
 <div class="home-container" ng-controller="HomeController">
 
 	<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#hero-image-carousel" data-slide-to="0" class="active"></li>
-			<li data-target="#hero-image-carousel" data-slide-to="1"></li>
-			<li data-target="#hero-image-carousel" data-slide-to="2"></li>
-		</ol>
 
 		<div class="carousel-inner">
-			<div class="item active">
-				<div class="carouselImg" style="background: url('http://storage.googleapis.com/aries-website/hero-images/truck.png'); background-size:cover; min-height:350px;; background-repeat: no-repeat; background-position:50% 60%;"></div>
+			<div class="item" ng-class="{'active':i === 0}" ng-repeat="(i,img) in carousel_images">
+				<div class="carouselImg" style="background: url('[[img.image]]'); background-size:cover; min-height:350px;; background-repeat: no-repeat; background-position:50% 60%;"></div>
 				<div class="carousel-caption">
-					<span class="bigText pull-right">A NEW ERA OF BULL BARS IS HERE</span>
+					<span class="bigText">[[img.text]]</span>
 					<div class="clearfix">&nbsp;</div>
-					<a class="pull-right red-transparent-button" href="/category/299">VIEW BULL BARS</a>
-				</div>
-			</div>
-			<div class="item">
-				<div class="carouselImg" style="background: url('http://storage.googleapis.com/aries-website/hero-images/jeep.png'); background-size:cover; width:100%; min-height:350px; background-repeat: no-repeat; background-position:50% 80%;"></div>
-				<div class="carousel-caption">
-					<span class="bigText pull-right">A NEW ERA OF GRILLE GUARDS IS HERE</span>
-					<div class="clearfix">&nbsp;</div>
-					<a class="pull-right red-transparent-button" href="/category/296">VIEW PRO SERIES</a>
-				</div>
-			</div>
-			<div class="item">
-				<div class="carouselImg" style="background: url('https://storage.googleapis.com/aries-website/hero-images/JeepCapture.JPG'); background-size:cover; width:100%; min-height:350px; background-repeat: no-repeat; background-position:50% 40%;"></div>
-				<div class="carousel-caption">
-					<span class="bigText pull-right">A NEW ERA OF BUMPERS IS HERE</span>
-					<div class="clearfix">&nbsp;</div>
-					<a class="pull-right red-transparent-button" href="/category/332">VIEW BUMPERS</a>
+					<a class="white-transparent-button" href="[[img.link]]">[[img.button_text]]</a>
 				</div>
 			</div>
 		</div>
@@ -41,7 +20,7 @@
 			<span class="glyphicon glyphicon-chevron-right"></span>
 		</a>
 	</div>
-<!-- <part-lookup></part-lookup> -->
+
 	<div class="container">
 		<div class="row">
 		  <div class="col-md-6 col-lg-6">

@@ -10,7 +10,7 @@ var exec = require('gulp-exec');
 gulp.task('styles', function () {
   return gulp.src('public/sass/main.scss')
     .pipe($.plumber())
-    .pipe($.rubySass({style: 'compressed'}))
+    .pipe($.rubySass({style: ''}))
     .pipe($.autoprefixer('last 1 version'))
     .pipe(gulp.dest('public/css'))
     .pipe($.size());
