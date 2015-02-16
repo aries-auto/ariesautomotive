@@ -1,40 +1,44 @@
+<a ng-click="showLookup()" class="lookup-heading">
+	Vehicle Lookup
+	<span class="glyphicon glyphicon-chevron-down"></span>
+	<div class="clearfix"></div>
+</a>
 
-<div id="lookup" class="inline-form">
-
-
-	<div class="vehicle-data inline-form">
-
-		<select class="form-control-inline" integer ng-model="vehicle.base.year">
+<form ng-submit="submitVehicle()" class="lookup ehicle-data form-inline">
+	<div class="form-group">
+		<select class="form-control" integer ng-model="vehicle.base.year">
 			<option value="0">- Select Year -</option>
 			<option ng-repeat="year in years" value="[[year]]">[[year]]</option>
 		</select>
-		
-		<select class="form-control-inline" ng-model="vehicle.base.make">
+	</div>
+	
+	<div class="form-group">
+		<select class="form-control" ng-model="vehicle.base.make">
 			<option value="">- Select Make -</option>
 			<option value="[[make]]" ng-repeat="make in makes">[[make]]</option>
 		</select>
-	
-		<select class="form-control-inline" ng-model="vehicle.base.model">
+	</div>
+	<div class="form-group">
+		<select class="form-control" ng-model="vehicle.base.model">
 			<option value="">- Select Model -</option>
 			<option value="[[model]]" ng-repeat="model in models">[[model]]</option>
 		</select>
-	
-		<select class="form-control-inline" ng-model="vehicle.submodel" ng-if="submodels.length > 0">
+	</div>
+	<div class="form-group">
+		<select class="form-control" ng-model="vehicle.submodel" ng-if="submodels.length > 0">
 			<option value="">- Select Submodel -</option>
 			<option value="[[submodel]]" ng-repeat="submodel in submodels">[[submodel]]</option>
 		</select>
 	</div>
-	<div ng-class="(configurations.length > 0)?'vehicle-data':'vehicle-data inline-form'">
-	
-		<select ng-repeat="(i, config) in configurations" ng-model="vehicle.configurations[i].value" class="form-control-inline">
+	<div class="form-group" ng-repeat="(i, config) in configurations">
+		<select ng-model="vehicle.configurations[i].value" class="form-control">
 			<option value="">- Select [[config.type]] -</option>
 			<option value="[[val]]" ng-repeat="val in config.options">[[val]]</option>
 		</select>
-
-		<span class="form-group vehicle-submit" ng-click="submitVehicle()">
-			<button class="btn ">View Parts</button>
-		</span>
-
 	</div>
-	<div class="clearfix"></div>
-</div>
+
+	<button type="submit" class="btn red-transparent-button view-parts-button">
+		View Parts
+	</button>
+</form>
+<div class="clearfix"></div>

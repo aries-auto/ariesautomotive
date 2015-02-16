@@ -9,6 +9,8 @@ define({
 		'ui.router': './lib/angular-ui-router/release/angular-ui-router',
 		'bootstrap':'./lib/bootstrap-sass-official/assets/javascripts/bootstrap',
 		'ngSanitize':'./lib/angular-sanitize/angular-sanitize.min',
+		'ngAnimate':'./lib/angular-animate/angular-animate.min',
+		'ngTouch':'./lib/angular-touch/angular-touch.min',
 		'pace':'./lib/pace/pace.min'
 	},
 	shim: {
@@ -18,6 +20,8 @@ define({
 		},
 		'ngResource': ['angular'],
 		'ngSanitize': ['angular'],
+		'ngAnimate': ['angular'],
+		'ngTouch': ['angular'],
 		'ui.router' : ['angular'],
 		'bootstrap':['jquery']
 	},

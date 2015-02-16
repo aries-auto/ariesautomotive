@@ -6,8 +6,6 @@ define(['./module'], function (module) {
 
 	module.controller('LookupController', ['$scope','$window', 'LookupService',  '$location', function($scope, $window, LookupService,  $location){
 		$scope.title ='Your Vehicle';
-		// $scope.lookup = $window.lookup;
-
 
 		$scope.vehicle = {
 			base:{
@@ -48,17 +46,31 @@ define(['./module'], function (module) {
 				}
 			});
 		};
+		$scope.showLookup = function(){
+			var els = document.getElementsByClassName('lookup');
+			var heads = document.getElementsByClassName('lookup-heading');
+			if(els.length === 0 || heads.length === 0){
+				return;
+			}
+			var look = els[0];
+			var head = heads[0];
+			if(els[0].className.indexOf('show') !== -1){ // reset
+				head.querySelectorAll('.glyphicon')[0].className = head.querySelectorAll('.glyphicon')[0].className.replace(/(?:^|\s)glyphicon-chevron-up(?!\S)/g, ' glyphicon-chevron-down');
+				look.className = look.className.replace(/(?:^|\s)show(?!\S)/g, '');
+				return;
+			}
+			
+			console.log(head);
+			head.querySelectorAll('.glyphicon')[0].className = head.querySelectorAll('.glyphicon')[0].className.replace(/(?:^|\s)glyphicon-chevron-down(?!\S)/g, ' glyphicon-chevron-up');
+			look.className += ' show';
+			return;
+		};
 		$scope.submitVehicle = function(){
-			// var vehicle_str = JSON.stringify($scope.vehicle);
-			// console.log(vehicle_str)
-			// var input = '<input type="hidden" name="vehicle" value="'+encodeURIComponent(vehicle_str)+'">';
-			// $('<form action="/vehicle" method="POST">'+input+'</form>').submit();
 			var l = $location.path();
 			if (l !== "/vehicle"){
 				$location.path("/vehicle");
 			}else{
 				LookupService.set($scope.vehicle);
-	
 			}
 		};
 
@@ -108,9 +120,5 @@ define(['./module'], function (module) {
 		$scope.$watch('vehicle.configurations',function(n, o){
 			$scope.updateVehicle();
 		});
-
-		// if($scope.lookup !== null && $scope.lookup.vehicle !== null && $scope.lookup.vehicle.base !== null && $scope.lookup.vehicle.base.year > 0){
-		// 	$('#lookup').collapse('hide');
-		// }
 	}]);
 });

@@ -6,6 +6,8 @@ define([
 	'angular',
 	'ui.router',
 	'ngSanitize',
+	'ngAnimate',
+	'ngTouch',
 	'pace',
 	'./config',
 	'./controllers/index/index',
@@ -60,7 +62,9 @@ define([
 		'app.terms',
 		'app.warranties',
 		'ui.router',
-		'ngSanitize'
+		'ngSanitize',
+		'ngAnimate',
+		'ngTouch'
 	]).config(function ($urlRouterProvider,$interpolateProvider, $locationProvider) {
 		$urlRouterProvider.otherwise('/');
 		$interpolateProvider.startSymbol('[[');

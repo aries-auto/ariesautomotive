@@ -1,28 +1,114 @@
 
 
-.inline-form{
-	display: inline;
-	float:left;
-	select{
-		margin:.2em .5em .2em .2em;
+.lookup-container{
+	background-color: white;
+	padding: 5px;
+
+	.lookup-heading{
+		text-decoration: none;
+		font-size: 24px;
+		font-weight:900;
+		text-transform: uppercase;
+		display:block;
+		height: 38px;
+		line-height: 38px;
+		text-align:center;
+	
+		span.glyphicon{
+			display:inline-block;
+			vertical-align: baseline;
+			font-size:18px;
+		}
+		&:hover,&:focus{
+			text-decoration: none;
+			color: $altRed;
+		}
 	}
-	button{
-		margin-top:.2em;
-		background-color:$headerMenuBackColor;
-		color:$white;
+
+	.lookup{
+		display: none;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		&.show{
+			-webkit-animation: 4.5s flipInX ease;
+			animation: 4.5s flipInX ease;
+			display:block;
+		}
+		.form-group{
+			padding: 2px 5px;
+			margin-bottom:0;
+			&:last-child{
+				padding-right:0;
+			}
+		}
+
+		.view-parts-button{
+			width:100%;
+		}
 	}
 }
 
+@keyframes flipInX {
+  0% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transition-timing-function: ease-in;
+    opacity: 0;
+  }
 
-@media(max-width: 950px){
-	.inline-form{
-		color:green;
-		display: show;
-		select{
-			display:block;
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  100% {
+    transform: perspective(400px);
+    transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+
+
+@media(min-width: $screen-md-min){
+	.lookup-container{
+		padding:10px;
+		.lookup-heading{
+			font-size:18px;
+			margin-left:12.3%;
+			float:left;
+			padding: 0 10px 0 0;
+			display: inline-block;
+			text-align: left;
+			span.glyphicon{
+				display:none;
+			}
 		}
-		button{
-			margin-bottom:.5em;
+		.lookup{
+			display: block;
+			float:left;
+			width:65%;
+
+			.view-parts-button{
+				width:auto;
+			}
 		}
 	}
 }
