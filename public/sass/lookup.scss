@@ -113,9 +113,12 @@
 				display:none;
 			}
 		}
-		.vehicle-desc, .red-transparent-button{
-			float:none;
+		.vehicle-desc-container{
+			.vehicle-desc, .red-transparent-button{
+				float:none;
+			}
 		}
+		
 		.lookup{
 			display: block;
 			float:left;

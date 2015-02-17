@@ -105,15 +105,15 @@ define(['./module'], function (module) {
 			if($scope.vehicle.base === undefined || $scope.vehicle.base.year === undefined || $scope.vehicle.base.make === undefined || $scope.vehicle.base.model === undefined ){
 				$scope.vehicle_string = str;
 			}
-			str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make + ' ' + $scope.vehicle.base.model;
+			str = $scope.vehicle.base.year.trim() + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
 			
 			if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
-				str += ' ' + $scope.vehicle.submodel;
+				str += ' ' + $scope.vehicle.submodel.trim();
 			}
 			if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
 				for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
 					var conf = $scope.vehicle.configurations[i];
-					str += ' ' + conf;
+					str += ' ' + conf.value.trim();
 				}
 			}
 
