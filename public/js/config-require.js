@@ -11,7 +11,8 @@ define({
 		'ngSanitize':'./lib/angular-sanitize/angular-sanitize.min',
 		'ngAnimate':'./lib/angular-animate/angular-animate.min',
 		'ngTouch':'./lib/angular-touch/angular-touch.min',
-		'pace':'./lib/pace/pace.min'
+		'pace':'./lib/pace/pace.min',
+		'LocalStorageModule': './lib/angular-local-storage/dist/angular-local-storage'
 	},
 	shim: {
 		'angular': {
@@ -23,6 +24,7 @@ define({
 		'ngAnimate': ['angular'],
 		'ngTouch': ['angular'],
 		'ui.router' : ['angular'],
+		'LocalStorageModule':['angular'],
 		'bootstrap':['jquery']
 	},
 	urlArgs: 'bust=0.0.4'

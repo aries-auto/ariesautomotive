@@ -27,7 +27,16 @@
 				"NProgress",
 				"module",
 				"define",
-				"Typekit"
+				"Typekit",
+				// karam defs
+				"expect",
+				"describe",
+				"by",
+				"inject",
+				"beforeEach",
+				"it",
+				"browser",
+				"element"
 		],
 
 

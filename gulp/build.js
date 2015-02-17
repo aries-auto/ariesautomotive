@@ -17,7 +17,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-  return gulp.src(['public/js/**/*.js', '!public/js/lib/**/*.js'])
+  return gulp.src(['public/js/**/*.js', '!public/js/lib/**/*.js', '!public/js/**/*.spec.js', '!public/js/**/*.e2e.js'])
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
@@ -68,11 +68,11 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
 
 gulp.task('images', function () {
   return gulp.src('public/img/**/*')
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       optimizationLevel: 3,
       progressive: true,
       interlaced: true
-    })))
+    }))
     .pipe(gulp.dest('public/img/dest'))
     .pipe($.size());
 });
@@ -90,7 +90,6 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build-be',function(){
-	console.log('build be');
 	var options = {
 		continueOnError: false,
 		pipeStdout: false,

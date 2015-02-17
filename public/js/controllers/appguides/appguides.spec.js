@@ -63,7 +63,7 @@ define([
 				httpBackend.when('GET','http://ariesautoapi.curtmfg.com/category/0?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCategories);
 				httpBackend.flush();
 				expect(scope.applicationGuides).toEqual(mockedAppGuides);
-				expect(scope.applicationGuide).not.toBeNull;
+				expect(scope.applicationGuide).not.toEqual(null);
 			});
 		});
 

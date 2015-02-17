@@ -9,6 +9,7 @@ define([
 	'ngAnimate',
 	'ngTouch',
 	'pace',
+	'LocalStorageModule',
 	'./config',
 	'./controllers/index/index',
 	'./controllers/aboutus/index',
@@ -64,12 +65,14 @@ define([
 		'ui.router',
 		'ngSanitize',
 		'ngAnimate',
-		'ngTouch'
-	]).config(function ($urlRouterProvider,$interpolateProvider, $locationProvider) {
+		'ngTouch',
+		'LocalStorageModule'
+	]).config(function ($urlRouterProvider,$interpolateProvider, $locationProvider, localStorageServiceProvider) {
 		$urlRouterProvider.otherwise('/');
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
 		$locationProvider.html5Mode(true);
+		localStorageServiceProvider.setPrefix('localStorage').setPrefix('ariesauto');
 	}).value('AppConfig', {
 		APIURL : 'http://ariesautoapi.curtmfg.com',
 		APIKEY : '883d4046-8b96-11e4-9475-42010af00d4e'

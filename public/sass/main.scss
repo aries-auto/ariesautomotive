@@ -64,21 +64,31 @@ body{
 
 	a.red-transparent-button,
 	button.red-transparent-button,
-	button[type=submit].red-transparent-button{
+	button[type=submit].red-transparent-button,
+	a.white-transparent-button,
+	button.white-transparent-button,
+	button[type=submit].white-transparent-button{
 		background: transparent;
 		background-color: rgba(255,255,255,0.6);
-		color: $altRed;
 		font-weight: bold;
-		border:1px solid $altRed;
-		padding-top: 2px;
-		padding-bottom: 3px;
-		padding-left:15px;
-		padding-right:15px;
+		padding: 2px 15px;
 		font-size:18px;
 		border-radius:0;
+		cursor: pointer;
 		&:hover, &:focus{
 			text-decoration: none;
 			background-color:transparent;
+			transition: 0.3s ease-in-out;
+		}
+	}
+
+	a.red-transparent-button,
+	button.red-transparent-button,
+	button[type=submit].red-transparent-button{
+		color: $altRed;
+		border:1px solid $altRed;
+		
+		&:hover, &:focus{
 			color:$headerColor;
 			border-color: $headerColor;
 			transition: 0.3s ease-in-out;
@@ -87,20 +97,9 @@ body{
 	a.white-transparent-button,
 	button.white-transparent-button,
 	button[type=submit].white-transparent-button{
-		background: transparent;
-		background-color: rgba(255,255,255,0.6);
 		color: #fff;
-		font-weight: bold;
 		border:1px solid #fff;
-		padding-top: 2px;
-		padding-bottom: 3px;
-		padding-left:15px;
-		padding-right:15px;
-		font-size:18px;
-		border-radius:0;
 		&:hover,&:focus{
-			text-decoration: none;
-			background-color: none;
 			transition: 0.3s ease-in-out;
 		}
 	}
@@ -228,22 +227,14 @@ body{
 						padding-top:5px;
 						font-family: "ff-good-headline-web-pro-con-n4","ff-good-headline-web-pro-con",sans-serif;
 						-webkit-font-smoothing: antialiased;
-
 					}
 
 					li{
-						a{
-
-						}
-						.dropdown-toggle{
-							// background-color: $headerMenuBackColor;
-
-						}
 						.dropdown-menu{
 							background-color:#ffffff;
 							border-top: none;
 							padding-top: 22px;
-							margin: 0 5px 0 -1px;
+							margin: 0 0 0 -1px;
 							font-size:18px;
 							border-bottom: 4px solid $altRed;
 							li{
@@ -263,7 +254,6 @@ body{
 					margin-top: 0px;
 					border-left: 1px solid #000000;
 					padding-top: 20px;
-					/* margin-right: 0px; */
 					margin-bottom: 0px;
 					padding-bottom: 0px;
 					height: 80px;
@@ -402,21 +392,6 @@ body{
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
-
-
-/* To use responsive table, make sure you include responsivleTable as a class on your table, as well has creating your own class to fill out the table headings content for your media query. An example of this can be found below:
-
-				.applicationsTbl{
-					@media
-					only screen and (max-width: 760px),
-					(min-device-width: 768px) and (max-device-width: 1024px)  {
-						td:nth-of-type(1):before { content: "Year"; font-weight:900; }
-						td:nth-of-type(2):before { content: "Make"; font-weight:900; }
-						td:nth-of-type(3):before { content: "Model"; font-weight:900; }
-						td:nth-of-type(4):before { content: "SubModel"; font-weight:900; }
-					}
-				}
- */
 
 
 .responsiveTable{
