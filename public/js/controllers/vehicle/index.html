@@ -2,20 +2,24 @@
 
 <div class="category-container" ng-cloak>
 
-	<div ng-if="(parts.length == 0 || parts == null) && vehicle == null" class="no-parts container">
+	<div ng-if="(parts.length == 0 || parts == null) && !qualified" class="no-parts container">
 		<h4>
 			Select a Vehicle
 			<span ng-if="years.length > 0">Year</span>
 			<span ng-if="makes.length > 0">Make</span>
 			<span ng-if="models.length > 0">Model</span>
 			<span ng-if="submodels.length > 0">Submodel</span>
+			<span ng-if="configurations.length > 0">[[configurations[0].type]]</span>
 		</h4>
 		<div class="well well-lg">
 			<a href="/vehicle/[[year]]" ng-repeat="year in years" class="vehicle-option year">[[year]]</a>
-			<a href="/vehicle/[[vehicle.base.year]]/[[make]]" ng-repeat="make in makes" class="vehicle-option make">[[make]]</a>
+			<a href="[[vehicleLink()]]/[[make]]" ng-repeat="make in makes" class="vehicle-option make">[[make]]</a>
+			<a href="[[vehicleLink()]]/[[model]]" ng-repeat="model in models" class="vehicle-option model">[[model]]</a>
+			<a href="[[vehicleLink()]]/[[sub]]" ng-repeat="sub in submodels" class="vehicle-option submodel">[[sub]]</a>
+			<a href="[[vehicleLink()]]/[[opt]]" ng-repeat="opt in configurations[0].options" class="vehicle-option opt">[[opt]]</a>
 		</div>
 	</div>
-	<div ng-if="(parts.length == 0 || parts == null) && vehicle != null" class="container">
+	<div ng-if="(parts.length == 0 || parts == null) && qualified" class="container">
 		<form ng-submit="submitInquiry()" role="form" class="form-horizontal" accept-charset="utf-8">
 			<h4>Vehicle Inquiry</h4>
 		</form>
