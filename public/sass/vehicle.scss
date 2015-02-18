@@ -2,6 +2,16 @@
 	text-align: center
 }
 
+.no-parts{
+	.vehicle-option{
+		padding: 5px 10px;
+		display:block;
+		display:inline-block;
+		min-width:30px;
+		font-size: 16px;
+	}
+}
+
 .vehicle-data{
 	select{
 		margin-top:.6em;

@@ -102,10 +102,15 @@ define(['./module'], function (module) {
 		};
 		$scope.generateVehicleString = function(){
 			var str = '';
-			if($scope.vehicle.base === undefined || $scope.vehicle.base.year === undefined || $scope.vehicle.base.make === undefined || $scope.vehicle.base.model === undefined ){
+			if($scope.vehicle.base === undefined || $scope.vehicle.base.year === undefined || $scope.vehicle.base.make === undefined || $scope.vehicle.base.model === undefined){
 				$scope.vehicle_string = str;
+				return;
 			}
-			str = $scope.vehicle.base.year.trim() + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
+			if($scope.vehicle.base === null || $scope.vehicle.base.year === null || $scope.vehicle.base.make === null || $scope.vehicle.base.model === null){
+				$scope.vehicle_string = str;
+				return;
+			}
+			str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
 			
 			if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
 				str += ' ' + $scope.vehicle.submodel.trim();

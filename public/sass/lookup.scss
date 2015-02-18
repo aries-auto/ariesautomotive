@@ -99,7 +99,7 @@
 }
 
 
-@media(min-width: $screen-md-min){
+@media(min-width: $screen-sm-max){
 	.lookup-container{
 		padding:10px;
 		.lookup-heading, .vehicle-desc{
@@ -126,6 +126,12 @@
 
 			.view-parts-button{
 				width:auto;
+			}
+
+			&.show{
+				-webkit-animation: none;
+				animation: none;
+				display:block;
 			}
 		}
 	}
