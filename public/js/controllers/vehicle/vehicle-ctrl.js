@@ -38,7 +38,6 @@ define(['./module'], function (module) {
 					}
 				}
 			}
-			console.log($scope.vehicle);
 
 			LookupService.query($scope.vehicle).then(function(data){
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){

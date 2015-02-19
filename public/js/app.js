@@ -93,7 +93,7 @@ define([
 			button_text: 'VIEW PRO SERIES',
 			link: '/category/296'
 		},{
-			image:'https://storage.googleapis.com/aries-website/hero-images/JeepCapture.JPG',
+			image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
 			text: 'A NEW ERA OF BUMPERS IS HERE',
 			button_text: 'VIEW BUMPERS',
 			link: '/category/332'
