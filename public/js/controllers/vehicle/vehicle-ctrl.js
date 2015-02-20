@@ -12,10 +12,20 @@ define(['./module'], function (module) {
 		$scope.submodels = [];
 		$scope.configurations = [];
 		$scope.qualified = false;
+		$scope.pagination = {
+			page: 1,
+			count: 12
+		};
+		if($location.search().page !== undefined && $location.search().page !== null){
+			$scope.pagination.page = parseInt($location.search().page,10);
+		}
+		if($location.search().count !== undefined && $location.search().count !== null ){
+			$scope.pagination.count = parseInt($location.search().count,10);
+		}
+
 
 		var i;
 		
-
 		if($scope.vehicle === null && $stateParams !== {}){
 			$scope.vehicle = {
 				base:{
@@ -39,7 +49,7 @@ define(['./module'], function (module) {
 				}
 			}
 
-			LookupService.query($scope.vehicle).then(function(data){
+			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.count).then(function(data){
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
 					$scope.years = data.available_years;
 				}
@@ -73,18 +83,19 @@ define(['./module'], function (module) {
 					});
 				}else{
 					$scope.parts = data.parts;
+					$scope.pagination = data.pagination;
 				}
 			},function(err){
 				$scope.err = err;
 			});
-
 		}else {
 			if ($scope.vehicle !== null){
 				$scope.qualified = true;
 			}
 
-			LookupService.query($scope.vehicle).then(function(data){
+			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.count).then(function(data){
 				$scope.parts = data.parts;
+				$scope.pagination = data.pagination;
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
 					$scope.years = data.available_years;
 				}
@@ -115,27 +126,29 @@ define(['./module'], function (module) {
 			$location.hash(elementId);
 			$anchorScroll();
 		};
-
 		$scope.clear = function(){
 			$scope.vehicle = {};
 			$scope.vehicle.base = {};
 			$scope.vehicle.base.year = 0;
 			$scope.parts = null;
 		};
-
-		$scope.$on('vehicleChange',function(event,x){
-			$scope.vehicle = x;
-			$scope.getParts();
-		});
-
 		$scope.getParts = function(){
-			LookupService.query($scope.vehicle).then(function(data){
+			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.count).then(function(data){
 				$scope.parts = data.parts;
+				$scope.pagination = data.pagination;
 			},function(err){
 				$scope.err = err;
 			});
 		};
-
+		$scope.loadMore = function(){
+			$scope.pagination.page++;
+			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.returned_count).then(function(data){
+				$scope.parts = $scope.parts.concat(data.parts);
+				$scope.pagination = data.pagination;
+			},function(err){
+				$scope.err = err;
+			});
+		};
 		$scope.vehicleLink = function(){
 			var str = '/vehicle';
 			if($scope.vehicle === undefined || $scope.vehicle === null || $scope.vehicle.base === undefined || $scope.vehicle.base === null){
@@ -165,6 +178,10 @@ define(['./module'], function (module) {
 			}
 			return str;
 		};
+		$scope.$on('vehicleChange',function(event,x){
+			$scope.vehicle = x;
+			$scope.getParts();
+		});
 		
 	}]);
 });

@@ -15,7 +15,13 @@ define(['angular'], function(angular){
 			delete: function(){
 				return localStorageService.remove('vehicle');
 			},
-			query : function(vehicle){
+			query : function(vehicle, page, count){
+				if(page === undefined || page === null || page === 0){
+					page = 1
+				}
+				if(count === undefined || count === null || count === 0){
+					count = 12;
+				}
 				var def = $q.defer();
 				var params = vehicle;
 				$http({
@@ -27,7 +33,9 @@ define(['angular'], function(angular){
 					},
 					responseType: 'jsonp',
 					params: {
-						'key': AppConfig.APIKEY
+						'key': AppConfig.APIKEY,
+						'page':page,
+						'count':count
 					}
 				}).success(def.resolve).error(def.reject);
 
