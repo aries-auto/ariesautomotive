@@ -456,6 +456,24 @@ body{
 
 @media(min-width: $screen-md-min){
 	body{
+		header .navbar #navbarCollapse .navbar-nav a.call-link {
+			font-size: 16px;
+			line-height: 27px;
+		}
+		.content{
+			.internal-hero{
+				background-attachment:fixed;
+			}
+		}
+	}
+}
+
+@media(min-width: $screen-lg-min){
+	body{
+		header .navbar #navbarCollapse .navbar-nav a.call-link {
+			font-size: 20px;
+			line-height: 27px;
+		}
 		.content{
 			.internal-hero{
 				background-attachment:fixed;
