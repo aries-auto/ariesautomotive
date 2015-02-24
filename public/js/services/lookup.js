@@ -24,6 +24,14 @@ define(['angular'], function(angular){
 				}
 				var def = $q.defer();
 				var params = vehicle;
+				if(vehicle.configurations !== undefined){
+					for (var i = 0; i < vehicle.configurations.length; i++) {
+						var conf = vehicle.configurations[i];
+						if (conf.value === ''){
+							vehicle.configurations.splice(i,1);
+						}
+					}
+				}
 				$http({
 					method:'post',
 					url:AppConfig.APIURL + '/vehicle',
@@ -36,6 +44,23 @@ define(['angular'], function(angular){
 						'key': AppConfig.APIKEY,
 						'page':page,
 						'count':count
+					}
+				}).success(def.resolve).error(def.reject);
+
+				return def.promise;
+			},
+			inquire : function(inquiry){
+				var def = $q.defer();
+				$http({
+					method:'post',
+					url:AppConfig.APIURL + '/vehicle/inquire',
+					data:inquiry,
+					headers:{
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					responseType: 'jsonp',
+					params: {
+						'key': AppConfig.APIKEY
 					}
 				}).success(def.resolve).error(def.reject);
 

@@ -23,29 +23,6 @@ define(['./module'], function (module) {
 		$scope.submodels = [];
 		$scope.configurations = [];
 
-		var tmpVehicle = LookupService.get();
-		if(tmpVehicle !== undefined && tmpVehicle !== null && tmpVehicle.base !== undefined && tmpVehicle.base !== null){
-			$scope.vehicle = tmpVehicle;
-			LookupService.query($scope.vehicle).then(function(data){
-				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
-					$scope.valid_vehicle = false;
-				}else if(data.available_makes !== undefined && data.available_makes !== null && data.available_makes.length > 0){
-					$scope.valid_vehicle = false;
-				}else if(data.available_models !== undefined && data.available_models !== null && data.available_models.length > 0){
-					$scope.valid_vehicle = false;
-				}else if(data.available_submodels !== undefined && data.available_submodels !== null && data.available_submodels.length > 0){
-					$scope.valid_vehicle = false;
-				}else if(data.available_configurations !== undefined && data.available_configurations !== null && data.available_configurations.length > 0){
-					$scope.valid_vehicle = false;
-				}else{
-					$scope.valid_vehicle = true;
-					$scope.vehicle = data.vehicle;
-				}
-				$scope.generateVehicleString();
-				return;
-			});
-		}
-
 		$scope.updateVehicle = function(e){
 			LookupService.query($scope.vehicle).then(function(data){
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
@@ -118,7 +95,9 @@ define(['./module'], function (module) {
 			if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
 				for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
 					var conf = $scope.vehicle.configurations[i];
-					str += ' ' + conf.value.trim();
+					if(conf.value !== undefined && conf.value !== ''){
+						str += ' ' + conf.value.trim();
+					}
 				}
 			}
 
@@ -143,6 +122,30 @@ define(['./module'], function (module) {
 			});
 		};
 
+		var tmpVehicle = LookupService.get();
+		if(tmpVehicle !== undefined && tmpVehicle !== null && tmpVehicle.base !== undefined && tmpVehicle.base !== null){
+			$scope.vehicle = tmpVehicle;
+			LookupService.query($scope.vehicle).then(function(data){
+				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
+					$scope.valid_vehicle = false;
+				}else if(data.available_makes !== undefined && data.available_makes !== null && data.available_makes.length > 0){
+					$scope.valid_vehicle = false;
+				}else if(data.available_models !== undefined && data.available_models !== null && data.available_models.length > 0){
+					$scope.valid_vehicle = false;
+				}else if(data.available_submodels !== undefined && data.available_submodels !== null && data.available_submodels.length > 0){
+					$scope.valid_vehicle = false;
+				}else if(data.available_configurations !== undefined && data.available_configurations !== null && data.available_configurations.length > 0){
+					$scope.valid_vehicle = false;
+				}else{
+					$scope.valid_vehicle = true;
+					$scope.vehicle = data.vehicle;
+				}
+				$scope.generateVehicleString();
+				return;
+			});
+		}else{
+			$scope.updateVehicle();
+		}
 
 		$scope.$watch('vehicle.base.year',function(n, o){
 			if(n !== o && n > 0){
@@ -186,7 +189,9 @@ define(['./module'], function (module) {
 			}
 		});
 		$scope.$watch('vehicle.configurations',function(n, o){
-			$scope.updateVehicle();
+			if(n.length !== o.length){
+				$scope.updateVehicle();
+			}
 		});
 	}]);
 });

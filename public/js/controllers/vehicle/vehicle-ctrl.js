@@ -4,13 +4,15 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('VehicleController',  ['$scope', 'LookupService','PartService', '$location','$anchorScroll', '$stateParams', function($scope, LookupService, PartService, $location, $anchorScroll, $stateParams){
+	module.controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams){
 		
 		$scope.vehicle = LookupService.get();
 		$scope.years = [];
 		$scope.makes = [];
 		$scope.submodels = [];
 		$scope.configurations = [];
+		$scope.inquiry = {};
+		$scope.inquiry_success = false;
 		$scope.qualified = false;
 		$scope.pagination = {
 			page: 1,
@@ -22,6 +24,100 @@ define(['./module'], function (module) {
 		if($location.search().count !== undefined && $location.search().count !== null ){
 			$scope.pagination.count = parseInt($location.search().count,10);
 		}
+
+		$scope.scrollTo = function(elementId){
+			$location.hash(elementId);
+			$anchorScroll();
+		};
+		$scope.clear = function(){
+			$scope.vehicle = {};
+			$scope.vehicle.base = {};
+			$scope.vehicle.base.year = 0;
+			$scope.parts = null;
+		};
+		$scope.getParts = function(){
+			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.count).then(function(data){
+				$scope.parts = data.parts;
+				$scope.pagination = data.pagination;
+			},function(err){
+				$scope.err = err;
+			});
+		};
+		$scope.loadMore = function(){
+			$scope.pagination.page++;
+			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.returned_count).then(function(data){
+				$scope.parts = $scope.parts.concat(data.parts);
+				$scope.pagination = data.pagination;
+			},function(err){
+				$scope.err = err;
+			});
+		};
+		$scope.vehicleLink = function(){
+			var str = '/vehicle';
+			if($scope.vehicle === undefined || $scope.vehicle === null || $scope.vehicle.base === undefined || $scope.vehicle.base === null){
+				return str;
+			}
+			if($scope.vehicle.base.year === undefined || $scope.vehicle.base.year === null || $scope.vehicle.base.year === 0){
+				return str;
+			}
+			str += '/' + $scope.vehicle.base.year;
+			if($scope.vehicle.base.make === undefined || $scope.vehicle.base.make === null || $scope.vehicle.base.make === ''){
+				return str;
+			}
+			str += '/' + $scope.vehicle.base.make;
+			if($scope.vehicle.base.model === undefined || $scope.vehicle.base.model === null || $scope.vehicle.base.model === ''){
+				return str;
+			}
+			str += '/' + $scope.vehicle.base.model;
+			if($scope.vehicle.submodel === undefined || $scope.vehicle.submodel === null || $scope.vehicle.submodel === ''){
+				return str;
+			}
+			str += '/' + $scope.vehicle.submodel;
+			if($scope.vehicle.configurations === undefined || $scope.vehicle.configurations === null || $scope.vehicle.configurations.length === 0){
+				return str;
+			}
+			for (var j = 0; j < $scope.vehicle.configurations.length; j++) {
+				str += '/' + $scope.vehicle.configurations[j].key;
+			}
+			return str;
+		};
+		$scope.generateVehicleString = function(){
+			var str = '';
+			if($scope.vehicle.base === undefined || $scope.vehicle.base.year === undefined || $scope.vehicle.base.make === undefined || $scope.vehicle.base.model === undefined){
+				return str;
+			}
+			if($scope.vehicle.base === null || $scope.vehicle.base.year === null || $scope.vehicle.base.make === null || $scope.vehicle.base.model === null){
+				return str;
+			}
+			str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
+			
+			if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
+				str += ' ' + $scope.vehicle.submodel.trim();
+			}
+			if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
+				for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
+					var conf = $scope.vehicle.configurations[i];
+					if(conf.value !== undefined && conf.value !== ''){
+						str += ' ' + conf.value.trim();
+					}
+				}
+			}
+
+			return str;
+		};
+		$scope.submitInquiry = function(){
+			$scope.inquiry.vehicle = JSON.stringify($scope.vehicle);
+			LookupService.inquire($scope.inquiry).then(function(){
+				$scope.inquiry_success = true;
+				$scope.inquiry = {};
+			},function(err){
+				$scope.err = err;
+			});
+		};
+		$scope.$on('vehicleChange',function(event,x){
+			$scope.vehicle = x;
+			$scope.getParts();
+		});
 
 
 		var i;
@@ -121,67 +217,21 @@ define(['./module'], function (module) {
 				$scope.err = err;
 			});
 		}
-
-		$scope.scrollTo = function(elementId){
-			$location.hash(elementId);
-			$anchorScroll();
-		};
-		$scope.clear = function(){
-			$scope.vehicle = {};
-			$scope.vehicle.base = {};
-			$scope.vehicle.base.year = 0;
-			$scope.parts = null;
-		};
-		$scope.getParts = function(){
-			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.count).then(function(data){
-				$scope.parts = data.parts;
-				$scope.pagination = data.pagination;
-			},function(err){
-				$scope.err = err;
-			});
-		};
-		$scope.loadMore = function(){
-			$scope.pagination.page++;
-			LookupService.query($scope.vehicle, $scope.pagination.page, $scope.pagination.returned_count).then(function(data){
-				$scope.parts = $scope.parts.concat(data.parts);
-				$scope.pagination = data.pagination;
-			},function(err){
-				$scope.err = err;
-			});
-		};
-		$scope.vehicleLink = function(){
-			var str = '/vehicle';
-			if($scope.vehicle === undefined || $scope.vehicle === null || $scope.vehicle.base === undefined || $scope.vehicle.base === null){
-				return str;
-			}
-			if($scope.vehicle.base.year === undefined || $scope.vehicle.base.year === null || $scope.vehicle.base.year === 0){
-				return str;
-			}
-			str += '/' + $scope.vehicle.base.year;
-			if($scope.vehicle.base.make === undefined || $scope.vehicle.base.make === null || $scope.vehicle.base.make === ''){
-				return str;
-			}
-			str += '/' + $scope.vehicle.base.make;
-			if($scope.vehicle.base.model === undefined || $scope.vehicle.base.model === null || $scope.vehicle.base.model === ''){
-				return str;
-			}
-			str += '/' + $scope.vehicle.base.model;
-			if($scope.vehicle.submodel === undefined || $scope.vehicle.submodel === null || $scope.vehicle.submodel === ''){
-				return str;
-			}
-			str += '/' + $scope.vehicle.submodel;
-			if($scope.vehicle.configurations === undefined || $scope.vehicle.configurations === null || $scope.vehicle.configurations.length === 0){
-				return str;
-			}
-			for (var j = 0; j < $scope.vehicle.configurations.length; j++) {
-				str += '/' + $scope.vehicle.configurations[j].key;
-			}
-			return str;
-		};
-		$scope.$on('vehicleChange',function(event,x){
-			$scope.vehicle = x;
-			$scope.getParts();
-		});
 		
+
+		CategoryService.GetParents().then(function(data){
+			$scope.categories = [];
+			for (var i = 0; i < data.length; i++) {
+				var cat = data[i];
+				if(cat.sub_categories !== undefined && cat.sub_categories !== null && cat.sub_categories.length > 0){
+					for (var j = 0; j < cat.sub_categories.length; j++) {
+						var sub = cat.sub_categories[j];
+						$scope.categories.push(sub);
+					}
+				}else{
+					$scope.categories.push(cat);
+				}
+			}
+		});
 	}]);
 });
