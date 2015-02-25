@@ -4,7 +4,7 @@
 define(['./module'], function (module) {
 	'use strict';
 
-	module.controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', function($scope, PartService, $stateParams, $sce){
+	module.controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', function($scope, PartService, $stateParams, $sce, AppConfig){
 		$scope.part = {};
 		$scope.featuredProducts = [];
 		$scope.vehicles = [];
