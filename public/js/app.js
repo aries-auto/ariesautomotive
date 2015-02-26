@@ -85,7 +85,7 @@ define([
 		});
 
 		$scope.carousel_images = [{
-			image:'http://storage.googleapis.com/aries-website/hero-images/truck.png',
+			image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
 			text: 'A NEW ERA OF BULL BARS IS HERE',
 			button_text: 'VIEW BULL BARS',
 			link: '/category/299'
