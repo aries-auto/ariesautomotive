@@ -119,6 +119,30 @@ define(['./module'], function (module) {
 					submodel: '',
 					configurations: []
 				};
+				LookupService.query($scope.vehicle).then(function(data){
+					if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
+						$scope.years = data.available_years;
+					}
+					if(data.available_makes !== undefined && data.available_makes !== null && data.available_makes.length > 0){
+						$scope.makes = data.available_makes;
+					}
+					if(data.available_models !== undefined && data.available_models !== null && data.available_models.length > 0){
+						$scope.models = data.available_models;
+					}
+					if(data.available_submodels !== undefined && data.available_submodels !== null && data.available_submodels.length > 0){
+						$scope.submodels = data.available_submodels;
+						$scope.vehicle.configurations = [];
+					}
+					if(data.available_configurations !== undefined && data.available_configurations !== null && data.available_configurations.length > 0){
+						$scope.configurations = data.available_configurations;
+						angular.forEach(data.available_configurations, function(conf, i){
+							$scope.vehicle.configurations[i] = {
+								key: conf.type
+							};
+						});
+					}
+					$scope.generateVehicleString();
+				});
 			});
 		};
 

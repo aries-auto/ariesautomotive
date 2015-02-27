@@ -204,12 +204,12 @@ body{
 					a.call-link{
 						color: #ABABAB;
 						font-size:20px;
-						font-family: "proxima-nova-condensed",sans-serif;
+						font-family: "ff-good-headline-web-pro-con",sans-serif;
 					}
 					a.call-link:hover{
 						color: #D4D4D4;
 						font-size:20px;
-						font-family: "proxima-nova-condensed",sans-serif;
+						font-family: "ff-good-headline-web-pro-con",sans-serif;
 					}
 					.open{
 						a{
@@ -239,6 +239,7 @@ body{
 								a{
 									color: $headerMenuBackColor;
 									border-radius:0;
+									font-family: "ff-good-headline-web-pro-con",sans-serif;
 								}
 							}
 							li:hover a{
