@@ -78,11 +78,15 @@ define([
 	}).value('AppConfig', {
 		APIURL : 'http://ariesautoapi.curtmfg.com',
 		APIKEY : '883d4046-8b96-11e4-9475-42010af00d4e'
-	}).controller('AppController', ['$scope','CategoryService', function($scope, CategoryService){
+	}).controller('AppController', ['$scope', '$rootScope', '$location','CategoryService', function($scope, $rootScope, $location, CategoryService){
 		$scope.parentCats = [];
 		CategoryService.GetParents().then(function(parentCats){
 			$scope.parentCats = parentCats;
 		});
+
+		$rootScope.goTo = function(path){
+            $location.path(path);
+        };
 
 		$scope.carousel_images = [{
 			image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',

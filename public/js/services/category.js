@@ -9,7 +9,8 @@ define(['angular'], function(angular){
 					method: 'get',
 					url: AppConfig.APIURL + '/category/'+catid,
 					params: {
-						'key' : AppConfig.APIKEY
+						'key' : AppConfig.APIKEY,
+						'count':12
 					},
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
