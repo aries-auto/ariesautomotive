@@ -75,7 +75,7 @@ body{
 		font-size:18px;
 		border-radius:0;
 		cursor: pointer;
-		&:hover, &:focus{
+		&:hover, &:focus, &:disabled{
 			text-decoration: none;
 			background-color:transparent;
 			transition: 0.3s ease-in-out;
@@ -88,7 +88,7 @@ body{
 		color: $altRed;
 		border:1px solid $altRed;
 		
-		&:hover, &:focus{
+		&:hover, &:focus, &:disabled{
 			color:$headerColor;
 			border-color: $headerColor;
 			transition: 0.3s ease-in-out;
@@ -99,7 +99,7 @@ body{
 	button[type=submit].white-transparent-button{
 		color: #fff;
 		border:1px solid #fff;
-		&:hover,&:focus{
+		&:hover,&:focus, &:disabled{
 			transition: 0.3s ease-in-out;
 		}
 	}

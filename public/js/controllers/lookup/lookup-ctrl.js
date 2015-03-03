@@ -70,6 +70,7 @@ define(['./module'], function (module) {
 			return;
 		};
 		$scope.submitVehicle = function(){
+
 			var l = $location.path();
 			LookupService.set($scope.vehicle);
 			if (l !== "/vehicle"){
@@ -147,7 +148,7 @@ define(['./module'], function (module) {
 		};
 
 		var tmpVehicle = LookupService.get();
-		if(tmpVehicle !== undefined && tmpVehicle !== null && tmpVehicle.base !== undefined && tmpVehicle.base !== null){
+		if(tmpVehicle !== undefined && tmpVehicle !== null && tmpVehicle.base !== undefined && tmpVehicle.base !== null && tmpVehicle.base.year > 0 && tmpVehicle.base.make !== '' && tmpVehicle.base.model !== ''){
 			$scope.vehicle = tmpVehicle;
 			LookupService.query($scope.vehicle).then(function(data){
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){

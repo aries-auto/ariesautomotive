@@ -43,8 +43,8 @@
 				<option value="[[val]]" ng-repeat="val in config.options">[[val]]</option>
 			</select>
 		</div>
-
-		<button type="submit" class="btn red-transparent-button view-parts-button">
+		
+		<button type="submit" class="btn red-transparent-button view-parts-button" ng-disabled="vehicle.base.year === 0 || vehicle.base.make === '' || vehicle.base.model === ''">
 			View Parts
 		</button>
 	</form>
