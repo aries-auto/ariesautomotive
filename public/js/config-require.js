@@ -27,5 +27,5 @@ define({
 		'LocalStorageModule':['angular'],
 		'bootstrap':['jquery']
 	},
-	urlArgs: 'bust=0.0.6'
+	urlArgs: 'bust=1.0.0-rc'
 });
