@@ -86,9 +86,9 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
 									<div class="carousel-inner">
-										<div ng-repeat="i in part.images | filter:{size:'Venti'}" class="item [[($last==true) ? 'active':'']]" ng-class="[[($first==true) ? 'active':'']]">
+										<div ng-repeat="(i,img) in part.images | filter:{size:'Venti'}" class="[[(i === 0) ? 'item active':'item']]">
 											<div class="carouselImg">
-												<img class="largeImg img-responsive" src="http://[[i.path.Host]][[i.path.Path]]" />
+												<img class="largeImg img-responsive" src="http://[[img.path.Host]][[img.path.Path]]" />
 											</div>
 										</div>
 									</div>
