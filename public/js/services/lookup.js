@@ -5,7 +5,6 @@ define(['angular'], function(angular){
 		.factory('LookupService', ['$http', '$q','AppConfig','$rootScope', 'localStorageService', function($http, $q, AppConfig,$rootScope, localStorageService){
 		return {
 			set : function(vehicle){
-				console.log(vehicle);
 				localStorageService.set('vehicle',vehicle);
 				$rootScope.$broadcast('vehicleChange',vehicle);
 			},

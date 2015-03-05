@@ -93,6 +93,7 @@ define(['./module'], function (module) {
 			if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
 				str += ' ' + $scope.vehicle.submodel.trim();
 			}
+			console.log($scope.vehicle.configurations);
 			if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
 				for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
 					var conf = $scope.vehicle.configurations[i];
@@ -147,9 +148,16 @@ define(['./module'], function (module) {
 			});
 		};
 
+		LookupService.query({}).then(function(data){
+			console.log($scope.makes);
+			$scope.years = data.available_years;
+		});
+
 		var tmpVehicle = LookupService.get();
 		if(tmpVehicle !== undefined && tmpVehicle !== null && tmpVehicle.base !== undefined && tmpVehicle.base !== null && tmpVehicle.base.year > 0 && tmpVehicle.base.make !== '' && tmpVehicle.base.model !== ''){
 			$scope.vehicle = tmpVehicle;
+			$scope.valid_vehicle = false;
+			$scope.generateVehicleString();
 			LookupService.query($scope.vehicle).then(function(data){
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
 					$scope.valid_vehicle = false;
@@ -169,6 +177,7 @@ define(['./module'], function (module) {
 				return;
 			});
 		}else{
+			$scope.generateVehicleString();
 			$scope.updateVehicle();
 		}
 
