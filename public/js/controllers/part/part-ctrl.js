@@ -18,7 +18,7 @@ define(['./module'], function (module) {
 					var v = {
 						year: vehicle.year,
 						make: vehicle.make,
-						model: vehicle.nodel,
+						model: vehicle.model,
 						submodel: vehicle.submodel
 					};
 

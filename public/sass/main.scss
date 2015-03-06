@@ -435,14 +435,15 @@ body{
 			border-bottom: 1px solid #E1E1E1;
 			position: relative;
 			padding-left: 50%;
-			line-height:20px;
+			line-height:25px;
+			min-height: 30px;
 		}
 
 		td:before {
 			/* Now like a table header */
 			position: absolute;
 			/* Top/left values mimic padding */
-			top: 6px;
+			top: 2px;
 			left: 6px;
 			width: 45%;
 			padding-right: 10px;
