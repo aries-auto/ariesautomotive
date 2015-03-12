@@ -96,9 +96,9 @@
 										<li class="thumb" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]">
 											<img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" />
 										<li>
-										<li class="thumb" ng-repeat="vid in part.videos" ng-click="shadowbox(vid, 'video')">
+										<!-- <li class="thumb" ng-repeat="vid in part.videos" ng-click="shadowbox(vid, 'video')">
 											<img class="thumbImg img-responsive" src="http://img.youtube.com/vi/[[vid.YouTubeVideoId]]/0.jpg" />
-										</li>
+										</li> -->
 									</ol>
 
 									<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
@@ -129,9 +129,9 @@
 										<li class="thumb" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]">
 											<img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" />
 										</li>
-										<li class="thumb" ng-repeat="vid in part.videos" ng-click="shadowbox(vid, 'video')">
+										<!-- <li class="thumb" ng-repeat="vid in part.videos" ng-click="shadowbox(vid, 'video')">
 											<img class="thumbImg img-responsive" src="http://img.youtube.com/vi/[[vid.YouTubeVideoId]]/0.jpg" />
-										</li>
+										</li> -->
 									</ol>
 									<p class="mobile-help">Slide image to view more.</p>
 
@@ -248,10 +248,8 @@
 
 			<div class="video-container col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="part.videos.length > 0">
 				<h3>VIDEOS</h3>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="vid in part.videos">
-					<div class="ytVideoWrapper">
-						<iframe width="420" height="315" ng-src="[[getIframeSrc(vid.YouTubeVideoId)]]" frameborder="0" allowfullscreen></iframe>
-					</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-if="vid.channels.length > 0" ng-repeat="vid in part.videos">
+					<div class="ytVideoWrapper" ng-bind-html="renderHTML(vid.channels[0].embedCode)"></div>
 				</div>
 			</div>
 
