@@ -93,7 +93,6 @@ define(['./module'], function (module) {
 			if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
 				str += ' ' + $scope.vehicle.submodel.trim();
 			}
-			console.log($scope.vehicle.configurations);
 			if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
 				for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
 					var conf = $scope.vehicle.configurations[i];
@@ -149,7 +148,6 @@ define(['./module'], function (module) {
 		};
 
 		LookupService.query({}).then(function(data){
-			console.log($scope.makes);
 			$scope.years = data.available_years;
 		});
 
