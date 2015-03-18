@@ -35,6 +35,13 @@ define(['./module'], function (module) {
 			$scope.featuredProducts = featured;
 		});
 
+		$scope.renderYouTube = function(vid){
+			if(vid.channels === undefined || vid.channels.length === 0){
+				return '';
+			}
+			return $sce.trustAsHtml(vid.channels[0].embedCode.replace(vid.channels[0].foreignId,vid.channels[0].foreignId+'?rel=0'));
+		};
+
 		$scope.renderHTML = function(content){
 			return $sce.trustAsHtml(content);
 		};
