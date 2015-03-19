@@ -11,6 +11,8 @@ define([
 	'pace',
 	'LocalStorageModule',
 	'./config',
+	'./controllers/app/index',
+	'./controllers/search/index',
 	'./controllers/index/index',
 	'./controllers/aboutus/index',
 	'./controllers/appguides/index',
@@ -30,6 +32,7 @@ define([
 	'./services/geography',
 	'./services/lookup',
 	'./services/part',
+	'./services/search',
 	'./services/vehicle',
 	'./services/techSupport',
 	'./services/testimonial',
@@ -47,11 +50,14 @@ define([
 		'app.services.geography',
 		'app.services.lookup',
 		'app.services.part',
+		'app.services.search',
 		'app.services.vehicle',
 		'app.services.techSupport',
 		'app.services.testimonial',
 		'app.services.warranties',
 		'app.directives.index',
+		'app.app',
+		'app.search',
 		'app.index',
 		'app.aboutus',
 		'app.appguides',
@@ -78,31 +84,5 @@ define([
 	}).value('AppConfig', {
 		APIURL : 'http://ariesautoapi.curtmfg.com',
 		APIKEY : '883d4046-8b96-11e4-9475-42010af00d4e'
-	}).controller('AppController', ['$scope', '$rootScope', '$location','CategoryService', function($scope, $rootScope, $location, CategoryService){
-		$scope.parentCats = [];
-		CategoryService.GetParents().then(function(parentCats){
-			$scope.parentCats = parentCats;
-		});
-
-		$rootScope.goTo = function(path){
-            $location.path(path);
-        };
-
-		$scope.carousel_images = [{
-			image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
-			text: 'A NEW ERA OF BULL BARS IS HERE',
-			button_text: 'VIEW BULL BARS',
-			link: '/category/299'
-		},{
-			image:'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
-			text: 'A NEW ERA OF GRILLE GUARDS IS HERE',
-			button_text: 'VIEW PRO SERIES',
-			link: '/category/296'
-		},{
-			image:'https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png',
-			text: 'A NEW ERA OF BUMPERS IS HERE',
-			button_text: 'VIEW BUMPERS',
-			link: '/category/332'
-		}];
-	}])
+	})
 });
