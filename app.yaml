@@ -1,30 +1,28 @@
-application: aries-auto
-version: 4
+application: trucks-plus
+version: 1
 runtime: go
 api_version: go1
 
 handlers:
+- url: /scripts
+  static_dir: dist/scripts
+- url: /fonts
+  static_dir: dist/fonts
+  mime_type: application/x-font-otf
+- url: /lib
+  static_dir: dist/lib
+- url: /assets
+  static_dir: dist/assets
+- url: /styles
+  static_dir: dist/styles
+- url: /views
+  static_dir: dist/views
 - url: /.*
   script: _go_app
 
 skip_files:
-- ^(.*/)?app\.yaml
-- ^(.*/)?app\.yml
-- ^(.*/)?#.*#
-- ^(.*/)?.*~
-- ^(.*/)?.*\.py[co]
-- ^(.*/)?.*/RCS/.*
-- ^(.*/)?\..*
-- ^(.*/)?tests$
-- ^(.*/)?test$
-- ^test/(.*/)?
-- ^COPYING.LESSER
-- ^README\..*
-- \.gitignore
-- ^\.git/.*
-- \.*\.lint$
-- ^fabfile\.py
-- ^testrunner\.py
-- ^grunt\.js
-- ^watcher\.go
-- ^node_modules/(.*/)?
+- ^node_modules$
+- ^.tmp$
+- ^gulp$
+- ^e2e$
+- ^src$

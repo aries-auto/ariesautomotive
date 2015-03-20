@@ -6,17 +6,16 @@ var $ = require('gulp-load-plugins')();
 
 var browserSync = require('browser-sync');
 
+var paths = gulp.paths;
+
 // Downloads the selenium webdriver
 gulp.task('webdriver-update', $.protractor.webdriver_update);
 
 gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
-gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
-  var testFiles = [
-    'public/js/**/*.e2e.js'
-  ];
+function runProtractor (done) {
 
-  gulp.src('some test files')
+  gulp.src(paths.e2e + '/**/*.js')
     .pipe($.protractor.protractor({
       configFile: 'protractor.conf.js',
     }))
@@ -25,14 +24,12 @@ gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
       throw err;
     })
     .on('end', function () {
-      done();
-
       // Close browser sync server
-      browserSync.instance.cleanup();
-      process.exit();
+      browserSync.exit();
+      done();
     });
-});
+}
 
-gulp.task('protractor', ['serve:e2e', 'protractor-only']);
-gulp.task('protractor:src', ['serve:e2e', 'protractor-only']);
-gulp.task('protractor:dist', ['serve:e2e-dist', 'protractor-only']);
+gulp.task('protractor', ['protractor:src']);
+gulp.task('protractor:src', ['serve:e2e', 'webdriver-update'], runProtractor);
+gulp.task('protractor:dist', ['serve:e2e-dist', 'webdriver-update'], runProtractor);

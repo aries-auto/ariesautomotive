@@ -2,13 +2,13 @@
 
 var gulp = require('gulp');
 
-var browserSync = require('browser-sync');
+var paths = gulp.paths;
 
-var $ = require('gulp-load-plugins')();
-
-gulp.task('watch', ['wiredep', 'styles', 'scripts'] ,function () {
-  gulp.watch('public/sass/**/*.scss', ['styles']);
-  gulp.watch('public/js/**/*.js', ['scripts']);
-  gulp.watch('public/img/**/*', ['images']);
-  gulp.watch('bower.json', ['wiredep']);
+gulp.task('watch', ['inject'], function () {
+  gulp.watch([
+    paths.src + '/*.html',
+    paths.src + '/{app,components}/**/*.scss',
+    paths.src + '/{app,components}/**/*.js',
+    'bower.json'
+  ], ['inject']);
 });

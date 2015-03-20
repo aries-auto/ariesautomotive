@@ -4,16 +4,32 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-var wiredep = require('wiredep').stream;
+var wiredep = require('wiredep');
 
-gulp.task('test', function() {
+var paths = gulp.paths;
 
-	return gulp.src('requireJS will load all source files')
-		.pipe($.karma({
-			configFile: 'karma.conf.js',
-			action: 'run'
-		})).on('error', function(err) {
-			// Make sure failed tests cause gulp to exit non-zero
-			throw err;
-		});
-});
+function runTests (singleRun, done) {
+  var bowerDeps = wiredep({
+    directory: 'src/lib',
+    exclude: ['bootstrap-sass-official'],
+    dependencies: true,
+    devDependencies: true
+  });
+
+  var testFiles = bowerDeps.js.concat([
+    paths.src + '/{app,components}/**/*.js'
+  ]);
+
+  gulp.src(testFiles)
+    .pipe($.karma({
+      configFile: 'karma.conf.js',
+      action: (singleRun)? 'run': 'watch'
+    }))
+    .on('error', function (err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    });
+}
+
+gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
+gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });

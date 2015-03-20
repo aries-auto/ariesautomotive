@@ -1,20 +1,25 @@
-// Protractor configuration file.
+'use strict';
+
+var paths = require('./.yo-rc.json')['generator-gulp-angular'].props.paths;
+
+// An example configuration file.
 exports.config = {
+  // The address of a running selenium server.
+  //seleniumAddress: 'http://localhost:4444/wd/hub',
+  //seleniumServerJar: deprecated, this should be set on node_modules/protractor/config.json
 
-	baseUrl: 'http://localhost:8080',
+  // Capabilities to be passed to the webdriver instance.
+  capabilities: {
+    'browserName': 'chrome'
+  },
 
-	// The address of a running selenium server.
-	seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+  // Spec patterns are relative to the current working directly when
+  // protractor is called.
+  specs: [paths.e2e + '/**/*.js'],
 
-	// Capabilities to be passed to the webdriver instance.
-	capabilities: {
-		'browserName': 'chrome'
-	},
-	specs:['./**/*.e2e.js'],
-
-	// Options to be passed to Jasmine-node.
-	jasmineNodeOpts: {
-		showColors: true,
-		defaultTimeoutInterval: 30000
-	}
+  // Options to be passed to Jasmine-node.
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000
+  }
 };
