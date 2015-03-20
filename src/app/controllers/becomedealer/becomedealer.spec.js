@@ -1,4 +1,4 @@
-describe('BecomeDealerController in app.index', function () {
+describe('BecomeDealerController', function () {
 
 	var scope, subject, httpBackend;
 
@@ -27,10 +27,7 @@ describe('BecomeDealerController in app.index', function () {
 	}
 
 	beforeEach(function () {
-		module('app',
-					'app.constants',
-					'app.services.becomedealer',
-					'app.becomedealer',
+		module('ariesautomotive',
 					'ui.router',
 					'ngSanitize');
 
@@ -57,7 +54,7 @@ describe('BecomeDealerController in app.index', function () {
 
 	describe('Check http calls. ',function(){
 		it('should populate models',function(){
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBusinessClasses);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/dealers/business/classes?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBusinessClasses);
 			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
 
 			httpBackend.flush();
@@ -71,9 +68,9 @@ describe('BecomeDealerController in app.index', function () {
 
 	describe('Check postForm. ',function(){
 		it('form should submit.',function(){
-		 	httpBackend.when('GET','http://ariesautoapi.curtmfg.com/new/dealers/business/classes?key= 883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBusinessClasses);
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key= 883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
-			httpBackend.expectPOST('http://ariesautoapi.curtmfg.com/contact/15?key= 883d4046-8b96-11e4-9475-42010af00d4e').respond(mockDealer);
+		 	httpBackend.when('GET','http://ariesautoapi.curtmfg.com/dealers/business/classes?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBusinessClasses);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
+			httpBackend.expectPOST('http://ariesautoapi.curtmfg.com/contact/51?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockDealer);
 
 			scope.contact = mockDealer;
 			scope.saveDealer(scope.contact);

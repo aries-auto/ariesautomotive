@@ -165,7 +165,14 @@ body{
 			margin: 0;
 
 			.topnav{
-
+				.navbar-form{
+					width:30%;
+					.form-group .form-control{
+						width:100%;
+						height:38px;
+						font-size: 16px;
+					}
+				}
 				.topNavItem{
 					font-size:20px;
 					font-family: "ff-good-headline-web-pro-con",sans-serif;
@@ -224,6 +231,19 @@ body{
 				.extraMenu{
 					color:#cccccc;
 					background-color:$topHeaderBackColor;
+				}
+
+				.navbar-form{
+					border-top:none;
+					border-bottom:none;
+					box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+					.form-group{
+						margin-bottom:0;
+						padding-left:0;
+					}
+					button[type=submit]{
+						font-size:16px;
+					}
 				}
 
 				.navbar-nav{

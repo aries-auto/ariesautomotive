@@ -1,21 +1,20 @@
 'use strict';
 
-describe('The main view', function () {
-  var page;
+describe('Home page', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/index.html');
-    page = require('./main.po');
+    browser.get('http://localhost:3000/');
   });
 
-  it('should include jumbotron with correct data', function() {
-    expect(page.h1El.getText()).toBe('\'Allo, \'Allo!');
-    expect(page.imgEl.getAttribute('src')).toMatch(/assets\/images\/yeoman.png$/);
-    expect(page.imgEl.getAttribute('alt')).toBe('I\'m Yeoman');
+  it('should have proper title text', function () {
+    expect(browser.getTitle()).toEqual('Aries Automotive');
   });
 
-  it('list more than 5 awesome things', function () {
-    expect(page.thumbnailEls.count()).toBeGreaterThan(5);
+  it('should have 2 testimonials', function(){
+    expect(element.all(by.css('.testimonial')).count()).toBe(2);
   });
 
+  it('should have 5 featured products', function(){
+    expect(element.all(by.css('.featuredProd')).count()).toBe(5);
+  });
 });

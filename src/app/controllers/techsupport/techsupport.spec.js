@@ -1,6 +1,7 @@
-describe('TechsupportController in app.index', function () {
+describe('TechsupportController', function () {
 
 	var scope, subject, httpBackend;
+	var api_key = '883d4046-8b96-11e4-9475-42010af00d4e';
 
 	var mockedContactReceivers = [{
 		"id":1,
@@ -28,10 +29,7 @@ describe('TechsupportController in app.index', function () {
 	
 
 	beforeEach(function () {
-		module('app',
-					'app.constants',
-					'app.services.techSupport',
-					'app.techsupport',
+		module('ariesautomotive',
 					'ui.router',
 					'ngSanitize');
 
@@ -58,7 +56,7 @@ describe('TechsupportController in app.index', function () {
 
 	describe('Check http calls. ',function(){
 		it('should populate contactReceivers',function(){
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedContactReceivers);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key='+api_key).respond(mockedContactReceivers);
 			
 			httpBackend.flush();
 			expect(scope.contactReceivers).not.toBeEmpty;
@@ -69,8 +67,8 @@ describe('TechsupportController in app.index', function () {
 
 	describe('Check http calls - submitTechSupport. ',function(){
 		it('should populate contactReceivers',function(){
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedContactReceivers);
-			httpBackend.when('POST','http://ariesautoapi.curtmfg.com/techSupport/11/true?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond();
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key='+api_key).respond(mockedContactReceivers);
+			httpBackend.when('POST','http://ariesautoapi.curtmfg.com/techSupport/39/true?key='+api_key).respond();
 			scope.submitTechSupport(techSupport);
 			httpBackend.flush();
 
@@ -79,8 +77,8 @@ describe('TechsupportController in app.index', function () {
 		});
 
 		it('should NOT populate contactReceivers',function(){
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedContactReceivers);
-			httpBackend.when('POST','http://ariesautoapi.curtmfg.com/techSupport/11/true?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond();
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/contact/types/receivers/11?key='+api_key).respond(mockedContactReceivers);
+			httpBackend.when('POST','http://ariesautoapi.curtmfg.com/techSupport/39/true?key='+api_key).respond();
 			scope.submitTechSupport(badTechSupport);
 			httpBackend.flush();
 

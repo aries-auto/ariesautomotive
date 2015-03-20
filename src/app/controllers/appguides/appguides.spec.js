@@ -24,10 +24,7 @@ describe('AppGuidesController in app.index', function () {
 
 
 	beforeEach(function () {
-		module('app',
-					'app.constants',
-					'app.services.applicationGuide',
-					'app.appguides',
+		module('ariesautomotive',
 					'ui.router',
 					'ngSanitize');
 

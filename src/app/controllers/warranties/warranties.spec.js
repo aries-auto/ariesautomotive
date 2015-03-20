@@ -1,4 +1,4 @@
-describe('WarrantiesController in app.index', function () {
+describe('WarrantiesController', function () {
 
 	var scope, subject, httpBackend;
 	var warranty = {
@@ -9,7 +9,7 @@ describe('WarrantiesController in app.index', function () {
 		"contactID":1
 	};
 	var badWarranty = {
-		"partNumber": 123,
+		"partNumber": 11000,
 		"date":"01/01/2001",
 		"approved":true,
 		"contactID":1
@@ -52,10 +52,7 @@ describe('WarrantiesController in app.index', function () {
 	}];
 
 	beforeEach(function () {
-		module('app',
-					'app.constants',
-					'app.services.warranties',
-					'app.warranties',
+		module('ariesautomotive',
 					'ui.router',
 					'ngSanitize');
 
@@ -81,10 +78,9 @@ describe('WarrantiesController in app.index', function () {
 
 	describe('Check if scope is in its place after mocked HTTP requests. ', function () {
 		it('Countrystates and warranty/partConfirm should be populated. ', function () {
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/warranty/6/false?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedWarrantyResponse);
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/11000?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedPart);
-
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/warranty/24/false?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedWarrantyResponse);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/old/11000?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedPart);
 			httpBackend.flush();
 			expect(scope.countrystates).toEqual(mockedCountryStates);
 
@@ -96,9 +92,9 @@ describe('WarrantiesController in app.index', function () {
 		
 		});
 		it('Warranty/partConfirm should contain bad data. ', function () {
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/old/123?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedBadPart);
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/123?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedBadPart);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/old/11000?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedBadPart);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/old/11000?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedPart);
 
 			scope.matchPart(badWarranty);
 			httpBackend.flush();
@@ -114,8 +110,8 @@ describe('WarrantiesController in app.index', function () {
 	});
 	describe('submit warranty',function(){
 		it('should generate a positive response',function(){
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
-			httpBackend.when('POST','http://ariesautoapi.curtmfg.com/warranty/6/false?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedWarrantyResponse);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
+			httpBackend.when('POST','http://ariesautoapi.curtmfg.com/warranty/24/false?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedWarrantyResponse);
 
 			scope.submitWarranty(warranty);
 	
@@ -126,7 +122,7 @@ describe('WarrantiesController in app.index', function () {
 			expect(scope.warranty).toBeEmpty;
 		});
 		it('should generate a negative response',function(){
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedCountryStates);
+			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/geography/countrystates?key=883d4046-8b96-11e4-9475-42010af00d4e').respond(mockedCountryStates);
 			
 			scope.submitWarranty(undatedWarranty);
 	

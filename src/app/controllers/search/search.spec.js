@@ -7,34 +7,14 @@ describe('SearchController in app.index', function () {
 
 
 	beforeEach(function () {
-		module('app',
-					'app.constants',
-					'app.services.applicationGuide',
-					'app.services.becomedealer',
-					'app.services.category',
-					'app.services.contact',
-					'app.services.geography',
-					'app.services.part',
-					'app.services.techSupport',
-					'app.services.testimonial',
-					'app.services.warranties',
-					'app.index',
-					'app.aboutus',
-					'app.appguides',
-					'app.becomedealer',
-					'app.contact',
-					'app.category',
-					'app.part',
-					'app.techsupport',
-					'app.terms',
-					'app.warranties',
+		module('ariesautomotive',
 					'ui.router',
 					'ngSanitize');
 
 		inject(function ($rootScope, $controller, $httpBackend) {
 			httpBackend = $httpBackend;
 			scope = $rootScope.$new();
-			subject = $controller('PartController', { $scope: scope});
+			subject = $controller('SearchController', { $scope: scope});
 		});
 	});
 
@@ -47,22 +27,8 @@ describe('SearchController in app.index', function () {
 	describe('check if scope is also in its place', function () {
 		it('should test scope to be defined', function () {
 			expect(scope).toBeDefined();
-			expect(scope.featuredProducts).toEqual([]);
-			expect(scope.part).toEqual({});
-		});
-	});
-
-	describe('check if scope is in its place after mocked HTTP requests', function () {
-		it('should test scope to be equal to mocked data', function () {
-
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part/featured?key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedFeaturedProds);
-			httpBackend.when('GET','http://ariesautoapi.curtmfg.com/part?id=2010051&key=eef1922f-2cba-11e4-8758-42010af0fd79').respond(mockedProduct);
-
-			httpBackend.flush();
-
-			expect(scope.featuredProducts).toEqual(mockedFeaturedProds);
-			// part is not fullfilled like normal service calls, and this test fails, now to figure out why :)
-			//expect(scope.part).toEqual(mockedProduct);
+			expect(scope.parts).toEqual([]);
+			expect(scope.query).toEqual('');
 		});
 	});
 

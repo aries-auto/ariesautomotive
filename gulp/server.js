@@ -28,15 +28,22 @@ function browserSyncInit(baseDir, files, browser) {
     startPath: '/',
     server: {
       baseDir: baseDir,
-      middleware: modRewrite([
-        '!\\.\\w+$ /index.html [L]'
-      ]),
+      middleware: proxyMiddleware,
       routes: routes
     },
     browser: browser
   }, function(err, bs) {
     qrcode.generate(bs.options.urls.external);
   });
+}
+
+function proxyMiddleware(req, res, next) {
+  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
+    next();
+  } else {
+    modRewrite(['!\\.\\w+$ /index.html [L]'])(req, res, next);
+    // proxy.web(req, res);
+  }
 }
 
 gulp.task('serve', ['watch'], function () {

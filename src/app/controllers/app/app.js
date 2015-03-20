@@ -8,12 +8,8 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
   });
 
   $rootScope.goTo = function(path){
-          $location.path(path);
-      };
-
-      $scope.search = function(){
-        $location.path('/search/'+$scope.search_term);
-      };
+      $location.path(path);
+  };
 
   $scope.carousel_images = [{
     image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',

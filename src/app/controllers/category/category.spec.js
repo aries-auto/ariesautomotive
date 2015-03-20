@@ -6,27 +6,7 @@ describe('CategoryController in app.index', function () {
 
 
 	beforeEach(function () {
-		module('app',
-					'app.constants',
-					'app.services.applicationGuide',
-					'app.services.becomedealer',
-					'app.services.category',
-					'app.services.contact',
-					'app.services.geography',
-					'app.services.part',
-					'app.services.techSupport',
-					'app.services.testimonial',
-					'app.services.warranties',
-					'app.index',
-					'app.aboutus',
-					'app.appguides',
-					'app.becomedealer',
-					'app.contact',
-					'app.category',
-					'app.part',
-					'app.techsupport',
-					'app.terms',
-					'app.warranties',
+		module('ariesautomotive',
 					'ui.router',
 					'ngSanitize');
 
