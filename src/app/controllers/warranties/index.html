@@ -31,7 +31,7 @@
 
 								<div class="form-group col-xs-6">
 									<label for="country">Country:</label>
-									<select id="country" class="form-control" name="country" ng-model="form.country" ng-options=" country.country for country in countrystates" ng-change="updateStates()"required>
+									<select id="country" class="form-control" name="country" ng-model="form.country" ng-options="country.country for country in countrystates" ng-change="updateStates()"required>
 										<option value="" selected>--Choose a Country--</option>
 									</select>
 								</div>

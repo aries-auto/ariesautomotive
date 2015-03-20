@@ -2,13 +2,15 @@
 
 angular.module('ariesautomotive').factory('SearchService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 	return {
-		Search : function(term){
+		Search : function(term, page, count){
 			var def = $q.defer();
 			$http({
 				method: 'get',
 				url: AppConfig.APIURL + '/search/'+term,
 				params: {
-					'key' : AppConfig.APIKEY
+					'key' : AppConfig.APIKEY,
+					'page':page,
+					'count':count
 				},
 				responseType: 'jsonp'
 			}).success(def.resolve).error(def.reject);

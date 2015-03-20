@@ -10,7 +10,8 @@ describe('Warranties', function () {
     expect(browser.getTitle()).toEqual('Aries Automotive');
   });
 
-  it('should have a drop down with multiple contact types', function(){
-    expect(element(by.css('#country')).all(by.tagName("option")).count()).toBeGreaterThan(1);
+  it('should have a drop down with multiple countries', function(){
+  	var cnt = element(by.id('country')).all(by.tagName('option')).count();
+  	expect(cnt).toBeGreaterThan(1);
   });
 });

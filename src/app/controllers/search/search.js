@@ -4,22 +4,29 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 	$scope.parts = [];
 	$scope.query = '';
 	$scope.loadingMore = false;
+	$scope.total_hits = 0;
+	$scope.took = 0;
+
+	// paging variables
+	var page = 1;
+	var count = 24;
+
 	if($stateParams !== undefined && $stateParams.term !== undefined && $stateParams.term !== ''){
 		$scope.query = $stateParams.term;
 
-		SearchService.Search($scope.query).then(function(data){
+		SearchService.Search($scope.query, page, count).then(function(data){
 			if(data === undefined || data.hits === undefined || data.hits.hits === undefined){
 				return;
 			}
+
+			$scope.total_hits = data.hits.total;
+			$scope.took = data.took * .001;
 
 			angular.forEach(data.hits.hits, function(hit){
 				if(hit._type === 'part'){
 					$scope.parts.push(hit._source);
 				}
 			});
-
-		},function(){
-			// search failed
 		});
 	}
 
@@ -35,7 +42,18 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 		$('.pagination').css('opacity','0.6');
 		$scope.loadingMore = true;
 
-		$scope.category.product_listing.page++;
+		page++;
+		SearchService.Search($scope.query, page, count).then(function(data){
+			if(data === undefined || data.hits === undefined || data.hits.hits === undefined){
+				return;
+			}
+
+			angular.forEach(data.hits.hits, function(hit){
+				if(hit._type === 'part'){
+					$scope.parts.push(hit._source);
+				}
+			});
+		});
 		
 	};
 	$scope.scrollTo = function(elementId){

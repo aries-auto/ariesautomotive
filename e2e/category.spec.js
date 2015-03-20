@@ -3,7 +3,7 @@
 describe('Category', function () {
 
   beforeEach(function () {
-    browser.get('http://localhost:3000/category/304');
+    browser.get('http://localhost:3000/category/293');
   });
 
   it('should have proper title text', function () {

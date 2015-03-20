@@ -12,7 +12,10 @@
 				</div>
 				<div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
 					<div class="container">
-						<h2 id="catTitleProds">[[category.title | uppercase]] PRODUCTS</h2>
+						<h2 id="catTitleProds">
+							SEARCH RESULTS
+							<span class="small">1 - [[parts.length]] of [[total_hits]] results for "<em>[[query]]</em>" returned in [[took]] seconds</span>
+						</h2>
 
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
 							<!-- Products -->
@@ -56,7 +59,7 @@
 
 						<!-- Pagination -->
 						<div class="clearfix"></div>
-						<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length">
+						<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="parts.length < total_hits">
 							<span>Load more</span>
 						</a>
 
