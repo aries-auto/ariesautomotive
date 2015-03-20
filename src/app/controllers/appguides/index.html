@@ -1,0 +1,18 @@
+<div class="appguides-container">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 col-lg-12">
+				<h1>APPLICATION GUIDES</h1>
+					<p class="product row well category" ng-repeat="cat in categories">[[cat]]
+						<span ng-repeat="app in applicationGuides" class="right">
+
+							<a ng-if="app.category.title == cat" href="[[app.url]]" target="blank" class="appGuideLink">
+								<img src="http://[[app.icon]]" alt=".[[app.fileType]]" style="width: 35px; height: 35px;" class="icon">
+							</a>&nbsp;
+
+						</span>
+					</p>
+			</div>
+		</div>
+	</div>
+</div>

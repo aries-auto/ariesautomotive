@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js" ng-app="ariesautomotive">
+  <head>
+    <meta charset="utf-8">
+    <title>Aries Automotive</title>
+    <base href="/">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
+
+    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/path/to/favicon-152.png?v=2"> -->
+
+    <!-- For iPad with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2">
+
+    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/path/to/favicon-120.png?v=2"> -->
+
+    <!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/ico/apple-touch-icon-114x114-precompressed.png?v=2">
+
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/ico/apple-touch-icon-72x72-precompressed.png?v=2">
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-touch-icon-57x57-precompressed.png?v=2">
+    <link rel="icon" href="/assets/img/ico/favicon.png?v=2" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2">
+
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <link rel="stylesheet" href="app/vendor.css">
+    <!-- bower:css -->
+    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automaticaly insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!-- build:js(src) scripts/modernizr.js -->
+    <script src="lib/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body ng-controller="AppController" ng-cloak>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div>
+      <div ng-include="'components/navbar/navbar.html'"></div>
+    </div>
+    <div ui-view="body"></div>
+    <div>
+      <div ng-include="'components/footer/footer.html'"></div>
+    </div>
+
+    <!-- Google Analytics and TypeKit Initialization -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+
+      // load typekit
+      (function() {
+        var config = {
+          kitId: 'zgp0frb'
+        };
+        var d = false;
+        var tk = document.createElement('script');
+        tk.src = '//use.typekit.net/' + config.kitId + '.js';
+        tk.type = 'text/javascript';
+        tk.async = 'true';
+        tk.onload = tk.onreadystatechange = function() {
+          var rs = this.readyState;
+          if (d || rs && rs !== 'complete' && rs !== 'loaded') {
+            return;
+          }
+          d = true;
+          try { 
+            Typekit.load(config); 
+          } catch (e) {}
+        };
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(tk, s);
+      })();
+    </script>
+
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automaticaly insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+  </body>
+</html>

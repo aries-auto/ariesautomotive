@@ -1,0 +1,141 @@
+<!--Vehicle-->
+
+<div class="category-container" ng-cloak>
+
+	<div ng-if="(parts.length == 0 || parts == null) && !qualified" class="no-parts container">
+		<h4>
+			Select a Vehicle
+			<span ng-if="years.length > 0">Year</span>
+			<span ng-if="makes.length > 0">Make</span>
+			<span ng-if="models.length > 0">Model</span>
+			<span ng-if="submodels.length > 0">Submodel</span>
+			<span ng-if="configurations.length > 0">[[configurations[0].type]]</span>
+		</h4>
+		<div class="well well-lg">
+			<a href="/vehicle/[[year]]" ng-repeat="year in years" class="vehicle-option year">[[year]]</a>
+			<a href="[[vehicleLink()]]/[[make]]" ng-repeat="make in makes" class="vehicle-option make">[[make]]</a>
+			<a href="[[vehicleLink()]]/[[model]]" ng-repeat="model in models" class="vehicle-option model">[[model]]</a>
+			<a href="[[vehicleLink()]]/[[sub]]" ng-repeat="sub in submodels" class="vehicle-option submodel">[[sub]]</a>
+			<a href="[[vehicleLink()]]/[[opt]]" ng-repeat="opt in configurations[0].options" class="vehicle-option opt">[[opt]]</a>
+		</div>
+	</div>
+	<div ng-if="(parts.length == 0 || parts == null) && qualified" class="container">
+		<form ng-submit="submitInquiry()" role="form" class="form-horizontal vehicle-inquiry" accept-charset="utf-8">
+			<h4>Vehicle Inquiry</h4>
+			<p class="lead">Well, this is embarrassing. We do not have parts for that application at this time.</p>
+			<p class="lead">However, we are constantly developing new products. Please provide us with an email address and a brief description of the part you are looking for, and we will give you a holler when something awesome becomes available.</p>
+			<p class="lead">Thank you for your interest in our products.</p>
+
+			<div class="form-group">
+				<label for="name" class="control-label col-lg-2">Name</label>
+				<div class="col-lg-6">
+					<input type="text" class="form-control" ng-model="inquiry.name" id="name" placeholder="Please enter your name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label col-lg-2">Email Address</label>
+				<div class="col-lg-6">
+					<input type="email" class="form-control" ng-model="inquiry.email" id="name" placeholder="Please enter your email address">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="phone" class="control-label col-lg-2">Phone Number</label>
+				<div class="col-lg-6">
+					<input type="tel" class="form-control" ng-model="inquiry.phone" id="name" placeholder="Please enter your phone number">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="vehicle" class="control-label col-lg-2">Vehicle</label>
+				<div class="col-lg-6">
+					<p class="form-control-static">[[generateVehicleString()]]</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="categories.length > 0">
+				<label for="category" class="control-label col-lg-2">Product Category</label>
+				<div class="col-lg-6">
+					<select class="form-control" integer id="category" ng-model="inquiry.category">
+						<option value="">- Select Category -</option>
+						<option ng-repeat="cat in categories | orderBy:'title'" value="[[cat.id]]">[[cat.title]]</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="message" class="control-label col-lg-2">Message</label>
+				<div class="col-lg-6">
+					<textarea name="message" rows="10" id="message" class="form-control" ng-model="inquiry.message" placeholder="Enter any further information that you woul like to include in your inquiry"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+    			<div class="col-sm-offset-2 col-sm-6">
+	      			<button type="submit" class="btn btn-default">Send Inquiry</button>
+	      			<span class="success" ng-if="inquiry_success">Your inquiry has been submitted, thank you for your interest in Aries Automotive.</span>
+	      			<span class="success" ng-if="err.messageDetails">Error: [[err.messageDetails]]</span>
+	    		</div>
+	  		</div>
+		</form>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+
+			<div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
+				<div class="container">
+					<h2 id="catTitleProds">
+						PRODUCTS 
+						<span ng-if="pagination.total_items">([[parts.length]] of [[pagination.total_items]])</span>
+					</h2>
+
+					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
+						<!-- Products -->
+						<div class="product row well" ng-click="goTo('/part/'+[[p.oldPartNumber]])" ng-repeat="p in parts">
+							<div class="product-header">
+								<span class="product-desc">
+									<a href="/part/[[p.oldPartNumber]]" ng-if="p.oldPartNumber">[[p.short_description | uppercase]]
+										<span class="product-id">[[p.oldPartNumber]]</span>
+									</a>
+									<a href="/part/[[p.id]]"  ng-if="!p.oldPartNumber">[[p.short_description | uppercase]]
+										<span class="product-id">[[p.id]]</span>
+									</a>
+								</span>
+							</div>
+
+							<!-- Image -->
+							<div class="product-image col-xs-12 col-sm-12 col-md-3 col-lg-2">
+								<div ng-if="p.images.length > 1">
+									<img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
+								</div>
+								<div ng-if="!p.images">
+									<img class="img-responsive" src="/assets/img/partImgPlaceholder.jpg" alt="Image for [[p.title]]" />
+								</div>
+							</div>
+
+							<div class=" col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
+								<!-- Price -->
+								<div class="product-price">
+									<span class="msrp">MSRP <span class="price" ng-repeat="price in p.pricing | filter:{type:'List'} | limitTo:1">[[price.price | currency]]</span></span>
+								</div>
+
+								<!-- Attributes -->
+								<div class="product-attr">
+									<span class="title">Details:</span>
+									<ul>
+										<li ng-repeat="attr in p.attributes"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
+						<div class="clearfix"></div>
+					</div>
+
+					<!-- Pagination -->
+					<div class="clearfix"></div>
+					<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="pagination !== undefined && pagination.total_items > parts.length">
+						<span>Load more</span>
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

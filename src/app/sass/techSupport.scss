@@ -1,0 +1,34 @@
+#contactReceivers{
+	margin: 0 auto;
+	margin-bottom: 1em;
+	.headerRow{
+		font-size: 1.6em;
+		text-align: center;
+	}
+	.darken{
+		background-color: rgba(0,0,0,.1);
+	}
+	tr{
+		td, th{
+			text-align: left;
+			padding:1em 2em 1em 2em;
+		}
+		th{
+			background-color: rgba(0,0,0,.1);
+			font-size: 1.3em;
+		}
+	}
+	
+}
+#techSupportContent{
+	padding-left:2em;
+	p{
+		font-size:.8em;
+	}
+}
+.link{
+	a:hover{
+		color:#333;
+		text-decoration: none;
+	}
+}

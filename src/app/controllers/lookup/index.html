@@ -1,0 +1,47 @@
+<div class="vehicle-desc-container" ng-if="valid_vehicle">
+	<a href="/vehicle" class="vehicle-desc">[[vehicle_string]]</a>
+	<a class="red-transparent-button" ng-click="clearVehicle()">Change</a>
+	<div class="clearfix"></div>
+</div>
+
+<div ng-if="!valid_vehicle">
+	<a ng-click="showLookup()" class="lookup-heading">
+		Vehicle Lookup
+		<img src="/assets/img/arrow.png" class="expansion-arrow" alt="Expand">
+		<div class="clearfix"></div>
+	</a>
+
+	<form ng-submit="submitVehicle()" class="lookup ehicle-data form-inline">
+		<div class="form-group">
+			<select class="form-control" integer ng-model="vehicle.base.year" ng-options="year as year for year in years">
+				<option value="">- Select Year -</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<select class="form-control" ng-model="vehicle.base.make" ng-options="make as make for make in makes">
+				<option value="">- Select Make -</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select class="form-control" ng-model="vehicle.base.model" ng-options="model as model for model in models">
+				<option value="">- Select Model -</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select class="form-control" ng-model="vehicle.submodel" ng-if="submodels.length > 0" ng-options="submodel as submodel for submodel in submodels">
+				<option value="">- Select Submodel -</option>
+			</select>
+		</div>
+		<div class="form-group" ng-repeat="(i, config) in configurations">
+			<select ng-model="vehicle.configurations[i].value" class="form-control" ng-options="val as val for val in config.options">
+				<option value="">- Select [[config.type]] -</option>
+			</select>
+		</div>
+		
+		<button type="submit" class="btn red-transparent-button view-parts-button" ng-disabled="vehicle.base.year === 0 || vehicle.base.make === '' || vehicle.base.model === ''">
+			View Parts
+		</button>
+	</form>
+</div>
+<div class="clearfix"></div>
