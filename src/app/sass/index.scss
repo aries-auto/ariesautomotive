@@ -243,6 +243,7 @@ body{
 					}
 					button[type=submit]{
 						font-size:16px;
+						border: none;
 					}
 				}
 
@@ -515,8 +516,19 @@ body{
 					padding: 0;
 				}
 			}
-			#navbarCollapse .navbar-nav {
-				margin-top:0;
+			#navbarCollapse {
+				.navbar-form{
+					box-shadow: none;
+					.form-control{
+						vertical-align: top;
+					}
+				}
+				.navbar-nav {
+					margin-top:0;
+					.navigationItem:nth-child(1) > a{
+						padding-left:0;
+					}
+				}
 			}
 		}
 	}
@@ -540,22 +552,26 @@ body{
 					}
 				}
 			}
-			#navbarCollapse .navbar-nav {
-				a.call-link {
-					font-size: 16px;
-					height:85px;
-					line-height: 85px;
-					padding: 0 8px;
-				}
-				.navigationItem{
-					font-size: 18px;
-					padding-top: 0;
-					height: 85px;
-					& > a{
-						background: transparent;
-						color:#ffffff;
-						line-height:85px;
-						padding:0 8px;
+			#navbarCollapse {
+				
+				.navbar-nav {
+				
+					a.call-link {
+						font-size: 16px;
+						height:85px;
+						line-height: 85px;
+						padding: 0 8px;
+					}
+					.navigationItem{
+						font-size: 18px;
+						padding-top: 0;
+						height: 85px;
+						& > a{
+							background: transparent;
+							color:#ffffff;
+							line-height:85px;
+							padding:0 8px;
+						}
 					}
 				}
 			}
