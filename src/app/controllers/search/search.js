@@ -20,7 +20,7 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 			}
 
 			$scope.total_hits = data.hits.total;
-			$scope.took = data.took * .001;
+			$scope.took = parseFloat((data.took * .001).toFixed(4));
 
 			angular.forEach(data.hits.hits, function(hit){
 				if(hit._type === 'part'){
