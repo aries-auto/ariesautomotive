@@ -306,12 +306,8 @@ body{
 					}
 				}
 				.phoneNum{
-					margin-top: 0px;
 					border-left: 1px solid #000000;
-					padding-top: 20px;
-					margin-bottom: 0px;
-					padding-bottom: 0px;
-					height: 80px;
+					height: 85px;
 					min-height: 100%;
 					box-shadow: inset 1px 0px 0px #57111A;
 				}
@@ -341,9 +337,9 @@ body{
 			font-family: "proxima-nova-condensed",sans-serif;
 
 			h4{
-						font-family: "ff-good-headline-web-pro-con",sans-serif;
-						font-weight:700;
-						font-size:28px;
+				font-family: "ff-good-headline-web-pro-con",sans-serif;
+				font-weight:700;
+				font-size:28px;
 			}
 
 
@@ -529,20 +525,38 @@ body{
 @media(min-width: $screen-md-min){
 	body{
 		header .navbar {
-			.navbar-header .navbar-brand{
-				height: auto !important;
-				img{
-					width: 100%;
-					padding: 0;
+			.topnav .topNavItem a{
+				padding:0 15px;
+				line-height: 55px;
+				height:55px;
+			}
+			.navbar-header{ 
+				height:85px;
+				.navbar-brand {
+					padding: 1px 0;
+					img{
+						width: 100%;
+						padding: 0;
+					}
 				}
 			}
 			#navbarCollapse .navbar-nav {
 				a.call-link {
 					font-size: 16px;
-					line-height: 0;
+					height:85px;
+					line-height: 85px;
+					padding: 0 8px;
 				}
 				.navigationItem{
 					font-size: 18px;
+					padding-top: 0;
+					height: 85px;
+					& > a{
+						background: transparent;
+						color:#ffffff;
+						line-height:85px;
+						padding:0 8px;
+					}
 				}
 			}
 		}
