@@ -7,20 +7,17 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 
 	$scope.title ='Your Vehicle';
 	$scope.vehicle = {
-		base:{
-			year: 0,
-			make: '',
-			model: ''
-		},
-		submodel: '',
-		configurations: []
+		year: '',
+		make: '',
+		model: ''
+		style: ''
 	};
 	$scope.vehicle_string = '';
 	$scope.valid_vehicle = false;
 	$scope.years = [];
 	$scope.makes = [];
-	$scope.submodels = [];
-	$scope.configurations = [];
+	$scope.models = [];
+	$scope.styles = [];
 
 	$scope.updateVehicle = function(e){
 		LookupService.query($scope.vehicle).then(function(data){
