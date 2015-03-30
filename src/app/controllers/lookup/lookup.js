@@ -9,8 +9,9 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 	$scope.vehicle = {
 		year: '',
 		make: '',
-		model: ''
-		style: ''
+		model: '',
+		style: '',
+		collection: ''
 	};
 	$scope.vehicle_string = '';
 	$scope.valid_vehicle = false;
@@ -18,8 +19,10 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 	$scope.makes = [];
 	$scope.models = [];
 	$scope.styles = [];
+	$scope.collections = [];
 
-	$scope.updateVehicle = function(e){
+
+	$scope.updateVehicle = function(){
 		LookupService.query($scope.vehicle).then(function(data){
 			if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
 				$scope.years = data.available_years;
@@ -30,18 +33,10 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			if(data.available_models !== undefined && data.available_models !== null && data.available_models.length > 0){
 				$scope.models = data.available_models;
 			}
-			if(data.available_submodels !== undefined && data.available_submodels !== null && data.available_submodels.length > 0){
-				$scope.submodels = data.available_submodels;
-				$scope.vehicle.configurations = [];
+			if(data.available_styles !== undefined && data.available_styles !== null && data.available_styles.length > 0){
+				$scope.styles = data.available_styles;
 			}
-			if(data.available_configurations !== undefined && data.available_configurations !== null && data.available_configurations.length > 0){
-				$scope.configurations = data.available_configurations;
-				angular.forEach(data.available_configurations, function(conf, i){
-					$scope.vehicle.configurations[i] = {
-						key: conf.type
-					};
-				});
-			}
+			
 			$scope.generateVehicleString();
 		});
 	};
@@ -59,7 +54,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			return;
 		}
 		
-		
 		head.querySelectorAll('.expansion-arrow')[0].className = head.querySelectorAll('.expansion-arrow')[0].className.replace(/(?:^|\s)down(?!\S)/g, '');
 		head.querySelectorAll('.expansion-arrow')[0].className += ' up';
 		look.className += ' show';
@@ -68,34 +62,29 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 	$scope.submitVehicle = function(){
 
 		var l = $location.path();
-		LookupService.set($scope.vehicle);
-		if (l !== "/vehicle"){
-			$location.path("/vehicle");
+		var path = '/vehicle/'+$scope.vehicle.collection+'/'+$scope.vehicle.year+'/'+$scope.vehicle.make+'/'+$scope.vehicle.model;
+		if($scope.vehicle.style !== ''){
+			path += '/'+$scope.vehicle.style;
+		}
+		if (l !== path){
+			$location.path(path);
 		}
 		$scope.valid_vehicle = true;
 	};
 	$scope.generateVehicleString = function(){
 		var str = '';
-		if($scope.vehicle.base === undefined || $scope.vehicle.base.year === undefined || $scope.vehicle.base.make === undefined || $scope.vehicle.base.model === undefined){
+		if($scope.vehicle.year === undefined || $scope.vehicle.make === undefined || $scope.vehicle.model === undefined){
 			$scope.vehicle_string = str;
 			return;
 		}
-		if($scope.vehicle.base === null || $scope.vehicle.base.year === null || $scope.vehicle.base.make === null || $scope.vehicle.base.model === null){
+		if($scope.vehicle.year === null || $scope.vehicle.make === null || $scope.vehicle.model === null){
 			$scope.vehicle_string = str;
 			return;
 		}
-		str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
+		str = $scope.vehicle.year + ' ' + $scope.vehicle.make.trim() + ' ' + $scope.vehicle.model.trim();
 		
-		if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
-			str += ' ' + $scope.vehicle.submodel.trim();
-		}
-		if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
-			for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
-				var conf = $scope.vehicle.configurations[i];
-				if(conf.value !== undefined && conf.value !== ''){
-					str += ' ' + conf.value.trim();
-				}
-			}
+		if($scope.vehicle.style !== undefined && $scope.vehicle.style !== ''){
+			str += ' ' + $scope.vehicle.style.trim();
 		}
 
 		$scope.vehicle_string = str;
@@ -108,13 +97,11 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 		$timeout(function(){
 			$scope.showLookup();
 			$scope.vehicle = {
-				base:{
-					year: 0,
-					make: '',
-					model: ''
-				},
-				submodel: '',
-				configurations: []
+				year: 0,
+				make: '',
+				model: '',
+				style: '',
+				collection: ''
 			};
 			LookupService.query($scope.vehicle).then(function(data){
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
@@ -143,81 +130,12 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 		});
 	};
 
-	LookupService.query({}).then(function(data){
-		$scope.years = data.available_years;
+	LookupService.collections().then(function(data){
+		$scope.collections = data;
 	});
 
-	var tmpVehicle = LookupService.get();
-	if(tmpVehicle !== undefined && tmpVehicle !== null && tmpVehicle.base !== undefined && tmpVehicle.base !== null && tmpVehicle.base.year > 0 && tmpVehicle.base.make !== '' && tmpVehicle.base.model !== ''){
-		$scope.vehicle = tmpVehicle;
-		$scope.valid_vehicle = false;
-		$scope.generateVehicleString();
-		LookupService.query($scope.vehicle).then(function(data){
-			if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
-				$scope.valid_vehicle = false;
-			}else if(data.available_makes !== undefined && data.available_makes !== null && data.available_makes.length > 0){
-				$scope.valid_vehicle = false;
-			}else if(data.available_models !== undefined && data.available_models !== null && data.available_models.length > 0){
-				$scope.valid_vehicle = false;
-			}else if(data.available_submodels !== undefined && data.available_submodels !== null && data.available_submodels.length > 0){
-				$scope.valid_vehicle = false;
-			}else if(data.available_configurations !== undefined && data.available_configurations !== null && data.available_configurations.length > 0){
-				$scope.valid_vehicle = false;
-			}else{
-				$scope.valid_vehicle = true;
-				$scope.vehicle = data.vehicle;
-			}
-			$scope.generateVehicleString();
-			return;
-		});
-	}else{
-		$scope.generateVehicleString();
-		$scope.updateVehicle();
-	}
-
-	$scope.$watch('vehicle.base.year',function(n, o){
-		if(n !== o && n > 0){
-			$scope.vehicle.base.year = parseInt($scope.vehicle.base.year, 10);
-			$scope.vehicle.base.make = '';
-			$scope.vehicle.base.model = '';
-			$scope.vehicle.submodel = '';
-			$scope.vehicle.configurations = [];
-			$scope.makes = [];
-			$scope.models = [];
-			$scope.submodels = [];
-			$scope.configurations = [];
-			$scope.updateVehicle();
-		}
-	});
-	$scope.$watch('vehicle.base.make',function(n, o){
-		if(n !== o && n !== ''){
-			$scope.vehicle.base.model = '';
-			$scope.vehicle.submodel = '';
-			$scope.vehicle.configurations = [];
-			$scope.models = [];
-			$scope.submodels = [];
-			$scope.configurations = [];
-			$scope.updateVehicle();
-		}
-	});
-	$scope.$watch('vehicle.base.model',function(n, o){
-		if(n !== o && n !== ''){
-			$scope.vehicle.submodel = '';
-			$scope.vehicle.configurations = [];
-			$scope.submodels = [];
-			$scope.configurations = [];
-			$scope.updateVehicle();
-		}
-	});
-	$scope.$watch('vehicle.submodel',function(n, o){
-		if(n !== o && n !== ''){
-			$scope.vehicle.configurations = [];
-			$scope.configurations = [];
-			$scope.updateVehicle();
-		}
-	});
-	$scope.$watch('vehicle.configurations',function(n, o){
-		if(n.length !== o.length){
+	$scope.$watchCollection('vehicle',function(n, o){
+		if(n !== o){
 			$scope.updateVehicle();
 		}
 	});

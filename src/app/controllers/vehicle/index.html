@@ -5,18 +5,18 @@
 	<div ng-if="(parts.length == 0 || parts == null) && !qualified" class="no-parts container">
 		<h4>
 			Select a Vehicle
+			<span ng-if="collections.length > 0">Category</span>
 			<span ng-if="years.length > 0">Year</span>
 			<span ng-if="makes.length > 0">Make</span>
 			<span ng-if="models.length > 0">Model</span>
-			<span ng-if="submodels.length > 0">Submodel</span>
-			<span ng-if="configurations.length > 0">[[configurations[0].type]]</span>
+			<span ng-if="styles.length > 0">Style</span>
 		</h4>
 		<div class="well well-lg">
-			<a href="/vehicle/[[year]]" ng-repeat="year in years" class="vehicle-option year">[[year]]</a>
-			<a href="[[vehicleLink()]]/[[make]]" ng-repeat="make in makes" class="vehicle-option make">[[make]]</a>
-			<a href="[[vehicleLink()]]/[[model]]" ng-repeat="model in models" class="vehicle-option model">[[model]]</a>
-			<a href="[[vehicleLink()]]/[[sub]]" ng-repeat="sub in submodels" class="vehicle-option submodel">[[sub]]</a>
-			<a href="[[vehicleLink()]]/[[opt]]" ng-repeat="opt in configurations[0].options" class="vehicle-option opt">[[opt]]</a>
+			<a href="[[vehicleLink(col)]]" ng-repeat="col in collections" class="vehicle-option collection">[[col | uppercase]]</a>
+			<a href="[[vehicleLink(year)]]" ng-repeat="year in years" class="vehicle-option year">[[year]]</a>
+			<a href="[[vehicleLink(make)]]" ng-repeat="make in makes" class="vehicle-option make">[[make | uppercase]]</a>
+			<a href="[[vehicleLink(model)]]" ng-repeat="model in models" class="vehicle-option model">[[model | uppercase]]</a>
+			<a href="[[vehicleLink(style)]]" ng-repeat="style in styles" class="vehicle-option style">[[style | uppercase]]</a>
 		</div>
 	</div>
 	<div ng-if="(parts.length == 0 || parts == null) && qualified" class="container">
@@ -81,8 +81,7 @@
 			<div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
 				<div class="container">
 					<h2 id="catTitleProds">
-						PRODUCTS 
-						<span ng-if="pagination.total_items">([[parts.length]] of [[pagination.total_items]])</span>
+						PRODUCTS for [[generateVehicleString()]]
 					</h2>
 
 					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">

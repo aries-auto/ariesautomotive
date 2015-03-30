@@ -100,17 +100,8 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('full_vehicle',{
-        url: '/vehicle/:year/:make/:model/:submodel/{configs:.*}',
-        views:{
-          'body':{
-            templateUrl: 'app/controllers/vehicle/index.html',
-            controller: 'VehicleController'
-          },
-          'lookup': lookupState
-        }
-      }).state('sub_vehicle',{
-        url: '/vehicle/:year/:make/:model/:submodel',
+      }).state('style_vehicle',{
+        url: '/vehicle/:collection/:year/:make/:model/{style:.*}',
         views:{
           'body':{
             templateUrl: 'app/controllers/vehicle/index.html',
@@ -119,7 +110,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           'lookup': lookupState
         }
       }).state('base_vehicle',{
-        url: '/vehicle/:year/:make/:model',
+        url: '/vehicle/:collection/:year/:make/:model',
         views:{
           'body':{
             templateUrl: 'app/controllers/vehicle/index.html',
@@ -128,7 +119,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           'lookup': lookupState
         }
       }).state('make_vehicle',{
-        url: '/vehicle/:year/:make',
+        url: '/vehicle/:collection/:year/:make',
         views:{
           'body':{
             templateUrl: 'app/controllers/vehicle/index.html',
@@ -137,7 +128,16 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           'lookup': lookupState
         }
       }).state('year_vehicle',{
-        url: '/vehicle/:year',
+        url: '/vehicle/:collection/:year',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/vehicle/index.html',
+            controller: 'VehicleController'
+          },
+          'lookup': lookupState
+        }
+      }).state('col_vehicle',{
+        url: '/vehicle/:collection',
         views:{
           'body':{
             templateUrl: 'app/controllers/vehicle/index.html',

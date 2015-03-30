@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppConfig', function($http, $q, AppConfig){
-	return {i
+	return {
 		collections: function(){
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/vehicle/mongol/cols',
+				url: AppConfig.APIURL + '/vehicle/mongo/cols',
 				headers:{
 					'Content-Type':'application/json; charset=UTF-8'
-				},
+			},
 				responseType: 'jsonp',
 				params: { 'key': AppConfig.APIKEY}
 			}).success(def.resolve).error(def.reject);
@@ -21,11 +21,10 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 			$http({
 				method:'post',
 				url:AppConfig.APIURL + '/vehicle/mongo',
-				data:vehicle,
+				data:$.param(vehicle),
 				headers:{
-					'Content-Type': 'application/json; charset=UTF-8'
+					'Content-Type': 'application/x-www-form-urlencoded'
 				},
-				responseType: 'jsonp',
 				params: {'key': AppConfig.APIKEY}
 			}).success(def.resolve).error(def.reject);
 
