@@ -72,7 +72,7 @@
 
 				.product-attr{
 					float:left;
-					margin-left:30px;
+					margin-left:0px;
 					.title{
 						font-weight:900;
 						font-size:18px;
@@ -82,6 +82,7 @@
 						list-style:none;
 						padding:0;
 						li{
+							font-size:16px;
 							padding:0;
 						}
 					}
@@ -90,6 +91,7 @@
 				.product-price{
 					float:left;
 					font-size:20px;
+					margin-right:5px;
 					
 					.price{
 						color: $altRed;
@@ -168,6 +170,9 @@
 					.product-attr{
 						margin-left:0;
 						border-top: 1px solid #ccc;
+						ul li{
+							font-size:16px;
+						}
 					}
 				}
 			}
