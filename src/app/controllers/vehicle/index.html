@@ -86,7 +86,7 @@
 
 					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
 						<!-- Products -->
-						<div class="product row well" ng-click="goTo('/part/'+[[p.oldPartNumber]])" ng-repeat="p in parts">
+						<div class="product row well" ng-click="goTo('/part/[[p.oldPartNumber]]')" ng-repeat="p in parts">
 							<div class="product-header">
 								<span class="product-desc">
 									<a href="/part/[[p.oldPartNumber]]" ng-if="p.oldPartNumber">[[p.short_description | uppercase]]

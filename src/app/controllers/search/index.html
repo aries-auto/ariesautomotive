@@ -10,7 +10,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
+				<div id="catPartsContainer" class="container-fluid">
 					<div class="container">
 						<h2 id="catTitleProds">
 							SEARCH RESULTS
@@ -18,6 +18,7 @@
 						</h2>
 
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
+							<div class="super-padding" ng-if="parts.length === 0"></div>
 							<!-- Products -->
 							<div class="product row well" ng-click="goTo('/part/[[p.oldPartNumber]]')" ng-repeat="p in parts">
 								<div class="product-header">

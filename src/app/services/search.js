@@ -6,7 +6,7 @@ angular.module('ariesautomotive').factory('SearchService', ['$http','$q','AppCon
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/search/'+term,
+				url: AppConfig.APIURL + '/search/'+term.replace('-2',''),
 				params: {
 					'key' : AppConfig.APIKEY,
 					'page':page,
