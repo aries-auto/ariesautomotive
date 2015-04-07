@@ -31,7 +31,7 @@
 										<img ng-repeat="img in p.images | orderBy:sort | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
 									</div>
 									<div ng-if="!p.images">
-										<img class="img-responsive" src="/img/partImgPlaceholder.jpg" alt="Image for [[p.title]]" />
+										<img class="img-responsive" src="/assets/img/partImgPlaceholder.jpg" alt="Image for [[p.title]]" />
 									</div>
 								</div>
 
