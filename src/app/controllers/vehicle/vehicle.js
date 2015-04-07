@@ -69,7 +69,7 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 			str += ' ' + $scope.vehicle.style.trim();
 		}
 
-		return str.replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();});
+		return str.replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();}).toUpperCase();
 	};
 	$scope.submitInquiry = function(){
 		$scope.inquiry.vehicle = JSON.stringify($scope.vehicle);
