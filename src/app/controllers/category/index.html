@@ -28,7 +28,7 @@
 								<!-- Image -->
 								<div class="product-image col-xs-12 col-sm-12 col-md-3 col-lg-2">
 									<div ng-if="p.images.length > 1">
-										<img ng-repeat="img in p.images | orderBy:sort | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
+										<img ng-repeat="img in p.images | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
 									</div>
 									<div ng-if="!p.images">
 										<img class="img-responsive" src="/assets/img/partImgPlaceholder.jpg" alt="Image for [[p.title]]" />
