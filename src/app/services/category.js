@@ -2,14 +2,15 @@
 
 angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 	return {
-		GetCategory: function(catid){
+		GetCategory: function(catid, page, count){
 			var def = $q.defer();
 			$http({
 				method: 'get',
 				url: AppConfig.APIURL + '/category/'+catid,
 				params: {
 					'key' : AppConfig.APIKEY,
-					'count':12
+					'count':count,
+					'page':page
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'

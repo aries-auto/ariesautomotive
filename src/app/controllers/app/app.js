@@ -8,6 +8,7 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
   });
 
   $rootScope.goTo = function(path){
+      $location.search(null);
       $location.path(path);
   };
 
