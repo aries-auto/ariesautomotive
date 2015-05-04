@@ -36,7 +36,17 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('category',{
+      }).state('lp',{
+        url: '/lp/:id',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/lp/index.html',
+            controller: 'LPController'
+          },
+          'lookup': lookupState
+        }
+      })
+      .state('category',{
         url: '/category/:id',
         views:{
           'body':{
