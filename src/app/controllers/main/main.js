@@ -11,4 +11,11 @@ angular.module('ariesautomotive').controller('MainController', ['$scope', 'Testi
   PartService.GetFeatured().then(function(featured){
     $scope.featuredProducts = featured;
   });
+
+  $scope.carouselPrev = function(){
+  	$('#hero-image-carousel').carousel('prev');
+  };
+  $scope.carouselNext = function(){
+  	$('#hero-image-carousel').carousel('next');
+  };
 }]);
