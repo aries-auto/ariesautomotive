@@ -127,5 +127,32 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			default:
 				break;
 		}
-	}
+	};
+	$scope.ShareFacebook = function(){
+		if($scope.part === undefined){
+			return '';
+		}		
+		var facebookURL = "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber + "&_rdr";
+		window.$windowScope = $scope;
+		window.open(facebookURL, "Share Aries Automotive", "width=500, height=500");
+	
+	};
+	$scope.ShareTwitter = function(){
+		if($scope.part === undefined){
+			return '';
+		}			
+		var pageURL = "http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber;
+		var tweetText = $scope.part.short_description + " - " + $scope.part.oldPartNumber;
+		var twitterURL = "https://twitter.com/intent/tweet?text=" + tweetText + "&url=" + pageURL + "&via=ariesautomotive&original_referer=" + pageURL;
+		window.$windowScope = $scope;
+		window.open(twitterURL, "Tweet Aries Automotive", "width=500, height=500");
+	};
+	$scope.ShareGoogle = function(){
+		if($scope.part === undefined){
+			return '';
+		}
+		var googleURL = "https://plus.google.com/share?url=http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber;
+		window.$windowScope = $scope;
+		window.open(googleURL, "Share Aries Automotive", "width=500, height=500");
+	};
 }]);
