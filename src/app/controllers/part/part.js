@@ -148,6 +148,9 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		window.open(twitterURL, "Tweet Aries Automotive", "width=500, height=500");
 	};
 	$scope.ShareGoogle = function(){
+		if($scope.part === undefined){
+			return '';
+		}
 		var googleURL = "https://plus.google.com/share?url=http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber;
 		window.$windowScope = $scope;
 		window.open(googleURL, "Share Aries Automotive", "width=500, height=500");
