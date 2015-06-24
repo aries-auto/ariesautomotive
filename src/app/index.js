@@ -54,6 +54,15 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
+      }).state('appguide',{
+        url: '/appguides/:collection',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/appguides/appguide.html',
+            controller: 'AppGuideController'
+          },
+          'lookup': lookupState
+        }
       })
       .state('becomedealer',{
         url: '/becomedealer',

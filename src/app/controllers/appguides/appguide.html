@@ -1,0 +1,39 @@
+<div class="appguides-container">
+	<div class="container appguide">
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li><a href="/appguides">Application Guides</a></li>
+			<li class="active">[[ collection ]]</li>
+		</ol>
+		<h1>[[ collection ]]</h1>
+		<p>The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>Make</th>
+					<th>Model</th>
+					<th>Style</th>
+					<th>Year</th>
+					<th>Parts</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="app in applications">
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.make ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.model ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.year ]]</td>
+					<td>
+						<a title="View All Parts" href="/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]">View All Parts</a>
+						<a href="/part/[[ part.oldPartNumber ]]" title="[[ part.oldPartNumber ]] [[ part.short_description ]]" ng-repeat="part in app.parts">[[ part.oldPartNumber]]</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a href="/appguides/[[ col ]]" class="appguide well" ng-repeat="col in collections">
+			<span>[[ col ]]</span>
+		</a>
+	</div>
+</div>

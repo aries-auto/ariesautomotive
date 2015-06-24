@@ -17,7 +17,7 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 		},
 		query : function(vehicle){
 			var def = $q.defer();
-			
+
 			$http({
 				method:'post',
 				url:AppConfig.APIURL + '/vehicle/mongo',

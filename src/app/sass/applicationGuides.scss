@@ -1,3 +1,9 @@
+.breadcrumb{
+	li, li a{
+		text-transform: capitalize;
+	}
+}
+
 .category{
 	font-size:2em;
 	.right{
@@ -11,11 +17,48 @@
 			}
 		}
 	}
-	
+
 }
 
-.appguide{
-	padding:10px;
-	margin-bottom:0px;
+.appguides-container{
+	margin: 25px 0;
 
+	.container.appguide{
+		h1{
+			text-transform: capitalize;
+		}
+
+		table{
+			thead tr th{
+				font-size: 26px;
+			}
+			tbody{
+				td{
+					font-size: 20px;
+					text-transform: capitalize;
+					&:hover{
+						cursor: pointer;
+					}
+					&:last-child{
+						&:hover{
+							cursor: default;
+						}
+						a{
+							display:block;
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	a.appguide{
+		padding:10px;
+		margin-bottom:0px;
+		font-size: 1.5em;
+		display:block;
+		text-transform: capitalize;
+		margin-bottom: 5px;
+	}
 }
