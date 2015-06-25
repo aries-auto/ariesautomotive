@@ -99,7 +99,6 @@ body{
 
 	a:hover{
 		color:$headerColor;
-
 	}
 
 	a.red-transparent-button,
@@ -127,7 +126,7 @@ body{
 	button[type=submit].red-transparent-button{
 		color: $altRed;
 		border:1px solid $altRed;
-		
+
 		&:hover, &:focus, &:disabled{
 			color:$headerColor;
 			border-color: $headerColor;
@@ -170,7 +169,7 @@ body{
 
 			.topnav{
 				.navbar-form{
-					width:30%;
+					width:35%;
 					.form-group .form-control{
 						width:100%;
 						height:38px;
@@ -546,7 +545,7 @@ body{
 				line-height: 55px;
 				height:55px;
 			}
-			.navbar-header{ 
+			.navbar-header{
 				height:85px;
 				.navbar-brand {
 					padding: 1px 0;
@@ -557,9 +556,9 @@ body{
 				}
 			}
 			#navbarCollapse {
-				
+
 				.navbar-nav {
-				
+
 					a.call-link {
 						font-size: 16px;
 						height:85px;
@@ -593,10 +592,10 @@ body{
 		header .navbar {
 			#navbarCollapse .navbar-nav {
 				a.call-link {
-					font-size: 20px;
+					/* font-size: 20px; */
 				}
 				.navigationItem{
-					font-size: 24px;
+					/* font-size: 24px; */
 				}
 			}
 		}

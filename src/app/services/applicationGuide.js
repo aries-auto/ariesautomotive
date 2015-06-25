@@ -14,7 +14,10 @@ angular.module('ariesautomotive').factory('ApplicationGuideService', ['$http', '
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
-		getApplications: function(col){
+		getApplications: function(col, page){
+			if(page === undefined){
+				page = 0
+			}
 			var def = $q.defer();
 			$http({
 				method: 'post',
@@ -22,9 +25,11 @@ angular.module('ariesautomotive').factory('ApplicationGuideService', ['$http', '
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp',
+				responseType: 'json',
 				data:$.param({
-					collection: col
+					collection: col,
+					page: page,
+					limit: 100
 				}),
 			}).success(def.resolve).error(def.reject);
 			return def.promise;

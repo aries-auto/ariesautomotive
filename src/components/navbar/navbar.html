@@ -2,7 +2,7 @@
   <nav role="navigation" ng-controller="NavbarController" class="navbar navbar-default">
 
       <div class="row topnav visible-sm visible-md visible-lg">
-          <form ng-submit="search()" class="navbar-form navbar-left row visible-md visible-lg" role="search">
+          <form ng-submit="search()" class="navbar-form navbar-left row hidden-xs" role="search">
               <div class="form-group col-md-10 col-lg-10">
                   <input type="text" name="query" class="form-control" ng-model="search_term" placeholder="Search">
               </div>
@@ -32,7 +32,7 @@
       </div>
       <div id="navbarSeperator" class="visible-xs"></div>
       <div id="navbarCollapse" class="collapse navbar-collapse">
-          <form ng-submit="search()" class="navbar-form navbar-left hidden-md hidden-lg" role="search">
+          <form ng-submit="search()" class="navbar-form navbar-left visible-xs" role="search">
               <div class="form-group col-sm-9 col-xs-10">
                   <input type="text" name="query" class="form-control" ng-model="search_term" placeholder="Search">
               </div>
