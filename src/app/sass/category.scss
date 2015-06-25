@@ -10,6 +10,13 @@
 		}
 	}
 	#catPartsContainer{
+	
+		#catTitleProds{
+			span{
+				text-transform: capitalize;
+			}
+		}
+
 		background-color:white;
 		.product-view{
 			padding:15px;
