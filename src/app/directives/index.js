@@ -17,4 +17,39 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 			});
 		}
 	};
-});
+}).directive('finishLink', function(){
+	return {
+		restrict: 'AE',
+		scope:{
+			app: '=',
+			finish: '='
+		},
+		link: function(scope, el, attrs, ngModel){
+			var finish = scope.finish;
+			var app = scope.app;
+			angular.forEach(app.parts, function(p){
+				if (p.finish === finish){
+					el.attr('title', 'View ' + p.oldPartNumber);
+					el.html(p.oldPartNumber);
+					el.attr('href', '/part/'+p.oldPartNumber);
+				}
+			});
+		}
+	}
+}).directive('appguideInstallLink', function(){
+	return {
+		restrict: 'AE',
+		scope:{
+			app: '='
+		},
+		link: function(scope, el, attrs, ngModel){
+			var app = scope.app;
+			angular.forEach(app.parts, function(p){
+				if (p.install_sheet !== ''){
+					el.attr('href', p.install_sheet);
+					el.html(p.oldPartNumber);
+				}
+			});
+		}
+	}
+});;

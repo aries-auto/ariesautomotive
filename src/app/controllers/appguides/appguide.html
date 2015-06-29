@@ -14,8 +14,10 @@
 					<th>Make</th>
 					<th>Model</th>
 					<th>Style</th>
-					<th>Year</th>
-					<th>Parts</th>
+					<th>Start Year</th>
+					<th>End Year</th>
+					<th ng-repeat="fin in finishes">[[ fin ]]</th>
+					<th>Install Sheet</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,10 +25,17 @@
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.make ]]</td>
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.model ]]</td>
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.year ]]</td>
-					<td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.startYear ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.endYear ]]</td>
+					<!-- <td>
 						<a title="View All Parts" href="/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]">View All Parts</a>
 						<a href="/part/[[ part.oldPartNumber ]]" title="[[ part.oldPartNumber ]] [[ part.short_description ]]" ng-repeat="part in app.parts">[[ part.oldPartNumber]]</a>
+					</td> -->
+					<td ng-repeat="fin in finishes">
+						<a app="app" finish="fin" collection="collection" finish-link></a>
+					</td>
+					<td>
+						<a app="app" appguide-install-link></a>
 					</td>
 				</tr>
 			</tbody>
