@@ -24,6 +24,7 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$scope', '$
 			var last = {};
 			$scope.finishes = data.finishes;
 			$scope.colors = data.colors;
+			console.log($scope.colors);
 			for (var i = 0; i < data.applications.length; i++) {
 				var thisApp = data.applications[i];
 				if(last.make !== thisApp.make || last.model !== thisApp.model || last.style !== thisApp.style){

@@ -28,7 +28,7 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 			var finish = scope.finish;
 			var app = scope.app;
 			angular.forEach(app.parts, function(p){
-				if (p.finish === finish){
+				if (p.finish === finish || p.color == finish){
 					el.attr('title', 'View ' + p.oldPartNumber);
 					el.html(p.oldPartNumber);
 					el.attr('href', '/part/'+p.oldPartNumber);

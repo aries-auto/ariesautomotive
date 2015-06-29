@@ -17,6 +17,7 @@
 					<th>Start Year</th>
 					<th>End Year</th>
 					<th ng-repeat="fin in finishes">[[ fin ]]</th>
+					<th ng-repeat="col in colors">[[ col ]]</th>
 					<th>Install Sheet</th>
 				</tr>
 			</thead>
@@ -27,12 +28,11 @@
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.startYear ]]</td>
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.endYear ]]</td>
-					<!-- <td>
-						<a title="View All Parts" href="/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]">View All Parts</a>
-						<a href="/part/[[ part.oldPartNumber ]]" title="[[ part.oldPartNumber ]] [[ part.short_description ]]" ng-repeat="part in app.parts">[[ part.oldPartNumber]]</a>
-					</td> -->
 					<td ng-repeat="fin in finishes">
 						<a app="app" finish="fin" collection="collection" finish-link></a>
+					</td>
+					<td ng-repeat="col in colors">
+						<a app="app" finish="col" collection="collection" finish-link></a>
 					</td>
 					<td>
 						<a app="app" appguide-install-link></a>
