@@ -5,6 +5,7 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$scope', '$
 	$scope.applications = [];
 	$scope.finishes = [];
 	$scope.colors = [];
+	$scope.location = false;
 	var page = 0;
 
 	$scope.getPart = function(f, app){
@@ -13,37 +14,49 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$scope', '$
 		});
 	};
 
+	var parseLocations = function(apps){
+		var low = 0;
+		var high = 0;
+		var last = {};
+		angular.forEach(apps, function(app){
+			if(last.make !== app.make || last.model !== app.model || last.style !== app.style){
+				if (last.make !== undefined && $scope.applications.indexOf(last) === -1){
+					last.startYear = low;
+					last.endYear = high;
+					last.locations = [];
+					var existing = [];
+					for (var j = 0; j < last.parts.length; j++) {
+						var p = last.parts[j];
+						if(p.location.length > 0 && existing[p.location] === undefined){
+							$scope.location = true;
+							last.locations.push(p.location);
+							existing[p.location] = true;
+						}
+					}
+					$scope.applications.push(last);
+				}
+				last = app;
+				high = app.year;
+				low = app.year;
+			}else if(app.year < low){
+				low = app.year;
+			}else{
+				last = {};
+				high = 0;
+				low = 0;
+			}
+		});
+	}
+
 	var getMore = function(page){
 		ApplicationGuideService.getApplications($scope.collection, page).then(function(data){
 			if(data.applications.length === 0){
 				return;
 			}
 
-			var low = 0;
-			var high = 0;
-			var last = {};
 			$scope.finishes = data.finishes;
 			$scope.colors = data.colors;
-			console.log($scope.colors);
-			for (var i = 0; i < data.applications.length; i++) {
-				var thisApp = data.applications[i];
-				if(last.make !== thisApp.make || last.model !== thisApp.model || last.style !== thisApp.style){
-					if (last.make !== undefined && $scope.applications.indexOf(last) === -1){
-						last.startYear = low;
-						last.endYear = high;
-						$scope.applications.push(last);
-					}
-					last = thisApp;
-					high = thisApp.year;
-					low = thisApp.year;
-				}else if(thisApp.year < low){
-					low = thisApp.year;
-				}else{
-					last = {};
-					high = 0;
-					low = 0;
-				}
-			}
+			parseLocations(data.applications);
 			page = page + 1;
 			getMore(page);
 		});

@@ -7,7 +7,7 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 		transclude: true,
 		templateUrl: '/js/controllers/lookup/index.html',
 		controller: 'LookupController'
-	}
+	};
 }).directive('integer', function () {
 	return {
 		require:'ngModel',
@@ -22,27 +22,29 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 		restrict: 'AE',
 		scope:{
 			app: '=',
-			finish: '='
+			finish: '=',
+			location: '='
 		},
-		link: function(scope, el, attrs, ngModel){
+		link: function(scope, el){
 			var finish = scope.finish;
 			var app = scope.app;
+			var loc = scope.location;
 			angular.forEach(app.parts, function(p){
-				if (p.finish === finish || p.color == finish){
+				if (p.finish === finish || p.color === finish && (loc === undefined || loc === '' || p.location === loc)){
 					el.attr('title', 'View ' + p.oldPartNumber);
 					el.html(p.oldPartNumber);
 					el.attr('href', '/part/'+p.oldPartNumber);
 				}
 			});
 		}
-	}
+	};
 }).directive('appguideInstallLink', function(){
 	return {
 		restrict: 'AE',
 		scope:{
 			app: '='
 		},
-		link: function(scope, el, attrs, ngModel){
+		link: function(scope, el){
 			var app = scope.app;
 			angular.forEach(app.parts, function(p){
 				if (p.install_sheet !== ''){
@@ -51,5 +53,5 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 				}
 			});
 		}
-	}
-});;
+	};
+});
