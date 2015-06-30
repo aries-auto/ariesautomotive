@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','LocalStorageModule'])
   .config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider) {
     var lookupState = {
@@ -169,6 +170,15 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           'body':{
             templateUrl: 'app/controllers/warranties/index.html',
             controller: 'WarrantiesController'
+          },
+          'lookup': lookupState
+        }
+    }).state('where_to_buy',{
+        url: '/buy',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/wheretobuy/index.html',
+            controller: 'BuyController'
           },
           'lookup': lookupState
         }

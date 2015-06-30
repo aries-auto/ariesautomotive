@@ -21,6 +21,8 @@
   "validthis": true,
   "globals": {
     "angular": false,
+    "Modernizr": false,
+    "navigator": false,
     // Angular Mocks
     "inject": false,
     // JASMINE
