@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Buy Local Mother Fucker! [[ locations.length ]]</h1>
+
+    <div class="row">
+        <div class="angular-google-map-container map-box">
+            <img ng-if="!map.show" src="http://winefolly.wpengine.netdna-cdn.com/wp-content/uploads/2012/06/pulp-fiction.jpg-1280%C3%971024-Image.jpeg" alt="">
+            <ui-gmap-google-map ng-if="map.show" style="top:80px" class="col-md-12" center="map.center"
+                                control="gMap"
+                                zoom="map.zoom"
+                                dragging="map.dragging"
+                                options="map.options"
+                                events="map.events"
+                                bounds="map.bounds"
+                                refresh="map.refresh"
+                                pan="true">
+                <ui-gmap-marker ng-repeat="m in locations" coords="m.coords" icon="map.markerIcon" idKey="m.id"></ui-gmap-marker>
+            </ui-gmap-google-map>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div ng-repeat="loc in locations" class="col-md-6 col-sm-12 col-xs-12">
+            <div itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="name">[[ loc.name ]]</span>
+                <span itemprop="streetAddress">[[ loc.address ]]</span>
+                <span itemprop="addressLocality">[[ loc.city ]]</span>,
+                <span itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
+                <span itemprop="postalCode">[[ loc.postalCode ]]</span>
+                <span itemprop="addressCountry">[[ loc.country.country ]]</span> 
+            </div>
+        </div>
+    </div>
+
+</div>

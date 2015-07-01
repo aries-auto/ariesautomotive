@@ -1,0 +1,19 @@
+
+.map-box{
+    width: 100%;
+    margin: 0 auto 20px auto;
+    padding: 20px 0 100px 0;
+    .angular-google-map-container{
+        height: 800px;
+    }
+    > img{
+        width: 100%;
+    }
+}
+
+.angular-google-map {
+    top: 0 !important;
+    img{
+        max-width: none;
+    }
+}

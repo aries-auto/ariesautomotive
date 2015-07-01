@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','LocalStorageModule'])
-  .config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider) {
+angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','LocalStorageModule', 'uiGmapgoogle-maps'])
+  .config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
     var lookupState = {
       templateUrl: 'app/controllers/lookup/index.html',
       controller: 'LookupController'
@@ -187,6 +187,11 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   	$interpolateProvider.startSymbol('[[');
   	$interpolateProvider.endSymbol(']]');
   	$locationProvider.html5Mode(true);
-  	localStorageServiceProvider.setPrefix('localStorage').setPrefix('ariesauto');
+  	localStorageServiceProvider.setPrefix('ariesauto');
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA',
+        v: '3.17',
+        libraries: 'drawing, geometry, palces, visualization'
+    });
 
 });
