@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('ariesautomotive').controller('LookupController', ['$scope','$window', '$timeout', 'LookupService',  '$location', function($scope, $window, $timeout, LookupService, $location){
+angular.module('ariesautomotive').controller('LookupController', ['$scope','$window', '$timeout', 'LookupService',  '$location', '$rootScope', function($scope, $window, $timeout, LookupService, $location, $rootScope){
 
 	$scope.title ='Your Vehicle';
 	$scope.vehicle = {
@@ -36,7 +36,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			if(data.available_styles !== undefined && data.available_styles !== null && data.available_styles.length > 0){
 				$scope.styles = data.available_styles;
 			}
-			
+
 			$scope.generateVehicleString();
 		});
 	};
@@ -53,7 +53,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			look.className = look.className.replace(/(?:^|\s)show(?!\S)/g, '');
 			return;
 		}
-		
+
 		head.querySelectorAll('.expansion-arrow')[0].className = head.querySelectorAll('.expansion-arrow')[0].className.replace(/(?:^|\s)down(?!\S)/g, '');
 		head.querySelectorAll('.expansion-arrow')[0].className += ' up';
 		look.className += ' show';
@@ -81,13 +81,15 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			$scope.vehicle_string = str;
 			return;
 		}
+
 		str = $scope.vehicle.year + ' ' + $scope.vehicle.make.trim() + ' ' + $scope.vehicle.model.trim();
-		
+
 		if($scope.vehicle.style !== undefined && $scope.vehicle.style !== ''){
 			str += ' ' + $scope.vehicle.style.trim();
 		}
 
 		$scope.vehicle_string = str;
+		$rootScope.full_vehicle = str;
 	};
 	$scope.clearVehicle = function(){
 		if(!LookupService.delete()){

@@ -163,11 +163,31 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
+      }).state('sitemap_index',{
+        url: '/sitemap_index.xml',
+        views:{
+          'body':{
+            templateUrl: 'src/sitemap_index.xml'
+          }
+        }
+      }).state('sitemap',{
+        url: '/sitemap.xml',
+        views:{
+          'body':{
+            templateUrl: 'src/sitemap.xml'
+          }
+        }
+      }).state('image_sitemap',{
+        url: '/image_sitemap.xml',
+        views:{
+          'body':{
+            templateUrl: 'src/image_sitemap.xml'
+          }
+        }
       });
     $urlRouterProvider.otherwise('/');
   	$interpolateProvider.startSymbol('[[');
   	$interpolateProvider.endSymbol(']]');
   	$locationProvider.html5Mode(true);
   	localStorageServiceProvider.setPrefix('localStorage').setPrefix('ariesauto');
-
 });

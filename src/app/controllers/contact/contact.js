@@ -1,8 +1,12 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('ContactController', ['$scope', 'ContactService','BecomeDealerService', 'GeographyService', 
-	function($scope, ContactService, BecomeDealerService, GeographyService){
+angular.module('ariesautomotive').controller('ContactController', ['$scope', 'ContactService','BecomeDealerService', 'GeographyService', '$rootScope', 'TitleService',
+	function($scope, ContactService, BecomeDealerService, GeographyService, $rootScope, TitleService){
 	$scope.formData = {'sendEmail': true};
+
+	var titleText = "Contact Us | Conctact Resources for Aries Automotive";
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	$scope.postForm = function(){
 		$scope.errorMessage = '';
