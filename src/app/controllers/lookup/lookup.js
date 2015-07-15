@@ -36,7 +36,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			if(data.available_styles !== undefined && data.available_styles !== null && data.available_styles.length > 0){
 				$scope.styles = data.available_styles;
 			}
-			
+
 			$scope.generateVehicleString();
 		});
 	};
@@ -53,12 +53,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			look.className = look.className.replace(/(?:^|\s)show(?!\S)/g, '');
 			return;
 		}
-<<<<<<< HEAD
-		
-=======
 
-
->>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 		head.querySelectorAll('.expansion-arrow')[0].className = head.querySelectorAll('.expansion-arrow')[0].className.replace(/(?:^|\s)down(?!\S)/g, '');
 		head.querySelectorAll('.expansion-arrow')[0].className += ' up';
 		look.className += ' show';
@@ -86,25 +81,11 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 			$scope.vehicle_string = str;
 			return;
 		}
-<<<<<<< HEAD
+
 		str = $scope.vehicle.year + ' ' + $scope.vehicle.make.trim() + ' ' + $scope.vehicle.model.trim();
-		
+
 		if($scope.vehicle.style !== undefined && $scope.vehicle.style !== ''){
 			str += ' ' + $scope.vehicle.style.trim();
-=======
-		str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
-
-		if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
-			str += ' ' + $scope.vehicle.submodel.trim();
-		}
-		if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
-			for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
-				var conf = $scope.vehicle.configurations[i];
-				if(conf.value !== undefined && conf.value !== ''){
-					str += ' ' + conf.value.trim();
-				}
-			}
->>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 		}
 
 		$scope.vehicle_string = str;

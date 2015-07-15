@@ -8,10 +8,7 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		CategoryService.GetCategory($stateParams.id).then(function(cat){
 			$scope.category = cat;
-<<<<<<< HEAD
 			$scope.parts = $scope.category.product_listing.parts;
-		});
-=======
 			var titleText = $scope.category.title + " | Aries Automotive Products";
 			$rootScope.titleservice = TitleService;
 			$rootScope.titleservice.set(titleText);
@@ -31,7 +28,6 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 			});
 			page--;
 		}
->>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 	}
 
 	$scope.renderHTML = function(content){

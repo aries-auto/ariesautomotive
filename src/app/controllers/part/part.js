@@ -159,9 +159,4 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		window.$windowScope = $scope;
 		window.open(googleURL, "Share Aries Automotive", "width=500, height=500");
 	};
-<<<<<<< HEAD
 }]);
-=======
-
-}]);
->>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
