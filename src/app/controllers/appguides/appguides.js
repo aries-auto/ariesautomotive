@@ -1,9 +1,13 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', 'ApplicationGuideService', function($scope, ApplicationGuideService){
+angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', 'ApplicationGuideService', '$rootScope', 'TitleService', function($scope, ApplicationGuideService, $rootScope, TitleService){
 	$scope.applicationGuide = {};
 	$scope.categories = [];
 	$scope.applicationGuides = {};
+
+	var titleText = "App Guides | Application Guides for Aries Automotive accessories.";
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	//3 is the Aries site...
 	$scope.applicationGuides = ApplicationGuideService.GetApplicationGuidesByWebsite(3).then(function(data){

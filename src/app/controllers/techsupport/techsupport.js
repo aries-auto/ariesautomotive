@@ -1,11 +1,15 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('TechSupportController', ['$scope', 'TechSupportService', function($scope, TechSupportService){
+angular.module('ariesautomotive').controller('TechSupportController', ['$scope', 'TechSupportService', '$rootScope', 'TitleService', function($scope, TechSupportService, $rootScope, TitleService){
 	$scope.techSupport = {};
 	$scope.techSupport.contact = {};
 
 	$scope.message = "";
 	$scope.dateMessage = "";
+
+	var titleText = "Technical Support - Aries Automotive";
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	$scope.submitTechSupport = function(techSupport){
 

@@ -6,7 +6,9 @@
     "type": "git",
     "url": "https://github.com/aries-auto/ariesautomotive"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express-seojs": "0.0.5"
+  },
   "devDependencies": {
     "bower": "^1.3.12",
     "browser-sync": "~1.7.1",

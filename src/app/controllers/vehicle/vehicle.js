@@ -1,15 +1,30 @@
 'use strict';
 
+<<<<<<< HEAD
 angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams){
 	
 	$scope.vehicle = {};
 	$scope.collections = [];
+=======
+angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', 'TitleService', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, TitleService){
+
+	$scope.vehicle = LookupService.get();
+>>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 	$scope.years = [];
 	$scope.makes = [];
 	$scope.styles = [];
 	$scope.inquiry = {};
 	$scope.inquiry_success = false;
 	$scope.qualified = false;
+
+	if($rootScope.full_vehicle === null || $rootScope.full_vehicle === undefined || $rootScope.full_vehicle === '') {
+		var titleText = "Vehicle Search - Aries Automotive Products."
+	} else {
+		var titleText = "Vehicle Search - Aries Automotive Products for " + $rootScope.full_vehicle;
+	}
+
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);
@@ -63,10 +78,25 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 		if($scope.vehicle === null || $scope.vehicle.year === null || $scope.vehicle.make === null || $scope.vehicle.model === null){
 			return str;
 		}
+<<<<<<< HEAD
 		str = $scope.vehicle.year + ' ' + $scope.vehicle.make.trim() + ' ' + $scope.vehicle.model.trim();
 		
 		if($scope.vehicle.style !== undefined && $scope.vehicle.style !== ''){
 			str += ' ' + $scope.vehicle.style.trim();
+=======
+		str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
+
+		if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
+			str += ' ' + $scope.vehicle.submodel.trim();
+		}
+		if($scope.vehicle.configurations !== undefined && $scope.vehicle.configurations.length > 0){
+			for (var i = $scope.vehicle.configurations.length - 1; i >= 0; i--) {
+				var conf = $scope.vehicle.configurations[i];
+				if(conf.value !== undefined && conf.value !== ''){
+					str += ' ' + conf.value.trim();
+				}
+			}
+>>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 		}
 
 		return str.replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();}).toUpperCase();
@@ -86,7 +116,12 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 	});
 
 	var i;
+<<<<<<< HEAD
 	if($scope.vehicle.year === undefined && $stateParams !== {}){
+=======
+
+	if($scope.vehicle === null && $stateParams !== {}){
+>>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 		$scope.vehicle = {
 			collection:'',
 			year:'',
@@ -114,6 +149,7 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 				if(data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0){
 					$scope.years = data.available_years;
 				}
+<<<<<<< HEAD
 				if(data.available_makes !== undefined && data.available_makes !== null && data.available_makes.length > 0){
 					$scope.makes = data.available_makes;
 				}
@@ -136,6 +172,27 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 				$scope.err = err;
 			});
 		}
+=======
+				angular.forEach(data.available_configurations, function(conf, i){
+
+					for (i = 0; i < confs.length; i++) {
+						var c = confs[i];
+						if (conf.value === c){
+							$scope.vehicle.configurations.push({
+								key: conf.key,
+								value: conf.value
+							});
+						}
+					}
+				});
+			}else{
+				$scope.parts = data.parts;
+				$scope.pagination = data.pagination;
+			}
+		},function(err){
+			$scope.err = err;
+		});
+>>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 	}else {
 		if ($scope.vehicle !== null){
 			$scope.qualified = true;
@@ -159,6 +216,10 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 			$scope.err = err;
 		});
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> d76bac2... Added sitemaps for SEO. Added TitleService to generate dynamic titles for each page.
 
 	CategoryService.GetParents().then(function(data){
 		$scope.categories = [];

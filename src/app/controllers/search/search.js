@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('SearchController', ['$scope', 'SearchService', '$stateParams','$sce', '$location', '$anchorScroll', 'AppConfig', function($scope, SearchService, $stateParams, $sce, $location, $anchorScroll, AppConfig){
+angular.module('ariesautomotive').controller('SearchController', ['$scope', 'SearchService', '$stateParams','$sce', '$location', '$anchorScroll', 'AppConfig', '$rootScope', 'TitleService', function($scope, SearchService, $stateParams, $sce, $location, $anchorScroll, AppConfig, $rootScope, TitleService){
 	$scope.parts = [];
 	$scope.query = '';
 	$scope.loadingMore = false;
@@ -10,6 +10,10 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 	// paging variables
 	var page = 1;
 	var count = 24;
+
+	var titleText = "Search Results - Aries Automotive";
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	if($stateParams !== undefined && $stateParams.term !== undefined && $stateParams.term !== ''){
 		$scope.query = $stateParams.term;
@@ -54,7 +58,7 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 				}
 			});
 		});
-		
+
 	};
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);
