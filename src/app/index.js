@@ -179,5 +179,4 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   	$interpolateProvider.endSymbol(']]');
   	$locationProvider.html5Mode(true);
   	localStorageServiceProvider.setPrefix('localStorage').setPrefix('ariesauto');
-
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll' , function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll){
+angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', 'TitleService', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope, TitleService){
 	$scope.category = {};
 	$scope.loadingMore = false;
 	$scope.parts = [];
@@ -16,6 +16,9 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		CategoryService.GetCategory($stateParams.id, $scope.page, $scope.count).then(function(cat){
 			$scope.category = cat;
+			var titleText = $scope.category.title + " | Aries Automotive Products";
+			$rootScope.titleservice = TitleService;
+			$rootScope.titleservice.set(titleText);
 		});
 
 		var page = $scope.page;
@@ -28,7 +31,7 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 						$scope.parts.unshift(p);
 					};
 				}
-				
+
 			});
 			page--;
 		}

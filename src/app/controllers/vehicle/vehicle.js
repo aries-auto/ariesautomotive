@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams){
-	
+angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', 'TitleService', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, TitleService){
+
 	$scope.vehicle = LookupService.get();
 	$scope.years = [];
 	$scope.makes = [];
@@ -20,6 +20,15 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 	if($location.search().count !== undefined && $location.search().count !== null ){
 		$scope.pagination.count = parseInt($location.search().count,10);
 	}
+
+	if($rootScope.full_vehicle === null || $rootScope.full_vehicle === undefined || $rootScope.full_vehicle === '') {
+		var titleText = "Vehicle Search - Aries Automotive Products."
+	} else {
+		var titleText = "Vehicle Search - Aries Automotive Products for " + $rootScope.full_vehicle;
+	}
+
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);
@@ -86,7 +95,7 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 			return str;
 		}
 		str = $scope.vehicle.base.year + ' ' + $scope.vehicle.base.make.trim() + ' ' + $scope.vehicle.base.model.trim();
-		
+
 		if($scope.vehicle.submodel !== undefined && $scope.vehicle.submodel !== ''){
 			str += ' ' + $scope.vehicle.submodel.trim();
 		}
@@ -117,7 +126,7 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 
 
 	var i;
-	
+
 	if($scope.vehicle === null && $stateParams !== {}){
 		$scope.vehicle = {
 			base:{
@@ -162,12 +171,12 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 					confs = $stateParams.configs.split('/');
 				}
 				angular.forEach(data.available_configurations, function(conf, i){
-					
+
 					for (i = 0; i < confs.length; i++) {
 						var c = confs[i];
 						if (conf.value === c){
 							$scope.vehicle.configurations.push({
-								key: conf.key, 
+								key: conf.key,
 								value: conf.value
 							});
 						}
@@ -213,7 +222,7 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 			$scope.err = err;
 		});
 	}
-	
+
 
 	CategoryService.GetParents().then(function(data){
 		$scope.categories = [];

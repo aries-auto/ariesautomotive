@@ -1,8 +1,12 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('MainController', ['$scope', 'TestimonialService', 'PartService' , function($scope, TestimonialService, PartService){
+angular.module('ariesautomotive').controller('MainController', ['$scope', 'TestimonialService', 'PartService', '$rootScope', 'TitleService', function($scope, TestimonialService, PartService, $rootScope, TitleService){
   $scope.testimonials = [];
   $scope.featuredProducts = [];
+
+  var titleText = "Aries Automotive - The Best in Truck and Jeep Accessories";
+  $rootScope.titleservice = TitleService;
+  $rootScope.titleservice.set(titleText);
 
   TestimonialService.GetRandom({count: 2, randomize: true}).then(function(testimonials){
     $scope.testimonials = testimonials;
@@ -18,4 +22,5 @@ angular.module('ariesautomotive').controller('MainController', ['$scope', 'Testi
   $scope.carouselNext = function(){
   	$('#hero-image-carousel').carousel('next');
   };
+
 }]);
