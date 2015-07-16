@@ -163,12 +163,6 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('sitemap_index',{
-        url: '/sitemap_index.xml'
-      }).state('sitemap',{
-        url: '/sitemap.xml'
-      }).state('image_sitemap',{
-        url: '/image_sitemap.xml'
       });
     $urlRouterProvider.otherwise('/');
   	$interpolateProvider.startSymbol('[[');
