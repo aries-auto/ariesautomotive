@@ -30,5 +30,7 @@ handlers:
   static_dir: dist/styles
 - url: /views
   static_dir: dist/views
+- url: /sitemap
+  static_dir: src
 - url: /.*
   script: _go_app
