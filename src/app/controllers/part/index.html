@@ -1,7 +1,10 @@
 <div class="part-container" ng-cloak>
-							<div ng-class="litUp === true ? 'lightedBox' : 'lightbox'" ng-click="toggleInstallSheet()">
-								<iframe src="[[getInstallSheet()]]" class="lightboxFrame"></iframe>
-							</div>
+	<div ng-class="litUp === true ? 'lightedBox' : 'lightbox'" ng-click="toggleInstallSheet()">
+		<iframe src="[[getInstallSheet()]]" class="lightboxFrame"></iframe>
+	</div>
+	<div ng-if="litUpVideo" ng-class="litUpVideo === true ? 'lightedBox' : 'lightbox'" ng-click="toggleVideoLightbox()">
+		<div class="ytVideoWrapper videoBox" ng-bind-html="renderYouTube(vid)"></div>
+	</div>
 
 	<div class="product-info container-fluid">
 		<div class="container">
@@ -250,9 +253,12 @@
 
 			<div class="video-container col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="part.videos.length > 0">
 				<h3>VIDEOS</h3>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 videoDiv" ng-if="vid.channels.length > 0" ng-repeat="vid in part.videos">
+				<!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 videoDiv" ng-if="vid.channels.length > 0" ng-repeat="vid in part.videos">
 					<div class="ytVideoWrapper" ng-bind-html="renderYouTube(vid)"></div>
-				</div>
+				</div> -->
+				<div class="install-sheet" ng-click="toggleVideoLightbox(vid)" ng-if="vid.channels.length > 0" ng-repeat="vid in part.videos">
+					<a><img src="[[vid.thumbnail]]" class="videoThumbnail"/></a>
+				</div>	
 			</div>
 
 

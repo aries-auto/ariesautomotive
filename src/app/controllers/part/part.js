@@ -5,6 +5,8 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
 	$scope.litUp = false;
+	$scope.litUpVideo= false;
+
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		PartService.GetPart($stateParams.id).then(function(part){
 			$scope.part = part;
@@ -110,6 +112,10 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	};
 	$scope.toggleInstallSheet = function(){
 		$scope.litUp = !$scope.litUp;
+	}
+	$scope.toggleVideoLightbox = function(v){
+		$scope.vid = v;
+		$scope.litUpVideo = !$scope.litUpVideo;
 	}
 	$scope.getInstallVideo = function(){
 		if($scope.part === undefined || $scope.part.videos === undefined){
