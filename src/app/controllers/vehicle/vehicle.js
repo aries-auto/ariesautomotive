@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams){
-	
+angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', 'TitleService', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, TitleService){
+
 	$scope.vehicle = {};
 	$scope.collections = [];
 	$scope.years = [];
@@ -10,6 +10,15 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 	$scope.inquiry = {};
 	$scope.inquiry_success = false;
 	$scope.qualified = false;
+
+	if($rootScope.full_vehicle === null || $rootScope.full_vehicle === undefined || $rootScope.full_vehicle === '') {
+		var titleText = "Vehicle Search - Aries Automotive Products."
+	} else {
+		var titleText = "Vehicle Search - Aries Automotive Products for " + $rootScope.full_vehicle;
+	}
+
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
 
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);
@@ -63,8 +72,9 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 		if($scope.vehicle === null || $scope.vehicle.year === null || $scope.vehicle.make === null || $scope.vehicle.model === null){
 			return str;
 		}
+
 		str = $scope.vehicle.year + ' ' + $scope.vehicle.make.trim() + ' ' + $scope.vehicle.model.trim();
-		
+
 		if($scope.vehicle.style !== undefined && $scope.vehicle.style !== ''){
 			str += ' ' + $scope.vehicle.style.trim();
 		}
@@ -136,7 +146,7 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 				$scope.err = err;
 			});
 		}
-	}else {
+	} else {
 		if ($scope.vehicle !== null){
 			$scope.qualified = true;
 		}

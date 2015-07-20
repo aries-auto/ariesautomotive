@@ -30,5 +30,8 @@ handlers:
   static_dir: dist/styles
 - url: /views
   static_dir: dist/views
+- url: /(.*\.(xml))$
+  static_files: dist/\1
+  upload: dist/.*\.(xml)$
 - url: /.*
   script: _go_app

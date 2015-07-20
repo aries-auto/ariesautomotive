@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll' , function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll){
+angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', 'TitleService', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope, TitleService){
 	$scope.category = {};
 	$scope.loadingMore = false;
 	$scope.parts = []
@@ -9,7 +9,25 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 		CategoryService.GetCategory($stateParams.id).then(function(cat){
 			$scope.category = cat;
 			$scope.parts = $scope.category.product_listing.parts;
+			var titleText = $scope.category.title + " | Aries Automotive Products";
+			$rootScope.titleservice = TitleService;
+			$rootScope.titleservice.set(titleText);
 		});
+
+		var page = $scope.page;
+		while (page > 0){
+			CategoryService.parts($stateParams.id, page, $scope.count).then(function(data){
+				$scope.category.product_listing = data;
+				if(data.parts !== undefined && data.parts !== null){
+					for (var i = 0; i < data.parts.length; i++) {
+						var p = data.parts[i];
+						$scope.parts.unshift(p);
+					};
+				}
+
+			});
+			page--;
+		}
 	}
 
 	$scope.renderHTML = function(content){

@@ -1,12 +1,19 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', function($scope, PartService, $stateParams, $sce, AppConfig){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', 'TitleService', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, TitleService){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
+	$scope.litUp = false;
+	$scope.litUpVideo= false;
+
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		PartService.GetPart($stateParams.id).then(function(part){
 			$scope.part = part;
+
+			var titleText = "Aries Automotive - " + $scope.part.short_description + " - " + $scope.part.oldPartNumber;
+			$rootScope.titleservice = TitleService;
+			$rootScope.titleservice.set(titleText);
 
 			var exists = [];
 			var str = '';
@@ -101,8 +108,15 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === null || $scope.part.install_sheet === null){
 			return '';
 		}
-		return $scope.part.install_sheet.Scheme +'://'+$scope.part.install_sheet.Host+$scope.part.install_sheet.Path;
+		return $sce.trustAsResourceUrl($scope.part.install_sheet.Scheme +'://'+$scope.part.install_sheet.Host+$scope.part.install_sheet.Path);
 	};
+	$scope.toggleInstallSheet = function(){
+		$scope.litUp = !$scope.litUp;
+	}
+	$scope.toggleVideoLightbox = function(v){
+		$scope.vid = v;
+		$scope.litUpVideo = !$scope.litUpVideo;
+	}
 	$scope.getInstallVideo = function(){
 		if($scope.part === undefined || $scope.part.videos === undefined){
 			return '';
@@ -131,16 +145,16 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.ShareFacebook = function(){
 		if($scope.part === undefined){
 			return '';
-		}		
+		}
 		var facebookURL = "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber + "&_rdr";
 		window.$windowScope = $scope;
 		window.open(facebookURL, "Share Aries Automotive", "width=500, height=500");
-	
+
 	};
 	$scope.ShareTwitter = function(){
 		if($scope.part === undefined){
 			return '';
-		}			
+		}
 		var pageURL = "http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber;
 		var tweetText = $scope.part.short_description + " - " + $scope.part.oldPartNumber;
 		var twitterURL = "https://twitter.com/intent/tweet?text=" + tweetText + "&url=" + pageURL + "&via=ariesautomotive&original_referer=" + pageURL;

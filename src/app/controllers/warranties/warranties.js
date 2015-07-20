@@ -1,13 +1,17 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', function($scope, WarrantyService, GeographyService, PartService){
+angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', '$rootScope', 'TitleService', function($scope, WarrantyService, GeographyService, PartService, $rootScope, TitleService){
 	$scope.message = "Click this button:";
 	$scope.partConfirm = false;
 	$scope.warranty = {};
 	$scope.warranty.contact = {};
 
 	$scope.states = {};
-	
+
+	var titleText = "Warranty Information - Waranties for Aries Automotive Products.";
+	$rootScope.titleservice = TitleService;
+	$rootScope.titleservice.set(titleText);
+
 	$scope.updateStates = function(){
 		$scope.states = this.form.country.states;
 		$scope.warranty.contact.country = this.form.country.country;
