@@ -4,7 +4,6 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
-	$scope.litUp = false;
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		PartService.GetPart($stateParams.id).then(function(part){
 			$scope.part = part;
@@ -108,9 +107,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		return $sce.trustAsResourceUrl($scope.part.install_sheet.Scheme +'://'+$scope.part.install_sheet.Host+$scope.part.install_sheet.Path);
 	};
-	$scope.toggleInstallSheet = function(){
-		$scope.litUp = !$scope.litUp;
-	}
+
 	$scope.getInstallVideo = function(){
 		if($scope.part === undefined || $scope.part.videos === undefined){
 			return '';
