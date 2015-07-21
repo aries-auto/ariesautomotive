@@ -127,7 +127,7 @@ body{
 	button[type=submit].red-transparent-button{
 		color: $altRed;
 		border:1px solid $altRed;
-		
+
 		&:hover, &:focus, &:disabled{
 			color:$headerColor;
 			border-color: $headerColor;
@@ -546,7 +546,7 @@ body{
 				line-height: 55px;
 				height:55px;
 			}
-			.navbar-header{ 
+			.navbar-header{
 				height:85px;
 				.navbar-brand {
 					padding: 1px 0;
@@ -557,9 +557,9 @@ body{
 				}
 			}
 			#navbarCollapse {
-				
+
 				.navbar-nav {
-				
+
 					a.call-link {
 						font-size: 16px;
 						height:85px;
