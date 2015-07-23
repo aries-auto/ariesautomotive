@@ -32,6 +32,10 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
             timeout: 500,
             maximumAge: 500
     };
+	var centerUS = {
+		latitude: 38.8833,
+		longitude: 77.0167
+	};
 
     var plotPosition = function(pos){
         if(pos.coords !== undefined && pos.coords !== null){
@@ -44,9 +48,15 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
         if ($scope.position === undefined){
             $rootScope.$broadcast('error', 'Failed to retrieve your location');
         }
+
+		$scope.map.center = centerUS;
+		$scope.map.show = true;
+        $scope.map.refresh = true;
+		console.log('failed position');
     };
 
     var updateLocations = function(){
+		console.log('updating locations');
         $scope.coordinates.latitude = $scope.position.coords.latitude;
         $scope.coordinates.longitude = $scope.position.coords.longitude;
         BuyService.local($scope.position.coords).then(function(data){
@@ -69,17 +79,23 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
         $scope.map.refresh = true;
         updateLocations();
     });
+	$scope.$watchCollection('map', function(){
+		console.log($scope.map);
+	});
 
     GoogleMapApi.then(function(){
-        if(Modernizr.geolocation){
+		if (Modernizr.geolocation) {
             var pos = localStorage.get('position');
             if (pos === undefined || pos === null || pos.coords === undefined){
                 navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
                 navigator.geolocation.watchPosition(plotPosition, failedPosition, geoOptions);
-            }else{
-                $scope.position = pos;
+				return;
             }
-        }
+
+            $scope.position = pos;
+			return;
+		}
     });
+
 
 }]);

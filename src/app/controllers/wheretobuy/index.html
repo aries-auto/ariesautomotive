@@ -1,9 +1,13 @@
 <div class="container">
-    <h1>Buy Local Mother Fucker! [[ locations.length ]]</h1>
+    <h1>Buy Local</h1>
 
     <div class="row">
         <div class="angular-google-map-container map-box">
-            <img ng-if="!map.show" src="http://winefolly.wpengine.netdna-cdn.com/wp-content/uploads/2012/06/pulp-fiction.jpg-1280%C3%971024-Image.jpeg" alt="">
+            <div ng-if="!map.show && map.show !== true">
+                <h1>Map Not Loading</h1>
+                <span>[[ map.show ]]</span>
+            </div>
+
             <ui-gmap-google-map ng-if="map.show" style="top:80px" class="col-md-12" center="map.center"
                                 control="gMap"
                                 zoom="map.zoom"
@@ -27,7 +31,7 @@
                 <span itemprop="addressLocality">[[ loc.city ]]</span>,
                 <span itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
                 <span itemprop="postalCode">[[ loc.postalCode ]]</span>
-                <span itemprop="addressCountry">[[ loc.country.country ]]</span> 
+                <span itemprop="addressCountry">[[ loc.country.country ]]</span>
             </div>
         </div>
     </div>
