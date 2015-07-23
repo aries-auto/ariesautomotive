@@ -9,7 +9,7 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 		CategoryService.GetCategory($stateParams.id).then(function(cat){
 			$scope.category = cat;
 			$scope.parts = $scope.category.product_listing.parts;
-			var titleText = $scope.category.title + " | Aries Automotive Products";
+			var titleText = $scope.category.title + " | ARIES Automotive Products";
 			$rootScope.titleservice = TitleService;
 			$rootScope.titleservice.set(titleText);
 		});

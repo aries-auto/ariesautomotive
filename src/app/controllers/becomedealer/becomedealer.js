@@ -4,7 +4,7 @@ angular.module('ariesautomotive').controller('BecomeDealerController', ['$scope'
 	$scope.contact = {};
 	$scope.message = "";
 
-	var titleText = "Aries Automotive - Become an Aries Automotive dealer";
+	var titleText = "ARIES Automotive - Become an ARIES Automotive dealer";
 	$rootScope.titleservice = TitleService;
 	$rootScope.titleservice.set(titleText);
 

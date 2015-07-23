@@ -8,7 +8,7 @@ angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope',
 
 	$scope.states = {};
 
-	var titleText = "Warranty Information - Waranties for Aries Automotive Products.";
+	var titleText = "Warranty Information - Waranties for ARIES Automotive Products.";
 	$rootScope.titleservice = TitleService;
 	$rootScope.titleservice.set(titleText);
 

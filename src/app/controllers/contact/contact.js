@@ -4,7 +4,7 @@ angular.module('ariesautomotive').controller('ContactController', ['$scope', 'Co
 	function($scope, ContactService, BecomeDealerService, GeographyService, $rootScope, TitleService){
 	$scope.formData = {'sendEmail': true};
 
-	var titleText = "Contact Us | Conctact Resources for Aries Automotive";
+	var titleText = "Contact Us | Conctact Resources for ARIES Automotive";
 	$rootScope.titleservice = TitleService;
 	$rootScope.titleservice.set(titleText);
 

@@ -4,7 +4,7 @@ angular.module('ariesautomotive').controller('MainController', ['$scope', 'Testi
   $scope.testimonials = [];
   $scope.featuredProducts = [];
 
-  var titleText = "Aries Automotive - The Best in Truck and Jeep Accessories";
+  var titleText = "ARIES Automotive - The Best in Truck and Jeep Accessories";
   $rootScope.titleservice = TitleService;
   $rootScope.titleservice.set(titleText);
 

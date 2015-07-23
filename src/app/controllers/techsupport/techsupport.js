@@ -7,7 +7,7 @@ angular.module('ariesautomotive').controller('TechSupportController', ['$scope',
 	$scope.message = "";
 	$scope.dateMessage = "";
 
-	var titleText = "Technical Support - Aries Automotive";
+	var titleText = "Technical Support - ARIES Automotive";
 	$rootScope.titleservice = TitleService;
 	$rootScope.titleservice.set(titleText);
 

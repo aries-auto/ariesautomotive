@@ -5,7 +5,7 @@ angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', '
 	$scope.categories = [];
 	$scope.applicationGuides = {};
 
-	var titleText = "App Guides | Application Guides for Aries Automotive accessories.";
+	var titleText = "App Guides | Application Guides for ARIES Automotive accessories.";
 	$rootScope.titleservice = TitleService;
 	$rootScope.titleservice.set(titleText);
 
@@ -15,7 +15,7 @@ angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', '
 
 		//get unique cat ids
 		angular.forEach($scope.applicationGuides, function(v,k){
-			v.category.title = (v.category.title === '') ? 'General Aries Applications' : v.category.title;
+			v.category.title = (v.category.title === '') ? 'General ARIES Applications' : v.category.title;
 			if($scope.categories.indexOf(v.category.title) === -1){
 				$scope.categories.push(v.category.title);
 			}

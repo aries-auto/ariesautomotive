@@ -12,9 +12,9 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 	$scope.qualified = false;
 
 	if($rootScope.full_vehicle === null || $rootScope.full_vehicle === undefined || $rootScope.full_vehicle === '') {
-		var titleText = "Vehicle Search - Aries Automotive Products."
+		var titleText = "Vehicle Search - ARIES Automotive Products."
 	} else {
-		var titleText = "Vehicle Search - Aries Automotive Products for " + $rootScope.full_vehicle;
+		var titleText = "Vehicle Search - ARIES Automotive Products for " + $rootScope.full_vehicle;
 	}
 
 	$rootScope.titleservice = TitleService;

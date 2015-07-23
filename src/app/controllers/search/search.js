@@ -11,7 +11,7 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 	var page = 1;
 	var count = 24;
 
-	var titleText = "Search Results - Aries Automotive";
+	var titleText = "Search Results - ARIES Automotive";
 	$rootScope.titleservice = TitleService;
 	$rootScope.titleservice.set(titleText);
 
