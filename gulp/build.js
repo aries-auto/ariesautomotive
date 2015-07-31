@@ -90,8 +90,13 @@ gulp.task('sitemap', function () {
     .pipe(gulp.dest(paths.dist + '/'));
 });
 
+gulp.task('googleverification', function () {
+  return gulp.src(paths.src + '/**/google73134e511c5bcd8d.html')
+    .pipe(gulp.dest(paths.dist + '/'));
+});
+
 gulp.task('clean', function (done) {
   $.del([paths.dist + '/', paths.tmp + '/'], done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc', 'sitemap']);
+gulp.task('build', ['html', 'images', 'fonts', 'misc', 'sitemap', 'googleverification']);
