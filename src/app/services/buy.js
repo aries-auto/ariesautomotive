@@ -2,16 +2,55 @@
 
 angular.module('ariesautomotive').factory('BuyService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 	return {
-		local: function(coords){
+		local: function(coords, distance, skip, count){
+			var def = $q.defer();
+			var d = distance || 0;
+			var s = skip || 0;
+			var c = count || 500;
+			$http({
+				method: 'get',
+				url: AppConfig.InternalURL + '/dealers/local',
+				params: {
+					'key': AppConfig.APIKEY,
+					'latlng': coords.latitude + ',' + coords.longitude,
+					'distance': d,
+					'skip': s,
+					'count': c
+				},
+				responseType: 'json'
+			}).success(def.resolve).error(def.reject);
+			return def.promise;
+		},
+		bounds: function(center, ne, sw, skip, count, sort){
+			var def = $q.defer();
+			var s = skip || 0;
+			var c = count || 500;
+			$http({
+				method: 'get',
+				url: AppConfig.InternalURL + '/dealers/local/bounds',
+				params: {
+					'key': AppConfig.APIKEY,
+					'center': center,
+					'ne': ne,
+					'sw': sw,
+					'skip': s,
+					'sort': sort,
+					'count': c
+				},
+				responseType: 'json'
+			}).success(def.resolve).error(def.reject);
+			return def.promise;
+		},
+
+		regions: function(){
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/dealers/local',
+				url: AppConfig.InternalURL + '/dealers/local/regions',
 				params: {
-					'key': AppConfig.APIKEY,
-					'latlng': coords.latitude + ',' + coords.longitude
+					'key': AppConfig.APIKEY
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}
