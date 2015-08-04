@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','LocalStorageModule', 'uiGmapgoogle-maps'])
-  .config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
+angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps'])
+  .config(function($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
     var lookupState = {
       templateUrl: 'app/controllers/lookup/index.html',
       controller: 'LookupController'
@@ -10,197 +10,197 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
     $stateProvider
       .state('home', {
         url: '/',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/main/index.html',
             controller: 'MainController'
           },
-          'lookup':lookupState
+          'lookup': lookupState
         }
       })
-      .state('aboutus',{
+      .state('aboutus', {
         url: '/about',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/aboutus/index.html',
             controller: 'AboutUsController'
           },
-          'lookup':lookupState
+          'lookup': lookupState
         }
       })
-      .state('part',{
+      .state('part', {
         url: '/part/:id',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/part/index.html',
             controller: 'PartController'
           },
           'lookup': lookupState
         }
-      }).state('category',{
+      }).state('category', {
         url: '/category/:id',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/category/index.html',
             controller: 'CategoryController'
           },
           'lookup': lookupState
         }
-      }).state('appguides',{
+      }).state('appguides', {
         url: '/appguides',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/appguides/index.html',
             controller: 'AppGuidesController'
           },
           'lookup': lookupState
         }
-      }).state('appguide',{
+      }).state('appguide', {
         url: '/appguides/:collection',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/appguides/appguide.html',
             controller: 'AppGuideController'
           },
           'lookup': lookupState
         }
       })
-      .state('becomedealer',{
+      .state('becomedealer', {
         url: '/becomedealer',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/becomedealer/index.html',
             controller: 'BecomeDealerController'
           },
           'lookup': lookupState
         }
-      }).state('contact',{
+      }).state('contact', {
         url: '/contact',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/contact/index.html',
             controller: 'ContactController'
           },
           'lookup': lookupState
         }
-      }).state('search',{
+      }).state('search', {
         url: '/search/:term',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/search/index.html',
             controller: 'SearchController'
           },
           'lookup': lookupState
         }
-      }).state('techsupport',{
+      }).state('techsupport', {
         url: '/techsupport',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/techsupport/index.html',
             controller: 'TechSupportController'
           },
           'lookup': lookupState
         }
-      }).state('terms',{
+      }).state('terms', {
         url: '/terms',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/terms/index.html',
             controller: 'TermsController'
           },
           'lookup': lookupState
         }
-      }).state('style_vehicle',{
+      }).state('style_vehicle', {
         url: '/vehicle/:collection/:year/:make/:model/{style:.*}',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/vehicle/index.html',
             controller: 'VehicleController'
           },
           'lookup': lookupState
         }
-      }).state('base_vehicle',{
+      }).state('base_vehicle', {
         url: '/vehicle/:collection/:year/:make/:model',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/vehicle/index.html',
             controller: 'VehicleController'
           },
           'lookup': lookupState
         }
-      }).state('make_vehicle',{
+      }).state('make_vehicle', {
         url: '/vehicle/:collection/:year/:make',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/vehicle/index.html',
             controller: 'VehicleController'
           },
           'lookup': lookupState
         }
-      }).state('year_vehicle',{
+      }).state('year_vehicle', {
         url: '/vehicle/:collection/:year',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/vehicle/index.html',
             controller: 'VehicleController'
           },
           'lookup': lookupState
         }
-      }).state('col_vehicle',{
+      }).state('col_vehicle', {
         url: '/vehicle/:collection',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/vehicle/index.html',
             controller: 'VehicleController'
           },
           'lookup': lookupState
         }
-      }).state('empty_vehicle',{
+      }).state('empty_vehicle', {
         url: '/vehicle',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/vehicle/index.html',
             controller: 'VehicleController'
           },
           'lookup': lookupState
         }
-      }).state('warranties',{
+      }).state('warranties', {
         url: '/warranties',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/warranties/index.html',
             controller: 'WarrantiesController'
           },
           'lookup': lookupState
         }
-    }).state('where_to_buy',{
+      }).state('where_to_buy', {
         url: '/buy',
-        views:{
-          'body':{
+        views: {
+          'body': {
             templateUrl: 'app/controllers/wheretobuy/index.html',
             controller: 'BuyController'
           },
           'lookup': lookupState
         }
-    }).state('where_to_buy_linked',{
-          url: '/buy/:location',
-          views:{
-            'body':{
-              templateUrl: 'app/controllers/wheretobuy/index.html',
-              controller: 'BuyController'
-            },
-            'lookup': lookupState
-          }
-        });
+      }).state('where_to_buy_linked', {
+        url: '/buy/:location',
+        views: {
+          'body': {
+            templateUrl: 'app/controllers/wheretobuy/index.html',
+            controller: 'BuyController'
+          },
+          'lookup': lookupState
+        }
+      });
     $urlRouterProvider.otherwise('/');
-  	$interpolateProvider.startSymbol('[[');
-  	$interpolateProvider.endSymbol(']]');
-  	$locationProvider.html5Mode(true);
-  	localStorageServiceProvider.setPrefix('ariesauto');
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+    $locationProvider.html5Mode(true);
+    localStorageServiceProvider.setPrefix('ariesauto');
     uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA',
-        v: '3.17',
-        libraries: 'drawing, geometry, palces, visualization'
+      key: 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA',
+      v: '3.17',
+      libraries: 'drawing, geometry, palces, visualization'
     });
 
-});
+  });

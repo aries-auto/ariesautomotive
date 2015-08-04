@@ -12,7 +12,7 @@ angular.module('ariesautomotive').factory('TestimonialService', ['$http','$q','A
 			if(params.count !== null && params.count !== undefined){
 				url += '&count='+params.count.toString();
 			}
-			
+
 			if(params.randomize !== null && params.randomize !== undefined){
 				url += '&randomize=' + params.randomize.toString();
 			}

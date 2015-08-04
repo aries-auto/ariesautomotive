@@ -2,6 +2,8 @@
 
 var gulp = require('gulp');
 
+var path  = require('path');
+
 var paths = gulp.paths;
 
 var $ = require('gulp-load-plugins')({
@@ -24,7 +26,7 @@ gulp.task('partials', function () {
     .pipe(gulp.dest(paths.tmp + '/partials/'));
 });
 
-gulp.task('html', ['inject', 'partials'], function () {
+gulp.task('html', ['config:prod','inject', 'partials'], function () {
   var partialsInjectFile = gulp.src(paths.tmp + '/partials/templateCacheHtml.js', { read: false });
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
