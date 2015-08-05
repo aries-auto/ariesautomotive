@@ -1,5 +1,12 @@
 <div class="container full-width">
-    <h1>Buy Local</h1>
+    <div class="row header-row">
+        <div class="col-md-3">
+            <h1>Buy Local</h1>
+        </div>
+        <div class="col-md-9 search-form row">
+            <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
+        </div>
+    </div>
 
     <div id="map" class="angular-google-map-container map-box">
         <ui-gmap-google-map ng-if="map.show" style="top:80px" class="col-md-12" center="map.center"
@@ -52,6 +59,10 @@
                 <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
                 <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
                 <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
+
+                <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
+                    [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
+                </a>
 
                 <div class="actions">
                     <a href="tel:[[ loc.phone ]]">

@@ -10,23 +10,23 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
-gulp.task('config:dev', ['styles'],function(){
+gulp.task('config:dev', ['inject','styles'],function(){
     gulp.src(paths.src +'/app/constants/dev.json')
       .pipe($.ngConstant({
           name: 'AppConfig',
-          dest: 'config.js',
           templatePath: path.join(__dirname, '../src/app/constants', 'config.template.ejs')
       }))
+      .pipe($.rename('config.js'))
       .pipe(gulp.dest(paths.src + '/app/constants'));
 });
 
-gulp.task('config:prod', ['styles'],function(){
+gulp.task('config:prod', ['inject','styles'],function(){
     gulp.src(paths.src +'/app/constants/prod.json')
       .pipe($.ngConstant({
           name: 'AppConfig',
-          dest: 'config.js',
           templatePath: path.join(__dirname, '../src/app/constants', 'config.template.ejs')
       }))
+      .pipe($.rename('config.js'))
       .pipe(gulp.dest(paths.src + '/app/constants'));
 });
 

@@ -23,6 +23,8 @@
     "angular": false,
     "Modernizr": false,
     "navigator": false,
+    "document": false,
+    "google": false, // google maps
     // Angular Mocks
     "inject": false,
     // JASMINE

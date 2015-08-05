@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', function($scope, $rootScope, $stateParams, $anchorScroll, localStorage, BuyService, GoogleMapApi){
+angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', function($scope, $rootScope, $stateParams, $anchorScroll, ngDialog, localStorage, BuyService, GoogleMapApi){
 
 	var lastBounds = {};
 	var polyClick = function(gPoly){
@@ -68,15 +68,36 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 
     var plotPosition = function(pos){
         if(pos.coords !== undefined && pos.coords !== null){
-            $scope.position = pos;
+            $scope.position = {
+				coords: {
+					latitude: pos.coords.latitude,
+					longitude: pos.coords.longitude
+				}
+			};
+			$scope.map.center = $scope.coordinates = {
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude
+			};
+			$scope.map.zoom = 10;
+			$scope.$apply();
             localStorage.set('position', pos);
-            updateLocations();
         }
     };
     var failedPosition = function(){
         if ($scope.position === undefined){
             $rootScope.$broadcast('error', 'Failed to retrieve your location');
         }
+
+		ngDialog.open({
+			template: 'app/controllers/wheretobuy/location-form.html',
+			scope: $scope,
+			controller: ['$scope',function($scope){
+				$scope.lookupLocation = function(){
+					var val = document.getElementById('autocomplete').value;
+					$scope.$parent.lookupLocation(val);
+				};
+			}]
+		});
 
 		$scope.map.center = {
 			latitude: 40.125496,
@@ -106,6 +127,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
     };
 
 	$scope.locations = [];
+	$rootScope.search = '';
     $scope.coordinates = {};
     $scope.map = {
         markerIcon: 'http://www.curtmfg.com/Content/img/mapflag.png',
@@ -157,6 +179,23 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$anchorScroll('#map');
 	};
 
+	$scope.lookupLocation = function(val){
+		$scope.geocoder.geocode({'address': val},function(results, status){
+			if(status !== google.maps.GeocoderStatus.OK){
+				$rootScope.$broadcast('error', 'Failed to find location');
+				return;
+			}
+			ngDialog.closeAll();
+			$scope.map.center = {
+				latitude: results[0].geometry.location.lat(),
+				longitude: results[0].geometry.location.lng()
+			};
+			$scope.map.zoom = 10;
+			$scope.map.refresh = true;
+			$scope.$apply();
+		});
+	};
+
     $scope.$watch('position',function(){
         if ($scope.position === undefined || $scope.position.coords === undefined || $scope.position.coords === null){
             return;
@@ -166,8 +205,34 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
         updateLocations();
     });
 
+	$scope.$on('ngDialog.opened',function(){
+		$scope.autocomplete = new google.maps.places.Autocomplete(
+			(document.getElementById('autocomplete')),
+			{
+				types: ['geocode']
+			}
+		);
+	});
+
     GoogleMapApi.then(function(maps){
+		$scope.maps = maps;
 		$scope.geocoder = new maps.Geocoder();
+		var els = document.getElementsByClassName('autocomplete');
+		if(els.length > 0){
+			var comp = $scope.autocomplete = new maps.places.Autocomplete(
+				(els[0]),
+				{
+					types: ['geocode']
+				}
+			);
+			google.maps.event.addListener(comp, 'place_changed', function(){
+				var place = comp.getPlace();
+				if(place.formatted_address === undefined || place.formatted_address === ''){
+					return;
+				}
+				$scope.lookupLocation(place.formatted_address);
+			})
+		}
 		if($stateParams.location !== ''){
 			$scope.geocoder.geocode({'address': $stateParams.location},function(results, status){
 				if(status !== google.maps.GeocoderStatus.OK){
@@ -188,12 +253,11 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
             if (pos === undefined || pos === null || pos.coords === undefined){
 				var geoOptions = {
 			            enableHighAccuracy: true,
-			            timeout: 500,
+			            timeout: 10000,
 			            maximumAge: 500
 			    };
 
                 navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
-                navigator.geolocation.watchPosition(plotPosition, failedPosition, geoOptions);
 				return;
             }
 

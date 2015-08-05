@@ -15,7 +15,8 @@ angular.module('ariesautomotive').factory('BuyService', ['$http','$q','AppConfig
 					'latlng': coords.latitude + ',' + coords.longitude,
 					'distance': d,
 					'skip': s,
-					'count': c
+					'count': c,
+					'brand': 3,
 				},
 				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
@@ -35,7 +36,8 @@ angular.module('ariesautomotive').factory('BuyService', ['$http','$q','AppConfig
 					'sw': sw,
 					'skip': s,
 					'sort': sort,
-					'count': c
+					'count': c,
+					'brand': 3
 				},
 				responseType: 'json'
 			}).success(def.resolve).error(def.reject);

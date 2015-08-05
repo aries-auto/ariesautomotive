@@ -1,10 +1,26 @@
+$headerHeight: 40px;
+
+.header-row{
+    margin-top: 35px;
+    h1{
+        margin:0;
+        padding:0;
+        height:$headerHeight;
+    }
+    .search-form{
+        input{
+            height:$headerHeight;
+            width: 100%;
+        }
+    }
+}
 
 .map-box{
     width: 100%;
     margin: 0 auto 20px auto;
-    // padding: 20px 0 100px 0;
+    padding: 20px 0 20px 0;
     .angular-google-map-container{
-        height: 800px;
+        height: 400px;
     }
     > img{
         width: 100%;
@@ -49,8 +65,10 @@
 .text-locations{
     padding: 15px 0;
     > div{
+        position: relative;
         padding: 10px;
         margin: 10px;
+        min-height: 250px;
         border-bottom: 3px solid #57111a;
         span, a{
             font-size: 16px;
@@ -80,6 +98,8 @@
         }
 
         .actions{
+            position: absolute;
+            bottom: 15px;
             margin-top: 10px;
             a{
                 cursor: pointer;
@@ -90,6 +110,18 @@
                     vertical-align: middle;
                 }
             }
+        }
+    }
+}
+
+.pac-container{
+    z-index:10000;
+}
+
+@media(min-width: $screen-md-min){
+    .map-box {
+        .angular-google-map-container{
+            height:800px;
         }
     }
 }
