@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', function($scope, $rootScope, $stateParams, $anchorScroll, ngDialog, localStorage, BuyService, GoogleMapApi){
+angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function($scope, $rootScope, $stateParams, $anchorScroll, ngDialog, localStorage, BuyService, GoogleMapApi, isReady){
 
 	var lastBounds = {};
 	var polyClick = function(gPoly){
@@ -196,6 +196,36 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		});
 	};
 
+	$scope.loadDirections = function(end){
+		$scope.directions = {
+			end: end
+		};
+		ngDialog.open({
+			template: 'app/controllers/wheretobuy/directions-form.html',
+			scope: $scope,
+			controller: ['$scope',function($sc){
+				$sc.getDirections = function(){
+					$sc.$parent.directions.start = document.getElementById('directions-start').value || '';
+					$sc.$parent.getDirections();
+				};
+			}]
+		});
+	};
+
+	$scope.getDirections = function(){
+		ngDialog.closeAll();
+		var request = {
+			origin: $scope.directions.start,
+			destination: $scope.directions.end,
+			travelMode: $scope.maps.TravelMode.DRIVING
+		};
+		$scope.directionsService.route(request, function(response, status){
+			if(status === $scope.maps.DirectionsStatus.OK){
+				$scope.directionsDisplay.setDirections(response);
+			}
+		});
+	};
+
     $scope.$watch('position',function(){
         if ($scope.position === undefined || $scope.position.coords === undefined || $scope.position.coords === null){
             return;
@@ -206,8 +236,12 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
     });
 
 	$scope.$on('ngDialog.opened',function(){
+		var el = document.getElementById('autocomplete') || document.getElementById('directions-start');
+		if(el === undefined || el === null){
+			return;
+		}
 		$scope.autocomplete = new google.maps.places.Autocomplete(
-			(document.getElementById('autocomplete')),
+			(el),
 			{
 				types: ['geocode']
 			}
@@ -217,6 +251,14 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
     GoogleMapApi.then(function(maps){
 		$scope.maps = maps;
 		$scope.geocoder = new maps.Geocoder();
+		$scope.directionsService = new maps.DirectionsService();
+		isReady.promise(1).then(function(instances){
+			angular.forEach(instances, function(inst){
+				$scope.directionsDisplay = new maps.DirectionsRenderer();
+				$scope.directionsDisplay.setMap(inst.map);
+			});
+		});
+
 		var els = document.getElementsByClassName('autocomplete');
 		if(els.length > 0){
 			var comp = $scope.autocomplete = new maps.places.Autocomplete(
@@ -225,13 +267,13 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 					types: ['geocode']
 				}
 			);
-			google.maps.event.addListener(comp, 'place_changed', function(){
+			maps.event.addListener(comp, 'place_changed', function(){
 				var place = comp.getPlace();
 				if(place.formatted_address === undefined || place.formatted_address === ''){
 					return;
 				}
 				$scope.lookupLocation(place.formatted_address);
-			})
+			});
 		}
 		if($stateParams.location !== ''){
 			$scope.geocoder.geocode({'address': $stateParams.location},function(results, status){

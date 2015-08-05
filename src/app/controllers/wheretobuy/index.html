@@ -31,10 +31,6 @@
                                 <span class="glyphicon glyphicon-earphone"></span>
                                 [[ phone ]]
                             </a>
-                            <a href="#directions" class="pull-right">
-                                <span class="glyphicon glyphicon-th-list"></span>
-                                Directions
-                            </a>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -69,7 +65,7 @@
                         <span class="glyphicon glyphicon-earphone"></span>
                         [[ loc.phone ]]
                     </a>
-                    <a href="#directions">
+                    <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
                         <span class="glyphicon glyphicon-th-list"></span>
                         Directions
                     </a>
