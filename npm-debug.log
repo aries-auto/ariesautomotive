@@ -1,0 +1,215 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/brocseigneurie/.nvm/v0.10.32/bin/node',
+1 verbose cli   '/Users/brocseigneurie/.nvm/v0.10.32/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 warn package.json ariesautomotive@1.1.0-rc No README data
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive',
+6 verbose install   [ 'express-seojs',
+6 verbose install     'bower',
+6 verbose install     'browser-sync',
+6 verbose install     'chalk',
+6 verbose install     'connect-modrewrite',
+6 verbose install     'del',
+6 verbose install     'gulp',
+6 verbose install     'gulp-angular-filesort',
+6 verbose install     'gulp-angular-templatecache',
+6 verbose install     'gulp-autoprefixer',
+6 verbose install     'gulp-consolidate',
+6 verbose install     'gulp-csso',
+6 verbose install     'gulp-filter',
+6 verbose install     'gulp-flatten',
+6 verbose install     'gulp-imagemin',
+6 verbose install     'gulp-inject',
+6 verbose install     'gulp-jshint',
+6 verbose install     'gulp-karma',
+6 verbose install     'gulp-load-plugins',
+6 verbose install     'gulp-minify-html',
+6 verbose install     'gulp-ng-annotate',
+6 verbose install     'gulp-protractor',
+6 verbose install     'gulp-rename',
+6 verbose install     'gulp-replace',
+6 verbose install     'gulp-rev',
+6 verbose install     'gulp-rev-replace',
+6 verbose install     'gulp-sass',
+6 verbose install     'gulp-size',
+6 verbose install     'gulp-uglify',
+6 verbose install     'gulp-useref',
+6 verbose install     'http-proxy',
+6 verbose install     'jshint-stylish',
+6 verbose install     'karma-chrome-launcher',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'main-bower-files',
+6 verbose install     'protractor',
+6 verbose install     'qrcode-terminal',
+6 verbose install     'require-dir',
+6 verbose install     'uglify-save-license',
+6 verbose install     'wiredep',
+6 verbose install     'yo' ] ]
+7 info preinstall ariesautomotive@1.1.0-rc
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping express-seojs@0.0.5 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+10 verbose already installed skipping bower@^1.3.12 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+11 verbose already installed skipping browser-sync@~1.7.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+12 verbose already installed skipping chalk@~0.5.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+13 verbose already installed skipping connect-modrewrite@^0.7.11 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+14 verbose already installed skipping del@~0.1.3 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+15 verbose already installed skipping gulp@^3.8.11 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+16 verbose already installed skipping gulp-angular-filesort@~1.0.4 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+17 verbose already installed skipping gulp-angular-templatecache@~1.4.2 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+18 verbose already installed skipping gulp-autoprefixer@~2.0.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+19 verbose already installed skipping gulp-consolidate@~0.1.2 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+20 verbose already installed skipping gulp-csso@~0.2.9 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+21 verbose already installed skipping gulp-filter@~1.0.2 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+22 verbose already installed skipping gulp-flatten@~0.0.4 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+23 verbose already installed skipping gulp-imagemin@~2.0.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+24 verbose already installed skipping gulp-inject@~1.0.2 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+25 verbose already installed skipping gulp-jshint@~1.9.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+26 verbose already installed skipping gulp-karma@~0.0.4 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+27 verbose already installed skipping gulp-load-plugins@~0.7.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+28 verbose already installed skipping gulp-minify-html@~0.1.7 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+29 verbose already installed skipping gulp-ng-annotate@~0.5.2 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+30 verbose already installed skipping gulp-protractor@~0.0.11 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+31 verbose already installed skipping gulp-rename@~1.2.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+32 verbose already installed skipping gulp-replace@~0.5.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+33 verbose already installed skipping gulp-rev@~2.0.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+34 verbose already installed skipping gulp-rev-replace@~0.3.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+35 verbose already installed skipping gulp-sass@~1.1.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+36 verbose already installed skipping gulp-size@~1.1.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+37 verbose already installed skipping gulp-uglify@~1.0.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+38 verbose already installed skipping gulp-useref@~1.0.2 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+39 verbose already installed skipping http-proxy@~1.7.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+40 verbose already installed skipping jshint-stylish@~1.0.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+41 verbose already installed skipping karma-chrome-launcher@^0.1.7 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+42 verbose already installed skipping karma-jasmine@~0.3.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+43 verbose already installed skipping karma-phantomjs-launcher@~0.1.4 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+44 verbose already installed skipping main-bower-files@~2.4.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+45 verbose already installed skipping protractor@~1.4.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+46 verbose already installed skipping qrcode-terminal@~0.9.5 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+47 verbose already installed skipping require-dir@~0.1.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+48 verbose already installed skipping uglify-save-license@~0.4.1 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+49 verbose already installed skipping wiredep@~2.2.0 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+50 verbose already installed skipping yo@^1.4.6 /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+51 silly resolved []
+52 info build /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+53 verbose linkStuff [ false,
+53 verbose linkStuff   false,
+53 verbose linkStuff   false,
+53 verbose linkStuff   '/Users/brocseigneurie/dev/gocode/src/github.com/aries-auto' ]
+54 info linkStuff ariesautomotive@1.1.0-rc
+55 verbose linkBins ariesautomotive@1.1.0-rc
+56 verbose linkMans ariesautomotive@1.1.0-rc
+57 verbose rebuildBundles ariesautomotive@1.1.0-rc
+58 verbose rebuildBundles [ '.bin',
+58 verbose rebuildBundles   'bower',
+58 verbose rebuildBundles   'browser-sync',
+58 verbose rebuildBundles   'chalk',
+58 verbose rebuildBundles   'connect-modrewrite',
+58 verbose rebuildBundles   'del',
+58 verbose rebuildBundles   'express-seojs',
+58 verbose rebuildBundles   'gulp',
+58 verbose rebuildBundles   'gulp-angular-filesort',
+58 verbose rebuildBundles   'gulp-angular-templatecache',
+58 verbose rebuildBundles   'gulp-autoprefixer',
+58 verbose rebuildBundles   'gulp-consolidate',
+58 verbose rebuildBundles   'gulp-csso',
+58 verbose rebuildBundles   'gulp-filter',
+58 verbose rebuildBundles   'gulp-flatten',
+58 verbose rebuildBundles   'gulp-imagemin',
+58 verbose rebuildBundles   'gulp-inject',
+58 verbose rebuildBundles   'gulp-jshint',
+58 verbose rebuildBundles   'gulp-karma',
+58 verbose rebuildBundles   'gulp-load-plugins',
+58 verbose rebuildBundles   'gulp-minify-html',
+58 verbose rebuildBundles   'gulp-ng-annotate',
+58 verbose rebuildBundles   'gulp-protractor',
+58 verbose rebuildBundles   'gulp-rename',
+58 verbose rebuildBundles   'gulp-replace',
+58 verbose rebuildBundles   'gulp-rev',
+58 verbose rebuildBundles   'gulp-rev-replace',
+58 verbose rebuildBundles   'gulp-sass',
+58 verbose rebuildBundles   'gulp-size',
+58 verbose rebuildBundles   'gulp-uglify',
+58 verbose rebuildBundles   'gulp-useref',
+58 verbose rebuildBundles   'http-proxy',
+58 verbose rebuildBundles   'jasmine-core',
+58 verbose rebuildBundles   'jshint-stylish',
+58 verbose rebuildBundles   'karma',
+58 verbose rebuildBundles   'karma-chrome-launcher',
+58 verbose rebuildBundles   'karma-jasmine',
+58 verbose rebuildBundles   'karma-phantomjs-launcher',
+58 verbose rebuildBundles   'main-bower-files',
+58 verbose rebuildBundles   'protractor',
+58 verbose rebuildBundles   'qrcode-terminal',
+58 verbose rebuildBundles   'require-dir',
+58 verbose rebuildBundles   'uglify-save-license',
+58 verbose rebuildBundles   'wiredep',
+58 verbose rebuildBundles   'yo' ]
+59 verbose rebuild bundle /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules/jasmine-core
+60 info build /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules/jasmine-core
+61 info preinstall jasmine-core@2.3.4
+62 verbose linkStuff [ false,
+62 verbose linkStuff   false,
+62 verbose linkStuff   false,
+62 verbose linkStuff   '/Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules' ]
+63 info linkStuff jasmine-core@2.3.4
+64 verbose linkBins jasmine-core@2.3.4
+65 verbose linkMans jasmine-core@2.3.4
+66 verbose rebuildBundles jasmine-core@2.3.4
+67 info install jasmine-core@2.3.4
+68 info postinstall jasmine-core@2.3.4
+69 verbose rebuild bundle /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules/karma
+70 info build /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules/karma
+71 info preinstall karma@0.13.2
+72 verbose linkStuff [ false,
+72 verbose linkStuff   false,
+72 verbose linkStuff   false,
+72 verbose linkStuff   '/Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules' ]
+73 info linkStuff karma@0.13.2
+74 verbose linkBins karma@0.13.2
+75 verbose link bins [ { karma: './bin/karma' },
+75 verbose link bins   '/Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive/node_modules/.bin',
+75 verbose link bins   false ]
+76 verbose linkMans karma@0.13.2
+77 verbose rebuildBundles karma@0.13.2
+78 verbose rebuildBundles [ '.bin',
+78 verbose rebuildBundles   'bluebird',
+78 verbose rebuildBundles   'body-parser',
+78 verbose rebuildBundles   'chokidar',
+78 verbose rebuildBundles   'colors',
+78 verbose rebuildBundles   'connect',
+78 verbose rebuildBundles   'core-js',
+78 verbose rebuildBundles   'di',
+78 verbose rebuildBundles   'dom-serialize',
+78 verbose rebuildBundles   'expand-braces',
+78 verbose rebuildBundles   'glob',
+78 verbose rebuildBundles   'graceful-fs',
+78 verbose rebuildBundles   'http-proxy',
+78 verbose rebuildBundles   'lodash',
+78 verbose rebuildBundles   'log4js',
+78 verbose rebuildBundles   'memoizee',
+78 verbose rebuildBundles   'mime',
+78 verbose rebuildBundles   'minimatch',
+78 verbose rebuildBundles   'optimist',
+78 verbose rebuildBundles   'rimraf',
+78 verbose rebuildBundles   'socket.io',
+78 verbose rebuildBundles   'source-map',
+78 verbose rebuildBundles   'useragent' ]
+79 info install karma@0.13.2
+80 info postinstall karma@0.13.2
+81 info install ariesautomotive@1.1.0-rc
+82 info postinstall ariesautomotive@1.1.0-rc
+83 info prepublish ariesautomotive@1.1.0-rc
+84 error peerinvalid The package karma does not satisfy its siblings' peerDependencies requirements!
+84 error peerinvalid Peer gulp-karma@0.0.4 wants karma@>=0.10 <=0.13
+84 error peerinvalid Peer karma-phantomjs-launcher@0.1.4 wants karma@>=0.9
+85 error System Darwin 14.4.0
+86 error command "/Users/brocseigneurie/.nvm/v0.10.32/bin/node" "/Users/brocseigneurie/.nvm/v0.10.32/bin/npm" "install"
+87 error cwd /Users/brocseigneurie/dev/gocode/src/github.com/aries-auto/ariesautomotive
+88 error node -v v0.10.32
+89 error npm -v 1.4.28
+90 error code EPEERINVALID
+91 verbose exit [ 1, true ]
