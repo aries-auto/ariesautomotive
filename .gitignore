@@ -3,3 +3,4 @@ src/lib/
 .sass-cache/
 .tmp/
 dist/
+src/app/constants/config.js
