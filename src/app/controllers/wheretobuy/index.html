@@ -9,6 +9,10 @@
     </div>
 
     <div id="map" class="angular-google-map-container map-box">
+        <div ng-if="!map.show" class="loading-container">
+            <span us-spinner="{radius:30, width:8, length: 16}"></span>
+            <span class="message">Loading the map..</span>
+        </div>
         <ui-gmap-google-map ng-if="map.show" style="top:80px" class="col-md-12" center="map.center"
                             control="gMap"
                             zoom="map.zoom"

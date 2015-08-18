@@ -19,6 +19,17 @@ $headerHeight: 40px;
     width: 100%;
     margin: 0 auto 20px auto;
     padding: 20px 0 20px 0;
+
+    .loading-container{
+        position: relative;
+        height: auto;
+        text-align: center;
+        padding-top: 40%;
+        .message{
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
     .angular-google-map-container{
         height: 400px;
     }
@@ -120,6 +131,9 @@ $headerHeight: 40px;
 
 @media(min-width: $screen-md-min){
     .map-box {
+        .loading-container{
+            padding-top: 15%;
+        }
         .angular-google-map-container{
             height:800px;
         }
