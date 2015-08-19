@@ -22,6 +22,23 @@ angular.module('ariesautomotive').factory('BuyService', ['$http','$q','AppConfig
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
+		online: function(skip, count){
+			var def = $q.defer();
+			var s = skip || 0;
+			var c = count || 500;
+			$http({
+				method: 'get',
+				url: AppConfig.InternalURL + '/dealers/online',
+				params: {
+					'key': AppConfig.APIKEY,
+					'skip': s,
+					'count': c,
+					'brand': 3,
+				},
+				responseType: 'json'
+			}).success(def.resolve).error(def.reject);
+			return def.promise;
+		},
 		bounds: function(center, ne, sw, skip, count, sort){
 			var def = $q.defer();
 			var s = skip || 0;

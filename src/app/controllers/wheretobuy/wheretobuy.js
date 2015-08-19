@@ -308,5 +308,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		}
     });
 
+	BuyService.online(0, 100).then(function(res) {
+		$scope.online = res;
+	});
+
 
 }]);
