@@ -1,128 +1,127 @@
 <div class="container full-width">
 
     <div class="row header-row">
-        <div class="col-md-3">
-            <h1>Buy Online</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div ng-repeat="loc in online" class="col-md-4 col-sm-12 col-xs-12 text-locations">
-            <div itemscope itemtype="http://schema.org/PostalAddress">
-                <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
-                <span class="type">[[ loc.dealerType.label ]]</span>
-                <span class="address" itemprop="streetAddress">[[ loc.address ]]</span>
-                <span class="city" itemprop="addressLocality">[[ loc.city ]]</span>
-                <span>,</span>
-                <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
-                <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
-                <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
-
-                <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
-                    [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
-                </a>
-
-                <div class="actions">
-                    <a href="tel:[[ loc.phone ]]">
-                        <span class="glyphicon glyphicon-earphone"></span>
-                        [[ loc.phone ]]
+        <div class="col-md-5">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" ng-class="{ 'active' : display === 'local' }">
+                    <a href="#local" aria-controls="Buy local" role="tab" ng-click="changeDisplay('local', $event)" data-toggle="tab">
+                        Buy Local
                     </a>
-                    <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
-                        <span class="glyphicon glyphicon-th-list"></span>
-                        Directions
+                </li>
+                <li role="presentation" ng-class="{ 'active' : display === 'online' }">
+                    <a href="#online" aria-controls="Buy online" role="tab" ng-click="changeDisplay('online', $event)" data-toggle="tab">
+                        Buy Online
                     </a>
-                    <a ng-click="panTo(loc)">
-                        <span class="glyphicon glyphicon-map-marker"></span>
-                        View on Map
-                    </a>
-                </div>
-
-            </div>
+                </li>
+            </ul>
         </div>
-    </div>
-
-    <hr>
-
-    <div class="row header-row">
-        <div class="col-md-3">
-            <h1>Buy Local</h1>
-        </div>
-        <div class="col-md-9 search-form row">
+        <div class="col-md-7 search-form row" ng-show="display === 'local'">
             <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
         </div>
     </div>
 
-    <div id="map" class="angular-google-map-container map-box">
-        <div ng-if="!map.show" class="loading-container">
-            <span us-spinner="{radius:30, width:8, length: 16}"></span>
-            <span class="message">Loading the map..</span>
-        </div>
-        <ui-gmap-google-map ng-if="map.show" style="top:80px" class="col-md-12" center="map.center"
-                            control="gMap"
-                            zoom="map.zoom"
-                            dragging="map.dragging"
-                            options="map.options"
-                            events="map.events"
-                            bounds="map.bounds"
-                            refresh="map.refresh"
-                            pan="true">
-            <ui-gmap-markers idKey="'id'" models="locations" doCluster="true" clusterOptions="{minimumClusterSize: 10}" icon="'icon'" coords="'coords'">
-                <ui-gmap-windows show="show">
-                    <div class="info-window" ng-non-bindable>
-                        <span class="title">[[ name ]]</span>
-                        <span class="dealer-type">[[ dealerType.label ]]</span>
-                        <span class="street">[[ address ]]</span>
-                        <span class="city">[[ city ]], [[state.abbreviation]] [[ postalCode ]]</span>
-                        <hr>
-                        <div class="actions">
-                            <a href="tel:[[ phone ]]" class="pull-left">
-                                <span class="glyphicon glyphicon-earphone"></span>
-                                [[ phone ]]
-                            </a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </ui-gmap-windows>
-            </ui-gmap-markers>
-            <ui-gmap-polygons ng-if="map.polys && map.zoom < 6" idKey="'name'" models="map.polys" path="'coordinates'"
-                     stroke="{ color: '#57111a', weight: 3, opacity: '0.8' }" fill="{ opacity: '0.0'}" visible="true" geodesic="true" fit="false"
-                     editable="false" static="true" ng-cloak="" events="map.polyEvents">
-
-            </ui-gmap-polygons>
-        </ui-gmap-google-map>
-    </div>
-
-    <div class="row">
-        <div ng-repeat="loc in locations" class="col-md-3 col-sm-12 col-xs-12 text-locations">
-            <div itemscope itemtype="http://schema.org/PostalAddress">
-                <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
-                <span class="type">[[ loc.dealerType.label ]]</span>
-                <span class="address" itemprop="streetAddress">[[ loc.address ]]</span>
-                <span class="city" itemprop="addressLocality">[[ loc.city ]]</span>
-                <span>,</span>
-                <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
-                <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
-                <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
-
-                <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
-                    [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
-                </a>
-
-                <div class="actions">
-                    <a href="tel:[[ loc.phone ]]">
-                        <span class="glyphicon glyphicon-earphone"></span>
-                        [[ loc.phone ]]
-                    </a>
-                    <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
-                        <span class="glyphicon glyphicon-th-list"></span>
-                        Directions
-                    </a>
-                    <a ng-click="panTo(loc)">
-                        <span class="glyphicon glyphicon-map-marker"></span>
-                        View on Map
-                    </a>
+    <div class="tab-content">
+        <div class="tab-pane" ng-class="{ 'active' : display === 'local' }" id="local" role="tabpanel">
+            <div id="map" class="angular-google-map-container map-box">
+                <div ng-if="!map.show" class="loading-container">
+                    <span us-spinner="{radius:30, width:8, length: 16}"></span>
+                    <span class="message">Loading the map..</span>
                 </div>
+                <ui-gmap-google-map ng-if="map.show" style="top:80px" class="col-md-12" center="map.center"
+                                    control="gMap"
+                                    zoom="map.zoom"
+                                    dragging="map.dragging"
+                                    options="map.options"
+                                    events="map.events"
+                                    bounds="map.bounds"
+                                    refresh="map.refresh"
+                                    pan="true">
+                    <ui-gmap-markers idKey="'id'" models="locations" doCluster="true" clusterOptions="{minimumClusterSize: 10}" icon="'icon'" coords="'coords'">
+                        <ui-gmap-windows show="show">
+                            <div class="info-window" ng-non-bindable>
+                                <span class="title">[[ name ]]</span>
+                                <span class="dealer-type">[[ dealerType.label ]]</span>
+                                <span class="street">[[ address ]]</span>
+                                <span class="city">[[ city ]], [[state.abbreviation]] [[ postalCode ]]</span>
+                                <hr>
+                                <div class="actions">
+                                    <a href="tel:[[ phone ]]" class="pull-left">
+                                        <span class="glyphicon glyphicon-earphone"></span>
+                                        [[ phone ]]
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </ui-gmap-windows>
+                    </ui-gmap-markers>
+                    <ui-gmap-polygons ng-if="map.polys && map.zoom < 6" idKey="'name'" models="map.polys" path="'coordinates'"
+                             stroke="{ color: '#57111a', weight: 3, opacity: '0.8' }" fill="{ opacity: '0.0'}" visible="true" geodesic="true" fit="false"
+                             editable="false" static="true" ng-cloak="" events="map.polyEvents">
 
+                    </ui-gmap-polygons>
+                </ui-gmap-google-map>
+            </div>
+
+            <div class="row">
+                <div ng-repeat="loc in locations" class="col-md-3 col-sm-12 col-xs-12 text-locations">
+                    <div itemscope itemtype="http://schema.org/PostalAddress">
+                        <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
+                        <span class="type">[[ loc.dealerType.label ]]</span>
+                        <span class="address" itemprop="streetAddress">[[ loc.address ]]</span>
+                        <span class="city" itemprop="addressLocality">[[ loc.city ]]</span>
+                        <span>,</span>
+                        <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
+                        <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
+                        <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
+
+                        <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
+                            [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
+                        </a>
+
+                        <div class="actions">
+                            <a href="tel:[[ loc.phone ]]">
+                                <span class="glyphicon glyphicon-earphone"></span>
+                                [[ loc.phone ]]
+                            </a>
+                            <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                                Directions
+                            </a>
+                            <a ng-click="panTo(loc)">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                View on Map
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" ng-class="{ 'active' : display === 'online' }" id="online" role="tabpanel">
+            <div class="row">
+                <div ng-repeat="d in online" class="col-md-4 col-sm-12 col-xs-12 text-locations">
+                    <div itemscope itemtype="http://schema.org/PostalAddress">
+                        <a href="[[ d.website.Scheme ]]://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" class="name" itemprop="name">[[ d.name ]]</a>
+                        <span class="type">[[ d.dealerType.label ]]</span>
+                        <span class="address" itemprop="streetAddress">[[ d.address ]]</span>
+                        <span class="city" itemprop="addressLocality">[[ d.city ]]</span>
+                        <span ng-if="d.state.abbreviation.length > 1" class="state" itemprop="addressRegion">,[[ d.state.abbreviation ]]</span>
+                        <span class="zip" itemprop="postalCode">[[ d.postalCode ]]</span>
+                        <span class="country" itemprop="addressCountry">[[ d.country.country ]]</span>
+
+                        <div class="actions">
+                            <a ng-if="d.phone.trim().length > 9" class="[[d.phone.trim()]]" href="tel:[[ d.phone ]]">
+                                <span class="glyphicon glyphicon-earphone"></span>
+                                [[ d.phone.trim() ]]
+                            </a>
+                            <a ng-if="d.website.Host !== ''" target="_blank" href="[[ d.website.Scheme ]]://[[ d.website.Host ]][[ d.website.Path ]]" class="website">
+                                <span class="glyphicon glyphicon-new-window"></span>
+                                Website
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

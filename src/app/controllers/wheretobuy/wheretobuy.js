@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function($scope, $rootScope, $stateParams, $anchorScroll, ngDialog, localStorage, BuyService, GoogleMapApi, isReady){
+angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', '$location', '$timeout', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function($scope, $rootScope, $stateParams, $anchorScroll, $location, $timeout, ngDialog, localStorage, BuyService, GoogleMapApi, isReady){
 
 	var lastBounds = {};
 	var polyClick = function(gPoly){
@@ -128,6 +128,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 
 	$scope.locations = [];
 	$rootScope.search = '';
+	$scope.display = $location.hash() || 'local';
     $scope.coordinates = {};
     $scope.map = {
         markerIcon: 'http://www.curtmfg.com/Content/img/mapflag.png',
@@ -166,6 +167,20 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			return '';
 		}
 		return obj.Scheme + '://' + obj.Host + obj.Path;
+	};
+
+	$scope.changeDisplay = function(disp, e){
+		$scope.display = disp;
+		$scope.map.show = false;
+		if (disp === 'local') {
+			$timeout(function(){
+				$scope.map.show = true;
+				$scope.map.refresh = true;
+			});
+
+		}
+		$location.hash(disp);
+		e.preventDefault();
 	};
 
 	$scope.panTo = function(l){

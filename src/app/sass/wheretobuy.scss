@@ -2,10 +2,30 @@ $headerHeight: 40px;
 
 .header-row{
     margin-top: 35px;
-    h1{
-        margin:0;
-        padding:0;
-        height:$headerHeight;
+
+    ul > li{
+        padding: 0 5px;
+
+        &:nth-child(2){
+            border-left: 1px solid $altRed;
+        }
+
+        &,
+        & a,
+        & a:hover,
+        & a:focus{
+            background: transparent;
+            border: none;
+        }
+
+        &.active a,
+        &.active a:hover,
+        &.active a:focus{
+            background-color: $altRed;
+            border-radius: 4px;
+            color: white;
+            border: none;
+        }
     }
     .search-form{
         input{
