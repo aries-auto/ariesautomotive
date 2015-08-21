@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', 'ApplicationGuideService', '$rootScope', 'TitleService', function($scope, ApplicationGuideService, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', 'ApplicationGuideService', '$rootScope', function($scope, ApplicationGuideService, $rootScope){
 	$scope.applicationGuide = {};
 	$scope.categories = [];
 	$scope.applicationGuides = {};
 
-	var titleText = "App Guides | Application Guides for Aries Automotive accessories.";
-	$rootScope.titleservice = TitleService;
-	$rootScope.titleservice.set(titleText);
+	$rootScope.pageTitle = "ARIES Automotive | Application Guide | Part Lookup Information";
+	$rootScope.pageDesc = "Each ARIES app guide is category-specific and broken down by vehicle make, model, year and style to help you find the right ARIES part for your vehicle.";
+	$rootScope.pageKywds = "aries, automotive, application guide";
 
 	//3 is the Aries site...
 	$scope.applicationGuides = ApplicationGuideService.GetApplicationGuidesByWebsite(3).then(function(data){

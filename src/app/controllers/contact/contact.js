@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('ContactController', ['$scope', 'ContactService','BecomeDealerService', 'GeographyService', '$rootScope', 'TitleService',
-	function($scope, ContactService, BecomeDealerService, GeographyService, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('ContactController', ['$scope', 'ContactService','BecomeDealerService', 'GeographyService', '$rootScope',
+	function($scope, ContactService, BecomeDealerService, GeographyService, $rootScope){
 	$scope.formData = {'sendEmail': true};
 
-	var titleText = "Contact Us | Conctact Resources for Aries Automotive";
-	$rootScope.titleservice = TitleService;
-	$rootScope.titleservice.set(titleText);
+	$rootScope.pageTitle = "ARIES Automotive | Contact Us";
+  $rootScope.pageDesc = "For tech support, customer service or any question about ARIES products, contact us by phone, fax or email. The main ARIES contact number is (888)800-2743.";
+  $rootScope.pageKywds = "aries, automotive, contact information";
 
 	$scope.postForm = function(){
 		$scope.errorMessage = '';

@@ -8,9 +8,9 @@ angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope',
 
 	$scope.states = {};
 
-	var titleText = "Warranty Information - Waranties for Aries Automotive Products.";
-	$rootScope.titleservice = TitleService;
-	$rootScope.titleservice.set(titleText);
+	$rootScope.pageTitle = "ARIES Automotive | Warranty Registration";
+  $rootScope.pageDesc = "Register and submit an ARIES product warranty using your warranty card and proof of purchase. ARIES warranty submission can be online or through fax or email.";
+  $rootScope.pageKywds = "aries, warranty, automotive";
 
 	$scope.updateStates = function(){
 		$scope.states = this.form.country.states;

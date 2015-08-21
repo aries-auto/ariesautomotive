@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('BecomeDealerController', ['$scope','BecomeDealerService','GeographyService', '$rootScope', 'TitleService', function($scope, BecomeDealerService, GeographyService, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('BecomeDealerController', ['$scope','BecomeDealerService','GeographyService', '$rootScope', function($scope, BecomeDealerService, GeographyService, $rootScope){
 	$scope.contact = {};
 	$scope.message = "";
 
-	var titleText = "Aries Automotive - Become an Aries Automotive dealer";
-	$rootScope.titleservice = TitleService;
-	$rootScope.titleservice.set(titleText);
+	$rootScope.pageTitle = "ARIES Automotive | Become a Dealer | Become a Seller";
+	$rootScope.pageDesc = "For the retail store, distribution center and web retailer, ARIES has the marketing resources, technical support and order-fill rate to help you succeed.";
+	$rootScope.pageKywds = "aries, dealer, seller, automotive";
 
 	BecomeDealerService.GetBusinessClasses().then(function(classes){
 		$scope.businessClasses = classes;

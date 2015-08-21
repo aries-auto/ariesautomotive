@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('TechSupportController', ['$scope', 'TechSupportService', '$rootScope', 'TitleService', function($scope, TechSupportService, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('TechSupportController', ['$scope', 'TechSupportService', '$rootScope', function($scope, TechSupportService, $rootScope){
 	$scope.techSupport = {};
 	$scope.techSupport.contact = {};
 
 	$scope.message = "";
 	$scope.dateMessage = "";
 
-	var titleText = "Technical Support - Aries Automotive";
-	$rootScope.titleservice = TitleService;
-	$rootScope.titleservice.set(titleText);
+	$rootScope.pageTitle = "ARIES Automotive | Technical Support";
+  $rootScope.pageDesc = "For questions about ARIES products, vehicle application or installation help, ARIES technical support can be reached by phone or email.";
+  $rootScope.pageKywds = "aries, automotive, technical support";
 
 	$scope.submitTechSupport = function(techSupport){
 

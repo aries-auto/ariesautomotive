@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', 'TitleService', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope){
 	$scope.category = {};
 	$scope.loadingMore = false;
 	$scope.parts = [];
@@ -16,9 +16,9 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		CategoryService.GetCategory($stateParams.id, $scope.page, $scope.count).then(function(cat){
 			$scope.category = cat;
-			var titleText = $scope.category.title + " | Aries Automotive Products";
-			$rootScope.titleservice = TitleService;
-			$rootScope.titleservice.set(titleText);
+			$rootScope.pageTitle = $scope.category.metaTitle;
+			$rootScope.pageDesc = $scope.category.metaDescription;
+			$rootScope.pageKywds = $scope.category.metaKeywords;atom 
 		});
 
 		var page = $scope.page;

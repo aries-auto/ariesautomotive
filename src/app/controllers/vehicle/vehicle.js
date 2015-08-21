@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', 'TitleService', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope){
 
 	$scope.vehicle = LookupService.get();
 	$scope.years = [];
@@ -14,6 +14,11 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 		page: 1,
 		count: 12
 	};
+
+	$rootScope.pageTitle = "Automotive Accessories | Custom Fit | Vehicle Specific | ARIES";
+	$rootScope.pageDesc = "Many ARIES parts are made for a vehicle-specific fit. Look up your vehicle to find ARIES products that fit your specific year, make, model and submodel.";
+	$rootScope.pageKywds = "aries, custom fit, vehicle specific, automotive, accessories";
+
 	if($location.search().page !== undefined && $location.search().page !== null){
 		$scope.pagination.page = parseInt($location.search().page,10);
 	}
