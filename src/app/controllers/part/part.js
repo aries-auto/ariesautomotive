@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', 'TitleService', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, TitleService){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
@@ -11,9 +11,12 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		PartService.GetPart($stateParams.id).then(function(part){
 			$scope.part = part;
 
-			var titleText = "ARIES Automotive - " + $scope.part.short_description + " - " + $scope.part.oldPartNumber;
-			$rootScope.titleservice = TitleService;
-			$rootScope.titleservice.set(titleText);
+			var years = {
+				maxYear: "",
+				minYear: "",
+				make: "",
+				model: ""
+			};
 
 			var exists = [];
 			var str = '';
@@ -25,12 +28,27 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 					submodel: vehicle.submodel
 				};
 
+				if (v.year > years.maxYear) {
+					years.maxYear = v.year;
+				} else {
+					if (years.minYear === "") years.minYear = v.year;
+				}
+				if (v.year < years.minYear) years.minYear = v.year;
+				years.make = v.make;
+				years.model = v.model;
+
 				str = v.year+v.make+v.model+v.submodel;
 				if(exists.indexOf(str) === -1){
 					$scope.vehicles.push(v);
 					exists.push(str);
 				}
 			});
+
+			var titleStr = $scope.part.short_description + " | " + $scope.part.categories[0].short_description + " | " + years.minYear + "-" + years.maxYear + " " + years.make + " " + years.model;
+			$rootScope.pageTitle = titleStr;
+			$rootScope.pageDesc = $scope.part.categories[0].metaDescription;
+			$rootScope.pageKywds = "aries, " + $scope.part.short_description + ", " + years.make + ", " + years.model;
+
 		});
 	}
 
