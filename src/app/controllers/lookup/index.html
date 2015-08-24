@@ -13,32 +13,37 @@
 
 	<form ng-submit="submitVehicle()" class="lookup ehicle-data form-inline">
 		<div class="form-group">
-			<select class="form-control" ng-model="vehicle.collection" ng-options="col as (col | uppercase) for col in collections">
+			<div id="cat_lookup_label" class="nodisplay">Vehicle Category Lookup</div>
+			<select class="form-control" ng-model="vehicle.collection" ng-options="col as (col | uppercase) for col in collections" aria-labelledby="cat_lookup_label">
 				<option value="">- Select Category -</option>
 			</select>
 		</div>
 		<div class="form-group">
-			<select class="form-control" ng-model="vehicle.year" ng-options="year as year for year in years">
+			<div id="year_lookup_label" class="nodisplay">Vehicle Year Lookup</div>
+			<select class="form-control" ng-model="vehicle.year" ng-options="year as year for year in years" aria-labelledby="year_lookup_label">
 				<option value="">- Select Year -</option>
 			</select>
 		</div>
-		
+
 		<div class="form-group">
-			<select class="form-control" ng-model="vehicle.make" ng-options="make as (make | uppercase) for make in makes">
+			<div id="make_lookup_label" class="nodisplay">Vehicle Make Lookup</div>
+			<select class="form-control" ng-model="vehicle.make" ng-options="make as (make | uppercase) for make in makes" aria-labelledby="make_lookup_label">
 				<option value="">- Select Make -</option>
 			</select>
 		</div>
 		<div class="form-group">
-			<select class="form-control" ng-model="vehicle.model" ng-options="model as (model | uppercase) for model in models">
+			<div id="model_lookup_label" class="nodisplay">Vehicle Model Lookup</div>
+			<select class="form-control" ng-model="vehicle.model" ng-options="model as (model | uppercase) for model in models" aria-labelledby="model_lookup_label">
 				<option value="">- Select Model -</option>
 			</select>
 		</div>
 		<div class="form-group">
-			<select class="form-control" ng-model="vehicle.style" ng-if="styles.length > 0" ng-options="style as (style | uppercase) for style in styles">
+			<div id="style_lookup_label" class="nodisplay">Vehicle Style Lookup</div>
+			<select class="form-control" ng-model="vehicle.style" ng-if="styles.length > 0" ng-options="style as (style | uppercase) for style in styles" aria-labelledby="style_lookup_label">
 				<option value="">- Select Style -</option>
 			</select>
 		</div>
-		
+
 		<button type="submit" class="btn red-transparent-button view-parts-button" ng-disabled="vehicle.year === '' || vehicle.make === '' || vehicle.model === ''">
 			View Parts
 		</button>
