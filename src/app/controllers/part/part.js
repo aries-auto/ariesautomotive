@@ -6,19 +6,16 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.vehicles = [];
 	$scope.litUp = false;
 	$scope.litUpVideo= false;
+	var metakeys = [];
 
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		PartService.GetPart($stateParams.id).then(function(part){
 			$scope.part = part;
 
 			var vTitle = ""
-			var x = {
-				make: "",
-				model: ""
-			}
-
 			var exists = [];
 			var str = '';
+
 			angular.forEach(part.vehicles, function(vehicle, k){
 				var v = {
 					year: vehicle.year,
@@ -27,32 +24,34 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 					submodel: vehicle.submodel
 				};
 
-				if (x.make !== v.make) {
-					x.make = v.make;
-					if (x.model !== v.model) {
-						x.model = v.model;
-						if (vTitle === "") {
-							vTitle = x.make + " " + x.model;
-						} else {
-							vTitle = vTitle + ", " + x.make + " " + x.model;
-						}
-					}
-				}
-
 				str = v.year+v.make+v.model+v.submodel;
 				if(exists.indexOf(str) === -1){
 					$scope.vehicles.push(v);
 					exists.push(str);
+				};
+
+				str = v.make + " " + v.model;
+				if ($scope.checkForDoubles(str)) {
+					metakeys.push(str);
 				}
+
 			});
 
-			var titleStr = $scope.part.short_description + " #" + $scope.part.oldPartNumber + " | " + $scope.part.categories[0].short_description + vTitle;
+			for (var i = 0; i < metakeys.length; i++) {
+				if (vTitle === "") {
+					vTitle = metakeys[i];
+				} else {
+					vTitle = vTitle + ", " + metakeys[i];
+				}
+			}
+
+			var titleStr = $scope.part.short_description + " #" + $scope.part.oldPartNumber + " | " + $scope.part.categories[0].short_description;
 			$rootScope.pageTitle = titleStr;
 			$rootScope.pageDesc = $scope.part.categories[0].metaDescription;
 			$rootScope.pageKywds = "aries, " + $scope.part.short_description + ", " + vTitle;
 
-		});
-	}
+	});
+}
 
 	PartService.GetFeatured().then(function(featured){
 		$scope.featuredProducts = featured;
@@ -63,6 +62,16 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			return '';
 		}
 		return $sce.trustAsHtml(vid.channels[0].embedCode.replace(vid.channels[0].foreignId,vid.channels[0].foreignId+'?rel=0'));
+	};
+
+	$scope.checkForDoubles = function(combo){
+		var flag = true;
+		for (var i = 0; i <= metakeys.length; i++) {
+			if (combo === metakeys[i]) {
+				flag = false;
+			}
+		}
+		return flag;
 	};
 
 	$scope.renderHTML = function(content){
