@@ -2,7 +2,7 @@
 
 
 angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps', 'angularSpinner'])
-  .config(function($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider, usSpinnerConfigProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
     var lookupState = {
       templateUrl: 'app/controllers/lookup/index.html',
       controller: 'LookupController'
@@ -173,15 +173,15 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('where_to_buy', {
-        url: '/buy',
-        views: {
-          'body': {
-            templateUrl: 'app/controllers/wheretobuy/index.html',
-            controller: 'BuyController'
-          },
-          'lookup': lookupState
-        }
+    //   }).state('where_to_buy', {
+    //     url: '/buy',
+    //     views: {
+    //       'body': {
+    //         templateUrl: 'app/controllers/wheretobuy/index.html',
+    //         controller: 'BuyController'
+    //       },
+    //       'lookup': lookupState
+    //     }
       }).state('where_to_buy_linked', {
         url: '/buy/:location',
         views: {
@@ -203,4 +203,4 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
       libraries: 'places'
     });
 
-  });
+});

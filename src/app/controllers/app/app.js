@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootScope', '$location','CategoryService', function($scope, $rootScope, $location, CategoryService){
+angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootScope', '$location', '$state','CategoryService', function($scope, $rootScope, $location, $state, CategoryService){
   $scope.parentCats = [];
   $scope.search_term = '';
   CategoryService.GetParents().then(function(parentCats){
@@ -9,6 +9,7 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 
   $rootScope.goTo = function(path){
       $location.path(path);
+      $state.reload();
   };
 
   $scope.carousel_images = [{
