@@ -3,11 +3,12 @@
 angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope){
 	$scope.category = {};
 	$scope.loadingMore = false;
-	$scope.parts = []
+	$scope.parts = [];
 
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		CategoryService.GetCategory($stateParams.id).then(function(cat){
 			$scope.category = cat;
+			$scope.parts = $scope.category.product_listing.parts;
 			$rootScope.pageTitle = $scope.category.metaTitle;
 			$rootScope.pageDesc = $scope.category.metaDescription;
 			$rootScope.pageKywds = $scope.category.metaKeywords;
