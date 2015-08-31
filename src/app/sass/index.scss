@@ -373,7 +373,7 @@ body{
 				}
 			}
 			.footerLogo{
-                @include opacity(0.6);
+                width: 200px;
 				max-height:110px;
 			}
 		}
@@ -546,12 +546,17 @@ body{
 				height:55px;
 			}
 			.navbar-header{
-				height:85px;
+                height: 85px;
 				.navbar-brand {
-                    width: 20%;
                     margin: 0 20px;
+                    height: 100%;
+                    span{
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
                     img{
-                        height: 83px;
+                        width: 200px;
+                        vertical-align: middle;
                     }
 				}
 			}
