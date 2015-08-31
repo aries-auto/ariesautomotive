@@ -1,11 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <sitemap>
-      <loc>http://www.ariesautomotive.com/sitemap.xml</loc>
-      <lastmod>2015-08-20T21:14:07Z</lastmod>
-   </sitemap>
-   <sitemap>
-      <loc>http://www.ariesautomotive.com/sitemap2.xml</loc>
-      <lastmod>2015-08-20T21:14:07Z</lastmod>
-   </sitemap>
-   </sitemapindex>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>http://www.ariesautomotive.com/sitemap.xml</loc><lastmod>2015-08-31T21:49:29Z</lastmod></sitemap><sitemap><loc>http://www.ariesautomotive.com/imagemap.xml</loc><lastmod>2015-08-31T21:49:29Z</lastmod></sitemap></sitemapindex>
