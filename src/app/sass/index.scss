@@ -182,13 +182,16 @@ body{
 						height:38px;
 						font-size: 16px;
 					}
+                    button{
+                        border-color: rgb(169, 42, 43);
+                    }
 				}
 				.topNavItem{
 					font-size:20px;
 					font-family: "ff-good-headline-web-pro-con",sans-serif;
 					-webkit-font-smoothing: antialiased;
 				}
-				background: url("/assets/img/footer-back.png");
+				background-color: rgb(255, 255, 255);
 				margin: 0;
 				font-size:20px;
 				font-family: "ff-good-headline-web-pro-con",sans-serif;
@@ -198,7 +201,7 @@ body{
 						margin-right: 40px;
 					}
 					a{
-						color: $white;
+						color: #777777;
 						padding-top:10px;
 						padding-bottom:10px;
 						// -webkit-font-smoothing: antialiased;
@@ -316,7 +319,7 @@ body{
 					}
 				}
 				.phoneNum{
-					border-left: 1px solid #000000;
+					border-left: 1px solid rgb(169, 42, 43);
 					height: 85px;
 					min-height: 100%;
 					box-shadow: inset 1px 0px 0px $newRed;
