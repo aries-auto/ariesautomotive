@@ -12,7 +12,7 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
           return;
         }
         for (var i = 0; i < resp.length; i++) {
-          if (new Date(resp[i].publishEnd) > new Date() || !(resp[i].publishEnd > 0)) {
+          if ((new Date(resp[i].publishEnd) > new Date() || !(resp[i].publishEnd > 0)) && resp[i].active === true) {
             $scope.news.push(resp[i]);
           }
         }
