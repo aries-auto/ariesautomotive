@@ -8,6 +8,9 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
 
     if (!$state.params.id) {
       NewsService.getAll().then(function (resp) {
+        if (resp === null || resp === undefined){
+          return;
+        }
         for (var i = 0; i < resp.length; i++) {
           if (new Date(resp[i].publishEnd) > new Date() || !(resp[i].publishEnd > 0)) {
             $scope.news.push(resp[i]);
