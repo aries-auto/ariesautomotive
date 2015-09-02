@@ -5,7 +5,6 @@ var gulp = require('gulp');
 var paths = gulp.paths;
 
 gulp.task('watch', ['inject'], function () {
-	console.log(paths.src);
   gulp.watch([
   	'!' + paths.src + '/lib/**',
     paths.src + '/*.html',
