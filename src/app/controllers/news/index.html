@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-6-12 col-lg-10 col-offset-lg-1 news" ng-if="newsitem">
-                    <h1>[[newsitem.title]]</h1>
+                    <h1 class="newsitem-header">[[newsitem.title]]</h1>
                     <div ng-bind-html="trustAsHtml(newsitem.content)"></div>
                     <a href="/news">BACK TO NEWS</a>
                 </div>
