@@ -82,6 +82,24 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
+      }).state('news',{
+        url: '/news',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/news/index.html',
+            controller: 'NewsController'
+          },
+          'lookup': lookupState
+        }
+       }).state('news item',{
+        url: '/news/:id',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/news/index.html',
+            controller: 'NewsController'
+          },
+          'lookup': lookupState
+        }
       }).state('search',{
         url: '/search/:term',
         views:{
