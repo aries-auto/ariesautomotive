@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsService', '$rootScope', '$state', function ($scope, NewsService, $rootScope, $state) {
+angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsService', '$rootScope', '$state', '$sanitize', '$sce', function ($scope, NewsService, $rootScope, $state, $sanitize, $sce) {
     
     $scope.news = [];
     $scope.count = 8; //headlines per page
@@ -29,5 +29,9 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
         $scope.newsitem = resp;
       });
     }
+
+    $scope.trustAsHtml = function(string) {
+      return $sce.trustAsHtml(string);
+    };
 
 }]);
