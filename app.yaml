@@ -38,3 +38,5 @@ handlers:
   upload: dist/google73134e511c5bcd8d.html
 - url: /.*
   script: _go_app
+env_variables:
+  PRERENDER_TOKEN: 'Ny5UurBwp9vvWl0TqFmz'
