@@ -2,6 +2,8 @@ package ariesautomotive
 
 import (
 	"net/http"
+	"seo"
+	"strings"
 
 	"github.com/unrolled/render"
 )
@@ -16,6 +18,12 @@ func init() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		ua := req.UserAgent()
+		if strings.Contains(ua, "facebookexternalhit/1.1") {
+			seo.Facebook(w, req)
+			return
+		}
+
 		r.HTML(w, 200, "index", nil)
 	})
 
