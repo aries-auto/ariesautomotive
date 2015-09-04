@@ -2,6 +2,7 @@ package seo
 
 import (
 	"github.com/unrolled/render"
+	"html/template"
 	"net/http"
 	"regexp"
 )
@@ -28,7 +29,7 @@ type Route struct {
 	Pattern     string
 	Method      string
 	Metadata    map[string]string
-	Body        string
+	Body        template.HTML
 	Keywords    string
 	Matcher     RouteMatcher
 }
@@ -41,7 +42,6 @@ func Facebook(w http.ResponseWriter, req *http.Request) {
 		}
 
 		r.HTML(w, 200, "template", rte.Matcher.GetData(req))
-
 	}
 }
 

@@ -42,9 +42,12 @@ func (n NewsMatcher) GetData(req *http.Request) Route {
 	}
 
 	r.Name = nws.Title
-	r.Body = template.HTMLEscapeString(nws.Content)
+	r.Body = template.HTML(nws.Content)
 	r.Description = nws.Lead
 	r.Keywords = nws.Title + " " + nws.Lead
+	for _, mt := range nws.Metadata {
+		r.Metadata[mt.Type] = mt.Value
+	}
 
 	return r
 }
