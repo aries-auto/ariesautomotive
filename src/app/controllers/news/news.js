@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsService', '$rootScope', '$state', function ($scope, NewsService, $rootScope, $state) {
+angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsService', '$rootScope', '$state', '$sanitize', '$sce', function ($scope, NewsService, $rootScope, $state, $sanitize, $sce) {
     
     $scope.news = [];
     $scope.count = 8; //headlines per page
@@ -12,7 +12,7 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
           return;
         }
         for (var i = 0; i < resp.length; i++) {
-          if (new Date(resp[i].publishEnd) > new Date() || !(resp[i].publishEnd > 0)) {
+          if ((new Date(resp[i].publishEnd) > new Date() || !(resp[i].publishEnd > 0)) && resp[i].active === true) {
             $scope.news.push(resp[i]);
           }
         }
@@ -29,5 +29,9 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
         $scope.newsitem = resp;
       });
     }
+
+    $scope.trustAsHtml = function(string) {
+      return $sce.trustAsHtml(string);
+    };
 
 }]);
