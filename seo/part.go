@@ -20,7 +20,7 @@ func (p PartMatcher) GetData(req *http.Request) Route {
 
 	path = strings.Replace(path, "/part/", "", 1)
 
-	qry := fmt.Sprintf("%s/part/%s/old?key=%s", API_DOMAIN, path, KEY)
+	qry := fmt.Sprintf("%s/part/old/%s?key=%s", API_DOMAIN, path, KEY)
 
 	c := appengine.NewContext(req)
 	resp, err := urlfetch.Client(c).Get(qry)
@@ -51,5 +51,4 @@ func (p PartMatcher) GetData(req *http.Request) Route {
 	r.Keywords = part.ShortDesc
 
 	return r
-
 }
