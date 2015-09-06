@@ -14,6 +14,11 @@ var (
 			Pattern: "/news/*",
 			Matcher: NewsMatcher{},
 		},
+		Route{
+			Name:    "Part",
+			Pattern: "/part/*",
+			Matcher: PartMatcher{},
+		},
 	}
 	r = render.New(render.Options{
 		Directory:     "seo",             // Specify what path to load the templates from.

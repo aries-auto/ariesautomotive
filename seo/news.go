@@ -21,7 +21,7 @@ func (n NewsMatcher) GetData(req *http.Request) Route {
 
 	path = strings.Replace(path, "/news/", "", 1)
 
-	qry := fmt.Sprintf("http://ariesautoapi.curtmfg.com/news/%s?key=%s", path, KEY)
+	qry := fmt.Sprintf("%s/news/%s?key=%s", API_DOMAIN, path, KEY)
 
 	c := appengine.NewContext(req)
 	resp, err := urlfetch.Client(c).Get(qry)
