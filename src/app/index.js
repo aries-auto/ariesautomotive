@@ -173,15 +173,15 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-    //   }).state('where_to_buy', {
-    //     url: '/buy',
-    //     views: {
-    //       'body': {
-    //         templateUrl: 'app/controllers/wheretobuy/index.html',
-    //         controller: 'BuyController'
-    //       },
-    //       'lookup': lookupState
-    //     }
+      }).state('where_to_buy', {
+        url: '/buy',
+        views: {
+          'body': {
+            templateUrl: 'app/controllers/wheretobuy/index.html',
+            controller: 'BuyController'
+          },
+          'lookup': lookupState
+        }
       }).state('where_to_buy_linked', {
         url: '/buy/:location',
         views: {
