@@ -75,7 +75,8 @@
 
 						<div class="form-group col-xs-12" ng-show="formData.type != 51">
 							<label for="subject">Enter the subject:</label>
-							<input type="text" class="form-control" id="subject" placeholder="Enter the subject." ng-model="formData.subject" name="subject" required>
+							<input type="text" class="form-control" id="subject" ng-disabled="formData.type == 51" placeholder="Enter the subject." ng-model="formData.subject" name="subject" ng-required="formData
+							.type != 51">
 						</div>
 
 						<div class="form-group col-xs-12">
@@ -84,7 +85,7 @@
 						</div>
 
 						<div class="form-group col-xs-12">
-							<button type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid" ng-click="postForm()">SEND</button>
+							<button type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid || saving" ng-click="postForm()">SEND</button>
 						</div>
 
 
