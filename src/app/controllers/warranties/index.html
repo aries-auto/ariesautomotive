@@ -13,19 +13,19 @@
 							<p><em>Please complete all fields.</em></p>
 								<div class="form-group col-md-6 col-xs-9">
 									<label for="firstName">First Name:</label>
-									<input type="text"  class="form-control" name="firstName" ng-model="warranty.contact.firstName" placeholder="Enter your first name." required>
+									<input type="text" id="firstName" class="form-control" name="firstName" ng-model="warranty.contact.firstName" placeholder="Enter your first name." required>
 								</div>
 								<div class="form-group col-xs-6">
 									<label for="lastName">Last Name:</label>
-									<input type="text"  class="form-control" name="lastName" ng-model="warranty.contact.lastName" placeholder="Enter your last name." required>
+									<input type="text" id="lastName" class="form-control" name="lastName" ng-model="warranty.contact.lastName" placeholder="Enter your last name." required>
 								</div>
 								<div class="form-group col-xs-6">
 									<label for="address">Street Address:</label>
-									<input type="text"  class="form-control" name="address" ng-model="warranty.contact.address" placeholder="Enter address." required>
+									<input type="text" id="address" class="form-control" name="address" ng-model="warranty.contact.address" placeholder="Enter address." required>
 								</div>
 								<div class="form-group col-xs-6">
 									<label for="city">City:</label>
-									<input type="text"  class="form-control" name="city" ng-model="warranty.contact.city" placeholder="Enter city." required>
+									<input type="text" id="city" class="form-control" name="city" ng-model="warranty.contact.city" placeholder="Enter city." required>
 								</div>
 
 
@@ -38,7 +38,7 @@
 
 								<div class="form-group col-xs-6">
 									<label for="state">State/Province:</label>
-									<select class="form-control" name="state" ng-model="form.state" ng-options="state.state for state in states" ng-change="updateState()" required>
+									<select id="state" class="form-control" name="state" ng-model="form.state" ng-options="state.state for state in states" ng-change="updateState()" required>
 										<option value="">--Select a State--</option>
 									</select>
 								</div>
@@ -46,18 +46,18 @@
 
 								<div class="form-group col-xs-6">
 									<label for="postalCode">Zip/Postal Code:</label>
-									<input type="text"  class="form-control" name="postalCode" ng-model="warranty.contact.postalCode" placeholder="Enter zip." required>
+									<input type="text" id="postalCode" class="form-control" name="postalCode" ng-model="warranty.contact.postalCode" placeholder="Enter zip." required>
 								</div>
 
 								<div class="form-group col-xs-6">
 									<label for="phone">Phone:</label>
-									<input type="text"  class="form-control" name="phone" ng-model="warranty.contact.phone" placeholder="Enter your phone number." required>
+									<input type="text" id="phone" class="form-control" name="phone" ng-model="warranty.contact.phone" placeholder="Enter your phone number." required>
 								</div>
 								<div class="form-group col-xs-12">
 									<label for="email">Email:</label>
 									<div class="input-group">
 										<span class="input-group-addon">@</span>
-										<input type="text"  class="form-control" name="email" ng-model="warranty.contact.email" placeholder="Enter your email." required>
+										<input type="text" id="email" class="form-control" name="email" ng-model="warranty.contact.email" placeholder="Enter your email." required>
 									</div>
 								</div>
 							</div>
@@ -73,15 +73,15 @@
 								</p>
 								<div class="form-group col-xs-6">
 									<label for="partNumber">Part Number:</label>&nbsp;&nbsp;&nbsp;<span ng-if="!partConfirm"><em>Enter a valid part number.</em></span>
-									<input type="text"  class="form-control" name="partNumber" ng-model="warranty.partNumber" placeholder="Enter part number." ng-change="matchPart(warranty)" required>
+									<input type="text" id="partNumber" class="form-control" name="partNumber" ng-model="warranty.partNumber" placeholder="Enter part number." ng-change="matchPart(warranty)" required>
 								</div>
 								<div class="form-group col-xs-6">
 									<label for="date">Date:</label><span ng-model="dateMessage" ng-if="dateMessage" class="danger"> [[dateMessage]]</span>
-									<input type="date"  class="form-control" name="date" ng-model="warranty.date" placeholder="Enter date." ng-required>
+									<input type="date" id="date" class="form-control" name="date" ng-model="warranty.date" placeholder="Enter date." ng-required>
 								</div>
 								<div class="form-group col-xs-6">
 									<label for="serialNumber">Serial Number:</label>
-									<input type="text"  class="form-control" name="serialNumber" ng-model="warranty.serialNumber" placeholder="Enter serial number." required>
+									<input type="text" id="serialNumber" class="form-control" name="serialNumber" ng-model="warranty.serialNumber" placeholder="Enter serial number." required>
 								</div>
 								<h3 class="col-xs-12 col-md-12">STEP 3 OF 4: CLICK SUBMIT BELOW.</h3>
 								<div class="form-group col-xs-3">

@@ -25,7 +25,7 @@
 						</div>
 
 
-						<div class="form-group col-xs-12" ng-if="formData.contactType == 15">
+						<div class="form-group col-xs-12" ng-if="formData.type == 51">
 							<label for="businessname">Enter your business name:</label>
 							<input type="text" class="form-control" id="businessname" placeholder="Enter your business name." ng-model="formData.businessName" name="businessName" required>
 							<label for="businesstype">Select your business type:</label>
@@ -52,6 +52,7 @@
 						<div class="form-group col-xs-12">
 							<label for="address">Enter your street address:</label>
 							<input type="text" class="form-control" id="address" placeholder="Enter your street address." ng-model="formData.address1" name="address1"><br>
+							<label for="address2" class="nodisplay">Enter your street address:</label>
 							<input type="text" class="form-control" id="address2" placeholder="Address line 2." ng-model="formData.address2" name="address2">
 						</div>
 						<div class="form-group col-xs-12">
@@ -72,9 +73,10 @@
 							<input type="text" class="form-control" id="postalcode" placeholder="Enter your postal code." ng-model="formData.postalCode" name="postalCode">
 						</div>
 
-						<div class="form-group col-xs-12" ng-show="formData.contactType != 15">
+						<div class="form-group col-xs-12" ng-show="formData.type != 51">
 							<label for="subject">Enter the subject:</label>
-							<input type="text" class="form-control" id="subject" placeholder="Enter the subject." ng-model="formData.subject" name="subject" required>
+							<input type="text" class="form-control" id="subject" ng-disabled="formData.type == 51" placeholder="Enter the subject." ng-model="formData.subject" name="subject" ng-required="formData
+							.type != 51">
 						</div>
 
 						<div class="form-group col-xs-12">
@@ -83,7 +85,7 @@
 						</div>
 
 						<div class="form-group col-xs-12">
-							<button type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid" ng-click="postForm()">SEND</button>
+							<button type="submit" class="btn btn-primary" ng-disabled="contactForm.$invalid || saving" ng-click="postForm()">SEND</button>
 						</div>
 
 
@@ -121,6 +123,8 @@
 									<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
 										<span itemprop="streetAddress">2611 Regent Boulevard</span>
 										<br>
+										<span itemprop="suite">Suite 300</span>
+										<br>
 										<span itemprop="addressLocality">DFW Airport</span>,
 										<span itemprop="addressRegion">TX</span>
 										<span itemprop="postalCode">75261</span>
@@ -135,7 +139,7 @@
 								<div class="body">
 									<span class="addressname" itemprop="name">ARIES AUTOMOTIVE ATLANTA AREA</span>
 									<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-										<span itemprop="streetAddress">110 Northpoint Parkway</span>
+										<span itemprop="streetAddress">110 Northpoint Parkway Suite 200</span>
 										<br>
 										<span itemprop="addressLocality">Acworth</span>,
 										<span itemprop="addressRegion">GA</span>
@@ -151,7 +155,7 @@
 								<div class="body">
 									<span class="addressname" itemprop="name">ARIES AUTOMOTIVE EDMONTON AREA</span>
 									<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-										<span itemprop="streetAddress">12820 184th Street N.W.</span>
+										<span itemprop="streetAddress">12820 184th Street NW</span>
 										<br>
 										<span itemprop="addressLocality">Edmonton</span>,
 										<span itemprop="addressRegion">Alberta</span>
@@ -167,11 +171,12 @@
 								<div class="body">
 									<span class="addressname" itemprop="name">ARIES AUTOMOTIVE SEATTLE AREA</span>
 									<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-										<span itemprop="streetAddress">12820 184th Street N.W.</span>
+										<span itemprop="streetAddress">2108 'B' Street NW Suite 120</span>
 										<br>
+
 										<span itemprop="addressLocality">Edmonton</span>,
-										<span itemprop="addressRegion">Alberta</span>
-										<span itemprop="postalCode">T5V 1T4</span>
+										<span itemprop="addressRegion">Auburn, WA</span>
+										<span itemprop="postalCode">98001</span>
 									</div>
 									Phone: <a href="tel:+18772878634" itemprop="telephone">(877) 287-8634</a><br>
 									Fax: <a href="tel:+17158318712" itemprop="faxNumber">(715) 831-8712</a><br>
@@ -183,7 +188,7 @@
 								<div class="body">
 									<span class="addressname" itemprop="name">ARIES AUTOMOTIVE TORONTO AREA</span>
 									<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-										<span itemprop="streetAddress">317 Rutherford Rd South</span>
+										<span itemprop="streetAddress">317 Rutherford Rd South Unit A</span>
 										<br>
 										<span itemprop="addressLocality">Brampton</span>,
 										<span itemprop="addressRegion">Ontario</span>
@@ -199,7 +204,7 @@
 								<div class="body">
 									<span class="addressname" itemprop="name">ARIES AUTOMOTIVE TORRANCE AREA</span>
 									<div itemprop="address" itemscope itemtype="//schema.org/PostalAddress">
-										<span itemprop="streetAddress">23932 Madison St, Unit B</span>
+										<span itemprop="streetAddress">23935 Madison St., Unit B</span>
 										<br>
 										<span itemprop="addressLocality">Torrance</span>,
 										<span itemprop="addressRegion">CA</span>

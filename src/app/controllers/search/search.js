@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('SearchController', ['$scope', 'SearchService', '$stateParams','$sce', '$location', '$anchorScroll', 'AppConfig', function($scope, SearchService, $stateParams, $sce, $location, $anchorScroll, AppConfig){
+angular.module('ariesautomotive').controller('SearchController', ['$scope', 'SearchService', '$stateParams','$sce', '$location', '$anchorScroll', 'AppConfig', '$rootScope', function($scope, SearchService, $stateParams, $sce, $location, $anchorScroll, AppConfig, $rootScope){
 	$scope.parts = [];
 	$scope.query = '';
 	$scope.loadingMore = false;
@@ -10,6 +10,10 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 	// paging variables
 	var page = 1;
 	var count = 24;
+
+	$rootScope.pageTitle = "ARIES Automotive | Search";
+	$rootScope.pageDesc = "Finding grille guards, bull bars, side bars and other ARIES parts for your vehicle is easy using the ARIES product search bar and part lookup tool.";
+	$rootScope.pageKywds = "aries, automotive, product search";
 
 	if($stateParams !== undefined && $stateParams.term !== undefined && $stateParams.term !== ''){
 		$scope.query = $stateParams.term;
@@ -54,7 +58,7 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 				}
 			});
 		});
-		
+
 	};
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);

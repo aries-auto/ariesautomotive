@@ -17,15 +17,16 @@
 	padding: 150px 0;
 }
 
+$newRed: rgb(199, 48, 49);
 $topHeaderBackColor: #1c0104;
 $headerMenuBackColor: #31070C;
 $headerColor: #26090D;
-$headerCallLinkColor: #b2312b;
+$headerCallLinkColor: $newRed;
 $footerColor: #999999;
-$footerNavColor: #b2312b;
+$footerNavColor: $newRed;
 $white: #ffffff;
 $red: #ff0000;
-$altRed : #af231c;
+$altRed : $newRed;
 
 @import "./vendor.scss";
 @import "./homepage.scss";
@@ -39,6 +40,7 @@ $altRed : #af231c;
 @import "./lookup.scss";
 @import "./vehicle.scss";
 @import "./wheretobuy.scss";
+@import "./news.scss";
 
 .pace {
   -webkit-pointer-events: none;
@@ -61,6 +63,10 @@ $altRed : #af231c;
   right: 100%;
   width: 100%;
   height: 2px;
+}
+
+.nodisplay {
+  display: none;
 }
 
 body{
@@ -157,14 +163,14 @@ body{
 	}
 
 	header{
-		background-color: $headerMenuBackColor;
+		background-color: $newRed;
 		box-shadow: 0 0 24px 0 rgba(0,0,0,0.6);
 		border: 0;
 		margin: 0;
 		z-index: 16;
 		position: relative;
 		.navbar{
-			background-color: $headerMenuBackColor;
+			background-color: $newRed;
 			border: 0;
 			margin: 0;
 
@@ -176,13 +182,16 @@ body{
 						height:38px;
 						font-size: 16px;
 					}
+                    button{
+                        border-color: rgb(169, 42, 43);
+                    }
 				}
 				.topNavItem{
 					font-size:20px;
 					font-family: "ff-good-headline-web-pro-con",sans-serif;
 					-webkit-font-smoothing: antialiased;
 				}
-				background: url("/assets/img/footer-back.png");
+				background-color: rgb(255, 255, 255);
 				margin: 0;
 				font-size:20px;
 				font-family: "ff-good-headline-web-pro-con",sans-serif;
@@ -192,7 +201,7 @@ body{
 						margin-right: 40px;
 					}
 					a{
-						color: $white;
+						color: #777777;
 						padding-top:10px;
 						padding-bottom:10px;
 						// -webkit-font-smoothing: antialiased;
@@ -211,10 +220,9 @@ body{
 				}
 				.navbar-brand{
 					padding: 0;
-					img{
-						width: 80px;
-						padding-top:5px;
-					}
+                    img{
+                        height: 50px;
+                    }
 				}
 			}
 
@@ -227,9 +235,9 @@ body{
 				margin: 0;
 				border: 0;
 
-				-moz-box-shadow: inset 0px 0px 25px #57111A;
-				-webkit-box-shadow: inset 0px 0px 25px #57111A;
-				box-shadow: inset 0px 0px 25px #57111A;
+				-moz-box-shadow: inset 0px 0px 25px $newRed;
+				-webkit-box-shadow: inset 0px 0px 25px $newRed;
+				box-shadow: inset 0px 0px 25px $newRed;
 				font-size:24px;
 
 				.extraMenu{
@@ -311,10 +319,10 @@ body{
 					}
 				}
 				.phoneNum{
-					border-left: 1px solid #000000;
+					border-left: 1px solid rgb(169, 42, 43);
 					height: 85px;
 					min-height: 100%;
-					box-shadow: inset 1px 0px 0px #57111A;
+					box-shadow: inset 1px 0px 0px $newRed;
 				}
 			}
 		}
@@ -370,6 +378,7 @@ body{
 				}
 			}
 			.footerLogo{
+                width: 200px;
 				max-height:110px;
 			}
 		}
@@ -432,15 +441,15 @@ body{
 
 	button[type=submit]{
 		text-transform: uppercase;
-		background-color: #57111a;
+		background-color: $newRed;
 		border-color: #31070c;
 		color: #fff;
 		font-size: 18px;
 		cursor: pointer;
 		letter-spacing: 0.05em;
 		&[disabled], &:hover, &:active, &:focus{
-			border-color: #b2312b;
-			background-color:#b2312b;
+			border-color: $newRed;
+			background-color:$newRed;
 		}
 	}
 }
@@ -513,17 +522,12 @@ body{
 @media(min-width: $screen-sm-min){
 	body{
 		header .navbar {
-			.navbar-header .navbar-brand{
-				height: auto !important;
-				img{
-					width: 100px;
-					padding: 0;
-				}
-			}
 			#navbarCollapse {
 				.navbar-form{
 					box-shadow: none;
+                    width: 75%;
 					.form-control{
+                        width: 100%;
 						vertical-align: top;
 					}
 				}
@@ -549,14 +553,23 @@ body{
 			.navbar-header{
 				height:85px;
 				.navbar-brand {
-					padding: 1px 0;
-					img{
-						width: 100%;
-						padding: 0;
-					}
+                    margin: 0 20px;
+                    height: 100%;
+                    span{
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    img{
+                        width: 200px;
+                        vertical-align: middle;
+                    }
 				}
 			}
 			#navbarCollapse {
+
+        .navbar-form{
+                    width: 75%;
+                }
 
 				.navbar-nav {
 

@@ -13,12 +13,12 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
   };
 
   $scope.carousel_images = [{
-    image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
+    image:'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
     text: 'A NEW ERA OF BULL BARS IS HERE',
     button_text: 'VIEW BULL BARS',
     link: '/category/299'
   },{
-    image:'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+    image:'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
     text: 'A NEW ERA OF GRILLE GUARDS IS HERE',
     button_text: 'VIEW PRO SERIES',
     link: '/category/296'

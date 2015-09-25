@@ -61,8 +61,8 @@
 					text-align: center;
 
 					.install-sheet a{
-						color: #af231c;
-						border: 2px solid #af231c;
+						color: $newRed;
+						border: 2px solid $newRed;
 						margin-bottom:10px;
 						padding: 5px 10px;
 						font-size: 18px;
@@ -113,7 +113,7 @@
 							line-height:40px;
 							img{
 								width:100%;
-								height:100%;	
+								height:100%;
 							}
 						}
 					}
@@ -160,7 +160,7 @@
 
 
 				.thumb{
-					list-style:none; 
+					list-style:none;
 					cursor:pointer;
 					display: inline-block;
 					padding:0;
@@ -219,7 +219,7 @@
 
 
 				.applicationsTbl{
-					@media 
+					@media
 					only screen and (max-width: 760px),
 					(min-device-width: 768px) and (max-device-width: 1024px)  {
 						td:nth-of-type(1):before { content: "Year"; font-weight:900; }
@@ -252,6 +252,9 @@
 			margin-bottom:30px;
 			padding-left:0px;
 		}
+		.videoDiv{
+			padding:1em;
+		}
 
 		.accessories{
 			@media (min-width: 992px){
@@ -277,8 +280,65 @@
 	}
 }
 
+/** LIGHTBOX MARKUP **/
+
+.lightbox {
+	/** Default lightbox to hidden */
+	display: none;
+
+	/** Position and style */
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+}
+
+.lightboxFrame, {
+	/** Pad the lightbox image */
+	width: 90%;
+	height: 80%;
+	margin-top: 2%;
+}
+
+.lightbox:target , .lightedBox{
+	/** Remove default browser outline */
+	outline: none;
+
+	/** Unhide lightbox **/
+	display: block;
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+}
+
+.videoBox{
+	max-width:90%;
+	max-height: 90%;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+}
+
 @media(min-width: $screen-md-min){
-	body .part-container .product-info{ 
+	.videoBox{
+		width:50%;
+		iframe{
+			max-height:50%;
+		}
+	}
+	.videoThumbnail{
+		width: 30%;
+	}
+	body .part-container .product-info{
 		.product-media{
 			.thumbs{
 				.thumb{
@@ -286,7 +346,7 @@
 				}
 			}
 		}
-		.product-details{ 
+		.product-details{
 			.install-sheet, .install-video, .share-icons{
 				float:left;
 				height:40px;

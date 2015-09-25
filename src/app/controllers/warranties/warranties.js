@@ -1,13 +1,17 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', function($scope, WarrantyService, GeographyService, PartService){
+angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', '$rootScope', function($scope, WarrantyService, GeographyService, PartService, $rootScope){
 	$scope.message = "Click this button:";
 	$scope.partConfirm = false;
 	$scope.warranty = {};
 	$scope.warranty.contact = {};
 
 	$scope.states = {};
-	
+
+	$rootScope.pageTitle = "ARIES Automotive | Warranty Registration";
+  $rootScope.pageDesc = "Register and submit an ARIES product warranty using your warranty card and proof of purchase. ARIES warranty submission can be online or through fax or email.";
+  $rootScope.pageKywds = "aries, warranty, automotive";
+
 	$scope.updateStates = function(){
 		$scope.states = this.form.country.states;
 		$scope.warranty.contact.country = this.form.country.country;

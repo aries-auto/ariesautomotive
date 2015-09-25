@@ -46,7 +46,16 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('appguides', {
+      }).state('lp',{
+        url: '/lp/:id',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/lp/index.html',
+            controller: 'LPController'
+          },
+          'lookup': lookupState
+        }
+      }).state('appguides',{
         url: '/appguides',
         views: {
           'body': {
@@ -55,17 +64,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('appguide', {
-        url: '/appguides/:collection',
-        views: {
-          'body': {
-            templateUrl: 'app/controllers/appguides/appguide.html',
-            controller: 'AppGuideController'
-          },
-          'lookup': lookupState
-        }
-      })
-      .state('becomedealer', {
+      }).state('becomedealer', {
         url: '/becomedealer',
         views: {
           'body': {
@@ -83,7 +82,25 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
-      }).state('search', {
+      }).state('news',{
+        url: '/news',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/news/index.html',
+            controller: 'NewsController'
+          },
+          'lookup': lookupState
+        }
+       }).state('news item',{
+        url: '/news/:id',
+        views:{
+          'body':{
+            templateUrl: 'app/controllers/news/index.html',
+            controller: 'NewsController'
+          },
+          'lookup': lookupState
+        }
+      }).state('search',{
         url: '/search/:term',
         views: {
           'body': {
@@ -193,6 +210,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
         }
       });
     $urlRouterProvider.otherwise('/');
+
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
     $locationProvider.html5Mode(true);
@@ -202,5 +220,4 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
       v: '3.17',
       libraries: 'places'
     });
-
 });
