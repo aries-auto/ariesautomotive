@@ -101,7 +101,7 @@
             <div class="row">
                 <div ng-repeat="d in online" class="col-md-4 col-sm-12 col-xs-12 text-locations">
                     <div itemscope itemtype="http://schema.org/PostalAddress">
-                        <a href="[[ d.website.Scheme ]]://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" class="name" itemprop="name">[[ d.name ]]</a>
+                        <a href="[[ d.website.Scheme ]]://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" class="name" itemprop="name">[[ d.website.Host ]]</a>
                         <span class="type">[[ d.dealerType.label ]]</span>
                         <span class="address" itemprop="streetAddress">[[ d.address ]]</span>
                         <span class="city" itemprop="addressLocality">[[ d.city ]]</span>
