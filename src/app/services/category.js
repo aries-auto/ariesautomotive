@@ -41,7 +41,8 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 				method: 'get',
 				url: AppConfig.APIURL + '/category',
 				params: {
-					'key': AppConfig.APIKEY
+					'key': AppConfig.APIKEY,
+					'brandID': AppConfig.BRAND_ID
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
