@@ -10,7 +10,7 @@ angular.module('ariesautomotive').factory('LandingPageService', ['$http', '$q','
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}
