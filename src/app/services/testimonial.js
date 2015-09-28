@@ -20,11 +20,11 @@ angular.module('ariesautomotive').factory('TestimonialService', ['$http','$q','A
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: url,
+				url: url + '&brandID=3',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}
