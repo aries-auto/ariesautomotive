@@ -6,7 +6,7 @@ angular.module('ariesautomotive').factory('NewsService', ['$http', '$q', 'AppCon
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/news?key=' + AppConfig.APIKEY
+				url: AppConfig.APIURL + '/news?key=' + AppConfig.APIKEY + '&brandID=' + AppConfig.BRAND_ID
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},

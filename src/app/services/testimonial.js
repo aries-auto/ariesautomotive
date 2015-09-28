@@ -20,7 +20,7 @@ angular.module('ariesautomotive').factory('TestimonialService', ['$http','$q','A
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: url + '&brandID=3',
+				url: url + '&brandID='+AppConfig.BRAND_ID ,
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
