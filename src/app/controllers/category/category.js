@@ -12,19 +12,28 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 			$rootScope.pageTitle = $scope.category.metaTitle;
 			$rootScope.pageDesc = $scope.category.metaDescription;
 			$rootScope.pageKywds = $scope.category.metaKeywords;
+			getParts();
 		});
+	}
 
+
+	var getParts = function(){
 		var page = $scope.page;
+		if (page  === null || page === undefined){
+			page = 1;
+		}
+
 		while (page > 0){
 			CategoryService.parts($stateParams.id, page, $scope.count).then(function(data){
 				$scope.category.product_listing = data;
 				if(data.parts !== undefined && data.parts !== null){
 					for (var i = 0; i < data.parts.length; i++) {
-						var p = data.parts[i];
-						$scope.parts.unshift(p);
+						if ($scope.parts === null){
+							$scope.parts = [];
+						}
+						$scope.parts.push(data.parts[i]);
 					};
 				}
-
 			});
 			page--;
 		}
