@@ -10,7 +10,8 @@ angular.module('ariesautomotive').factory('SearchService', ['$http','$q','AppCon
 				params: {
 					'key' : AppConfig.APIKEY,
 					'page':page,
-					'count':count
+					'count':count,
+					'brandID': AppConfig.BRAND_ID
 				},
 				responseType: 'jsonp'
 			}).success(def.resolve).error(def.reject);
