@@ -12,6 +12,7 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 			$rootScope.pageTitle = $scope.category.metaTitle;
 			$rootScope.pageDesc = $scope.category.metaDescription;
 			$rootScope.pageKywds = $scope.category.metaKeywords;
+		}).finally(function(){
 			getParts();
 		});
 	}
