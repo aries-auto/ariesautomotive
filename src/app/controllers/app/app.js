@@ -15,17 +15,17 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 		image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		text: 'A NEW ERA OF BULL BARS IS HERE',
 		button_text: 'VIEW BULL BARS',
-		link: '/category/299'
+		link: '/category/332'
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
 		text: 'A NEW ERA OF GRILLE GUARDS IS HERE',
 		button_text: 'VIEW PRO SERIES',
-		link: '/category/296'
+		link: '/category/331'
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png',
 		text: 'A NEW ERA OF BUMPERS IS HERE',
 		button_text: 'VIEW BUMPERS',
-		link: '/category/332'
+		link: '/category/324'
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg',
 		text: 'ARIES Unveils StyleGuard™ as New Name for Floor Liners',
