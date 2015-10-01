@@ -29,7 +29,7 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg',
 		text: 'ARIES Unveils StyleGuard™ as New Name for Floor Liners',
-		button_text: 'VIEW STYLEGUARD™ FLOOR LINERS',
-		link: '/category/321'
+		button_text: 'READ MORE',
+		link: '/news/47'
 	}];
 }]);
