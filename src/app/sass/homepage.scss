@@ -34,6 +34,36 @@
 		}
 	}
 
+	.row.whats-new{
+		padding: 20px 15px 0 15px;
+		max-width: 100%;
+		margin:auto;
+
+		img.header{
+			max-width: 100%;
+		}
+		.callout {
+			position: relative;
+			img {
+				margin-top: 10px;
+				max-width: 100%;
+				opacity: 0.6;
+			}
+			span{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				display:block;
+				width: 100%;
+				padding: 5px 0;
+				text-align: center;
+				font-size: 20px;
+				background-color: rgb(234, 234, 234);
+				background-color: rgba(234, 234, 234, 0.7);
+			}
+		}
+	}
+
 	.row.catalog{
 		margin: 70px 0;
 	}
@@ -85,4 +115,18 @@
 			}
 		}
 	}
+}
+
+@media (min-width: 760px){
+	.home-container{
+		.row.whats-new{
+
+			.callout {
+				span{
+					font-size: 32px;
+				}
+			}
+		}
+	}
+
 }

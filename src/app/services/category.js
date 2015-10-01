@@ -9,12 +9,13 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 				url: AppConfig.APIURL + '/category/'+catid,
 				params: {
 					'key' : AppConfig.APIKEY,
-					'count':12
+					'count':12,
+					'brandID':AppConfig.BRAND_ID
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
@@ -31,7 +32,7 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 				headers: {
 					'Content-Type':'application/json; charset=UTF-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
@@ -41,12 +42,13 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 				method: 'get',
 				url: AppConfig.APIURL + '/category',
 				params: {
-					'key': AppConfig.APIKEY
+					'key': AppConfig.APIKEY,
+					'brandID': AppConfig.BRAND_ID
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}

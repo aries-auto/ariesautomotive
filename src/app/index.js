@@ -1,8 +1,7 @@
 'use strict';
 
-
-angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps', 'angularSpinner'])
-  .config(function($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider) {
+angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps','bootstrapLightbox', 'angularSpinner'])
+  .config(function($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider, LightboxProvider) {
     var lookupState = {
       templateUrl: 'app/controllers/lookup/index.html',
       controller: 'LookupController'
@@ -219,11 +218,11 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
         }
       });
     $urlRouterProvider.otherwise('/');
-
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
     $locationProvider.html5Mode(true);
     localStorageServiceProvider.setPrefix('ariesauto');
+    LightboxProvider.templateUrl = 'app/controllers/main/whatsNewLightbox.html';
     uiGmapGoogleMapApiProvider.configure({
       key: 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA',
       v: '3.17',

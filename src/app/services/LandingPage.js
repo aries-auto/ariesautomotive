@@ -6,11 +6,11 @@ angular.module('ariesautomotive').factory('LandingPageService', ['$http', '$q','
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/lp/'+id+'?key=' + AppConfig.APIKEY,
+				url: AppConfig.APIURL + '/lp/'+id+'?key=' + AppConfig.APIKEY + '&brandID=' + AppConfig.BRAND_ID,
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}

@@ -55,6 +55,15 @@ $altRed : $newRed;
   display: none;
 }
 
+.link-no-deco{
+	color: rgb(51, 51, 51);
+}
+
+
+.link-no-deco:hover{
+	color: rgb(51, 51, 51);
+}
+
 .pace .pace-progress {
   background: $altRed;
   position: fixed;
@@ -516,6 +525,21 @@ body{
 			white-space: nowrap;
 		}
 
+	}
+}
+
+.whats-new{
+	cursor: pointer;
+}
+.modal-backdrop{
+	height:1800px;
+}
+.lightboxWhatsNewVideo{
+	height:400px;
+	iframe{
+		overflow:hidden;
+		height:100%;
+		width:100%
 	}
 }
 
