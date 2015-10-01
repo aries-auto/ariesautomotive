@@ -208,6 +208,15 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
           },
           'lookup': lookupState
         }
+      }).state('iconfig', {
+        url: '/iconfig',
+        views: {
+          'body': {
+            templateUrl: 'app/controllers/iconfig/index.html',
+            controller: 'IconfigController'
+          },
+          'lookup': lookupState
+        }
       });
     $urlRouterProvider.otherwise('/');
 

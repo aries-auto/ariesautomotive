@@ -167,6 +167,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			return '';
 		}
 		return obj.Scheme + '://' + obj.Host + obj.Path;
+
 	};
 
 	$scope.changeDisplay = function(disp, e){
@@ -324,8 +325,24 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
     });
 
 	BuyService.online(0, 100).then(function(res) {
-		$scope.online = res;
+		var platinums = [];
+		var regulars = [];
+		res.forEach(function(d){
+			if (d.dealerTier.tier == "Platinum"){
+				platinums.push(d);
+			}else{
+				regulars.push(d);
+			}
+		});
+		platinums.sort(randomOrder)
+		regulars.sort(randomOrder)
+		$scope.online = platinums.concat(regulars);
+
 	});
+
+	function randomOrder(){
+		return (Math.round(Math.random())-0.5);
+	}
 
 
 }]);
