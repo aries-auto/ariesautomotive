@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','LocalStorageModule'])
-  .config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider) {
+angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap','LocalStorageModule', 'bootstrapLightbox'])
+  .config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, LightboxProvider) {
     var lookupState = {
       templateUrl: 'app/controllers/lookup/index.html',
       controller: 'LookupController'
@@ -196,4 +196,5 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
   	$interpolateProvider.endSymbol(']]');
   	$locationProvider.html5Mode(true);
   	localStorageServiceProvider.setPrefix('localStorage').setPrefix('ariesauto');
+    LightboxProvider.templateUrl = 'app/controllers/main/whatsNewLightbox.html';
 });

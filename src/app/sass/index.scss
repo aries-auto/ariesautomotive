@@ -519,6 +519,10 @@ body{
 	}
 }
 
+.whats-new{
+	cursor: pointer;
+}
+
 @media(min-width: $screen-sm-min){
 	body{
 		header .navbar {
