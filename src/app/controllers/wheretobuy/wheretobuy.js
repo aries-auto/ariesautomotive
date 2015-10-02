@@ -25,9 +25,17 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 
 	var boundsChange = function(gMap){
 		var bnds = gMap.getBounds();
-		if($scope.map.zoom < 8 || bnds === lastBounds){
+		if(bnds === lastBounds){
+			return;
+		}else if (gMap.zoom < 6 || $scope.map.zoom < 6) {
+
+			BuyService.regions().then(function(data){
+				$scope.map.polys = data;
+			});
+			$scope.locations = [];
 			return;
 		}
+
 
 		lastBounds = bnds;
 		var center = bnds.getCenter();
@@ -38,16 +46,16 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		var swStr = sw.lat() + ',' + sw.lng();
 		$scope.locations = [];
 		var sort = 3;
-		if($scope.map.zoom > 6 && $scope.map.zoom < 9){
-			sort = 2;
-		}else if($scope.map.zoom > 8){
-			sort = 1;
-		}
+		// if($scope.map.zoom > 6 && $scope.map.zoom < 9){
+		// 	sort = 2;
+		// }else if($scope.map.zoom > 8){
+		// 	sort = 1;
+		// }
 		getByBounds(centerStr, neStr, swStr, 0 , 100, sort);
 	};
 
 	var getByBounds = function(center, ne, sw, skip, count, sort){
-
+		$scope.loadingLocations = true;
 		BuyService.bounds(center, ne, sw, skip, count, sort).then(function(data){
 			if (data === null || data.length === 0){
 				return;
@@ -62,6 +70,8 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			$scope.locations = data;
 			if(data.length === count){
 				getByBounds(center, ne, sw, $scope.locations.length, count, sort);
+			}else{
+				$scope.loadingLocations = false;
 			}
 		});
 	};
@@ -78,7 +88,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude
 			};
-			$scope.map.zoom = 10;
+			// $scope.map.zoom = 5;
 			$scope.$apply();
             localStorage.set('position', pos);
         }
@@ -118,10 +128,12 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
             latitude: $scope.position.coords.latitude,
             longitude: $scope.position.coords.longitude
         };
+
 		if($scope.map.zoom < 5){
 			BuyService.regions().then(function(data){
 				$scope.map.polys = data;
 			});
+			$scope.locations = [];
 		}
 
     };

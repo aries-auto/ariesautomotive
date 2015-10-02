@@ -35,6 +35,18 @@ $headerHeight: 40px;
     }
 }
 
+.location-loader{
+    position: relative;
+    height: auto;
+    text-align: center;
+    padding-top: 40%;
+    .message{
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
 .map-box{
     width: 100%;
     margin: 0 auto 20px auto;
@@ -94,8 +106,8 @@ $headerHeight: 40px;
 }
 
 .text-locations{
-    padding: 15px 0;
-    > div{
+    padding: 4px 0;
+    > div {
         position: relative;
         padding: 10px;
         margin: 10px;
@@ -141,6 +153,26 @@ $headerHeight: 40px;
                     vertical-align: middle;
                 }
             }
+        }
+    }
+}
+
+.online-locations{
+    margin: 30px 0;
+    a {
+        border-bottom: 3px solid #57111a;
+        display: block;
+        margin-bottom: 10px;
+        span.name{
+            color: #57111a;
+            text-transform: uppercase;
+            font-size: 24px;
+            font-weight: bold;
+            display:block;
+        }
+
+        .actions{
+            margin-bottom: 10px;
         }
     }
 }
