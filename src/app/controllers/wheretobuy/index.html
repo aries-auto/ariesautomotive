@@ -31,7 +31,7 @@
                     <div ng-if="loadingLocations === false && locations.length === 0" class="location-loader">
                         <span class="message">Sorry, there are no locations in the searched area.</span>
                     </div>
-                    <div ng-repeat="loc in locations | limitTo:3" class="text-locations">
+                    <div ng-repeat="loc in locations | limitTo:4" class="text-locations">
                         <div itemscope itemtype="http://schema.org/PostalAddress">
                             <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
                             <span class="type">[[ loc.dealerType.label ]]</span>
@@ -107,7 +107,7 @@
                 </div>
             </div>
             <div class="row">
-                <div ng-repeat="loc in locations" ng-if="$index > 2" class="col-md-4 col-sm-12 col-xs-12 text-locations">
+                <div ng-repeat="loc in locations" ng-if="$index > 3" class="col-md-4 col-sm-12 col-xs-12 text-locations">
                     <div itemscope itemtype="http://schema.org/PostalAddress">
                         <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
                         <span class="type">[[ loc.dealerType.label ]]</span>
