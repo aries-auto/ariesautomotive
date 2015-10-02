@@ -58,6 +58,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$scope.loadingLocations = true;
 		BuyService.bounds(center, ne, sw, skip, count, sort).then(function(data){
 			if (data === null || data.length === 0){
+				$scope.loadingLocations = false;
 				return;
 			}
 
