@@ -101,13 +101,17 @@
             <div class="row">
                 <div ng-repeat="d in online" class="col-md-4 col-sm-12 col-xs-12 text-locations">
                     <div itemscope itemtype="http://schema.org/PostalAddress">
-                        <a href="[[ d.website.Scheme ]]://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" class="name" itemprop="name">[[ d.website.Host ]]</a>
+                        <a href="http://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" class="name" itemprop="name">[[ d.name ]]</a>
+
+
                         <span class="type">[[ d.dealerType.label ]]</span>
-                        <span class="address" itemprop="streetAddress">[[ d.address ]]</span>
-                        <span class="city" itemprop="addressLocality">[[ d.city ]]</span>
-                        <span ng-if="d.state.abbreviation.length > 1" class="state" itemprop="addressRegion">,[[ d.state.abbreviation ]]</span>
-                        <span class="zip" itemprop="postalCode">[[ d.postalCode ]]</span>
-                        <span class="country" itemprop="addressCountry">[[ d.country.country ]]</span>
+                        <span class="address" itemprop="streetAddress" ng-if="d.address">[[ d.address ]]</span>
+                        <div ng-if="d.city && d.state">
+                            <span class="city" itemprop="addressLocality">[[ d.city ]]</span>
+                            <span ng-if="d.state.abbreviation.length > 1" class="state" itemprop="addressRegion">, [[ d.state.abbreviation ]]</span>
+                        </div>
+                        <span class="zip" itemprop="postalCode" ng-if="d.postalCode">[[ d.postalCode ]]</span>
+                        <span class="country" itemprop="addressCountry" ng-if="d.country.country">[[ d.country.country ]]</span>
 
                         <div class="actions">
                             <a ng-if="d.phone.trim().length > 9" class="[[d.phone.trim()]]" href="tel:[[ d.phone ]]">
@@ -118,6 +122,11 @@
                                 <span class="glyphicon glyphicon-new-window"></span>
                                 Website
                             </a>
+                            <a ng-if="d.website.Host === ''" target="_blank" href="http://[[ d.website.Path ]]" class="website">
+                                <span class="glyphicon glyphicon-new-window"></span>
+                                Website
+                            </a>
+
                         </div>
                     </div>
                 </div>

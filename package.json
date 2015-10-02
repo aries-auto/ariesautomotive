@@ -7,7 +7,8 @@
     "url": "https://github.com/aries-auto/ariesautomotive"
   },
   "dependencies": {
-    "express-seojs": "0.0.5"
+    "express-seojs": "0.0.5",
+    "gulp-sass": "^2.0.4"
   },
   "devDependencies": {
     "bower": "^1.3.12",
