@@ -13,24 +13,34 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 
 	$scope.carousel_images = [{
 		image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
-		text: 'A NEW ERA OF BULL BARS IS HERE',
+		text: 'NEVER FEAR THE UNCERTAIN ROAD',
 		button_text: 'VIEW BULL BARS',
-		link: '/category/332'
+		link: '/category/332',
+		order: 5
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
-		text: 'A NEW ERA OF GRILLE GUARDS IS HERE',
+		text: 'FIND OUT WHAT IT MEANS TO BE A PRO',
 		button_text: 'VIEW PRO SERIES',
-		link: '/category/331'
+		link: '/category/331',
+		order: 2
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png',
-		text: 'A NEW ERA OF BUMPERS IS HERE',
+		text: 'CHOOSE YOUR CONFIGURATION AND START CUSTOMIZING',
 		button_text: 'VIEW BUMPERS',
-		link: '/category/324'
+		link: '/category/324',
+		order: 3
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg',
-		text: 'ARIES Unveils StyleGuard™ as New Name for Floor Liners',
+		text: 'ARIES UNVEILS STYLEGUARD™ AS NEW NAME FOR FLOOR LINERS',
 		button_text: 'READ MORE',
-		link: '/news/47'
+		link: '/news/47',
+		order: 1
+	}, {
+		image: 'https://storage.googleapis.com/aries-website/hero-images/navyjeep.jpg',
+		text: 'DECKED OUT JEEP TO BE DONATED TO NAVY SEAL FOUNDATION',
+		button_text: 'READ MORE',
+		link: '/news/48',
+		order: 4
 	}];
 
 }]);

@@ -3,7 +3,7 @@
 	<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
 
 		<div class="carousel-inner">
-			<div class="item" ng-class="{'active':i === 0}" ng-repeat="(i,img) in carousel_images">
+			<div class="item" ng-class="{'active':i === 0}" ng-repeat="(i,img) in carousel_images | orderBy:'order'">
 				<div class="carouselImg" style="background: url('[[img.image]]'); background-size:cover; min-height:350px; background-repeat: no-repeat; background-position:50% 60%;"></div>
 				<div class="carousel-caption">
 					<span class="bigText">[[img.text]]</span>
