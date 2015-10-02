@@ -135,6 +135,10 @@ $headerHeight: 40px;
                 display:block;
                 content: ' ';
             }
+
+            &.website{
+                display:block;
+            }
         }
         a{
             cursor: pointer;
