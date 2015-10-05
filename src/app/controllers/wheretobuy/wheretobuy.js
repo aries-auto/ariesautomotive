@@ -1,6 +1,15 @@
 'use strict';
 
 angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', '$location', '$timeout', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function($scope, $rootScope, $stateParams, $anchorScroll, $location, $timeout, ngDialog, localStorage, BuyService, GoogleMapApi, isReady){
+	//mobile view-setter
+	$scope.location_limit = 4;
+	var MOBILE_WIDTH = '860';
+	$scope.mobile_view = false;
+	if (window.innerWidth <= MOBILE_WIDTH){
+		$scope.mobile_view = true;
+		$scope.location_limit = 999;
+	}
+
 
 	var lastBounds = {};
 	var polyClick = function(gPoly){
