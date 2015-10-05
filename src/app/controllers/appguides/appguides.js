@@ -5,7 +5,6 @@ angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', '
 
 	LookupService.collections().then(function(data){
 		$scope.collections = data;
-		console.log(data);
 	});
 
 	$scope.GetFileLocation = function(col, type){
