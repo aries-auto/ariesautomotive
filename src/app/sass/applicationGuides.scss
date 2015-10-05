@@ -2,6 +2,9 @@
 	li, li a{
 		text-transform: capitalize;
 	}
+	> li + li:before{
+		content: $breadcrumb-separator + "\00a0";
+	}
 }
 
 .category{
