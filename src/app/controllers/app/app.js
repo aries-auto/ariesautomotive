@@ -9,7 +9,6 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 
 	$rootScope.goTo = function(path) {
 		$location.path(path);
-		$state.reload();
 	};
 
 
