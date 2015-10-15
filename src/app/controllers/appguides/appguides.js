@@ -55,7 +55,7 @@ angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', '
 				}
 			case "grille guards":
 				if (type == "pdf"){
-					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%Grille%20Guards.pdf";
+					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.pdf";
 				}else{
 					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx";
 				}
