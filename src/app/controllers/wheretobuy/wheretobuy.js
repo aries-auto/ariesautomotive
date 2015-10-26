@@ -10,6 +10,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$scope.location_limit = 999;
 	}
 
+	$rootScope.pageTitle = "ARIES Automotive | Where to Buy";
+	$rootScope.pageKywds = "aries, automotive, dealer locator, where to buy";
+
 
 	var lastBounds = {};
 	var polyClick = function(gPoly){

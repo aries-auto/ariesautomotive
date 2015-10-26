@@ -5,6 +5,10 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 	$scope.loadingMore = false;
 	$scope.parts = [];
 
+	// Default Category Page title
+	$rootScope.pageTitle = "ARIES Automotive | Category";
+	$rootScope.pageKywds = "aries, automotive, category";
+
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		CategoryService.GetCategory($stateParams.id).then(function(cat){
 			$scope.category = cat;

@@ -5,6 +5,10 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
 	$scope.news = [];
 	$scope.count = 8; //headlines per page
 	$scope.index = 0;
+	// Default's
+	$rootScope.pageTitle = "ARIES Automotive | Latest News";
+	$rootScope.pageKywds = "aries, automotive, news, latest news";
+
 
 
 	if (!$state.params.id) {
@@ -28,6 +32,8 @@ angular.module('ariesautomotive').controller('NewsController', ['$scope', 'NewsS
 	if ($state.params.id) {
 		NewsService.get($state.params.id).then(function(resp) {
 			$scope.newsitem = resp;
+			$rootScope.pageTitle = "ARIES Automotive | " + $scope.newsitem.title;
+			$rootScope.pageKywds = "aries, automotive, news, latest news";
 		});
 	}
 

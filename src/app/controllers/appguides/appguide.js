@@ -1,11 +1,16 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('AppGuideController', ['$scope', '$stateParams', 'ApplicationGuideService', function($scope, $stateParams, ApplicationGuideService){
+angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope','$scope', '$stateParams', 'ApplicationGuideService', function($rootScope, $scope, $stateParams, ApplicationGuideService){
 	$scope.collection = $stateParams.collection || '';
 	$scope.applications = [];
 	$scope.finishes = [];
 	$scope.colors = [];
 	$scope.location = false;
+
+	$rootScope.pageTitle = "ARIES Automotive | Application Guides";
+	$rootScope.pageKywds = "aries, automotive, applications, application guides, vehicles";
+
+
 	var page = 0;
 
 	$scope.getPart = function(f, app){
