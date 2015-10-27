@@ -132,6 +132,28 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope','$win
 		});
 	};
 
+	$scope.resetYear = function(){
+		$scope.vehicle.year = '';
+		$scope.vehicle.make = '';
+		$scope.vehicle.model = '';
+		$scope.vehicle.style = '';
+	};
+
+	$scope.resetMake = function(){
+		$scope.vehicle.make = '';
+		$scope.vehicle.model = '';
+		$scope.vehicle.style = '';
+	};
+
+	$scope.resetModel = function(){
+		$scope.vehicle.model = '';
+		$scope.vehicle.style = '';
+	};
+
+	$scope.resetStyle = function(){
+		$scope.vehicle.style = '';
+	};
+
 	LookupService.collections().then(function(data){
 		$scope.collections = data;
 	});
