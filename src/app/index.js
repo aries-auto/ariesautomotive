@@ -6,6 +6,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
       templateUrl: 'app/controllers/lookup/index.html',
       controller: 'LookupController'
     };
+    jQuery.ajaxSetup({ cache: true });
     $stateProvider
       .state('home', {
         url: '/',
