@@ -44,7 +44,7 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 		}
 
 		$('.pagination').css('opacity','0.6');
-		$scope.loadingMore = true;
+		//$scope.loadingMore = true;
 
 		page++;
 		SearchService.Search($scope.query, page, count).then(function(data){
