@@ -4,6 +4,7 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 	$scope.category = {};
 	$scope.loadingMore = false;
 	$scope.parts = [];
+	var per_page = 50;
 
 	// Default Category Page title
 	$rootScope.pageTitle = "ARIES Automotive | Category";
@@ -16,32 +17,9 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 			$rootScope.pageTitle = $scope.category.metaTitle;
 			$rootScope.pageDesc = $scope.category.metaDescription;
 			$rootScope.pageKywds = $scope.category.metaKeywords;
-		}).finally(function(){
-			getParts();
+		}, function(err){
+			$rootScope.$broadcast('error', err.data.message);
 		});
-	}
-
-
-	var getParts = function(){
-		var page = $scope.page;
-		if (page  === null || page === undefined){
-			page = 1;
-		}
-
-		while (page > 0){
-			CategoryService.parts($stateParams.id, page, $scope.count).then(function(data){
-				$scope.category.product_listing = data;
-				if(data.parts !== undefined && data.parts !== null){
-					for (var i = 0; i < data.parts.length; i++) {
-						if ($scope.parts === null){
-							$scope.parts = [];
-						}
-						$scope.parts.push(data.parts[i]);
-					};
-				}
-			});
-			page--;
-		}
 	}
 
 	$scope.renderHTML = function(content){
@@ -57,7 +35,7 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 		$scope.loadingMore = true;
 
 		$scope.category.product_listing.page++;
-		CategoryService.parts($scope.category.id, $scope.category.product_listing.page, $scope.category.product_listing.per_page).then(function(data){
+		CategoryService.parts($scope.category.id, $scope.category.product_listing.page, per_page).then(function(data){
 			if(data.parts === undefined || data.parts === null){
 					data.parts = [];
 					data.total_items = $scope.category.product_listing.parts.length;
