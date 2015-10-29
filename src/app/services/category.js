@@ -24,7 +24,7 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url:AppConfig.APIURL + '/category/parts/' + id,
+				url:AppConfig.APIURL + '/category/' + id + '/parts',
 				params:{
 					'key':AppConfig.APIKEY,
 					'page':page,
@@ -37,7 +37,7 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
-		GetParents: function(callback){
+		GetParents: function(){
 			var def = $q.defer();
 			$http({
 				method: 'get',
