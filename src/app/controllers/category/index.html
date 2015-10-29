@@ -45,8 +45,10 @@
 									<div class="product-attr">
 										<!-- <span class="title">Details:</span> -->
 										<ul>
+
 											<li ng-repeat="attr in p.attributes | orderBy:'key'"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
 											<li><strong>UPC:</strong> [[p.upc]]</li>
+
 										</ul>
 									</div>
 								</div>

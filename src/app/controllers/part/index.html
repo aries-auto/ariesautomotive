@@ -236,9 +236,9 @@
 
 			<div class="prod-attributes col-xs-12 col-sm-12 col-md-4 col-lg-4 col-lg-offset-1 col-md-offset-1" ng-if="part.attributes.length > 0">
 				<h3>Technical Details</h3>
-				<div ng-repeat="attr in part.attributes | orderBy:'key'" class="row">
+				<div ng-repeat="attr in part.attributes | orderBy:'name'" class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<p class="field">[[attr.key]]</p>
+						<p class="field">[[attr.name]]</p>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<p class="value">[[attr.value]]</p>

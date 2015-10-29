@@ -14,7 +14,7 @@
           </form>
           <ul class="nav navbar-nav pull-right top-right-nav">
               <li class="topNavItem"><a href="/buy" title="Where to Buy">WHERE TO BUY</a></li>
-              <li class="topNavItem"><a href="http://orders.ariesautomotive.com/" title="COMNET Order Portal">COMNET LOGIN</a></li>
+              <li class="topNavItem"><a href="http://dealers.ariesautomotive.com" title="COMNET via Dealer Portal">COMNET via Dealer Portal</a></li>
               <li class="topNavItem"><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a></li>
               <li class="topNavItem"><a href="/about" title="About Us">ABOUT</a></li>
               <li class="topNavItem"><a href="/techsupport" title="Technical Support">TECH SUPPORT</a></li>
@@ -54,7 +54,9 @@
                     [[c.title | uppercase]]
                   </a>
                   <ul class="dropdown-menu" role="menu" ng-if="c.children !== undefined">
-                      <li ng-repeat="sc in c.children" role="menuitem">
+
+                      <li ng-repeat="sc in c.children | orderBy:'title'" role="menuitem">
+
                           <a href="/category/[[sc.id]]">[[sc.title]]</a>
                       </li>
                   </ul>
