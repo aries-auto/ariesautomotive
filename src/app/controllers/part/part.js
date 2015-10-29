@@ -8,8 +8,8 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.litUpVideo= false;
 	var metakeys = [];
 	//Defaults
-	$rootScope.pageTitle = "ARIES Automotive | Product Information";
-	$rootScope.pageKywds = "aries, automotive, product";
+	$rootScope.pageTitle = 'ARIES Automotive | Product Information';
+	$rootScope.pageKywds = 'aries, automotive, product';
 
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		PartService.GetPart($stateParams.id).then(function(part){
