@@ -1,5 +1,7 @@
 application: aries-auto
+
 version: 3
+
 runtime: go
 api_version: go1
 
