@@ -90,7 +90,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		for (var i = $scope.part.content.length - 1; i >= 0; i--) {
 			var con = $scope.part.content[i];
-			if(con.contentType.Type === 'CategoryBrief'){
+			if(con.contentType.type === 'CategoryBrief'){
 				return con.text;
 			}
 		}
@@ -102,7 +102,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		for (var i = $scope.part.content.length - 1; i >= 0; i--) {
 			var con = $scope.part.content[i];
-			if(con.contentType.Type === 'HTMLDescription'){
+			if(con.contentType.type === 'HTMLDescription'){
 				return con.text;
 			}
 		}
@@ -115,7 +115,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		for (var i = $scope.part.content.length - 1; i >= 0; i--) {
 			var con = $scope.part.content[i];
-			if(con.contentType.Type === 'Bullet' && bulls.indexOf(con.text) === -1){
+			if(con.contentType.type === 'Bullet' && bulls.indexOf(con.text) === -1){
 				bulls.push(con.text);
 			}
 		}

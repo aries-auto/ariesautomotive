@@ -42,7 +42,7 @@ func (p PartMatcher) GetData(req *http.Request) Route {
 
 	r.Name = part.ShortDesc
 	for _, con := range part.Content {
-		if con.ContentType.AllowHtml {
+		if con.ContentType.AllowsHTML {
 			r.Body = template.HTML(con.Text)
 			break
 		}
