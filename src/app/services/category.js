@@ -23,7 +23,7 @@ angular.module('ariesautomotive').factory('CategoryService', ['$http','$q','AppC
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url:AppConfig.APIURL + '/category/' + id + '/parts',
+				url:AppConfig.APIURL + '/category/parts/' + id,
 				params:{
 					'key':AppConfig.APIKEY,
 					'page':page,
