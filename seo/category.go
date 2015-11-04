@@ -1,15 +1,17 @@
 package seo
 
 import (
-	"appengine"
-	"appengine/urlfetch"
 	"encoding/json"
 	"fmt"
-	"github.com/curt-labs/GoAPI/models/products"
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"github.com/curt-labs/GoAPI/models/products"
+
+	"appengine"
+	"appengine/urlfetch"
 )
 
 type CategoryMatcher struct{}
