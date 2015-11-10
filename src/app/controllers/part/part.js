@@ -18,16 +18,16 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			var vTitle = ""
 			var exists = [];
 			var str = '';
+			$scope.showConfigs = false;
 
-			angular.forEach(part.vehicles, function(vehicle, k){
+			angular.forEach(part.mgo_vehicles, function(vehicle){
 				var v = {
 					year: vehicle.year,
 					make: vehicle.make,
 					model: vehicle.model,
-					submodel: vehicle.submodel
+					style: vehicle.style
 				};
-
-				str = v.year+v.make+v.model+v.submodel;
+				str = v.year+v.make+v.model+v.style;
 				if(exists.indexOf(str) === -1){
 					$scope.vehicles.push(v);
 					exists.push(str);
@@ -37,8 +37,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				if ($scope.checkForDoubles(str)) {
 					metakeys.push(str);
 				}
-
-			});
+			})
 
 			for (var i = 0; i < metakeys.length; i++) {
 				if (vTitle === "") {
