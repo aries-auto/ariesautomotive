@@ -21,7 +21,6 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			$scope.showConfigs = false;
 
 			angular.forEach(part.vehicle_applications, function(vehicle){
-
 				var v = {
 					year: vehicle.year,
 					make: vehicle.make,
