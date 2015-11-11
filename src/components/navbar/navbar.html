@@ -47,14 +47,16 @@
           </form>
           <ul class="nav navbar-nav">
               <li ng-repeat="c in parentCats" class="dropdown navigationItem">
-                  <a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown" ng-if="c.sub_categories !== undefined">[[c.title | uppercase]]
+                  <a href="#" title="[[c.title]]" class="dropdown-toggle" data-toggle="dropdown" ng-if="c.children !== undefined">[[c.title | uppercase]]
                       <i class="caret"></i>
                   </a>
-                  <a href="/category/[[c.id]]" title="[[c.title]]" ng-if="c.sub_categories === undefined">
+                  <a href="/category/[[c.id]]" title="[[c.title]]" ng-if="c.children === undefined">
                     [[c.title | uppercase]]
                   </a>
-                  <ul class="dropdown-menu" role="menu" ng-if="c.sub_categories !== undefined">
-                      <li ng-repeat="sc in c.sub_categories" role="menuitem">
+                  <ul class="dropdown-menu" role="menu" ng-if="c.children !== undefined">
+
+                      <li ng-repeat="sc in c.children | orderBy:'title'" role="menuitem">
+
                           <a href="/category/[[sc.id]]">[[sc.title]]</a>
                       </li>
                   </ul>

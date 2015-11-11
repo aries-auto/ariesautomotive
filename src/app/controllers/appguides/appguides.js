@@ -1,7 +1,11 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('AppGuidesController', ['$scope', 'LookupService', function($scope, LookupService){
+angular.module('ariesautomotive').controller('AppGuidesController', ['$rootScope','$scope', 'LookupService', function($rootScope, $scope, LookupService){
 	$scope.collections = [];
+
+	$rootScope.pageTitle = "ARIES Automotive | Application Guides";
+	$rootScope.pageKywds = "aries, automotive, applications, application guides, vehicles";
+
 
 	LookupService.collections().then(function(data){
 		$scope.collections = data;

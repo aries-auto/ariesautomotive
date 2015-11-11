@@ -1,8 +1,14 @@
 'use strict';
 
 angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootScope', '$location', '$state', 'CategoryService', function($scope, $rootScope, $location, $state, CategoryService) {
+	// rootscope titles
+	$rootScope.pageTitle = "ARIES Automotive | Custom Truck, Jeep, and SUV Accessories";
+	$rootScope.pageDesc = "From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.";
+	$rootScope.pageKywds = "aries, automotive, truck, suv, jeep, accessories, custom";
+
 	$scope.parentCats = [];
 	$scope.search_term = '';
+
 	CategoryService.GetParents().then(function(parentCats) {
 		$scope.parentCats = parentCats;
 	});

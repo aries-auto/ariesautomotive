@@ -49,6 +49,7 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 			angular.forEach(app.parts, function(p){
 				if (p.install_sheet !== ''){
 					el.attr('href', p.install_sheet);
+					el.attr('target', '_blank');
 					el.html(p.oldPartNumber);
 				}
 			});

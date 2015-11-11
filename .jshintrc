@@ -21,6 +21,7 @@
   "validthis": true,
   "globals": {
     "angular": false,
+    "window": true,
     "Modernizr": false,
     "navigator": false,
     "document": false,
