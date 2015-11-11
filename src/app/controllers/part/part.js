@@ -20,7 +20,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			var str = '';
 			$scope.showConfigs = false;
 
-			angular.forEach(part.mgo_vehicles, function(vehicle){
+			angular.forEach(part.vehicle_applications, function(vehicle){
 
 				var v = {
 					year: vehicle.year,
