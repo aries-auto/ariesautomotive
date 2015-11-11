@@ -20,11 +20,11 @@
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
 							<div class="super-padding" ng-if="parts.length === 0"></div>
 							<!-- Products -->
-							<div class="product row well" ng-click="goTo('/part/[[p.oldPartNumber]]')" ng-repeat="p in parts">
+							<div class="product row well" ng-click="goTo('/part/[[p.part_number]]')" ng-repeat="p in parts">
 								<div class="product-header">
 									<span class="product-desc">
-										<a href="/part/[[p.oldPartNumber]]">[[p.short_description | uppercase]]
-											<span class="product-id">[[p.oldPartNumber]]</span>
+										<a href="/part/[[p.part_number]]">[[p.short_description | uppercase]]
+											<span class="product-id">[[p.part_number]]</span>
 										</a>
 									</span>
 								</div>
@@ -49,7 +49,8 @@
 									<div class="product-attr">
 										<!-- <span class="title">Details:</span> -->
 										<ul>
-											<li ng-repeat="attr in p.attributes | orderBy:'key'"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
+											<li ng-repeat="attr in p.attributes | orderBy:'name'"><strong>[[attr.name]]:</strong> [[attr.value]]</li>
+											<li><strong>UPC:</strong> [[p.upc]]</li>
 										</ul>
 									</div>
 								</div>
