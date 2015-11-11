@@ -54,7 +54,7 @@
                     [[c.title | uppercase]]
                   </a>
                   <ul class="dropdown-menu" role="menu" ng-if="c.children !== undefined">
-                      <li ng-repeat="sc in c.children" role="menuitem">
+                      <li ng-repeat="sc in c.children | orderBy:'sort'" role="menuitem">
                           <a href="/category/[[sc.id]]">[[sc.title]]</a>
                       </li>
                   </ul>
