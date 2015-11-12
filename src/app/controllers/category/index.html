@@ -17,18 +17,17 @@
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
 							
 							<!-- Products -->
-							<div class="product row well" ng-click="goTo('/part/[[p.oldPartNumber]]')" ng-repeat="p in parts">
 
-								<part-box part="p"></part-box>
-
-							</div>
+							
+							<part-box parts="parts"></part-box>
+							
 							<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 							<div class="clearfix"></div>
 						</div>
 
 						<!-- Pagination -->
 						<div class="clearfix"></div>
-						<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.total_items > parts.length">
+						<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="category.product_listing !== undefined && category.product_listing.page < category.product_listing.total_pages">
 							<span>Load more</span>
 						</a>
 

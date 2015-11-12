@@ -6,7 +6,7 @@ angular.module('ariesautomotive').factory('PartService', ['$http','$q','AppConfi
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/part/old/'+partID,
+				url: AppConfig.APIURL + '/part/'+partID,
 				params: {
 					'key' : AppConfig.APIKEY
 				},

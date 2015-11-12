@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
@@ -8,19 +8,19 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.litUpVideo= false;
 	var metakeys = [];
 	//Defaults
-	$rootScope.pageTitle = "ARIES Automotive | Product Information";
-	$rootScope.pageKywds = "aries, automotive, product";
+	$rootScope.pageTitle = 'ARIES Automotive | Product Information';
+	$rootScope.pageKywds = 'aries, automotive, product';
 
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		PartService.GetPart($stateParams.id).then(function(part){
 			$scope.part = part;
 
-			var vTitle = ""
+			var vTitle = '';
 			var exists = [];
 			var str = '';
 			$scope.showConfigs = false;
 
-			angular.forEach(part.mgo_vehicles, function(vehicle){
+			angular.forEach(part.vehicle_applications, function(vehicle){
 				var v = {
 					year: vehicle.year,
 					make: vehicle.make,
@@ -31,26 +31,26 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				if(exists.indexOf(str) === -1){
 					$scope.vehicles.push(v);
 					exists.push(str);
-				};
+				}
 
-				str = v.make + " " + v.model;
+				str = v.make + ' ' + v.model;
 				if ($scope.checkForDoubles(str)) {
 					metakeys.push(str);
 				}
 			})
 
 			for (var i = 0; i < metakeys.length; i++) {
-				if (vTitle === "") {
+				if (vTitle === '') {
 					vTitle = metakeys[i];
 				} else {
-					vTitle = vTitle + ", " + metakeys[i];
+					vTitle = vTitle + ', ' + metakeys[i];
 				}
 			}
 
-			var titleStr = $scope.part.short_description + " #" + $scope.part.oldPartNumber + " | " + $scope.part.categories[0].short_description;
+			var titleStr = $scope.part.short_description + ' #' + $scope.part.oldPartNumber + ' | ' + $scope.part.categories[0].short_description;
 			$rootScope.pageTitle = titleStr;
 			$rootScope.pageDesc = $scope.part.categories[0].metaDescription;
-			$rootScope.pageKywds = "aries, " + $scope.part.short_description + ", " + vTitle;
+			$rootScope.pageKywds = 'aries, ' + $scope.part.short_description + ', ' + vTitle;
 
 	});
 }
@@ -60,10 +60,10 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	});
 
 	$scope.renderYouTube = function(vid){
-		if(vid.channels === undefined || vid.channels.length === 0){
+		if(vid.channel === undefined || vid.channel.length === 0){
 			return '';
 		}
-		return $sce.trustAsHtml(vid.channels[0].embedCode.replace(vid.channels[0].foreignId,vid.channels[0].foreignId+'?rel=0'));
+		return $sce.trustAsHtml(vid.channel[0].embed_code.replace(vid.channel[0].foreign_id,vid.channel[0].foreign_id+'?rel=0'));
 	};
 
 	$scope.checkForDoubles = function(combo){
@@ -89,7 +89,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		for (var i = $scope.part.content.length - 1; i >= 0; i--) {
 			var con = $scope.part.content[i];
-			if(con.contentType.Type === 'CategoryBrief'){
+			if(con.contentType.type === 'CategoryBrief'){
 				return con.text;
 			}
 		}
@@ -101,7 +101,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		for (var i = $scope.part.content.length - 1; i >= 0; i--) {
 			var con = $scope.part.content[i];
-			if(con.contentType.Type === 'HTMLDescription'){
+			if(con.contentType.type === 'HTMLDescription'){
 				return con.text;
 			}
 		}
@@ -114,7 +114,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		for (var i = $scope.part.content.length - 1; i >= 0; i--) {
 			var con = $scope.part.content[i];
-			if(con.contentType.Type === 'Bullet' && bulls.indexOf(con.text) === -1){
+			if(con.contentType.type === 'Bullet' && bulls.indexOf(con.text) === -1){
 				bulls.push(con.text);
 			}
 		}
@@ -143,11 +143,11 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	};
 	$scope.toggleInstallSheet = function(){
 		$scope.litUp = !$scope.litUp;
-	}
+	};
 	$scope.toggleVideoLightbox = function(v){
 		$scope.vid = v;
 		$scope.litUpVideo = !$scope.litUpVideo;
-	}
+	};
 	$scope.getInstallVideo = function(){
 		if($scope.part === undefined || $scope.part.videos === undefined){
 			return '';
@@ -177,27 +177,30 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
-		var facebookURL = "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber + "&_rdr";
+		var facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber + '&_rdr';
 		window.$windowScope = $scope;
-		window.open(facebookURL, "Share ARIES Automotive", "width=500, height=500");
+		window.open(facebookURL, 'Share ARIES Automotive', 'width=500, height=500');
 
 	};
 	$scope.ShareTwitter = function(){
 		if($scope.part === undefined){
 			return '';
 		}
-		var pageURL = "http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber;
-		var tweetText = $scope.part.short_description + " - " + $scope.part.oldPartNumber;
-		var twitterURL = "https://twitter.com/intent/tweet?text=" + tweetText + "&url=" + pageURL + "&via=ariesautomotive&original_referer=" + pageURL;
+		var pageURL = 'http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber;
+		var tweetText = $scope.part.short_description + ' - ' + $scope.part.oldPartNumber;
+		var twitterURL = 'https://twitter.com/intent/tweet?text=' + tweetText + '&url=' + pageURL + '&via=ariesautomotive&original_referer=' + pageURL;
 		window.$windowScope = $scope;
-		window.open(twitterURL, "Tweet ARIES Automotive", "width=500, height=500");
+		window.open(twitterURL, 'Tweet ARIES Automotive', 'width=500, height=500');
 	};
 	$scope.ShareGoogle = function(){
 		if($scope.part === undefined){
 			return '';
 		}
-		var googleURL = "https://plus.google.com/share?url=http%3A%2F%2Fariesautomotive.com%2Fpart%2F" + $scope.part.oldPartNumber;
+		var googleURL = 'https://plus.google.com/share?url=http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber;
 		window.$windowScope = $scope;
-		window.open(googleURL, "Share ARIES Automotive", "width=500, height=500");
+		window.open(googleURL, 'Share ARIES Automotive', 'width=500, height=500');
 	};
+	$scope.goTo = function(path){
+		$location.path(path);
+	}
 }]);
