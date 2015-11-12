@@ -15,40 +15,12 @@
 						<h2 id="catTitleProds">[[category.title | uppercase]] PRODUCTS</h2>
 
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
+							
 							<!-- Products -->
 							<div class="product row well" ng-click="goTo('/part/[[p.oldPartNumber]]')" ng-repeat="p in parts">
-								<div class="product-header">
-									<span class="product-desc">
-										<a href="/part/[[p.oldPartNumber]]">[[p.short_description | uppercase]]
-											<span class="product-id">[[p.oldPartNumber]]</span>
-										</a>
-									</span>
-								</div>
 
-								<!-- Image -->
-								<div class="product-image col-xs-12 col-sm-12 col-md-3 col-lg-2">
-									<div ng-if="p.images.length > 1">
-										<img ng-repeat="img in p.images | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
-									</div>
-									<div ng-if="!p.images">
-										<img class="img-responsive" src="/assets/img/partImgPlaceholder.jpg" alt="Image for [[p.title]]" />
-									</div>
-								</div>
+								<part-box part="p"></part-box>
 
-								<div class=" col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
-									<!-- Price -->
-									<div class="product-price" ng-repeat="price in p.pricing | filter:{type:'List'} | limitTo:1" ng-if="price.price > 0">
-										<span class="msrp">MSRP <span class="price">[[price.price | currency]]</span></span>
-									</div>
-
-									<!-- Attributes -->
-									<div class="product-attr">
-										<!-- <span class="title">Details:</span> -->
-										<ul>
-											<li ng-repeat="attr in p.attributes | orderBy:'key'"><strong>[[attr.key]]:</strong> [[attr.value]]</li>
-										</ul>
-									</div>
-								</div>
 							</div>
 							<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 							<div class="clearfix"></div>
