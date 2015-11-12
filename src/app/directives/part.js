@@ -4,7 +4,7 @@ angular.module('ariesautomotive').directive('partBox', function() {
 		scope: {
 			p: '=part'
 		},
-		templateUrl: '/app/controllers/part/part_box.html',
+		templateUrl: 'app/controllers/part/part_box.html',
 		controller: 'PartController'
 	};
 });
