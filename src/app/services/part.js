@@ -53,7 +53,8 @@ angular.module('ariesautomotive').factory('PartService', ['$http','$q','AppConfi
 				method: 'get',
 				url: AppConfig.APIURL + '/part/featured',
 				params: {
-					'key': AppConfig.APIKEY
+					'key': AppConfig.APIKEY,
+					'brandID':AppConfig.BRAND_ID
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
