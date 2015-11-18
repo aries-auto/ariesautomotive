@@ -29,7 +29,7 @@ angular.module('ariesautomotive').factory('BecomeDealerService', ['$http', 'AppC
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				responseType: 'jsonp'					
+				responseType: 'jsonp'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}
