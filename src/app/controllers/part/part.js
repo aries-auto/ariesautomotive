@@ -133,10 +133,14 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		return '';
 	};
 	$scope.getInstallSheet = function(){
+		console.log($scope.part)
 		if($scope.part === undefined || $scope.part.install_sheet === undefined){
 			return '';
 		}
 		if($scope.part === null || $scope.part.install_sheet === null){
+			return '';
+		}
+		if($scope.part.install_sheet.Path === ""){
 			return '';
 		}
 		return $sce.trustAsResourceUrl($scope.part.install_sheet.Scheme +'://'+$scope.part.install_sheet.Host+$scope.part.install_sheet.Path);
