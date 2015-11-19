@@ -133,7 +133,6 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		return '';
 	};
 	$scope.getInstallSheet = function(){
-		console.log($scope.part)
 		if($scope.part === undefined || $scope.part.install_sheet === undefined){
 			return '';
 		}
@@ -171,7 +170,6 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.shadowbox = function(obj, type){
 		switch(type){
 			case 'video':
-				console.log('implement shadowbox video');
 				break;
 			default:
 				break;
