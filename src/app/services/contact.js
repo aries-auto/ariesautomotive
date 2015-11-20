@@ -8,7 +8,8 @@ angular.module('ariesautomotive').factory('ContactService', ['$http','$q', 'AppC
 				method: 'get',
 				url: AppConfig.APIURL + '/contact/types',
 				params:{
-					'key' : AppConfig.APIKEY
+					'key' : AppConfig.APIKEY,
+					'brandID':AppConfig.BRAND_ID
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
