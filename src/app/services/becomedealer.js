@@ -8,7 +8,8 @@ angular.module('ariesautomotive').factory('BecomeDealerService', ['$http', 'AppC
 				method: 'get',
 				url: AppConfig.APIURL + '/dealers/business/classes',
 				params: {
-					'key': AppConfig.APIKEY
+					'key': AppConfig.APIKEY,
+					'brandID':AppConfig.BRAND_ID
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
