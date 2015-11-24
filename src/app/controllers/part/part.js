@@ -113,9 +113,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			return bulls;
 		}
 
-		var bullLen = $scope.part.content.length;
-
-		for (var i = 0; i < bullLen; i++) {
+		for (var i = 0; i < $scope.part.content.length; i++) {
 			var con = $scope.part.content[i];
 			if(con.contentType.type === 'Bullet' && bulls.indexOf(con.text) === -1){
 				bulls.push(con.text);
