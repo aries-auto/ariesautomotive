@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/curt-labs/GoAPI/models/products"
+	"github.com/curt-labs/api/models/products"
 
 	"appengine"
 	"appengine/urlfetch"

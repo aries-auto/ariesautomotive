@@ -1,15 +1,17 @@
 package seo
 
 import (
-	"appengine"
-	"appengine/urlfetch"
 	"encoding/json"
 	"fmt"
-	"github.com/curt-labs/GoAPI/models/news"
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"github.com/curt-labs/API/models/news"
+
+	"appengine"
+	"appengine/urlfetch"
 )
 
 type NewsMatcher struct {
