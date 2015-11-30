@@ -1,127 +1,171 @@
 <!doctype html>
 <html class="no-js" ng-app="ariesautomotive">
-  <head>
-    <meta charset="utf-8">
-    <title ng-bind="pageTitle">Aries Automotive</title>
-    <base href="/">
-    <meta name="fragment" content="!">
-    <meta name="description" ng-bind="pageDesc" content="">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
-    <meta name="keywords" ng-bind="pageKywds" content="">
-    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
-    <!-- <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/path/to/favicon-152.png?v=2"> -->
 
-    <!-- For iPad with high-resolution Retina display running iOS ≤ 6: -->
-    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2"> -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/ico/apple-icon-144x144.png?v=2">
+<head>
+	<meta charset="utf-8">
+	<title ng-bind="pageTitle">Aries Automotive</title>
+	<base href="/">
+	<meta name="fragment" content="!">
+	<meta name="description" ng-bind="pageDesc" content="">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+	<meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
+	<meta name="keywords" ng-bind="pageKywds" content="">
+	<!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+	<!-- <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/path/to/favicon-152.png?v=2"> -->
 
-    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
-    <!-- <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/path/to/favicon-120.png?v=2"> -->
+	<!-- For iPad with high-resolution Retina display running iOS ≤ 6: -->
+	<!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2"> -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/ico/apple-icon-144x144.png?v=2">
 
-    <!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
-    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/ico/apple-touch-icon-114x114-precompressed.png?v=2"> -->
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/ico/apple-icon-114x114.png?v=2">
+	<!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+	<!-- <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/path/to/favicon-120.png?v=2"> -->
 
-    <!-- For first- and second-generation iPad: -->
-    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/ico/apple-touch-icon-72x72-precompressed.png?v=2"> -->
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/ico/apple-icon-72x72.png?v=2">
+	<!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+	<!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/ico/apple-touch-icon-114x114-precompressed.png?v=2"> -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/ico/apple-icon-114x114.png?v=2">
 
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <!-- <link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-touch-icon-57x57-precompressed.png?v=2"> -->
-    <link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-icon-57x57.png?v=2">
-    <link rel="icon" href="/assets/img/ico/favicon-32x32.png?v=2" sizes="32x32">
-    <meta name="msapplication-TileColor" content="#FFFFFF">
-    <meta name="msapplication-TileImage" content="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2">
+	<!-- For first- and second-generation iPad: -->
+	<!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/ico/apple-touch-icon-72x72-precompressed.png?v=2"> -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/ico/apple-icon-72x72.png?v=2">
+
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<!-- <link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-touch-icon-57x57-precompressed.png?v=2"> -->
+	<link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-icon-57x57.png?v=2">
+	<link rel="icon" href="/assets/img/ico/favicon-32x32.png?v=2" sizes="32x32">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
+	<meta name="msapplication-TileImage" content="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2">
 
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <link rel="stylesheet" href="app/vendor.css">
-    <!-- bower:css -->
-    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+	<!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+	<link rel="stylesheet" href="app/vendor.css">
+	<!-- bower:css -->
+	<!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+	<!-- endbower -->
+	<!-- endbuild -->
 
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
-    <!-- inject:css -->
-    <!-- css files will be automaticaly insert here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+	<!-- build:css({.tmp/serve,src}) styles/app.css -->
+	<!-- inject:css -->
+	<!-- css files will be automaticaly insert here -->
+	<!-- endinject -->
+	<!-- endbuild -->
 
-    <!-- build:js(src) scripts/modernizr.js -->
-    <script src="lib/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
-  </head>
-  <body ng-controller="AppController" ng-cloak>
+	<!-- build:js(src) scripts/modernizr.js -->
+	<script src="lib/modernizr/modernizr.js"></script>
+	<!-- endbuild -->
+</head>
 
-		<noscript>
-			<p>testing</p>
-		</noscript>
+<body ng-controller="AppController">
 
-    <!--[if lt IE 10]>
+	<noscript>
+			<div style="width:60%;
+									height:60%;
+									position: fixed;
+									top: 20%;
+									left: 20%;
+									background-color: #FFFFFF;
+									text-align:center;
+									overflow:auto;
+									padding:20px;
+									border:1px solid #e3e3e3;
+									border-radius:4px;
+									box-shadow:1px 0 10px 2px #ccc;">
+				<strong style="color:red;">ATTENTION</strong>
+				<p>Your browser does not support javascript. Please enable javascript or click below to view the ARIES interior and exterior catalogs.</p>
+				<div style="width:100%;text-align:center;padding-top:10px;margin-bottom:20px;">
+					<div style="width:auto;display:flex;">
+						<div style="margin-left:auto;text-align:center;">
+							<a href="http://storage.googleapis.com/aries-website/catalog-2015.pdf">
+								<img src="/assets/img/catalog.png" alt="ARIES 2015 Exterior Catalog" />
+							</a>
+							<br />
+							<span>2015 Exterior Catalog</span>
+						</div>
+						<div style="margin-right:auto;text-align:center;">
+							<a href="https://storage.googleapis.com/aries-website/9900005_Catalog_Interior_SFS_%20RA.pdf">
+								<img src="https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png" alt="ARIES 2015 Interior Catalog" />
+							</a>
+							<br />
+							<span>2015 Interior Catalog</span>
+						</div>
+					</div>
+				</div>
+				<p>If you have any questions, please contact <a href="mailto:websupport@curtmfg.com">websupport@curtmfg.com</a></p>
+			</div>
+	</noscript>
+
+	<!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div>
-      <div ng-include="'components/navbar/navbar.html'"></div>
-    </div>
-    <div ui-view="body"></div>
-    <div>
-      <div ng-include="'components/footer/footer.html'"></div>
-    </div>
+	<div ng-cloak>
+		<div ng-include="'components/navbar/navbar.html'"></div>
+	</div>
+	<div ui-view="body" ng-cloak></div>
+	<div ng-cloak>
+		<div ng-include="'components/footer/footer.html'"></div>
+	</div>
 
-    <!-- Google Analytics and TypeKit Initialization -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-61502306-1');ga('send','pageview');
+	<!-- Google Analytics and TypeKit Initialization -->
+	<script>
+		(function(b, o, i, l, e, r) {
+			b.GoogleAnalyticsObject = l;
+			b[l] || (b[l] =
+				function() {
+					(b[l].q = b[l].q || []).push(arguments)
+				});
+			b[l].l = +new Date;
+			e = o.createElement(i);
+			r = o.getElementsByTagName(i)[0];
+			e.src = '//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e, r)
+		}(window, document, 'script', 'ga'));
+		ga('create', 'UA-61502306-1');
+		ga('send', 'pageview');
 
-      // load typekit
-      (function() {
-        var config = {
-          kitId: 'zgp0frb'
-        };
-        var d = false;
-        var tk = document.createElement('script');
-        tk.src = '//use.typekit.net/' + config.kitId + '.js';
-        tk.type = 'text/javascript';
-        tk.async = 'true';
-        tk.onload = tk.onreadystatechange = function() {
-          var rs = this.readyState;
-          if (d || rs && rs !== 'complete' && rs !== 'loaded') {
-            return;
-          }
-          d = true;
-          try {
-            Typekit.load(config);
-          } catch (e) {}
-        };
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(tk, s);
-      })();
-    </script>
+		// load typekit
+		(function() {
+			var config = {
+				kitId: 'zgp0frb'
+			};
+			var d = false;
+			var tk = document.createElement('script');
+			tk.src = '//use.typekit.net/' + config.kitId + '.js';
+			tk.type = 'text/javascript';
+			tk.async = 'true';
+			tk.onload = tk.onreadystatechange = function() {
+				var rs = this.readyState;
+				if (d || rs && rs !== 'complete' && rs !== 'loaded') {
+					return;
+				}
+				d = true;
+				try {
+					Typekit.load(config);
+				} catch (e) {}
+			};
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(tk, s);
+		})();
+	</script>
 
-    <!-- build:js(src) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+	<!-- build:js(src) scripts/vendor.js -->
+	<!-- bower:js -->
+	<!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
+	<!-- endbower -->
+	<!-- endbuild -->
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-    <!-- inject:js -->
-    <!-- js files will be automaticaly insert here -->
-    <!-- endinject -->
+	<!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+	<!-- inject:js -->
+	<!-- js files will be automaticaly insert here -->
+	<!-- endinject -->
 
-    <!-- inject:partials -->
-    <!-- angular templates will be automatically converted in js and inserted here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+	<!-- inject:partials -->
+	<!-- angular templates will be automatically converted in js and inserted here -->
+	<!-- endinject -->
+	<!-- endbuild -->
 
-  </body>
+</body>
+
 </html>
