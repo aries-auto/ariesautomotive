@@ -1,21 +1,7 @@
 'use strict';
 
-angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppConfig', function($http, $q, AppConfig){
+angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppConfig', 'localStorageService', function($http, $q, AppConfig, localStorageService){
 	return {
-		getYears: function(){
-			var def = $q.defer();
-			$http({
-				method: 'post',
-				url: AppConfig.APIURL + '/vehicle/mongo/allCollections',
-				data:'',
-				headers:{
-					'Content-Type':'application/json; charset=UTF-8'
-			},
-				responseType: 'jsonp',
-				params: { 'key': AppConfig.APIKEY}
-			}).success(def.resolve).error(def.reject);
-			return def.promise;
-		},
 		collections: function(){
 			var def = $q.defer();
 			$http({
@@ -34,7 +20,7 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 
 			$http({
 				method:'post',
-				url:AppConfig.APIURL + '/vehicle/mongo',
+				url:AppConfig.APIURL + '/vehicle/mongo/allCollections',
 				data:$.param(vehicle),
 				headers:{
 					'Content-Type': 'application/x-www-form-urlencoded'
@@ -74,6 +60,12 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 				}
 			}
 			return true;
+		},
+		setVehicle : function(v) {
+			return localStorageService.set('vehicle', v);
+		},
+		clear : function() {
+			return localStorageService.remove('vehicle');
 		}
 	};
 }]);
