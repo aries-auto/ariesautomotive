@@ -197,7 +197,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 				url: '/vehicle/:year/:make/:model',
 				views: {
 					'body': {
-						templateUrl: 'app/controllers/warranties/index.html',
+						templateUrl: 'app/controllers/vehicle/index.html',
 						controller: 'VehicleController'
 					},
 					'lookup': lookupState

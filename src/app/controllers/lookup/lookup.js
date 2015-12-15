@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('ariesautomotive').controller('LookupController', ['$scope', '$window', '$timeout', 'LookupService', '$location', '$rootScope', 'localStorageService', 'InventoryService', function($scope, $window, $timeout, LookupService, $location, $rootScope, localStorageService, InventoryService) {
+angular.module('ariesautomotive').controller('LookupController', ['$scope', '$window', '$timeout', 'LookupService', '$location', '$rootScope', 'localStorageService', function($scope, $window, $timeout, LookupService, $location, $rootScope, localStorageService) {
 	$scope.title = 'Your Vehicle';
 	$scope.vehicle_string = '';
 	$scope.valid_vehicle = false;
@@ -192,17 +192,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 			}
 			if (resp.parts) {
 				$scope.parts = resp.parts;
-				InventoryService.getInventoryByParts(resp.parts).then(function(respo){
-					let pInvs = respo.data;
-					pInvs.forEach(function(pi) {
-						$scope.parts.forEach(function(p) {
-							p.PartInventory = {};
-							if (pi.PartID === p.id) {
-								p.PartInventory = pi;
-							}
-						});
-					});
-				});
 				$scope.processing = false;
 				return;
 			}
