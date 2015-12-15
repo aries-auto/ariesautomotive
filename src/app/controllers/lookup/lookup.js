@@ -62,18 +62,18 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 	// 	look.className += ' show';
 	// 	return;
 	// };
-	// $scope.submitVehicle = function() {
-	//
-	// 	var l = $location.path();
-	// 	var path = '/vehicle/' + $scope.vehicle.collection + '/' + $scope.vehicle.year + '/' + $scope.vehicle.make + '/' + $scope.vehicle.model;
-	// 	if ($scope.vehicle.style !== '') {
-	// 		path += '/' + $scope.vehicle.style;
-	// 	}
-	// 	if (l !== path) {
-	// 		$location.path(path);
-	// 	}
-	// 	$scope.valid_vehicle = true;
-	// };
+	$scope.submitVehicle = function() {
+
+		var l = $location.path();
+		var path = '/vehicle/aries' + '/' + $scope.vehicle.year + '/' + $scope.vehicle.make + '/' + $scope.vehicle.model;
+		if ($scope.vehicle.style !== '') {
+			path += '/' + $scope.vehicle.style;
+		}
+		if (l !== path) {
+			$location.path(path);
+		}
+		$scope.valid_vehicle = true;
+	};
 	// $scope.generateVehicleString = function() {
 	// 	var str = '';
 	// 	if ($scope.vehicle.year === undefined || $scope.vehicle.make === undefined || $scope.vehicle.model === undefined) {
