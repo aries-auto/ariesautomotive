@@ -11,13 +11,13 @@
 		<div class="clearfix"></div>
 	</a>
 
-	<form ng-submit="submitVehicle()" class="lookup ehicle-data form-inline">
-		<div class="form-group">
+	<form ng-submit="submitVehicle()" class="lookup vehicle-data form-inline">
+		<!-- <div class="form-group">
 			<div id="cat_lookup_label" class="nodisplay">Vehicle Category Lookup</div>
 			<select class="form-control" ng-model="vehicle.collection" ng-options="col as (col | uppercase) for col in collections" ng-change="resetYear()" aria-labelledby="cat_lookup_label">
 				<option value="">- Select Category -</option>
 			</select>
-		</div>
+		</div> -->
 		<div class="form-group">
 			<div id="year_lookup_label" class="nodisplay">Vehicle Year Lookup</div>
 			<select class="form-control" ng-model="vehicle.year" ng-options="year as year for year in years" ng-change="resetMake()" aria-labelledby="year_lookup_label">

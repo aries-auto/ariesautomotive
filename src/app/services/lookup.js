@@ -2,6 +2,20 @@
 
 angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppConfig', function($http, $q, AppConfig){
 	return {
+		getYears: function(){
+			var def = $q.defer();
+			$http({
+				method: 'post',
+				url: AppConfig.APIURL + '/vehicle/mongo/allCollections',
+				data:'',
+				headers:{
+					'Content-Type':'application/json; charset=UTF-8'
+			},
+				responseType: 'jsonp',
+				params: { 'key': AppConfig.APIKEY}
+			}).success(def.resolve).error(def.reject);
+			return def.promise;
+		},
 		collections: function(){
 			var def = $q.defer();
 			$http({
