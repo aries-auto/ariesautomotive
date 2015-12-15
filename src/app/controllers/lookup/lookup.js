@@ -22,9 +22,14 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 	$scope.styles = [];
 	$scope.collections = [];
 
-	// LookupService.getYears().then(function(data) {
-	// 	$scope.years = data.available_years;
-	// });
+	if (!this.$lookup.validateBaseVehicle($scope.vehicle)) {
+		$scope.vehicle = {};
+		this.$lookup.collections().then(function(resp) {
+			$scope.collections = resp.data;
+		});
+	} else {
+		$scope.validVehicle = true;
+	}
 
 
 	$scope.updateVehicle = function() {

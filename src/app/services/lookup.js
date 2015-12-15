@@ -60,6 +60,20 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 			}).success(def.resolve).error(def.reject);
 
 			return def.promise;
+		},
+		validateBaseVehicle : function(v) {
+			if (v === undefined || v === null) {
+				return false;
+			}
+
+			var requiredProps = ['year', 'make', 'model'];
+			var req;
+			for (req in requiredProps) {
+				if (v[req] === undefined || v[req] === null || v[req] === '') {
+					return false;
+				}
+			}
+			return true;
 		}
 	};
 }]);
