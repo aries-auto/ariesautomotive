@@ -138,62 +138,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 					},
 					'lookup': lookupState
 				}
-			})//.state('style_vehicle', {
-			// 	url: '/vehicle/:collection/:year/:make/:model/{style:.*}',
-			// 	views: {
-			// 		'body': {
-			// 			templateUrl: 'app/controllers/vehicle/index.html',
-			// 			controller: 'VehicleController'
-			// 		},
-			// 		'lookup': lookupState
-			// 	}
-			// }).state('base_vehicle', {
-			// 	url: '/vehicle/:collection/:year/:make/:model',
-			// 	views: {
-			// 		'body': {
-			// 			templateUrl: 'app/controllers/vehicle/index.html',
-			// 			controller: 'VehicleController'
-			// 		},
-			// 		'lookup': lookupState
-			// 	}
-			// }).state('make_vehicle', {
-			// 	url: '/vehicle/:collection/:year/:make',
-			// 	views: {
-			// 		'body': {
-			// 			templateUrl: 'app/controllers/vehicle/index.html',
-			// 			controller: 'VehicleController'
-			// 		},
-			// 		'lookup': lookupState
-			// 	}
-			// }).state('year_vehicle', {
-			// 	url: '/vehicle/:collection/:year',
-			// 	views: {
-			// 		'body': {
-			// 			templateUrl: 'app/controllers/vehicle/index.html',
-			// 			controller: 'VehicleController'
-			// 		},
-			// 		'lookup': lookupState
-			// 	}
-			// }).state('col_vehicle', {
-			// 	url: '/vehicle/:collection',
-			// 	views: {
-			// 		'body': {
-			// 			templateUrl: 'app/controllers/vehicle/index.html',
-			// 			controller: 'VehicleController'
-			// 		},
-			// 		'lookup': lookupState
-			// 	}
-			// }).state('empty_vehicle', {
-			// 	url: '/vehicle',
-			// 	views: {
-			// 		'body': {
-			// 			templateUrl: 'app/controllers/vehicle/index.html',
-			// 			controller: 'VehicleController'
-			// 		},
-			// 		'lookup': lookupState
-			// 	}
-			// })
-			.state('lookup_vehicle', {
+			}).state('lookup_vehicle', {
 				url: '/vehicle/:year/:make/:model',
 				views: {
 					'body': {

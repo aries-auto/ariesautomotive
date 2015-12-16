@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope){
+angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location','$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope){
 
-	$scope.vehicle = {};
 	$scope.collections = [];
 	$scope.years = [];
 	$scope.makes = [];
@@ -14,6 +13,13 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 	$rootScope.pageTitle = "Automotive Accessories | Custom Fit | Vehicle Specific | ARIES";
 	$rootScope.pageDesc = "Many ARIES parts are made for a vehicle-specific fit. Look up your vehicle to find ARIES products that fit your specific year, make, model and submodel.";
 	$rootScope.pageKywds = "aries, custom fit, vehicle specific, automotive, accessories";
+
+	$scope.vehicle = LookupService.getVehicle();
+	if (!LookupService.validateBaseVehicle($scope.vehicle)) {
+		//LookupService.clear();
+		//$location.path('/');
+		return;
+	}
 
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);

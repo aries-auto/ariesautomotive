@@ -52,10 +52,10 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 				return false;
 			}
 
-			var requiredProps = ['year', 'make', 'model'];
-			var req;
-			for (req in requiredProps) {
-				if (v[req] === undefined || v[req] === null || v[req] === '') {
+			var props = ['year', 'make', 'model'];
+			var i;
+			for (i = 0; i < props.length; i++) {
+				if (v[props[i]] === undefined || v[props[i]] === null || v[props[i]] === '') {
 					return false;
 				}
 			}
@@ -63,6 +63,9 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q','AppCo
 		},
 		setVehicle : function(v) {
 			return localStorageService.set('vehicle', v);
+		},
+		getVehicle : function() {
+			return localStorageService.get('vehicle');
 		},
 		clear : function() {
 			return localStorageService.remove('vehicle');
