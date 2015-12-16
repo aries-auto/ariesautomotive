@@ -103,7 +103,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 
 		$scope.valid_vehicle = false;
 		$timeout(function() {
-			$scope.showLookup();
 			$scope.vehicle = {
 				year: 0,
 				make: '',

@@ -16,8 +16,8 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 
 	$scope.vehicle = LookupService.getVehicle();
 	if (!LookupService.validateBaseVehicle($scope.vehicle)) {
-		//LookupService.clear();
-		//$location.path('/');
+		LookupService.clear();
+		$location.path('/');
 		return;
 	}
 
@@ -170,6 +170,33 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 			$scope.err = err;
 		});
 	}
+
+	$scope.getCategoryParts = function() {
+			$scope.processing = true;
+			LookupService.queryCategoryStyles($scope.vehicle).then(function(resp) {
+				$scope.totalNumberParts = 0;
+
+				let categoryparts = {};
+
+				for (let title in resp.data) {
+					if (!$scope.tab) {
+						$scope.tab = title;
+					}
+					categoryparts[title] = resp.data[title];
+					categoryparts[title].name = title;
+					if ($scope.vehicle.style && $scope.vehicle.style !== '') {
+						categoryparts[title].style = $scope.vehicle.style;
+					}
+					$scope.totalNumberParts += resp.data[title].parts.length;
+					categoryparts[title].style_required = LookupService.checkStyleRequiredToAddToCart(categoryparts[title]);
+				}
+
+				$scope.processing = false;
+				$scope.categoryparts = categoryparts;
+			}, function(err) {
+				$rootScope.$broadcast('error', err.data.message);
+			});
+		};
 
 	CategoryService.GetParents().then(function(data){
 		$scope.categories = [];

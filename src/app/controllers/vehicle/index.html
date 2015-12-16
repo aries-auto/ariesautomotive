@@ -66,40 +66,73 @@
 				</div>
 			</div>
 			<div class="form-group">
-    			<div class="col-sm-offset-2 col-sm-6">
-	      			<button type="submit" class="btn btn-default">Send Inquiry</button>
-	      			<span class="success" ng-if="inquiry_success">Your inquiry has been submitted, thank you for your interest in ARIES Automotive.</span>
-	      			<span class="success" ng-if="err.messageDetails">Error: [[err.messageDetails]]</span>
-	    		</div>
-	  		</div>
+				<div class="col-sm-offset-2 col-sm-6">
+					<button type="submit" class="btn btn-default">Send Inquiry</button>
+					<span class="success" ng-if="inquiry_success">Your inquiry has been submitted, thank you for your interest in ARIES Automotive.</span>
+					<span class="success" ng-if="err.messageDetails">Error: [[err.messageDetails]]</span>
+				</div>
+			</div>
 		</form>
 	</div>
 
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
 
-			<div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
+			<div>
+				<span ng-show="processing">
+					<h3>Loading Part Results...</h3>
+					<md-progress-linear class="md-warn" md-mode="indeterminate"></md-progress-linear>
+				</span>
+				<span ng-show="!processing">
+					<!-- <h3 class="vehicle-results-heading">We found {{ totalNumberParts || 0 }} products for a {{ vehicleString() | uppercase}} </h3> -->
+				</span>
+			</div>
+			
+			<ul class="nav nav-tabs">
+				<li ng-repeat="cat in categoryparts"><a href="#">[[cat.name]]</a><li>
+				<!-- <md-tab ng-repeat="(i,cat) in categoryparts" label="{{i}} ({{cat.parts.length}})" ng-click="setTab(i)">
+					<md-content></md-content>
+				</md-tab> -->
+			</ul>
+			<!-- <div ng-repeat="(i, cat) in categoryparts" ng-if="tab === i" layout-padding>
+				<md-content class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0">
+					<div flex="50">
+						<p class="md-display-1">{{ i | uppercase }}</p>
+						<p class="md-title">Please select a style that properly matches your vehicle.</p>
+						<md-select ng-model="cat.style" aria-label="Select Style for {{ cat.title }}" placeholder="Select a Style">
+							<md-option ng-repeat="style in cat.available_styles">
+								{{ style | uppercase }}
+							</md-option>
+						</md-select>
+					</div>
+				</md-content>
+
+				<part-rows ng-if="cat.style || !cat.available_styles || cat.available_styles.length === 0" class="md-tabs-content" data-style="cat.style" ng-model="cat.parts"></part>
+			</div> -->
+
+			<!-- <div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
 				<div class="container">
 					<h2 id="catTitleProds">
 						<span class="collection">[[ vehicle.collection ]]</span> for [[generateVehicleString()]]
 					</h2>
 
-					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
-						<!-- Products -->
+					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view"> -->
+			<!-- Products -->
 
-						<part-box parts="parts"></part-box>
+			<!-- <part-box parts="parts"></part-box>
 						<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 						<div class="clearfix"></div>
-					</div>
+					</div> -->
 
-					<!-- Pagination -->
-					<div class="clearfix"></div>
+			<!-- Pagination -->
+			<!-- <div class="clearfix"></div>
 					<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="pagination !== undefined && pagination.total_items > parts.length">
 						<span>Load more</span>
-					</a>
+					</a> -->
 
-				</div>
-			</div>
 		</div>
 	</div>
+
+</div>
+</div>
 </div>
