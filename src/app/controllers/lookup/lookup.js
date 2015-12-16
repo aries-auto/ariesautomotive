@@ -98,9 +98,9 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 	// 	$rootScope.full_vehicle = str;
 	// };
 	$scope.clearVehicle = function() {
-		if (!LookupService.delete()) {
-			return;
-		}
+		LookupService.clear();
+		$scope.vehicle = {};
+
 		$scope.valid_vehicle = false;
 		$timeout(function() {
 			$scope.showLookup();
