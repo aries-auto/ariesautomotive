@@ -46,6 +46,8 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q', 'AppC
 					'key': AppConfig.APIKEY
 				}
 			}).success(def.resolve).error(def.reject);
+
+			return def.promise;
 		},
 		checkStyleRequiredToAddToCart: function(cat) {
 			if (!cat.available_styles || cat.available_styles.length > 0) {

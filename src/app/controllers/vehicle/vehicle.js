@@ -17,9 +17,44 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 	$scope.vehicle = LookupService.getVehicle();
 	if (!LookupService.validateBaseVehicle($scope.vehicle)) {
 		LookupService.clear();
+		$scope.vehicle = {};
 		$location.path('/');
-		return;
+	} else {
+		$scope.validVehicle = true;
 	}
+
+	$scope.getCategoryParts = function() {
+			$scope.processing = true;
+
+			LookupService.queryCategoryStyles($scope.vehicle).then(function(resp) {
+				$scope.totalNumberParts = 0;
+
+				var categoryparts = {};
+				var title;
+				console.log(resp);
+				for (title in resp) {
+					console.log(title);
+					if (!$scope.tab) {
+						$scope.tab = title;
+					}
+					categoryparts[title] = resp[title];
+					categoryparts[title].name = title;
+					if ($scope.vehicle.style && $scope.vehicle.style !== '') {
+						categoryparts[title].style = $scope.vehicle.style;
+					}
+					$scope.totalNumberParts += resp[title].parts.length;
+					categoryparts[title].style_required = LookupService.checkStyleRequiredToAddToCart(categoryparts[title]);
+				}
+
+				$scope.processing = false;
+				$scope.categoryparts = categoryparts;
+				console.log(categoryparts);
+			}, function(err) {
+				$rootScope.$broadcast('error', err.data.message);
+			});
+		};
+
+		$scope.getCategoryParts();
 
 	$scope.scrollTo = function(elementId){
 		$location.hash(elementId);
@@ -170,33 +205,6 @@ angular.module('ariesautomotive').controller('VehicleController',  ['$scope', 'L
 			$scope.err = err;
 		});
 	}
-
-	$scope.getCategoryParts = function() {
-			$scope.processing = true;
-			LookupService.queryCategoryStyles($scope.vehicle).then(function(resp) {
-				$scope.totalNumberParts = 0;
-
-				let categoryparts = {};
-
-				for (let title in resp.data) {
-					if (!$scope.tab) {
-						$scope.tab = title;
-					}
-					categoryparts[title] = resp.data[title];
-					categoryparts[title].name = title;
-					if ($scope.vehicle.style && $scope.vehicle.style !== '') {
-						categoryparts[title].style = $scope.vehicle.style;
-					}
-					$scope.totalNumberParts += resp.data[title].parts.length;
-					categoryparts[title].style_required = LookupService.checkStyleRequiredToAddToCart(categoryparts[title]);
-				}
-
-				$scope.processing = false;
-				$scope.categoryparts = categoryparts;
-			}, function(err) {
-				$rootScope.$broadcast('error', err.data.message);
-			});
-		};
 
 	CategoryService.GetParents().then(function(data){
 		$scope.categories = [];
