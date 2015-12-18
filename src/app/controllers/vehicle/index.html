@@ -89,11 +89,11 @@
 			</div>
 
 			<ul class="nav nav-tabs" role="tablist">
-				<li ng-repeat="(i,cat) in categoryparts"><a href="#[[i]]" data-toggle="tab" role="tab" ng-click="setTab(i)">[[cat.name]]</a>
+				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(1)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name]]</a>
 					<li>
 			</ul>
 			<div class="tab-content">
-				<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-if="tab === i" class="tab-pane fade" role="tabpanel" layout-padding>
+				<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
 					<div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0">
 						<div flex="50">
 							<p class="md-display-1">[[ i | uppercase ]]</p>
@@ -125,10 +125,10 @@
 								<div class="clearfix"></div>
 
 							</div>
-
 							<!-- <div ng-if="cat.style || !cat.available_styles || cat.available_styles.length === 0" class="md-tabs-content" data-style="cat.style" ng-model="cat.parts"></div> -->
 						</div>
 					</div>
+
 				</div>
 			</div>
 

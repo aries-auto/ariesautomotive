@@ -47,13 +47,16 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 
 			$scope.processing = false;
 			$scope.categoryparts = categoryparts;
-			console.log(categoryparts);
 		}, function(err) {
 			$rootScope.$broadcast('error', err.data.message);
 		});
 	};
 
 	$scope.getCategoryParts();
+	$('#catTabs a').click(function (e) {
+		e.preventDefault;
+		$(this).tab('show');
+	})
 
 	$scope.scrollTo = function(elementId) {
 		$location.hash(elementId);
@@ -78,6 +81,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 			$scope.categoryparts[v.collection] = resp[v.collection];
 			$scope.categoryparts[v.collection].name = v.collection;
 			$scope.categoryparts[cat.name].style = style;
+			console.log($scope.categoryparts);
 		}, function(err) {
 			$rootScope.$broadcast('error', err.data.message);
 		});
@@ -85,6 +89,9 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	$scope.setTab = function(tab) {
 		$scope.tab = tab;
 	};
+	$scope.isSet = function(tabID) {
+		return $scope.tab === tabID;
+	}
 
 	$scope.vehicleLink = function(val) {
 		val = encodeURIComponent(val);
