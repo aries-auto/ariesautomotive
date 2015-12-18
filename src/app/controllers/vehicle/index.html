@@ -88,51 +88,70 @@
 				</span>
 			</div>
 
-			<ul class="nav nav-tabs">
-				<li ng-repeat="cat in categoryparts">[[cat.name]]<li>
-				<!-- <md-tab ng-repeat="(i,cat) in categoryparts" label="{{i}} ({{cat.parts.length}})" ng-click="setTab(i)">
-					<md-content></md-content>
-				</md-tab> -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li ng-repeat="(i,cat) in categoryparts"><a href="#[[i]]" data-toggle="tab" role="tab" ng-click="setTab(i)">[[cat.name]]</a>
+					<li>
 			</ul>
-			<!-- <div ng-repeat="(i, cat) in categoryparts" ng-if="tab === i" layout-padding>
-				<md-content class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0">
-					<div flex="50">
-						<p class="md-display-1">{{ i | uppercase }}</p>
-						<p class="md-title">Please select a style that properly matches your vehicle.</p>
-						<md-select ng-model="cat.style" aria-label="Select Style for {{ cat.title }}" placeholder="Select a Style">
-							<md-option ng-repeat="style in cat.available_styles">
-								{{ style | uppercase }}
-							</md-option>
-						</md-select>
+			<div class="tab-content">
+				<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-if="tab === i" class="tab-pane fade" role="tabpanel" layout-padding>
+					<div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0">
+						<div flex="50">
+							<p class="md-display-1">[[ i | uppercase ]]</p>
+							<p class="md-title">Please select a style that properly matches your vehicle.</p>
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="cat.style" aria-label="Select Style for [[ cat.title ]]" ng-click="setCategoryStyle(cat, style)">
+									Select a Style
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li ng-repeat="style in cat.available_styles" role="presentation"><a role="menuitem" href="#">[[ style | uppercase ]]</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-				</md-content>
 
-				<part-rows ng-if="cat.style || !cat.available_styles || cat.available_styles.length === 0" class="md-tabs-content" data-style="cat.style" ng-model="cat.parts"></part>
-			</div> -->
+					<div id="catPartsContainer" class="container-fluid" ng-if="cat.parts.length > 0">
+						<div class="container">
+							<h2 id="catTitleProds">
+								<span class="collection">[[ vehicle.collection ]]</span> for [[generateVehicleString()]]
+							</h2>
 
-			<!-- <div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
+							<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
+								<!-- Products -->
+								<part-box parts="cat.parts"></part-box>
+								<div class="scrollButton" ng-click="scrollTo(productView)">
+									<span>Top</span>
+								</div>
+								<div class="clearfix"></div>
+
+							</div>
+
+							<!-- <div ng-if="cat.style || !cat.available_styles || cat.available_styles.length === 0" class="md-tabs-content" data-style="cat.style" ng-model="cat.parts"></div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+				<!-- <div id="catPartsContainer" class="container-fluid" ng-if="parts.length > 0">
 				<div class="container">
 					<h2 id="catTitleProds">
 						<span class="collection">[[ vehicle.collection ]]</span> for [[generateVehicleString()]]
 					</h2>
 
 					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view"> -->
-			<!-- Products -->
+				<!-- Products -->
 
-			<!-- <part-box parts="parts"></part-box>
+				<!-- <part-box parts="parts"></part-box>
 						<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 						<div class="clearfix"></div>
 					</div> -->
 
-			<!-- Pagination -->
-			<!-- <div class="clearfix"></div>
+				<!-- Pagination -->
+				<!-- <div class="clearfix"></div>
 					<a href="javascript:;" class="pagination" ng-click="loadMore()" ng-if="pagination !== undefined && pagination.total_items > parts.length">
 						<span>Load more</span>
 					</a> -->
 
-		</div>
-	</div>
 
-</div>
-</div>
+	</div>
 </div>
