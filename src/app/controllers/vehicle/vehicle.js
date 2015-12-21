@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
-
 	$scope.collections = [];
 	$scope.years = [];
 	$scope.makes = [];
@@ -70,13 +69,13 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		});
 	};
 	$scope.setCategoryStyle = function(cat, style) {
-		let v = $scope.vehicle;
+		var v = $scope.vehicle;
 		v.collection = cat.name;
 		v.style = style;
 		LookupService.queryCategoryStyles(v).then(function(resp) {
 			$scope.categoryparts[v.collection] = resp[v.collection];
 			$scope.categoryparts[v.collection].name = v.collection;
-			$scope.categoryparts[cat.name].style = style;
+			$scope.categoryparts[v.collection].style = style;
 		}, function(err) {
 			$rootScope.$broadcast('error', err.data.message);
 		});
@@ -132,6 +131,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 			str += ' ' + $scope.vehicle.style.trim();
 		}
 
+
 		return str.replace(/\w\S*/g, function(str) {
 			return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
 		}).toUpperCase();
@@ -155,6 +155,10 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	$scope.$on('vehicleChange', function(event, x) {
 		$scope.vehicle = x;
 		$scope.getParts();
+	});
+
+	$scope.$watch('vehicle', function() {
+		console.log("TESTING");
 	});
 
 	var i;

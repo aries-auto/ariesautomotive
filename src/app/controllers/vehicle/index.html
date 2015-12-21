@@ -112,11 +112,11 @@
 
 					<div id="catPartsContainer" class="container-fluid" ng-if="cat.style && cat.parts.length > 0">
 						<div class="container">
-							<h2 id="catTitleProds">
-								<span class="collection">[[i]]</span> for [[generateVehicleString()]]
+							<h2>
+								<span class="collection">Selected Style:</span> [[cat.style | uppercase]]
 							</h2>
 							<div>
-								<button class="btn btn-default" type="button" ng-click="resetStyle(cat)">CLEAR STYLE</button>
+								<button class="btn btn-default" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
 							</div>
 
 							<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">

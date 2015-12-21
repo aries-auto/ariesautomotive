@@ -12,6 +12,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 	$scope.models = [];
 	$scope.styles = [];
 	$scope.collections = [];
+	$scope.vehicle_string = LookupService.toString();
 
 	$scope.vehicle = LookupService.getVehicle('vehicle');
 	if($scope.vehicle === null || !LookupService.validateBaseVehicle($scope.vehicle)) {
@@ -24,12 +25,9 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 			style: '',
 			collection: ''
 		};
-		LookupService.collections().then(function(resp) {
-			$scope.collections = resp.data;
-		});
+	} else {
+		$scope.vehicle_string = LookupService.toString();
 	}
-
-
 
 	$scope.clearVehicle = function() {
 	if (($scope.makes === null) && ($scope.models === null) && (!$scope.validVehicle)) {
@@ -48,26 +46,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 		$location.path('/');
 	}
 };
-	//
-	// $scope.showLookup = function() {
-	// 	var els = document.getElementsByClassName('lookup');
-	// 	var heads = document.getElementsByClassName('lookup-heading');
-	// 	if (els.length === 0 || heads.length === 0) {
-	// 		return;
-	// 	}
-	// 	var look = els[0];
-	// 	var head = heads[0];
-	// 	if (els[0].className.indexOf('show') !== -1) { // reset
-	// 		head.querySelectorAll('.expansion-arrow')[0].className = head.querySelectorAll('.expansion-arrow')[0].className.replace(/(?:^|\s)up(?!\S)/g, ' down');
-	// 		look.className = look.className.replace(/(?:^|\s)show(?!\S)/g, '');
-	// 		return;
-	// 	}
-	//
-	// 	head.querySelectorAll('.expansion-arrow')[0].className = head.querySelectorAll('.expansion-arrow')[0].className.replace(/(?:^|\s)down(?!\S)/g, '');
-	// 	head.querySelectorAll('.expansion-arrow')[0].className += ' up';
-	// 	look.className += ' show';
-	// 	return;
-	// };
 
 	$scope.submitVehicle = function() {
 		var l = $location.path();
@@ -80,7 +58,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 		}
 		$scope.valid_vehicle = true;
 		LookupService.setVehicle($scope.vehicle);
-		$scope.vehicle_string = $scope.generateVehicleString();
 	};
 	$scope.generateVehicleString = function() {
 		var str = '';
