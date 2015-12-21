@@ -157,10 +157,6 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		$scope.getParts();
 	});
 
-	$scope.$watch('vehicle', function() {
-		console.log("TESTING");
-	});
-
 	var i;
 	if ($scope.vehicle.year === undefined && $stateParams !== {}) {
 		$scope.vehicle = {
