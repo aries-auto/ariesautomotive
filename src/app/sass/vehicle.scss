@@ -28,14 +28,13 @@
 
 .style-top-wrap {
 	padding:10px 15px;
-	margin:0px auto;
+	vertical-align: middle;
 }
 
 .sel-top-bar {
 	font-size: 22px;
-	vertical-align: middle;
 	float:left;
-	margin: 15px;
+	margin-right: 15px;
 }
 
 .set-style-btn {
@@ -58,4 +57,12 @@
 
 .style-drop {
 	float: left;
+}
+
+.tab-top {
+	padding-bottom: 15px;
+}
+
+.cat-tabs li:active{
+	color: blue;
 }
