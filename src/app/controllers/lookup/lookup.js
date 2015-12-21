@@ -5,13 +5,14 @@
 
 angular.module('ariesautomotive').controller('LookupController', ['$scope', '$window', '$timeout', 'LookupService', '$location', '$rootScope', 'localStorageService', function($scope, $window, $timeout, LookupService, $location, $rootScope, localStorageService) {
 	$scope.title = 'Your Vehicle';
-	$scope.vehicle_string = '';
 	$scope.valid_vehicle = true;
 	$scope.years = [];
 	$scope.makes = [];
 	$scope.models = [];
 	$scope.styles = [];
 	$scope.collections = [];
+	$scope.vehicle_string = '';
+	$scope.path = '';
 	$scope.vehicle_string = LookupService.toString();
 
 	$scope.vehicle = LookupService.getVehicle('vehicle');
@@ -27,6 +28,10 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 		};
 	} else {
 		$scope.vehicle_string = LookupService.toString();
+	}
+
+	if ($scope.vehicle_string !== null && $scope.vehicle_string !== '') {
+		$scope.path = '/vehicle/' + $scope.vehicle.year + '/' + $scope.vehicle.make + '/' + $scope.vehicle.model;
 	}
 
 	$scope.clearVehicle = function() {
@@ -54,6 +59,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 			path += '/' + $scope.vehicle.style;
 		}
 		if (l !== path) {
+			$scope.path = path;
 			$location.path(path);
 		}
 		$scope.valid_vehicle = true;
