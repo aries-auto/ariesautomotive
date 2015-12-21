@@ -89,32 +89,35 @@
 			</div>
 
 			<ul class="nav nav-tabs" role="tablist">
-				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(1)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name]]</a>
+				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(i)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name]]</a>
 					<li>
 			</ul>
 			<div class="tab-content">
 				<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
-					<div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0">
+					<!-- <div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0"> -->
+						<div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0">
 						<div flex="50">
-							<p class="md-display-1">[[ i | uppercase ]]</p>
 							<p class="md-title">Please select a style that properly matches your vehicle.</p>
 							<div class="dropdown">
-								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="cat.style" aria-label="Select Style for [[ cat.title ]]" ng-click="setCategoryStyle(cat, style)">
+								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="cat.style" aria-label="Select Style for [[ cat.title ]]">
 									Select a Style
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">
-									<li ng-repeat="style in cat.available_styles" role="presentation"><a role="menuitem" href="#">[[ style | uppercase ]]</a></li>
+									<li ng-repeat="style in cat.available_styles" role="presentation" ng-click="setCategoryStyle(cat, style)"><a role="menuitem" href>[[ style | uppercase ]]</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 
-					<div id="catPartsContainer" class="container-fluid" ng-if="cat.parts.length > 0">
+					<div id="catPartsContainer" class="container-fluid" ng-if="cat.style && cat.parts.length > 0">
 						<div class="container">
 							<h2 id="catTitleProds">
-								<span class="collection">[[ vehicle.collection ]]</span> for [[generateVehicleString()]]
+								<span class="collection">[[i]]</span> for [[generateVehicleString()]]
 							</h2>
+							<div>
+								<button class="btn btn-default" type="button" ng-click="resetStyle(cat)">CLEAR STYLE</button>
+							</div>
 
 							<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
 								<!-- Products -->

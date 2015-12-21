@@ -94,6 +94,13 @@ angular.module('ariesautomotive').factory('LookupService', ['$http', '$q', 'AppC
 		},
 		clear: function() {
 			return localStorageService.remove('vehicle');
+		},
+		toString: function() {
+			var v = localStorageService.get('vehicle');
+			if (!v) {
+				return '';
+			}
+			return v.year + " " + v.make + " " + v.model + " " + v.style;
 		}
 	};
 }]);

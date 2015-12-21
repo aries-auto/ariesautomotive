@@ -53,10 +53,6 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	};
 
 	$scope.getCategoryParts();
-	$('#catTabs a').click(function (e) {
-		e.preventDefault;
-		$(this).tab('show');
-	})
 
 	$scope.scrollTo = function(elementId) {
 		$location.hash(elementId);
@@ -81,7 +77,6 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 			$scope.categoryparts[v.collection] = resp[v.collection];
 			$scope.categoryparts[v.collection].name = v.collection;
 			$scope.categoryparts[cat.name].style = style;
-			console.log($scope.categoryparts);
 		}, function(err) {
 			$rootScope.$broadcast('error', err.data.message);
 		});
@@ -133,7 +128,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 
 		str = $scope.vehicle.year + ' ' + $scope.vehicle.make.trim() + ' ' + $scope.vehicle.model.trim();
 
-		if ($scope.vehicle.style !== undefined && $scope.vehicle.style !== '') {
+		if ($scope.vehicle.style !== undefined && $scope.vehicle.style !== '' && $scope.vehicle.style !== null) {
 			str += ' ' + $scope.vehicle.style.trim();
 		}
 
@@ -150,6 +145,13 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 			$scope.err = err;
 		});
 	};
+
+	$scope.resetStyle = function(cat) {
+		$scope.vehicle.style = '';
+		$scope.styles = '';
+		$scope.setCategoryStyle(cat, null);
+	};
+
 	$scope.$on('vehicleChange', function(event, x) {
 		$scope.vehicle = x;
 		$scope.getParts();
