@@ -34,10 +34,11 @@
 .sel-top-bar {
 	font-size: 22px;
 	vertical-align: middle;
+	float:left;
+	margin-right: 15px;
 }
 
 .set-style-btn {
-	margin-left: 15px;
 	font-weight: bold;
 	font-size: 16px;
 }
@@ -53,4 +54,8 @@
 	color: #FFFFFF;
 	font-weight: bold;
 	font-size: 16px;
+}
+
+.style-drop {
+	float: left;
 }
