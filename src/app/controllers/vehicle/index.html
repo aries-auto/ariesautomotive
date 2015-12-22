@@ -77,10 +77,12 @@
 
 	<div>
 		<div class="col-xs-12 col-md-12 col-lg-12 tab-top">
+			<div class="tab-wrap">
 			<ul class="nav nav-tabs nav-justified" role="tablist">
 				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(i)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name]]</a>
 					<li>
 			</ul>
+		</div>
 			<div class="tab-content">
 				<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
 					<!-- <div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0"> -->

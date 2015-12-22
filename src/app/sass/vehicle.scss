@@ -59,20 +59,32 @@
 	float: left;
 }
 
+.tab-wrap {
+	width:100%;
+	border-bottom:2px solid #ddd;
+}
+
 .tab-top {
-	padding: 15px 0px;
+	padding: 0px 0px 15px 0px;
 	background-color: #FFFFFF;
 }
 
-.nav-tabs>li {
-    height:65px;
-}
+@media (min-width: 768px) {
 
-.nav-tabs>li>a, .nav-tabs>li>a>div {
-    height:100%;
-    display:table;
-}
-.nav-tabs>li>a span {
-    display:table-cell;
-    vertical-align:middle;
+	.nav-tabs>li {
+	    height:65px;
+	}
+
+	.nav-tabs.nav-justified > li > a {
+		border: 0px;
+	}
+
+	.nav-tabs>li>a, .nav-tabs>li>a>div {
+	    height:100%;
+	    display:table;
+	}
+	.nav-tabs>li>a span {
+	    display:table-cell;
+	    vertical-align:middle;
+	}
 }
