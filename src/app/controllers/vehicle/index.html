@@ -19,7 +19,7 @@
 			<a href="[[vehicleLink(style)]]" ng-repeat="style in styles" class="vehicle-option style">[[style | uppercase]]</a>
 		</div>
 	</div>
-	<div ng-if="(parts.length == 0 || parts == null) && qualified" class="container">
+	<div ng-if="(parts.length == 0 || parts == null) && qualified && loading" class="container">
 		<form ng-submit="submitInquiry()" role="form" class="form-horizontal vehicle-inquiry" accept-charset="utf-8">
 			<h4>Vehicle Inquiry</h4>
 			<p class="lead">Well, this is embarrassing. We do not have parts for that application at this time.</p>
@@ -77,9 +77,12 @@
 
 	<div>
 		<div class="col-xs-12 col-md-12 col-lg-12 tab-top">
-			<div class="tab-wrap">
+		<div class="tab-wrap" ng-if="!loading">
+			<h3>Loading Parts...</h3>
+		</div>
+		<div class="tab-wrap" ng-if="loading">
 			<ul class="nav nav-tabs nav-justified" role="tablist">
-				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(i)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name]]</a>
+				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(i)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
 					<li>
 			</ul>
 		</div>

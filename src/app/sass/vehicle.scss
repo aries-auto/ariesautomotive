@@ -69,13 +69,22 @@
 	background-color: #FFFFFF;
 }
 
+.nav-tabs>li {
+		font-size: 15px;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  background: #F5F5F5;
+}
+
 @media (min-width: 768px) {
 
 	.nav-tabs>li {
 	    height:65px;
 	}
 
-	.nav-tabs.nav-justified > li > a {
+	.nav-tabs.nav-justified>li>a {
 		border: 0px;
 	}
 
