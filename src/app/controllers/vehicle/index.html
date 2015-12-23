@@ -19,7 +19,7 @@
 			<a href="[[vehicleLink(style)]]" ng-repeat="style in styles" class="vehicle-option style">[[style | uppercase]]</a>
 		</div>
 	</div>
-	<div ng-if="(parts.length == 0 || parts == null) && qualified && !processing"  class="container">
+	<div ng-if="qualified && display && !processing" class="container">
 		<form ng-submit="submitInquiry()" role="form" class="form-horizontal vehicle-inquiry" accept-charset="utf-8">
 			<h4>Vehicle Inquiry</h4>
 			<p class="lead">Well, this is embarrassing. We do not have parts for that application at this time.</p>
@@ -75,52 +75,53 @@
 		</form>
 	</div>
 
-	<div>
-		<div class="col-xs-12 col-md-12 col-lg-12 tab-top">
-		<div class="tab-wrap" ng-show="processing">
+	<div class="container">
+	<div class="col-xs-12 col-md-12 col-lg-12 container tab-top">
+		<div class="tab-wrap" ng-if="processing">
 			<h3>Loading Parts...</h3>
 		</div>
+
 		<div class="tab-wrap">
 			<ul class="nav nav-tabs nav-justified" role="tablist">
 				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:tab.isSet(i)}" id="catTabs"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
 					<li>
 			</ul>
 		</div>
-			<div class="tab-content">
-				<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
-					<!-- <div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0"> -->
-					<div class="category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
-							<span class="md-title sel-top-bar">Please select a style that properly matches your vehicle.</span>
-							<div class="dropdown style-drop">
-								<button class="btn btn-default dropdown-toggle set-style-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="cat.style" aria-label="Select Style for [[ cat.title ]]">
-									Select a Style
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li ng-repeat="style in cat.available_styles" role="presentation" ng-click="setCategoryStyle(cat, style)"><a role="menuitem" href>[[ style | uppercase ]]</a></li>
-								</ul>
-							</div>
+		<div class="tab-content">
+			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
+				<!-- <div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0"> -->
+				<div class="category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
+					<span class="md-title sel-top-bar">Please select a style that properly matches your vehicle.</span>
+					<div class="dropdown style-drop">
+						<button class="btn btn-default dropdown-toggle set-style-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="cat.style" aria-label="Select Style for [[ cat.title ]]">
+							Select a Style
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li ng-repeat="style in cat.available_styles" style="font-size:14px;" role="presentation" ng-click="setCategoryStyle(cat, style)"><a role="menuitem" href>[[ style | uppercase ]]</a></li>
+						</ul>
 					</div>
+				</div>
 
-					<div id="catPartsContainer" class="container-fluid" ng-if="cat.style && cat.parts.length > 0">
-						<div class="container">
-							<div class="sel-style-bar" >
-								<strong>Selected Style:</strong> [[cat.style | uppercase]]
-								<button class="btn btn-default clear-style-btn" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
+				<div id="catPartsContainer" class="container-fluid" ng-if="cat.style && cat.parts.length > 0">
+					<div class="">
+						<div class="sel-style-bar">
+							<strong>Selected Style:</strong> [[cat.style | uppercase]]
+							<button class="btn btn-default clear-style-btn" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
+						</div>
+
+						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
+							<!-- Products -->
+							<part-box parts="cat.parts"></part-box>
+							<div class="scrollButton" ng-click="scrollTo(productView)">
+								<span>Top</span>
 							</div>
-
-							<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
-								<!-- Products -->
-								<part-box parts="cat.parts"></part-box>
-								<div class="scrollButton" ng-click="scrollTo(productView)">
-									<span>Top</span>
-								</div>
-								<div class="clearfix"></div>
-
-							</div>
+							<div class="clearfix"></div>
+						</div>
 					</div>
 				</div>
 
 			</div>
+		</div>
 	</div>
 </div>

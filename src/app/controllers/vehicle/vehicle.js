@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
+angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', '$timeout', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, $timeout) {
 	$scope.collections = [];
 	$scope.years = [];
 	$scope.makes = [];
@@ -8,6 +8,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	$scope.inquiry = {};
 	$scope.inquiry_success = false;
 	$scope.qualified = false;
+	$scope.display = false;
 
 	$rootScope.pageTitle = "Automotive Accessories | Custom Fit | Vehicle Specific | ARIES";
 	$rootScope.pageDesc = "Many ARIES parts are made for a vehicle-specific fit. Look up your vehicle to find ARIES products that fit your specific year, make, model and submodel.";
@@ -46,6 +47,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 
 			$scope.categoryparts = categoryparts;
 			$scope.processing = false;
+			$scope.stopProcessing();
 		}, function(err) {
 			$rootScope.$broadcast('error', err.data.message);
 		});
@@ -246,4 +248,22 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 			}
 		}
 	});
+
+
+	$scope.stopProcessing = function() {
+		var item;
+		var sum = 0;
+		for (item in $scope.categoryparts) {
+			if ($scope.categoryparts[item].parts !== null) {
+				sum += $scope.categoryparts[item].parts.length;
+			}
+		}
+
+		if (sum === 0) {
+			$scope.display = true;
+			return;
+		}
+		$scope.display = false;
+	};
+
 }]);

@@ -70,7 +70,15 @@
 }
 
 .nav-tabs>li {
-		font-size: 15px;
+	font-size: 15px;
+}
+
+#catPartsContainer {
+	overflow: auto;
+}
+
+.product-view {
+	padding: 0px;
 }
 
 @media (min-width: 768px) {
