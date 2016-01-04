@@ -33,33 +33,33 @@ server.use('/api/content', require('./api/content'));
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
 server.get('*', async (req, res, next) => {
-  try {
-    let statusCode = 200;
-    const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
-    const css = [];
-    const context = {
-      insertCss: styles => css.push(styles._getCss()),
-      onSetTitle: value => data.title = value,
-      onSetMeta: (key, value) => data[key] = value,
-      onPageNotFound: () => statusCode = 404,
-    };
+    try {
+        let statusCode = 200;
+        const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
+        const css = [];
+        const context = {
+            insertCss: styles => css.push(styles._getCss()),
+            onSetTitle: value => data.title = value,
+            onSetMeta: (key, value) => data[key] = value,
+            onPageNotFound: () => statusCode = 404,
+        };
 
-    await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {
-      data.body = ReactDOM.renderToString(component);
-      data.css = css.join('');
-    });
+        await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {
+            data.body = ReactDOM.renderToString(component);
+            data.css = css.join('');
+        });
 
-    const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
-    res.status(statusCode).send('<!doctype html>\n' + html);
-  } catch (err) {
-    next(err);
-  }
+        const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
+        res.status(statusCode).send('<!doctype html>\n' + html);
+    } catch (err) {
+        next(err);
+    }
 });
 
 //
 // Launch the server
 // -----------------------------------------------------------------------------
 server.listen(port, () => {
-  /* eslint-disable no-console */
-  console.log(`The server is running at http://localhost:${port}/`);
+    /* eslint-disable no-console */
+    console.log(`The server is running at http://localhost:${port}/`);
 });

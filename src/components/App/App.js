@@ -11,6 +11,7 @@ import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import s from './App.scss';
 import Header from '../Header';
+import Lookup from '../Lookup';
 import Feedback from '../Feedback';
 import Footer from '../Footer';
 
@@ -56,7 +57,10 @@ class App extends Component {
     return !this.props.error ? (
       <div>
         <Header />
-        {this.props.children}
+        <Lookup years={this.props.context.years} />
+        <div className="children">
+            {this.props.children}
+        </div>
         <Feedback />
         <Footer />
       </div>
