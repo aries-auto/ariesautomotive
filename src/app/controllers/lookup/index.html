@@ -5,35 +5,32 @@
 </div>
 
 <div ng-if="!valid_vehicle">
-	<a ng-click="showLookup()" class="lookup-heading">
+	<!-- <a ng-click="showLookup()" class="lookup-heading">
 		Vehicle Lookup
 		<img src="/assets/img/arrow.png" class="expansion-arrow" alt="Expand">
 		<div class="clearfix"></div>
-	</a>
+	</a> -->
 
 	<form ng-submit="submitVehicle()" class="lookup vehicle-data form-inline">
-		<!-- <div class="form-group">
-			<div id="cat_lookup_label" class="nodisplay">Vehicle Category Lookup</div>
-			<select class="form-control" ng-model="vehicle.collection" ng-options="col as (col | uppercase) for col in collections" ng-change="resetYear()" aria-labelledby="cat_lookup_label">
-				<option value="">- Select Category -</option>
-			</select>
-		</div> -->
+		<div class="form-group lookup-heading" ng-click="showLookup()">
+			Vehicle Lookup
+		</div>
 		<div class="form-group">
 			<div id="year_lookup_label" class="nodisplay">Vehicle Year Lookup</div>
-			<select class="form-control" ng-model="vehicle.year" ng-options="year as year for year in years" ng-change="resetMake()" aria-labelledby="year_lookup_label">
+			<select class="form-control lookup-form" ng-model="vehicle.year" ng-options="year as year for year in years" ng-change="resetMake()" aria-labelledby="year_lookup_label">
 				<option value="">- Select Year -</option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<div id="make_lookup_label" class="nodisplay">Vehicle Make Lookup</div>
-			<select class="form-control" ng-model="vehicle.make" ng-options="make as (make | uppercase) for make in makes" ng-change="resetModel()" aria-labelledby="make_lookup_label">
+			<select class="form-control lookup-form" ng-model="vehicle.make" ng-options="make as (make | uppercase) for make in makes" ng-change="resetModel()" aria-labelledby="make_lookup_label">
 				<option value="">- Select Make -</option>
 			</select>
 		</div>
 		<div class="form-group">
 			<div id="model_lookup_label" class="nodisplay">Vehicle Model Lookup</div>
-			<select class="form-control" ng-model="vehicle.model" ng-options="model as (model | uppercase) for model in models" ng-change="resetStyle()" aria-labelledby="model_lookup_label">
+			<select class="form-control lookup-form" ng-model="vehicle.model" ng-options="model as (model | uppercase) for model in models" ng-change="resetStyle()" aria-labelledby="model_lookup_label">
 				<option value="">- Select Model -</option>
 			</select>
 		</div>

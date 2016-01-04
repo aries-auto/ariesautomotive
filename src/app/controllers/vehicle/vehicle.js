@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', '$timeout', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, $timeout) {
+angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
 	$scope.collections = [];
 	$scope.years = [];
 	$scope.makes = [];

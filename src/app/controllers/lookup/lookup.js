@@ -145,7 +145,7 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 
 	$scope.$watchCollection('vehicle', function(n, o) {
 		$scope.processing = true;
-		let vehicle = n;
+		var vehicle = n;
 		if (n === undefined || n === null || n === o) {
 			vehicle = {};
 		}

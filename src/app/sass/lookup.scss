@@ -36,6 +36,7 @@
 .lookup-container{
 	background-color: #f5f5f5;
 	padding: 5px;
+	text-align: center;
 
 	.lookup-heading,.vehicle-desc{
 		color: #26090D;
@@ -46,8 +47,7 @@
 		display:block;
 		height: 38px;
 		line-height: 38px;
-		text-align:center;
-	
+
 		.expansion-arrow.up{
 			transition: all 0.3s ease-in-out;
 			transform: rotate(-180deg);
@@ -69,7 +69,7 @@
 	}
 
 	.lookup{
-		display: none;
+		display: inherit;
 		-webkit-transition: all 0.3s ease-in-out;
 		-moz-transition: all 0.3s ease-in-out;
 		-o-transition: all 0.3s ease-in-out;
@@ -88,7 +88,7 @@
 		}
 
 		.view-parts-button{
-			width:100%;
+			width:auto;
 		}
 		.iconfig-button{
 			text-transform:uppercase;
@@ -102,14 +102,18 @@
 	}
 }
 
+.form-control.lookup-form {
+	margin-top: 0px;
+}
+
 
 @media(min-width: $screen-sm-max){
 	.lookup-container{
 		padding:10px;
 		.lookup-heading, .vehicle-desc{
 			font-size:18px;
-			margin-left:12.3%;
-			float:left;
+			//margin-left:12.3%;
+			//float:left;
 			padding: 0 10px 0 0;
 			display: inline-block;
 			text-align: left;
@@ -122,11 +126,12 @@
 				float:none;
 			}
 		}
-		
+
 		.lookup{
 			display: block;
 			float:left;
-			width:65%;
+			width:100%;
+			text-align:center;
 
 			.view-parts-button{
 				width:auto;
