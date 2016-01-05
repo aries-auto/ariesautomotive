@@ -36,12 +36,11 @@
 .lookup-container{
 	background-color: #f5f5f5;
 	padding: 5px;
-	text-align: center;
 
 	.lookup-heading,.vehicle-desc{
 		color: #26090D;
 		text-decoration: none;
-		font-size: 24px;
+		font-size: 18px;
 		font-weight:900;
 		text-transform: uppercase;
 		display:block;
@@ -80,7 +79,7 @@
 			display:block;
 		}
 		.form-group{
-			padding: 2px 5px;
+			padding: 2px 5px 0px 2px;
 			margin-bottom:0;
 			&:last-child{
 				padding-right:0;
@@ -112,8 +111,7 @@
 		padding:10px;
 		.lookup-heading, .vehicle-desc{
 			font-size:18px;
-			//margin-left:12.3%;
-			//float:left;
+			float:left;
 			padding: 0 10px 0 0;
 			display: inline-block;
 			text-align: left;
@@ -128,10 +126,10 @@
 		}
 
 		.lookup{
-			display: block;
+			display: inline-block;
 			float:left;
-			width:100%;
 			text-align:center;
+			margin-left: 230px;
 
 			.view-parts-button{
 				width:auto;
@@ -143,5 +141,19 @@
 				display:block;
 			}
 		}
+	}
+}
+
+@media(min-width: 768px){
+	.lookup {
+		.form-group {
+			float: left;
+		}
+	}
+}
+
+@media(max-width: 767px){
+	.form-control.lookup-form {
+		margin: 5px 0px;
 	}
 }
