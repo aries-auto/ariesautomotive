@@ -28,7 +28,10 @@
 
 .style-top-wrap {
 	padding:10px 15px;
-	vertical-align: middle;
+	margin: 10px 0px;
+	height: 55px;
+	background-color: #F5F5F5;
+	border-radius: 4px 4px 4px 4px;
 }
 
 .sel-top-bar {
@@ -44,7 +47,11 @@
 
 .sel-style-bar {
 	font-size: 24px;
-	margin-top: 5px;
+	margin: 10px 0px 20px;
+	padding:10px 15px;
+	height: 55px;
+	background-color: #F5F5F5;
+	border-radius: 4px 4px 4px 4px;
 }
 
 .clear-style-btn {
@@ -60,43 +67,51 @@
 }
 
 .tab-wrap {
-	width:100%;
-	border-bottom:2px solid #ddd;
+	margin: 25px auto 0px;
+	text-align: center;
+	height: 60px;
 }
 
 .tab-top {
-	padding: 0px 0px 15px 0px;
-	background-color: #FFFFFF;
+	background: url("/assets/img/bgtexture.png");
 }
 
 .nav-tabs>li {
-	font-size: 15px;
-}
-
-#catPartsContainer {
-	overflow: auto;
+	font-size: 12px;
 }
 
 .product-view {
 	padding: 0px;
 }
 
+.tab-content {
+		background-color: #FFFFFF;
+		padding-bottom: 10px;
+		margin: 0px auto 20px;
+}
+
 @media (min-width: 768px) {
 
 	.nav-tabs>li {
-	    height:65px;
+		width: 11%;
 	}
 
-	.nav-tabs.nav-justified>li>a {
+	.nav-tabs>li>a {
 		border: 0px;
+		text-align: center;
+		vertical-align: bottom;
+		height: 60px;
+		padding: 5px;
+		overflow: auto;
 	}
 
-	.nav-tabs>li>a, .nav-tabs>li>a>div {
-	    height:100%;
-	    display:table;
+	.nav-tabs>li>a:hover, .nav-tabs>li>a:focus {
+		background-color: #FFFFFF;
 	}
-	.nav-tabs>li>a span {
-	    display:table-cell;
-	    vertical-align:middle;
+
+	.outside-wrap {
+		width: 98%;
+		height: 100%;
 	}
+
 }
