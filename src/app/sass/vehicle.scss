@@ -28,10 +28,11 @@
 
 .style-top-wrap {
 	padding:10px 15px;
-	margin: 10px 0px;
+	margin: 20px 0px 15px;
 	height: 55px;
 	background-color: #F5F5F5;
 	border-radius: 4px 4px 4px 4px;
+	vertical-align: middle;
 }
 
 .sel-top-bar {
@@ -47,7 +48,7 @@
 
 .sel-style-bar {
 	font-size: 24px;
-	margin: 10px 0px 20px;
+	margin: 20px 0px 10px;
 	padding:10px 15px;
 	height: 55px;
 	background-color: #F5F5F5;
@@ -56,6 +57,7 @@
 
 .clear-style-btn {
 	margin-left: 15px;
+	margin-bottom: 5px;
 	background-color: #000000;
 	color: #FFFFFF;
 	font-weight: bold;
@@ -64,12 +66,6 @@
 
 .style-drop {
 	float: left;
-}
-
-.tab-wrap {
-	margin: 25px auto 0px;
-	text-align: center;
-	height: 60px;
 }
 
 .tab-top {
@@ -81,16 +77,21 @@
 }
 
 .product-view {
-	padding: 0px;
+	padding: 10px;
 }
 
 .tab-content {
 		background-color: #FFFFFF;
-		padding-bottom: 10px;
-		margin: 0px auto 20px;
+		margin: 0px auto;
 }
 
 @media (min-width: 768px) {
+
+	.tab-wrap {
+		margin: 25px auto 0px;
+		text-align: center;
+		height: 60px;
+	}
 
 	.nav-tabs>li {
 		width: 11%;
@@ -99,19 +100,32 @@
 	.nav-tabs>li>a {
 		border: 0px;
 		text-align: center;
-		vertical-align: bottom;
+		vertical-align: text-bottom;
 		height: 60px;
 		padding: 5px;
-		overflow: auto;
+		overflow-x: auto;
+		overflow-y: hidden;
+		color: #C73031;
 	}
 
 	.nav-tabs>li>a:hover, .nav-tabs>li>a:focus {
 		background-color: #FFFFFF;
 	}
 
+	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus {
+		color: #C73031;
+	}
+
 	.outside-wrap {
 		width: 98%;
 		height: 100%;
+		margin: 0px auto 15px;
 	}
+}
 
+@media (max-width: 767px) {
+	.nav-tabs>li {
+		width: 25%;
+		display: none;
+	}
 }

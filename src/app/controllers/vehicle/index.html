@@ -84,15 +84,14 @@
 		<div class="outside-wrap">
 		<div class="tab-wrap">
 			<ul class="nav nav-tabs" role="tablist">
-				<li ng-repeat="(i,cat) in categoryparts" class="catTabs" ng-class="{active:tab.isSet(i)}"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
+				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:isSet(i)}"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
 					<li>
 			</ul>
 		</div>
 		<div class="tab-content">
 			<div class="container">
 			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
-				<!-- <div class="category-style" layout-padding layout="row" layout-align="center center" ng-if="!cat.style && cat.available_styles.length > 0"> -->
-				<div class="well category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
+				<div class="well inline category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
 					<span class="md-title sel-top-bar">Please select a style that properly matches your vehicle.</span>
 					<div class="dropdown style-drop">
 						<button class="btn btn-default dropdown-toggle set-style-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-model="cat.style" aria-label="Select Style for [[ cat.title ]]">
