@@ -81,12 +81,17 @@
 			<h3>Loading Parts...</h3>
 		</div>
 
-		<div class="outside-wrap">
 		<div class="tab-wrap">
-			<ul class="nav nav-tabs" role="tablist">
+			<ul class="nav nav-tabs lg-tabs" role="tablist">
 				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:isSet(i)}"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
 					<li>
 			</ul>
+
+			<ul class="nav nav-pills nav-stacked sm-tabs" role="tablist">
+				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:isSet(i)}"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
+					<li>
+			</ul>
+
 		</div>
 		<div class="tab-content">
 			<div class="container">
@@ -126,6 +131,5 @@
 		</div>
 	</div>
 
-</div>
 
 </div>
