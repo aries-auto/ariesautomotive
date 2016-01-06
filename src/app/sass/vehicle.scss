@@ -110,16 +110,24 @@
 
 	.nav-tabs>li>a:hover, .nav-tabs>li>a:focus {
 		background-color: #FFFFFF;
+		color: #C73031;
 	}
 
-	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus {
+	.nav-tabs>li.active>a,
+	.nav-tabs>li.active>a:focus,
+	.nav-tabs>li.active>a:hover {
 		color: #C73031;
+		border: 0px;
 	}
 
 	.outside-wrap {
 		width: 98%;
 		height: 100%;
 		margin: 0px auto 15px;
+	}
+
+	.product-view {
+		padding: 0px;
 	}
 }
 
