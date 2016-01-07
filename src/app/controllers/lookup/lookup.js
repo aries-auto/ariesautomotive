@@ -152,7 +152,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 
 		LookupService.query($scope.vehicle).then(function(resp) {
 			if (resp.available_years) {
-				$scope.processing = true;
 				$scope.years = resp.available_years;
 				$scope.makes = null;
 				$scope.models = null;
@@ -161,7 +160,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 				return;
 			}
 			if (resp.available_makes) {
-				$scope.processing = true;
 				$scope.makes = resp.available_makes;
 				$scope.models = null;
 				$scope.styles = null;
@@ -169,7 +167,6 @@ angular.module('ariesautomotive').controller('LookupController', ['$scope', '$wi
 				return;
 			}
 			if (resp.available_models) {
-				$scope.processing = true;
 				$scope.models = resp.available_models;
 				$scope.styles = null;
 				$scope.processing = false;
