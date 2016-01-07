@@ -82,7 +82,7 @@
 		</div>
 
 		<div class="tab-wrap">
-			<ul class="nav nav-tabs lg-tabs" role="tablist">
+			<ul class="nav nav-pills nav-stacked lg-tabs" role="tablist">
 				<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:isSet(i)}"><a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
 					<li>
 			</ul>
@@ -94,7 +94,6 @@
 
 		</div>
 		<div class="tab-content">
-			<div class="container">
 			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
 				<div class="well inline category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
 					<span class="md-title sel-top-bar">Please select a style that properly matches your vehicle.</span>
@@ -116,9 +115,9 @@
 							<button class="btn btn-default clear-style-btn" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
 						</div>
 
-						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
+						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12 thin-box" id="product-view">
 							<!-- Products -->
-							<part-box parts="cat.parts"></part-box>
+							<part-box class="part-box-wrap" parts="cat.parts"></part-box>
 							<div class="scrollButton" ng-click="scrollTo(productView)">
 								<span>Top</span>
 							</div>
@@ -129,7 +128,6 @@
 
 			</div>
 		</div>
-	</div>
 
 
 </div>

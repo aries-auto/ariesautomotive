@@ -28,11 +28,12 @@
 
 .style-top-wrap {
 	padding:10px 15px;
-	margin: 20px 0px 15px;
+	margin: 20px;
 	height: 60px;
 	background-color: #F5F5F5;
 	border-radius: 4px 4px 4px 4px;
 	vertical-align: middle;
+	width: inherit;
 }
 
 .sel-top-bar {
@@ -70,9 +71,10 @@
 
 .tab-top {
 	background: url("/assets/img/bgtexture.png");
+	width: 100%;
 }
 
-.nav-tabs>li {
+.nav-tabs>li, .nav-pills>li {
 	font-size: 12px;
 }
 
@@ -82,56 +84,72 @@
 
 .product-view {
 	padding: 0px 0px 10px;
+	width: 100%;
+	overflow: auto;
 }
 
 #catPartsContainer {
 	overflow: auto;
 }
 
+.part-box-wrap {
+	width: 100%;
+}
+
 @media (min-width: 768px) {
 
 	.tab-wrap {
-		margin: 25px auto 0px;
+		margin: 10px auto;
 		text-align: center;
-		height: 60px;
 		width: 98%;
 	}
 
-	.nav-tabs>li {
-		width: 11%;
+	.nav-pills>li {
+		margin: 3px 0px;
 	}
 
-	.nav-tabs>li>a {
+	.nav-pills>li>a {
 		border: 0px;
-		text-align: center;
+		text-align: left;
 		vertical-align: text-bottom;
-		height: 60px;
-		padding: 5px;
+		padding: 10px 5px;
 		overflow-x: auto;
 		overflow-y: hidden;
 		color: #C73031;
 	}
 
-	.nav-tabs>li>a:hover, .nav-tabs>li>a:focus {
+	.nav-pills>li>a:hover, .nav-pills>li>a:focus {
 		background-color: #FFFFFF;
 		color: #C73031;
 	}
 
-	.nav-tabs>li.active>a,
-	.nav-tabs>li.active>a:focus,
-	.nav-tabs>li.active>a:hover {
+	.nav-pills>li.active>a,
+	.nav-pills>li.active>a:focus,
+	.nav-pills>li.active>a:hover {
 		color: #C73031;
+		background-color: #FFFFFF;
 		border: 0px;
+		border-radius: 4px 0px 0px 4px;
 	}
 
 	.tab-content {
-			width: 98%;
-			background-color: #FFFFFF;
-			margin: 0px auto 15px;
+		width: 98%;
+		background-color: #FFFFFF;
+		margin: 0px auto 15px;
 	}
 
 	.sm-tabs {
 		display: none;
+	}
+
+	.tab-wrap {
+		width: 20%;
+		float: left;
+	}
+
+	.tab-content {
+		width: 80%;
+		float: left;
 	}
 
 }
