@@ -75,8 +75,8 @@
 		</form>
 	</div>
 
-
-	<div class="col-xs-12 col-md-12 col-lg-12 container tab-top">
+	<div class="tab-body-wrap">
+	<div class="col-xs-12 col-md-12 col-lg-12 container tab-body">
 		<div class="tab-wrap" ng-if="processing">
 			<h3>Loading Parts...</h3>
 		</div>
@@ -94,7 +94,7 @@
 
 		</div>
 		<div class="tab-content">
-			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" ng-show="isSet(i)" layout-padding>
+			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" class="cat-wrap" ng-show="isSet(i)" layout-padding>
 				<div class="well inline category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
 					<span class="md-title sel-top-bar">Please select a style that properly matches your vehicle.</span>
 					<div class="dropdown style-drop">
@@ -130,4 +130,5 @@
 		</div>
 
 
+</div>
 </div>
