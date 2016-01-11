@@ -28,16 +28,6 @@
 
 /////////// BROC EDIT /////////////
 
-// .style-top-wrap {
-// 	padding:10px 15px;
-// 	margin: 5px;
-// 	height: 60px;
-// 	background-color: #F5F5F5;
-// 	border-radius: 4px 4px 4px 4px;
-// 	vertical-align: middle;
-// 	width: 100%;
-// }
-
 .sel-top-bar {
 	font-size: 22px;
 	float:left;
@@ -74,7 +64,6 @@
 .tab-body {
 	width: 100%;
 	padding: 0px;
-	height: 100%;
 	background: url("/assets/img/bgtexture.png");
 	overflow: auto;
 }
@@ -96,6 +85,10 @@
 
 #catPartsContainer {
 	overflow: auto;
+	width: 100%;
+}
+
+.cat-wrap {
 	width: 100%;
 }
 
@@ -138,13 +131,7 @@ html, body{
 	.tab-content {
 		width: 80%;
 		float: left;
-		display: flex;
 		margin: 0px;
-		height: 100%;
-	}
-
-	.cat-wrap {
-		width: 100%;
 	}
 
 	.style-top-wrap {
@@ -257,8 +244,6 @@ html, body{
 		width: 100%;
 		float: left;
 		display: flex;
-		flex: 2;
-		flex-wrap: wrap;
 	}
 
 	.tab-wrap {
@@ -297,12 +282,6 @@ html, body{
 		color: #C73031;
 	}
 
-	// .style-top-wrap {
-	// 	background-color: #FFFFFF;
-	// 	border: 0px;
-	// 	height: 90px;
-	// }
-
 	.set-style-btn {
 		font-weight: bold;
 		font-size: 16px;
@@ -328,9 +307,5 @@ html, body{
 	.clear-style-btn {
 		margin-left: 0px;
 	}
-
-	// .well {
-	// 	box-shadow: none;
-	// }
 
 }
