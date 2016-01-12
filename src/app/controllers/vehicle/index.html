@@ -109,9 +109,14 @@
 				</div>
 
 				<div id="catPartsContainer" class="container-fluid" ng-if="cat.style && cat.parts.length > 0">
-					<div class="well sel-style-bar">
-						<strong>Selected Style:</strong> [[cat.style | uppercase]]
-						<button class="btn btn-default clear-style-btn" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
+					<div class="well inline sel-style-bar">
+						<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+							<strong>Selected Style:</strong> [[cat.style | uppercase]]
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+							<button class="btn btn-default clear-style-btn" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
+						</div>
+						<div class="clearfix"></div>
 					</div>
 
 					<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12 thin-box" id="product-view">
@@ -121,6 +126,7 @@
 							<span>Top</span>
 						</div>
 					</div>
+
 				</div>
 			</div>
 
