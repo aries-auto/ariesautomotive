@@ -77,18 +77,18 @@
 
 	<div class="tab-body-wrap">
 		<div class="col-xs-12 col-md-12 col-lg-12 container tab-body">
-			<div class="tab-wrap" ng-if="processing">
-				<h3>Loading Parts...</h3>
+			<div class="loading-panel" ng-if="processing">
+				<h3>Loading Parts</h3><span us-spinner></span>
 			</div>
 
-			<div class="tab-wrap">
+			<div class="tab-wrap" ng-if="!processing">
 				<ul class="nav nav-pills nav-stacked lg-tabs" role="tablist">
 					<li ng-repeat="(i,cat) in categoryparts" ng-class="{active:isSet(i)}">
 						<a href ng-click="setTab(i)">[[cat.name | uppercase]]</a>
 					<li>
 				</ul>
-
 			</div>
+
 			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" class="cat-wrap tab-content" ng-show="isSet(i)" layout-padding>
 				<div class="well inline category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
 					<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
