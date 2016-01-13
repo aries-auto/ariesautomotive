@@ -90,6 +90,7 @@
 			</div>
 
 			<div ng-repeat="(i, cat) in categoryparts" id="[[i]]" class="cat-wrap tab-content" ng-show="isSet(i)" layout-padding>
+				<div class="sel-title"><h3>[[cat.name | uppercase]]</h3></div>
 				<div class="well inline category-style style-top-wrap" ng-if="!cat.style && cat.available_styles.length > 0">
 					<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 						<span class="md-title sel-top-bar">Please select a style that properly matches your vehicle.</span>
