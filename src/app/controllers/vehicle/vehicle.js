@@ -15,12 +15,23 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	$rootScope.pageKywds = "aries, custom fit, vehicle specific, automotive, accessories";
 
 	$scope.vehicle = LookupService.getVehicle();
+	if ($scope.vehicle === null) {
+		$scope.vehicle = {
+			year: $stateParams.year,
+			make: $stateParams.make,
+			model: $stateParams.model,
+			style: "",
+			collection: ""
+		};
+	}
+
 	if (!LookupService.validateBaseVehicle($scope.vehicle)) {
 		LookupService.clear();
 		$scope.vehicle = {};
 		$location.path('/');
 	} else {
 		$scope.validVehicle = true;
+		LookupService.setVehicle($scope.vehicle);
 	}
 
 	$scope.getCategoryParts = function() {
