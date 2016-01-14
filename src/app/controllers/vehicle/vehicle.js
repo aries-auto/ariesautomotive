@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
-	// $scope.collections = [];
-	// $scope.years = [];
-	// $scope.makes = [];
-	// $scope.models = [];
-	// $scope.styles = [];
+	$scope.collections = [];
+	$scope.years = [];
+	$scope.makes = [];
+	$scope.models = [];
+	$scope.styles = [];
 	$scope.inquiry = {};
 	$scope.inquiry_success = false;
 	$scope.qualified = false;
