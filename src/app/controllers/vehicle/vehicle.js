@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
-	$scope.collections = [];
-	$scope.years = [];
-	$scope.makes = [];
-	$scope.styles = [];
+	// $scope.collections = [];
+	// $scope.years = [];
+	// $scope.makes = [];
+	// $scope.models = [];
+	// $scope.styles = [];
 	$scope.inquiry = {};
 	$scope.inquiry_success = false;
 	$scope.qualified = false;
@@ -225,24 +226,6 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		if ($scope.vehicle !== null) {
 			$scope.qualified = true;
 		}
-
-		LookupService.query($scope.vehicle).then(function(data) {
-			$scope.parts = data.parts;
-			if (data.available_years !== undefined && data.available_years !== null && data.available_years.length > 0) {
-				$scope.years = data.available_years;
-			}
-			if (data.available_makes !== undefined && data.available_makes !== null && data.available_makes.length > 0) {
-				$scope.makes = data.available_makes;
-			}
-			if (data.available_models !== undefined && data.available_models !== null && data.available_models.length > 0) {
-				$scope.models = data.available_models;
-			}
-			if (data.available_styles !== undefined && data.available_styles !== null && data.available_styles.length > 0) {
-				$scope.styles = data.available_styles;
-			}
-		}, function(err) {
-			$scope.err = err;
-		});
 	}
 
 	CategoryService.GetParents().then(function(data) {
