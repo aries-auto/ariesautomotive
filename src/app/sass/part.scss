@@ -283,7 +283,7 @@
 	clear: both;
 	width: 100%;
 	padding: 0;
-	
+
 	div{
 		margin: 0 15% 0 15%;
 		width: 80%;
@@ -342,12 +342,25 @@
 	display:block;
 }
 
+.search-part-box {
+	width: 100%;
+}
+
+@media(min-width: $screen-sm-min) {
+	.search-part-box {
+		width: 45%;
+	}
+}
+
 @media(min-width: $screen-md-min){
 	.videoBox{
 		width:50%;
 		iframe{
 			max-height:50%;
 		}
+	}
+	.search-part-box {
+		width: 100%;
 	}
 	.videoThumbnail{
 		width: 30%;
@@ -391,3 +404,9 @@
 		}
 	}
 }
+
+// @media(min-width: $screen-lg-min){
+// 	.search-part-box {
+// 		width: 100%;
+// 	}
+// }
