@@ -18,7 +18,7 @@
 		</div>
 	</div>
 
-	<div class=" col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
+	<div class="side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
 		<!-- Price -->
 		<div class="product-price" ng-repeat="price in p.pricing | filter:{type:'List'} | limitTo:1" ng-if="price.price > 0">
 			<span class="msrp">MSRP <span class="price">[[price.price | currency]]</span></span>

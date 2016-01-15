@@ -10,7 +10,7 @@
 		}
 	}
 	#catPartsContainer{
-	
+
 		#catTitleProds{
 			span{
 				text-transform: capitalize;
@@ -19,7 +19,6 @@
 
 		background-color:white;
 		.product-view{
-			padding:15px;
 			display: -webkit-box;
 			display: -moz-box;
 			display: -ms-flexbox;
@@ -155,7 +154,7 @@
 				.product{
 					width: 45%;
 					margin: 10px;
-					min-height:360px;
+					min-height:450px;
 				}
 			}
 		}
@@ -168,7 +167,7 @@
 		#catPartsContainer{
 			.product-view{
 				.product{
-					width: 350px;
+					width: 31%;
 					margin: 10px;
 					.product-price, .product-attr{
 						float:none;

@@ -60,20 +60,19 @@
 <body ng-controller="AppController">
 
 	<noscript>
-		<div style="width:60%;height:60%;position:fixed;top:20%;left:20%;background-color:#FFFFFF;text-align:center;overflow:auto;
-				padding:20px;border:1px solid #e3e3e3;border-radius:4px;box-shadow:1px 0 10px 2px #ccc;">
-			<strong style="color:red;">ATTENTION</strong>
+		<div class="js-disabled">
+			<strong class="attn-span">ATTENTION</strong>
 			<p>Your browser does not support javascript. Please enable javascript or click below to view the ARIES interior and exterior catalogs.</p>
-			<div style="width:100%;text-align:center;padding-top:10px;margin-bottom:20px;">
-				<div style="width:auto;display:flex;">
-					<div style="margin-left:auto;text-align:center;">
+			<div class="thumbs-wrap">
+				<div class="thumbs-inside">
+					<div class="thumb-left">
 						<a href="https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf">
 							<img src="https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png" alt="ARIES 2016 Exterior Catalog" />
 						</a>
 						<br />
 						<span>2016 Exterior Catalog</span>
 					</div>
-					<div style="margin-right:auto;text-align:center;">
+					<div class="thumb-right">
 						<a href="https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf">
 							<img src="https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png" alt="ARIES 2016 Interior Catalog" />
 						</a>
@@ -86,22 +85,21 @@
 		</div>
 	</noscript>
 
-	<div id="xhrBlock" style="width:60%;height:60%;position:fixed;top:20%;left:20%;background-color:#FFFFFF;text-align:center;overflow:auto;
-			padding:20px;border:1px solid #e3e3e3;border-radius:4px;box-shadow:1px 0 10px 2px #ccc;visibility:hidden;">
-		<strong style="color:red;">ATTENTION</strong>
+	<div id="xhrBlock" class="js-disabled">
+		<strong class="attn-span">ATTENTION</strong>
 		<p>Your browser does not support XML HTTP Requests. Please enable XML HTTP Requests or click below to view the ARIES interior and exterior catalogs.</p>
-		<div style="width:100%;text-align:center;padding-top:10px;margin-bottom:20px;">
-			<div style="width:auto;display:flex;">
-				<div style="margin-left:auto;text-align:center;">
+		<div class="thumbs-wrap">
+			<div class="thumbs-inside">
+				<div class="thumb-left">
 					<a href="https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf">
 						<img src="https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png" alt="ARIES 2016 Exterior Catalog" />
 					</a>
 					<br />
 					<span>2016 Exterior Catalog</span>
 				</div>
-				<div style="margin-right:auto;text-align:center;">
-					<a href="https://storage.googleapis.com/aries-website/9900005_Catalog_Interior_SFS_%20RA.pdf">
-						<img src="https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf" alt="ARIES 2016 Interior Catalog" />
+				<div class="thumb-right">
+					<a href="https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf">
+						<img src="https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png" alt="ARIES 2016 Interior Catalog" />
 					</a>
 					<br />
 					<span>2016 Interior Catalog</span>
@@ -113,7 +111,7 @@
 
 	<script>
 		if (!window.XMLHttpRequest) {
-			document.getElementById('xhrBlock').style.visibility = 'visible';
+			document.getElementById('xhrBlock').style.display = 'inherit';
 		}
 	</script>
 

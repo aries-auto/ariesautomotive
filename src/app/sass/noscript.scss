@@ -1,0 +1,44 @@
+.js-disabled {
+	width:60%;
+	height:60%;
+	position:fixed;
+	top:20%;
+	left:20%;
+	background-color:#FFFFFF;
+	text-align:center;
+	overflow:auto;
+	padding:20px;
+	border:1px solid #e3e3e3;
+	border-radius:4px;
+	box-shadow:1px 0 10px 2px #ccc;
+
+	.attn-span {
+		color: red;
+	}
+
+	.thumbs-wrap {
+		width:100%;
+		text-align:center;
+		padding-top:10px;
+		margin-bottom:20px;
+
+		.thumbs-inside {
+			width:auto;
+			display:flex;
+
+			.thumb-left {
+				margin-left:auto;
+				text-align:center;
+			}
+
+			.thumb-right {
+				margin-right:auto;
+				text-align:center;
+			}
+		}
+	}
+}
+
+#xhrBlock {
+	display: none;
+}

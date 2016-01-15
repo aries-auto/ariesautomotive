@@ -40,14 +40,13 @@
 	.lookup-heading,.vehicle-desc{
 		color: #26090D;
 		text-decoration: none;
-		font-size: 24px;
+		font-size: 18px;
 		font-weight:900;
 		text-transform: uppercase;
 		display:block;
 		height: 38px;
 		line-height: 38px;
-		text-align:center;
-	
+
 		.expansion-arrow.up{
 			transition: all 0.3s ease-in-out;
 			transform: rotate(-180deg);
@@ -69,7 +68,7 @@
 	}
 
 	.lookup{
-		display: none;
+		display: inherit;
 		-webkit-transition: all 0.3s ease-in-out;
 		-moz-transition: all 0.3s ease-in-out;
 		-o-transition: all 0.3s ease-in-out;
@@ -80,7 +79,7 @@
 			display:block;
 		}
 		.form-group{
-			padding: 2px 5px;
+			padding: 2px 5px 0px 2px;
 			margin-bottom:0;
 			&:last-child{
 				padding-right:0;
@@ -88,7 +87,7 @@
 		}
 
 		.view-parts-button{
-			width:100%;
+			width:auto;
 		}
 		.iconfig-button{
 			text-transform:uppercase;
@@ -102,13 +101,16 @@
 	}
 }
 
+.form-control.lookup-form {
+	margin-top: 0px;
+}
+
 
 @media(min-width: $screen-sm-max){
 	.lookup-container{
 		padding:10px;
 		.lookup-heading, .vehicle-desc{
 			font-size:18px;
-			margin-left:12.3%;
 			float:left;
 			padding: 0 10px 0 0;
 			display: inline-block;
@@ -122,11 +124,12 @@
 				float:none;
 			}
 		}
-		
+
 		.lookup{
-			display: block;
+			display: inline-block;
 			float:left;
-			width:65%;
+			text-align:center;
+			margin-left: 230px;
 
 			.view-parts-button{
 				width:auto;
@@ -138,5 +141,19 @@
 				display:block;
 			}
 		}
+	}
+}
+
+@media(min-width: 768px){
+	.lookup {
+		.form-group {
+			float: left;
+		}
+	}
+}
+
+@media(max-width: 767px){
+	.form-control.lookup-form {
+		margin: 5px 0px;
 	}
 }
