@@ -72,7 +72,7 @@
 
 			.title-info{
 				padding:0px;
-				padding-bottom:30px;
+				padding-bottom:10px;
 				display:inline-flex;
 
 				> div{
@@ -278,6 +278,20 @@
 			}
 		}
 	}
+}
+.product-nav{
+	clear: both;
+	width: 100%;
+	padding: 0;
+	
+	div{
+		margin: 0 15% 0 15%;
+		width: 80%;
+	}
+}
+
+.where-to-buy-button{
+	background-color: transparent !important;
 }
 
 /** LIGHTBOX MARKUP **/

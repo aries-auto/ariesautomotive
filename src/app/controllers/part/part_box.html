@@ -1,4 +1,4 @@
-<div class="product row well" ng-click="goTo('/part/[[p.part_number]]')" ng-repeat="p in parts">
+<div class="product row well" ng-repeat="p in parts">
 	<!-- Products -->
 	<div class="product-header">
 		<span class="product-desc">
@@ -31,5 +31,11 @@
 				<li ng-repeat="attr in p.attributes | orderBy:'key'"><strong>[[attr.name]]:</strong> [[attr.value]]</li>
 			</ul>
 		</div>
+	</div>
+	<div class="product-nav col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
+		<div>
+			<a href="/buy" class="btn red-transparent-button view-parts-button" aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
+	        <a href="/part/[[p.part_number]]" class="btn red-transparent-button view-parts-button" aria-controls="Part details" role="button" data-toggle="tab">View Details</a></span>
+        </div>
 	</div>
 </div>
