@@ -81,6 +81,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				}
 			}
 			$scope.locations = data;
+			console.log($scope.locations);
 			if(data.length === count){
 				getByBounds(center, ne, sw, $scope.locations.length, count, sort);
 			}else{

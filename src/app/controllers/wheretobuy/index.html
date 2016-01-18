@@ -24,9 +24,9 @@
         <div class="tab-pane" ng-class="{ 'active' : display === 'local' }" id="local" role="tabpanel">
             <div class="row">
                 
-                <div ng-if="!mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div>
+                <!-- <div ng-if="!mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div> -->
        
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div id="map" class="angular-google-map-container map-box">
                         <div ng-if="!map.show" class="loading-container">
                             <span us-spinner="{radius:30, width:8, length: 16}"></span>
@@ -69,7 +69,9 @@
                 </div>
             </div>
             <div class="row col-md-12" ng-if="!mobile_view">
-                <div ng-repeat="loc in locations" ng-if="$index > 3" class="col-md-4 col-sm-12 col-xs-12 text-locations">
+                <div ng-repeat="(tier, locs) in locations | groupBy:'dealerTier.tier'">
+                    <h2 style="max-width:400px;">[[tier]]</h2>
+                    <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-6 text-locations">
                     <div itemscope itemtype="http://schema.org/PostalAddress">
                         <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
                         <span class="type">[[ loc.dealerType.label ]]</span>
@@ -100,6 +102,7 @@
                         </div>
 
                     </div>
+                </div>
                 </div>
             </div>
         </div>
