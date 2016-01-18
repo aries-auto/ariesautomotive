@@ -3,10 +3,7 @@ import Router from 'react-routing/src/Router';
 import fetch from './core/fetch';
 import App from './components/App';
 import Product from './components/Product';
-import ContentPage from './components/ContentPage';
-import ContactPage from './components/ContactPage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
+import Home from './components/Home';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -21,32 +18,77 @@ const router = new Router(on => {
             body: '{}',
         });
 
-        const vehicleResponse = await yearsResponse.json();
-        let years = [];
-        if (vehicleResponse.available_years !== undefined) {
-            years = vehicleResponse.available_years;
-        }
+        const categoryResponse = await fetch('http://api.curtmfg.com/v3/category?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79', {
+            method: 'get',
+        });
 
-        state.context.years = years;
+        try {
+            let years = [];
+            const vehicleResponse = await yearsResponse.json();
+            if (vehicleResponse.available_years !== undefined) {
+                years = vehicleResponse.available_years;
+            }
+
+            state.context.years = years;
+
+            state.context.categories = await categoryResponse.json() || [];
+        } catch (e) {
+            state.context.error = e;
+        }
 
         const component = await next();
         return component && <App context={state.context}>{component}</App>;
     });
 
-    on('/contact', async () => <ContactPage />);
+    on('/product/:id', async (state) => {
+        try {
+            const url = `http://api.curtmfg.com/v3/part/${state.params.id}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+            const partResponse = await fetch(url, {
+                method: 'get',
+            });
 
-    on('/login', async () => <LoginPage />);
+            state.context.part = await partResponse.json();
+        } catch (e) {
+            state.context.error = e;
+        }
 
-    on('/register', async () => <RegisterPage />);
-
-    on('/product', async () => {
-        let part = {};
-
-        return part && <Product product={part} />;
+        return <Product part={state.context.part} />;
     });
 
-    on('*', async () => {
-        return {} && <ContentPage />;
+    on('/category/:id/:title', async (state) => {
+        try {
+            const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+            const catResponse = await fetch(url, {
+                method: 'get',
+            });
+
+            state.context.category = await catResponse.json();
+        } catch (e) {
+            state.context.error = e;
+        }
+
+        console.log(state.context.category);
+        return <Product part={state.context.part} />;
+    });
+
+    on('/category/:id/:title/:sub', async (state) => {
+        try {
+            const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+            const catResponse = await fetch(url, {
+                method: 'get',
+            });
+
+            state.context.category = await catResponse.json();
+        } catch (e) {
+            state.context.error = e;
+        }
+
+        console.log(state.context.category, state.context.error);
+        return <Product part={state.context.part} />;
+    });
+
+    on('/', async () => {
+        return <Home />;
     });
 
     on('error', (state, error) => state.statusCode === 404 ?
