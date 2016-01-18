@@ -308,12 +308,18 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 					types: ['geocode']
 				}
 			);
+
 			maps.event.addListener(comp, 'place_changed', function(){
 				var place = comp.getPlace();
-				if(place.formatted_address === undefined || place.formatted_address === ''){
+				if(place === undefined){
 					return;
 				}
-				$scope.lookupLocation(place.formatted_address);
+				if(place.formatted_address !== '' && place.formatted_address !== undefined){
+					$scope.lookupLocation(place.formatted_address);
+				}else{
+					$scope.lookupLocation(place.name);
+				}
+				
 			});
 		}
 		if($stateParams.location !== ''){
