@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="row col-md-12" ng-if="!mobile_view">
-                <div ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key'">
+                <div ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key.sort'">
                     <h2 style="max-width:400px;">[[locs.$key]]</h2>
                     <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-6 text-locations">
                     <div itemscope itemtype="http://schema.org/PostalAddress">
