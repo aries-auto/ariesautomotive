@@ -1,0 +1,43 @@
+:global a.red-transparent-button,
+:global button.red-transparent-button,
+:global button[type=submit].red-transparent-button,
+:global a.white-transparent-button,
+:global button.white-transparent-button,
+:global button[type=submit].white-transparent-button{
+	background: transparent;
+	background-color: rgb(255,255,255,0.6);
+	font-weight: bold;
+	padding: 2px 15px;
+	font-size:18px;
+	border-radius:0;
+	cursor: pointer;
+	margin-bottom: 5px;
+	&:hover, &:focus, &:disabled{
+		text-decoration: none;
+		background-color:transparent;
+		transition: 0.3s ease-in-out;
+	}
+}
+
+:global a.red-transparent-button,
+:global button.red-transparent-button,
+:global button[type=submit].red-transparent-button{
+	color: $altRed;
+	border:1px solid $altRed;
+
+	&:hover, &:focus, &:disabled{
+		color:$headerColor;
+		border-color: $headerColor;
+		transition: 0.3s ease-in-out;
+	}
+}
+
+:global a.white-transparent-button,
+:global button.white-transparent-button,
+:global button[type=submit].white-transparent-button{
+	color: #fff;
+	border:1px solid #fff;
+	&:hover,&:focus, &:disabled{
+		transition: 0.3s ease-in-out;
+	}
+}

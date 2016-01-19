@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
+import cx from 'classnames';
 import s from './App.scss';
 import Header from '../Header';
 import Lookup from '../Lookup';
@@ -46,8 +47,11 @@ class App extends Component {
     }
 
     render() {
+        const styles = {
+            background: "url('/img/bgtexture.png')",
+        };
         return !this.props.error ? (
-        <div>
+        <div className={cx(s.root)} style={styles}>
             <Header categories={this.props.context.categories} />
             <Lookup years={this.props.context.years} />
             <div className="children">

@@ -30,7 +30,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.get('*', async (req, res, next) => {
     try {
         let statusCode = 200;
-        const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
+        const data = { title: 'ARIES Automotive | Product Information', description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.', css: '', body: '', entry: assets.main.js };
         const css = [];
         const context = {
             insertCss: styles => css.push(styles._getCss()),

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Carousel, CarouselItem } from 'react-bootstrap';
 import cx from 'classnames';
 import s from './Home.scss';
 import withStyles from '../../decorators/withStyles';
@@ -10,62 +11,31 @@ class Home extends Component {
         className: PropTypes.string,
         carouselImages: PropTypes.array,
         featuredProducts: PropTypes.array,
+        context: PropTypes.shape({
+            carouselImages: PropTypes.array,
+            featuredProducts: PropTypes.array,
+        }),
     };
 
     constructor() {
         super();
-
         this.carouselPrev = this.carouselPrev.bind(this);
         this.carouselNext = this.carouselNext.bind(this);
         this.state = {
-            carouselImages: [{
-                image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
-                text: 'Never Fear the Uncertain Road',
-                button_text: 'VIEW BULL BARS',
-                link: '/category/332',
-                order: 5,
-                styles: {
-                    backgroundImage: 'url(http://storage.googleapis.com/aries-website/hero-images/jeep.png)',
-                },
-            }, {
-                image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
-                text: 'Find Out What It Means to Be a Pro',
-                button_text: 'VIEW PRO SERIES',
-                link: '/category/331',
-                order: 2,
-                styles: {
-                    backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png)',
-                },
-            }, {
-                image: 'https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png',
-                text: 'Choose Your Configuration and Start Customizing',
-                button_text: 'VIEW MODULAR BUMPERS',
-                link: '/category/324',
-                order: 3,
-                styles: {
-                    backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png)',
-                },
-            }, {
-                image: 'https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg',
-                text: 'ARIES Unveils StyleGuard™ as New Name for Floor Liners',
-                button_text: 'READ MORE',
-                link: '/news/47',
-                order: 1,
-                styles: {
-                    backgroundImage: `url('https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg')`,
-                },
-            }, {
-                image: 'https://storage.googleapis.com/aries-website/hero-images/navyjeep.jpg',
-                text: 'Decked Out Jeep to Be Donated to Navy SEAL Foundation',
-                button_text: 'READ MORE',
-                link: '/news/48',
-                order: 4,
-                styles: {
-                    backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/navyjeep.jpg)',
-                },
-            }],
-            featuredProducts: [],
+            context: {
+                carouselImages: [],
+                featuredProducts: [],
+            },
         };
+    }
+
+    componentWillMount() {
+        if (!this.props || !this.props.context) {
+            return;
+        }
+        this.setState({
+            context: this.props.context,
+        });
     }
 
     getFeaturedImage(prod) {
@@ -81,6 +51,7 @@ class Home extends Component {
         return url;
     }
 
+
     carouselPrev() {
 
     }
@@ -93,35 +64,20 @@ class Home extends Component {
         return (
             <div className={cx(s.root, this.props.className, 'home-container')} role="navigation">
 
-                <div id="hero-image-carousel" className="carousel slide" data-ride="carousel">
-
-                    <div className="carousel-inner">
-                        {this.state.carouselImages.map((img, i) => {
-                            let active = '';
-                            if (i === 0) {
-                                active = 'active';
-                            }
-                            return (
-                                <div key={i} className={cx(active, 'item')}>
-                                    <div className={cx(s.carouselImg)} style={img.styles}></div>
-                                    <div className="carousel-caption">
-                                        <span className="bigText">{img.text}</span>
-                                        <div className="clearfix">&nbsp;</div>
-                                        <a className="white-transparent-button" href="{img.link}">{img.button_text}</a>
-                                    </div>
+                <Carousel>
+                    {this.state.context.carouselImages.map((img, i) => {
+                        return (
+                            <CarouselItem key={i}>
+                                <div className={cx(s.carouselImg)} style={img.styles}></div>
+                                <div className="carousel-caption">
+                                    <span className={cx('big-text')}>{img.text}</span>
+                                    <div className="clearfix"></div>
+                                    <a className="white-transparent-button" href={img.link}>{img.button_text}</a>
                                 </div>
-                            );
-                        })}
-
-                    </div>
-
-                    <a className="left carousel-control" onClick={this.carouselPrev()} role="button" data-slide="prev">
-                        <span className="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a className="right carousel-control" onClick={this.carouselNext()} role="button" data-slide="next">
-                        <span className="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                </div>
+                            </CarouselItem>
+                        );
+                    })}
+                </Carousel>
 
                 <div className="container">
                     <div className="row">
@@ -140,9 +96,9 @@ class Home extends Component {
                         </div>
                         <div className="col-md-6 col-lg-6">
 
-                            <div className="row whats-new" ng-click="showWhatsNewLightbox()">
-                                <img src="https://storage.googleapis.com/aries-website/whatsnew/What's-New-Banner.png" alt="What's New with ARIES" className="header" />
-                                <div className="callout">
+                            <div className={cx(s.whatsNew, 'row')}>
+                                <img src="https://storage.googleapis.com/aries-website/whatsnew/What's-New-Banner.png" alt="What's New with ARIES" className={cx(s.header)} />
+                                <div className={cx(s.callout)}>
                                     <img src="https://storage.googleapis.com/aries-website/whatsnew/ARIES-Floor-Liner-Artistic-Black%20(20).jpg" alt=" Introducing StyleGuard Floor Liners" className="styleguard" />
                                     <span>Introducing StyleGuard&trade; Floor Liners</span>
                                 </div>
@@ -179,10 +135,10 @@ class Home extends Component {
                     <div className="row">
                         <div className="col-md-12" ng-controller="PartController">
                             <h3>FEATURED PRODUCTS</h3>
-                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 featuredProducts">
-                                {this.props.featuredProducts.map((prod, i) => {
+                            <div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
+                                {this.state.context.featuredProducts.map((prod, i) => {
                                     return (
-                                        <div key={i} className="featuredProd col-xs-12 col-md-2 col-5">
+                                        <div key={i} className={cx(s.featuredProd, 'col-xs-12', 'col-md-2')}>
                                             <h4><a href={'/part/' + prod.part_number}>{prod.short_description}</a></h4>
                                             <a href={'/part/' + prod.part_number}>
                                                 <img src={this.getFeaturedImage(prod)} className="img-responsive" alt={'Image for ' + prod.short_description} />
@@ -202,11 +158,15 @@ class Home extends Component {
                         <div className="col-md-12">
                             <h3>FROM OUR CUSTOMERS</h3>
                             <div className="col-md-12 testimonials">
-                                <div ng-repeat="t in testimonials | limitTo:2" className="testimonial col-md-6">
-                                    <h4>"[[t.title | uppercase]]"</h4>
-                                    <p>[[t.content]]</p>
-                                    <span className="customerName">- [[t.firstName | uppercase]] [[t.lastName | uppercase]], [[t.location | uppercase]]</span>
-                                </div>
+                                {this.state.context.testimonials.map((t, i) => {
+                                    return (
+                                        <div key={i} className={cx(s.testimonial, 'col-md-6')}>
+                                            <h4>"{t.title}"</h4>
+                                            <p>{t.content}</p>
+                                            <span className={cx(s.customerName)}>- {t.firstName} {t.lastName}, {t.location}</span>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

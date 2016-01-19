@@ -1,10 +1,22 @@
 @import '../variables.scss';
 
 .root {
-  max-width: $max-content-width;
-  padding: 10px 0;
+	background-color: $white-base;
+	padding: 10px 0;
+	width: 100%;
+}
+
+:global .form-inline {
+    margin: auto;
+    max-width: $max-content-width;
 }
 
 .formGroup {
-    margin: 0 10px;
+	margin: 0 10px;
+}
+
+@media(min-width: 720px) {
+    :global .form-inline {
+        margin-left: 215px;
+    }
 }
