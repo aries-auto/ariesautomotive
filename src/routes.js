@@ -87,8 +87,20 @@ const router = new Router(on => {
         return <Product part={state.context.part} />;
     });
 
-    on('/', async () => {
-        return <Home />;
+    on('/', async (state) => {
+        state.context.featuredProducts = [];
+        try {
+            const url = `http://api.curtmfg.com/v3/part/featured?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+            const featResponse = await fetch(url, {
+                method: 'get',
+            });
+
+            state.context.featuredProducts = await featResponse.json();
+        } catch (e) {
+            state.context.error = e;
+        }
+
+        return <Home featuredProducts={state.context.featuredProducts} />;
     });
 
     on('error', (state, error) => state.statusCode === 404 ?

@@ -12,7 +12,19 @@ class Lookup extends Component {
         years: PropTypes.array,
         makes: PropTypes.array,
         models: PropTypes.array,
-        vehicle: PropTypes.object,
+        vehicle: PropTypes.shape({
+            year: PropTypes.string,
+            model: PropTypes.string,
+            make: PropTypes.string,
+        }),
+    };
+
+    static defaultProps = {
+        vehicle: {
+            year: '',
+            make: '',
+            model: '',
+        },
     };
 
     constructor() {
@@ -88,13 +100,35 @@ class Lookup extends Component {
                     makes: this.state.makes,
                     models: data.available_models,
                 });
+            } else {
+                this.setState({
+                    vehicle: this.state.vehicle,
+                    years: this.state.years,
+                    makes: this.state.makes,
+                    models: this.state.models,
+                    action: 'view',
+                });
             }
         });
     }
 
+    vehicleValid() {
+        if (!this.state.vehicle.year || this.state.vehicle.year === '') {
+            return false;
+        }
+        if (!this.state.vehicle.make || this.state.vehicle.make === '') {
+            return false;
+        }
+        if (!this.state.vehicle.model || this.state.vehicle.model === '') {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
         const yearSelect = (
-            <div className="form-group">
+            <div className={cx(s.formGroup, 'form-group')}>
                 <select className="form-control" name="year" onChange={this.changeVehicle} aria-labelledby="year_lookup_label">
                     <option value="">- Select Year -</option>
                     {this.props.years.map((year, i) => {
@@ -104,23 +138,24 @@ class Lookup extends Component {
             </div>
         );
         let makeSelect = (
-            <div className="form-group">
+            <div className={cx(s.formGroup, 'form-group')}>
                 <select className="form-control" name="make" disabled="disabled" aria-labelledby="make_lookup_label">
                     <option value="">- Select Make -</option>
                 </select>
             </div>
         );
         let modelSelect = (
-            <div className="form-group">
+            <div className={cx(s.formGroup, 'form-group')}>
                 <select className="form-control" name="model" disabled="disabled" aria-labelledby="model_lookup_label">
                     <option value="">- Select Model -</option>
                 </select>
             </div>
         );
+        let viewAction;
 
         if (this.state.makes && this.state.makes.length > 0) {
             makeSelect = (
-                <div className="form-group">
+                <div className={cx(s.formGroup, 'form-group')}>
                     <select className="form-control" name="make" onChange={this.changeVehicle} aria-labelledby="make_lookup_label">
                         <option value="">- Select Make -</option>
                         {this.state.makes.map((make, i) => {
@@ -132,7 +167,7 @@ class Lookup extends Component {
         }
         if (this.state.models && this.state.models.length > 0) {
             modelSelect = (
-                <div className="form-group">
+                <div className={cx(s.formGroup, 'form-group')}>
                     <select className="form-control" name="model" onChange={this.changeVehicle} aria-labelledby="model_lookup_label">
                         <option value="">- Select Model -</option>
                         {this.state.models.map((model, i) => {
@@ -142,6 +177,11 @@ class Lookup extends Component {
                 </div>
             );
         }
+        if (this.state.action === 'view') {
+            viewAction = (
+                <button>View Parts</button>
+            );
+        }
         return (
             <div className={cx(s.root, this.props.className, 'container-fluid')} role="navigation">
                 <form className={cx('form-inline')}>
@@ -149,6 +189,7 @@ class Lookup extends Component {
                     {yearSelect}
                     {makeSelect}
                     {modelSelect}
+                    {viewAction}
                 </form>
             </div>
         );
