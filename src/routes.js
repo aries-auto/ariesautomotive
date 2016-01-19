@@ -23,13 +23,10 @@ const router = new Router(on => {
         });
 
         try {
-            let years = [];
             const vehicleResponse = await yearsResponse.json();
             if (vehicleResponse.available_years !== undefined) {
-                years = vehicleResponse.available_years;
+                state.context.years = vehicleResponse.available_years;
             }
-
-            state.context.years = years;
 
             state.context.categories = await categoryResponse.json() || [];
         } catch (e) {
