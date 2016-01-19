@@ -215,7 +215,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				$scope.map.show = true;
 				$scope.map.refresh = true;
 			});
-
+		}
+		if ($scope.online === undefined){
+			getOnline();
 		}
 		$location.hash(disp);
 		e.preventDefault();
@@ -397,22 +399,27 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
             longitude: $scope.map.center.longitude
         };
 	};
+	if ($location.hash() == "online"){
+		getOnline();
+	}
 
-	BuyService.online(0, 100).then(function(res) {
-		var platinums = [];
-		var regulars = [];
-		res.forEach(function(d){
-			if (d.dealerTier.tier == "Platinum"){
-				platinums.push(d);
-			}else{
-				regulars.push(d);
-			}
+	function getOnline(){
+		BuyService.online(0, 100).then(function(res) {
+			var platinums = [];
+			var regulars = [];
+			res.forEach(function(d){
+				if (d.dealerTier.tier == "Platinum"){
+					platinums.push(d);
+				}else{
+					regulars.push(d);
+				}
+			});
+			platinums.sort(randomOrder)
+			regulars.sort(randomOrder)
+			$scope.online = platinums.concat(regulars);
+
 		});
-		platinums.sort(randomOrder)
-		regulars.sort(randomOrder)
-		$scope.online = platinums.concat(regulars);
-
-	});
+	}
 
 	function randomOrder(){
 		return (Math.round(Math.random())-0.5);
