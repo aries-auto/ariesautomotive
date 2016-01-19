@@ -69,13 +69,13 @@
                 </div>
                 <div ng-if="map.show" class="col-md-12 tierToggles">
                     <div id="platToggle">
-                        Platinum <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="refreshMarkers()">
+                        Platinum <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="toggleTier('Platinum')">
                     </div>
                     <div id="goldToggle">
-                        Gold <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled">
+                        Gold <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled" ng-change="toggleTier('Gold')">
                     </div>
                     <div id="silverToggle">
-                        Silver <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled">
+                        Silver <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled" ng-change="toggleTier('Silver')">
                     </div>
                 </div>
             </div>

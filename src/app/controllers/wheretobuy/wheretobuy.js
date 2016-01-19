@@ -68,11 +68,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		// }
 		getByBounds(centerStr, neStr, swStr, 0 , 100, sort);
 	};
-	$scope.refreshMarkers = function(){
-        $scope.map.show = true;
-        $scope.map.refresh = true;
-        $scope.$apply();
-	};
+
 	var getByBounds = function(center, ne, sw, skip, count, sort){
 		$scope.loadingLocations = true;
 		BuyService.bounds(center, ne, sw, skip, count, sort).then(function(data){
@@ -370,6 +366,37 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			return;
 		}
     });
+
+	$scope.toggleTier = function(tier){
+		if (tier === "Platinum"){
+			if ($scope.platEnabled === true){
+				$scope.platEnabled = false;
+			}else{
+				$scope.platEnabled = true;
+			}
+		}
+		if (tier === "Gold"){
+			if ($scope.goldEnabled === true){
+				$scope.goldEnabled = false;
+			}else{
+				$scope.goldEnabled = true;
+			}
+		}
+		if (tier === "Silver"){
+			if ($scope.silverEnabled === true){
+				$scope.silverEnabled = false;
+			}else{
+				$scope.silverEnabled = true;
+			}
+		}
+		// refresh map	- kinda hacky, will revisit
+        $scope.map.show = true;
+        $scope.map.refresh = true;
+		$scope.map.center = {
+            latitude: $scope.map.center.latitude + .0001,
+            longitude: $scope.map.center.longitude
+        };
+	};
 
 	BuyService.online(0, 100).then(function(res) {
 		var platinums = [];
