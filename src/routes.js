@@ -67,7 +67,6 @@ const router = new Router(on => {
             state.context.error = e;
         }
 
-        console.log(state.context.category);
         return <Product part={state.context.part} />;
     });
 
@@ -83,7 +82,6 @@ const router = new Router(on => {
             state.context.error = e;
         }
 
-        console.log(state.context.category, state.context.error);
         return <Product part={state.context.part} />;
     });
 
