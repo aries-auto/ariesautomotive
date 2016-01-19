@@ -67,6 +67,17 @@
                         </ui-gmap-google-map>
                     </div>
                 </div>
+                <div ng-if="map.show" class="col-md-12 tierToggles">
+                    <div id="platToggle">
+                        Platinum <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="refreshMarkers()">
+                    </div>
+                    <div id="goldToggle">
+                        Gold <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled">
+                    </div>
+                    <div id="silverToggle">
+                        Silver <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled">
+                    </div>
+                </div>
             </div>
             <div class="row col-md-12" ng-if="!mobile_view">
                 <div ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key.sort'">

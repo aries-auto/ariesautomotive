@@ -12,6 +12,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 
 	$rootScope.pageTitle = "ARIES Automotive | Where to Buy";
 	$rootScope.pageKywds = "aries, automotive, dealer locator, where to buy";
+	$scope.platEnabled = true;
+	$scope.goldEnabled = true;
+	$scope.silverEnabled = true;
 
 
 	var lastBounds = {};
@@ -65,7 +68,11 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		// }
 		getByBounds(centerStr, neStr, swStr, 0 , 100, sort);
 	};
-
+	$scope.refreshMarkers = function(){
+        $scope.map.show = true;
+        $scope.map.refresh = true;
+        $scope.$apply();
+	};
 	var getByBounds = function(center, ne, sw, skip, count, sort){
 		$scope.loadingLocations = true;
 		BuyService.bounds(center, ne, sw, skip, count, sort).then(function(data){
@@ -73,14 +80,24 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				$scope.loadingLocations = false;
 				return;
 			}
-
+			var locationData = [];
 			for (var i = 0; i < data.length; i++) {
 				var el = data[i];
 				if(el !== undefined && el !== null && el.id !== undefined && el.id !== null && el.dealerType !== undefined){
 					data[i].icon = el.dealerType.mapIcon.mapIcon.Scheme + '://' + el.dealerType.mapIcon.mapIcon.Host + el.dealerType.mapIcon.mapIcon.Path;
 				}
+				// handle the toggle buttons for each dealer tier
+				if(el.dealerTier.tier == "Platinum" && $scope.platEnabled === true){
+					locationData.push(data[i]);
+				}
+				if(el.dealerTier.tier == "Gold" && $scope.goldEnabled === true){
+					locationData.push(data[i]);
+				}
+				if(el.dealerTier.tier == "Silver" && $scope.silverEnabled === true){
+					locationData.push(data[i]);
+				}
 			}
-			$scope.locations = data;
+			$scope.locations = locationData;
 			if(data.length === count){
 				getByBounds(center, ne, sw, $scope.locations.length, count, sort);
 			}else{
@@ -133,7 +150,6 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
     };
 
     var updateLocations = function(){
-
         $scope.coordinates.latitude = $scope.position.coords.latitude;
         $scope.coordinates.longitude = $scope.position.coords.longitude;
 
