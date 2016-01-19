@@ -51,6 +51,8 @@ $headerHeight: 40px;
     width: 100%;
     margin: 0 auto 20px auto;
     padding: 20px 0 20px 0;
+    margin-bottom:0px;
+    padding-bottom:0px;
 
     .loading-container{
         position: relative;
@@ -67,6 +69,35 @@ $headerHeight: 40px;
     }
     > img{
         width: 100%;
+    }
+}
+
+.tierToggles{
+    padding-bottom:5px;
+    padding-left:15px;
+    padding-right:15px;
+
+    .toggles{
+        padding-top:10px;
+        background-color:#ffffff;
+        padding-left:5px;
+        padding-bottom:10px;
+
+        .tierTitle{
+            font-size: 1.5em;
+            margin-bottom:0px;
+            padding-bottom:0px;
+            display:inline;
+        }
+        .toggleContainer{
+            display:inline;
+            font-size:1.5em;
+            background-color:#ffffff;
+            padding:3px;
+            border-radius:4px;
+            margin:5px;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+        }
     }
 }
 

@@ -68,14 +68,17 @@
                     </div>
                 </div>
                 <div ng-if="map.show" class="col-md-12 tierToggles">
-                    <div id="platToggle">
-                        Platinum <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="toggleTier('Platinum')">
-                    </div>
-                    <div id="goldToggle">
-                        Gold <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled" ng-change="toggleTier('Gold')">
-                    </div>
-                    <div id="silverToggle">
-                        Silver <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled" ng-change="toggleTier('Silver')">
+                    <div class="toggles">
+                        <h4 class="tierTitle hidden-xs">Show / Hide Types:</h4>
+                        <div class="toggleContainer" id="platToggle">
+                              <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="toggleTier('Platinum')"> <img height="20px" src="https://storage.googleapis.com/aries-website/wtb/mapflag.png"> Platinum
+                        </div>
+                        <div class="toggleContainer" id="goldToggle">
+                            <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled" ng-change="toggleTier('Gold')"> <img src="http://www.curtmfg.com/Content/img/mapdot4.png"> Gold
+                        </div>
+                        <div class="toggleContainer" id="silverToggle">
+                            <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled" ng-change="toggleTier('Silver')"> <img src="http://www.curtmfg.com/Content/img/mapdot3.png"> Silver
+                        </div>
                     </div>
                 </div>
             </div>
