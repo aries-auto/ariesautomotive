@@ -12,8 +12,8 @@ class SearchForm extends Component {
         term: PropTypes.string,
     };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
@@ -23,19 +23,16 @@ class SearchForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state.term);
-        // this.setState({
-        //     term: this.state.term,
-        // });
-        return;
+        const term = this.refs.term.getValue();
+        window.location = `/search/${term}`;
     }
 
     render() {
         return (
             <div className={cx(s.root, this.props.className)} role="navigation">
                 <form className={s.navbarSearch + ' navbar-form navbar-left row'} onSubmit={this.handleSubmit} role="search">
-                    <Input type="search" label="Enter search" placeholder="Search" />
-                    <Button type="submit" bsStyle="default">
+                    <Input type="search" ref="term" label="Enter search" placeholder="Search" />
+                    <Button type="submit" bsStyle="default" className="">
                         <span className={s.nodisplay}>Search</span>
                         <Glyphicon glyph="search" />
                     </Button>

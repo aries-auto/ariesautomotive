@@ -1,0 +1,6 @@
+{
+  "name": "PartResults",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PartResults.js"
+}

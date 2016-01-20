@@ -17,22 +17,36 @@ class Navigation extends Component {
             <div className={cx(s.root, this.props.className)} role="navigation">
                 <ul className="nav nav-pills">
                     {this.props.categories.map((cat, j) => {
+                        if (cat.children && cat.children.length > 0) {
+                            return (
+                                <li key={j} role="presentation" className="dropdown">
+                                    <a className={s.link + ' dropdown-toggle'} data-toggle="dropdown" href={'/category/' + cat.id + '/' + cat.title} role="button" aria-haspopup="true" aria-expanded="false">
+                                        {cat.title} <span className="caret"></span>
+                                    </a>
+                                    <ul className="dropdown-menu">
+                                        {cat.children.map((sub, i) => {
+                                            return (
+                                                <li key={i}><a href={'/category/' + sub.id + '/' + cat.title + '/' + sub.title}>{sub.title}</a></li>
+                                            );
+                                        })}
+                                    </ul>
+                                </li>
+                            );
+                        }
+
                         return (
-                            <li key={j} role="presentation" className="dropdown">
-                                <a className={s.link + ' dropdown-toggle'} data-toggle="dropdown" href={'/category/' + cat.id + '/' + cat.title} role="button" aria-haspopup="true" aria-expanded="false">
-                                    {cat.title} <span className="caret"></span>
+                            <li key={j} role="presentation">
+                                <a className={s.link} href={'/category/' + cat.id + '/' + cat.title} aria-haspopup="true">
+                                    {cat.title}
                                 </a>
-                                <ul className="dropdown-menu">
-                                    {cat.children.map((sub, i) => {
-                                        return (
-                                            <li key={i}><a href={'/category/' + sub.id + '/' + cat.title + '/' + sub.title}>{sub.title}</a></li>
-                                        );
-                                    })}
-                                </ul>
                             </li>
                         );
                     })}
-
+                    <li role="presentation">
+                        <a className={s.link} href="/appguides">
+                            Application Guides
+                        </a>
+                    </li>
                 </ul>
             </div>
         );

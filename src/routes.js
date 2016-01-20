@@ -4,6 +4,7 @@ import fetch from './core/fetch';
 import App from './components/App';
 import Product from './components/Product';
 import Home from './components/Home';
+import SearchResults from './components/SearchResults';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -80,6 +81,18 @@ const router = new Router(on => {
         }
 
         return <Product part={state.context.part} />;
+    });
+
+    on('/search/:term', async (state) => {
+        try {
+            const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79&brandID=3`);
+
+            state.context.searchResult = await searchResponse.json();
+        } catch (e) {
+            state.context.error = e;
+        }
+
+        return <SearchResults context={state.context} />;
     });
 
     on('/', async (state) => {
