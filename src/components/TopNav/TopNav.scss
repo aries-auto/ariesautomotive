@@ -1,7 +1,35 @@
 @import '../variables.scss';
 
 .root {
-  background-color: $white-base;
-  font-size: 20px;
-  margin: 0;
+	background-color: $white-base;
+	font-size: 20px;
+	margin: 0;
+}
+
+.menu {
+	margin-right: 40px;
+
+	> li > a {
+		color: $gray-light;
+		padding: 10px 0;
+
+		&:hover {
+            background-color: $white-base;
+			color: $gray-lighter;
+		}
+	}
+}
+
+.item {
+	font-family: $font-family-base;
+	font-size: 20px;
+	-webkit-font-smoothing: antialiased;
+}
+
+@media screen and (width >= $screen-sm-min) {
+	.menu > li > a {
+		height: 55px;
+		line-height: 55px;
+		padding: 0 15px;
+	}
 }

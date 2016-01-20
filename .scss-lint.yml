@@ -84,7 +84,7 @@ linters:
   ImportPath:
     enabled: true
     leading_underscore: false
-    filename_extension: false
+    filename_extension: true
 
   Indentation:
     enabled: true
@@ -146,7 +146,7 @@ linters:
     enabled: true
 
   QualifyingElement:
-    enabled: true
+    enabled: false
     allow_element_with_attribute: false
     allow_element_with_class: false
     allow_element_with_id: false

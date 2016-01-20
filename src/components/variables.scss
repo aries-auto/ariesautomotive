@@ -8,17 +8,17 @@ $gray-darker:           color(black lightness(+13.5%)); /* #222 */
 $gray-dark:             color(black lightness(+25%));   /* #404040 */
 $gray:                  color(black lightness(+33.5%)); /* #555 */
 $gray-light:            color(black lightness(+46.7%)); /* #777 */
-$gray-lighter:          color(black lightness(+93.5%)); /* #eaeaea */
+$gray-lighter:          color(black lightness(+77.5%)); /* #c7c7c7 */
 
-$newRed: rgb(199, 48, 49);
+$new-red: rgb(199, 48, 49);
 $topHeaderBackColor: #1c0104;
 $headerMenuBackColor: #31070C;
-$headerColor: #26090D;
-$headerCallLinkColor: $newRed;
+$header-color: #26090D;
+$headerCallLinkColor: $new-red;
 $footerColor: #999999;
-$footerNavColor: $newRed;
+$footerNavColor: $new-red;
 $red: #ff0000;
-$altRed : $newRed;
+$alt-red : $new-red;
 $trans-black: rgba(0, 0, 0, .6);
 
 /*

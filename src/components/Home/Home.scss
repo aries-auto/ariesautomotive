@@ -1,8 +1,6 @@
 @import '../variables.scss';
 @import '../classes.scss';
 
-.root {}
-
 .carouselImg {
 	background-position: 50% 60%;
 	background-repeat: no-repeat;
@@ -50,17 +48,20 @@
 	max-width: 100%;
 	padding: 20px 15px 0;
 
-	.header{
+	.header {
 		max-width: 100%;
 	}
+
 	.callout {
 		position: relative;
+
 		img {
 			margin-top: 10px;
 			max-width: 100%;
 			opacity: .6;
 		}
-		span{
+
+		span {
 			background-color: $gray-lighter;
 			bottom: 0;
 			display: block;

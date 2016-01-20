@@ -1,43 +1,71 @@
+@import './variables.scss';
+
 :global a.red-transparent-button,
 :global button.red-transparent-button,
 :global button[type=submit].red-transparent-button,
 :global a.white-transparent-button,
 :global button.white-transparent-button,
-:global button[type=submit].white-transparent-button{
+:global button[type=submit].white-transparent-button {
 	background: transparent;
-	background-color: rgb(255,255,255,0.6);
-	font-weight: bold;
-	padding: 2px 15px;
-	font-size:18px;
-	border-radius:0;
+	background-color: $gray-light;
+	border-radius: 0;
 	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
 	margin-bottom: 5px;
-	&:hover, &:focus, &:disabled{
+	padding: 2px 15px;
+
+	&:hover,
+	&:focus,
+	&:disabled {
+		background-color: transparent;
 		text-decoration: none;
-		background-color:transparent;
-		transition: 0.3s ease-in-out;
+		transition: all .3s ease-in-out;
 	}
 }
 
 :global a.red-transparent-button,
 :global button.red-transparent-button,
-:global button[type=submit].red-transparent-button{
-	color: $altRed;
-	border:1px solid $altRed;
+:global button[type=submit].red-transparent-button {
+	border: 1px solid $alt-red;
+	color: $alt-red;
 
-	&:hover, &:focus, &:disabled{
-		color:$headerColor;
-		border-color: $headerColor;
-		transition: 0.3s ease-in-out;
+	&:hover,
+	&:focus,
+	&:disabled {
+		border-color: $header-color;
+		color: $header-color;
+		transition: all .3s ease-in-out;
 	}
 }
 
 :global a.white-transparent-button,
 :global button.white-transparent-button,
-:global button[type=submit].white-transparent-button{
-	color: #fff;
-	border:1px solid #fff;
-	&:hover,&:focus, &:disabled{
-		transition: 0.3s ease-in-out;
+:global button[type=submit].white-transparent-button {
+	border: 1px solid $white-base;
+	color: $white-base;
+
+	&:hover,
+	&:focus,
+	&:disabled {
+		transition: .3s ease-in-out;
+	}
+}
+
+:global button[type=submit] {
+	background-color: $alt-red;
+	border-color: $header-color;
+	color: $white-base;
+	cursor: pointer;
+	font-size: 18px;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+
+	&[disabled],
+	&:hover,
+	&:active,
+	&:focus{
+		border-color: $new-red;
+		background-color: $new-red;
 	}
 }

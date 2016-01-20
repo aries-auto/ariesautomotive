@@ -100,6 +100,7 @@ const config = {
         return [
             require('postcss-import')({ addDependencyTo: bundler }),
             require('precss')(),
+            require('postcss-media-minmax'),
             require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
         ];
     },
