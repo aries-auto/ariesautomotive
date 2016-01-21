@@ -406,17 +406,29 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 	function getOnline(){
 		BuyService.online(0, 100).then(function(res) {
 			var platinums = [];
-			var regulars = [];
+			var golds = [];
+			var silvers = []
 			res.forEach(function(d){
-				if (d.dealerTier.tier == "Platinum"){
-					platinums.push(d);
-				}else{
-					regulars.push(d);
+				switch(d.dealerTier.tier){
+					case "Platinum":
+						platinums.push(d);
+						break;
+					case "Gold":
+						golds.push(d);
+						break;
+					case "Silver":
+						silvers.push(d);
+						break;
+					default:
+						silvers.push(d);
 				}
 			});
-			platinums.sort(randomOrder)
-			regulars.sort(randomOrder)
-			$scope.online = platinums.concat(regulars);
+			platinums.sort(randomOrder);
+			golds.sort(randomOrder);
+			silvers.sort(randomOrder);
+			$scope.onlinePlats = platinums;
+			$scope.onlineGolds = golds;
+			$scope.onlineSilvs = silvers;
 
 		});
 	}

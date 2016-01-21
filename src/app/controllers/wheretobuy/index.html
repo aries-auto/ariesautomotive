@@ -121,8 +121,36 @@
             </div>
         </div>
         <div class="tab-pane" ng-class="{ 'active' : display === 'online' }" id="online" role="tabpanel">
+            <h1>Online Retailers</h1>
+            <p>Want to purchase our products online? Listed below are online retailers, where you can purchase our products to be delivered to your door.</p>
             <div class="row">
-                <div ng-repeat="d in online" class="col-md-3 col-sm-12 col-xs-12 online-locations">
+                <h3 ng-if="onlinePlats.length > 0" class="col-xs-12 col-md-12 col-lg-12">Platinum</h3>
+                <!-- Platinum will display company logo instead of just name -->
+                <div ng-repeat="d in onlinePlats" class="col-md-3 col-sm-12 col-xs-12 online-locations">
+                    <a href="http://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" itemscope itemtype="http://schema.org/PostalAddress">
+                        <img class="online-retailer-logo" ng-if="d.logo.Host" src="http://[[ d.logo.Host ]][[ d.logo.Path ]]" alt="[[d.name]]">
+                        <!-- 
+                        Example Image
+                        <img class="online-retailer-logo" src="http://www.curtmfg.com/assets/eCustomHitch.png"> -->
+                        <span ng-if="!d.logo.Host" itemprop="name" class="name">[[ d.name ]]</span>
+                        <div class="actions">
+                            <span class="glyphicon glyphicon-new-window"></span>
+                            Click Here to Buy Online
+                        </div>
+                    </a>
+                </div>
+                <h3 ng-if="onlineGolds.length > 0" class="col-xs-12 col-md-12 col-lg-12">Gold</h3>
+                <div ng-repeat="d in onlineGolds" class="col-md-3 col-sm-12 col-xs-12 online-locations">
+                    <a href="http://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" itemscope itemtype="http://schema.org/PostalAddress">
+                        <span itemprop="name" class="name">[[ d.name ]]</span>
+                        <div class="actions">
+                            <span class="glyphicon glyphicon-new-window"></span>
+                            Click Here to Buy Online
+                        </div>
+                    </a>
+                </div>
+                <h3 ng-if="onlineSilvs.length > 0" class="col-xs-12 col-md-12 col-lg-12">Silver</h3>
+                <div ng-repeat="d in onlineSilvs" class="col-md-3 col-sm-12 col-xs-12 online-locations">
                     <a href="http://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" itemscope itemtype="http://schema.org/PostalAddress">
                         <span itemprop="name" class="name">[[ d.name ]]</span>
                         <div class="actions">

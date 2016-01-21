@@ -194,6 +194,13 @@ $headerHeight: 40px;
 
 .online-locations{
     margin: 30px 0;
+
+    .online-retailer-logo{
+        width:100%;
+        height:auto;
+        max-height:50px;
+    }
+
     a {
         border-bottom: 3px solid #57111a;
         display: block;
