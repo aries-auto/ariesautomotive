@@ -19,9 +19,7 @@ const router = new Router(on => {
             body: '{}',
         });
 
-        const categoryResponse = await fetch('http://api.curtmfg.com/v3/category?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79', {
-            method: 'get',
-        });
+        const categoryResponse = await fetch('http://api.curtmfg.com/v3/category?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79');
 
         try {
             const vehicleResponse = await yearsResponse.json();

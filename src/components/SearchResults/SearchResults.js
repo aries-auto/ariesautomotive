@@ -41,9 +41,7 @@ class SearchResults extends Component {
 
     showParts() {
         if (this.state.context.searchResult.hits.hits.length > 0) {
-            return (
-                <PartResults parts={this.state.context.searchResult.hits.hits} className="search-part-box" />
-            );
+            return <PartResults parts={this.state.context.searchResult.hits.hits} className="search-part-box" />;
         }
     }
 

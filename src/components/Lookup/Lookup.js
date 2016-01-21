@@ -14,8 +14,8 @@ class Lookup extends Component {
         models: PropTypes.array,
         vehicle: PropTypes.shape({
             year: PropTypes.string,
-            model: PropTypes.string,
             make: PropTypes.string,
+            model: PropTypes.string,
         }),
     };
 
