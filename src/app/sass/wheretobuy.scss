@@ -47,6 +47,20 @@ $headerHeight: 40px;
     }
 }
 
+.loadingloc{
+    .message{
+        position: absolute;
+        width: 200px;
+        margin-left:-75px;
+        margin-top:60px;
+        z-index: 2000000000;
+        left: 50%;
+        top: 50%;
+        font-weight:bold;
+        font-size:1.5em;
+    }
+}
+
 .map-box{
     width: 100%;
     margin: 0 auto 20px auto;
@@ -55,6 +69,7 @@ $headerHeight: 40px;
     padding-bottom:0px;
 
     .loading-container{
+
         position: relative;
         height: auto;
         text-align: center;
@@ -62,8 +77,11 @@ $headerHeight: 40px;
         .message{
             font-size: 18px;
             font-weight: bold;
+            z-index:999999999999999;
         }
     }
+
+
     .angular-google-map-container{
         height: 400px;
     }

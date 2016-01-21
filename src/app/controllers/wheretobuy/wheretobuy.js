@@ -120,7 +120,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				longitude: pos.coords.longitude
 			};
 			// $scope.map.zoom = 5;
+			$scope.locLoaded = true;
 			$scope.$apply();
+
             localStorage.set('position', pos);
         }
     };
@@ -367,6 +369,8 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			    };
                 navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
 				return;
+            }else{
+            	$locLoaded = true;
             }
 
             $scope.position = pos;
