@@ -84,7 +84,12 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				}
 				// handle the toggle buttons for each dealer tier
 				if(el.dealerTier.tier == "Platinum" && $scope.platEnabled === true){
-					locationData.push(data[i]);
+					// handle discount hitch being first, ugh.
+					if (el.customerId === 10444250){
+						locationData.unshift(data[i]); // love unshift
+					}else{
+						locationData.push(data[i]);
+					}			
 				}
 				if(el.dealerTier.tier == "Gold" && $scope.goldEnabled === true){
 					locationData.push(data[i]);
