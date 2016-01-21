@@ -167,6 +167,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 	$rootScope.search = '';
 	$scope.display = $location.hash() || 'local';
     $scope.coordinates = {};
+
     $scope.map = {
         markerIcon: 'http://www.curtmfg.com/Content/img/mapflag.png',
         show: false,
@@ -282,10 +283,10 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 	};
 
     $scope.$watch('position',function(){
+    	$scope.map.show = true; // don't wait on geo location to show map. Downside is map will eventually snap to the result of getCurrentPosition()
         if ($scope.position === undefined || $scope.position.coords === undefined || $scope.position.coords === null){
             return;
         }
-        $scope.map.show = true;
         $scope.map.refresh = true;
         updateLocations();
     });
@@ -357,9 +358,8 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				var geoOptions = {
 			            enableHighAccuracy: true,
 			            timeout: 10000,
-			            maximumAge: 500
+			            maximumAge: Infinity // Infinity says to try to pull from cache if possible
 			    };
-
                 navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
 				return;
             }
