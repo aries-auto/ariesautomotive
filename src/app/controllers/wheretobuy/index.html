@@ -1,22 +1,24 @@
 <div class="container full-width">
 
     <div class="row header-row">
-        <div class="col-md-5">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" ng-class="{ 'active' : display === 'local' }">
-                    <a href="#local" aria-controls="Buy local" role="tab" ng-click="changeDisplay('local', $event)" data-toggle="tab">
-                        Buy Local
-                    </a>
-                </li>
-                <li role="presentation" ng-class="{ 'active' : display === 'online' }">
-                    <a href="#online" aria-controls="Buy online" role="tab" ng-click="changeDisplay('online', $event)" data-toggle="tab">
-                        Buy Online
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-7 search-form row" ng-show="display === 'local'">
-            <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
+        <div class="col-md-10 map-nav-top">
+            <div class="col-md-5 col-xs-12 map-nav-tab-switch">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="{ 'active' : display === 'local' }">
+                        <a href="#local" aria-controls="Buy local" role="tab" ng-click="changeDisplay('local', $event)" data-toggle="tab">
+                            Buy Local
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{ 'active' : display === 'online' }">
+                        <a href="#online" aria-controls="Buy online" role="tab" ng-click="changeDisplay('online', $event)" data-toggle="tab">
+                            Buy Online
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-5 col-xs-12 search-form row" ng-show="display === 'local'">
+                <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
+            </div>
         </div>
     </div>
     <div class="tab-content">
@@ -25,7 +27,7 @@
                 
                 <!-- <div ng-if="!mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div> -->
        
-                <div class="col-md-12">
+                <div class="col-md-10 col-lg-10 map-app-container">
 
                     <div id="map" class="angular-google-map-container map-box">
                         <div ng-if="!map.show" class="loading-container">
@@ -73,7 +75,7 @@
                     </div>
                 </div>
                 <div ng-if="map.show" class="col-md-12 tierToggles">
-                    <div class="toggles">
+                    <div class="toggles col-md-10" style="margin-left:auto; margin-right:auto; float:none;">
                         <h4 class="tierTitle hidden-xs">Show / Hide Types:</h4>
                         <div class="toggleContainer" id="platToggle">
                               <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="toggleTier('Platinum')"> <img height="20px" src="https://storage.googleapis.com/aries-website/wtb/mapflag.png"> Platinum
@@ -87,10 +89,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-md-12" ng-if="!mobile_view">
+            <div class="row col-md-12">
                 <div ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key.sort'">
                     <h2 style="max-width:400px;">[[locs.$key]]</h2>
-                    <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-6 text-locations">
+                    <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-12 text-locations">
                     <div itemscope itemtype="http://schema.org/PostalAddress">
                         <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
                         <span class="type">[[ loc.dealerType.label ]]</span>
@@ -127,7 +129,7 @@
         </div>
         <div class="tab-pane" ng-class="{ 'active' : display === 'online' }" id="online" role="tabpanel">
             <h1>Online Retailers</h1>
-            <p>Want to purchase our products online? Listed below are online retailers, where you can purchase our products to be delivered to your door.</p>
+            <p>Want to purchase our products online? Listed below are online retailers, where you can purchase our products to be delivered right to your door.</p>
             <div class="row">
                 <h3 ng-if="onlinePlats.length > 0" class="col-xs-12 col-md-12 col-lg-12">Platinum</h3>
                 <!-- Platinum will display company logo instead of just name -->
@@ -167,7 +169,7 @@
             </div>
         </div>
 
-        <div ng-if="mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div>
+<!--         <div ng-if="mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div> -->
 
     </div>
 

@@ -28,10 +28,20 @@ $headerHeight: 40px;
         }
     }
     .search-form{
+        float:right;
         input{
             height:$headerHeight;
             width: 100%;
         }
+    }
+}
+
+.map-nav-top{
+    float:none;
+    margin: 0 auto;
+
+    .map-nav-tab-switch{
+        float:left;
     }
 }
 
@@ -60,6 +70,11 @@ $headerHeight: 40px;
         font-size:1.5em;
     }
 }
+.map-app-container{
+    float:none;
+    margin: 0 auto;
+    height:500px;
+}
 
 .map-box{
     width: 100%;
@@ -83,7 +98,8 @@ $headerHeight: 40px;
 
 
     .angular-google-map-container{
-        height: 400px;
+        height:500px;
+        max-height: 500px;
     }
     > img{
         width: 100%;
