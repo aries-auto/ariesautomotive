@@ -126,7 +126,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
             localStorage.set('position', pos);
         }
     };
+
     var failedPosition = function(){
+		$scope.locLoaded = true;
         if ($scope.position === undefined){
             $rootScope.$broadcast('error', 'Failed to retrieve your location');
         }
@@ -134,6 +136,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		ngDialog.open({
 			template: 'app/controllers/wheretobuy/location-form.html',
 			scope: $scope,
+			closeByNavigation: true,
 			controller: ['$scope',function($scope){
 				$scope.lookupLocation = function(){
 					var val = document.getElementById('autocomplete').value;
@@ -167,6 +170,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			});
 			$scope.locations = [];
 		}
+
 
     };
 
@@ -255,6 +259,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			};
 			$scope.map.zoom = 10;
 			$scope.map.refresh = true;
+
 			$scope.$apply();
 		});
 	};
