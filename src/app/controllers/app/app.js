@@ -17,6 +17,10 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 		$location.path(path);
 	};
 
+	$scope.getYear = function(){
+        return new Date().getFullYear();
+	};
+
 	$scope.carousel_images = [{
 		image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		text: 'Never Fear the Uncertain Road',
