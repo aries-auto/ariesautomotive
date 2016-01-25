@@ -197,7 +197,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
 		$locationProvider.html5Mode(true);
-		localStorageServiceProvider.setPrefix('ariesauto');
+		localStorageServiceProvider.setPrefix('ariesauto').setStorageType('sessionStorage');
 		LightboxProvider.templateUrl = 'app/controllers/main/whatsNewLightbox.html';
 		uiGmapGoogleMapApiProvider.configure({
 			key: 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA',

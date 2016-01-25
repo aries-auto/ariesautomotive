@@ -18,7 +18,11 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 			$rootScope.pageDesc = $scope.category.metaDescription;
 			$rootScope.pageKywds = $scope.category.metaKeywords;
 		}, function(err){
-			$rootScope.$broadcast('error', err.data.message);
+			if (err.data && err.data.message) {
+				$rootScope.$broadcast('error', err.data.message);
+			} else {
+				$rootScope.$broadcast('error', 'Failed to find that category');
+			}
 		});
 	}
 
