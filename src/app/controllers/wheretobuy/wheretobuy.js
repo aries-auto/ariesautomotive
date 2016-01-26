@@ -120,10 +120,11 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude
 			};
-			// $scope.map.zoom = 5;
+			$scope.map.zoom = 10;
 			$scope.locLoaded = true;
-
             localStorage.set('position', pos);
+            $scope.map.refresh = true;
+			$scope.$apply();
         }
     };
 
@@ -377,7 +378,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 					latitude: res.location.lat,
 					longitude: res.location.lng
 				}
-			};
+			}
 	        plotPosition($scope.position);
 		});
 
@@ -391,7 +392,6 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		            maximumAge: Infinity // Infinity says to try to pull from cache if possible
 		    };
             navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
-            $scope.map.zoom = 8;
 			return;
 		}
 	}
