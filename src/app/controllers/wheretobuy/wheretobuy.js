@@ -371,14 +371,14 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			$scope.map.center = $scope.coordinates = {
 				latitude: res.location.lat,
 				longitude: res.location.lng
-			}
+			};
 
             $scope.position = {
 				coords: {
 					latitude: res.location.lat,
 					longitude: res.location.lng
 				}
-			}
+			};
 	        plotPosition($scope.position);
 		});
 
