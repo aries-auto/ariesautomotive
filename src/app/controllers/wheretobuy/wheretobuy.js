@@ -26,7 +26,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		}
 		var lat = path.getAt(0).lat();
 		var lng = path.getAt(0).lng();
-		$scope.map.zoom = 8;
+		$scope.map.zoom = 10;
 		$scope.position.coords = {
 			latitude: lat,
 			longitude: lng
@@ -147,8 +147,8 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		});
 
 		$scope.map.center = {
-			latitude: 40.125496,
-			longitude: -96.391891
+			latitude: 44.8167,
+			longitude: -91.5000
 		};
 		$scope.map.zoom = 4;
 		$scope.position = {};
@@ -191,8 +191,8 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
         showWeather: false,
         showHeat: false,
         center: {
-			latitude: -40.125496,
-			longitude: -96.391891
+			latitude: 44.8167,
+			longitude: -91.5000
         },
         options:{
             streetViewControler: false,
@@ -200,7 +200,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
             maxZoom: 20,
             minZoom: 3
         },
-        zoom: 8,
+        zoom: 10,
 		pan: true,
         dragging: false,
         bounds: {},
@@ -380,6 +380,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				}
 			};
 	        plotPosition($scope.position);
+		}, function(error){
+			// in case getting by ip fails, the default location of Eau Claire will be loaded
+			$scope.locLoaded = true;
 		});
 
     });
