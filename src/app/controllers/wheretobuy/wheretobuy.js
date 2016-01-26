@@ -15,6 +15,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 	$scope.platEnabled = true;
 	$scope.goldEnabled = true;
 	$scope.silverEnabled = true;
+	$scope.locLoaded = false;
 
 
 	var lastBounds = {};
@@ -121,7 +122,6 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 			};
 			// $scope.map.zoom = 5;
 			$scope.locLoaded = true;
-			$scope.$apply();
 
             localStorage.set('position', pos);
         }
@@ -154,6 +154,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$scope.coordinates = $scope.position.coords = $scope.map.center;
 		$scope.$apply();
     };
+
 
     var updateLocations = function(){
         $scope.coordinates.latitude = $scope.position.coords.latitude;
@@ -189,7 +190,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
         showWeather: false,
         showHeat: false,
         center: {
-			latitude: 40.125496,
+			latitude: -40.125496,
 			longitude: -96.391891
         },
         options:{
@@ -364,24 +365,36 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				$scope.$apply();
 			});
 		}
-		if (Modernizr.geolocation) {
-            var pos = localStorage.get('position');
-            if (pos === undefined || pos === null || pos.coords === undefined){
-				var geoOptions = {
-			            enableHighAccuracy: true,
-			            timeout: 10000,
-			            maximumAge: Infinity // Infinity says to try to pull from cache if possible
-			    };
-                navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
-				return;
-            }else{
-            	$locLoaded = true;
-            }
 
-            $scope.position = pos;
+		BuyService.geoLocateIP().then(function(res) {
+			$scope.map.center = $scope.coordinates = {
+				latitude: res.location.lat,
+				longitude: res.location.lng
+			}
+
+            $scope.position = {
+				coords: {
+					latitude: res.location.lat,
+					longitude: res.location.lng
+				}
+			};
+	        plotPosition($scope.position);
+		});
+
+    });
+
+	$scope.LookupGeoLoc = function(){
+		if (Modernizr.geolocation) {
+			var geoOptions = {
+		            enableHighAccuracy: true,
+		            timeout: 10000,
+		            maximumAge: Infinity // Infinity says to try to pull from cache if possible
+		    };
+            navigator.geolocation.getCurrentPosition(plotPosition, failedPosition, geoOptions);
+            $scope.map.zoom = 8;
 			return;
 		}
-    });
+	}
 
 	$scope.toggleTier = function(tier){
 		if (tier === "Platinum"){

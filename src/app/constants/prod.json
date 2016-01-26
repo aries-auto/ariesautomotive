@@ -4,6 +4,7 @@
         "APIURL": "http://goapi.curtmfg.com",
         "InternalURL": "http://iapi.curtmfg.com",
         "APIKEY":"883d4046-8b96-11e4-9475-42010af00d4e",
-        "BRAND_ID": "3"
+        "BRAND_ID": "3",
+        "GeoLocAPIKey": "AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA"
     }
 }

@@ -72,6 +72,20 @@ angular.module('ariesautomotive').factory('BuyService', ['$http','$q','AppConfig
 				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
+		},
+
+		geoLocateIP: function(){
+			var def = $q.defer();
+			//curl -d '' https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA
+			$http({
+				method: 'post',
+				url: "https://www.googleapis.com/geolocation/v1/geolocate",
+				params: {
+					'key': AppConfig.GeoLocAPIKey
+				},
+				responseType: 'json'
+			}).success(def.resolve).error(def.reject);
+			return def.promise;
 		}
 	};
 }]);
