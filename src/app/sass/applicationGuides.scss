@@ -31,6 +31,27 @@
 			text-transform: capitalize;
 		}
 
+		.app-guide-download {
+
+			span{
+				font-weight: bold;
+				font-size: 18px;
+				vertical-align: middle;
+				margin-right: 10px;
+			}
+
+			a {
+				margin: 0 5px;
+				img{
+					@include opacity(.8);
+				}
+
+				&:hover img{
+					@include opacity(1);
+				}
+			}
+		}
+
 		table{
 			thead tr th{
 				font-size: 18px;
@@ -56,7 +77,7 @@
 	}
 
 
-	div.appguide{
+	a.appguide{
 		padding:10px;
 		margin-bottom:0px;
 		font-size: 1.5em;
