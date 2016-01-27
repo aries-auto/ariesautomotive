@@ -29,7 +29,6 @@
 					<th ng-if="location">Location</th>
 					<th ng-repeat="fin in finishes">[[ fin ]]</th>
 					<th ng-repeat="col in colors">[[ col ]]</th>
-					<th>Install Sheet</th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="app in applications | filter:{locations: '!!'}">
@@ -46,9 +45,6 @@
 					<td ng-repeat="col in colors">
 						<a app="app" finish="col" collection="collection" location="loc" finish-link></a>
 					</td>
-					<td>
-						<a app="app" location="loc" appguide-install-link></a>
-					</td>
 				</tr>
 			</tbody>
 			<tbody ng-repeat="app in applications | filter:{locations: '!'}">
@@ -64,9 +60,6 @@
 					</td>
 					<td ng-repeat="col in colors">
 						<a app="app" finish="col" collection="collection" finish-link></a>
-					</td>
-					<td>
-						<a app="app" appguide-install-link></a>
 					</td>
 				</tr>
 			</tbody>

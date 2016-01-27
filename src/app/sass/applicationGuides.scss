@@ -63,12 +63,19 @@
 					&:hover{
 						cursor: pointer;
 					}
-					&:last-child{
-						&:hover{
-							cursor: default;
-						}
-						a{
-							display:block;
+					// &:last-child{
+					// 	&:hover{
+					// 		cursor: default;
+					// 	}
+					// 	a{
+					// 		display:block;
+					// 	}
+					// }
+
+					.partLink {
+						display: block;
+						.glyphicon {
+							margin: 0 3px;
 						}
 					}
 				}
