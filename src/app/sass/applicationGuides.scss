@@ -1,43 +1,59 @@
-.breadcrumb{
-	li, li a{
+.breadcrumb {
+	li,
+	li a{
 		text-transform: capitalize;
 	}
-	> li + li:before{
-		content: $breadcrumb-separator + "\00a0";
+
+	> li + li::before {
+		content: $breadcrumb-separator + '\00a0';
 	}
 }
 
-.category{
-	font-size:2em;
-	.right{
-		float:right;
-		a{
-			text-decoration:none;
+.category {
+	font-size: 2em;
 
-			.icon{
-				font-size: .8em;
-				border:none;
-			}
+	.right {
+		float: right;
+
+		a {
+			text-decoration: none;
+		}
+
+		a.icon {
+			border: 0;
+			font-size: .8em;
 		}
 	}
 
 }
 
-.appguides-container{
+.appguides-container {
 	margin: 25px 0;
 
 	.container.appguide{
+
 		h1{
 			text-transform: capitalize;
 		}
 
+		.install-instructions {
+			line-height: 30px;
+			margin: 35px 10px 5px;
+			font-size: 18px;
+			color: $newRed;
+
+			span {
+				font-size: 14px;
+			}
+		}
+
 		.app-guide-download {
 
-			span{
-				font-weight: bold;
+			span {
 				font-size: 18px;
-				vertical-align: middle;
+				font-weight: bold;
 				margin-right: 10px;
+				vertical-align: middle;
 			}
 
 			a {
@@ -63,14 +79,6 @@
 					&:hover{
 						cursor: pointer;
 					}
-					// &:last-child{
-					// 	&:hover{
-					// 		cursor: default;
-					// 	}
-					// 	a{
-					// 		display:block;
-					// 	}
-					// }
 
 					.partLink {
 						display: block;
