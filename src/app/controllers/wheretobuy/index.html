@@ -1,7 +1,7 @@
 <div class="container full-width">
 
     <div class="row header-row">
-        <div class="col-md-10 map-nav-top">
+        <div class="col-md-12 map-nav-top">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map-nav-tab-switch">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" ng-class="{ 'active' : display === 'local' }">
@@ -17,17 +17,24 @@
                 </ul>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row" ng-show="display === 'local'">
-                <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
+                <div class="pull-left col-lg-1 col-md-1">
+                    <a href="#" class="geo-lookup" ng-click="LookupGeoLoc()">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                    </a>
+                </div>
+                <div class="pull-right col-lg-11 col-md-11">
+                    <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
+                </div>
             </div>
         </div>
     </div>
     <div class="tab-content">
         <div class="tab-pane" ng-class="{ 'active' : display === 'local' }" id="local" role="tabpanel">
             <div class="row">
-                
+
                 <!-- <div ng-if="!mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div> -->
-       
-                <div class="col-md-10 col-lg-10 map-app-container">
+
+                <div class="col-md-12 col-lg-12 map-app-container">
 
                     <div id="map" class="angular-google-map-container map-box">
                         <div ng-if="!map.show" class="loading-container">
@@ -86,9 +93,6 @@
                             <div class="toggleContainer" id="silverToggle">
                                 <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled" ng-change="toggleTier('Silver')"> <img src="http://www.curtmfg.com/Content/img/mapdot3.png"> Silver
                             </div>
-                            <span class="geoloc pull-right">
-                                <a href="" class="red-transparent-button" ng-click="LookupGeoLoc()">Use Your Location</a>
-                            </span>
                     </div>
                 </div>
             </div>
@@ -139,7 +143,7 @@
                 <div ng-repeat="d in onlinePlats" class="col-md-3 col-sm-12 col-xs-12 online-locations">
                     <a href="http://[[ d.website.Host ]][[ d.website.Path ]]" target="_blank" itemscope itemtype="http://schema.org/PostalAddress">
                         <img class="online-retailer-logo" ng-if="d.logo.Host" src="http://[[ d.logo.Host ]][[ d.logo.Path ]]" alt="[[d.name]]">
-                        <!-- 
+                        <!--
                         Example Image
                         <img class="online-retailer-logo" src="http://www.curtmfg.com/assets/eCustomHitch.png"> -->
                         <span ng-if="!d.logo.Host" itemprop="name" class="name">[[ d.name ]]</span>

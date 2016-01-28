@@ -1,5 +1,5 @@
 $headerHeight: 40px;
-$SuperSmallWidth : 480px;
+$SuperSmallWidth: 480px;
 
 .header-row{
     margin-top: 35px;
@@ -45,6 +45,10 @@ $SuperSmallWidth : 480px;
     .map-nav-tab-switch{
         float:left;
     }
+
+    .geo-lookup {
+        font-size: 32px;
+    }
 }
 
 .location-loader{
@@ -74,16 +78,15 @@ $SuperSmallWidth : 480px;
 }
 .map-app-container{
     float:none;
-    margin: 0 auto;
-    height:500px;
+    margin: 20px auto 0;
+    min-height:500px;
 }
 
 .map-box{
     width: 100%;
-    margin: 0 auto 20px auto;
-    padding: 20px 0 20px 0;
-    margin-bottom:0px;
-    padding-bottom:0px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 500px;
 
     .loading-container{
 
@@ -108,17 +111,14 @@ $SuperSmallWidth : 480px;
     }
 }
 
-.tierToggles{
-    padding-bottom:5px;
-    padding-left:15px;
-    padding-right:15px;
+.tierToggles {
+    padding: 0 15px 5px;
 
-    .toggles{
-        padding-top:10px;
-        background-color:#ffffff;
-        padding-left:5px;
-        padding-bottom:10px;
-        margin-bottom:10px;
+    .toggles {
+        background-color: #ffffff;
+        margin-bottom: 10px;
+        padding: 10px 5px;
+        width: 100%;
 
         .tierTitle{
             font-size: 1.5em;
