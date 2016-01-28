@@ -1,4 +1,5 @@
 $headerHeight: 40px;
+$SuperSmallWidth : 480px;
 
 .header-row{
     margin-top: 35px;
@@ -27,12 +28,13 @@ $headerHeight: 40px;
             border: none;
         }
     }
-    .search-form{
+    .wtb-search{
         float:right;
         input{
             height:$headerHeight;
             width: 100%;
         }
+
     }
 }
 
@@ -116,6 +118,7 @@ $headerHeight: 40px;
         background-color:#ffffff;
         padding-left:5px;
         padding-bottom:10px;
+        margin-bottom:10px;
 
         .tierTitle{
             font-size: 1.5em;
@@ -272,6 +275,37 @@ $headerHeight: 40px;
         }
         .angular-google-map-container{
             height:800px;
+        }
+    }
+}
+
+@media(max-width: $screen-xs-max){
+    .wtb-search{
+        margin-top:10px;
+        margin-left:5px;
+        float:left;
+    }
+}
+
+@media (max-width: $SuperSmallWidth) {
+    .toggles{
+        display:inline-block;
+        .toggleContainer{
+            float:left;
+            display:block;
+            margin-top:10px;
+            width:100%;
+        }
+    }
+    .geoloc{
+        float:left;
+        display:block;
+        margin-top:10px;
+        width:100%;
+        a{
+            width:100%;
+            display:block;
+            text-align:center;
         }
     }
 }

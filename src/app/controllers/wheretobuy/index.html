@@ -2,7 +2,7 @@
 
     <div class="row header-row">
         <div class="col-md-10 map-nav-top">
-            <div class="col-md-5 col-xs-12 map-nav-tab-switch">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map-nav-tab-switch">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" ng-class="{ 'active' : display === 'local' }">
                         <a href="#local" aria-controls="Buy local" role="tab" ng-click="changeDisplay('local', $event)" data-toggle="tab">
@@ -16,7 +16,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-5 col-xs-12 search-form row" ng-show="display === 'local'">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row" ng-show="display === 'local'">
                 <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
             </div>
         </div>
@@ -76,19 +76,19 @@
                 </div>
                 <div ng-if="map.show" class="col-md-12 tierToggles">
                     <div class="toggles col-md-10" style="margin-left:auto; margin-right:auto; float:none;">
-                        <h4 class="tierTitle hidden-xs">Show / Hide Types:</h4>
-                        <div class="toggleContainer" id="platToggle">
-                              <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="toggleTier('Platinum')"> <img height="20px" src="https://storage.googleapis.com/aries-website/wtb/mapflag.png"> Platinum
-                        </div>
-                        <div class="toggleContainer" id="goldToggle">
-                            <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled" ng-change="toggleTier('Gold')"> <img src="http://www.curtmfg.com/Content/img/mapdot4.png"> Gold
-                        </div>
-                        <div class="toggleContainer" id="silverToggle">
-                            <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled" ng-change="toggleTier('Silver')"> <img src="http://www.curtmfg.com/Content/img/mapdot3.png"> Silver
-                        </div>
-                         <span class="geoloc pull-right">
-                            <a href="" class="red-transparent-button" ng-click="LookupGeoLoc()">Use Your Location</a>
-                        </span>
+                            <h4 class="tierTitle hidden-xs hidden-sm">Show / Hide Types:</h4>
+                            <div class="toggleContainer" id="platToggle">
+                                  <input type="checkbox" name="platEnabled" value="platEnabled" ng-model="platEnabled" ng-change="toggleTier('Platinum')"> <img height="20px" src="https://storage.googleapis.com/aries-website/wtb/mapflag.png"> Platinum
+                            </div>
+                            <div class="toggleContainer" id="goldToggle">
+                                <input type="checkbox" name="goldEnabled" value="goldEnabled" ng-model="goldEnabled" ng-change="toggleTier('Gold')"> <img src="http://www.curtmfg.com/Content/img/mapdot4.png"> Gold
+                            </div>
+                            <div class="toggleContainer" id="silverToggle">
+                                <input type="checkbox" name="silverEnabled" value="silverEnabled" ng-model="silverEnabled" ng-change="toggleTier('Silver')"> <img src="http://www.curtmfg.com/Content/img/mapdot3.png"> Silver
+                            </div>
+                            <span class="geoloc pull-right">
+                                <a href="" class="red-transparent-button" ng-click="LookupGeoLoc()">Use Your Location</a>
+                            </span>
                     </div>
                 </div>
             </div>
