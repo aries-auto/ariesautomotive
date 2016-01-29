@@ -47,7 +47,9 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				}
 			}
 
-			var titleStr = $scope.part.short_description + ' #' + $scope.part.oldPartNumber + ' | ' + $scope.part.categories[0].short_description;
+			console.log($scope.part);
+
+			var titleStr = $scope.part.short_description + ' #' + $scope.part.part_number + ' | ' + $scope.part.categories[0].short_description;
 			$rootScope.pageTitle = titleStr;
 			$rootScope.pageDesc = $scope.part.categories[0].metaDescription;
 			$rootScope.pageKywds = 'aries, ' + $scope.part.short_description + ', ' + vTitle;
