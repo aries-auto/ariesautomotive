@@ -7,8 +7,8 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 	$scope.colors = [];
 	$scope.location = false;
 
-	$rootScope.pageTitle = "ARIES Automotive | Application Guides";
-	$rootScope.pageKywds = "aries, automotive, applications, application guides, vehicles";
+	$rootScope.pageTitle = 'ARIES Automotive | Application Guides';
+	$rootScope.pageKywds = 'aries, automotive, applications, application guides, vehicles';
 
 
 	var page = 0;
@@ -20,77 +20,64 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 	};
 
 	$scope.GetFileLocation = function(type){
-		var pdf = "";
-		var xlsx = "";
 		switch($scope.collection) {
-			case "3 in round side bars":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.xlsx";
+			case '3 in round side bars':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.pdf';
 				}
-			case "3 in round side bars, pro series":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20PRO%20SERIES%20SIDE%20BARS%20App%20Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20PRO%20SERIES%20SIDE%20BARS%20App%20Guide.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.xlsx';
+			case '3 in round side bars, pro series':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20PRO%20SERIES%20SIDE%20BARS%20App%20Guide.pdf';
 				}
-			case "4 in oval side bars":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20PRO%20SERIES%20SIDE%20BARS%20App%20Guide.xlsx';
+			case '4 in oval side bars':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.pdf';
 				}
-			case "4 in oval side bars, wheel to wheel":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.xlsx';
+			case '4 in oval side bars, wheel to wheel':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.pdf';
 				}
-			case "6 in oval side bars and mounting brackets":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.xlsx';
+			case '6 in oval side bars and mounting brackets':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.pdf';
 				}
-			case "bull bars":
-				if (type == "pdf"){
-					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.pdf";
-				}else{
-					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.xlsx';
+			case 'bull bars':
+				if (type === 'pdf'){
+					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.pdf';
 				}
-			case "floor liners":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.xlsx";
+				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.xlsx';
+			case 'floor liners':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.pdf';
 				}
-			case "grille guards":
-				if (type == "pdf"){
-					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.pdf";
-				}else{
-					return "http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.xlsx';
+			case 'grille guards':
+				if (type === 'pdf'){
+					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.pdf';
 				}
-			case "jeep accessories":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx";
+				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx';
+			case 'jeep accessories':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
 				}
-			case "jeep bumper kits and replacement parts":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx';
+			case 'jeep bumper kits and replacement parts':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
 				}
-			case "4 in round side bars, big step":
-				if (type == "pdf"){
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.pdf";
-				}else{
-					return "https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.xlsx";
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx';
+			case '4 in round side bars, big step':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.pdf';
 				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.xlsx';
 			default:
-				return "";
+				return '';
 		}
 	};
 
@@ -120,13 +107,28 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				low = app.year;
 			}else if(app.year < low){
 				low = app.year;
+
+				for (var i = 0; i < app.parts.length; i++) {
+					var ap = app.parts[i];
+					var exists = false;
+					for (var j = 0; j < last.parts.length; j++) {
+						var lp = last.parts[j];
+						if (ap.oldPartNumber === lp.oldPartNumber) {
+							exists = true;
+						}
+					}
+
+					if (!exists) {
+						last.parts.push(ap);
+					}
+				}
 			}else{
 				last = {};
 				high = 0;
 				low = 0;
 			}
 		});
-	}
+	};
 
 	var getMore = function(page){
 		ApplicationGuideService.getApplications($scope.collection, page).then(function(data){
