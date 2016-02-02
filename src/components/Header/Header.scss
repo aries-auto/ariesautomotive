@@ -6,10 +6,39 @@
 }
 
 .container {
+	height: 80px;
 	margin: 0 auto;
-	padding: 20px 0;
+	padding: 15px 0;
 }
 
-.brand img {
-	height: 50px;
+.brand {
+	height: 100%;
+	padding: 0 15px;
+
+	img {
+		height: 50px;
+	}
+}
+
+.phoneNum {
+	border-left: 1px solid $header-color;
+	box-shadow: inset 1px 0 0 $new-red;
+	height: 80px;
+	margin-top: -15px;
+	min-height: 100%;
+	padding: 15px;
+
+	a {
+		color: #ABABAB;
+		font-size: 20px;
+		font-family: "ff-good-headline-web-pro-con",sans-serif;
+		line-height: 45px;
+		text-decoration: none;
+
+		&:hover,
+		&:visited,
+		&:focus {
+			color: #D4D4D4;
+		}
+	}
 }

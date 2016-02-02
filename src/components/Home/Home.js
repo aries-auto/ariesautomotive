@@ -104,13 +104,13 @@ class Home extends Component {
                                 </div>
                             </div>
 
-                            <div className="row whats-new">
+                            <div className={cx(s.whatsNew, 'row')}>
                                 <a href="/envision">
                                     <img src="https://storage.googleapis.com/aries-website/whatsnew/Envision-Website-Graphic.png" alt="Envision ARIES" />
                                 </a>
                             </div>
 
-                            <div className="row catalog">
+                            <div className={cx('row', s.catalog)}>
                                 <div className="col-xs-6 col-md-7 col-lg-5">
                                     <img src="https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png" alt="catalog" className="img-responsive" />
                                 </div>
@@ -119,7 +119,7 @@ class Home extends Component {
                                     <a className="red-transparent-button" href="https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf">DOWNLOAD</a>
                                 </div>
                             </div>
-                            <div className="row catalog">
+                            <div className={cx('row', s.catalog)}>
                                 <div className="col-xs-6 col-md-7 col-lg-5">
                                     <img src="https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png" alt="catalog" className="img-responsive" />
                                 </div>
@@ -133,7 +133,7 @@ class Home extends Component {
                 </div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-12" ng-controller="PartController">
+                        <div className="col-md-12">
                             <h3>FEATURED PRODUCTS</h3>
                             <div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
                                 {this.state.context.featuredProducts.map((prod, i) => {

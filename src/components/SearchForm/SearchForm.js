@@ -31,7 +31,7 @@ class SearchForm extends Component {
         return (
             <div className={cx(s.root, this.props.className)} role="navigation">
                 <form className={s.navbarSearch + ' navbar-form navbar-left row'} onSubmit={this.handleSubmit} role="search">
-                    <Input type="search" ref="term" label="Enter search" placeholder="Search" />
+                    <Input type="search" ref="term" groupClassName={s.searchGroup} label="Enter search" placeholder="Search" />
                     <Button type="submit" bsStyle="default" className="">
                         <span className={s.nodisplay}>Search</span>
                         <Glyphicon glyph="search" />

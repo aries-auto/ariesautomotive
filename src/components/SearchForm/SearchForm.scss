@@ -7,16 +7,23 @@
 		display: none;
 	}
 
-	input {
-		font-family: $font-family-base;
-		font-size: 16px;
-		height: 24px;
+	.searchGroup {
+		width: 300px;
 		margin-right: 10px;
-		width: 100%;
+
+		input {
+			font-family: $font-family-base;
+			font-size: 16px;
+			height: 24px;
+			margin-right: 5%;
+			width: 90%;
+		}
+
 	}
 
 	button[type=submit] {
 		border-color: $new-red;
+		width: 15%;
 
 		.nodisplay {
 			display: none;

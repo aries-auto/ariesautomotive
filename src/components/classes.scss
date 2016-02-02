@@ -6,8 +6,7 @@
 :global a.white-transparent-button,
 :global button.white-transparent-button,
 :global button[type=submit].white-transparent-button {
-	background: transparent;
-	background-color: $gray-light;
+	background-color: $lookup-color;
 	border-radius: 0;
 	cursor: pointer;
 	font-size: 18px;

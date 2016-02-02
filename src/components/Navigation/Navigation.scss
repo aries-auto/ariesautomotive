@@ -1,9 +1,41 @@
 @import '../variables.scss';
 
-.root .nav {
-  color: $white-base;
-}
+.root {
+    padding-left: 0;
 
-.link {
-  color: $white-base;
+    .nav {
+        color: $white-base;
+    }
+
+    .nav .link {
+        background-color: transparent;
+        color: $white-base;
+
+        &:hover,
+        &:focus {
+            background-color: transparent;
+        }
+    }
+
+    .nav .subMenu {
+        background-color: $white-base;
+        border-bottom: 4px solid $alt-red;
+        border-radius: 0 0 4px 4px;
+        border-top: 0;
+        font-size: 18px;
+        margin: 20px 0 0 -1px;
+        padding-top: 22px;
+
+        li a {
+            // color: $headerMenuBackColor;
+            border-radius: 0;
+            color: $header-color;
+            font-family: "ff-good-headline-web-pro-con", sans-serif;
+            padding: 10px 8px;
+        }
+
+        li:hover a{
+            background-color: #cccccc;
+        }
+    }
 }
