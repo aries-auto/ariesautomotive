@@ -3,6 +3,7 @@ import Router from 'react-routing/src/Router';
 import fetch from './core/fetch';
 import App from './components/App';
 import Product from './components/Product';
+import Category from './components/Category';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import NotFoundPage from './components/NotFoundPage';
@@ -48,7 +49,7 @@ const router = new Router(on => {
             state.context.error = e;
         }
 
-        return <Product part={state.context.part} />;
+        return <Product context={state.context} />;
     });
 
     on('/category/:id/:title', async (state) => {
@@ -63,7 +64,7 @@ const router = new Router(on => {
             state.context.error = e;
         }
 
-        return <Product part={state.context.part} />;
+        return <Category context={state.context} />;
     });
 
     on('/category/:id/:title/:sub', async (state) => {
@@ -73,12 +74,18 @@ const router = new Router(on => {
                 method: 'get',
             });
 
+            const partURL = `http://api.curtmfg.com/v3/category/${state.params.id}/parts?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+            const partResponse = await fetch(partURL, {
+                method: 'get',
+            });
+
             state.context.category = await catResponse.json();
+            state.context.category.parts = await partResponse.json();
         } catch (e) {
             state.context.error = e;
         }
 
-        return <Product part={state.context.part} />;
+        return <Category context={state.context} />;
     });
 
     on('/search/:term', async (state) => {

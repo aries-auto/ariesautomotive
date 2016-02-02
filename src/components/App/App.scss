@@ -9,6 +9,11 @@
 html {
     color: #222;
     font-family: $font-family-base;
+    font-size: 14px;
+    line-height: 1;
+}
+
+html.wf-active {
     font-size: 1em; /* ~16px; */
     line-height: 1.375; /* ~22px */
 }

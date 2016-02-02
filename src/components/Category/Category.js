@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import PartResults from '../PartResults';
-import s from './SearchResults.scss';
+import s from './Category.scss';
 import withStyles from '../../decorators/withStyles';
 
 @withStyles(s)
@@ -10,7 +10,7 @@ class SearchResults extends Component {
     static propTypes = {
         className: PropTypes.string,
         context: PropTypes.shape({
-            searchResult: PropTypes.object,
+            category: PropTypes.object,
         }),
     };
 
@@ -22,7 +22,7 @@ class SearchResults extends Component {
     }
 
     componentWillMount() {
-        if (!this.props || !this.props.context || !this.props.context.searchResult) {
+        if (!this.props || !this.props.context || !this.props.context.category) {
             return;
         }
 
@@ -40,18 +40,15 @@ class SearchResults extends Component {
     }
 
     showParts() {
-        if (this.state.context.searchResult.hits.hits.length > 0) {
-            return <PartResults parts={this.state.context.searchResult.hits.hits} />;
+        console.log(this.state.context.category.parts.parts);
+        if (this.state.context.category.parts.parts.length > 0) {
+            return <PartResults parts={this.state.context.category.parts.parts} />;
         }
     }
 
-    took() {
-        return parseFloat((this.state.context.searchResult.took * 0.001).toFixed(4));
-    }
-
     pagination() {
-        const res = this.state.context.searchResult;
-        if (res.hits.hits.length > 0 && res.hits.hits < res.hits.total) {
+        const res = this.state.context.category.parts;
+        if (res.length > 0) {
             return (
                 <a href="#" className="pagination" onClick={this.loadMore()}>
                     <span>Load more</span>
@@ -64,8 +61,7 @@ class SearchResults extends Component {
         return (
             <div className={cx(s.root, this.props.className, 'container')} role="navigation">
                 <h2 id="catTitleProds">
-					SEARCH RESULTS
-					<span className="small">1 - {this.state.context.searchResult.hits.hits.length} of {this.state.context.searchResult.hits.total} results for "<em>{this.state.term}</em>" returned in {this.took()} seconds</span>
+					{this.props.context.category.title}
 				</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
