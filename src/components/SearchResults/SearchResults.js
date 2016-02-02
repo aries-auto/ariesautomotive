@@ -49,30 +49,33 @@ class SearchResults extends Component {
         return parseFloat((this.state.context.searchResult.took * 0.001).toFixed(4));
     }
 
+    pagination() {
+        const res = this.state.context.searchResult;
+        if (res.hits.hits.length > 0 && res.hits.hits < res.hits.total) {
+            return (
+                <a href="#" className="pagination" onClick={this.loadMore()}>
+                    <span>Load more</span>
+                </a>
+            );
+        }
+    }
+
     render() {
         return (
-            <div className={cx(s.root, this.props.className, 'search-container')} role="navigation">
+            <div className={cx(s.root, this.props.className, 'container')} role="navigation">
                 <h2 id="catTitleProds">
 					SEARCH RESULTS
 					<span className="small">1 - {this.state.context.searchResult.hits.hits.length} of {this.state.context.searchResult.hits.total} results for "<em>{this.state.term}</em>" returned in {this.took()} seconds</span>
 				</h2>
 
-				<div className="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12">
-
+				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
 					{/* Products */}
                     {this.showParts()}
-
-					<div className="scrollButton" onClick={this.scrollTo('productView')}><span>Top</span></div>
-					<div className="clearfix"></div>
-				</div>
+                </div>
 
 				{/* Pagination */}
 				<div className="clearfix"></div>
-
-                {/* TODO: ng-if="parts.length < total_hits" */}
-				<a href="#" className="pagination" onClick={this.loadMore()}>
-					<span>Load more</span>
-				</a>
+				{this.pagination()}
             </div>
         );
     }

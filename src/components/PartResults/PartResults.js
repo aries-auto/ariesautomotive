@@ -37,7 +37,7 @@ class PartResults extends Component {
 
         p.pricing.map((pr, i) => {
             if (pr.type === 'List' && pr.price > 0) {
-                return <span key={i} className="msrp">MSRP <span className="price">${parseFloat(pr.price.toFixed(2))}</span></span>;
+                return <span key={i} className="msrp">MSRP <span className={s.priceValue}>${parseFloat(pr.price.toFixed(2))}</span></span>;
             }
         });
     }
@@ -70,38 +70,36 @@ class PartResults extends Component {
 
     render() {
         return (
-            <div className={cx(s.root, this.props.className, 'result-container')} role="navigation">
+            <div className={cx(s.root, this.props.className)} role="navigation">
                 {this.state.parts.map((part, i) => {
                     return (
-                        <div key={i} className="product row well" ng-repeat="p in parts">
-                            <div className="product-header">
-                                <span className="product-desc">
+                        <div key={i} className={cx(s.product, 'row', 'well')}>
+                            <div className={s.header}>
+                                <span className={s.desc}>
                                     <a href={'/part/' + part._source.part_number}>{part._source.short_description}
-                                        <span className="product-id">{part._source.part_number}</span>
+                                        <span className={s.partNum}>{part._source.part_number}</span>
                                     </a>
                                 </span>
                             </div>
 
-                            <div className="product-image col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <div className={cx(s.image, 'col-xs-12', 'col-sm-12', 'col-md-3', 'col-lg-2')}>
                                 <img className="img-responsive" src={this.partImages(part._source)} alt={'Image for ' + part._source.short_description} />
                             </div>
 
                             <div className="side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
 
-                                <div className="product-price">
+                                <div className={s.price}>
                                     {this.getPrice(part._source)}
                                 </div>
-                                <div className="product-attr">
+                                <div className={s.attr}>
                                     <ul>
                                         {this.showAttributes(part._source)}
                                     </ul>
                                 </div>
                             </div>
-                            <div className="product-nav col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
-                                <div>
-                                    <a href="/buy" className="btn red-transparent-button" aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
-                                    <a href={'/part/' + part._source.part_number} className="btn red-transparent-button" aria-controls="Part details" role="button" data-toggle="tab">View Details</a>
-                                </div>
+                            <div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
+                                <a href="/buy" className="btn red-transparent-button" aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
+                                <a href={'/part/' + part._source.part_number} className="btn red-transparent-button" aria-controls="Part details" role="button" data-toggle="tab">View Details</a>
                             </div>
                         </div>
                     );
