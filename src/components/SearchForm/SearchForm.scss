@@ -34,20 +34,6 @@
 			display: none;
 		}
 	}
-
-	.mobile {
-		border: 1px solid $white-base;
-		border-left: 0;
-		border-right: 0;
-	}
-
-	.mobile .group {
-		width: 85%;
-	}
-
-	.mobile button {
-		width: 10%;
-	}
 }
 
 @media(min-width: $screen-md-min) {

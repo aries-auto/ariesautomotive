@@ -11,7 +11,7 @@ class SearchResults extends Component {
         className: PropTypes.string,
         context: PropTypes.shape({
             searchResult: PropTypes.object,
-            term: PropTypes.string.isRequired,
+            term: PropTypes.string,
         }),
     };
 

@@ -10,17 +10,27 @@
 	padding: 0;
 }
 
+.mobileContainer {
+	height: 40px;
+	margin: 5px 0;
+	padding: 0;
+}
+
 .brand {
 	height: 100%;
-	padding: 0 15px;
+	padding: 0;
 
 	img {
 		height: 50px;
 	}
 }
 
-.collapse span {
-	background-color: $white-base;
+.collapse {
+	margin-right: 0;
+
+	span {
+		background-color: $white-base;
+	}
 }
 
 .phoneNum {

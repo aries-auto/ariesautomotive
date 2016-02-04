@@ -1,0 +1,31 @@
+@import '../variables.scss';
+
+.root {
+	width: 100%;
+
+	.searchIcon {
+		font-size: 20px;
+		line-height: 40px;
+		vertical-align: bottom;
+	}
+
+	button[type=submit] {
+		border: 0;
+		float: right;
+		padding: 0;
+		width: 10%;
+		background: none;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: $white-base;
+			text-shadow: 0 1px 2px $gray;
+		}
+
+		.nodisplay {
+			display: none;
+		}
+	}
+
+}
