@@ -112,7 +112,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
         if(pos.coords === undefined || pos.coords === null){
 			return;
 		}
-		
+
         $scope.position = {
 			coords: {
 				latitude: pos.coords.latitude,
@@ -127,6 +127,9 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$scope.locLoaded = true;
         localStorage.set('position', pos);
         $scope.map.refresh = true;
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
     };
 
     var failedPosition = function(){
