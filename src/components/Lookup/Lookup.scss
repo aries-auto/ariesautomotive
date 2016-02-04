@@ -2,21 +2,40 @@
 
 .root {
 	background-color: $lookup-color;
-	padding: 10px 0;
+	padding: 10px;
 	width: 100%;
 }
 
-:global .form-inline {
+.inlineForm {
     margin: auto;
     max-width: $max-content-width;
 }
 
+.heading {
+	color: $black-base;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 900;
+	text-transform: uppercase;
+	display: block;
+	height: 38px;
+	line-height: 38px;
+}
+
 .formGroup {
-	margin: 0 10px;
+	margin: 10px;
+
+	select {
+		text-transform: uppercase;
+	}
 }
 
 @media(min-width: 720px) {
-    :global .form-inline {
+	.root{
+		padding: 10px 0;
+	}
+
+    .inlineForm {
         margin-left: 215px;
     }
 }

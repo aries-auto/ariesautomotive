@@ -179,13 +179,13 @@ class Lookup extends Component {
         }
         if (this.state.action === 'view') {
             viewAction = (
-                <button>View Parts</button>
+                <button className="red-transparent-button pull-right">View Parts</button>
             );
         }
         return (
             <div className={cx(s.root, this.props.className, 'container-fluid')} role="navigation">
-                <form className={cx('form-inline')}>
-                    <label>Vehicle Lookup</label>
+                <form className={cx(s.inlineForm, 'form-inline')}>
+                    <label className={s.heading}>Vehicle Lookup</label>
                     {yearSelect}
                     {makeSelect}
                     {modelSelect}
