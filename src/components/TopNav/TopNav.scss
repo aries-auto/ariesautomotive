@@ -12,6 +12,7 @@
 	> li > a {
 		color: $gray-light;
 		padding: 10px 0;
+		font-size: 14px;
 
 		&:hover {
             background-color: $white-base;
@@ -26,10 +27,18 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-@media screen and (width >= $screen-sm-min) {
+@media screen and (width >= $screen-md-min) {
 	.menu > li > a {
+		font-size: 20px;
 		height: 55px;
 		line-height: 55px;
+		padding: 0 5px;
+	}
+}
+
+@media screen and (width >= $screen-lg-min) {
+	.menu > li > a {
+		font-size: 20px;
 		padding: 0 15px;
 	}
 }

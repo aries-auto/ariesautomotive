@@ -76,30 +76,30 @@ class PartResults extends Component {
                         <div key={i} className={cx(s.product, 'row', 'well')}>
                             <div className={s.header}>
                                 <span className={s.desc}>
-                                    <a href={'/part/' + part._source.part_number}>{part._source.short_description}
-                                        <span className={s.partNum}>{part._source.part_number}</span>
+                                    <a href={'/part/' + part.part_number}>{part.short_description}
+                                        <span className={s.partNum}>{part.part_number}</span>
                                     </a>
                                 </span>
                             </div>
 
                             <div className={cx(s.image, 'col-xs-12', 'col-sm-12', 'col-md-3', 'col-lg-2')}>
-                                <img className="img-responsive" src={this.partImages(part._source)} alt={'Image for ' + part._source.short_description} />
+                                <img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
                             </div>
 
                             <div className="side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
 
                                 <div className={s.price}>
-                                    {this.getPrice(part._source)}
+                                    {this.getPrice(part)}
                                 </div>
                                 <div className={s.attr}>
                                     <ul>
-                                        {this.showAttributes(part._source)}
+                                        {this.showAttributes(part)}
                                     </ul>
                                 </div>
                             </div>
                             <div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
                                 <a href="/buy" className="btn red-transparent-button" aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
-                                <a href={'/part/' + part._source.part_number} className="btn red-transparent-button" aria-controls="Part details" role="button" data-toggle="tab">View Details</a>
+                                <a href={'/part/' + part.part_number} className="btn red-transparent-button" aria-controls="Part details" role="button" data-toggle="tab">View Details</a>
                             </div>
                         </div>
                     );

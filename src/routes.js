@@ -11,24 +11,27 @@ import ErrorPage from './components/ErrorPage';
 
 const router = new Router(on => {
     on('*', async (state, next) => {
-        const yearsResponse = await fetch('https://goapi.curtmfg.com/vehicle/mongo/allCollections?key=883d4046-8b96-11e4-9475-42010af00d4e', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json',
-            },
-            body: '{}',
-        });
-
-        const categoryResponse = await fetch('http://api.curtmfg.com/v3/category?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79');
+        if (!state.context) {
+            state.context = {};
+        }
+        const [yearResponse, catResponse] = await Promise.all([
+            fetch('https://goapi.curtmfg.com/vehicle/mongo/allCollections?key=883d4046-8b96-11e4-9475-42010af00d4e', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json',
+                },
+                body: '{}',
+            }),
+            fetch('http://api.curtmfg.com/v3/category?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79'),
+        ]);
 
         try {
-            const vehicleResponse = await yearsResponse.json();
+            state.context.categories = await catResponse.json();
+            const vehicleResponse = await yearResponse.json();
             if (vehicleResponse.available_years !== undefined) {
                 state.context.years = vehicleResponse.available_years;
             }
-
-            state.context.categories = await categoryResponse.json() || [];
         } catch (e) {
             state.context.error = e;
         }
@@ -93,6 +96,20 @@ const router = new Router(on => {
             const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79&brandID=3`);
 
             state.context.searchResult = await searchResponse.json();
+            state.context.term = state.query.term;
+        } catch (e) {
+            state.context.error = e;
+        }
+
+        return <SearchResults context={state.context} />;
+    });
+
+    on('/search', async (state) => {
+        try {
+            const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.query.term}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79&brandID=3`);
+
+            state.context.searchResult = await searchResponse.json();
+            state.context.term = state.query.term;
         } catch (e) {
             state.context.error = e;
         }

@@ -11,6 +11,7 @@ class SearchResults extends Component {
         className: PropTypes.string,
         context: PropTypes.shape({
             searchResult: PropTypes.object,
+            term: PropTypes.string.isRequired,
         }),
     };
 
@@ -40,9 +41,12 @@ class SearchResults extends Component {
     }
 
     showParts() {
-        if (this.state.context.searchResult.hits.hits.length > 0) {
-            return <PartResults parts={this.state.context.searchResult.hits.hits} />;
+        const parts = [];
+        for (let i = 0; i < this.state.context.searchResult.hits.hits.length; i++) {
+            parts.push(this.state.context.searchResult.hits.hits[i]._source);
         }
+
+        return <PartResults parts={parts} />;
     }
 
     took() {
@@ -65,7 +69,7 @@ class SearchResults extends Component {
             <div className={cx(s.root, this.props.className, 'container')} role="navigation">
                 <h2 id="catTitleProds">
 					SEARCH RESULTS
-					<span className="small">1 - {this.state.context.searchResult.hits.hits.length} of {this.state.context.searchResult.hits.total} results for "<em>{this.state.term}</em>" returned in {this.took()} seconds</span>
+					<span className="small">1 - {this.state.context.searchResult.hits.hits.length} of {this.state.context.searchResult.hits.total} results for "<em>{this.state.context.term}</em>" returned in {this.took()} seconds</span>
 				</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">

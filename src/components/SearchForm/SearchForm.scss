@@ -1,15 +1,20 @@
 @import '../variables.scss';
 
-.navbarSearch {
+.root {
 	width: 100%;
+
+	form {
+		width: 100%;
+		box-shadow: none;
+	}
 
 	label {
 		display: none;
 	}
 
-	.searchGroup {
-		width: 300px;
+	.group {
 		margin-right: 10px;
+		width: 150px;
 
 		input {
 			font-family: $font-family-base;
@@ -28,5 +33,31 @@
 		.nodisplay {
 			display: none;
 		}
+	}
+
+	.mobile {
+		border: 1px solid $white-base;
+		border-left: 0;
+		border-right: 0;
+	}
+
+	.mobile .group {
+		width: 85%;
+	}
+
+	.mobile button {
+		width: 10%;
+	}
+}
+
+@media(min-width: $screen-md-min) {
+	.root .group {
+		width: 200px;
+	}
+}
+
+@media(min-width: $screen-lg-min) {
+	.root .group {
+		width: 80%;
 	}
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Carousel, CarouselItem } from 'react-bootstrap';
+import Modal from 'react-modal';
 import cx from 'classnames';
 import s from './Home.scss';
 import withStyles from '../../decorators/withStyles';
@@ -19,8 +20,8 @@ class Home extends Component {
 
     constructor() {
         super();
-        this.carouselPrev = this.carouselPrev.bind(this);
-        this.carouselNext = this.carouselNext.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.state = {
             context: {
                 carouselImages: [],
@@ -35,6 +36,30 @@ class Home extends Component {
         }
         this.setState({
             context: this.props.context,
+            modalStyles: {
+                overlay: {
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                    zIndex: '40',
+                },
+                content: {
+                    top: '30%',
+                    left: '30%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    padding: '0',
+                    transform: 'translate(-25%, -25%)',
+                    width: '80%',
+                    height: '50%',
+                    borderRadius: '0',
+                    border: '0',
+                },
+            },
+            modalIsOpen: false,
         });
     }
 
@@ -51,19 +76,25 @@ class Home extends Component {
         return url;
     }
 
-
-    carouselPrev() {
-
+    openModal() {
+        this.setState({
+            context: this.state.context,
+            modalIsOpen: true,
+        });
     }
 
-    carouselNext() {
-
+    closeModal() {
+        this.setState({
+            context: this.state.context,
+            modalIsOpen: false,
+        });
     }
 
     render() {
         return (
             <div className={cx(s.root, this.props.className, 'home-container')} role="navigation">
 
+                {/* Carousel */}
                 <Carousel>
                     {this.state.context.carouselImages.map((img, i) => {
                         return (
@@ -79,6 +110,7 @@ class Home extends Component {
                     })}
                 </Carousel>
 
+                {/* Marketing Mess */}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 col-lg-6">
@@ -96,7 +128,7 @@ class Home extends Component {
                         </div>
                         <div className="col-md-6 col-lg-6">
 
-                            <div className={cx(s.whatsNew, 'row')}>
+                            <div onClick={this.openModal} className={cx(s.whatsNew, s.styleguard, 'row')}>
                                 <img src="https://storage.googleapis.com/aries-website/whatsnew/What's-New-Banner.png" alt="What's New with ARIES" className={cx(s.header)} />
                                 <div className={cx(s.callout)}>
                                     <img src="https://storage.googleapis.com/aries-website/whatsnew/ARIES-Floor-Liner-Artistic-Black%20(20).jpg" alt=" Introducing StyleGuard Floor Liners" className="styleguard" />
@@ -104,7 +136,7 @@ class Home extends Component {
                                 </div>
                             </div>
 
-                            <div className={cx(s.whatsNew, 'row')}>
+                            <div className={cx(s.whatsNew, s.envision, 'row')}>
                                 <a href="/envision">
                                     <img src="https://storage.googleapis.com/aries-website/whatsnew/Envision-Website-Graphic.png" alt="Envision ARIES" />
                                 </a>
@@ -131,6 +163,8 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
+
+                {/* Featured Products */}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -153,17 +187,18 @@ class Home extends Component {
                     </div>
                 </div>
 
+                {/* Testimonials */}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <h3>FROM OUR CUSTOMERS</h3>
-                            <div className="col-md-12 testimonials">
+                            <div className={cx('col-md-12', s.testimonials)}>
                                 {this.state.context.testimonials.map((t, i) => {
                                     return (
                                         <div key={i} className={cx(s.testimonial, 'col-md-6')}>
                                             <h4>"{t.title}"</h4>
                                             <p>{t.content}</p>
-                                            <span className={cx(s.customerName)}>- {t.firstName} {t.lastName}, {t.location}</span>
+                                            <span className={cx(s.name)}>- {t.firstName} {t.lastName}, {t.location}</span>
                                         </div>
                                     );
                                 })}
@@ -171,6 +206,15 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
+
+                {/* YouTube Modal */}
+                <Modal
+                  isOpen={this.state.modalIsOpen}
+                  onRequestClose={this.closeModal}
+                  style={this.state.modalStyles}
+                >
+                    <iframe className={s.modalIframe} src="https://www.youtube.com/v/8GzILyP_2BM" frameBorder="0" allowFullscreen></iframe>
+                </Modal>
             </div>
         );
     }

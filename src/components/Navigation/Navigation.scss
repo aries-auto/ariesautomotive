@@ -10,6 +10,7 @@
     .nav .link {
         background-color: transparent;
         color: $white-base;
+        font-size: 14px;
 
         &:hover,
         &:focus {
@@ -23,8 +24,7 @@
         border-radius: 0 0 4px 4px;
         border-top: 0;
         font-size: 18px;
-        margin: 20px 0 0 -1px;
-        padding-top: 22px;
+        margin: 0 0 0 -1px;
 
         li a {
             // color: $headerMenuBackColor;
@@ -37,5 +37,16 @@
         li:hover a{
             background-color: #cccccc;
         }
+    }
+}
+
+@media screen and (width >= $screen-lg-min) {
+    .root .nav .link {
+        font-size: 18px;
+    }
+
+    .root .nav .subMenu {
+        padding-top: 22px;
+        margin-top: 20px;
     }
 }

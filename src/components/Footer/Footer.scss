@@ -1,16 +1,99 @@
 @import '../variables.scss';
 
 .root {
-	background: $gray-darker;
-	color: $white-base;
+	background: url('/img/footerBackground.png');
+	color: $footer-color;
+	font-family: "proxima-nova-condensed",sans-serif;
 	margin: 0;
-    padding: 15px 0 0;
+	padding: 15px 0 0;
 	width: 100%;
 }
 
 .container {
 	margin: 0 auto;
-	max-width: $max-content-width;
 	padding: 20px 15px;
-	text-align: center;
+}
+
+h4 {
+	color: $white-base;
+}
+
+.semaLogo{
+	margin-top: 10px;
+}
+
+.footerNav {
+	padding:0px 0px;
+	padding-bottom:70px;
+	ul{
+		li{
+			padding:0px;
+			padding-top:4px;
+			font-size:18px;
+			a{
+				padding:0px;
+			}
+			a:hover{
+				background: none;
+				color:#ccc;
+			}
+		}
+	}
+}
+
+.footerLogo {
+	width: 200px;
+	max-height:110px;
+}
+
+.addressInfo{
+	font-size: 18px;
+
+	span:last-child {
+		margin-left: 5px;
+	}
+}
+
+.addressName{
+	font-size: 18px;
+	font-weight: 700;
+}
+
+address{
+	.phoneNumber {
+		margin: 10px 0;
+	}
+
+	.phone {
+		font-size: 20px;
+		margin-left: 5px;
+
+		a {
+			color: $footer-color;
+		}
+
+		a:hover {
+			color: $gray-light;
+			text-decoration: none;
+		}
+	}
+}
+
+.conditions{
+	font-size:16px;
+	.terms{
+		text-decoration:underline;
+
+	}
+	a:hover{
+		color: #666666;
+	}
+
+}
+
+.social{
+	padding-left:0px;
+	h4{
+		padding-left:15px;
+	}
 }
