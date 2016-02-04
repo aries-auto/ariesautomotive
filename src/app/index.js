@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps', 'bootstrapLightbox', 'angularSpinner', 'angular.filter'])
+angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps', 'bootstrapLightbox', 'angularSpinner', 'angular.filter', 'ngMdIcons'])
 	.config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider, LightboxProvider) {
 		var lookupState = {
 			templateUrl: 'app/controllers/lookup/index.html',

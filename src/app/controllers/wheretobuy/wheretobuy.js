@@ -90,7 +90,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 						locationData.unshift(data[i]); // love unshift
 					}else{
 						locationData.push(data[i]);
-					}			
+					}
 				}
 				if(el.dealerTier.tier == "Gold" && $scope.goldEnabled === true){
 					locationData.push(data[i]);
@@ -109,23 +109,24 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 	};
 
     var plotPosition = function(pos){
-        if(pos.coords !== undefined && pos.coords !== null){
-            $scope.position = {
-				coords: {
-					latitude: pos.coords.latitude,
-					longitude: pos.coords.longitude
-				}
-			};
-			$scope.map.center = $scope.coordinates = {
+        if(pos.coords === undefined || pos.coords === null){
+			return;
+		}
+		
+        $scope.position = {
+			coords: {
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude
-			};
-			$scope.map.zoom = 10;
-			$scope.locLoaded = true;
-            localStorage.set('position', pos);
-            $scope.map.refresh = true;
-			$scope.$apply();
-        }
+			}
+		};
+		$scope.map.center = $scope.coordinates = {
+			latitude: pos.coords.latitude,
+			longitude: pos.coords.longitude
+		};
+		$scope.map.zoom = 10;
+		$scope.locLoaded = true;
+        localStorage.set('position', pos);
+        $scope.map.refresh = true;
     };
 
     var failedPosition = function(){
@@ -348,7 +349,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				}else{
 					$scope.lookupLocation(place.name);
 				}
-				
+
 			});
 		}
 		if($stateParams.location !== ''){

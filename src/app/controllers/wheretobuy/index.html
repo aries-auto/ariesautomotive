@@ -17,22 +17,23 @@
                 </ul>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row" ng-show="display === 'local'">
-                <div class="pull-left col-lg-1 col-md-1">
-                    <a href="#" class="geo-lookup" ng-click="LookupGeoLoc()">
-                        <span class="glyphicon glyphicon-map-marker"></span>
+                <div class="pull-left col-lg-4 col-md-4 col-xs-4 col-sm-3 geo-lookup">
+                    <a href="#" ng-click="LookupGeoLoc()">
+                        <ng-md-icon icon="my_location"></ng-md-icon>
+                        <span>Use my Location</span>
                     </a>
                 </div>
-                <div class="pull-right col-lg-11 col-md-11">
+                <div class="pull-right col-lg-8 col-md-8 col-xs-8 col-sm-9">
                     <input type="search" class="form-control autocomplete" placeholder="Search for location" ng-show="map.show">
                 </div>
+                <div class="clearfix"></div>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div class="tab-content">
         <div class="tab-pane" ng-class="{ 'active' : display === 'local' }" id="local" role="tabpanel">
             <div class="row">
-
-                <!-- <div ng-if="!mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div> -->
 
                 <div class="col-md-12 col-lg-12 map-app-container">
 
@@ -97,40 +98,41 @@
                 </div>
             </div>
             <div class="row col-md-12">
-                <div ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key.sort'">
-                    <h2 style="max-width:400px;">[[locs.$key]]</h2>
-                    <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-12 text-locations">
-                    <div itemscope itemtype="http://schema.org/PostalAddress">
-                        <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
-                        <span class="type">[[ loc.dealerType.label ]]</span>
-                        <span class="address" itemprop="streetAddress">[[ loc.address ]]</span>
-                        <span class="city" itemprop="addressLocality">[[ loc.city ]]</span>
-                        <span>,</span>
-                        <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
-                        <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
-                        <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
+                <div class="text-locations" ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key.sort'">
+                    <h2>[[locs.$key]]</h2>
+                    <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-12 location">
+                        <div itemscope itemtype="http://schema.org/PostalAddress">
+                            <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
+                            <span class="type">[[ loc.dealerType.label ]]</span>
+                            <span class="address" itemprop="streetAddress">[[ loc.address ]]</span>
+                            <span class="city" itemprop="addressLocality">[[ loc.city ]]</span>
+                            <span>,</span>
+                            <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
+                            <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
+                            <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
 
-                        <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
-                            [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
-                        </a>
+                            <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
+                                [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
+                            </a>
 
-                        <div class="actions">
-                            <a href="tel:[[ loc.phone ]]">
-                                <span class="glyphicon glyphicon-earphone"></span>
-                                [[ loc.phone ]]
-                            </a>
-                            <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
-                                <span class="glyphicon glyphicon-th-list"></span>
-                                Directions
-                            </a>
-                            <a ng-click="panTo(loc)">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                                View on Map
-                            </a>
+                            <div class="actions">
+                                <a href="tel:[[ loc.phone ]]">
+                                    <span class="glyphicon glyphicon-earphone"></span>
+                                    [[ loc.phone ]]
+                                </a>
+                                <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    Directions
+                                </a>
+                                <a ng-click="panTo(loc)">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    View on Map
+                                </a>
+                            </div>
+
                         </div>
-
                     </div>
-                </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

@@ -29,10 +29,16 @@ $SuperSmallWidth: 480px;
         }
     }
     .wtb-search{
-        float:right;
+        float: left;
+        margin-top: 10px;
+
         input{
-            height:$headerHeight;
+            height: $headerHeight;
             width: 100%;
+        }
+
+        div:nth-child(2) {
+            padding-right: 0;
         }
 
     }
@@ -43,11 +49,33 @@ $SuperSmallWidth: 480px;
     margin: 0 auto;
 
     .map-nav-tab-switch{
-        float:left;
+        float: left;
+        padding-left: 0;
     }
 
     .geo-lookup {
-        font-size: 32px;
+        padding-right: 0;
+        text-align: left;
+
+        a {
+            display: inline-block;
+            margin: 8px 0;
+            text-decoration: none;
+
+            &:active,
+            &:focus {
+                color: #26090D;
+            }
+
+            &:hover {
+                transition: color .3s ease-in;
+            }
+
+            span {
+                font-size: 15px;
+                vertical-align: baseline;
+            }
+        }
     }
 }
 
@@ -76,6 +104,7 @@ $SuperSmallWidth: 480px;
         font-size:1.5em;
     }
 }
+
 .map-app-container{
     float:none;
     margin: 20px auto 0;
@@ -180,59 +209,73 @@ $SuperSmallWidth: 480px;
 }
 
 .text-locations{
-    padding: 4px 0;
-    > div {
-        position: relative;
-        padding: 10px;
-        margin: 10px;
-        min-height: 190px;
-        border-bottom: 3px solid #57111a;
-        span, a{
-            font-size: 16px;
-            &.name{
-                color: #57111a;
-                text-transform: uppercase;
-                font-size: 24px;
-                font-weight: bold;
-                display:block;
-                line-height:20px;
-                margin-bottom:8px;
-            }
-            &.type{
-                font-size: 16px;
-                display:block;
-                text-transform: none;
-                font-weight: normal;
-                color: #333333;
-                margin-bottom: 5px;
-            }
-            &.city:before{
-                clear:both;
-                display:block;
-                content: ' ';
-            }
 
-            &.website{
-                display:block;
-            }
-        }
-        a{
-            cursor: pointer;
-        }
+    h2 {
+        border-bottom: 4px solid $altRed;
+    }
+    .location {
+        padding: 4px 0;
 
-        .actions{
-            position: absolute;
-            bottom:10px;
-            margin-top: 3px;
-            a{
-                cursor: pointer;
-                margin-right: 7px;
-                text-decoration: none;
+        > div {
+            position: relative;
+            padding: 10px 10px 0;
+            margin: 10px;
+            min-height: 190px;
+            border-bottom: 3px solid #57111a;
+            background: $white;
+            box-shadow: 3px 4px 7px $footerColor;
+
+            span, a{
                 font-size: 16px;
-                span{
-                    vertical-align: middle;
+                &.name{
+                    color: #57111a;
+                    text-transform: uppercase;
+                    font-size: 24px;
+                    font-weight: bold;
+                    display:block;
+                    line-height:20px;
+                    margin-bottom:8px;
+                }
+                &.type{
+                    font-size: 16px;
+                    display:block;
+                    text-transform: none;
+                    font-weight: normal;
+                    color: #333333;
+                    margin-bottom: 5px;
+                }
+                &.city:before{
+                    clear:both;
+                    display:block;
+                    content: ' ';
+                }
+
+                &.website{
+                    display:block;
                 }
             }
+            a{
+                cursor: pointer;
+            }
+
+            .actions{
+                position: absolute;
+                bottom:10px;
+                margin-top: 3px;
+                a{
+                    cursor: pointer;
+                    margin-right: 7px;
+                    text-decoration: none;
+                    font-size: 16px;
+                    span{
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+
+        &:nth-child(1n) > div {
+            margin-left: 0;
         }
     }
 }
@@ -269,6 +312,15 @@ $SuperSmallWidth: 480px;
 }
 
 @media(min-width: $screen-md-min){
+
+    .header-row .wtb-search {
+        float: right;
+    }
+
+    .map-nav-top .geo-lookup {
+        text-align: right;
+    }
+
     .map-box {
         .loading-container{
             padding-top: 15%;
@@ -276,14 +328,6 @@ $SuperSmallWidth: 480px;
         .angular-google-map-container{
             height:800px;
         }
-    }
-}
-
-@media(max-width: $screen-xs-max){
-    .wtb-search{
-        margin-top:10px;
-        margin-left:5px;
-        float:left;
     }
 }
 
