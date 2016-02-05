@@ -23,9 +23,9 @@
     <div class="tab-content">
         <div class="tab-pane" ng-class="{ 'active' : display === 'local' }" id="local" role="tabpanel">
             <div class="row">
-                
+
                 <div ng-if="!mobile_view" ng-include="" src="'app/controllers/wheretobuy/fourLocations.html'"></div>
-       
+
                 <div class="col-md-8">
                     <div id="map" class="angular-google-map-container map-box">
                         <div ng-if="!map.show" class="loading-container">
