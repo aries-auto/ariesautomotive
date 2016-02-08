@@ -112,10 +112,13 @@
 									<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
 										<li class="thumb" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]">
 											<img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" />
-										<li>
+										</li>
 
-										<li class="thumb" ng-repeat="($i, vid) in part.videos" ng-click="shadowbox(vid, 'video')">
-											<img ng-click="openLightbox($i)" class="thumbImg img-responsive" ng-src="[[vid.thumbnail]]"  />
+										<li class="thumb video_thumb" ng-repeat="($i, vid) in part.videos" ng-click="shadowbox(vid, 'video')">
+											<div>
+
+												<img ng-click="openLightbox($i)" class="thumbImg img-responsive" ng-src="[[vid.thumbnail]]"  />
+											</div>
 										</li>
 									</ol>
 
