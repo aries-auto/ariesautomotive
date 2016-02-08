@@ -176,11 +176,34 @@
 					}
 				}
 				.video_thumb{
+					position:relative;
 					div{
 						width: 102.5px;
 						height: 102.222px;
 					}
-					
+					.arrow{
+						position: absolute;
+						display: block; 
+						z-index: 10;
+						left: 35px;
+						top: 40px;
+						height: 20px;
+						width: 30px;
+						background-color: #CE1E1E;
+						border-radius: 12px/5px;
+						-webkit-border-radius: 12px/5px;
+						-moz-border-radius: 12px/5px;
+					}
+					.arrow-right {
+						position: absolute;
+						display: block; 
+						z-index: 11;
+						left: 14px;
+						top: 6px;
+						border-top: 5px solid transparent;
+						border-bottom: 5px solid transparent;
+						border-left: 5px solid #EEEEEE;
+					}
 				}
 			}
 			.mobile-help{
