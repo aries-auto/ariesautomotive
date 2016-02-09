@@ -61,11 +61,14 @@
 					text-align: center;
 
 					.install-sheet a{
+						text-align: center;
 						color: $newRed;
 						border: 2px solid $newRed;
 						margin-bottom:10px;
-						padding: 5px 10px;
+						padding: 0 10px;
 						font-size: 18px;
+						display: block;
+						min-width: 130px;
 					}
 				}
 			}
