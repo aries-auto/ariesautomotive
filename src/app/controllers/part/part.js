@@ -44,6 +44,9 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			angular.forEach(part.videos, function(video, i){
 				video.type = 'video';
 				video.url  = $sce.trustAsResourceUrl(video.channel[0].link.replace("watch?v=", "v/"));
+				if (video.subject_type === 'Installation Video'){
+					$scope.installVideos.push(video);
+				}
 			});
 
 			for (var i = 0; i < metakeys.length; i++) {
@@ -75,6 +78,13 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 
 	$scope.openLightbox = function(index){
 		Lightbox.openModal($scope.part.videos, index);
+	}
+
+	$scope.openInstallVideo = function(){
+		if ($scope.installVideos.length < 1){
+			return;
+		}
+		Lightbox.openModal($scope.installVideos, 0);
 	}
 
 	$scope.checkForDoubles = function(combo){
