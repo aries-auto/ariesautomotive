@@ -56,15 +56,9 @@
 				width: 100%;
 
 				.install-container{
-					margin:auto 0;
-					margin-bottom: 15px;
-					text-align: center;
-
 					.install-sheet a{
 						text-align: center;
-						color: $newRed;
 						border: 2px solid $newRed;
-						margin-bottom:10px;
 						padding: 0 10px;
 						font-size: 18px;
 						display: block;
@@ -402,7 +396,6 @@
 		.product-details{
 			.install-sheet, .install-video, .share-icons, .where-to-buy-button{
 				float:left;
-				height:40px;
 				line-height: 40px;
 			}
 			.share-icons{
