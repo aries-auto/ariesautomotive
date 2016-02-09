@@ -77,7 +77,9 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	};
 
 	$scope.openLightbox = function(index){
-		Lightbox.openModal($scope.part.videos, index);
+		var vids = [];
+		vids.push($scope.part.videos[index]);
+		Lightbox.openModal(vids, 0);
 	}
 
 	$scope.openInstallVideo = function(){
