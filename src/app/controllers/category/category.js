@@ -13,7 +13,9 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 	if($stateParams !== undefined && $stateParams.id !== undefined && $stateParams.id !== ''){
 		CategoryService.GetCategory($stateParams.id).then(function(cat){
 			$scope.category = cat;
-			$scope.parts = $scope.category.product_listing.parts;
+			if (!$scope.category.vehicle_specific) {
+				$scope.parts = $scope.category.product_listing.parts;
+			}
 			$rootScope.pageTitle = $scope.category.metaTitle;
 			$rootScope.pageDesc = $scope.category.metaDescription;
 			$rootScope.pageKywds = $scope.category.metaKeywords;
