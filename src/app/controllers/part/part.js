@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', 'Lightbox', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location, Lightbox){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
@@ -37,7 +37,17 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				if ($scope.checkForDoubles(str)) {
 					metakeys.push(str);
 				}
-			})
+			});
+
+			//video setup
+			$scope.installVideos = [];
+			angular.forEach(part.videos, function(video, i){
+				video.type = 'video';
+				video.url  = $sce.trustAsResourceUrl(video.channel[0].link.replace("watch?v=", "v/"));
+				if (video.subject_type === 'Installation Video'){
+					$scope.installVideos.push(video);
+				}
+			});
 
 			for (var i = 0; i < metakeys.length; i++) {
 				if (vTitle === '') {
@@ -65,6 +75,19 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		return $sce.trustAsHtml(vid.channel[0].embed_code.replace(vid.channel[0].foreign_id,vid.channel[0].foreign_id+'?rel=0'));
 	};
+
+	$scope.openLightbox = function(index){
+		var vids = [];
+		vids.push($scope.part.videos[index]);
+		Lightbox.openModal(vids, 0);
+	}
+
+	$scope.openInstallVideo = function(){
+		if ($scope.installVideos.length < 1){
+			return;
+		}
+		Lightbox.openModal($scope.installVideos, 0);
+	}
 
 	$scope.checkForDoubles = function(combo){
 		var flag = true;

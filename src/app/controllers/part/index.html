@@ -30,57 +30,64 @@
 							</div>
 						</div>
 						<div class="part-header">
-							<h1 class="partShortDesc hidden-xs hidden-sm col-md-8 col-lg-9">[[part.short_description | uppercase]]</h1>
-							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-3 install-container" ng-if="getInstallSheet() !== ''">
-								<!-- Install Sheet -->
-								<div class="install-sheet">
-									<a href="[[getInstallSheet()]]" target="_blank"><span class="glyphicon glyphicon-new-window"></span>
-										Install Sheet</a>
-								</div>
-								<!-- <div class="install-sheet" ng-click="toggleInstallSheet()">
-									<a><span class="glyphicon glyphicon-new-window"></span>
-										Install Sheet</a>
-								</div> -->
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="title-info col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-								<div class="part-num">
-									<span class="small">PART #[[part.part_number]]</span>
-								</div>
-								<!-- MSRP -->
-								<div class="msrp" ng-if="getPrice() !== ''">
-									<span>MSRP [[getPrice()]]</span>
-								</div>
-							</div>
-							<!-- Share Icons -->
-							<div class="col-sm-5 col-xs-5 col-md-5 col-lg-5 share-icons pull-right">
-								<div class="socialIcon">
-									<a href="#Facebook" title="Share us on Facebook" ng-click='ShareFacebook()'>
-										<img src="/assets/img/facebook-icon.png" alt="Facebook" />
-									</a>
-								</div>
-								<div class="socialIcon">
-									<a href="#Twitter" title="Tweet Us on Twitter" ng-click='ShareTwitter()'>
-										<img src="/assets/img/twitter-icon.png" alt="Twitter" />
-									</a>
-								</div>
-								<div class="socialIcon">
+
+							<h1 class="partShortDesc hidden-xs hidden-sm">
+								[[part.short_description | uppercase]]
+							</h1>
+
+							<div class="action-container">
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 link-container">
+
+									<div class="part-num-container">
+										<span class="part-num">PART #[[part.part_number]]</span>
+										<span ng-if="getPrice() !== ''">MSRP [[getPrice()]]</span>
+									</div>
+
+
+									<!-- Share Icons -->
+									<div class="share-icons">
+										<a href="#Facebook" title="Share us on Facebook" ng-click='ShareFacebook()'>
+											<img src="/assets/img/facebook-icon.png" alt="Facebook" />
+										</a>
+										<a href="#Twitter" title="Tweet Us on Twitter" ng-click='ShareTwitter()'>
+											<img src="/assets/img/twitter-icon.png" alt="Twitter" />
+										</a>
 										<a href="#GooglePlus" title="Share Us on Google Plus" ng-click='ShareGoogle()'>
-										<img src="/assets/img/googleplus-icon.png" alt="Google Plus" />
-									</a>
+											<img src="/assets/img/googleplus-icon.png" alt="Google Plus" />
+										</a>
+									</div>
+									<div class="clearfix"></div>
 								</div>
+								<div class="col-lg-8 install-container">
+
+									<!-- Install Sheet -->
+									<div class="install-sheet pull-left" ng-if="getInstallSheet() !== ''">
+										<a href="[[getInstallSheet()]]" target="_blank">
+											<span class="glyphicon glyphicon-wrench"></span>
+											Install Sheet
+										</a>
+									</div>
+
+									<div class="install-sheet pull-left" ng-if="installVideos.length">
+										<a ng-click="openInstallVideo()" aria-controls="Installation Videos" role="button" data-toggle="tab">
+											<span class="glyphicon glyphicon-play"></span>
+											Install Video
+										</a>
+									</div>
+
+									<div class="install-sheet pull-left">
+										<a ng-href="/buy" aria-controls="Where to buy" role="button" data-toggle="tab">
+											<span class="glyphicon glyphicon-usd"></span>
+											Where To Buy
+										</a>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
 							</div>
+
 						</div>
 
-						<div class="title-info col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 share-icons pull-right">
-								<button class="btn red-transparent-button where-to-buy-button">
-									<a href="/buy" aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
-						        </button>
-							</div>
-						</div>
 
 						<div class="part-content" ng-show="part.content">
 							<div>
@@ -93,7 +100,8 @@
 							</ul>
 						</div>
 					</div>
-					<div class="product-media hidden-xs hidde-sm col-md-6 col-lg-6">
+					<!-- Image -->
+					<div class="product-media hidden-xs hidden-sm col-md-6 col-lg-6">
 						<div ng-if="(part.images | filter:{size:'Venti'}).length > 0">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<div id="hero-image-carousel" class="carousel slide" data-ride="carousel">
@@ -107,10 +115,14 @@
 									<ol class="thumbs col-xs-12 col-md-12 col-lg-12">
 										<li class="thumb" ng-repeat="i in part.images | filter:{size:'Venti'}" data-target="#hero-image-carousel" data-slide-to="[[$index]]">
 											<img class="thumbImg img-responsive" src="http://www.curtmfg.com[[i.path.Path]]" />
-										<li>
-										<!-- <li class="thumb" ng-repeat="vid in part.videos" ng-click="shadowbox(vid, 'video')">
-											<img class="thumbImg img-responsive" src="http://img.youtube.com/vi/[[vid.YouTubeVideoId]]/0.jpg" />
-										</li> -->
+										</li>
+
+										<li class="thumb video_thumb" ng-repeat="($i, vid) in part.videos" ng-click="shadowbox(vid, 'video')">
+											<div>
+												<img ng-click="openLightbox($i)" class="thumbImg img-responsive" ng-src="[[vid.thumbnail]]"  />
+												<span class="arrow" ng-click="openLightbox($i)" ><span class="arrow-right"></span></span>
+											</div>
+										</li>
 									</ol>
 
 									<a class="left carousel-control" href="#hero-image-carousel" role="button" data-slide="prev">
@@ -166,51 +178,61 @@
 							</div>
 						</div>
 						<div class="part-header">
-							<h1 class="partShortDesc hidden-xs hidden-sm col-md-9 col-lg-9">[[part.short_description | uppercase]]</h1>
-							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 install-container" ng-if="getInstallSheet() !== ''">
-								<!-- Install Sheet -->
-								<div class="install-sheet">
-									<a ng-href="[[getInstallSheet()]]" target="_blank" title="Installation Sheet">
-										<span class="glyphicon glyphicon-new-window"></span>
-										Install Sheet
-									</a>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 install-container">
-								<button class="btn red-transparent-button where-to-buy-button">
-									<a href="/buy" aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
-						        </button>
-						    </div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="title-info col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="col-xs-6 col-sm-6 col-md-9 col-lg-9">
-								<div class="part-num">
-									<span class="small">PART #[[part.part_number]]</span>
-								</div>
-								<!-- MSRP -->
-								<div class="msrp" ng-if="getPrice() !== ''">
-									<span>MSRP [[getPrice()]]</span>
-								</div>
-							</div>
-							<!-- Share Icons -->
-							<div class="col-sm-6 col-xs-6 col-md-6 col-lg-6 share-icons pull-right">
-								<div class="socialIcon">
-									<a href="#Facebook" title="Share us on Facebook" ng-click='ShareFacebook()'>
-										<img src="/assets/img/facebook-icon.png" alt="Facebook" />
-									</a>
-								</div>
-								<div class="socialIcon">
-									<a href="#Twitter" title="Tweet Us on Twitter" ng-click='ShareTwitter()'>
-										<img src="/assets/img/twitter-icon.png" alt="Twitter" />
-									</a>
-								</div>
-								<div class="socialIcon">
+
+							<h1 class="partShortDesc hidden-xs hidden-sm">
+								[[part.short_description | uppercase]]
+							</h1>
+
+							<div class="action-container">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 link-container">
+
+									<div class="part-num-container pull-left">
+										<span class="part-num">PART #[[part.part_number]]</span>
+										<span ng-if="getPrice() !== ''">MSRP [[getPrice()]]</span>
+									</div>
+
+									<!-- Share Icons -->
+									<div class="share-icons pull-right">
+										<a href="#Facebook" title="Share us on Facebook" ng-click='ShareFacebook()'>
+											<img src="/assets/img/facebook-icon.png" alt="Facebook" />
+										</a>
+										<a href="#Twitter" title="Tweet Us on Twitter" ng-click='ShareTwitter()'>
+											<img src="/assets/img/twitter-icon.png" alt="Twitter" />
+										</a>
 										<a href="#GooglePlus" title="Share Us on Google Plus" ng-click='ShareGoogle()'>
-										<img src="/assets/img/googleplus-icon.png" alt="Google Plus" />
-									</a>
+											<img src="/assets/img/googleplus-icon.png" alt="Google Plus" />
+										</a>
+									</div>
+									<div class="clearfix"></div>
 								</div>
+								<div class="clearfix"></div>
+								<div class="col-lg-12 install-container mobile">
+
+									<!-- Install Sheet -->
+									<div class="install-sheet" ng-if="getInstallSheet() !== ''">
+										<a href="[[getInstallSheet()]]" target="_blank">
+											<span class="glyphicon glyphicon-wrench"></span>
+											Install Sheet
+										</a>
+									</div>
+
+									<div class="install-sheet" ng-if="installVideos.length">
+										<a ng-click="openInstallVideo()" aria-controls="Installation Videos" role="button" data-toggle="tab">
+											<span class="glyphicon glyphicon-play"></span>
+											Install Video
+										</a>
+									</div>
+
+									<div class="install-sheet">
+										<a ng-href="/buy" aria-controls="Where to buy" role="button" data-toggle="tab">
+											<span class="glyphicon glyphicon-usd"></span>
+											Where To Buy
+										</a>
+									</div>
+								</div>
+								<div class="clearfix"></div>
 							</div>
+
 						</div>
 
 						<div class="part-content" ng-show="part.content">
@@ -260,12 +282,12 @@
 			</div>
 			<div class="clearfix"></div>
 
-			<div class="video-container col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="part.videos.length > 0">
+			<!-- <div class="video-container col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="part.videos.length > 0">
 				<h3>VIDEOS</h3>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 videoDiv" ng-if="vid.channel.length > 0" ng-repeat="vid in part.videos">
 					<div class="ytVideoWrapper" ng-bind-html="renderYouTube(vid)"></div>
 				</div>
-			</div>
+			</div> -->
 
 
 			<div class="application col-xs-12 col-sm-12 col-md-12 col-lg-12">

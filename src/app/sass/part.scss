@@ -52,69 +52,74 @@
 			}
 
 			.part-header{
-				display:inline-flex;
 				width: 100%;
+			}
 
-				.install-container{
-					margin:auto 0;
-					margin-bottom: 15px;
-					text-align: center;
+			.action-container {
+				margin: 15px 0;
+			}
 
-					.install-sheet a{
-						color: $newRed;
-						border: 2px solid $newRed;
-						margin-bottom:10px;
-						padding: 5px 10px;
-						font-size: 18px;
+			.link-container {
+				padding: 0;
+
+				.part-num-container{
+					span {
+						display: block;
+					}
+					span:first-child {
+						padding:0px;
+						font-size: 20px;
+						color: $headerColor;
+						font-weight:900;
+						margin-right: 10px;
+					}
+				}
+
+				.share-icons {
+					a{
+						display: inline-block;
+						width:35px;
+						height:35px;
+						line-height:40px;
+						img{
+							width:100%;
+							height:100%;
+						}
 					}
 				}
 			}
 
-			.title-info{
-				padding:0px;
-				padding-bottom:10px;
-				display:inline-flex;
+			.install-container {
+				padding: 0;
+				margin: 5px 0;
 
-				> div{
-					margin:auto;
-					margin-left:0;
-					padding-left:0;
-				}
+				.install-sheet {
+					margin: 5px 0;
+					a{
+						text-transform: uppercase;
+						margin: 0 2px;
+						text-align: center;
+						border: 2px solid $newRed;
+						padding: 0 3px;
+						font-size: 12px;
+						display: block;
+						min-width: 115px;
 
-				.part-num{
-					padding:0px;
-					.small{
-						font-size: 18px;
-						color: $headerColor;
-						font-weight:900;
+						span{
+							font-size: 12px;
+							vertical-align: baseline;
+						}
 					}
 				}
 
-				.share-icons{
-					min-height:40px;
-					margin:0;
-					padding:0px;
-					text-align: right;
-
-					#share{
-						font-size: 18px;
-						color: #666666;
-						font-weight:900;
-						padding-right:4px;
-					}
-					.socialIcon{
-						display:inline-block;
-						width:35px;
-						height:35px;
-						a{
-							display: inline-block;
-							width:100%;
-							height:100%;
-							line-height:40px;
-							img{
-								width:100%;
-								height:100%;
-							}
+				&.mobile {
+					display: flex;
+					justify-content: space-between;
+					margin: 25px 0;
+					> div {
+						width: 30%;
+						a {
+							padding: 10px 5px;
 						}
 					}
 				}
@@ -173,6 +178,45 @@
 						box-shadow: 1px 0 10px 2px #ccc;
 						width:100%;
 						height:100%;
+					}
+				}
+				.video_thumb{
+					position:relative;
+					height: 100px;
+					div{
+						display: inline-block;
+						height: 100%;
+						vertical-align: middle;
+						background: black;
+
+						img {
+							box-shadow: none;
+							height: 70px;
+							margin: 15px 0;
+						}
+					}
+					.arrow{
+						position: absolute;
+						display: block;
+						z-index: 10;
+						left: 35px;
+						top: 40px;
+						height: 20px;
+						width: 30px;
+						background-color: #CE1E1E;
+						border-radius: 12px/5px;
+						-webkit-border-radius: 12px/5px;
+						-moz-border-radius: 12px/5px;
+					}
+					.arrow-right {
+						position: absolute;
+						display: block;
+						z-index: 11;
+						left: 14px;
+						top: 6px;
+						border-top: 5px solid transparent;
+						border-bottom: 5px solid transparent;
+						border-left: 5px solid #EEEEEE;
 					}
 				}
 			}
@@ -348,6 +392,10 @@
 	width: 100%;
 }
 
+.lightbox-modal > .modal-dialog {
+	margin-top: 20%;
+}
+
 @media(min-width: $screen-md-min){
 	.videoBox{
 		width:50%;
@@ -367,14 +415,11 @@
 			}
 		}
 		.product-details{
-			.install-sheet, .install-video, .share-icons{
+			.install-sheet, .install-video, .where-to-buy-button{
 				float:left;
-				height:40px;
 				line-height: 40px;
 			}
 			.share-icons{
-				margin-left:15px;
-				clear:right;
 				.socialIcon{
 					line-height:40px;
 				}
@@ -383,17 +428,6 @@
 				min-height:350px;
 			}
 
-			.part-header{
-				.install-container{
-					text-align: right;
-					margin-bottom:auto;
-					margin-top:10px;
-					padding-right:0;
-					.install-sheet{
-						float:right;
-					}
-				}
-			}
 		}
 	}
 }
