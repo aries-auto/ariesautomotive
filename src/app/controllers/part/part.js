@@ -43,7 +43,15 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 			$scope.installVideos = [];
 			angular.forEach(part.videos, function(video, i){
 				video.type = 'video';
-				video.url  = $sce.trustAsResourceUrl(video.channel[0].link.replace("watch?v=", "v/"));
+				if (video.channel && video.channel.length > 0) {
+					video.url  = $sce.trustAsResourceUrl(video.channel[0].link.replace("watch?v=", "embed/"));
+				} else if (video.channels && video.channels.length > 0) {
+					video.url  = $sce.trustAsResourceUrl(video.channels[0].link.replace("watch?v=", "embed/"));
+				}
+				if (video.url === undefined) {
+					return;
+				}
+
 				if (video.subject_type === 'Installation Video'){
 					$scope.installVideos.push(video);
 				}
@@ -79,6 +87,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.openLightbox = function(index){
 		var vids = [];
 		vids.push($scope.part.videos[index]);
+		console.log($scope.part.videos[index]);
 		Lightbox.openModal(vids, 0);
 	}
 

@@ -43,7 +43,7 @@ angular.module('ariesautomotive').controller('MainController', ['$scope', 'Testi
   $scope.whatsNewContent = [
   {
     'type':'video',
-    'url': 'https://www.youtube.com/v/8GzILyP_2BM',
+    'url': 'https://www.youtube.com/embed/8GzILyP_2BM',
     'thumbUrl': 'https://i.ytimg.com/vi/8GzILyP_2BM/1.jpg'
   }];
 
