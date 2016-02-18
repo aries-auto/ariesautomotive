@@ -82,11 +82,10 @@ class Lookup extends Component {
         LookupActions.set(this.state.vehicle);
     }
 
-    viewParts() {
-        console.log('click')
-        const loc = '/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}';
-        console.log(loc)
-        // console.log(window)
+    viewParts(e) {
+        e.preventDefault();
+        const loc = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
+        window.location.href = loc;
     }
 
     getYearElement(){
