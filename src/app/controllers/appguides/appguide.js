@@ -76,6 +76,36 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.xlsx';
+			case '5 in running boards, aerotread':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.xlsx';
+			case '5.5 in bull bars, advantedge':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.xlsx';
+			case 'headache racks, advantedge':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.xlsx';
+			case 'headache racks':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.xlsx';
+			case '5.5 in side bars, advantedge':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Headache%20Racks.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Headache%20Racks.xlsx';
+			case '6.5 in commercial running boards, ridgestep':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.xlsx';
 			default:
 				return '';
 		}
@@ -148,4 +178,8 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 
 	getMore(page);
 
-}]);
+}]).filter('no_quote', function(){
+	return function(style){
+		return style.replace(/'/, '-foot');
+	}
+})
