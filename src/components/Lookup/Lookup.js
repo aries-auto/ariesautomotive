@@ -7,6 +7,7 @@ import LookupActions from '../../actions/LookupActions.js';
 import LookupStore from '../../stores/LookupStore.js';
 import connectToStores from 'alt-utils/lib/connectToStores'; 
 
+
 class Lookup extends Component {
 
     static propTypes = {
@@ -151,4 +152,4 @@ class Lookup extends Component {
 
 }
 
-export default connectToStores(Lookup);
+export default withStyles(connectToStores(Lookup), s);
