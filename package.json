@@ -47,7 +47,6 @@
     "gaze": "^0.5.2",
     "git-repository": "^0.1.1",
     "glob": "^6.0.1",
-    "isomorphic-style-loader": "0.0.5",
     "jest-cli": "^0.8.2",
     "jscs": "^2.7.0",
     "json-loader": "^0.5.4",

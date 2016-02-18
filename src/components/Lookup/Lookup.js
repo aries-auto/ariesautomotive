@@ -9,7 +9,7 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 
 
 class Lookup extends Component {
-
+    
     static propTypes = {
         className: PropTypes.string,
         years: PropTypes.array,
@@ -34,6 +34,7 @@ class Lookup extends Component {
         super();
 
         this.changeVehicle = this.changeVehicle.bind(this);
+        this.viewParts = this.viewParts.bind(this);
         this.state = {
             vehicle: {},
             makes: [],
@@ -81,6 +82,13 @@ class Lookup extends Component {
         LookupActions.set(this.state.vehicle);
     }
 
+    viewParts() {
+        console.log('click')
+        const loc = '/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}';
+        console.log(loc)
+        // console.log(window)
+    }
+
     getYearElement(){
         return (
             <div className={cx(s.formGroup, 'form-group')}>
@@ -124,7 +132,7 @@ class Lookup extends Component {
     getViewButton(ok){
         let disabled = ok ? false : true;
         return(
-            <button className="red-transparent-button pull-right" disabled={disabled}>View Parts</button>
+            <button className="red-transparent-button pull-right" disabled={disabled} onClick={this.viewParts}>View Parts</button>
         );
     }
 
@@ -144,7 +152,7 @@ class Lookup extends Component {
                     {this.getYearElement()}
                     {this.getMakeElement(makes)}
                     {this.getModelElement(models)}
-                    {this.getViewButton(view)}
+                    {this.getViewButton(this.props.view)}
                 </form>
             </div>
         );
@@ -152,4 +160,4 @@ class Lookup extends Component {
 
 }
 
-export default withStyles(connectToStores(Lookup), s);
+export default connectToStores(Lookup);

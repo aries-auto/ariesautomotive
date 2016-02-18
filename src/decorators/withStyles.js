@@ -9,7 +9,7 @@
 
 import React, { Component, PropTypes } from 'react';
 
-function withStyles(BaseComponent, ...styles) {
+function withStyles(...styles) {
   return (BaseComponent) => class StyledComponent extends Component {
     static contextTypes = {
       insertCss: PropTypes.func.isRequired,

@@ -16,6 +16,7 @@ class LookupStore extends EventEmitter {
 			years: [],
 			makes: [],
 			models: [],
+			view: false,
 		}
 		this.bindListeners({
 			get: LookupActions.get,
@@ -71,7 +72,7 @@ class LookupStore extends EventEmitter {
 						years: this.state.years,
 						makes: this.state.makes,
 						models: this.state.models,
-						action: 'view',
+						view: true,
 					});
 				}
 			})
