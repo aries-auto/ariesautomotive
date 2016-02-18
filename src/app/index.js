@@ -189,8 +189,7 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 					'body': {
 						templateUrl: 'app/controllers/iconfig/index.html',
 						controller: 'IconfigController'
-					},
-					'lookup': lookupState
+					}
 				}
 			});
 		$urlRouterProvider.otherwise('/');
