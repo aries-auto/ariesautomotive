@@ -5,8 +5,9 @@
     "__DEV__": true
   },
   "rules": {
-    "indent": [2, 4],
+    "indent": [2, "tab"],
     "react/jsx-quotes": 0,
+    "react/jsx-indent-props": [2, "tab"],
     "jsx-quotes": [2, "prefer-double"]
   }
 }

@@ -7,22 +7,22 @@ import withStyles from '../../decorators/withStyles';
 @withStyles(s)
 class Product extends Component {
 
-    static propTypes = {
-        className: PropTypes.string,
-        part: PropTypes.object,
-    };
+	static propTypes = {
+		className: PropTypes.string,
+		part: PropTypes.object,
+	};
 
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    render() {
-        return (
-            <div className={cx(s.root, this.props.className)} role="navigation">
-                { this.props.part.short_description }
-            </div>
-        );
-    }
+	render() {
+		return (
+			<div className={cx(s.root, this.props.className)} role="navigation">
+				{ this.props.part.short_description }
+			</div>
+		);
+	}
 
 }
 
