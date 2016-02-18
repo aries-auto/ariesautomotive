@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', 'Lightbox', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location, Lightbox){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', 'Lightbox', '$q', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location, Lightbox, $q){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
@@ -65,17 +65,37 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				}
 			}
 
+			$scope.getRelatedParts()
+
 			var titleStr = $scope.part.short_description + ' #' + $scope.part.part_number + ' | ' + $scope.part.categories[0].short_description;
 			$rootScope.pageTitle = titleStr;
 			$rootScope.pageDesc = $scope.part.categories[0].metaDescription;
 			$rootScope.pageKywds = 'aries, ' + $scope.part.short_description + ', ' + vTitle;
 
-	});
-}
+		});
+	}
 
 	PartService.GetFeatured().then(function(featured){
 		$scope.featuredProducts = featured;
 	});
+
+	$scope.getRelatedParts = function(){
+		if (!$scope.part.related || !$scope.part.related.length || $scope.part.related.length < 1){
+			return;
+		}
+		var related = [];
+		for (var i in $scope.part.related) {
+			PartService.GetPartByID($scope.part.related[i]).then(function(res){
+				related.push(res);
+			}, (function(err){
+				$rootScope.$broadcast('error', err);
+			}));
+		}
+		$q.all(related).then(function(data){
+			$scope.part.related = related;
+			return;
+		});
+	}
 
 	$scope.renderYouTube = function(vid){
 		if(vid.channel === undefined || vid.channel.length === 0){
@@ -87,7 +107,6 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 	$scope.openLightbox = function(index){
 		var vids = [];
 		vids.push($scope.part.videos[index]);
-		console.log($scope.part.videos[index]);
 		Lightbox.openModal(vids, 0);
 	}
 
