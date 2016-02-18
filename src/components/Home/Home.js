@@ -27,6 +27,21 @@ class Home extends Component {
                 carouselImages: [],
                 featuredProducts: [],
             },
+            catalogs: [
+                {
+                    title: '2016 Exterior Catalog',
+                    image: 'https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png',
+                    link: 'https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf',
+                }, {
+                    title: '2016 Interior Catalog',
+                    image: 'https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png',
+                    link: 'https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf',
+                }, {
+                    title: '2016 Jeep Catalog',
+                    image: 'https://storage.googleapis.com/aries-website/ARIES-Jeep-Cover.png',
+                    link: 'https://storage.googleapis.com/aries-website/_2016%20ARIES%20Jeep%20Catalog-SFS.pdf',
+                },
+            ],
         };
     }
 
@@ -54,7 +69,7 @@ class Home extends Component {
                     padding: '0',
                     transform: 'translate(-25%, -25%)',
                     width: '80%',
-                    height: '50%',
+                    height: '80%',
                     borderRadius: '0',
                     border: '0',
                 },
@@ -74,6 +89,35 @@ class Home extends Component {
             }
         });
         return url;
+    }
+
+    getCatalogs() {
+        if (!this.state.catalogs || this.state.catalogs.length === 0) {
+            return (
+                <div></div>
+            );
+        }
+
+        const output = [];
+        this.state.catalogs.map((cat, i) => {
+            output.push(
+                <div key={i} className={cx('col-xs-12', 'col-sm-4', 'col-md-4', 'col-lg-4', s.catalog)}>
+                    <img src={ cat.image } alt={ cat.title } />
+                    <div>
+                        <h3>{ cat.title }</h3>
+                        <a href={ cat.link } className={cx('red-transparent-button', s.redTransparentButton)}
+                          title={'Download' + cat.title }
+                        >
+                            Download
+                        </a>
+                    </div>
+                </div>
+            );
+        });
+
+        return (
+            <div className={cx(s.container, 'container', s.catalogs)}>{ output }</div>
+        );
     }
 
     openModal() {
@@ -116,8 +160,8 @@ class Home extends Component {
                         <div className="col-md-6 col-lg-6">
                             <h1>DO IT WITH STYLE. DO IT WITH ARIES</h1>
                             <p>
-                            They change the rules, so we make up our own. They put up road blocks; we find a way around. They tell us there is no path ahead; we blaze a trail. At ARIES, we get revved up about going off the beaten path. From our Pro Series grille guards and modular
-                            Jeep bumpers to our StyleGuard&trade; floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.
+                                They change the rules, so we make up our own. They put up road blocks; we find a way around. They tell us there is no path ahead; we blaze a trail. At ARIES, we get revved up about going off the beaten path. From our Pro Series grille guards and modular
+                                Jeep bumpers to our StyleGuard&trade; floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.
                             </p>
                             <div className={cx(s.ytWrapper)}>
                                 <iframe allowFullScreen="" frameBorder="0" height="315" src="//www.youtube.com/embed/M7k7rhOtMY4?rel=0" width="420"></iframe>
@@ -141,28 +185,12 @@ class Home extends Component {
                                     <img src="https://storage.googleapis.com/aries-website/whatsnew/Envision-Website-Graphic.png" alt="Envision ARIES" />
                                 </a>
                             </div>
-
-                            <div className={cx('row', s.catalog)}>
-                                <div className="col-xs-6 col-md-7 col-lg-5">
-                                    <img src="https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png" alt="catalog" className="img-responsive" />
-                                </div>
-                                <div className="col-xs-3 col-md-3 col-lg-7">
-                                    <h3>2016 EXTERIOR<br />CATALOG</h3>
-                                    <a className="red-transparent-button" href="https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf">DOWNLOAD</a>
-                                </div>
-                            </div>
-                            <div className={cx('row', s.catalog)}>
-                                <div className="col-xs-6 col-md-7 col-lg-5">
-                                    <img src="https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png" alt="catalog" className="img-responsive" />
-                                </div>
-                                <div className="col-xs-3 col-md-3 col-lg-7">
-                                    <h3>2016 INTERIOR<br />CATALOG</h3>
-                                    <a className="red-transparent-button" href="https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf">DOWNLOAD</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
+
+                {/* Catalogs */}
+                {this.getCatalogs()}
 
                 {/* Featured Products */}
                 <div className="container">
@@ -172,7 +200,7 @@ class Home extends Component {
                             <div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
                                 {this.state.context.featuredProducts.map((prod, i) => {
                                     return (
-                                        <div key={i} className={cx(s.featuredProd, 'col-xs-12', 'col-md-2')}>
+                                        <div key={i} className={cx(s.featuredProd, s.col5, 'col-xs-12', 'col-md-2')}>
                                             <h4><a href={'/part/' + prod.part_number}>{prod.short_description}</a></h4>
                                             <a href={'/part/' + prod.part_number}>
                                                 <img src={this.getFeaturedImage(prod)} className="img-responsive" alt={'Image for ' + prod.short_description} />

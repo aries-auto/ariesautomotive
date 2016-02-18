@@ -6,6 +6,7 @@ import Product from './components/Product';
 import Category from './components/Category';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
+import VehicleResults from './components/VehicleResults';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -115,6 +116,26 @@ const router = new Router(on => {
         }
 
         return <SearchResults context={state.context} />;
+    });
+
+    on('/vehicle', async (state) => {
+        state.context.params = state.params;
+        return <VehicleResults context={state.context} />;
+    });
+
+    on('/vehicle/:year', async (state) => {
+        state.context.params = state.params;
+        return <VehicleResults context={state.context} />;
+    });
+
+    on('/vehicle/:year/:make', async (state) => {
+        state.context.params = state.params;
+        return <VehicleResults context={state.context} />;
+    });
+
+    on('/vehicle/:year/:make/:model', async (state) => {
+        state.context.params = state.params;
+        return <VehicleResults context={state.context} />;
     });
 
     on('/', async (state) => {

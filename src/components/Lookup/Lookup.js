@@ -31,6 +31,7 @@ class Lookup extends Component {
         super();
 
         this.changeVehicle = this.changeVehicle.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             vehicle: {},
             makes: [],
@@ -112,6 +113,16 @@ class Lookup extends Component {
         });
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        if (!this.vehicleValid()) {
+            return;
+        }
+
+        window.location.href = `/vehicle/${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
+        return;
+    }
+
     vehicleValid() {
         if (!this.state.vehicle.year || this.state.vehicle.year === '') {
             return false;
@@ -179,12 +190,14 @@ class Lookup extends Component {
         }
         if (this.state.action === 'view') {
             viewAction = (
-                <button className="red-transparent-button pull-right">View Parts</button>
+                <div className={cx(s.formGroup, s.button, 'form-group')}>
+                    <button className="red-transparent-button pull-right">View Parts</button>
+                </div>
             );
         }
         return (
             <div className={cx(s.root, this.props.className, 'container-fluid')} role="navigation">
-                <form className={cx(s.inlineForm, 'form-inline')}>
+                <form onSubmit={this.handleSubmit} className={cx(s.inlineForm, 'form-inline')}>
                     <label className={s.heading}>Vehicle Lookup</label>
                     {yearSelect}
                     {makeSelect}

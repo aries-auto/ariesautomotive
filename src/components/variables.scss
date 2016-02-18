@@ -1,50 +1,62 @@
 /*
  * Colors
  * ========================================================================== */
+$white-base: rgba(255, 255, 255, 1);
+$black-base: rgba(0, 0, 0, 1);
+$gray-darker: color(black lightness(+13.5%));
 
-$white-base:            rgba(255, 255, 255, 1);
-$black-base:            rgba(0, 0, 0, 1);
-$gray-darker:           color(black lightness(+13.5%)); /* #222 */
-$gray-dark:             color(black lightness(+25%));   /* #404040 */
-$gray:                  color(black lightness(+33.5%)); /* #555 */
-$gray-light:            color(black lightness(+46.7%)); /* #777 */
-$gray-lighter:          color(black lightness(+77.5%)); /* #c7c7c7 */
+/* #222 */
+$gray-dark: color(black lightness(+25%));
 
+/* #404040 */
+$gray: color(black lightness(+33.5%));
+
+/* #555 */
+$gray-light: color(black lightness(+46.7%));
+
+/* #777 */
+$gray-lighter: color(black lightness(+77.5%));
+
+/* #c7c7c7 */
 $new-red: rgb(199, 48, 49);
 $lookup-color: #f5f5f5;
 $topHeaderBackColor: #1c0104;
-$headerMenuBackColor: #31070C;
-$header-color: #26090D;
+$headerMenuBackColor: #31070c;
+$header-color: #26090d;
 $headerCallLinkColor: $new-red;
-$footer-color: #999999;
+$footer-color: #999;
 $footerNavColor: $new-red;
-$red: #ff0000;
-$alt-red : $new-red;
+$red: #f00;
+$alt-red: $new-red;
 $trans-black: rgba(0, 0, 0, .6);
 
 /*
  * Typography
  * ========================================================================== */
-
-$font-family-base:      'ff-good-headline-web-pro-con', sans-serif;
+$font-family-base: 'ff-good-headline-web-pro-con', sans-serif;
 
 /*
  * Layout
  * ========================================================================== */
-
-$max-content-width:     1000px;
+$max-content-width: 1000px;
 
 /*
  * Media queries breakpoints
  * ========================================================================== */
+$screen-xs-min: 480px;
 
-$screen-xs-min:         480px;  /* Extra small screen / phone */
-$screen-sm-min:         768px;  /* Small screen / tablet */
-$screen-md-min:         992px;  /* Medium screen / desktop */
-$screen-lg-min:         1200px; /* Large screen / wide desktop */
+/* Extra small screen / phone */
+$screen-sm-min: 768px;
+
+/* Small screen / tablet */
+$screen-md-min: 992px;
+
+/* Medium screen / desktop */
+$screen-lg-min: 1200px;
+
+/* Large screen / wide desktop */
 
 /*
  * Animations
  * ========================================================================== */
-
-$animation-swift-out:   .45s cubic-bezier(0.3, 1, 0.4, 1) 0s;
+$animation-swift-out: .45s cubic-bezier(.3, 1, .4, 1) 0s;

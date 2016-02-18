@@ -1,0 +1,6 @@
+{
+  "name": "VehicleResults",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./VehicleResults.js"
+}
