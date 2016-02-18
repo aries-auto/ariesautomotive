@@ -1,3 +1,3 @@
-import Dispatcher from 'flux';
+import Alt from 'alt';
 
-export default new Dispatcher.Dispatcher();
+export default new Alt();
