@@ -86,7 +86,8 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 		var high = 0;
 		var last = {};
 		angular.forEach(apps, function(app){
-			if(last.make !== app.make || last.model !== app.model || last.style !== app.style){
+			if(last.make !== app.make || last.model !== app.model ||
+				last.style !== app.style || last.min_year !== app.min_year){
 				if (last.make !== undefined && $scope.applications.indexOf(last) === -1){
 					last.startYear = low;
 					last.endYear = high;
@@ -100,6 +101,7 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 							existing[p.location] = true;
 						}
 					}
+
 					$scope.applications.push(last);
 				}
 				last = app;

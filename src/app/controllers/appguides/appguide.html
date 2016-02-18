@@ -34,12 +34,12 @@
 			</thead>
 			<tbody ng-repeat="app in applications | filter:{locations: '!!'}">
 				<tr ng-repeat="loc in app.locations">
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.make ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.model ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.startYear ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.endYear ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')" ng-if="location">[[ loc ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.make ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.model ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.min_year ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.max_year ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')" ng-if="location">[[ loc ]]</td>
 					<td ng-repeat="fin in finishes">
 						<a app="app" finish="fin" collection="collection" location="loc" finish-link></a>
 					</td>
@@ -50,12 +50,12 @@
 			</tbody>
 			<tbody ng-repeat="app in applications | filter:{locations: '!'}">
 				<tr>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.make ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.model ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.startYear ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.endYear ]]</td>
-					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')" ng-if="location"></td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.make ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.model ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.style ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.min_year ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')">[[ app.max_year ]]</td>
+					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style ]]')" ng-if="location"></td>
 					<td ng-repeat="fin in finishes">
 						<a app="app" finish="fin" collection="collection" finish-link></a>
 					</td>
