@@ -58,6 +58,18 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 			}
 
 			$scope.categoryparts = categoryparts;
+			
+			//get all seat defenders
+			CategoryService.parts(320,'','').then(function(cats){
+				$scope.categoryparts['seat defenders'] = {
+					name: 'seat defenders',
+					parts: cats.parts,
+					style_required: false,
+					available_styles: '',
+					style: 'Fits All Vehicle Styles'
+				}
+			});
+
 			$scope.processing = false;
 			$scope.stopProcessing();
 		}, function(err) {
