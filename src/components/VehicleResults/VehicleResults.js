@@ -56,7 +56,7 @@ class VehicleResults extends Component {
 		const output = [];
 		for (const cat in this.props.categoryparts) {
 			if (!cat) {
-				return;
+				return output;
 			}
 			output.push(
 				<li style="font-size:14px;" role="presentation" onClick={this.setCategoryStyle(cat)}>
