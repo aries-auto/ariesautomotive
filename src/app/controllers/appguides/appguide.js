@@ -62,9 +62,9 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx';
 			case 'jeep accessories':
 				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
+					return 'https://www.curtmfg.com/Vendor%20Login%20Files/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.pdf';
 				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx';
+				return 'https://www.curtmfg.com/Vendor%20Login%20Files/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.xlsx';
 			case 'jeep bumper kits and replacement parts':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
@@ -97,14 +97,19 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.xlsx';
 			case '5.5 in side bars, advantedge':
 				if (type === 'pdf'){
-					return '';
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Side%20Bar.pdf';
 				}
-				return '';
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Side%20Bar.xlsx';
 			case '6.5 in commercial running boards, ridgestep':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.xlsx';
+			case 'jeep rocker steps':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Rocker%20Steps.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Rocker%20Steps.xlsx';
 			default:
 				return '';
 		}
