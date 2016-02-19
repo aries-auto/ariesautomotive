@@ -10,7 +10,6 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 	$rootScope.pageTitle = 'ARIES Automotive | Application Guides';
 	$rootScope.pageKywds = 'aries, automotive, applications, application guides, vehicles';
 
-
 	var page = 0;
 
 	$scope.getPart = function(f, app){
@@ -88,9 +87,9 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.xlsx';
 			case 'headache racks, advantedge':
 				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.pdf';
+					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Headache%20Racks.pdf';
 				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.xlsx';
+				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Headache%20Racks.xlsx';
 			case 'headache racks':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.pdf';
@@ -98,9 +97,9 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.xlsx';
 			case '5.5 in side bars, advantedge':
 				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Headache%20Racks.pdf';
+					return '';
 				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Headache%20Racks.xlsx';
+				return '';
 			case '6.5 in commercial running boards, ridgestep':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.pdf';
