@@ -60,7 +60,7 @@ class Html extends Component {
 				<head>
 					<meta charSet="utf-8" />
 					<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-					<title>{this.props.title}</title>
+					<title>ARIES Automotive | {this.props.title}</title>
 					<meta name="description" content={this.props.description} />
 					<meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
 					<meta name="keywords" ng-bind="pageKywds" content="" />

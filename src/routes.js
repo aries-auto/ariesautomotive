@@ -7,6 +7,7 @@ import Category from './components/Category';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
+import About from './components/About';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -136,6 +137,10 @@ const router = new Router(on => {
 	on('/vehicle/:year/:make/:model', async (state) => {
 		state.context.params = state.params;
 		return <VehicleResults context={state.context} />;
+	});
+
+	on('/about', async (state) => {
+		return <About context={state.context} />;
 	});
 
 	on('/', async (state) => {
