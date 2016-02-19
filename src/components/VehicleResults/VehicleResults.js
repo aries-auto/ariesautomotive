@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './VehicleResults.scss';
-import Location from '../../core/Location';
-import withStyles from '../../decorators/withStyles';
+// import Location from '../../core/Location';
+// import withStyles from '../../decorators/withStyles';
+import VehicleStore from '../../stores/VehicleStore';
+import VehicleActions from '../../actions/VehicleActions';
+import connectToStores from 'alt-utils/lib/connectToStores';
 
-@withStyles(s)
+// @withStyles(s)
 class VehicleResults extends Component {
 
 	static propTypes = {
@@ -16,63 +19,70 @@ class VehicleResults extends Component {
 				model: PropTypes.string,
 			}),
 		}),
+		vehicle: PropTypes.shape({
+			year: PropTypes.string,
+			make: PropTypes.string,
+			model: PropTypes.string,
+		}),
+		categoryparts: PropTypes.object,
 	};
 
 	constructor() {
 		super();
-		this.parseVehicle = this.parseVehicle.bind(this);
 		this.state = {
 			context: {},
 		};
+		this.getCategoryStyles = this.getCategoryStyles.bind(this);
+		this.setCategoryStyle = this.setCategoryStyle.bind(this);
 	}
 
 	componentWillMount() {
-		if (!this.state.vehicle) {
-			this.parseVehicle();
-			return;
-		}
+		VehicleActions.set({
+			year: this.props.context.params.year,
+			make: this.props.context.params.make,
+			model: this.props.context.params.model,
+		});
 	}
 
-	parseVehicle() {
-		if (!this.props.context.params || !this.props.context.params.year || !this.props.context.params.make ||
-			!this.props.context.params.model || this.props.context.params.year === '') {
-			Location.push({
-				pathname: '/vehicle',
-				state: this.state || null,
-			});
-			return;
-		}
-		if (this.props.context.params.make === '') {
-			Location.push({
-				pathname: `/vehicle/${this.props.context.params.year}`,
-				state: this.state || null,
-			});
-			return;
-		}
-		if (this.props.context.params.model === '') {
-			Location.push({
-				pathname: `/vehicle/${this.props.context.params.year}/${this.props.context.params.make}`,
-				state: this.state || null,
-			});
-			return;
-		}
+	static getStores() {
+		return [VehicleStore];
+	}
 
-		this.setState({
-			vehicle: {
-				year: this.props.context.params.year,
-				make: this.props.context.params.make,
-				model: this.props.context.params.model,
-			},
-		});
+	static getPropsFromStores() {
+		return VehicleStore.getState();
+	}
+
+	getCategoryStyles() {
+		const output = [];
+		for (const cat in this.props.categoryparts) {
+			if (!cat) {
+				return;
+			}
+			output.push(
+				<li style="font-size:14px;" role="presentation" onClick={this.setCategoryStyle(cat)}>
+					<a role="menuitem" href>{cat}</a>
+				</li>
+			);
+		}
+		return output;
+	}
+
+	setCategoryStyle(cat) {
+		console.log(cat);
 	}
 
 	render() {
 		return (
-			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
+			<div className={cx(s.root, this.props.className)} role="navigation">
+				<div className="tab-wrap">
+					<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
+						{this.getCategoryStyles()}
+					</ul>
+				</div>
 			</div>
 		);
 	}
 
 }
 
-export default VehicleResults;
+export default connectToStores(VehicleResults);
