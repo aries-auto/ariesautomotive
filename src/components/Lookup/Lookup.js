@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Lookup.scss';
-import LookupActions from '../../actions/LookupActions.js';
-import LookupStore from '../../stores/LookupStore.js';
+import LookupActions from '../../actions/LookupActions';
+import LookupStore from '../../stores/LookupStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
 

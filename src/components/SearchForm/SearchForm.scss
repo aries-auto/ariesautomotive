@@ -27,8 +27,16 @@
 	}
 
 	button[type=submit] {
+		background-color: $new-red;
 		border-color: $new-red;
+		color: $white-base;
+		font-size: 18px;
+		transition: color .2s ease-in;
 		width: 15%;
+
+		&:hover {
+			color: $black-base;
+		}
 
 		.nodisplay {
 			display: none;

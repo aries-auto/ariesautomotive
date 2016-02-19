@@ -14,6 +14,14 @@ function withStyles(...styles) {
 			this.removeCss();
 		}
 
+		static getStores() {
+			return [];
+		}
+
+		static getPropsFromStores() {
+			return {};
+		}
+
 		render() {
 			return <BaseComponent {...this.props} />;
 		}
