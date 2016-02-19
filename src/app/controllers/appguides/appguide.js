@@ -19,7 +19,7 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 	};
 
 	$scope.GetFileLocation = function(type){
-		switch($scope.collection) {
+		switch($scope.collection.toLowerCase()) {
 			case '3 in round side bars':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.pdf';
@@ -62,9 +62,9 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx';
 			case 'jeep accessories':
 				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/Vendor%20Login%20Files/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.pdf';
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.pdf';
 				}
-				return 'https://www.curtmfg.com/Vendor%20Login%20Files/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.xlsx';
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.xlsx';
 			case 'jeep bumper kits and replacement parts':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
