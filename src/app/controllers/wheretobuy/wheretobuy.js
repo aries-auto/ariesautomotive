@@ -77,7 +77,10 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				$scope.loadingLocations = false;
 				return;
 			}
-			var locationData = [];
+			var mapLocations = [];
+			var platLocations = [];
+			var goldLocations = [];
+			var silvLocations = [];
 			for (var i = 0; i < data.length; i++) {
 				var el = data[i];
 				if(el !== undefined && el !== null && el.id !== undefined && el.id !== null && el.dealerType !== undefined){
@@ -87,19 +90,28 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				if(el.dealerTier.tier == "Platinum" && $scope.platEnabled === true){
 					// handle discount hitch being first, ugh.
 					if (el.customerId === 10444250){
-						locationData.unshift(data[i]); // love unshift
+						platLocations.unshift(data[i]); // love unshift
 					}else{
-						locationData.push(data[i]);
+						platLocations.push(data[i]);
 					}
+					mapLocations.push(data[i]);
 				}
 				if(el.dealerTier.tier == "Gold" && $scope.goldEnabled === true){
-					locationData.push(data[i]);
+					goldLocations.push(data[i]);
+					mapLocations.push(data[i]);
 				}
 				if(el.dealerTier.tier == "Silver" && $scope.silverEnabled === true){
-					locationData.push(data[i]);
+					silvLocations.push(data[i]);
+					mapLocations.push(data[i]);
 				}
 			}
-			$scope.locations = locationData;
+			// Handle different tiers
+			$scope.platLocations = platLocations;
+			$scope.goldLocations = goldLocations;
+			$scope.silvLocations = silvLocations;
+			// handle map locations
+			$scope.locations = mapLocations;
+
 			if(data.length === count){
 				getByBounds(center, ne, sw, $scope.locations.length, count, sort);
 			}else{

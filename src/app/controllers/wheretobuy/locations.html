@@ -1,0 +1,36 @@
+<div class="text-locations" ng-repeat="locs in locations | groupBy:'dealerTier.tier' | toArray:true | orderBy:'-$key.sort'">
+    <h2>[[locs.$key]]</h2>
+    <div ng-repeat="loc in locs" class="col-md-4 col-sm-6 col-xs-12 location">
+        <div itemscope itemtype="http://schema.org/PostalAddress">
+            <a ng-click="panTo(loc)" class="name" itemprop="name">[[ loc.name ]]</a>
+            <span class="type">[[ loc.dealerType.label ]]</span>
+            <span class="address" itemprop="streetAddress">[[ loc.address ]]</span>
+            <span class="city" itemprop="addressLocality">[[ loc.city ]]</span>
+            <span>,</span>
+            <span class="state" itemprop="addressRegion">[[ loc.state.abbreviation ]]</span>
+            <span class="zip" itemprop="postalCode">[[ loc.postalCode ]]</span>
+            <span class="country" itemprop="addressCountry">[[ loc.country.country ]]</span>
+
+            <a ng-if="loc.showWebsite && loc.website.Host !== ''" href="[[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]" class="website">
+                [[ loc.website.Scheme ]]://[[ loc.website.Host ]][[ loc.website.Path ]]
+            </a>
+
+            <div class="actions">
+                <a href="tel:[[ loc.phone ]]">
+                    <span class="glyphicon glyphicon-earphone"></span>
+                    [[ loc.phone ]]
+                </a>
+                <a ng-click="loadDirections(loc.address + ', ' + loc.city + ', ' + loc.state.abbreviation + ', ' + loc.country.country)">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                    Directions
+                </a>
+                <a ng-click="panTo(loc)">
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                    View on Map
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
