@@ -24,13 +24,14 @@ class LatestNews extends Component {
 
 	constructor() {
 		super();
+
+		NewsActions.all();
 	}
 
 	componentWillMount() {
 		this.setState({
 			title,
 		});
-		NewsActions.all();
 	}
 
 	static getStores() {

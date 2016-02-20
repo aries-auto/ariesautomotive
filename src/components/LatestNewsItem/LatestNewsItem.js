@@ -23,21 +23,21 @@ class LatestNewsItem extends Component {
 	static defaultProps = {
 		item: {},
 		title: '',
-		content: {
+		context: {
 			id: '',
 		},
 	};
 
-	constructor() {
+	constructor(props) {
 		super();
+
+		NewsActions.get(props.context.id);
 	}
 
 	componentWillMount() {
 		this.setState({
 			title,
 		});
-
-		NewsActions.get(this.props.context.id);
 	}
 
 	static getStores() {
