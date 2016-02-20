@@ -9,6 +9,7 @@ import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
 import About from './components/About';
 import LatestNews from './components/LatestNews';
+import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -146,6 +147,11 @@ const router = new Router(on => {
 
 	on('/news', async (state) => {
 		return <LatestNews context={state.context} />;
+	});
+
+	on('/news/:id', async (state) => {
+		state.context.id = state.params.id;
+		return <LatestNewsItem context={state.context} />;
 	});
 
 	on('/', async (state) => {

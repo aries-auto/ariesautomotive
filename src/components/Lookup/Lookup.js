@@ -3,9 +3,11 @@ import cx from 'classnames';
 import s from './Lookup.scss';
 import LookupActions from '../../actions/LookupActions';
 import LookupStore from '../../stores/LookupStore';
+import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
-
+@withStyles(s)
+@connectToStores
 class Lookup extends Component {
 
 	static propTypes = {
@@ -187,4 +189,4 @@ class Lookup extends Component {
 
 }
 
-export default connectToStores(Lookup);
+export default Lookup;

@@ -1,99 +1,103 @@
 @import '../variables.scss';
 
 .root {
-	background: url('/img/footerBackground.png');
-	color: $footer-color;
-	font-family: "proxima-nova-condensed",sans-serif;
-	margin: 0;
-	padding: 15px 0 0;
-	width: 100%;
+    width: 100%;
+    padding: 15px 0 0;
+    margin: 0;
+    font-family: "proxima-nova-condensed", sans-serif;
+    color: $footer-color;
+    background: url('/img/footerBackground.png');
+
+    h4 {
+        color: $white-base;
+    }
+
+    address {
+        .phoneNumber {
+            margin: 10px 0;
+        }
+
+        .phone {
+            margin-left: 5px;
+            font-size: 20px;
+
+            a {
+                color: $footer-color;
+            }
+
+            a:hover {
+                color: $gray-light;
+                text-decoration: none;
+            }
+        }
+    }
 }
 
 .container {
-	margin: 0 auto;
-	padding: 20px 15px;
+    padding: 20px 15px;
+    margin: 0 auto;
 }
 
-h4 {
-	color: $white-base;
-}
-
-.semaLogo{
-	margin-top: 10px;
+.semaLogo {
+    margin-top: 10px;
 }
 
 .footerNav {
-	padding:0px 0px;
-	padding-bottom:70px;
-	ul{
-		li{
-			padding:0px;
-			padding-top:4px;
-			font-size:18px;
-			a{
-				padding:0px;
-			}
-			a:hover{
-				background: none;
-				color:#ccc;
-			}
-		}
-	}
+    padding: 0 0;
+    padding-bottom: 70px;
+
+    ul {
+        li {
+            padding: 0;
+            padding-top: 4px;
+            font-size: 18px;
+
+            a {
+                padding: 0;
+            }
+
+            a:hover {
+                color: #ccc;
+                background: none;
+            }
+        }
+    }
 }
 
 .footerLogo {
-	width: 200px;
-	max-height:110px;
+    width: 200px;
+    max-height: 110px;
 }
 
-.addressInfo{
-	font-size: 18px;
+.addressInfo {
+    font-size: 18px;
 
-	span:last-child {
-		margin-left: 5px;
-	}
+    span:last-child {
+        margin-left: 5px;
+    }
 }
 
-.addressName{
-	font-size: 18px;
-	font-weight: 700;
+.addressName {
+    font-size: 18px;
+    font-weight: 700;
 }
 
-address{
-	.phoneNumber {
-		margin: 10px 0;
-	}
+.conditions {
+    font-size: 16px;
 
-	.phone {
-		font-size: 20px;
-		margin-left: 5px;
+    .terms {
+        text-decoration: underline;
+    }
 
-		a {
-			color: $footer-color;
-		}
-
-		a:hover {
-			color: $gray-light;
-			text-decoration: none;
-		}
-	}
+    a:hover {
+        color: #666;
+    }
 }
 
-.conditions{
-	font-size:16px;
-	.terms{
-		text-decoration:underline;
+.social {
+    padding-left: 0;
 
-	}
-	a:hover{
-		color: #666666;
-	}
-
-}
-
-.social{
-	padding-left:0px;
-	h4{
-		padding-left:15px;
-	}
+    h4 {
+        padding-left: 15px;
+    }
 }

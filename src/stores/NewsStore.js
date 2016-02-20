@@ -12,12 +12,12 @@ class NewsStore extends EventEmitter {
 			error: {},
 		};
 		this.bindListeners({
+			all: NewsActions.all,
 			get: NewsActions.get,
 		});
-		this.get();
 	}
 
-	async get() {
+	async all() {
 		try {
 			await fetch('http://goapi.curtmfg.com/news?key=883d4046-8b96-11e4-9475-42010af00d4e&brandID=3')
 			.then((resp) => {
@@ -25,6 +25,23 @@ class NewsStore extends EventEmitter {
 			}).then((data) => {
 				this.setState({
 					news: data,
+				});
+			});
+		} catch (err) {
+			this.setState({
+				error: err,
+			});
+		}
+	}
+
+	async get(id) {
+		try {
+			await fetch(`http://goapi.curtmfg.com/news/${id}?key=883d4046-8b96-11e4-9475-42010af00d4e&brandID=3`)
+			.then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				this.setState({
+					item: data,
 				});
 			});
 		} catch (err) {
