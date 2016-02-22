@@ -1,9 +1,10 @@
-FROM node:5.0.0
+FROM gcr.io/google_appengine/nodejs
 
-COPY . /
+RUN install_node v5.2.0
+COPY build /app
+
+WORKDIR /app
+
 RUN npm install
-RUN npm run build -- --release
 
-EXPOSE 8080
-
-CMD ["node", "build/server.js"]
+CMD npm start
