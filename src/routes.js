@@ -8,6 +8,7 @@ import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
 import About from './components/About';
+import Terms from './components/Terms';
 import TechSupport from './components/TechSupport';
 import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
@@ -144,6 +145,10 @@ const router = new Router(on => {
 
 	on('/about', async (state) => {
 		return <About context={state.context} />;
+	});
+
+	on('/terms', async (state) => {
+		return <Terms context={state.context} />;
 	});
 
 	on('/techsupport', async (state) => {

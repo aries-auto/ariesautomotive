@@ -16,6 +16,8 @@ class SearchResults extends Component {
 
 	constructor() {
 		super();
+
+		this.scrollTo = this.scrollTo.bind(this);
 		this.state = {
 			context: {},
 		};
@@ -31,6 +33,12 @@ class SearchResults extends Component {
 		});
 	}
 
+	componentWillUpdate() {
+		const node = this.getDOMNode();
+		this.scrollHeight = node.scrollHeight;
+		this.scrollTop = node.scrollTop;
+	}
+
 	getContent() {
 		let content = '';
 		this.state.context.category.content.map((con) => {
@@ -40,10 +48,6 @@ class SearchResults extends Component {
 		return {
 			__html: content,
 		};
-	}
-
-	scrollTo(str) {
-		return str;
 	}
 
 	loadMore() {
@@ -67,6 +71,39 @@ class SearchResults extends Component {
 		}
 	}
 
+	scrollTo() {
+		window.scrollTo(0, 0);
+	}
+
+	renderParts() {
+		if (this.state.context.category.vehicle_specific) {
+			return (
+				<div className="container">
+					<div className={cx(s.findProducts, 'col-lg-12')}>
+						<a onClick={this.scrollTo} className="red-transparent-button">
+							Find Products for Your Vehicle
+						</a>
+						<div className="clearfix"></div>
+					</div>
+				</div>
+			);
+		}
+		return (
+			<div className="container">
+				<h2 id="categoryProdHeader">{this.props.context.category.title} Products</h2>
+
+				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+					{/* Products */}
+					{this.showParts()}
+				</div>
+
+				{/* Pagination */}
+				<div className="clearfix"></div>
+				{this.pagination()}
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
@@ -74,18 +111,7 @@ class SearchResults extends Component {
 					<h1 id="catTitle">{this.state.context.category.title}</h1>
 					<div dangerouslySetInnerHTML={this.getContent()} />
 				</div>
-				<div className="container">
-					<h2 id="categoryProdHeader">{this.props.context.category.title} Products</h2>
-
-					<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
-						{/* Products */}
-						{this.showParts()}
-					</div>
-
-					{/* Pagination */}
-					<div className="clearfix"></div>
-					{this.pagination()}
-				</div>
+				{this.renderParts()}
 			</div>
 		);
 	}

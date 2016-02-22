@@ -1,0 +1,64 @@
+import React, { Component, PropTypes } from 'react';
+import s from './Terms.scss';
+import withStyles from '../../decorators/withStyles';
+
+const title = 'Terms and Conditions';
+
+@withStyles(s)
+class Terms extends Component {
+
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+	};
+
+	componentWillMount() {
+		this.context.onSetTitle(title);
+	}
+
+	render() {
+		return (
+			<div className="terms-container">
+				<div className="container">
+					<div className="row">
+						<div className="col-xs-12 col-md-12 col-lg-12">
+							<h1>TERMS AND CONDITIONS</h1>
+
+							<h3>Terms</h3>
+							<p>All shipments are C.O.D. unless payment is received with an order or prior arrangements have been made for an open account. Prepayment will help avoid costly C.O.D. charges.</p>
+
+							<h3>Return Policy</h3>
+							<p>Any and all returns require an RGA number authorized by ARIES Automotive. ARIES Automotive requires an original purchase invoice number before an RGA number is to be issued. All authorized returns will be made on a freight-prepaid basis, including insurance, by the customer and will be subject to a 30% restocking fee. All returns will be issued as credit, not a refund, and may only be applied to a 2/1 (two for one) offsetting order.</p>
+
+							<h3>Shipment</h3>
+							<p>All freight-prepaid shipments will be by a freight company chosen by the manufacturer. Freight collect shipments will be by a freight company chosen by the manufacturer unless a freight company is specified at the time the order is placed. There is a 5% drop ship fee, minimum of $5.00, on orders that are shipped to a non-billing address.</p>
+
+							<h3>Claims</h3>
+							<p>Please be advised that responsibility of goods shipped transfers FOB at ARIES Automotive. Shipment shortages and damages must be claimed against carrier/freight company at the time of delivery. Customer must note the claim on the bill of lading/freight bill at the time of delivery and request an inspection by the carrier immediately. All shortages within ARIES boxes must be reported to ARIES Automotive within seven days of receipt of shipment. No claims will be allowed thereafter. Do not deduct claimed shortages from invoices when making payment. Credit memo(s) will be issued when the carrier pays the claim.Deductions taken without referencing a credit memo will not be honored.</p>
+
+							<h3>Pricing</h3>
+							<p>Prices and terms herein supersede all previous pricing. Prices are subject to change without notice.</p>
+
+							<h3>Stainless Steel Limited Lifetime Warranty</h3>
+							<p>ARIES Automotive offers the original purchaser a limited lifetime warranty from defects in material and workmanship. This warranty does not cover shipping damage, misuse, mishandling, road hazards, product modifications, or discoloration. This warranty does not cover cost for installation, removal, labor or shipping. This warranty only applies to new products installed on the original vehicle. The warranty covers the replacement or repair of any part or parts that are defective and returned to ARIES Automotive accompanied with a bill of sale and RGA number. Warranty claims cannot be determined until returned goods are inspected. If you live in an area that uses salt or other harsh chemicals for snow and ice removal, it is very important that you keep your bars clean. If you allow salt and other harsh snow and ice removing chemicals to stick to your step bars, this may cause your bars to rust prematurely and will void your warranty (warranty will be voided under product neglect) PLEASE KEEP YOUR STEP BARS CLEAN OF SALT AND OTHER SNOW REMOVING CHEMICALS. Please also DO NOT use any chemicals, even those meant to protect the product, on the product without consulting ARIES Automotive. Failure to do so will void your warranty (warranty will be voided under product modifications).</p>
+
+							<h3>Black Powder Coat Warranty</h3>
+							<p>ARIES Automotive offers the original purchaser a 3 year warranty from defects in material and workmanship on all powder coat finishes from the original date of purchase. This warranty does not cover shipping damage, misuse, mishandling, road hazards, or product modifications. This warranty does not cover cost for installation, removal, labor or shipping. This warranty only applies to new products installed on the original vehicle. The warranty covers the replacement or repair of any part or parts that are defective and returned to ARIES Automotive accompanied with a bill of sale and RGA number. Warranty claims cannot be determined until goods are inspected. If you live in an area that uses salt or other harsh chemicals for snow and ice removal, it is very important that you keep your bars clean. If you allow salt and other harsh snow and ice removing chemicals to stick to your step bars, this may cause your bars to rust prematurely and will void your warranty (warranty will be voided under product neglect) PLEASE KEEP YOUR STEP BARS CLEAN OF SALT AND OTHER SNOW REMOVING CHEMICALS. Please also DO NOT use any chemicals, even those meant to protect the product, on the product without consulting ARIES Automotive. Failure to do so will void your warranty (warranty will be voided under product modifications).</p>
+
+							<h3>Aluminum Warranty</h3>
+							<p>ARIES Automotive offers the original purchaser a 5 year warranty from defects in material and workmanship on all aluminum finishes from the original date of purchase. This warranty does not cover shipping damage, misuse, mishandling, road hazards, or product modifications. This warranty does not cover cost for installation, removal, labor or shipping. This warranty only applies to new products installed on the original vehicle. The warranty covers the replacement or repair of any part or parts that are defective and returned to ARIES Automotive accompanied with a bill of sale and RGA number. Warranty claims cannot be determined until goods are inspected.</p>
+
+							<h3>Disclaimer for ARIES Automotive Products</h3>
+							<p>ARIES Automotive products are designed to be sold as decorative accessories, and should not be relied upon as protection for both passengers and vehicle. The buyer assumes all risk and liability whatsoever resulting from the use of said products. There are limitations to the severity of impact that the products sold herein can withstand and the products are not a substitute for safe and careful driving. If you live in an area that uses salt or other harsh chemicals for snow and ice removal, it is very important that you keep your bars clean. If you allow salt and other harsh snow and ice removing chemicals to stick to your step bars, this may cause your bars to rust prematurely and will void your warranty (warranty will be voided under product neglect) PLEASE KEEP YOUR STEP BARS CLEAN OF SALT AND OTHER SNOW REMOVING CHEMICALS. Please also DO NOT use any chemicals, even those meant to protect the product, on the product without consulting ARIES Automotive. Failure to do so will void your warranty (warranty will be voided under product modifications).</p>
+
+							<p>ARIES Automotive reserves the right to redesign or discontinue products at anytime without prior notice.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+}
+
+export default Terms;
