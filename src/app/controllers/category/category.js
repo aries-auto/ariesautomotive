@@ -52,7 +52,10 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 				$('.pagination').css('opacity','1.0');
 		});
 	};
-	$scope.scrollTo = function(elementId){
+	$scope.scrollTo = function(elementId, ev){
+		if (ev) {
+			ev.preventDefault();
+		}
 		$location.hash(elementId);
 		$anchorScroll();
 	};

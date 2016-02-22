@@ -19,7 +19,7 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 	};
 
 	$scope.GetFileLocation = function(type){
-		switch($scope.collection) {
+		switch($scope.collection.toLowerCase()) {
 			case '3 in round side bars':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.pdf';
@@ -35,47 +35,17 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.xlsx';
-			case '4 in oval side bars, wheel to wheel':
+			case '4 in oval side bars, wheel-to-wheel':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.xlsx';
-			case '6 in oval side bars and mounting brackets':
-				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.pdf';
-				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.xlsx';
-			case 'bull bars':
-				if (type === 'pdf'){
-					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.pdf';
-				}
-				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.xlsx';
-			case 'floor liners':
-				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.pdf';
-				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.xlsx';
-			case 'grille guards':
-				if (type === 'pdf'){
-					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.pdf';
-				}
-				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx';
-			case 'jeep accessories':
-				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
-				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx';
-			case 'jeep bumper kits and replacement parts':
-				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
-				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx';
 			case '4 in round side bars, big step':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20BIG%20STEP%20SIDE%20BARS%20App%20Guide.xlsx';
-			case '5 in running boards, aerotread':
+			case '5 in running boards, aerotread and mounting brackets':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.pdf';
 				}
@@ -85,26 +55,61 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEDGE%20Bull%20Bars.xlsx';
-			case 'headache racks, advantedge':
+			case '5.5 in side bars, advantedge and mounting brackets':
 				if (type === 'pdf'){
-					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Headache%20Racks.pdf';
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Side%20Bar.pdf';
 				}
-				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Headache%20Racks.xlsx';
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Side%20Bar.xlsx';
+			case '6 in oval side bars and mounting brackets':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%206%20IN%20OVAL%20SIDE%20BARS_MOUNTING%20BRACKETS%20App%20Guide.xlsx';
+			case '6.5 in commercial running boards, ridgestep and mounting brackets':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.xlsx';
+			case 'bull bars':
+				if (type === 'pdf'){
+					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.pdf';
+				}
+				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Bull%20Bars.xlsx';
+			case 'styleguard floor liners':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Interiors_App_Guide.xlsx';
+			case 'grille guards':
+				if (type === 'pdf'){
+					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.pdf';
+				}
+				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Merged%20Grille%20Guards.xlsx';
 			case 'headache racks':
 				if (type === 'pdf'){
 					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.pdf';
 				}
 				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Headache%20Racks.xlsx';
-			case '5.5 in side bars, advantedge':
+			case 'headache racks, advantedge':
 				if (type === 'pdf'){
-					return '';
+					return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Headache%20Racks.pdf';
 				}
-				return '';
-			case '6.5 in commercial running boards, ridgestep':
+				return 'http://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Headache%20Racks.xlsx';
+			case 'jeep accessories':
 				if (type === 'pdf'){
-					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.pdf';
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.pdf';
 				}
-				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.xlsx';
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Accessories.xlsx';
+			case 'jeep bumper kits and replacement parts':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Modular%20Bumper%20Data%20Tables.xlsx';
+			case 'jeep rocker steps':
+				if (type === 'pdf'){
+					return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Rocker%20Steps.pdf';
+				}
+				return 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/Jeep%20Rocker%20Steps.xlsx';
 			default:
 				return '';
 		}

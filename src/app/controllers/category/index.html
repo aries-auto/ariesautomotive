@@ -7,6 +7,12 @@
 						<h1 id="catTitle">[[category.title | uppercase]]</h1>
 						<div ng-repeat="cont in category.content">
 							<div class="content" ng-bind-html="renderHTML(cont.text)"></div>
+							<div class="col-lg-12 find-products" ng-if="category.vehicle_specific">
+								<a ng-click="scrollTo(lookupContainer, $event)" class="red-transparent-button">
+									Find Products for Your Vehicle
+								</a>
+								<div class="clearfix"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -15,12 +21,10 @@
 						<h2 id="catTitleProds">[[category.title | uppercase]] PRODUCTS</h2>
 
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
-							
-							<!-- Products -->
 
-							
+							<!-- Products -->
 							<part-box parts="parts"></part-box>
-							
+
 							<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 							<div class="clearfix"></div>
 						</div>

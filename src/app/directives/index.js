@@ -31,7 +31,7 @@ angular.module('ariesautomotive').directive('partLookup',function(){
 			var loc = scope.location;
 			angular.forEach(app.parts, function(p){
 				if (p.finish === finish || p.color === finish && (loc === undefined || loc === '' || p.location === loc)){
-					var el2 = '<div class="partLink"><a href="/part/' + p.oldPartNumber + '" title="View ' + p.oldPartNumber + '">'+p.oldPartNumber+' - ' + p.category + '</a>';
+					var el2 = '<div class="partLink"><a href="/part/' + p.oldPartNumber + '" title="View ' + p.oldPartNumber + '">'+p.oldPartNumber+' - ' + p.short_description || p.category + '</a>';
 					if (p.install_sheet && p.install_sheet !== '') {
 						el2 += '<a class="installLink" target="_blank" href="' + p.install_sheet + '" title="Installation Sheet for ' + p.oldPartNumber +'"><span class="glyphicon glyphicon-wrench"></span></a>';
 					}
