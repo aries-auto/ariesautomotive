@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
+angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', '$analytics', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, $analytics) {
 	$scope.collections = [];
 	$scope.years = [];
 	$scope.makes = [];
@@ -99,6 +99,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		v.collection = cat.name;
 		v.style = style;
 		LookupService.queryCategoryStyles(v).then(function(resp) {
+			$analytics.pageTrack($location.path() + '#' + cat.name + '-' + v.style);
 			$scope.categoryparts[v.collection] = resp[v.collection];
 			$scope.categoryparts[v.collection].name = v.collection;
 			$scope.categoryparts[v.collection].style = style;
@@ -107,6 +108,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		});
 	};
 	$scope.setTab = function(tab) {
+		$analytics.pageTrack($location.path() + '#' + tab);
 		$scope.tab = tab;
 	};
 	$scope.isSet = function(tabID) {

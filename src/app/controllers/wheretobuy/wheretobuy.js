@@ -241,7 +241,6 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$scope.directions = {
 			end: end
 		};
-		console.log(end);
 		$analytics.eventTrack('wtb-directions-to:' + end);
 		ngDialog.open({
 			template: 'app/controllers/wheretobuy/directions-form.html',

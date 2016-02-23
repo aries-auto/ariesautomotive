@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', '$rootScope', function($scope, WarrantyService, GeographyService, PartService, $rootScope){
+angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope', 'WarrantyService','GeographyService','PartService', '$rootScope', '$analytics', function($scope, WarrantyService, GeographyService, PartService, $rootScope, $analytics){
 	$scope.message = "Click this button:";
 	$scope.partConfirm = false;
 	$scope.warranty = {};
@@ -33,6 +33,7 @@ angular.module('ariesautomotive').controller('WarrantiesController',  ['$scope',
 		warranty.date = new Date(warranty.date);
 
 		WarrantyService.SubmitWarranty(warranty).then(function(data){
+			$analytics.eventTrack('warranty-submitted');
 			$scope.warranty = {};
 			$scope.dateMessage = "";
 			$scope.message = "Request sent.";

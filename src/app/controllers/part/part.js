@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', 'Lightbox', '$q', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location, Lightbox, $q){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', 'Lightbox', '$q', '$analytics', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location, Lightbox, $q, $analytics){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
@@ -106,6 +106,8 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 
 	$scope.openLightbox = function(index){
 		var vids = [];
+		var vid = $scope.part.videos[index]
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':video:' + vid.title);
 		vids.push($scope.part.videos[index]);
 		Lightbox.openModal(vids, 0);
 	}
@@ -114,6 +116,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if ($scope.installVideos.length < 1){
 			return;
 		}
+		$analytics.eventTrack('part:' + $scope.part + ':installVideos');
 		Lightbox.openModal($scope.installVideos, 0);
 	}
 
@@ -231,6 +234,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':social:facebook');
 		var facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber + '&_rdr';
 		window.$windowScope = $scope;
 		window.open(facebookURL, 'Share ARIES Automotive', 'width=500, height=500');
@@ -240,6 +244,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':social:twitter');
 		var pageURL = 'http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber;
 		var tweetText = $scope.part.short_description + ' - ' + $scope.part.oldPartNumber;
 		var twitterURL = 'https://twitter.com/intent/tweet?text=' + tweetText + '&url=' + pageURL + '&via=ariesautomotive&original_referer=' + pageURL;
@@ -250,6 +255,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':social:google');
 		var googleURL = 'https://plus.google.com/share?url=http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber;
 		window.$windowScope = $scope;
 		window.open(googleURL, 'Share ARIES Automotive', 'width=500, height=500');
