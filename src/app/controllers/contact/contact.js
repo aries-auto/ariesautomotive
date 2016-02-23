@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('ContactController', ['$scope', 'ContactService', 'BecomeDealerService', 'GeographyService', '$rootScope',
-	function($scope, ContactService, BecomeDealerService, GeographyService, $rootScope) {
+angular.module('ariesautomotive').controller('ContactController', ['$scope', 'ContactService', 'BecomeDealerService', 'GeographyService', '$rootScope', '$analytics',
+	function($scope, ContactService, BecomeDealerService, GeographyService, $rootScope, $analytics) {
 		$scope.formData = {
 			'sendEmail': true
 		};
@@ -22,6 +22,7 @@ angular.module('ariesautomotive').controller('ContactController', ['$scope', 'Co
 					};
 					$scope.successMessage = 'Thank you. We have received your request.\n';
 				}
+				$analytics.eventTrack('contact-submitted');
 				$scope.saving = false;
 			}, function() {
 				$scope.errorMessage = 'Uh Oh! An error occurred while processing your request.\n';

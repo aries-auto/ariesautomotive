@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('MainController', ['$scope', 'TestimonialService', 'PartService', '$rootScope', 'Lightbox', '$sce', function($scope, TestimonialService, PartService, $rootScope, Lightbox, $sce){
+angular.module('ariesautomotive').controller('MainController', ['$scope', 'TestimonialService', 'PartService', '$rootScope', 'Lightbox', '$sce', '$analytics', function($scope, TestimonialService, PartService, $rootScope, Lightbox, $sce, $analytics){
   $scope.testimonials = [];
   $scope.featuredProducts = [];
   $scope.catalogs = [
@@ -48,6 +48,7 @@ angular.module('ariesautomotive').controller('MainController', ['$scope', 'Testi
   }];
 
   $scope.showWhatsNewLightbox = function(){
+    $analytics.eventTrack('HP:whats-new-lightbox');
     for (var i = 0; i < $scope.whatsNewContent.length; i++){
       if (typeof($scope.whatsNewContent[i].url) === 'string'){
         $scope.whatsNewContent[i].url = $sce.trustAsResourceUrl($scope.whatsNewContent[i].url);

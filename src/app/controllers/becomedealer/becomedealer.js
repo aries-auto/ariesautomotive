@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('BecomeDealerController', ['$scope', 'BecomeDealerService', 'GeographyService', '$rootScope', function($scope, BecomeDealerService, GeographyService, $rootScope) {
+angular.module('ariesautomotive').controller('BecomeDealerController', ['$scope', 'BecomeDealerService', 'GeographyService', '$rootScope', '$analytics' , function($scope, BecomeDealerService, GeographyService, $rootScope, $analytics) {
 	$scope.contact = {};
 	$scope.message = '';
 
@@ -29,6 +29,7 @@ angular.module('ariesautomotive').controller('BecomeDealerController', ['$scope'
 			$scope.message = 'Request sent.';
 			$scope.contact = {};
 			$scope.saving = false;
+			$analytics.eventTrack('BecomeADealer-submitted');
 		}, function() {
 			$scope.message = 'Request failed to send.';
 			$scope.saving = false;

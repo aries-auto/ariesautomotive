@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope){
+angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$stateParams', '$sce', 'CategoryService', '$location', '$anchorScroll', '$rootScope', '$analytics', function($scope, $stateParams, $sce, CategoryService, $location, $anchorScroll, $rootScope, $analytics){
 	$scope.category = {};
 	$scope.loadingMore = false;
 	$scope.parts = [];
@@ -36,11 +36,12 @@ angular.module('ariesautomotive').controller('CategoryController', ['$scope', '$
 		if($scope.loadingMore){
 			return;
 		}
-
 		$('.pagination').css('opacity','0.6');
 		$scope.loadingMore = true;
 
 		$scope.category.product_listing.page++;
+		$analytics.pageTrack('category:' + $scope.category.id + ':page:' + $scope.category.product_listing.page);
+
 		CategoryService.parts($scope.category.id, $scope.category.product_listing.page, per_page).then(function(data){
 			if(data.parts === undefined || data.parts === null){
 					data.parts = [];
