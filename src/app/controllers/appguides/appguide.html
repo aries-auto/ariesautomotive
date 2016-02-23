@@ -29,7 +29,6 @@
 					<th>End Year</th>
 					<th ng-if="location">Location</th>
 					<th ng-repeat="fin in finishes">[[ fin ]]</th>
-					<th ng-repeat="col in colors">[[ col ]]</th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="app in applications | filter:{locations: '!!'}">
@@ -43,9 +42,6 @@
 					<td ng-repeat="fin in finishes">
 						<a app="app" finish="fin" collection="collection" location="loc" finish-link></a>
 					</td>
-					<td ng-repeat="col in colors">
-						<a app="app" finish="col" collection="collection" location="loc" finish-link></a>
-					</td>
 				</tr>
 			</tbody>
 			<tbody ng-repeat="app in applications | filter:{locations: '!'}">
@@ -58,9 +54,6 @@
 					<td ng-click="goTo('/vehicle/[[ collection ]]/[[ app.min_year ]]/[[ app.make ]]/[[ app.model ]]/[[ app.style  | no_quote]]')" ng-if="location"></td>
 					<td ng-repeat="fin in finishes">
 						<a app="app" finish="fin" collection="collection" finish-link></a>
-					</td>
-					<td ng-repeat="col in colors">
-						<a app="app" finish="col" collection="collection" finish-link></a>
 					</td>
 				</tr>
 			</tbody>
