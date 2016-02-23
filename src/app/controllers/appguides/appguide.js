@@ -172,8 +172,12 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 				return;
 			}
 
-			$scope.finishes = data.finishes;
-			$scope.colors = data.colors;
+			if ($scope.collection.toLowerCase().indexOf('floor liners') !== -1) {
+				$scope.finishes = data.colors;
+			} else {
+				$scope.finishes = data.finishes;
+			}
+
 			parseLocations(data.applications);
 			page = page + 1;
 			getMore(page);
