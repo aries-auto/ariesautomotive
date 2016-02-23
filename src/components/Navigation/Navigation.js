@@ -13,6 +13,9 @@ class Navigation extends Component {
 
 	getCategories() {
 		const cats = [];
+		if (!this.props.categories || this.props.categories.length === 0) {
+			return cats;
+		}
 		this.props.categories.map((cat) => {
 			if (cat.children && cat.children.length > 0) {
 				cats.push(

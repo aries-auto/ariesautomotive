@@ -1,36 +1,216 @@
-.root {
+@import '../variables.scss';
 
+.top {
+    h1 {
+        text-transform: uppercase;
+		margin-top: 0;
+    }
 }
 
-.link {
-  display: inline-block;
-  padding: 3px 8px;
-  text-decoration: none;
-  font-size: 1.125em; /* ~18px */
+.breadcrumb {
+    padding-bottom: 9px;
+    padding-left: 0;
+    margin-bottom: 0;
+    background-color: transparent;
+
+    li + li:before {
+        font-weight: 400;
+        color: $header-color;
+        content: ">\00a0";
+    }
+
+    li {
+        font-size: 14px;
+        font-weight: 900;
+        color: $header-color;
+        text-transform: uppercase;
+
+        a, a.active {
+            font-style: normal;
+            font-weight: 400;
+            color: #666;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #888;
+        }
+    }
 }
 
-.link,
-.link:active,
-.link:visited {
-  color: rgba(255, 255, 255, .6);
+.linkContainer {
+    padding: 0;
+
+    .partNum {
+        span:first-child {
+            padding: 0;
+            margin-right: 10px;
+            font-size: 20px;
+            font-weight: 900;
+            color: $header-color;
+        }
+    }
+
+    .shareIcons {
+        margin: 10px 0;
+
+        a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            margin: 0 1px;
+            line-height: 40px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                transform: scale(.9);
+            }
+
+            &:hover {
+                img {
+                    transform: scale(1);
+                }
+            }
+        }
+    }
 }
 
-.link:hover {
-  color: rgba(255, 255, 255, 1);
+.installContainer {
+    padding: 0;
+    margin: 5px 0;
+
+    .installSheet {
+        margin: 5px 0;
+
+        a {
+            display: block;
+            min-width: 115px;
+            padding: 0 3px;
+            margin: 0 2px;
+            font-size: 12px;
+            text-align: center;
+            text-transform: uppercase;
+            border: 2px solid $new-red;
+
+            span {
+                margin-right: 5px;
+                font-size: 12px;
+                vertical-align: baseline;
+            }
+        }
+    }
+
+    &.mobile {
+        display: flex;
+        margin: 25px 0;
+        justify-content: space-between;
+
+        > div {
+            width: 30%;
+
+            a {
+                padding: 10px 5px;
+            }
+        }
+    }
 }
 
-.highlight {
-  margin-right: 8px;
-  margin-left: 8px;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, .15);
-  color: #fff;
+:global .carousel {
+    max-width: 450px;
+    box-shadow: 1px 0 10px -2px #ccc;
+
+    .carouselInner .item {
+        background: none;
+    }
 }
 
-.highlight:hover {
-  background: rgba(0, 0, 0, .3);
+:global .carousel-control.left, :global .carousel-control.right {
+    background: none;
 }
 
-.spacer {
-  color: rgba(255, 255, 255, .3);
+:global .carousel-control .glyphicon {
+    color: $header-color;
+}
+
+.carouselImg {
+    max-width: 450px;
+    max-height: 450px;
+}
+
+.thumbs {
+    max-width: 450px;
+    min-height: 80px;
+    padding: 10px 0 0 0;
+    margin-bottom: 0;
+    list-style: none;
+
+    .thumb {
+        display: inline-block;
+        width: 50%;
+        padding: 0;
+        padding-right: 10px;
+        overflow: hidden;
+        list-style: none;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+            height: 100%;
+            box-shadow: 1px 0 10px 2px #ccc;
+        }
+    }
+
+    .videoThumb {
+        position: relative;
+        height: 100px;
+
+        div {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            background: black;
+
+            img {
+                height: 70px;
+                margin: 15px 0;
+                box-shadow: none;
+            }
+        }
+
+        .arrow {
+            position: absolute;
+            top: 40px;
+            left: 35px;
+            z-index: 10;
+            display: block;
+            width: 30px;
+            height: 20px;
+            background-color: #ce1e1e;
+            border-radius: 12px/5px;
+        }
+
+        .arrowRight {
+            position: absolute;
+            top: 6px;
+            left: 14px;
+            z-index: 11;
+            display: block;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid #eee;
+        }
+    }
+}
+
+@media (min-width: $screen-md-min) {
+    .thumbs {
+        .thumb {
+            width: 25%;
+        }
+    }
+
+    .installSheet {
+        line-height: 40px;
+    }
 }

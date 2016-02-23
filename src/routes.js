@@ -47,18 +47,8 @@ const router = new Router(on => {
 		return component && <App context={state.context}>{component}</App>;
 	});
 
-	on('/product/:id', async (state) => {
-		try {
-			const url = `http://api.curtmfg.com/v3/part/${state.params.id}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
-			const partResponse = await fetch(url, {
-				method: 'get',
-			});
-
-			state.context.part = await partResponse.json();
-		} catch (e) {
-			state.context.error = e;
-		}
-
+	on('/part/:id', async (state) => {
+		state.context.id = state.params.id;
 		return <Product context={state.context} />;
 	});
 
