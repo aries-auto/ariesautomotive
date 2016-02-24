@@ -1,4 +1,5 @@
 import React from 'react';
+import ga from 'react-ga';
 import Router from 'react-routing/src/Router';
 import fetch from './core/fetch';
 import App from './components/App';
@@ -16,7 +17,10 @@ import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
+const isBrowser = typeof window !== 'undefined';
 const KEY = process.env.API_KEY;
+const gaOptions = { debug: true };
+const MyWindowDependentLibrary = isBrowser ? ga.initialize('UA-61502306-1', gaOptions) : undefined;
 
 const router = new Router(on => {
 	on('*', async (state, next) => {
@@ -44,7 +48,10 @@ const router = new Router(on => {
 		} catch (e) {
 			state.context.error = e;
 		}
-
+		if (MyWindowDependentLibrary !== undefined) {
+			ga.initialize('UA-61502306-1', gaOptions);
+		}
+		ga.pageview('arieact:' + state.path);
 		const component = await next();
 		return component && <App context={state.context}>{component}</App>;
 	});

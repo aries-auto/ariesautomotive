@@ -23,6 +23,7 @@
     "react-addons-css-transition-group": "^0.14.7",
     "react-bootstrap": "^0.28.2",
     "react-dom": "0.14.3",
+    "react-ga": "^1.2.0",
     "react-modal": "^0.6.1",
     "react-routing": "0.0.6",
     "source-map-support": "0.4.0",
