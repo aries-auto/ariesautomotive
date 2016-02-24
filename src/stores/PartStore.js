@@ -29,11 +29,9 @@ class PartStore extends EventEmitter {
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				this.part = data;
-				// this.setState({
-				// 	part: data,
-				// 	featured: this.state.featured,
-				// });
+				this.setState({
+					part: data,
+				});
 			});
 		} catch (err) {
 			this.setState({
@@ -48,7 +46,9 @@ class PartStore extends EventEmitter {
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				this.featured = data;
+				this.setState({
+					featured: data,
+				});
 			});
 		} catch (err) {
 			this.setState({

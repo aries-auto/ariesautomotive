@@ -22,6 +22,7 @@ class Product extends Component {
 		}),
 		carouselIndex: PropTypes.number,
 		carouselDirection: PropTypes.string,
+		featured: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -41,6 +42,7 @@ class Product extends Component {
 		super();
 
 		PartActions.get(props.context.id);
+		PartActions.featured();
 	}
 
 	componentWillMount() {
@@ -337,7 +339,6 @@ class Product extends Component {
 
 	renderRelated() {
 		const parts = [];
-
 		const rel = this.props.part.related.slice(0, 4);
 		rel.map((r, i) => {
 			let image;
@@ -373,32 +374,34 @@ class Product extends Component {
 	renderFeatured() {
 		const parts = [];
 
-		// console.log(PartActions.featured());
-		// rel.map((r, i) => {
-		// 	let image;
-		// 	r.images.map((img) => {
-		// 		if (img.sort === 'a' && img.size === 'Grande') {
-		// 			image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
-		// 		}
-		// 	});
-		// 	parts.push(
-		// 		<div key={i} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
-		// 			<h4>
-		// 				<a href={`/part/${r.part_number}`}>
-		// 					{r.short_description}
-		// 				</a>
-		// 			</h4>
-		// 			<a href={`/part/${r.part_number}`}>
-		// 				<img src={image} className="img-responsive" alt={`Image for ${r.title}`} />
-		// 			</a>
-		// 			<hr className="visible-xs-block" />
-		// 		</div>
-		// 	);
-		// });
+		const rel = this.props.featured.slice(0, 4);
+
+		rel.map((r, i) => {
+			let image;
+			r.images.map((img) => {
+				if (img.sort === 'a' && img.size === 'Grande') {
+					image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
+				}
+			});
+			parts.push(
+				<div key={i} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
+					<h4>
+						<a href={`/part/${r.part_number}`}>
+							{r.short_description}
+						</a>
+					</h4>
+					<a href={`/part/${r.part_number}`}>
+						<img src={image} className="img-responsive" alt={`Image for ${r.title}`} />
+					</a>
+					<hr className="visible-xs-block" />
+				</div>
+			);
+		});
 		return (
 			<div className={s.upsell}>
-				<h3>YOU MAY ALSO LIKE</h3>
+				<h3>YOU MAY ALSO LIKE (featured)</h3>
 				<div>
+					{parts}
 					<Upsell parts={parts} />
 				</div>
 			</div>
@@ -459,7 +462,7 @@ class Product extends Component {
 
 	renderPart() {
 		if (!this.props.part || !this.props.part.id) {
-			return (<div></div>);
+			return (<div>NO PART</div>);
 		}
 
 		return (

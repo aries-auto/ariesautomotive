@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Upsell.scss';
-import PartActions from '../../../actions/PartActions';
+// import PartActions from '../../../actions/PartActions';
 import PartStore from '../../../stores/PartStore';
 import withStyles from '../../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -26,7 +26,7 @@ class Upsell extends Component {
 
 		if (!props || !props.parts || props.parts.length === 0) {
 			console.log('getting featured');
-			PartActions.featured();
+			// PartActions.featured();
 		}
 	}
 
