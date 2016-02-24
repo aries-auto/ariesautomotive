@@ -76,7 +76,7 @@ const config = {
 				test: /\.scss$/,
 				loaders: [
 					'isomorphic-style-loader',
-					'css-loader?' + (DEBUG ? 'sourceMap&' : 'minimize&') +
+					'css-loader?' + (DEBUG ? 'sourceMap&' : 'minimize&sourceMap=true') +
 					'modules&localIdentName=[name]_[local]_[hash:base64:3]',
 					'postcss-loader',
 				],
@@ -122,6 +122,12 @@ const clientConfig = merge({}, config, {
 	devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
 	plugins: [
 		new webpack.DefinePlugin(GLOBALS),
+		new webpack.DefinePlugin({
+			'process.env': Object.keys(process.env).reduce((o, k) => {
+				o[k] = JSON.stringify(process.env[k]);
+				return o;
+			}, {}),
+		}),
 		new AssetsPlugin({
 			path: path.join(__dirname, '../build'),
 			filename: 'assets.js',

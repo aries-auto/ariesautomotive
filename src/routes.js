@@ -16,13 +16,15 @@ import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
+const KEY = process.env.API_KEY;
+
 const router = new Router(on => {
 	on('*', async (state, next) => {
 		if (!state.context) {
 			state.context = {};
 		}
 		const [yearResponse, catResponse] = await Promise.all([
-			fetch('https://goapi.curtmfg.com/vehicle/mongo/allCollections?key=883d4046-8b96-11e4-9475-42010af00d4e', {
+			fetch(`https://goapi.curtmfg.com/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
@@ -30,7 +32,7 @@ const router = new Router(on => {
 				},
 				body: '{}',
 			}),
-			fetch('http://api.curtmfg.com/v3/category?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79'),
+			fetch(`http://api.curtmfg.com/v3/category?brandID=3&key=${KEY}`),
 		]);
 
 		try {
@@ -54,7 +56,7 @@ const router = new Router(on => {
 
 	on('/category/:id/:title', async (state) => {
 		try {
-			const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+			const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=${KEY}`;
 			const catResponse = await fetch(url, {
 				method: 'get',
 			});
@@ -69,12 +71,12 @@ const router = new Router(on => {
 
 	on('/category/:id/:title/:sub', async (state) => {
 		try {
-			const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+			const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=9${KEY}`;
 			const catResponse = await fetch(url, {
 				method: 'get',
 			});
 
-			const partURL = `http://api.curtmfg.com/v3/category/${state.params.id}/parts?key=9300f7bc-2ca6-11e4-8758-42010af0fd79`;
+			const partURL = `http://api.curtmfg.com/v3/category/${state.params.id}/parts?key=9${KEY}`;
 			const partResponse = await fetch(partURL, {
 				method: 'get',
 			});
@@ -90,7 +92,7 @@ const router = new Router(on => {
 
 	on('/search/:term', async (state) => {
 		try {
-			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79&brandID=3`);
+			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=9${KEY}&brandID=3`);
 
 			state.context.searchResult = await searchResponse.json();
 			state.context.term = state.query.term;
@@ -103,7 +105,7 @@ const router = new Router(on => {
 
 	on('/search', async (state) => {
 		try {
-			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.query.term}?key=9300f7bc-2ca6-11e4-8758-42010af0fd79&brandID=3`);
+			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.query.term}?key=9${KEY}&brandID=3`);
 
 			state.context.searchResult = await searchResponse.json();
 			state.context.term = state.query.term;
@@ -211,8 +213,8 @@ const router = new Router(on => {
 			},
 		];
 		try {
-			const featResponse = await fetch(`http://api.curtmfg.com/v3/part/featured?brandID=3&key=9300f7bc-2ca6-11e4-8758-42010af0fd79`);
-			const testResponse = await fetch(`http://api.curtmfg.com/v3/testimonials?key=883d4046-8b96-11e4-9475-42010af00d4e&count=2&randomize=true&brandID=3`);
+			const featResponse = await fetch(`http://api.curtmfg.com/v3/part/featured?brandID=3&key=${KEY}`);
+			const testResponse = await fetch(`http://api.curtmfg.com/v3/testimonials?key=${KEY}&count=2&randomize=true&brandID=3`);
 
 			state.context.featuredProducts = await featResponse.json();
 			state.context.testimonials = await testResponse.json();

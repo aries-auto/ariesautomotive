@@ -1,70 +1,57 @@
 @import './variables.scss';
 
-:global a.red-transparent-button,
-:global button.red-transparent-button,
+:global a.red-transparent-button, :global button.red-transparent-button,
 :global button[type=submit].red-transparent-button,
-:global a.white-transparent-button,
-:global button.white-transparent-button,
+:global a.white-transparent-button, :global button.white-transparent-button,
 :global button[type=submit].white-transparent-button {
-	background-color: $lookup-color;
-	border-radius: 0;
-	cursor: pointer;
-	font-size: 18px;
-	font-weight: bold;
-	margin-bottom: 5px;
-	padding: 2px 15px;
+    padding: 2px 15px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: $lookup-color;
+    border-radius: 0;
 
-	&:hover,
-	&:focus,
-	&:disabled {
-		background-color: transparent;
-		text-decoration: none;
-		transition: all .3s ease-in-out;
-	}
+    &:hover, &:focus, &:disabled {
+        text-decoration: none;
+        background-color: transparent;
+        transition: all .3s ease-in-out;
+    }
 }
 
-:global a.red-transparent-button,
-:global button.red-transparent-button,
+:global a.red-transparent-button, :global button.red-transparent-button,
 :global button[type=submit].red-transparent-button {
-	border: 1px solid $alt-red;
-	color: $alt-red;
+    color: $alt-red;
+    border: 1px solid $alt-red;
 
-	&:hover,
-	&:focus,
-	&:disabled {
-		border-color: $header-color;
-		color: $header-color;
-		transition: all .3s ease-in-out;
-	}
+    &:hover, &:focus, &:disabled {
+        color: $header-color;
+        border-color: $header-color;
+        transition: all .3s ease-in-out;
+    }
 }
 
-:global a.white-transparent-button,
-:global button.white-transparent-button,
+:global a.white-transparent-button, :global button.white-transparent-button,
 :global button[type=submit].white-transparent-button {
-	border: 1px solid $white-base;
-	color: $white-base;
+    color: $white-base;
+    border: 1px solid $white-base;
 
-	&:hover,
-	&:focus,
-	&:disabled {
-		transition: .3s ease-in-out;
-	}
+    &:hover, &:focus, &:disabled {
+        transition: .3s ease-in-out;
+    }
 }
 
 :global button[type=submit] {
-	background-color: $alt-red;
-	border-color: $header-color;
-	color: $white-base;
-	cursor: pointer;
-	font-size: 18px;
-	letter-spacing: .05em;
-	text-transform: uppercase;
+    font-size: 18px;
+    color: $white-base;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    cursor: pointer;
+    background-color: $alt-red;
+    border-color: $header-color;
 
-	&[disabled],
-	&:hover,
-	&:active,
-	&:focus{
-		border-color: $new-red;
-		background-color: $new-red;
-	}
+    &[disabled], &:hover, &:active, &:focus {
+        background-color: $new-red;
+        border-color: $new-red;
+    }
 }

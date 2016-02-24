@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class PartActions {
 	constructor() {
-		this.generateActions('get');
+		this.generateActions('get', 'featured');
 	}
 }
 

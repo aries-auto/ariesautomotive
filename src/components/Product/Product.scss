@@ -2,8 +2,8 @@
 
 .top {
     h1 {
+        margin-top: 0;
         text-transform: uppercase;
-		margin-top: 0;
     }
 }
 
@@ -203,6 +203,116 @@
     }
 }
 
+.bottom {
+    background-color: $white-base;
+
+    .more {
+        padding-left: 0;
+
+        > div {
+            padding-left: 0;
+        }
+    }
+
+    .attributes {
+        h3 {
+            text-transform: uppercase;
+        }
+
+        .field {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .value {
+            font-size: 14px;
+        }
+    }
+}
+
+.applications {
+    margin: 15px 0;
+
+    .vehicle {
+        margin-bottom: 0;
+        font-size: 18px;
+
+        .applicationsTbl {
+            text-transform: capitalize;
+        }
+    }
+
+    .appguideLink {
+        display: block;
+        margin-top: 10px;
+        font-size: 18px;
+        color: $alt-red;
+    }
+}
+
+.responsiveTable {
+    width: 100%;
+    border-collapse: collapse;
+    /* Zebra striping */
+
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+
+    th {
+        font-weight: bold;
+        color: white;
+        background: #333;
+    }
+
+    td, th {
+        padding: 2px;
+        text-align: left;
+        border: 1px solid #ccc;
+    }
+
+    @media only screen and (max-width: 760px),
+       (min-device-width: 768px) and (max-device-width: 1024px) {
+        /* Force table to not be like tables anymore */
+
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }/* Hide table headers (but not display: none;, for accessibility) */
+
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            border: 1px solid #ccc;
+        }
+
+        td {
+            position: relative;
+            min-height: 30px;
+            padding-left: 50%;
+            line-height: 25px;
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 2px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+    }
+}
+
 @media (min-width: $screen-md-min) {
     .thumbs {
         .thumb {
@@ -212,5 +322,30 @@
 
     .installSheet {
         line-height: 40px;
+    }
+}
+
+@media only screen and (max-width: 760px),
+       (min-device-width: 768px) and (max-device-width: 1024px) {
+    .applicationsTbl {
+        td:nth-of-type(1):before {
+            font-weight: 900;
+            content: "Year";
+        }
+
+        td:nth-of-type(2):before {
+            font-weight: 900;
+            content: "Make";
+        }
+
+        td:nth-of-type(3):before {
+            font-weight: 900;
+            content: "Model";
+        }
+
+        td:nth-of-type(4):before {
+            font-weight: 900;
+            content: "Style";
+        }
     }
 }

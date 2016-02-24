@@ -4,6 +4,8 @@ import events from 'events';
 import fetch from '../core/fetch';
 const EventEmitter = events.EventEmitter;
 
+const KEY = process.env.API_KEY;
+
 class AppGuideStore extends EventEmitter {
 	constructor() {
 		super();
@@ -19,7 +21,7 @@ class AppGuideStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch('http://goapi.curtmfg.com/vehicle/mongo/cols?key=883d4046-8b96-11e4-9475-42010af00d4e&brandID=3')
+			await fetch(`http://goapi.curtmfg.com/vehicle/mongo/cols?key=${KEY}&brandID=3`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -36,7 +38,7 @@ class AppGuideStore extends EventEmitter {
 
 	async get(id) {
 		try {
-			await fetch(`http://goapi.curtmfg.com/news/${id}?key=883d4046-8b96-11e4-9475-42010af00d4e&brandID=3`)
+			await fetch(`http://goapi.curtmfg.com/news/${id}?key=${KEY}&brandID=3`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
