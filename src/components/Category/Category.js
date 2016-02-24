@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ga from 'react-ga';
 import cx from 'classnames';
 import PartResults from '../PartResults';
 import s from './Category.scss';
@@ -51,7 +52,7 @@ class SearchResults extends Component {
 	}
 
 	loadMore() {
-
+		ga.pageview('/category/' + this.state.context.category.id + '#page=');
 	}
 
 	showParts() {

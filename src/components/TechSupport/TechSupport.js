@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ga from 'react-ga';
 import s from './TechSupport.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
@@ -163,6 +164,9 @@ class TechSupport extends Component {
 		e.preventDefault();
 
 		// TODO: wire up the submission of the data.
+
+		// when the tech support form is submitted, handle the analytics
+		ga.event({ category: 'Ariect:TechSupport', action: 'Submitted', label: 'Submitted' });
 	}
 
 	renderInputs() {

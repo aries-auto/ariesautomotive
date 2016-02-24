@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ga from 'react-ga';
 import parsePath from 'history/lib/parsePath';
 import Location from '../../core/Location';
 
@@ -40,11 +41,14 @@ class Link extends Component {
 		if (allowTransition) {
 			const link = event.currentTarget;
 			if (this.props && this.props.to) {
+				console.log(this.props);
+				ga.event({ category: 'Ariect:Link:', action: 'Open Link', label: this.props.to });
 				Location.push({
 					...(parsePath(this.props.to)),
 					state: this.props && this.props.state || null,
 				});
 			} else {
+				ga.event({ category: 'Ariect:Link:', action: 'Open Link', label: link.pathname });
 				Location.push({
 					pathname: link.pathname,
 					search: link.search,

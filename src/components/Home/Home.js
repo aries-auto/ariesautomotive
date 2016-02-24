@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import ga from 'react-ga';
+import Link from '../Link';
 import { Carousel, CarouselItem } from 'react-bootstrap';
 import Modal from 'react-modal';
 import cx from 'classnames';
@@ -105,14 +107,14 @@ class Home extends Component {
 					<img src={ cat.image } alt={ cat.title } />
 					<div>
 						<h3>{ cat.title }</h3>
-						<a href={ cat.link }
+						<Link to={ cat.link }
 							className={cx(
 								'red-transparent-button'
 							)}
 							title={'Download' + cat.title }
 						>
 							Download
-						</a>
+						</Link>
 					</div>
 				</div>
 			);
@@ -124,6 +126,7 @@ class Home extends Component {
 	}
 
 	openModal() {
+		ga.event({ category: 'Ariect:HP', action: 'Open Modal', label: 'StyleGaurd' });
 		this.setState({
 			context: this.state.context,
 			modalIsOpen: true,
