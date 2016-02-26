@@ -123,7 +123,12 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 			var app = apps[i];
 			if(last.make !== app.make || last.model !== app.model ||
 				last.style !== app.style || last.min_year !== app.min_year){
-				if (last.make !== undefined && $scope.applications.indexOf(last) === -1){
+				console.log(i, apps.length - 1);
+				if ((last.make !== undefined && $scope.applications.indexOf(last) === -1) || i === (apps.length - 1)){
+					if (i === (apps.length - 1)){
+						$scope.applications.push(last);
+						last = app;
+					}
 					last.startYear = low;
 					last.endYear = high;
 					last.locations = [];
@@ -160,7 +165,9 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 					}
 				}
 			}else{
-				last = app;
+				if ((apps.length - 1) !== i) {
+					last = app;
+				}
 				high = 0;
 				low = 0;
 			}
