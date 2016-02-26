@@ -160,7 +160,7 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 					}
 				}
 			}else{
-				last = {};
+				last = app;
 				high = 0;
 				low = 0;
 			}
