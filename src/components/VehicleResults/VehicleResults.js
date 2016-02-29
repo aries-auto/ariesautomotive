@@ -6,6 +6,7 @@ import s from './VehicleResults.scss';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import VehicleStyle from './VehicleStyle';
 
 // @withStyles(s)
 class VehicleResults extends Component {
@@ -25,6 +26,7 @@ class VehicleResults extends Component {
 			model: PropTypes.string,
 		}),
 		categoryparts: PropTypes.object,
+		category: PropTypes.string,
 	};
 
 	constructor() {
@@ -59,8 +61,8 @@ class VehicleResults extends Component {
 				return output;
 			}
 			output.push(
-				<li style="font-size:14px;" role="presentation" onClick={this.setCategoryStyle(cat)}>
-					<a role="menuitem" href>{cat}</a>
+				<li key={cat} className={s.categoryStyle} role="presentation">
+					<a onClick={this.setCategoryStyle.bind(this, cat)}>{cat}</a>
 				</li>
 			);
 		}
@@ -68,17 +70,20 @@ class VehicleResults extends Component {
 	}
 
 	setCategoryStyle(cat) {
-		console.log(cat);
+		this.setState({
+			category: cat,
+		});
 	}
 
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
-				<div className="tab-wrap">
-					<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
-						{this.getCategoryStyles()}
-					</ul>
-				</div>
+					<div className="tab-wrap">
+						<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
+							{this.getCategoryStyles()}
+						</ul>
+					</div>
+				{this.state.category ? <VehicleStyle category={this.state.category}/> : null}
 			</div>
 		);
 	}
