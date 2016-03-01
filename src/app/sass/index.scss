@@ -183,10 +183,16 @@ body{
 			background-color: $newRed;
 			border: 0;
 			margin: 0;
-
+			.exact-text{
+				font-size: .8em;
+				.small-text{
+					font-size: .6em;
+				}
+			}
+			
 			.topnav{
 				.navbar-form{
-					width:23%;
+					width:45%;
 					.form-group .form-control{
 						width:100%;
 						height:38px;

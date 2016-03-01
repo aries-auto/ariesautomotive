@@ -2,7 +2,7 @@
 
 angular.module('ariesautomotive').factory('SearchService', ['$http','$q','AppConfig', function($http, $q, AppConfig){
 	return {
-		Search: function(term, page, count){
+		Search: function(term, page, count, raw){
 			var def = $q.defer();
 			$http({
 				method: 'get',
@@ -11,9 +11,10 @@ angular.module('ariesautomotive').factory('SearchService', ['$http','$q','AppCon
 					'key' : AppConfig.APIKEY,
 					'page':page,
 					'count':count,
-					'brandID': AppConfig.BRAND_ID
+					'brandID': AppConfig.BRAND_ID,
+					'raw': raw
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}

@@ -17,8 +17,12 @@ angular.module('ariesautomotive').controller('SearchController', ['$scope', 'Sea
 
 	if($stateParams !== undefined && $stateParams.term !== undefined && $stateParams.term !== ''){
 		$scope.query = $stateParams.term;
+		var raw = '';
+		if($stateParams.exact && ($stateParams.exact === true || $stateParams.exact === 'true')){
+			raw = $scope.query;
+		}
 
-		SearchService.Search($scope.query, page, count).then(function(data){
+		SearchService.Search($scope.query, page, count, raw).then(function(data){
 			if(data === undefined || data.hits === undefined || data.hits.hits === undefined){
 				return;
 			}
