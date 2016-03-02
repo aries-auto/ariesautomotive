@@ -1,1 +1,16 @@
 @import '../../classes.scss';
+.root{
+	min-width: 70%;
+	display: inline-block;
+	background-color: #FFFFFF;
+	min-height: 400px;
+	overflow: inherit;
+	padding: 4em;
+	float:right;
+	.selTopBar {
+		font-size: 22px;
+		float:left;
+		margin-right: 15px;
+	}
+}
+

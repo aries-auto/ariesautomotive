@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './VehicleResults.scss';
 // import Location from '../../core/Location';
-// import withStyles from '../../decorators/withStyles';
+import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
 
-// @withStyles(s)
+@withStyles(s)
+@connectToStores
 class VehicleResults extends Component {
 
 	static propTypes = {
@@ -61,7 +62,7 @@ class VehicleResults extends Component {
 				return output;
 			}
 			output.push(
-				<li key={cat} className={s.categoryStyle} role="presentation">
+				<li key={cat} className={cx(s.categoryStyle, (this.state.category === cat ? s.active : ''))} role="presentation">
 					<a onClick={this.setCategoryStyle.bind(this, cat)}>{cat}</a>
 				</li>
 			);
@@ -77,17 +78,19 @@ class VehicleResults extends Component {
 
 	render() {
 		return (
-			<div className={cx(s.root, this.props.className)} role="navigation">
+			<div className={s.container}>
+				<div className={cx(s.root, this.props.className)} role="navigation">
 					<div className="tab-wrap">
 						<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
 							{this.getCategoryStyles()}
 						</ul>
 					</div>
-				{this.state.category ? <VehicleStyle category={this.state.category}/> : null}
+				</div>
+				{this.state.category ? <VehicleStyle className={s.vehicleStyle} category={this.state.category}/> : null}
 			</div>
 		);
 	}
 
 }
 
-export default connectToStores(VehicleResults);
+export default VehicleResults;

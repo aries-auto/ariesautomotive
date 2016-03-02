@@ -73,8 +73,11 @@ class VehicleStyle extends Component {
 
 	render() {
 		return (
-			<div>
-				<select onChange={this.handleChange}>
+			<div className={s.root}>
+				<div>
+					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
+				</div>
+				<select className={s.dropdownMenu} onChange={this.handleChange}>
 					<option value="">--Choose a Style--</option>
 					{this.getStyleOptions()}
 				</select>

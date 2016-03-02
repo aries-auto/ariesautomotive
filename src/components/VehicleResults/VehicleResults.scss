@@ -2,3 +2,45 @@
 .categoryStyle{
 	font-size: 14px;
 }
+
+.container{
+	width: 100%;
+}
+.root {
+	display: inline-block;
+	max-width: 30%;
+	li {
+		margin: 0 0 6px;
+		background-color: transparent;
+
+		> a{
+			font-size: 18px;
+			font-family: "ff-good-headline-web-pro-con",sans-serif;
+			font-weight: bold;
+			border: 0px;
+			text-align: left;
+			vertical-align: text-bottom;
+			padding: 5px;
+			overflow-x: auto;
+			overflow-y: hidden;
+			color: #C73031;
+
+			&:hover, &:focus{
+				border-radius: 4px;
+				background-color: rgba(255, 255, 255, 0.6);
+			}
+		}
+		&.active > a{
+			background-color: rgb(255, 255 ,255);
+			color: #C73031;
+			border-radius: 4px;
+		}
+	}
+	.active{
+		background-color: white;
+	}
+}
+
+.vehicleStyle{
+	width: 50%;
+}
