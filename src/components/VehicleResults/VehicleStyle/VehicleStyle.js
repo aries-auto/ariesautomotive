@@ -83,7 +83,9 @@ class VehicleStyle extends Component {
 					<option value="">--Choose a Style--</option>
 					{this.getStyleOptions()}
 				</select>
-				{this.state && this.state.vehicle && this.state.vehicle.style ? <PartResults parts={this.props.categoryparts[this.props.category].parts}/> : ''}
+				<div>
+					{this.state && this.state.vehicle && this.state.vehicle.style ? <PartResults parts={this.props.categoryparts[this.props.category].parts} className={s.partResults}/> : ''}
+				</div>
 			</div>
 		);
 	}

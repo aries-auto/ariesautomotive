@@ -17,6 +17,7 @@ class LookupStore extends EventEmitter {
 			makes: [],
 			models: [],
 			view: false,
+			error: {},
 		};
 		this.bindListeners({
 			get: LookupActions.get,
@@ -77,7 +78,9 @@ class LookupStore extends EventEmitter {
 				}
 			});
 		} catch (err) {
-			console.log(err);
+			this.setState({
+				error: err,
+			});
 		}
 	}
 

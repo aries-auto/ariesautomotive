@@ -25,7 +25,6 @@ class Upsell extends Component {
 		super();
 
 		if (!props || !props.parts || props.parts.length === 0) {
-			console.log('getting featured');
 			// PartActions.featured();
 		}
 	}
@@ -42,14 +41,11 @@ class Upsell extends Component {
 	}
 
 	renderParts() {
-		console.log(this.props);
 	}
 
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
-				<h1>Hello world</h1>
-				{this.renderParts()}
 			</div>
 		);
 	}

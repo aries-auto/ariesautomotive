@@ -41,7 +41,6 @@ class Link extends Component {
 		if (allowTransition) {
 			const link = event.currentTarget;
 			if (this.props && this.props.to) {
-				console.log(this.props);
 				ga.event({ category: 'Ariect:Link:', action: 'Open Link', label: this.props.to });
 				Location.push({
 					...(parsePath(this.props.to)),

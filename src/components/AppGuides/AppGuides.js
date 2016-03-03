@@ -64,7 +64,6 @@ class AppGuides extends Component {
 	}
 
 	render() {
-		console.log(this.state);
 		return (
 			<div className={s.appguidesContainer}>
 				<div className="container">
