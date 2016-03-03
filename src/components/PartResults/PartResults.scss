@@ -97,6 +97,9 @@
             width: 40%;
         }
     }
+    .viewDetails, .whereToBuy{
+        min-width: 6em;
+    }
 }
 
 @media(min-width: $screen-md-min) {

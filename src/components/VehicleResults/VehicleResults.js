@@ -88,6 +88,7 @@ class VehicleResults extends Component {
 					</div>
 				</div>
 				{this.state.category ? <VehicleStyle className={s.vehicleStyle} category={this.state.category} categoryparts={this.state.categoryparts}/> : null}
+				<div className={s.clearfix}></div>
 			</div>
 		);
 	}
