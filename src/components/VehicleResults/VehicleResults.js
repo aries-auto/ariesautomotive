@@ -63,16 +63,17 @@ class VehicleResults extends Component {
 			}
 			output.push(
 				<li key={cat} className={cx(s.categoryStyle, (this.state.category === cat ? s.active : ''))} role="presentation">
-					<a onClick={this.setCategoryStyle.bind(this, cat)}>{cat}</a>
+					<a onClick={this.setCategoryStyle.bind(this, cat, this.props.categoryparts[cat])}>{cat}</a>
 				</li>
 			);
 		}
 		return output;
 	}
 
-	setCategoryStyle(cat) {
+	setCategoryStyle(cat, categoryparts) {
 		this.setState({
 			category: cat,
+			categoryparts,
 		});
 	}
 
@@ -86,7 +87,7 @@ class VehicleResults extends Component {
 						</ul>
 					</div>
 				</div>
-				{this.state.category ? <VehicleStyle className={s.vehicleStyle} category={this.state.category}/> : null}
+				{this.state.category ? <VehicleStyle className={s.vehicleStyle} category={this.state.category} categoryparts={this.state.categoryparts}/> : null}
 			</div>
 		);
 	}

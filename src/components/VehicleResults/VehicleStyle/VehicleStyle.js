@@ -5,6 +5,7 @@ import s from './VehicleStyle.scss';
 import withStyles from '../../../decorators/withStyles';
 import VehicleStore from '../../../stores/VehicleStore';
 // import VehicleActions from '../../actions/VehicleActions';
+import PartResults from '../../PartResults/PartResults';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
@@ -65,9 +66,10 @@ class VehicleStyle extends Component {
 	}
 
 	handleChange(event) {
-		console.log(event.target.value);
 		this.setState({
-			style: event.target.value,
+			vehicle: {
+				style: event.target.value,
+			},
 		});
 	}
 
@@ -81,6 +83,7 @@ class VehicleStyle extends Component {
 					<option value="">--Choose a Style--</option>
 					{this.getStyleOptions()}
 				</select>
+				{this.state && this.state.vehicle && this.state.vehicle.style ? <PartResults parts={this.props.categoryparts[this.props.category].parts}/> : ''}
 			</div>
 		);
 	}
