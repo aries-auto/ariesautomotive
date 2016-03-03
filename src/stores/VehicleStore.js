@@ -45,7 +45,7 @@ class VehicleStore extends EventEmitter {
 		if (this.state.vehicle.year === '' || this.state.vehicle.make === '' || this.state.vehicle.model === '') {
 			return;
 		}
-		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + this.state.vehicle.model;
+		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + encodeURIComponent(this.state.vehicle.model);
 		await fetch('https://goapi.curtmfg.com/vehicle/mongo/allCollections/category?key=883d4046-8b96-11e4-9475-42010af00d4e' + params, {
 			method: 'post',
 			headers: {

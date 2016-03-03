@@ -34,6 +34,14 @@
     }
 }
 
+.viewParts{
+    margin: auto;
+    height: 34px;
+}
+.disabled{
+    opacity: .3;
+}
+
 @media (min-width: 720px) {
     .inlineForm {
         margin-left: 270px;

@@ -96,7 +96,7 @@ class Lookup extends Component {
 	getViewButton(ok) {
 		const disabled = ok ? false : true;
 		return (
-			<button className="red-transparent-button pull-right" disabled={disabled} onClick={this.viewParts}>View Parts</button>
+			<button className={cx('red-transparent-button', s.viewParts, disabled ? s.disabled : '')} disabled={disabled} onClick={this.viewParts}>View Parts</button>
 		);
 	}
 
