@@ -120,15 +120,6 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 					},
 					'lookup': lookupState
 				}
-			}).state('search exact', {
-				url: '/search/:term/:exact',
-				views: {
-					'body': {
-						templateUrl: 'app/controllers/search/index.html',
-						controller: 'SearchController'
-					},
-					'lookup': lookupState
-				}
 			}).state('techsupport', {
 				url: '/techsupport',
 				views: {
