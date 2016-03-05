@@ -1,6 +1,9 @@
 .category-container{
 	background: url('/assets/img/bgtexture.png');
-
+	overflow: hidden; 
+	img{
+		max-width: 100%;
+	}
 	#categoryContent{
 		padding-bottom:25px;
 		.content{
