@@ -123,7 +123,6 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 			var app = apps[i];
 			if(last.make !== app.make || last.model !== app.model ||
 				last.style !== app.style || last.min_year !== app.min_year){
-				console.log(i, apps.length - 1);
 				if ((last.make !== undefined && $scope.applications.indexOf(last) === -1) || i === (apps.length - 1)){
 					if (i === (apps.length - 1)){
 						$scope.applications.push(last);
@@ -167,6 +166,8 @@ angular.module('ariesautomotive').controller('AppGuideController', ['$rootScope'
 			}else{
 				if ((apps.length - 1) !== i) {
 					last = app;
+				} else if ((apps.length - 1) === i){
+					$scope.applications.push(last);
 				}
 				high = 0;
 				low = 0;
