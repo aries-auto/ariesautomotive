@@ -47,6 +47,25 @@ class VehicleResults extends Component {
 		});
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps === this.props) {
+			return;
+		}
+		let i = 0;
+		for (const cat in nextProps.categoryparts) {
+			if (!cat) {
+				return;
+			}
+			if (!this.state.category && i === 0) {
+				this.setState({
+					category: cat,
+					categoryparts: nextProps.categoryparts[cat],
+				});
+			}
+			i++;
+		}
+	}
+
 	static getStores() {
 		return [VehicleStore];
 	}
@@ -61,9 +80,10 @@ class VehicleResults extends Component {
 			if (!cat) {
 				return output;
 			}
+			const active = this.state.category === cat;
 			output.push(
-				<li key={cat} className={cx(s.categoryStyle, (this.state.category === cat ? s.active : ''))} role="presentation">
-					<a onClick={this.setCategoryStyle.bind(this, cat, this.props.categoryparts[cat])}>{cat}</a>
+				<li key={cat} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
+					<a onClick={this.setCategoryStyle.bind(this, cat, this.props.categoryparts[cat])}>{cat.toUpperCase()}</a>
 				</li>
 			);
 		}
