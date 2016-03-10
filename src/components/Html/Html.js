@@ -87,7 +87,7 @@ class Html extends Component {
 					{/* For non-Retina iPhone, iPod Touch, and Android 2.1+ devices */}
 					<link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-touch-icon-57x57-precompressed.png?v=2" />
 					<link rel="apple-touch-icon-precomposed" href="/assets/img/ico/apple-icon-57x57.png?v=2" />
-					<link rel="icon" href="/assets/img/ico/favicon-32x32.png?v=2" sizes="32x32" />
+					<link rel="icon" href="https://storage.googleapis.com/aries-website/favicons/favicon-32x32.png" sizes="32x32" />
 					<meta name="msapplication-TileColor" content="#FFFFFF" />
 					<meta name="msapplication-TileImage" content="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2" />
 

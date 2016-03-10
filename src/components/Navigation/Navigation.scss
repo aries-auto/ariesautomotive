@@ -5,12 +5,14 @@
 
     .nav {
         color: $white-base;
+
     }
 
     .nav .link {
         background-color: transparent;
         color: $white-base;
-        font-size: 14px;
+        font-size: 18px;
+        font-family: $font-family-base;
 
         &:hover,
         &:focus {
@@ -38,15 +40,16 @@
             background-color: #cccccc;
         }
     }
+    .nav>li>a{
+        padding: 14px 14px;
+    }
 }
 
 @media screen and (width >= $screen-lg-min) {
-    .root .nav .link {
-        font-size: 18px;
-    }
 
     .root .nav .subMenu {
         padding-top: 22px;
         margin-top: 20px;
     }
+    
 }

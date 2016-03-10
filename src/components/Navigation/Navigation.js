@@ -21,7 +21,7 @@ class Navigation extends Component {
 				cats.push(
 					<li key={cat.id} role="presentation" className="dropdown">
 						<a className={cx(s.link, 'dropdown-toggle')} data-toggle="dropdown" href={'/category/' + cat.id + '/' + cat.title} role="button" aria-haspopup="true" aria-expanded="false">
-							{cat.title} <span className="caret"></span>
+							{cat.title.toUpperCase()} <span className="caret"></span>
 						</a>
 						<ul className={cx(s.subMenu, 'dropdown-menu')} role="menu">
 							{cat.children.map((sub) => {
@@ -53,7 +53,7 @@ class Navigation extends Component {
 					{this.getCategories()}
 					<li role="presentation">
 						<a className={s.link} href="/appguides">
-							Application Guides
+							APPLICATION GUIDES
 						</a>
 					</li>
 				</ul>
