@@ -9,10 +9,11 @@
 .inlineForm {
     max-width: $max-content-width;
     margin: auto;
+    text-align: center;
 
     .heading {
         display: inline-block;
-        height: 38px;
+        // height: 38px;
         font-size: 18px;
         font-weight: 900;
         line-height: 38px;
@@ -33,17 +34,29 @@
         }
     }
 }
+.lookup{
+}
 
 .viewParts{
-    margin: auto;
-    height: 34px;
+    height: 38px;
+    margin: .5em .3em;
 }
 .disabled{
     opacity: .3;
 }
+.vehicleName{
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 800;
+    a {
+        color: $black-base;
+        padding: .6em;
+        text-decoration: underline;
+    }
+}
 
 @media (min-width: 720px) {
     .inlineForm {
-        margin-left: 270px;
+        // margin-left: 270px;
     }
 }

@@ -5,6 +5,7 @@ import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
+import LookupActions from '../../actions/LookupActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
 
@@ -51,6 +52,7 @@ class VehicleResults extends Component {
 		if (nextProps === this.props) {
 			return;
 		}
+		// setdefaultPartCategory
 		let i = 0;
 		for (const cat in nextProps.categoryparts) {
 			if (!cat) {
@@ -64,6 +66,9 @@ class VehicleResults extends Component {
 			}
 			i++;
 		}
+
+		// set vehicle Props for Lookup
+		LookupActions.set(this.props.vehicle);
 	}
 
 	static getStores() {

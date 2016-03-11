@@ -37,6 +37,7 @@ class Lookup extends Component {
 		this.changeVehicle = this.changeVehicle.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.viewParts = this.viewParts.bind(this);
+		this.resetVehicle = this.resetVehicle.bind(this);
 		this.state = {
 			vehicle: {},
 			makes: [],
@@ -100,6 +101,35 @@ class Lookup extends Component {
 		);
 	}
 
+	getLookup() {
+		let makes = false;
+		let models = false;
+		if (this.props.makes && this.props.makes.length > 0) {
+			makes = true;
+		}
+
+		if (this.props.models && this.props.models.length > 0) {
+			models = true;
+		}
+		makes = makes;
+		models = models;
+		return (
+			<span className={s.lookup}>
+				<label className={s.heading}>Vehicle Lookup</label>
+				{this.getYearElement()}
+				{this.getMakeElement(makes)}
+				{this.getModelElement(models)}
+				{this.getViewButton(this.props.view)}
+			</span>
+		);
+	}
+
+	getChangeButton() {
+		return (
+			<button className={cx('red-transparent-button', s.viewParts)} onClick={this.resetVehicle}>Change</button>
+		);
+	}
+
 	vehicleValid() {
 		if (!this.state.vehicle.year || this.state.vehicle.year === '') {
 			return false;
@@ -128,6 +158,10 @@ class Lookup extends Component {
 
 		window.location.href = `/vehicle/${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
 		return;
+	}
+
+	resetVehicle() {
+		LookupActions.set({ year: '', make: '', model: '' });
 	}
 
 	changeVehicle(event) {
@@ -163,25 +197,25 @@ class Lookup extends Component {
 		LookupActions.set(this.state.vehicle);
 	}
 
+	showVehicle() {
+		const link = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
+		const v = `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model}`;
+		return (
+		<span className={cx(s.vehicleName, s.lookup)}>
+			<a href={link}>
+				{v.toUpperCase()}
+			</a>
+			{this.getViewButton(this.props.view)}
+			{this.getChangeButton()}
+		</span>
+		);
+	}
+
 	render() {
-		let makes = false;
-		let models = false;
-		if (this.props.makes && this.props.makes.length > 0) {
-			makes = true;
-		}
-
-		if (this.props.models && this.props.models.length > 0) {
-			models = true;
-		}
-
 		return (
 			<div className={cx(s.root, this.props.className, 'container-fluid')} role="navigation">
 				<form onSubmit={this.handleSubmit} className={cx(s.inlineForm, 'form-inline')}>
-					<label className={s.heading}>Vehicle Lookup</label>
-					{this.getYearElement()}
-					{this.getMakeElement(makes)}
-					{this.getModelElement(models)}
-					{this.getViewButton(this.props.view)}
+					{this.props.vehicle.model ? this.showVehicle() : this.getLookup() }
 				</form>
 			</div>
 		);
