@@ -1,8 +1,10 @@
 @import '../../classes.scss';
+@import '../../variables.scss';
+
 .root{
 	width: 70%;
 	display: inline-block;
-	background-color: #FFFFFF;
+	background-color: $white-base;
 	min-height: 400px;
 	overflow: inherit;
 	padding: 4em;
@@ -18,6 +20,33 @@
 	.clearfix{
 		width: 100%;
 		clear: both;
+	}
+	.greybox{
+		background-color: $lookup-color;
+		padding: 2em;
+		border: 1px solid $gray-lighter;
+		border-radius: 6px;
+		.select{
+			margin-top: 2em;
+		}
+		.styleButton{
+			font-weight: 800;
+		}
+		.styleChoices{
+			ul{
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			background-color: $white-base;
+			width: auto;
+			border: 1px solid $gray-lighter;
+			border-radius: 6px;
+			padding: 1em;
+			display: table;
+			float: right;
+			margin: .4em;
+		}
 	}
 }
 

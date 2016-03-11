@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-// import cx from 'classnames';
+import cx from 'classnames';
 import s from './VehicleStyle.scss';
-// import Location from '../../core/Location';
 import withStyles from '../../../decorators/withStyles';
 import VehicleStore from '../../../stores/VehicleStore';
-// import VehicleActions from '../../actions/VehicleActions';
+import VehicleActions from '../../../actions/VehicleActions';
 import PartResults from '../../PartResults/PartResults';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -29,11 +28,18 @@ class VehicleStyle extends Component {
 		}),
 		categoryparts: PropTypes.object,
 		category: PropTypes.string,
+		showStyle: PropTypes.bool,
+		parts: PropTypes.array,
 	};
 	constructor() {
 		super();
-		this.getStyleOptions = this.getStyleOptions.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.showStyleChoices = this.showStyleChoices.bind(this);
+		this.getStyleChoices = this.getStyleChoices.bind(this);
+		this.showStyleChoices = this.showStyleChoices.bind(this);
+		this.unhideChoices = this.unhideChoices.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+		this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
 	}
 
 	static getStores() {
@@ -44,7 +50,7 @@ class VehicleStyle extends Component {
 		return VehicleStore.getState();
 	}
 
-	getStyleOptions() {
+	getStyleChoices() {
 		const styleOptions = [];
 		let styles = {};
 		for (const i in this.props.categoryparts) {
@@ -58,33 +64,78 @@ class VehicleStyle extends Component {
 				return styleOptions;
 			}
 			styleOptions.push(
-				<option key={i} value={styles[i]}>{styles[i].toUpperCase()}
-				</option>
+				<li key={i} onClick={this.handleClick.bind(this, styles[i])} value={styles[i]}>{styles[i].toUpperCase()}
+				</li>
 			);
 		}
 		return styleOptions;
 	}
 
+	getCategoryPartsForVehicleStyle(parts, style) {
+		const returnedParts = [];
+		for (const i in parts) {
+			if (!parts[i]) {
+				continue;
+			}
+			const p = this.findVehicleApplicationMatch(parts[i], style);
+			if (p) {
+				returnedParts.push(p);
+			}
+		}
+		return returnedParts;
+	}
+
+	findVehicleApplicationMatch(part, style) {
+		for (const j in part.vehicle_applications) {
+			if (!part.vehicle_applications[j]) {
+				continue;
+			}
+			if (part.vehicle_applications[j].make.toString() === this.props.vehicle.make && part.vehicle_applications[j].model.toString() === this.props.vehicle.model && part.vehicle_applications[j].year.toString() === this.props.vehicle.year && part.vehicle_applications[j].style === style) {
+				return part;
+			}
+		}
+	}
+
+	showStyleChoices() {
+		return (
+			<div className={s.styleChoices}>
+				<ul>
+					{this.getStyleChoices()}
+				</ul>
+			</div>
+		);
+	}
+
+	unhideChoices() {
+		VehicleActions.setShowStyleState(true);
+	}
+
 	handleChange(event) {
-		this.setState({
-			vehicle: {
-				style: event.target.value,
-			},
-		});
+		VehicleActions.set(event.target.value);
+	}
+
+	handleClick(style) {
+		const v = {
+			year: this.props.vehicle.year,
+			make: this.props.vehicle.make,
+			model: this.props.vehicle.model,
+			style,
+		};
+		VehicleActions.set(v);
+		const parts = this.getCategoryPartsForVehicleStyle(this.props.categoryparts[this.props.category].parts, style);
+		VehicleActions.setParts(parts);
 	}
 
 	render() {
 		return (
 			<div className={s.root}>
-				<div>
+				<div className={s.greybox}>
 					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
+					<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>Select a Style <span className="caret"></span></button>
+					{this.props && this.props.showStyle ? this.showStyleChoices() : ''}
 				</div>
-				<select className={s.dropdownMenu} onChange={this.handleChange}>
-					<option value="">--Choose a Style--</option>
-					{this.getStyleOptions()}
-				</select>
 				<div>
-					{this.state && this.state.vehicle && this.state.vehicle.style ? <PartResults parts={this.props.categoryparts[this.props.category].parts} className={s.partResults}/> : ''}
+					{this.props && this.props.parts && this.props.parts.length ? <PartResults parts={this.props.parts} className={s.partResults}/> : ''}
 				</div>
 			</div>
 		);

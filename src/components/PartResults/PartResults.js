@@ -30,6 +30,15 @@ class PartResults extends Component {
 		});
 	}
 
+	componentWillReceiveProps(newProps) {
+		if (newProps.parts === this.props.parts) {
+			return;
+		}
+		this.setState({
+			parts: newProps.parts,
+		});
+	}
+
 	getPrice(p) {
 		if (!p.pricing || p.pricing.length > 0) {
 			return;

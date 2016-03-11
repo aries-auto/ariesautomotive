@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './VehicleResults.scss';
-// import Location from '../../core/Location';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
-import LookupActions from '../../actions/LookupActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
 
@@ -29,6 +27,7 @@ class VehicleResults extends Component {
 		}),
 		categoryparts: PropTypes.object,
 		category: PropTypes.string,
+		showStyle: PropTypes.bool,
 	};
 
 	constructor() {
@@ -48,29 +47,6 @@ class VehicleResults extends Component {
 		});
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps === this.props) {
-			return;
-		}
-		// setdefaultPartCategory
-		let i = 0;
-		for (const cat in nextProps.categoryparts) {
-			if (!cat) {
-				return;
-			}
-			if (!this.state.category && i === 0) {
-				this.setState({
-					category: cat,
-					categoryparts: nextProps.categoryparts[cat],
-				});
-			}
-			i++;
-		}
-
-		// set vehicle Props for Lookup
-		LookupActions.set(this.props.vehicle);
-	}
-
 	static getStores() {
 		return [VehicleStore];
 	}
@@ -80,12 +56,23 @@ class VehicleResults extends Component {
 	}
 
 	getCategoryStyles() {
+		let i = 0;
+		for (const cat in this.props.categoryparts) {
+			if (!cat) {
+				return '';
+			}
+			if (this.props.category === '' && i === 0) {
+				VehicleActions.setCategory(cat);
+				VehicleActions.setCategoryParts(this.props.categoryparts[cat]);
+			}
+			i++;
+		}
 		const output = [];
 		for (const cat in this.props.categoryparts) {
 			if (!cat) {
 				return output;
 			}
-			const active = this.state.category === cat;
+			const active = this.props.category === cat;
 			output.push(
 				<li key={cat} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
 					<a onClick={this.setCategoryStyle.bind(this, cat, this.props.categoryparts[cat])}>{cat.toUpperCase()}</a>
@@ -95,11 +82,11 @@ class VehicleResults extends Component {
 		return output;
 	}
 
-	setCategoryStyle(cat, categoryparts) {
-		this.setState({
-			category: cat,
-			categoryparts,
-		});
+	setCategoryStyle(cat) {
+		VehicleActions.setShowStyleState(false);
+		VehicleActions.updateVehicleStyle(null);
+		VehicleActions.setCategory(cat);
+		VehicleActions.setParts(null);
 	}
 
 	render() {
@@ -112,7 +99,7 @@ class VehicleResults extends Component {
 						</ul>
 					</div>
 				</div>
-				{this.state.category ? <VehicleStyle className={s.vehicleStyle} category={this.state.category} categoryparts={this.state.categoryparts}/> : null}
+				{this.props.category ? <VehicleStyle className={s.vehicleStyle} category={this.props.category} categoryparts={this.props.categoryparts}/> : null}
 				<div className={s.clearfix}></div>
 			</div>
 		);
