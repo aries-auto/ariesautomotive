@@ -110,15 +110,28 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	$scope.setTab = function(tab) {
 		$analytics.pageTrack($location.path() + '#' + tab);
 		$scope.tab = tab;
+		$scope.presetStyle(tab);
 	};
 	$scope.isSet = function(tabID) {
 		return $scope.tab === tabID;
 	}
 
+	//use current vehicle's style if it exists for this categorypart
+	$scope.presetStyle = function(categoryname){
+		if (!$scope.vehicle.style){
+			return;
+		}
+		for (var c in $scope.categoryparts[categoryname].available_styles){
+			if ($scope.categoryparts[categoryname].available_styles[c] === $scope.vehicle.style){
+				$scope.setCategoryStyle($scope.categoryparts[categoryname], $scope.categoryparts[categoryname].available_styles[c]);
+				return;
+			}
+		}
+	}
+
 	//if category only fits one vehicle style, all, select it by default
 	$scope.setAllByDefault = function(categoryparts){
 		for (var c in categoryparts){
-			console.log(categoryparts[c])
 			if (categoryparts[c].available_styles.length === 1 && categoryparts[c].available_styles[0].toLowerCase() === 'all'){
 				$scope.setCategoryStyle(categoryparts[c], categoryparts[c].available_styles[0]);
 			}
