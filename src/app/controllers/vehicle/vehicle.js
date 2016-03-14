@@ -57,7 +57,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 				categoryparts[title].style_required = LookupService.checkStyleRequiredToAddToCart(categoryparts[title]);
 			}
 
-			$scope.categoryparts = categoryparts;
+			$scope.categoryparts = $scope.setAllByDefault(categoryparts);
 			
 			//get all seat defenders
 			CategoryService.parts(320,'','').then(function(cats){
@@ -113,6 +113,17 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	};
 	$scope.isSet = function(tabID) {
 		return $scope.tab === tabID;
+	}
+
+	//if category only fits one vehicle style, all, select it by default
+	$scope.setAllByDefault = function(categoryparts){
+		for (var c in categoryparts){
+			console.log(categoryparts[c])
+			if (categoryparts[c].available_styles.length === 1 && categoryparts[c].available_styles[0].toLowerCase() === 'all'){
+				$scope.setCategoryStyle(categoryparts[c], categoryparts[c].available_styles[0]);
+			}
+		}
+		return categoryparts;
 	}
 
 	$scope.vehicleLink = function(val) {
