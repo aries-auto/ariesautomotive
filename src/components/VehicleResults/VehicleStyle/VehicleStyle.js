@@ -124,6 +124,7 @@ class VehicleStyle extends Component {
 		VehicleActions.set(v);
 		const parts = this.getCategoryPartsForVehicleStyle(this.props.categoryparts[this.props.category].parts, style);
 		VehicleActions.setParts(parts);
+		VehicleActions.setShowStyleState(false);
 	}
 
 	render() {
@@ -131,7 +132,7 @@ class VehicleStyle extends Component {
 			<div className={s.root}>
 				<div className={s.greybox}>
 					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
-					<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>Select a Style <span className="caret"></span></button>
+					<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{this.props.vehicle.style ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
 					{this.props && this.props.showStyle ? this.showStyleChoices() : ''}
 				</div>
 				<div>
