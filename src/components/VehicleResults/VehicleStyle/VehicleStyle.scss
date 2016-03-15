@@ -23,14 +23,16 @@
 	}
 	.greybox{
 		background-color: $lookup-color;
-		padding: 2em;
+		padding: 2em 2em 5em 2em;
 		border: 1px solid $gray-lighter;
 		border-radius: 6px;
 		.select{
 			margin-top: 2em;
 		}
 		.styleButton{
-			font-weight: 800;
+			font-weight: 600;
+			font-size: 1.4em;
+			padding: .6em;
 		}
 		.styleChoices{
 			ul{
@@ -43,9 +45,14 @@
 			border: 1px solid $gray-lighter;
 			border-radius: 6px;
 			padding: 1em;
-			display: table;
-			float: right;
+			display: inline-block;
 			margin: .4em;
+		}
+		.container{
+			display: block;
+			width: 50%;
+			float: right;
+
 		}
 	}
 }
