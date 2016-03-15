@@ -42,6 +42,25 @@ class VehicleStyle extends Component {
 		this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
 	}
 
+	componentWillMount() {
+		if (this.checkForStyleAll(this.props.categoryparts[this.props.category])) {
+			VehicleActions.setParts(this.props.categoryparts[this.props.category].parts);
+			this.props.vehicle.style = 'all';
+		}
+	}
+
+	componentWillUpdate(props) {
+		if (this.props.parts !== null && this.props.parts === props.parts) {
+			return;
+		}
+		if (this.checkForStyleAll(this.props.categoryparts[props.category])) {
+			VehicleActions.setParts(this.props.categoryparts[props.category].parts);
+			this.props.vehicle.style = 'all';
+		} else {
+			this.props.vehicle.style = null;
+		}
+	}
+
 	static getStores() {
 		return [VehicleStore];
 	}
@@ -83,6 +102,13 @@ class VehicleStyle extends Component {
 			}
 		}
 		return returnedParts;
+	}
+
+	checkForStyleAll(cat) {
+		if (cat.available_styles.length === 1 && cat.available_styles[0].toLowerCase() === 'all') {
+			return true;
+		}
+		return false;
 	}
 
 	findVehicleApplicationMatch(part, style) {
