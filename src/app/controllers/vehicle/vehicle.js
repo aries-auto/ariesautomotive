@@ -133,7 +133,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 	$scope.setAllByDefault = function(categoryparts){
 		for (var c in categoryparts){
 			if (categoryparts[c].available_styles.length === 1 && categoryparts[c].available_styles[0].toLowerCase() === 'all'){
-				$scope.setCategoryStyle(categoryparts[c], categoryparts[c].available_styles[0]);
+				categoryparts[c].style = categoryparts[c].available_styles[0];
 			}
 		}
 		return categoryparts;
