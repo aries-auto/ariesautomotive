@@ -3,11 +3,14 @@ import ga from 'react-ga';
 import Router from 'react-routing/src/Router';
 import fetch from './core/fetch';
 import App from './components/App';
+import BecomeDealer from './components/BecomeDealer';
 import Product from './components/Product';
 import Category from './components/Category';
+import Contact from './components/Contact';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
+import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
 import Terms from './components/Terms';
@@ -151,6 +154,14 @@ const router = new Router(on => {
 		return <AppGuides context={state.context} />;
 	});
 
+	on('/becomedealer', async (state) => {
+		return <BecomeDealer context={state.context} />;
+	});
+
+	on('/contact', async (state) => {
+		return <Contact context={state.context} />;
+	});
+
 	on('/terms', async (state) => {
 		return <Terms context={state.context} />;
 	});
@@ -166,6 +177,11 @@ const router = new Router(on => {
 	on('/news/:id', async (state) => {
 		state.context.id = state.params.id;
 		return <LatestNewsItem context={state.context} />;
+	});
+
+	on('/buy', async (state) => {
+		state.context.id = state.params.id;
+		return <WhereToBuy context={state.context} />;
 	});
 
 	on('/', async (state) => {

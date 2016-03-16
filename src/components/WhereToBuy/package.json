@@ -1,0 +1,6 @@
+{
+  "name": "WhereToBuy",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./WhereToBuy.js"
+}

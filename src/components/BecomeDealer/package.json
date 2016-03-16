@@ -1,0 +1,6 @@
+{
+  "name": "BecomeDealer",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BecomeDealer.js"
+}
