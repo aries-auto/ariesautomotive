@@ -61,7 +61,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		var neStr = ne.lat() + ',' + ne.lng();
 		var swStr = sw.lat() + ',' + sw.lng();
 		$scope.locations = [];
-		var sort = 3;
+		var sort = 2;
 		// if($scope.map.zoom > 6 && $scope.map.zoom < 9){
 		// 	sort = 2;
 		// }else if($scope.map.zoom > 8){
