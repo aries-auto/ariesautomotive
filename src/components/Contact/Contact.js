@@ -4,6 +4,7 @@ import s from './Contact.scss';
 import withStyles from '../../decorators/withStyles';
 import { fields } from './FormFields';
 import ContactStore from '../../stores/ContactStore';
+import ContactActions from '../../actions/ContactActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
@@ -13,10 +14,16 @@ class Contact extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		countries: PropTypes.array,
+		contactTypes: PropTypes.array,
+		inputs: PropTypes.array,
+		disabled: PropTypes.bool,
 	};
 
 	constructor() {
 		super();
+		this.modifyValue = this.modifyValue.bind(this);
+		this.submit = this.submit.bind(this);
+		this.checkDisabled = this.checkDisabled.bind(this);
 	}
 
 	static getStores() {
@@ -38,7 +45,7 @@ class Contact extends Component {
 				output.push(
 					<div key={i} className={'form-group col-xs-' + fields[i].width}>
 						<label htmlFor={fields[i].name}>{fields[i].label}</label>
-						<input type={fields[i].type} className="form-control" name={fields[i].name} placeholder={fields[i].placeholder} />
+						<input type={fields[i].type} className="form-control" name={fields[i].name} placeholder={fields[i].placeholder} onChange={this.modifyValue}/>
 					</div>);
 				break;
 			case 'country':
@@ -68,12 +75,41 @@ class Contact extends Component {
 				output.push(
 					<div key={i} className={'form-group col-xs-' + fields[i].width}>
 						<label htmlFor={fields[i].name}>{fields[i].label}</label>
-						<select className="form-control" name={fields[i].name}>
+						<select className="form-control" name={fields[i].name} onChange={this.modifyValue}>
 							<option value="">{fields[i].placeholder}</option>
 							{options}
 						</select>
 					</div>
 				);
+				break;
+			case 'contactType':
+				const contactOptions = [];
+				for (const j in this.props.contactTypes) {
+					if (!this.props.contactTypes[j]) {
+						continue;
+					}
+					contactOptions.push(
+						<option key={j} value={this.props.contactTypes[j].id}>
+							{this.props.contactTypes[j].name}
+						</option>
+					);
+				}
+				output.push(
+					<div key={i} className={'form-group col-xs-' + fields[i].width}>
+						<label htmlFor={fields[i].name}>{fields[i].label}</label>
+						<select className="form-control" name={fields[i].name} onChange={this.modifyValue}>
+							<option value="">{fields[i].placeholder}</option>
+							{contactOptions}
+						</select>
+					</div>
+				);
+				break;
+			case 'textarea':
+				output.push(
+					<div key={i} className={'form-group col-xs-' + fields[i].width}>
+						<label htmlFor={fields[i].name}>{fields[i].label}</label>
+						<textarea type={fields[i].type} className="form-control" name={fields[i].name} placeholder={fields[i].placeholder} onChange={this.modifyValue}></textarea>
+					</div>);
 				break;
 			default:
 				break;
@@ -82,7 +118,31 @@ class Contact extends Component {
 		return output;
 	}
 
+	checkDisabled() {
+		for (const i in fields) {
+			if (!fields[i]) {
+				continue;
+			}
+			if (fields[i].required === true) {
+				console.log(fields[i]);
+			}
+		}
+	}
+
+	modifyValue(event) {
+		const name = event.target.name;
+		const value = event.target.value;
+		this.props.inputs[name] = value;
+		this.checkDisabled();
+	}
+
+	submit(event) {
+		event.preventDefault();
+		ContactActions.postContactData(this.props.inputs.reason);
+	}
+
 	render() {
+		console.log(this.props.disabled);
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<div className={cx('visible-sm visible-md visible-lg internal-hero', s.hero)}></div>
@@ -93,6 +153,9 @@ class Contact extends Component {
 					<div className="row">
 						<form name="contactForm" role="form" noValidate>
 							{this.getForm()}
+							<div className="form-group col-xs-12">
+								<button type="submit" className="btn btn-primary" disabled="" onClick={this.submit}>SEND</button>
+							</div>
 						</form>
 					</div>
 				</div>

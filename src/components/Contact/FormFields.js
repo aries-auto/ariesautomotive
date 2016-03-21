@@ -1,17 +1,26 @@
 
 module.exports.fields = [
 	{
+		type: 'contactType',
+		label: 'What would you like to contact us about?',
+		placeholder: 'Select reason',
+		name: 'reason',
+		width: '12',
+		required: true,
+	},
+	{
 		type: 'text',
 		label: 'Enter your first name:',
 		placeholder: 'Enter your first name.',
-		name: 'firstname',
+		name: 'firstName',
 		width: '6',
+		required: true,
 	},
 	{
 		type: 'text',
 		label: 'Enter your last name:',
 		placeholder: 'Enter your last name.',
-		name: 'lastname',
+		name: 'lastName',
 		width: '6',
 	},
 	{
@@ -32,7 +41,7 @@ module.exports.fields = [
 		type: 'text',
 		label: 'Enter your street address:',
 		placeholder: 'Enter your street address.',
-		name: 'address',
+		name: 'address1',
 		width: '12',
 	},
 	{
@@ -61,7 +70,21 @@ module.exports.fields = [
 		type: 'text',
 		label: 'Enter your postal code',
 		placeholder: 'Enter your postal code.',
-		name: 'postalcode',
+		name: 'postalCode',
 		width: '6',
+	},
+	{
+		type: 'text',
+		label: 'Enter the subject',
+		placeholder: 'Enter the subject.',
+		name: 'subject',
+		width: '12',
+	},
+	{
+		type: 'textarea',
+		label: 'Enter the message',
+		placeholder: 'Enter the message.',
+		name: 'message',
+		width: '12',
 	},
 ];
