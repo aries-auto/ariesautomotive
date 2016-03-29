@@ -8,7 +8,7 @@
 				<div class="carousel-caption">
 					<span class="bigText">[[img.text]]</span>
 					<div class="clearfix">&nbsp;</div>
-					<a class="white-transparent-button" href="[[img.link]]">[[img.button_text]]</a>
+					<a class="white-transparent-button" href="[[img.link]]" analytics-on="click" analytics-event="HP:Carousel:[[img.link]]">[[img.button_text]]</a>
 				</div>
 			</div>
 		</div>
@@ -47,31 +47,20 @@
                 </div>
 
 				<div class="row whats-new">
-					<a href="/envision">
+					<a href="/envision" class="envision" analytics-on="click" analytics-event="HP:envision-aries">
 						<img src="https://storage.googleapis.com/aries-website/whatsnew/Envision-Website-Graphic.png" alt="Envision ARIES">
 					</a>
 				</div>
+			</div>
+		</div>
+	</div>
 
-				<div class="row catalog">
-					<div class="col-xs-6 col-md-7 col-lg-5">
-						<img src="https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png" alt="catalog" class="img-responsive">
-					</div>
-					<div class="col-xs-3 col-md-3 col-lg-7">
-						<h3>2016 EXTERIOR
-							<br>CATALOG</h3>
-						<a class="red-transparent-button" href="https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf">DOWNLOAD</a>
-					</div>
-				</div>
-				<div class="row catalog">
-					<div class="col-xs-6 col-md-7 col-lg-5">
-						<img src="https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png" alt="catalog" class="img-responsive">
-					</div>
-					<div class="col-xs-3 col-md-3 col-lg-7">
-						<h3>2016 INTERIOR
-							<br>CATALOG</h3>
-						<a class="red-transparent-button" href="https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf">DOWNLOAD</a>
-					</div>
-				</div>
+	<div class="container catalogs" ng-if="catalogs.length > 0">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 catalog" ng-repeat="cat in catalogs">
+			<img src="[[cat.image]]" alt="[[cat.title]]">
+			<div>
+				<h3>[[cat.title]]</h3>
+				<a href="[[cat.link]]" analytics-on="click" analytics-event="HP:Appguide:[[cat.title]]" class="red-transparent-button" title="Download [[cat.title]]">Download</a>
 			</div>
 		</div>
 	</div>
@@ -82,7 +71,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 featuredProducts">
 					<div ng-repeat="p in featuredProducts | limitTo:5" class="featuredProd col-xs-12 col-md-2 col-5">
 						<h4><a href="/part/[[p.part_number]]">[[p.short_description]]</a></h4>
-						<a href="/part/[[p.part_number]]">
+						<a href="/part/[[p.part_number]]" analytics-on="click" analytics-event="HP:FeaturedParts:[[p.part_number]]">
 							<img ng-repeat="img in p.images | filter:{sort:'a'} | filter:{size:'Grande'} | limitTo:1" src="http://www.curtmfg.com[[img.path.Path]]" class="img-responsive" alt="Image for [[p.title]]" />
 						</a>
 						<hr class="visible-xs-block" />

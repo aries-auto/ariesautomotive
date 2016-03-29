@@ -115,7 +115,7 @@
 							<strong>Selected Style:</strong> [[cat.style | uppercase]]
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-							<button class="btn btn-default clear-style-btn" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
+							<button class="btn btn-default clear-style-btn" ng-hide="cat.style === 'Fits All Vehicle Styles' ||cat.style === 'all'" type="button" ng-click="resetStyle(cat)">RESET STYLE</button>
 						</div>
 						<div class="clearfix"></div>
 					</div>

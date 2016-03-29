@@ -1,34 +1,71 @@
-.breadcrumb{
-	li, li a{
+.breadcrumb {
+	li,
+	li a{
 		text-transform: capitalize;
 	}
-	> li + li:before{
-		content: $breadcrumb-separator + "\00a0";
+
+	> li + li::before {
+		content: $breadcrumb-separator + '\00a0';
 	}
 }
 
-.category{
-	font-size:2em;
-	.right{
-		float:right;
-		a{
-			text-decoration:none;
+.category {
+	font-size: 2em;
 
-			.icon{
-				font-size: .8em;
-				border:none;
-			}
+	.right {
+		float: right;
+
+		a {
+			text-decoration: none;
+		}
+
+		a.icon {
+			border: 0;
+			font-size: .8em;
 		}
 	}
 
 }
 
-.appguides-container{
+.appguides-container {
 	margin: 25px 0;
 
 	.container.appguide{
+
 		h1{
 			text-transform: capitalize;
+		}
+
+		.install-instructions {
+			line-height: 30px;
+			margin: 35px 10px 5px;
+			font-size: 18px;
+			color: $newRed;
+
+			span {
+				font-size: 14px;
+			}
+		}
+
+		.app-guide-download {
+
+			span {
+				font-size: 18px;
+				font-weight: bold;
+				margin-right: 10px;
+				vertical-align: middle;
+			}
+
+			a {
+				margin: 0 5px;
+				img{
+					@include opacity(.8);
+				}
+
+				&:hover img{
+					@include opacity(1);
+				}
+			}
 		}
 
 		table{
@@ -42,12 +79,11 @@
 					&:hover{
 						cursor: pointer;
 					}
-					&:last-child{
-						&:hover{
-							cursor: default;
-						}
-						a{
-							display:block;
+
+					.partLink {
+						display: block;
+						.glyphicon {
+							margin: 0 3px;
 						}
 					}
 				}
@@ -56,7 +92,7 @@
 	}
 
 
-	div.appguide{
+	a.appguide{
 		padding:10px;
 		margin-bottom:0px;
 		font-size: 1.5em;

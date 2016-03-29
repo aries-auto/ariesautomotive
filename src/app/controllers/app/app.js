@@ -17,6 +17,10 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 		$location.path(path);
 	};
 
+	$scope.getYear = function(){
+        return new Date().getFullYear();
+	};
+
 	$scope.carousel_images = [{
 		image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		text: 'Never Fear the Uncertain Road',
@@ -42,10 +46,10 @@ angular.module('ariesautomotive').controller('AppController', ['$scope', '$rootS
 		link: '/news/47',
 		order: 1
 	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/navyjeep.jpg',
-		text: 'Decked Out Jeep to Be Donated to Navy SEAL Foundation',
+		image: 'https://storage.googleapis.com/aries-website/hero-images/Moab-Carousel.jpg',
+		text: 'Team ARIES at Moab Jeep Safari 2016',
 		button_text: 'READ MORE',
-		link: '/news/48',
+		link: '/lp/37',
 		order: 4
 	}];
 

@@ -1,44 +1,49 @@
-<div class="vehicle-desc-container" ng-if="valid_vehicle">
-	<a href="[[path]]" class="vehicle-desc">[[vehicle_string]]</a>
-	<a class="red-transparent-button" ng-click="clearVehicle()">Change</a>
+<div class="lookupContainerContainer" id="lookupContainer">
+	<div class="vehicle-desc-container" ng-if="valid_vehicle">
+		<a href="[[path]]" class="vehicle-desc">[[vehicle_string]]</a>
+		<a href="[[path]]" class="red-transparent-button">View Parts</a>
+		<a class="red-transparent-button" ng-click="clearVehicle()">Change</a>
+		<div class="clearfix"></div>
+	</div>
+
+	<div ng-if="!valid_vehicle">
+
+		<form ng-submit="submitVehicle()" class="lookup vehicle-data form-inline">
+			<div class="form-group lookup-heading" ng-click="showLookup()">
+				Vehicle Lookup
+			</div>
+			<div class="form-group">
+				<div id="year_lookup_label" class="nodisplay">Vehicle Year Lookup</div>
+				<select class="form-control lookup-form" ng-model="vehicle.year" ng-options="year as year for year in years" ng-change="resetMake()" aria-labelledby="year_lookup_label">
+					<option value="">- Select Year -</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<div id="make_lookup_label" class="nodisplay">Vehicle Make Lookup</div>
+				<select class="form-control lookup-form" ng-model="vehicle.make" ng-options="make as (make | uppercase) for make in makes" ng-disabled="!makes" ng-change="resetModel()" aria-labelledby="make_lookup_label">
+					<option value="">- Select Make -</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<div id="model_lookup_label" class="nodisplay">Vehicle Model Lookup</div>
+				<select class="form-control lookup-form" ng-model="vehicle.model" ng-options="model as (model | uppercase) for model in models" ng-disabled="!models" ng-change="resetStyle()" aria-labelledby="model_lookup_label">
+					<option value="">- Select Model -</option>
+				</select>
+			</div>
+
+			<button type="submit" class="btn form-control red-transparent-button view-parts-button" ng-disabled="vehicle.year === '' || vehicle.make === '' || vehicle.model === ''">
+				View Parts
+			</button>
+			<!--
+			<a href="/iconfig" class="btn red-transparent-button iconfig-button">
+				Visual Configurator
+			</a>
+			-->
+
+		</form>
+	</div>
+
 	<div class="clearfix"></div>
+
 </div>
-
-<div ng-if="!valid_vehicle">
-
-	<form ng-submit="submitVehicle()" class="lookup vehicle-data form-inline">
-		<div class="form-group lookup-heading" ng-click="showLookup()">
-			Vehicle Lookup
-		</div>
-		<div class="form-group">
-			<div id="year_lookup_label" class="nodisplay">Vehicle Year Lookup</div>
-			<select class="form-control lookup-form" ng-model="vehicle.year" ng-options="year as year for year in years" ng-change="resetMake()" aria-labelledby="year_lookup_label">
-				<option value="">- Select Year -</option>
-			</select>
-		</div>
-
-		<div class="form-group">
-			<div id="make_lookup_label" class="nodisplay">Vehicle Make Lookup</div>
-			<select class="form-control lookup-form" ng-model="vehicle.make" ng-options="make as (make | uppercase) for make in makes" ng-disabled="!makes" ng-change="resetModel()" aria-labelledby="make_lookup_label">
-				<option value="">- Select Make -</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<div id="model_lookup_label" class="nodisplay">Vehicle Model Lookup</div>
-			<select class="form-control lookup-form" ng-model="vehicle.model" ng-options="model as (model | uppercase) for model in models" ng-disabled="!models" ng-change="resetStyle()" aria-labelledby="model_lookup_label">
-				<option value="">- Select Model -</option>
-			</select>
-		</div>
-
-		<button type="submit" class="btn form-control red-transparent-button view-parts-button" ng-disabled="vehicle.year === '' || vehicle.make === '' || vehicle.model === ''">
-			View Parts
-		</button>
-		<!--
-		<a href="/iconfig" class="btn red-transparent-button iconfig-button">
-			Visual Configurator
-		</a>
-		-->
-
-	</form>
-</div>
-<div class="clearfix"></div>

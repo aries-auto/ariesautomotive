@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('TechSupportController', ['$scope', 'TechSupportService', '$rootScope', function($scope, TechSupportService, $rootScope){
+angular.module('ariesautomotive').controller('TechSupportController', ['$scope', 'TechSupportService', '$rootScope', '$analytics', function($scope, TechSupportService, $rootScope, $analytics){
 	$scope.techSupport = {};
 	$scope.techSupport.contact = {};
 
@@ -29,9 +29,10 @@ angular.module('ariesautomotive').controller('TechSupportController', ['$scope',
 		var def = TechSupportService.SubmitTechSupport(techSupport);
 		def.then(function(data){
 			$scope.techSupport = {};
-
+			$analytics.eventTrack('techsupport-submitted');
 			$scope.message = "Request sent.";
 		}).catch(function(err){
+			$analytics.eventTrack('techsupport-failed:' + err);
 			$scope.message = 'Failed to submit your support request, please call our help line.';
 		});
 	}

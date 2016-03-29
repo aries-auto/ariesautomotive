@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope) {
+angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'LookupService', 'localStorageService', 'PartService', 'CategoryService', '$location', '$anchorScroll', '$stateParams', '$rootScope', '$analytics', function($scope, LookupService, localStorageService, PartService, CategoryService, $location, $anchorScroll, $stateParams, $rootScope, $analytics) {
 	$scope.collections = [];
 	$scope.years = [];
 	$scope.makes = [];
@@ -57,7 +57,19 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 				categoryparts[title].style_required = LookupService.checkStyleRequiredToAddToCart(categoryparts[title]);
 			}
 
-			$scope.categoryparts = categoryparts;
+			$scope.categoryparts = $scope.setAllByDefault(categoryparts);
+			
+			//get all seat defenders
+			CategoryService.parts(320,'','').then(function(cats){
+				$scope.categoryparts['seat defenders'] = {
+					name: 'seat defenders',
+					parts: cats.parts,
+					style_required: false,
+					available_styles: '',
+					style: 'Fits All Vehicle Styles'
+				}
+			});
+
 			$scope.processing = false;
 			$scope.stopProcessing();
 		}, function(err) {
@@ -87,6 +99,7 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		v.collection = cat.name;
 		v.style = style;
 		LookupService.queryCategoryStyles(v).then(function(resp) {
+			$analytics.pageTrack($location.path() + '#' + cat.name + '-' + v.style);
 			$scope.categoryparts[v.collection] = resp[v.collection];
 			$scope.categoryparts[v.collection].name = v.collection;
 			$scope.categoryparts[v.collection].style = style;
@@ -95,10 +108,35 @@ angular.module('ariesautomotive').controller('VehicleController', ['$scope', 'Lo
 		});
 	};
 	$scope.setTab = function(tab) {
+		$analytics.pageTrack($location.path() + '#' + tab);
 		$scope.tab = tab;
+		$scope.presetStyle(tab);
 	};
 	$scope.isSet = function(tabID) {
 		return $scope.tab === tabID;
+	}
+
+	//use current vehicle's style if it exists for this categorypart
+	$scope.presetStyle = function(categoryname){
+		if (!$scope.vehicle.style){
+			return;
+		}
+		for (var c in $scope.categoryparts[categoryname].available_styles){
+			if ($scope.categoryparts[categoryname].available_styles[c] === $scope.vehicle.style){
+				$scope.setCategoryStyle($scope.categoryparts[categoryname], $scope.categoryparts[categoryname].available_styles[c]);
+				return;
+			}
+		}
+	}
+
+	//if category only fits one vehicle style, all, select it by default
+	$scope.setAllByDefault = function(categoryparts){
+		for (var c in categoryparts){
+			if (categoryparts[c].available_styles.length === 1 && categoryparts[c].available_styles[0].toLowerCase() === 'all'){
+				categoryparts[c].style = categoryparts[c].available_styles[0];
+			}
+		}
+		return categoryparts;
 	}
 
 	$scope.vehicleLink = function(val) {

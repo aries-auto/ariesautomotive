@@ -36,17 +36,22 @@
 
 	.row.whats-new{
 		padding: 20px 15px 0 15px;
-		max-width: 100%;
+		width: 100%;
 		margin:auto;
 
 		img.header{
-			max-width: 100%;
+			width: 100%;
 		}
+
+		.envision img {
+			width: 100%;
+		}
+
 		.callout {
 			position: relative;
 			img {
 				margin-top: 10px;
-				max-width: 100%;
+				width: 100%;
 				opacity: 0.6;
 			}
 			span{
@@ -64,8 +69,19 @@
 		}
 	}
 
-	.row.catalog{
-		margin: 70px 0;
+	.catalogs{
+		margin: 25px auto;
+		text-align: center;
+		text-transform: uppercase;
+
+		.catalog {
+			margin-bottom: 15px;
+
+			img {
+				width: 100%;
+				max-width: 249px;
+			}
+		}
 	}
 
 	.featuredProducts {

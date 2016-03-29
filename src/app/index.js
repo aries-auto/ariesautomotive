@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps', 'bootstrapLightbox', 'angularSpinner', 'angular.filter', 'ngMdIcons'])
+angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngDialog', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'uiGmapgoogle-maps', 'bootstrapLightbox', 'angularSpinner', 'angular.filter', 'ngMdIcons', 'angulartics', 'angulartics.google.analytics'])
 	.config(function ($stateProvider, $urlRouterProvider, $interpolateProvider, $locationProvider, localStorageServiceProvider, uiGmapGoogleMapApiProvider, LightboxProvider) {
 		var lookupState = {
 			templateUrl: 'app/controllers/lookup/index.html',
@@ -189,15 +189,14 @@ angular.module('ariesautomotive', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
 					'body': {
 						templateUrl: 'app/controllers/iconfig/index.html',
 						controller: 'IconfigController'
-					},
-					'lookup': lookupState
+					}
 				}
 			});
 		$urlRouterProvider.otherwise('/');
 		$interpolateProvider.startSymbol('[[');
 		$interpolateProvider.endSymbol(']]');
 		$locationProvider.html5Mode(true);
-		localStorageServiceProvider.setPrefix('ariesauto');
+		localStorageServiceProvider.setPrefix('ariesauto').setStorageType('sessionStorage');
 		LightboxProvider.templateUrl = 'app/controllers/main/whatsNewLightbox.html';
 		uiGmapGoogleMapApiProvider.configure({
 			key: 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA',

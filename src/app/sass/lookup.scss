@@ -35,7 +35,6 @@
 
 .lookup-container{
 	background-color: #f5f5f5;
-	padding: 5px;
 
 	.lookup-heading,.vehicle-desc{
 		color: #26090D;
@@ -107,8 +106,10 @@
 
 
 @media(min-width: $screen-sm-max){
+	.lookupContainerContainer{
+		padding: 10px;
+	}
 	.lookup-container{
-		padding:10px;
 		.lookup-heading, .vehicle-desc{
 			font-size:18px;
 			float:left;

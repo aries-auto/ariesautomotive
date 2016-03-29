@@ -2,14 +2,6 @@
 	<div>
 		<div class="row">
 			<div class="col-xs-12 col-md-12 col-lg-12">
-				<div id="categoryContent" class="container-fluid">
-					<div class="container">
-						<h1 id="catTitle">[[category.title | uppercase]]</h1>
-						<div ng-repeat="cont in category.content">
-							<div class="content" ng-bind-html="renderHTML(cont.text)"></div>
-						</div>
-					</div>
-				</div>
 				<div id="catPartsContainer" class="container-fluid">
 					<div class="container">
 						<h2 id="catTitleProds">
@@ -20,7 +12,7 @@
 						<div class="product-view col-sm-12 col-md-12 col-xs-12 col-lg-12" id="product-view">
 							<div class="super-padding" ng-if="parts.length === 0"></div>
 							<!-- Products -->
-							<part-box parts="parts"></part-box>
+							<part-box parts="parts" class="search-part-box"></part-box>
 							<div class="scrollButton" ng-click="scrollTo(productView)"><span>Top</span></div>
 							<div class="clearfix"></div>
 						</div>

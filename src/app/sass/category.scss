@@ -1,12 +1,25 @@
 .category-container{
 	background: url('/assets/img/bgtexture.png');
-
+	overflow: hidden; 
+	img{
+		max-width: 100%;
+	}
 	#categoryContent{
 		padding-bottom:25px;
 		.content{
 			font-size:18px;
 			font-family: "proxima-nova-condensed",sans-serif;
 			padding-bottom:30px;
+		}
+
+		.find-products {
+			margin: 25px 0;
+			text-align: center;
+
+			a.red-transparent-button {
+				font-size: 18px;
+				padding: 10px;
+			}
 		}
 	}
 	#catPartsContainer{
@@ -17,7 +30,6 @@
 			}
 		}
 
-		background-color:white;
 		.product-view{
 			display: -webkit-box;
 			display: -moz-box;
@@ -71,6 +83,7 @@
 						-webkit-box-shadow: 1px 0 10px 2px #ccc;
 						-moz-box-shadow: 1px 0 10px 2px #ccc;
 						box-shadow: 1px 0 10px 2px #ccc;
+						margin: 0px auto;
 					}
 					margin-bottom:25px;
 				}

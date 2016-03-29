@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location){
+angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartService', '$stateParams','$sce', 'AppConfig', '$rootScope', '$location', 'Lightbox', '$q', '$analytics', function($scope, PartService, $stateParams, $sce, AppConfig, $rootScope, $location, Lightbox, $q, $analytics){
 	$scope.part = {};
 	$scope.featuredProducts = [];
 	$scope.vehicles = [];
@@ -37,7 +37,25 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				if ($scope.checkForDoubles(str)) {
 					metakeys.push(str);
 				}
-			})
+			});
+
+			//video setup
+			$scope.installVideos = [];
+			angular.forEach(part.videos, function(video, i){
+				video.type = 'video';
+				if (video.channel && video.channel.length > 0) {
+					video.url  = $sce.trustAsResourceUrl(video.channel[0].link.replace("watch?v=", "embed/"));
+				} else if (video.channels && video.channels.length > 0) {
+					video.url  = $sce.trustAsResourceUrl(video.channels[0].link.replace("watch?v=", "embed/"));
+				}
+				if (video.url === undefined) {
+					return;
+				}
+
+				if (video.subject_type === 'Installation Video'){
+					$scope.installVideos.push(video);
+				}
+			});
 
 			for (var i = 0; i < metakeys.length; i++) {
 				if (vTitle === '') {
@@ -47,17 +65,37 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 				}
 			}
 
-			var titleStr = $scope.part.short_description + ' #' + $scope.part.oldPartNumber + ' | ' + $scope.part.categories[0].short_description;
+			$scope.getRelatedParts()
+
+			var titleStr = $scope.part.short_description + ' #' + $scope.part.part_number + ' | ' + $scope.part.categories[0].short_description;
 			$rootScope.pageTitle = titleStr;
 			$rootScope.pageDesc = $scope.part.categories[0].metaDescription;
 			$rootScope.pageKywds = 'aries, ' + $scope.part.short_description + ', ' + vTitle;
 
-	});
-}
+		});
+	}
 
 	PartService.GetFeatured().then(function(featured){
 		$scope.featuredProducts = featured;
 	});
+
+	$scope.getRelatedParts = function(){
+		if (!$scope.part.related || !$scope.part.related.length || $scope.part.related.length < 1){
+			return;
+		}
+		var related = [];
+		for (var i in $scope.part.related) {
+			PartService.GetPartByID($scope.part.related[i]).then(function(res){
+				related.push(res);
+			}, (function(err){
+				$rootScope.$broadcast('error', err);
+			}));
+		}
+		$q.all(related).then(function(data){
+			$scope.part.related = related;
+			return;
+		});
+	}
 
 	$scope.renderYouTube = function(vid){
 		if(vid.channel === undefined || vid.channel.length === 0){
@@ -65,6 +103,22 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		}
 		return $sce.trustAsHtml(vid.channel[0].embed_code.replace(vid.channel[0].foreign_id,vid.channel[0].foreign_id+'?rel=0'));
 	};
+
+	$scope.openLightbox = function(index){
+		var vids = [];
+		var vid = $scope.part.videos[index]
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':video:' + vid.title);
+		vids.push($scope.part.videos[index]);
+		Lightbox.openModal(vids, 0);
+	}
+
+	$scope.openInstallVideo = function(){
+		if ($scope.installVideos.length < 1){
+			return;
+		}
+		$analytics.eventTrack('part:' + $scope.part + ':installVideos');
+		Lightbox.openModal($scope.installVideos, 0);
+	}
 
 	$scope.checkForDoubles = function(combo){
 		var flag = true;
@@ -180,6 +234,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':social:facebook');
 		var facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber + '&_rdr';
 		window.$windowScope = $scope;
 		window.open(facebookURL, 'Share ARIES Automotive', 'width=500, height=500');
@@ -189,6 +244,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':social:twitter');
 		var pageURL = 'http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber;
 		var tweetText = $scope.part.short_description + ' - ' + $scope.part.oldPartNumber;
 		var twitterURL = 'https://twitter.com/intent/tweet?text=' + tweetText + '&url=' + pageURL + '&via=ariesautomotive&original_referer=' + pageURL;
@@ -199,6 +255,7 @@ angular.module('ariesautomotive').controller('PartController', ['$scope', 'PartS
 		if($scope.part === undefined){
 			return '';
 		}
+		$analytics.eventTrack('part:' + $scope.part.part_number + ':social:google');
 		var googleURL = 'https://plus.google.com/share?url=http%3A%2F%2Fariesautomotive.com%2Fpart%2F' + $scope.part.oldPartNumber;
 		window.$windowScope = $scope;
 		window.open(googleURL, 'Share ARIES Automotive', 'width=500, height=500');

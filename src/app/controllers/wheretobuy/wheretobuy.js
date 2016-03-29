@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', '$location', '$timeout', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', 'uiGmapIsReady', function($scope, $rootScope, $stateParams, $anchorScroll, $location, $timeout, ngDialog, localStorage, BuyService, GoogleMapApi, isReady){
+angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootScope', '$stateParams', '$anchorScroll', '$location', '$timeout', 'ngDialog', 'localStorageService', 'BuyService', 'uiGmapGoogleMapApi', 'uiGmapIsReady' , '$analytics', function($scope, $rootScope, $stateParams, $anchorScroll, $location, $timeout, ngDialog, localStorage, BuyService, GoogleMapApi, isReady, $analytics){
 	//mobile view-setter
 	$scope.location_limit = 4;
 	var MOBILE_WIDTH = '860';
@@ -286,12 +286,14 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		$scope.directions = {
 			end: end
 		};
+		$analytics.eventTrack('wtb-directions-to:' + end);
 		ngDialog.open({
 			template: 'app/controllers/wheretobuy/directions-form.html',
 			scope: $scope,
 			controller: ['$scope',function($sc){
 				$sc.getDirections = function(){
 					$sc.$parent.directions.start = document.getElementById('directions-start').value || '';
+					$analytics.eventTrack('wtb-directions-from:' + $sc.$parent.directions.start);
 					$sc.$parent.getDirections();
 				};
 			}]
@@ -346,6 +348,7 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 		});
 
 		var els = document.getElementsByClassName('autocomplete');
+		// Google Analytics
 		if(els.length > 0){
 			var comp = $scope.autocomplete = new maps.places.Autocomplete(
 				(els[0]),
@@ -359,12 +362,13 @@ angular.module('ariesautomotive').controller('BuyController', ['$scope', '$rootS
 				if(place === undefined){
 					return;
 				}
+
+				$analytics.eventTrack('wtb-search:' + place.formatted_address);
 				if(place.formatted_address !== '' && place.formatted_address !== undefined){
 					$scope.lookupLocation(place.formatted_address);
 				}else{
 					$scope.lookupLocation(place.name);
 				}
-
 			});
 		}
 		if($stateParams.location !== ''){

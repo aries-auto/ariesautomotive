@@ -13,22 +13,22 @@ angular.module('ariesautomotive').factory('PartService', ['$http','$q','AppConfi
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
-		GetOldPart: function(oldPartID){
+		GetPartByID: function(id){
 			var def = $q.defer();
 			$http({
 				method: 'get',
-				url: AppConfig.APIURL + '/part/old/'+oldPartID,
+				url: AppConfig.APIURL + '/part/id/'+id,
 				params: {
 					'key': AppConfig.APIKEY
 				},
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
@@ -44,7 +44,7 @@ angular.module('ariesautomotive').factory('PartService', ['$http','$q','AppConfi
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		},
@@ -60,7 +60,7 @@ angular.module('ariesautomotive').factory('PartService', ['$http','$q','AppConfi
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
 				},
-				responseType: 'jsonp'
+				responseType: 'json'
 			}).success(def.resolve).error(def.reject);
 			return def.promise;
 		}
