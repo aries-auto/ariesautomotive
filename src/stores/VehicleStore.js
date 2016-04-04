@@ -22,17 +22,29 @@ class VehicleStore extends EventEmitter {
 			showStyle: false,
 			category: '',
 			parts: [],
+			catStyleParts: {
+				category: {
+					name: '',
+					available_styles: {
+						name: '',
+						parts: [],
+					},
+				},
+			},
 		};
 		this.bindListeners({
 			getCategoryStyles: VehicleActions.getCategoryStyles,
 		});
-		this.bindActions({
-			set: VehicleActions.set,
-			setCategory: VehicleActions.setCategory,
-			setCategoryParts: VehicleActions.setCategoryParts,
-			setShowStyleState: VehicleActions.setShowStyleState,
-			setParts: VehicleActions.setParts,
-		});
+		// this.bindActions({
+		// 	set: VehicleActions.set,
+		// 	setCategory: VehicleActions.setCategory,
+		// 	setCategoryParts: VehicleActions.setCategoryParts,
+		// 	setShowStyleState: VehicleActions.setShowStyleState,
+		// 	setParts: VehicleActions.setParts,
+		// 	setCategoryStyleParts: VehicleActions.setCategoryStyleParts,
+		// 	updateVehicleStyle: VehicleActions.updateVehicleStyle,
+		// });
+		this.bindActions(VehicleActions);
 		this.getCategoryStyles();
 	}
 
@@ -94,11 +106,21 @@ class VehicleStore extends EventEmitter {
 		});
 	}
 
-	updateVehicleStyle(style) {
+	updateVehicleStyle(s) {
+		const vehicle = this.state.vehicle;
 		this.setState({
 			vehicle: {
-				style,
+				make: vehicle.make,
+				model: vehicle.model,
+				year: vehicle.year,
+				style: s,
 			},
+		});
+	}
+
+	setVehicle(vehicle) {
+		this.setState({
+			vehicle,
 		});
 	}
 
@@ -116,6 +138,10 @@ class VehicleStore extends EventEmitter {
 
 	setParts(parts) {
 		this.setState({ parts });
+	}
+
+	setCategoryStyleParts(catStyleParts) {
+		this.setState({ catStyleParts, category: catStyleParts.category.name });
 	}
 }
 

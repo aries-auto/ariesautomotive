@@ -28,6 +28,15 @@ class VehicleResults extends Component {
 		categoryparts: PropTypes.object,
 		category: PropTypes.string,
 		showStyle: PropTypes.bool,
+		catStyleParts: PropTypes.shape({
+			name: PropTypes.string,
+			category: PropTypes.shape({
+				available_styles: PropTypes.shape({
+					name: PropTypes.string,
+					parts: PropTypes.array,
+				}),
+			}),
+		}),
 	};
 
 	constructor() {
@@ -56,23 +65,13 @@ class VehicleResults extends Component {
 	}
 
 	getCategoryStyles() {
-		let i = 0;
-		for (const cat in this.props.categoryparts) {
-			if (!cat) {
-				return '';
-			}
-			if (this.props.category === '' && i === 0) {
-				VehicleActions.setCategory(cat);
-				VehicleActions.setCategoryParts(this.props.categoryparts[cat]);
-			}
-			i++;
-		}
+		this.setFirstCategoryByDefault();
 		const output = [];
 		for (const cat in this.props.categoryparts) {
 			if (!cat) {
 				return output;
 			}
-			const active = this.props.category === cat;
+			const active = this.props.catStyleParts.name === cat;
 			output.push(
 				<li key={cat} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
 					<a onClick={this.setCategoryStyle.bind(this, cat, this.props.categoryparts[cat])}>{cat.toUpperCase()}</a>
@@ -82,11 +81,85 @@ class VehicleResults extends Component {
 		return output;
 	}
 
+	setFirstCategoryByDefault() {
+		let i = 0;
+		for (const cat in this.props.categoryparts) {
+			if (!cat) {
+				return;
+			}
+			if (this.props.category === '' && i === 0) {
+				this.makeCatStyleParts(cat);
+				return;
+			}
+			i++;
+		}
+	}
+
 	setCategoryStyle(cat) {
+		this.makeCatStyleParts(cat);
 		VehicleActions.setShowStyleState(false);
-		VehicleActions.updateVehicleStyle(null);
-		VehicleActions.setCategory(cat);
 		VehicleActions.setParts(null);
+	}
+
+	makeCatStyleParts(cat) {
+		const catStyleParts = {};
+		for (const i in this.props.categoryparts) {
+			if (!this.props.categoryparts[i]) {
+				return;
+			}
+
+			if (i !== cat) {
+				continue;
+			}
+
+			if (!catStyleParts.category) {
+				catStyleParts.category = {};
+			}
+			catStyleParts.category[i] = {
+				available_styles: {},
+			};
+			catStyleParts.name = i;
+			for (const j in this.props.categoryparts[i].available_styles) {
+				if (!this.props.categoryparts[i].available_styles[j]) {
+					return;
+				}
+				catStyleParts.category[i].available_styles[this.props.categoryparts[i].available_styles[j]] = [];
+				const style = this.props.categoryparts[i].available_styles[j];
+				for (const k in this.props.categoryparts[i].parts) {
+					if (!this.props.categoryparts[i].parts[k]) {
+						return;
+					}
+					const vehicleApplications = this.props.categoryparts[i].parts[k].vehicle_applications;
+					if (this.inVehicleApps(this.props.vehicle, style, vehicleApplications)) {
+						catStyleParts.category[i].available_styles[this.props.categoryparts[i].available_styles[j]].push(this.props.categoryparts[i].parts[k]);
+					}
+				}
+			}
+			if (this.checkForStyleAll(catStyleParts)) {
+				VehicleActions.updateVehicleStyle('all');
+			}
+		}
+		VehicleActions.setCategoryStyleParts(catStyleParts);
+		return;
+	}
+
+	checkForStyleAll(catStyleParts) {
+		if (catStyleParts.category[catStyleParts.name].available_styles.length === 1 || catStyleParts.category[catStyleParts.name].available_styles.all) {
+			return true;
+		}
+		return false;
+	}
+
+	inVehicleApps(vehicle, style, applications) {
+		for (const i in applications) {
+			if (!applications[i]) {
+				return false;
+			}
+			if (applications[i].year === vehicle.year && applications[i].make === vehicle.make && applications[i].model === vehicle.model && applications[i].style === style) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	render() {
@@ -99,7 +172,7 @@ class VehicleResults extends Component {
 						</ul>
 					</div>
 				</div>
-				{this.props.category ? <VehicleStyle className={s.vehicleStyle} category={this.props.category} categoryparts={this.props.categoryparts}/> : null}
+				{this.props.catStyleParts.name ? <VehicleStyle className={s.vehicleStyle} catStyleParts={this.catStyleParts} category={this.props.catStyleParts.name} /> : null}
 				<div className={s.clearfix}></div>
 			</div>
 		);

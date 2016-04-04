@@ -26,39 +26,28 @@ class VehicleStyle extends Component {
 			categoryparts: PropTypes.object,
 			style: PropTypes.string,
 		}),
-		categoryparts: PropTypes.object,
+		// categoryparts: PropTypes.object,
 		category: PropTypes.string,
 		showStyle: PropTypes.bool,
 		parts: PropTypes.array,
+		catStyleParts: PropTypes.shape({
+			name: PropTypes.string,
+			category: PropTypes.shape({
+				available_styles: PropTypes.shape({
+					name: PropTypes.string,
+					parts: PropTypes.array,
+				}),
+			}),
+		}),
 	};
 	constructor() {
 		super();
-		this.handleChange = this.handleChange.bind(this);
 		this.showStyleChoices = this.showStyleChoices.bind(this);
 		this.getStyleChoices = this.getStyleChoices.bind(this);
 		this.showStyleChoices = this.showStyleChoices.bind(this);
 		this.unhideChoices = this.unhideChoices.bind(this);
-		this.handleClick = this.handleClick.bind(this);
+		this.setVehicleStyle = this.setVehicleStyle.bind(this);
 		this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
-	}
-
-	componentWillMount() {
-		if (this.checkForStyleAll(this.props.categoryparts[this.props.category])) {
-			VehicleActions.setParts(this.props.categoryparts[this.props.category].parts);
-			this.props.vehicle.style = 'all';
-		}
-	}
-
-	componentWillUpdate(props) {
-		if (this.props.parts !== null && this.props.parts === props.parts) {
-			return;
-		}
-		if (this.checkForStyleAll(this.props.categoryparts[props.category])) {
-			VehicleActions.setParts(this.props.categoryparts[props.category].parts);
-			this.props.vehicle.style = 'all';
-		} else {
-			this.props.vehicle.style = null;
-		}
 	}
 
 	static getStores() {
@@ -72,18 +61,21 @@ class VehicleStyle extends Component {
 	getStyleChoices() {
 		const styleOptions = [];
 		let styles = {};
-		for (const i in this.props.categoryparts) {
-			if (i === this.props.category) {
-				styles = this.props.categoryparts[i].available_styles;
-			}
-		}
+		// for (const i in this.props.categoryparts) {
+		// 	if (i === this.props.category) {
+		// 		styles = this.props.categoryparts[i].available_styles;
+		// 	}
+		// }
+
+		// styles = this.props.catStyleParts.category[this.props.category].available_styles;
+		styles = this.props.catStyleParts.category[this.props.catStyleParts.name].available_styles;
 
 		for (const i in styles) {
 			if (!i) {
 				return styleOptions;
 			}
 			styleOptions.push(
-				<li key={i} onClick={this.handleClick.bind(this, styles[i])} value={styles[i]}>{styles[i].toUpperCase()}
+				<li key={i} onClick={this.setVehicleStyle.bind(this, i)} value={i}>{i.toUpperCase()}
 				</li>
 			);
 		}
@@ -104,11 +96,37 @@ class VehicleStyle extends Component {
 		return returnedParts;
 	}
 
-	checkForStyleAll(cat) {
-		if (cat.available_styles.length === 1 && cat.available_styles[0].toLowerCase() === 'all') {
-			return true;
+	setVehicleStyle(style) {
+		const v = {
+			year: this.props.vehicle.year,
+			make: this.props.vehicle.make,
+			model: this.props.vehicle.model,
+			style,
+		};
+		VehicleActions.set(v);
+		VehicleActions.setShowStyleState(false);
+	}
+
+	getParts() {
+		const parts = this.props.catStyleParts.category[this.props.catStyleParts.name].available_styles[this.props.vehicle.style];
+		if (!parts || parts.length < 1) {
+			return <h3>No parts for this style</h3>;
 		}
-		return false;
+		return (<PartResults parts={parts} className={s.partResults}/>);
+	}
+
+	unhideChoices() {
+		VehicleActions.setShowStyleState(true);
+	}
+
+	showStyleChoices() {
+		return (
+			<div className={s.styleChoices}>
+				<ul>
+					{this.getStyleChoices()}
+				</ul>
+			</div>
+		);
 	}
 
 	findVehicleApplicationMatch(part, style) {
@@ -122,35 +140,11 @@ class VehicleStyle extends Component {
 		}
 	}
 
-	showStyleChoices() {
-		return (
-			<div className={s.styleChoices}>
-				<ul>
-					{this.getStyleChoices()}
-				</ul>
-			</div>
-		);
-	}
-
-	unhideChoices() {
-		VehicleActions.setShowStyleState(true);
-	}
-
-	handleChange(event) {
-		VehicleActions.set(event.target.value);
-	}
-
-	handleClick(style) {
-		const v = {
-			year: this.props.vehicle.year,
-			make: this.props.vehicle.make,
-			model: this.props.vehicle.model,
-			style,
-		};
-		VehicleActions.set(v);
-		const parts = this.getCategoryPartsForVehicleStyle(this.props.categoryparts[this.props.category].parts, style);
-		VehicleActions.setParts(parts);
-		VehicleActions.setShowStyleState(false);
+	checkForStyleAll(cat) {
+		if (cat.available_styles.length === 1 && cat.available_styles[0].toLowerCase() === 'all') {
+			return true;
+		}
+		return false;
 	}
 
 	render() {
@@ -159,12 +153,12 @@ class VehicleStyle extends Component {
 				<div className={s.greybox}>
 					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
 					<span className={s.container}>
-						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{this.props.vehicle.style ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
+						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.vehicle.style && !this.props.showStyle) ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
 						<br />{this.props && this.props.showStyle ? this.showStyleChoices() : ''}
 					</span>
 				</div>
 				<div>
-					{this.props && this.props.parts && this.props.parts.length ? <PartResults parts={this.props.parts} className={s.partResults}/> : ''}
+					{this.props.vehicle.style ? this.getParts() : ''}
 				</div>
 			</div>
 		);
