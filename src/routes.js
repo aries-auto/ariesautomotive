@@ -102,7 +102,7 @@ const router = new Router(on => {
 
 	on('/search/:term', async (state) => {
 		try {
-			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=9${KEY}&brandID=3`);
+			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=${KEY}&brandID=3`);
 
 			state.context.searchResult = await searchResponse.json();
 			state.context.term = state.query.term;
@@ -115,7 +115,7 @@ const router = new Router(on => {
 
 	on('/search', async (state) => {
 		try {
-			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.query.term}?key=9${KEY}&brandID=3`);
+			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.query.term}?key=${KEY}&brandID=3`);
 
 			state.context.searchResult = await searchResponse.json();
 			state.context.term = state.query.term;
