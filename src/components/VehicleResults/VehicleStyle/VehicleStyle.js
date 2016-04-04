@@ -47,7 +47,7 @@ class VehicleStyle extends Component {
 		this.showStyleChoices = this.showStyleChoices.bind(this);
 		this.unhideChoices = this.unhideChoices.bind(this);
 		this.setVehicleStyle = this.setVehicleStyle.bind(this);
-		this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
+		// this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
 	}
 
 	static getStores() {
@@ -61,13 +61,6 @@ class VehicleStyle extends Component {
 	getStyleChoices() {
 		const styleOptions = [];
 		let styles = {};
-		// for (const i in this.props.categoryparts) {
-		// 	if (i === this.props.category) {
-		// 		styles = this.props.categoryparts[i].available_styles;
-		// 	}
-		// }
-
-		// styles = this.props.catStyleParts.category[this.props.category].available_styles;
 		styles = this.props.catStyleParts.category[this.props.catStyleParts.name].available_styles;
 
 		for (const i in styles) {
@@ -80,20 +73,6 @@ class VehicleStyle extends Component {
 			);
 		}
 		return styleOptions;
-	}
-
-	getCategoryPartsForVehicleStyle(parts, style) {
-		const returnedParts = [];
-		for (const i in parts) {
-			if (!parts[i]) {
-				continue;
-			}
-			const p = this.findVehicleApplicationMatch(parts[i], style);
-			if (p) {
-				returnedParts.push(p);
-			}
-		}
-		return returnedParts;
 	}
 
 	setVehicleStyle(style) {
@@ -138,13 +117,6 @@ class VehicleStyle extends Component {
 				return part;
 			}
 		}
-	}
-
-	checkForStyleAll(cat) {
-		if (cat.available_styles.length === 1 && cat.available_styles[0].toLowerCase() === 'all') {
-			return true;
-		}
-		return false;
 	}
 
 	render() {
