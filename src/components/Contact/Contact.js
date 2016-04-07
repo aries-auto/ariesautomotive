@@ -6,6 +6,7 @@ import { fields } from './FormFields';
 import ContactStore from '../../stores/ContactStore';
 import ContactActions from '../../actions/ContactActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import { locationHtml } from '../../data/locations';
 
 @withStyles(s)
 @connectToStores
@@ -15,8 +16,8 @@ class Contact extends Component {
 		className: PropTypes.string,
 		countries: PropTypes.array,
 		contactTypes: PropTypes.array,
-		inputs: PropTypes.array,
-		disabled: PropTypes.bool,
+		inputs: PropTypes.object,
+		enabled: PropTypes.bool,
 	};
 
 	constructor() {
@@ -24,6 +25,7 @@ class Contact extends Component {
 		this.modifyValue = this.modifyValue.bind(this);
 		this.submit = this.submit.bind(this);
 		this.checkDisabled = this.checkDisabled.bind(this);
+		this.getLocations = this.getLocations.bind(this);
 	}
 
 	static getStores() {
@@ -118,15 +120,28 @@ class Contact extends Component {
 		return output;
 	}
 
+	getLocations() {
+		return (
+			<div className={'location'}>
+				{locationHtml()}
+			</div>
+		);
+	}
+
 	checkDisabled() {
 		for (const i in fields) {
 			if (!fields[i]) {
 				continue;
 			}
 			if (fields[i].required === true) {
-				console.log(fields[i]);
+				const f = this.props.inputs[fields[i].name];
+				if (!f || f === undefined) {
+					ContactActions.setFormValidation(false);
+					return;
+				}
 			}
 		}
+		ContactActions.setFormValidation(true);
 	}
 
 	modifyValue(event) {
@@ -142,21 +157,27 @@ class Contact extends Component {
 	}
 
 	render() {
-		console.log(this.props.disabled);
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<div className={cx('visible-sm visible-md visible-lg internal-hero', s.hero)}></div>
-				<div className="container">
-					<div className="row">
-						<h1>CONTACT</h1>
-					</div>
-					<div className="row">
+				<div className={cx(s.container, 'container')}>
+
+					<div className="col-xs-12 col-md-6 col-lg-6">
+						<div className={cx('head')}>
+							<h1>CONTACT</h1>
+						</div>
 						<form name="contactForm" role="form" noValidate>
 							{this.getForm()}
 							<div className="form-group col-xs-12">
-								<button type="submit" className="btn btn-primary" disabled="" onClick={this.submit}>SEND</button>
+								<button type="submit" className="btn btn-primary" disabled={!this.props.enabled} onClick={this.submit}>SEND</button>
 							</div>
 						</form>
+					</div>
+					<div className="col-xs-12 col-md-6 col-lg-6">
+						<div className={cx('head')}>
+							<h3>OUR LOCATIONS</h3>
+						</div>
+						{this.getLocations()}
 					</div>
 				</div>
 			</div>

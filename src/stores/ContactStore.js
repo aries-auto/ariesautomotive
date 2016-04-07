@@ -2,6 +2,7 @@ import ContactActions from '../actions/ContactActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
+import { apiBase } from '../config';
 const EventEmitter = events.EventEmitter;
 
 const KEY = process.env.API_KEY;
@@ -15,11 +16,13 @@ class ContactStore extends EventEmitter {
 			inputs: {},
 			error: {},
 			success: {},
+			enabled: false,
 		};
 		this.bindListeners({
 			getCountries: ContactActions.getCountries,
 			getContactTypes: ContactActions.getContactTypes,
 			postContactData: ContactActions.postContactData,
+			setFormValidation: ContactActions.setFormValidation,
 		});
 		if (this.state.countries.length === 0) {
 			this.getCountries();
@@ -31,7 +34,7 @@ class ContactStore extends EventEmitter {
 
 	async getCountries() {
 		try {
-			await fetch(`http://goapi.curtmfg.com/geography/countrystates?key=${KEY}`)
+			await fetch(`${apiBase}/geography/countrystates?key=${KEY}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -48,7 +51,7 @@ class ContactStore extends EventEmitter {
 
 	async getContactTypes() {
 		try {
-			await fetch(`http://goapi.curtmfg.com/contact/types?key=${KEY}&brandID=3`)
+			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=3`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -66,8 +69,7 @@ class ContactStore extends EventEmitter {
 	async postContactData(contactType) {
 		const inputs = JSON.stringify(this.state.inputs);
 		try {
-			// TODO
-			const url = `http://localhost:8081/contact/${contactType}?key=${KEY}&brandID=3`;
+			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=3`;
 			await fetch(url, {
 				method: 'POST',
 				body: inputs,
@@ -78,7 +80,6 @@ class ContactStore extends EventEmitter {
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				console.log(data);
 				this.setState({
 					success: data,
 				});
@@ -87,8 +88,11 @@ class ContactStore extends EventEmitter {
 			this.setState({
 				error: err.json(),
 			});
-			console.log(this.state.error);
 		}
+	}
+
+	setFormValidation(enabled) {
+		this.setState({ enabled });
 	}
 
 }

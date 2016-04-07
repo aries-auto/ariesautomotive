@@ -22,6 +22,7 @@ module.exports.fields = [
 		placeholder: 'Enter your last name.',
 		name: 'lastName',
 		width: '6',
+		required: true,
 	},
 	{
 		type: 'text',
@@ -29,6 +30,7 @@ module.exports.fields = [
 		placeholder: 'Enter your email address.',
 		name: 'email',
 		width: '6',
+		required: true,
 	},
 	{
 		type: 'text',
@@ -36,6 +38,7 @@ module.exports.fields = [
 		placeholder: 'Enter your phone number.',
 		name: 'phone',
 		width: '6',
+		required: true,
 	},
 	{
 		type: 'text',
@@ -43,6 +46,7 @@ module.exports.fields = [
 		placeholder: 'Enter your street address.',
 		name: 'address1',
 		width: '12',
+		required: true,
 	},
 	{
 		type: 'text',
@@ -57,6 +61,7 @@ module.exports.fields = [
 		placeholder: 'Enter your city.',
 		name: 'city',
 		width: '12',
+		required: true,
 	},
 	{
 		type: 'country',
@@ -65,6 +70,7 @@ module.exports.fields = [
 		name: 'state',
 		options: '',
 		width: '6',
+		required: true,
 	},
 	{
 		type: 'text',
@@ -72,6 +78,7 @@ module.exports.fields = [
 		placeholder: 'Enter your postal code.',
 		name: 'postalCode',
 		width: '6',
+		required: true,
 	},
 	{
 		type: 'text',
@@ -79,6 +86,7 @@ module.exports.fields = [
 		placeholder: 'Enter the subject.',
 		name: 'subject',
 		width: '12',
+		required: true,
 	},
 	{
 		type: 'textarea',
@@ -86,5 +94,6 @@ module.exports.fields = [
 		placeholder: 'Enter the message.',
 		name: 'message',
 		width: '12',
+		required: true,
 	},
 ];
