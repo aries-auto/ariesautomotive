@@ -3,17 +3,34 @@ import cx from 'classnames';
 import s from './WhereToBuy.scss';
 import withStyles from '../../decorators/withStyles';
 import Locations from './Locations/Locations';
+import BuyActions from '../../actions/BuyActions';
+import BuyStore from '../../stores/BuyStore';
 import Buymap from './Map/Map';
+import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
+@connectToStores
 class WhereToBuy extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		local: PropTypes.bool,
 	};
 
 	constructor() {
 		super();
+	}
+
+	static getStores() {
+		return [BuyStore];
+	}
+
+	static getPropsFromStores() {
+		return BuyStore.getState();
+	}
+
+	setLocal(l) {
+		BuyActions.setLocal(l);
 	}
 
 	render() {
@@ -22,14 +39,14 @@ class WhereToBuy extends Component {
 				<div className="row header-row">
 					<div className="col-md-12 map-nav-top">
 						<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 map-nav-tab-switch">
-							<ul className="nav nav-tabs" role="tablist">
-								<li role="presentation" ng-className="{ 'active' : display === 'local' }">
-									<a href="#local" aria-controls="Buy local" role="tab" ng-click="changeDisplay('local', $event)" data-toggle="tab">
+							<ul className={cx(s.nav, 'nav-tabs')} role="tablist">
+								<li role="presentation" onClick={this.setLocal.bind(this, true)}>
+									<a href="#local" className={cx(this.props.local ? s.active : '')}>
 									Buy Local
 									</a>
 								</li>
-								<li role="presentation" ng-className="{ 'active' : display === 'online' }">
-									<a href="#online" aria-controls="Buy online" role="tab" ng-click="changeDisplay('online', $event)" data-toggle="tab">
+								<li role="presentation" onClick={this.setLocal.bind(this, false)}>
+									<a href="#online" className={cx(!this.props.local ? s.active : '')}>
 									Buy Online
 									</a>
 								</li>
