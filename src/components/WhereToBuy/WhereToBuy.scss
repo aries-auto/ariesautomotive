@@ -1,4 +1,9 @@
 @import '../variables.scss';
+.mapContainer {
+    height: 600px;
+    width: 100%;
+    margin: 2em 0 2em 0;
+}
 .active {
 	color: $white-base;
 	background-color: $new-red;

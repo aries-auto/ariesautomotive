@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class BuyActions {
 	constructor() {
-		this.generateActions('setLocal');
+		this.generateActions('setLocal', 'bounds', 'setMarkers');
 	}
 }
 
