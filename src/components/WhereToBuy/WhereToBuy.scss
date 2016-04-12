@@ -1,28 +1,7 @@
 @import '../variables.scss';
+
 .mapContainer {
     height: 600px;
     width: 100%;
-    margin: 2em 0 2em 0;
-}
-.active {
-	color: $white-base;
-	background-color: $new-red;
-	border-color: $white-base;
-}
-.nav {
-	
-	position: relative;
-    display: block;
-    padding: 15px 15px;
-    li {
-    	list-style-type: none;
-    	a {
-    		text-decoration: none;
-    		padding: 10px 15px;
-    		border: none;
-    		:active {
-    			color: $white-base;
-    		}
-    	}
-    }
+    margin: 1em 0 2em 0;
 }

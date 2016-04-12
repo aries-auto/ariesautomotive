@@ -1,0 +1,39 @@
+@import '../../variables.scss';
+
+.root {
+    h2 {
+        color: $maroon;
+        border-bottom: $new-red 4px solid;
+    }
+    .text-locations {
+        width: 100%;
+        display: block;
+    }
+    .location {
+        background-color: $white-base;
+        position: relative;
+        padding: 10px 10px 0;
+        margin: 10px;
+        min-height: 190px;
+        border-bottom: 3px solid $maroon;
+        background: #fff;
+        box-shadow: 3px 4px 7px $black-base;
+        font-weight: 800;
+    }
+    .name {
+        font-size: 2em;
+        color: $maroon;
+    }
+    .name, .type, .address {
+        display: block;
+    }
+    .address {
+        padding: 1em 0 0 0;
+    }
+    .actions{
+        padding: 3em 0 0 0;
+        a {
+            padding: 0 1em 0 0;
+        }
+    }
+}

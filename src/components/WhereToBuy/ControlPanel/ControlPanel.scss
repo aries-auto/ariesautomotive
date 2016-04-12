@@ -1,0 +1,35 @@
+@import '../../variables.scss';
+
+.root{
+	padding: 1em 0 0 0;
+		.active {
+		color: $white-base;
+		background-color: $new-red;
+		border-color: $white-base;
+	}
+}
+
+.location {
+	font-size: 1.4em;
+	.locationtext {
+		padding: .5em 0 0 0;
+	}
+}
+
+.nav {
+	position: relative;
+    display: block;
+    padding: 15px 15px;
+    li {
+    	list-style-type: none;
+    	a {
+    		text-decoration: none;
+    		padding: 10px 15px;
+    		border: none;
+    		border-radius: 4px;
+    		:active {
+    			color: $white-base;
+    		}
+    	}
+    }
+}

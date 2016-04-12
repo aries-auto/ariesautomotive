@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import s from './../WhereToBuy.scss';
+import s from './ControlPanel.scss';
 import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
@@ -50,10 +50,10 @@ class ControlPanel extends Component {
 								</li>
 							</ul>
 						</div>
-						<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row" ng-show="display === 'local'">
-							<div className="pull-left col-lg-4 col-md-4 col-xs-4 col-sm-3 geo-lookup">
+						<div className={cx('col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row', s.location)} ng-show="display === 'local'">
+							<div className={cx('pull-left col-lg-4 col-md-4 col-xs-4 col-sm-3 geo-lookup', s.locationtext)}>
 								<a href="#" ng-click="LookupGeoLoc()">
-									<ng-md-icon icon="my_location"></ng-md-icon>
+									<span className="glyphicon glyphicon-globe"></span>
 									<span>Use my Location</span>
 								</a>
 							</div>
