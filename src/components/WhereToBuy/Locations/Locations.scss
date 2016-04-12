@@ -1,24 +1,26 @@
 @import '../../variables.scss';
 
 .root {
-    h2 {
-        color: $maroon;
-        border-bottom: $new-red 4px solid;
-    }
-    .text-locations {
+    
+    .textlocations {
         width: 100%;
         display: block;
-    }
-    .location {
-        background-color: $white-base;
-        position: relative;
-        padding: 10px 10px 0;
-        margin: 10px;
-        min-height: 190px;
-        border-bottom: 3px solid $maroon;
-        background: #fff;
-        box-shadow: 3px 4px 7px $black-base;
-        font-weight: 800;
+
+        h2 {
+            color: $maroon;
+            border-bottom: $new-red 4px solid;
+        }
+   
+        .location {
+            background-color: $white-base;
+            position: relative;
+            padding: 10px 10px 0;
+            margin: 10px;
+            min-height: 190px;
+            border-bottom: 3px solid $maroon;
+            box-shadow: 3px 4px 7px $black-base;
+            font-weight: 800;
+        }
     }
     .name {
         font-size: 2em;
@@ -31,9 +33,22 @@
         padding: 1em 0 0 0;
     }
     .actions{
-        padding: 3em 0 0 0;
+        padding: 2em 0 0 0;
         a {
             padding: 0 1em 0 0;
         }
     }
+
+    .onlinelocations{
+        .location {
+            position: relative;
+            padding: 10px 10px 0;
+            margin: 10px;
+            min-height: 100x;
+            border-bottom: $maroon 4px solid;
+            font-weight: 800;
+        }
+
+    }
+
 }
