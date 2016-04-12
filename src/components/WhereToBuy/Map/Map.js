@@ -13,25 +13,9 @@ class Map extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		coordinates: PropTypes.object,
+		center: PropTypes.object,
 		markers: PropTypes.array,
-	};
-
-	static defaultProps = {
-		coordinates: {
-			lat: 44.8167,
-			lng: -91.5000,
-		},
-		markers: [{
-			position: {
-				lat: 44.8167,
-				lng: -91.5000,
-			},
-			defaultAnimation: 2,
-			icon: {
-				url: 'http://www.curtmfg.com/Content/img/mapflag.png',
-			},
-		}],
+		bounds: PropTypes.object,
 	};
 
 	constructor() {
@@ -39,8 +23,8 @@ class Map extends Component {
 	}
 
 	componentDidMount() {
-		// TODO - map initial markers on load
-		// this.handleChange();
+		// initial map markers
+		BuyActions.bounds(this.props.center, this.props.bounds);
 	}
 
 	static getStores() {
@@ -90,7 +74,6 @@ class Map extends Component {
 
 
 	render() {
-		// console.log(this.props);
 		return (
 			<div className={cx(s.mapContainer)}>
 				<GoogleMapLoader

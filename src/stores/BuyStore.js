@@ -5,16 +5,21 @@ import fetch from '../core/fetch';
 import { iapiBase } from '../config';
 const EventEmitter = events.EventEmitter;
 
-// const KEY = process.env.API_KEY;
+const KEY = process.env.API_KEY;
 
 class BuyStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
 			local: true,
-			center: 0,
-			ne: 0,
-			sw: 0,
+			center: {
+				lat: 44.8167,
+				lng: -91.5000,
+			},
+			bounds: {
+				ne: '44.853219616918416,-91.4007797241211',
+				sw: '44.78015723973733,-91.59647369384766',
+			},
 			skip: 0,
 			sort: 2,
 			count: 100,
@@ -41,7 +46,7 @@ class BuyStore extends EventEmitter {
 	async bounds(args) {
 		const params = `&brand=${this.state.brand}&skip=${this.state.skip}&sort=${this.state.sort}&count=${this.state.count}&center=${args[0].lat},${args[0].lng}&ne=${args[1].ne}&sw=${args[1].sw}`;
 		try {
-			await fetch(iapiBase + '/dealers/local/bounds?key=883d4046-8b96-11e4-9475-42010af00d4e' + params, {
+			await fetch(iapiBase + '/dealers/local/bounds?key=' + KEY + params, {
 				method: 'get',
 				headers: {
 					'Accept': 'application/json',
@@ -49,7 +54,9 @@ class BuyStore extends EventEmitter {
 			}).then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				this.setState({ markers: data });
+				if (data && data !== null) {
+					this.setState({ markers: data });
+				}
 			});
 		} catch (err) {
 			this.setState({
