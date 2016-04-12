@@ -30,6 +30,7 @@ class BuyStore extends EventEmitter {
 			setLocal: BuyActions.setLocal,
 			bounds: BuyActions.bounds,
 			setMarkers: BuyActions.setMarkers,
+			online: BuyActions.online,
 		});
 	}
 
@@ -37,6 +38,9 @@ class BuyStore extends EventEmitter {
 		this.setState({
 			local,
 		});
+		if (local === false) {
+			this.online();
+		}
 	}
 
 	setMarkers(markers) {
@@ -47,6 +51,28 @@ class BuyStore extends EventEmitter {
 		const params = `&brand=${this.state.brand}&skip=${this.state.skip}&sort=${this.state.sort}&count=${this.state.count}&center=${args[0].lat},${args[0].lng}&ne=${args[1].ne}&sw=${args[1].sw}`;
 		try {
 			await fetch(iapiBase + '/dealers/local/bounds?key=' + KEY + params, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}).then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				if (data && data !== null) {
+					this.setState({ markers: data });
+				}
+			});
+		} catch (err) {
+			this.setState({
+				error: err,
+			});
+		}
+	}
+
+	async online() {
+		const params = `&brand=${this.state.brand}&skip=${this.state.skip}&count=${this.state.count}`;
+		try {
+			await fetch(iapiBase + '/dealers/online?key=' + KEY + params, {
 				method: 'get',
 				headers: {
 					'Accept': 'application/json',

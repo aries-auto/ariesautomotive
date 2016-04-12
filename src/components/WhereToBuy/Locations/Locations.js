@@ -14,6 +14,7 @@ class Locations extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		markers: PropTypes.array,
+		local: PropTypes.bool,
 	};
 
 	constructor() {
@@ -21,7 +22,7 @@ class Locations extends Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
-		if (nextProps.markers === this.props.markers) {
+		if ((nextProps.markers === this.props.markers) && (nextProps.local === this.props.local)) {
 			return false;
 		}
 		return true;

@@ -38,7 +38,7 @@ class WhereToBuy extends Component {
 		return (
 			<div className={cx(s.root, this.props.className, 'container')}>
 				<ControlPanel />
-				<Buymap />
+				{this.props.local === true ? <Buymap /> : ''}
 				<Locations />
 			</div>
 		);
