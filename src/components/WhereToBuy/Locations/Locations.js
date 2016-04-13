@@ -5,6 +5,17 @@ import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import Modal from 'react-modal';
+const customStyles = {
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)',
+	},
+};
 
 
 @withStyles(s)
@@ -15,6 +26,7 @@ class Locations extends Component {
 		className: PropTypes.string,
 		markers: PropTypes.array,
 		local: PropTypes.bool,
+		showModal: PropTypes.bool,
 	};
 
 	constructor() {
@@ -22,7 +34,7 @@ class Locations extends Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
-		if ((nextProps.markers === this.props.markers) && (nextProps.local === this.props.local)) {
+		if ((nextProps.markers === this.props.markers) && (nextProps.local === this.props.local) && nextProps.showModal === this.props.showModal) {
 			return false;
 		}
 		return true;
@@ -37,8 +49,11 @@ class Locations extends Component {
 	}
 
 	getDirections(location) {
-		// TODO directions
-		console.log(location);
+		BuyActions.setModal(true, location);
+	}
+
+	hideModal() {
+		BuyActions.setModal(false);
 	}
 
 	viewOnMap(location) {
@@ -59,6 +74,15 @@ class Locations extends Component {
 		sortedTiers.Gold = tiers.Gold;
 		sortedTiers.Silver = tiers.Silver;
 		return sortedTiers;
+	}
+
+	handleChange(e) {
+		BuyActions.setStartingLocation(e.target.value);
+	}
+
+	handleClick() {
+		// directinos
+		console.log(this.props);
 	}
 
 	renderLocations() {
@@ -158,10 +182,28 @@ class Locations extends Component {
 		return output;
 	}
 
+	renderLocationModal() {
+		return (
+			<Modal
+				style={customStyles}
+				isOpen={this.props.showModal}
+				onRequestClose={this.hideModal}
+			>
+			<h2>Get Directions</h2>
+			<div className={cx('form-group')}>
+				<label htmlFor="startingLocation">Enter Your Location</label>
+				<input type="text" name="startingLocation" onChange={this.handleChange}/>
+			</div>
+			<button className={cx('btn btn-primary')} type="submit" onClick={this.handleClick}>Map Route</button>
+			</Modal>
+		);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, s.boom)}>
 				{this.props.local === true ? this.renderLocations() : this.renderOnlineLocations()}
+				{this.props.showModal === true ? this.renderLocationModal() : ''}
 			</div>
 		);
 	}

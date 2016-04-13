@@ -25,12 +25,18 @@ class BuyStore extends EventEmitter {
 			count: 100,
 			brand: 3,
 			markers: [],
+			showModal: false,
+			startingLocation: '',
+			location: {},
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
 			bounds: BuyActions.bounds,
 			setMarkers: BuyActions.setMarkers,
 			online: BuyActions.online,
+			setModal: BuyActions.setModal,
+			setStartingLocation: BuyActions.setStartingLocation,
+			setLocation: BuyActions.setLocation,
 		});
 	}
 
@@ -45,6 +51,24 @@ class BuyStore extends EventEmitter {
 
 	setMarkers(markers) {
 		this.setState({ markers });
+	}
+
+	setModal(args) {
+		const showModal = args[0];
+		this.setState({ showModal });
+		if (args.length > 1) {
+			this.setState({
+				location: args[1],
+			});
+		}
+	}
+
+	setStartingLocation(startingLocation) {
+		this.setState({ startingLocation });
+	}
+
+	setLocation(location) {
+		this.setState({ location });
 	}
 
 	async bounds(args) {

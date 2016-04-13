@@ -4,7 +4,7 @@ import s from './../WhereToBuy.scss';
 import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
@@ -16,6 +16,7 @@ class Map extends Component {
 		center: PropTypes.object,
 		markers: PropTypes.array,
 		bounds: PropTypes.object,
+		directions: PropTypes.object,
 	};
 
 	constructor() {
@@ -25,6 +26,26 @@ class Map extends Component {
 	componentDidMount() {
 		// initial map markers
 		BuyActions.bounds(this.props.center, this.props.bounds);
+	}
+	componentWillReceiveProps() {
+		// TODO arrrrgggghhhh...load!
+		// const DirectionsService = new google.maps.DirectionsService();
+		// console.log(DirectionsService);
+		// const TravelMode = new this.refs.map.TravelMode();
+		// const DirectionsStatus = new this.refs.map.DirectionsStatus();
+		// DirectionsService.route({
+		// 	origin: this.state.origin,
+		// 	destination: this.state.destination,
+		// 	travelMode: TravelMode.DRIVING,
+		// }, (result, status) => {
+		// 	if (status === DirectionsStatus.OK) {
+		// 		this.setState({
+		// 			directions: result,
+		// 		});
+		// 	} else {
+		// 		console.error(`error fetching directions ${ result }`);
+		// 	}
+		// });
 	}
 
 	static getStores() {
@@ -110,6 +131,7 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
+					{this.props.directions ? <DirectionsRenderer directions={this.props.directions} /> : null}
 					</GoogleMap>
 				}
 				/>
