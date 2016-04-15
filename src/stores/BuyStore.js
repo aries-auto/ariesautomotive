@@ -26,8 +26,10 @@ class BuyStore extends EventEmitter {
 			brand: 3,
 			markers: [],
 			showModal: false,
-			startingLocation: '',
-			location: {},
+			origin: '',
+			destination: '',
+			fetchDirections: false,
+			directions: [],
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -35,8 +37,9 @@ class BuyStore extends EventEmitter {
 			setMarkers: BuyActions.setMarkers,
 			online: BuyActions.online,
 			setModal: BuyActions.setModal,
-			setStartingLocation: BuyActions.setStartingLocation,
-			setLocation: BuyActions.setLocation,
+			setOrigin: BuyActions.setOrigin,
+			showDirections: BuyActions.showDirections,
+			getDirections: BuyActions.getDirections,
 		});
 	}
 
@@ -56,19 +59,21 @@ class BuyStore extends EventEmitter {
 	setModal(args) {
 		const showModal = args[0];
 		this.setState({ showModal });
+
 		if (args.length > 1) {
+			const address = args[1].address + ' ' + args[1].city + ', ' + args[1].state.abbreviation + ' ' + args[1].postalCode;
 			this.setState({
-				location: args[1],
+				destination: address,
 			});
 		}
 	}
 
-	setStartingLocation(startingLocation) {
-		this.setState({ startingLocation });
+	setOrigin(origin) {
+		this.setState({ origin });
 	}
 
-	setLocation(location) {
-		this.setState({ location });
+	showDirections(fetchDirections) {
+		this.setState({ fetchDirections });
 	}
 
 	async bounds(args) {
@@ -111,6 +116,29 @@ class BuyStore extends EventEmitter {
 		} catch (err) {
 			this.setState({
 				error: err,
+			});
+		}
+	}
+
+	async getDirections() {
+		this.setState({ fetchDirections: false });
+		const url = `${iapiBase}/directions?key=${KEY}&origin=${this.state.origin}&destination=${this.state.destination}`;
+		try {
+			await fetch(url, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}).then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				if (data && data !== null) {
+					this.setState({ directions: data });
+				}
+			});
+		} catch (err) {
+			this.setState({
+				error: err, fetchDirections: false,
 			});
 		}
 	}

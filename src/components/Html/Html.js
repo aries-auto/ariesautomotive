@@ -93,7 +93,7 @@ class Html extends Component {
 
 					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
-					<script src="https://maps.googleapis.com/maps/api/js"></script>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA"></script>
 				</head>
 				<body>
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />

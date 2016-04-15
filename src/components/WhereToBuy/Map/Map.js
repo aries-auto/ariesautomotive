@@ -7,6 +7,7 @@ import BuyStore from '../../../stores/BuyStore';
 import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
+
 @withStyles(s)
 @connectToStores
 class Map extends Component {
@@ -16,7 +17,10 @@ class Map extends Component {
 		center: PropTypes.object,
 		markers: PropTypes.array,
 		bounds: PropTypes.object,
-		directions: PropTypes.object,
+		directions: PropTypes.array,
+		fetchDirections: PropTypes.bool,
+		origin: PropTypes.string,
+		destination: PropTypes.string,
 	};
 
 	constructor() {
@@ -27,25 +31,12 @@ class Map extends Component {
 		// initial map markers
 		BuyActions.bounds(this.props.center, this.props.bounds);
 	}
-	componentWillReceiveProps() {
-		// TODO arrrrgggghhhh...load!
-		// const DirectionsService = new google.maps.DirectionsService();
-		// console.log(DirectionsService);
-		// const TravelMode = new this.refs.map.TravelMode();
-		// const DirectionsStatus = new this.refs.map.DirectionsStatus();
-		// DirectionsService.route({
-		// 	origin: this.state.origin,
-		// 	destination: this.state.destination,
-		// 	travelMode: TravelMode.DRIVING,
-		// }, (result, status) => {
-		// 	if (status === DirectionsStatus.OK) {
-		// 		this.setState({
-		// 			directions: result,
-		// 		});
-		// 	} else {
-		// 		console.error(`error fetching directions ${ result }`);
-		// 	}
-		// });
+
+	componentWillReceiveProps(next) {
+		if (!next.fetchDirections) {
+			return;
+		}
+		BuyActions.getDirections();
 	}
 
 	static getStores() {
@@ -83,7 +74,7 @@ class Map extends Component {
 
 	renderShowInfo(index, marker) {
 		const content = `<h4>${marker.name}</h4><div>${marker.address}</div><div>${marker.city}, ${marker.state.abbreviation} ${marker.postalCode}</div>
-			<hr /><div><a href="tel${marker.phone}"><span class="glyphicon glyphicon-earphone">${marker.phone}</span></a></div>`;
+			<hr /><div><a href='tel${marker.phone}'><span class='glyphicon glyphicon-earphone'>${marker.phone}</span></a></div>`;
 		return (
 			<InfoWindow
 				key={index}
@@ -92,7 +83,6 @@ class Map extends Component {
 			/>
 		);
 	}
-
 
 	render() {
 		return (
@@ -131,7 +121,7 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
-					{this.props.directions ? <DirectionsRenderer directions={this.props.directions} /> : null}
+					{this.props.directions.length > 0 ? <DirectionsRenderer directions={this.props.directions} /> : null}
 					</GoogleMap>
 				}
 				/>

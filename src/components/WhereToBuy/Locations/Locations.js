@@ -31,6 +31,7 @@ class Locations extends Component {
 
 	constructor() {
 		super();
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -48,8 +49,8 @@ class Locations extends Component {
 		return BuyStore.getState();
 	}
 
-	getDirections(location) {
-		BuyActions.setModal(true, location);
+	getDirections(destination) {
+		BuyActions.setModal(true, destination);
 	}
 
 	hideModal() {
@@ -77,12 +78,11 @@ class Locations extends Component {
 	}
 
 	handleChange(e) {
-		BuyActions.setStartingLocation(e.target.value);
+		BuyActions.setOrigin(e.target.value);
 	}
 
 	handleClick() {
-		// directinos
-		console.log(this.props);
+		BuyActions.showDirections(true);
 	}
 
 	renderLocations() {
@@ -189,12 +189,12 @@ class Locations extends Component {
 				isOpen={this.props.showModal}
 				onRequestClose={this.hideModal}
 			>
-			<h2>Get Directions</h2>
-			<div className={cx('form-group')}>
-				<label htmlFor="startingLocation">Enter Your Location</label>
-				<input type="text" name="startingLocation" onChange={this.handleChange}/>
-			</div>
-			<button className={cx('btn btn-primary')} type="submit" onClick={this.handleClick}>Map Route</button>
+				<h2>Get Directions</h2>
+				<div className={cx('form-group')}>
+					<label htmlFor="startingLocation">Enter Your Location</label>
+					<input type="text" name="startingLocation" onChange={this.handleChange}/>
+				</div>
+				<button className={cx('btn btn-primary')} type="submit" onClick={this.handleClick}>Map Route</button>
 			</Modal>
 		);
 	}
