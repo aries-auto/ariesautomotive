@@ -78,7 +78,7 @@ class WhereToBuy extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className, 'container')}>
-				<ControlPanel />
+				<ControlPanel {...this.props} />
 				{this.props.local === true ? <Buymap {...this.props} /> : ''}
 				<Locations {...this.props} />
 				{this.props.showModal === true ? this.renderLocationModal() : ''}

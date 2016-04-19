@@ -30,6 +30,7 @@ class BuyStore extends EventEmitter {
 			destination: '',
 			fetchDirections: false,
 			directions: null,
+			suggestions: [],
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -40,6 +41,7 @@ class BuyStore extends EventEmitter {
 			setOrigin: BuyActions.setOrigin,
 			showDirections: BuyActions.showDirections,
 			setDirections: BuyActions.setDirections,
+			setSuggestions: BuyActions.setSuggestions,
 		});
 	}
 
@@ -54,6 +56,10 @@ class BuyStore extends EventEmitter {
 
 	setMarkers(markers) {
 		this.setState({ markers });
+	}
+
+	setSuggestions(suggestions) {
+		this.setState({ suggestions });
 	}
 
 	setModal(args) {

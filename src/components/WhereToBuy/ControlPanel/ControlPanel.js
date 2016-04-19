@@ -13,6 +13,9 @@ class ControlPanel extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		local: PropTypes.bool,
+		google: PropTypes.object,
+		location: PropTypes.string,
+		suggestions: PropTypes.array,
 	};
 
 	constructor() {
@@ -29,6 +32,29 @@ class ControlPanel extends Component {
 
 	setLocal(l) {
 		BuyActions.setLocal(l);
+	}
+
+	searchAutocomplete(e) {
+		if (!e.target.value || e.target.value.length === 0) {
+			return;
+		}
+		const autocomplete = new this.props.google.maps.places.AutocompleteService();
+		autocomplete.getQueryPredictions({ input: e.target.value }, (predictions, status) => {
+			if (status !== this.props.google.maps.places.PlacesServiceStatus.OK) {
+				console.log('err');
+			}
+			BuyActions.setSuggestions(predictions);
+		});
+	}
+
+	renderSuggestions() {
+		const suggestions = [];
+		this.props.suggestions.map((suggestion, index) => {
+			suggestions.push(<option value={suggestion.description} key={index}>{suggestion.description}</option>);
+		});
+		return (
+			<datalist id="suggestions">{suggestions}</datalist>
+		);
 	}
 
 	render() {
@@ -58,7 +84,8 @@ class ControlPanel extends Component {
 								</a>
 							</div>
 						<div className="pull-right col-lg-8 col-md-8 col-xs-8 col-sm-9">
-							<input type="search" className="form-control autocomplete" placeholder="Search for location" ng-show="map.show" />
+							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions" />
+							{this.props.suggestions.length > 0 ? this.renderSuggestions() : null}
 						</div>
 							<div className="clearfix"></div>
 						</div>

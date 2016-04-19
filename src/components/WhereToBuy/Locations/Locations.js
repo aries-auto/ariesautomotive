@@ -85,6 +85,7 @@ class Locations extends Component {
 			const locationHtml = [];
 			for (let i = 0; i < tiers[tierName].length; i++) {
 				const location = tiers[tierName][i];
+				const telephone = `tel:${location.phone}`;
 				locationHtml.push(<div className={cx('col-md-4 col-sm-6 col-xs-12', s.location)} key={tierName + i}>
 						<a className={s.name} onClick={this.viewOnMap.bind(this, location)}>{location.name}</a>
 						<span className={cx(s.type)}>{location.dealerType.label}</span>
@@ -94,7 +95,7 @@ class Locations extends Component {
 						<span className={cx(s.zip)}>{location.postalCode}</span>
 						<span className={cx(s.country)}>{location.state.country.abbreviation}</span>
 						<div className={cx(s.actions)}>
-							<a href="tel:{location.phone}">
+							<a href={telephone}>
 								<span className="glyphicon glyphicon-earphone"></span>
 								{location.phone}
 							</a>
