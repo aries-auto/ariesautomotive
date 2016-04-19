@@ -35,7 +35,6 @@ function render(state) {
 			} else {
 				window.scrollTo(0, 0);
 			}
-
 			// Remove the pre-rendered CSS because it's no longer used
 			// after the React app is launched
 			if (cssContainer) {
@@ -49,7 +48,7 @@ function render(state) {
 function run() {
 	let currentLocation = null;
 	let currentState = null;
-
+	const google = window.google;
 	// Make taps on links and buttons work fast on mobiles
 	FastClick.attach(document.body);
 
@@ -61,6 +60,7 @@ function run() {
 			query: location.query,
 			state: location.state,
 			context,
+			google,
 		});
 		render(currentState);
 	});

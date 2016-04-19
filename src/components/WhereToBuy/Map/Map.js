@@ -4,8 +4,9 @@ import s from './../WhereToBuy.scss';
 import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import DirectionsRenderer from '../DirectionsRenderer/DirectionsRenderer';
 
 
 @withStyles(s)
@@ -21,6 +22,7 @@ class Map extends Component {
 		fetchDirections: PropTypes.bool,
 		origin: PropTypes.string,
 		destination: PropTypes.string,
+		google: PropTypes.object,
 	};
 
 	constructor() {
@@ -33,10 +35,28 @@ class Map extends Component {
 	}
 
 	componentWillReceiveProps(next) {
-		if (!next.fetchDirections) {
+		if (!next.fetchDirections || !next.origin || !next.destination) {
 			return;
 		}
-		BuyActions.getDirections();
+		const DirectionsService = new this.props.google.maps.DirectionsService();
+		DirectionsService.route({
+			origin: next.origin,
+			destination: next.destination,
+			travelMode: this.props.google.maps.TravelMode.DRIVING,
+		}, (result, status) => {
+			if (status === this.props.google.maps.DirectionsStatus.OK) {
+				BuyActions.setDirections(result.routes);
+			} else {
+				console.error(`error fetching directions ${ result }`);
+			}
+		});
+	}
+
+	shouldComponentUpdate(nextProps) {
+		if (nextProps.directions && nextProps.directions.length > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	static getStores() {
@@ -84,6 +104,12 @@ class Map extends Component {
 		);
 	}
 
+	renderDirections() {
+		return (
+			<DirectionsRenderer directions={this.props.directions} />
+		);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.mapContainer)}>
@@ -121,7 +147,7 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
-					{this.props.directions.length > 0 ? <DirectionsRenderer directions={this.props.directions} /> : null}
+					{this.props.directions.length ? this.renderDirections() : null }
 					</GoogleMap>
 				}
 				/>

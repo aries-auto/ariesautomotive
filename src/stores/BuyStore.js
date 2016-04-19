@@ -40,6 +40,7 @@ class BuyStore extends EventEmitter {
 			setOrigin: BuyActions.setOrigin,
 			showDirections: BuyActions.showDirections,
 			getDirections: BuyActions.getDirections,
+			setDirections: BuyActions.setDirections,
 		});
 	}
 
@@ -59,7 +60,6 @@ class BuyStore extends EventEmitter {
 	setModal(args) {
 		const showModal = args[0];
 		this.setState({ showModal });
-
 		if (args.length > 1) {
 			const address = args[1].address + ' ' + args[1].city + ', ' + args[1].state.abbreviation + ' ' + args[1].postalCode;
 			this.setState({
@@ -74,6 +74,10 @@ class BuyStore extends EventEmitter {
 
 	showDirections(fetchDirections) {
 		this.setState({ fetchDirections });
+	}
+
+	setDirections(directions) {
+		this.setState({ directions, showModal: null, fetchDirections: false });
 	}
 
 	async bounds(args) {

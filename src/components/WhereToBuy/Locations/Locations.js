@@ -5,18 +5,6 @@ import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import Modal from 'react-modal';
-const customStyles = {
-	content: {
-		top: '50%',
-		left: '50%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)',
-	},
-};
-
 
 @withStyles(s)
 @connectToStores
@@ -31,7 +19,6 @@ class Locations extends Component {
 
 	constructor() {
 		super();
-		this.handleClick = this.handleClick.bind(this);
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -53,10 +40,6 @@ class Locations extends Component {
 		BuyActions.setModal(true, destination);
 	}
 
-	hideModal() {
-		BuyActions.setModal(false);
-	}
-
 	viewOnMap(location) {
 		for (const i in this.props.markers) {
 			if (!i) {return;}
@@ -75,14 +58,6 @@ class Locations extends Component {
 		sortedTiers.Gold = tiers.Gold;
 		sortedTiers.Silver = tiers.Silver;
 		return sortedTiers;
-	}
-
-	handleChange(e) {
-		BuyActions.setOrigin(e.target.value);
-	}
-
-	handleClick() {
-		BuyActions.showDirections(true);
 	}
 
 	renderLocations() {
@@ -182,28 +157,10 @@ class Locations extends Component {
 		return output;
 	}
 
-	renderLocationModal() {
-		return (
-			<Modal
-				style={customStyles}
-				isOpen={this.props.showModal}
-				onRequestClose={this.hideModal}
-			>
-				<h2>Get Directions</h2>
-				<div className={cx('form-group')}>
-					<label htmlFor="startingLocation">Enter Your Location</label>
-					<input type="text" name="startingLocation" onChange={this.handleChange}/>
-				</div>
-				<button className={cx('btn btn-primary')} type="submit" onClick={this.handleClick}>Map Route</button>
-			</Modal>
-		);
-	}
-
 	render() {
 		return (
 			<div className={cx(s.root, s.boom)}>
 				{this.props.local === true ? this.renderLocations() : this.renderOnlineLocations()}
-				{this.props.showModal === true ? this.renderLocationModal() : ''}
 			</div>
 		);
 	}
