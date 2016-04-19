@@ -4,9 +4,8 @@ import s from './../WhereToBuy.scss';
 import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import DirectionsRenderer from '../DirectionsRenderer/DirectionsRenderer';
 
 
 @withStyles(s)
@@ -45,7 +44,7 @@ class Map extends Component {
 			travelMode: this.props.google.maps.TravelMode.DRIVING,
 		}, (result, status) => {
 			if (status === this.props.google.maps.DirectionsStatus.OK) {
-				BuyActions.setDirections(result.routes);
+				BuyActions.setDirections(result.routes); // TODO
 			} else {
 				console.error(`error fetching directions ${ result }`);
 			}
@@ -53,7 +52,7 @@ class Map extends Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
-		if (nextProps.directions && nextProps.directions.length > 0) {
+		if ((nextProps.directions && nextProps.directions.length > 0) || this.props.markers) {
 			return true;
 		}
 		return false;
