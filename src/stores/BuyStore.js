@@ -39,7 +39,6 @@ class BuyStore extends EventEmitter {
 			setModal: BuyActions.setModal,
 			setOrigin: BuyActions.setOrigin,
 			showDirections: BuyActions.showDirections,
-			getDirections: BuyActions.getDirections,
 			setDirections: BuyActions.setDirections,
 		});
 	}
@@ -120,29 +119,6 @@ class BuyStore extends EventEmitter {
 		} catch (err) {
 			this.setState({
 				error: err,
-			});
-		}
-	}
-
-	async getDirections() {
-		this.setState({ fetchDirections: false });
-		const url = `${iapiBase}/directions?key=${KEY}&origin=${this.state.origin}&destination=${this.state.destination}`;
-		try {
-			await fetch(url, {
-				method: 'get',
-				headers: {
-					'Accept': 'application/json',
-				},
-			}).then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				if (data && data !== null) {
-					this.setState({ directions: data });
-				}
-			});
-		} catch (err) {
-			this.setState({
-				error: err, fetchDirections: false,
 			});
 		}
 	}

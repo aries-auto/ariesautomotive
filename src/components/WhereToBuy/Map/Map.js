@@ -6,8 +6,6 @@ import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
 import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
-// import Directions from '../Directions/Directions';
-
 
 @withStyles(s)
 @connectToStores
