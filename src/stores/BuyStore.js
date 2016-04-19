@@ -29,7 +29,7 @@ class BuyStore extends EventEmitter {
 			origin: '',
 			destination: '',
 			fetchDirections: false,
-			directions: [],
+			directions: null,
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,

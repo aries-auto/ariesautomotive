@@ -6,6 +6,7 @@ import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
 import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
+// import Directions from '../Directions/Directions';
 
 
 @withStyles(s)
@@ -17,7 +18,7 @@ class Map extends Component {
 		center: PropTypes.object,
 		markers: PropTypes.array,
 		bounds: PropTypes.object,
-		directions: PropTypes.array,
+		directions: PropTypes.any,
 		fetchDirections: PropTypes.bool,
 		origin: PropTypes.string,
 		destination: PropTypes.string,
@@ -44,18 +45,11 @@ class Map extends Component {
 			travelMode: this.props.google.maps.TravelMode.DRIVING,
 		}, (result, status) => {
 			if (status === this.props.google.maps.DirectionsStatus.OK) {
-				BuyActions.setDirections(result.routes); // TODO
+				BuyActions.setDirections(result);
 			} else {
 				console.error(`error fetching directions ${ result }`);
 			}
 		});
-	}
-
-	shouldComponentUpdate(nextProps) {
-		if ((nextProps.directions && nextProps.directions.length > 0) || this.props.markers) {
-			return true;
-		}
-		return false;
 	}
 
 	static getStores() {
@@ -104,24 +98,47 @@ class Map extends Component {
 	}
 
 	renderDirections() {
+		const origin = new this.props.google.maps.LatLng(41.8507300, -87.6512600);
 		return (
-			<DirectionsRenderer directions={this.props.directions} />
+			<GoogleMapLoader
+				containerElement={
+					<div
+						{...this.props}
+						style={{
+							height: '100%',
+						}}
+					/>
+				}
+				googleMapElement={
+				<GoogleMap
+					containerProps={{
+						...this.props,
+						style: {
+							height: `100%`,
+						},
+					}}
+					defaultZoom={13}
+					defaultCenter={origin}
+				>
+					<DirectionsRenderer directions={this.props.directions} />
+				</GoogleMap>
+				}
+			/>
 		);
 	}
 
-	render() {
+	renderMap() {
 		return (
-			<div className={cx(s.mapContainer)}>
-				<GoogleMapLoader
-					containerElement={
-						<div
-							{...this.props}
-							style={{
-								height: '100%',
-							}}
-						/>
-					}
-					googleMapElement={
+			<GoogleMapLoader
+				containerElement={
+					<div
+						{...this.props}
+						style={{
+							height: '100%',
+						}}
+					/>
+				}
+				googleMapElement={
 					<GoogleMap
 						containerProps={{
 							...this.props,
@@ -146,11 +163,16 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
-					{this.props.directions.length ? this.renderDirections() : null }
 					</GoogleMap>
 				}
-				/>
+			/>
+		);
+	}
 
+	render() {
+		return (
+			<div className={cx(s.mapContainer)}>
+				{ this.props.directions ? this.renderDirections() : this.renderMap() }
 			</div>
 		);
 	}
