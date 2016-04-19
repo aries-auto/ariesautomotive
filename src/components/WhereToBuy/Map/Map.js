@@ -4,8 +4,9 @@ import s from './../WhereToBuy.scss';
 import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer, Polygon } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
+// import Regions from '../Regions/Regions';
 
 @withStyles(s)
 @connectToStores
@@ -21,10 +22,21 @@ class Map extends Component {
 		origin: PropTypes.string,
 		destination: PropTypes.string,
 		google: PropTypes.object,
+		showRegions: PropTypes.bool,
+		regions: PropTypes.array,
+		zoom: PropTypes.number,
+	};
+
+	static defaultProps = {
+		zoom: 13,
 	};
 
 	constructor() {
 		super();
+	}
+
+	componentWillMount() {
+		BuyActions.regions();
 	}
 
 	componentDidMount() {
@@ -71,6 +83,10 @@ class Map extends Component {
 	}
 
 	handleChange() {
+		if (this.refs.map.getZoom() < 13) {
+			BuyActions.setShowRegions(true);
+			return;
+		}
 		const center = {
 			lat: this.refs.map.getCenter().lat(),
 			lng: this.refs.map.getCenter().lng(),
@@ -79,7 +95,6 @@ class Map extends Component {
 			ne: this.refs.map.getBounds().R.j + ',' + this.refs.map.getBounds().j.R,
 			sw: this.refs.map.getBounds().R.R + ',' + this.refs.map.getBounds().j.j,
 		};
-
 		BuyActions.bounds(center, bounds);
 	}
 
@@ -135,12 +150,25 @@ class Map extends Component {
 					}}
 					defaultZoom={13}
 					defaultCenter={origin}
+					zoom={this.props.zoom}
 				>
 					<DirectionsRenderer directions={this.props.directions} />
 				</GoogleMap>
 				}
 			/>
 		);
+	}
+
+	renderRegions() {
+		const regions = [];
+		this.props.regions.map((region, index) => {
+			const coords = [];
+			region.coordinates.map((coord) => {
+				coords.push({ lat: coord.latitude, lng: coord.longitude });
+			});
+			regions.push(<Polygon paths={coords} key={index} />);
+		});
+		return regions;
 	}
 
 	renderMap() {
@@ -181,6 +209,7 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
+					{this.props.showRegions ? ::this.renderRegions() : null}
 					</GoogleMap>
 				}
 			/>
@@ -191,6 +220,7 @@ class Map extends Component {
 		return (
 			<div className={cx(s.mapContainer)}>
 				{ this.props.directions ? this.renderDirections() : this.renderMap() }
+
 			</div>
 		);
 	}

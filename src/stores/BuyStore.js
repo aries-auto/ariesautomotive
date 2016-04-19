@@ -31,6 +31,8 @@ class BuyStore extends EventEmitter {
 			fetchDirections: false,
 			directions: null,
 			suggestions: [],
+			showRegions: false,
+			regions: [],
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -44,6 +46,8 @@ class BuyStore extends EventEmitter {
 			setSuggestions: BuyActions.setSuggestions,
 			setCurrentLocation: BuyActions.setCurrentLocation,
 			setCenter: BuyActions.setCenter,
+			setShowRegions: BuyActions.setShowRegions,
+			regions: BuyActions.regions,
 		});
 	}
 
@@ -95,6 +99,10 @@ class BuyStore extends EventEmitter {
 		this.setState({ directions, showModal: null, fetchDirections: false });
 	}
 
+	setShowRegions(showRegions) {
+		this.setState({ showRegions });
+	}
+
 	async bounds(args) {
 		const params = `&brand=${this.state.brand}&skip=${this.state.skip}&sort=${this.state.sort}&count=${this.state.count}&center=${args[0].lat},${args[0].lng}&ne=${args[1].ne}&sw=${args[1].sw}`;
 		try {
@@ -130,6 +138,27 @@ class BuyStore extends EventEmitter {
 			}).then((data) => {
 				if (data && data !== null) {
 					this.setState({ markers: data });
+				}
+			});
+		} catch (err) {
+			this.setState({
+				error: err,
+			});
+		}
+	}
+
+	async regions() {
+		try {
+			await fetch(iapiBase + '/dealers/local/regions?key=' + KEY, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}).then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				if (data && data !== null) {
+					this.setState({ regions: data });
 				}
 			});
 		} catch (err) {
