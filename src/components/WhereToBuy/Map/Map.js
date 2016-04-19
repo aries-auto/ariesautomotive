@@ -83,6 +83,24 @@ class Map extends Component {
 		BuyActions.bounds(center, bounds);
 	}
 
+	handleMapCenterChanged() {
+		const newCenter = this.refs.map.getCenter();
+		const newPos = {
+			lat: newCenter.lat(),
+			lng: newCenter.lng(),
+		};
+		if (newPos === this.props.center) {
+			return;
+		}
+		if (this._timeoutId) {
+			clearTimeout(this._timeoutId);
+		}
+		this._timeoutId = setTimeout(() => {
+			BuyActions.setCenter(this.props.center);
+		}, 3000);
+		BuyActions.setCenter(newPos);
+	}
+
 	renderShowInfo(index, marker) {
 		const content = `<h4>${marker.name}</h4><div>${marker.address}</div><div>${marker.city}, ${marker.state.abbreviation} ${marker.postalCode}</div>
 			<hr /><div><a href='tel${marker.phone}'><span class='glyphicon glyphicon-earphone'>${marker.phone}</span></a></div>`;
@@ -147,6 +165,8 @@ class Map extends Component {
 						defaultCenter={{ lat: 44.8167, lng: -91.5000 }}
 						onDragend={::this.handleChange}
 						onZoomChanged={::this.handleChange}
+						center={this.props.center}
+						onCenterChanged={::this.handleMapCenterChanged}
 					>
 					{this.props.markers.map((marker, index) => {
 						return (

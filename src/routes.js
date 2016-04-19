@@ -181,7 +181,7 @@ const router = new Router(on => {
 
 	on('/buy', async (state) => {
 		state.context.id = state.params.id;
-		return <WhereToBuy context={state.context} google={state.google} />;
+		return <WhereToBuy context={state.context} google={state.google} navigator={state.navigator} />;
 	});
 
 	on('/', async (state) => {

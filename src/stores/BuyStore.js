@@ -42,6 +42,8 @@ class BuyStore extends EventEmitter {
 			showDirections: BuyActions.showDirections,
 			setDirections: BuyActions.setDirections,
 			setSuggestions: BuyActions.setSuggestions,
+			setCurrentLocation: BuyActions.setCurrentLocation,
+			setCenter: BuyActions.setCenter,
 		});
 	}
 
@@ -60,6 +62,14 @@ class BuyStore extends EventEmitter {
 
 	setSuggestions(suggestions) {
 		this.setState({ suggestions });
+	}
+
+	setCurrentLocation(currentLocation) {
+		this.setState({ currentLocation });
+	}
+
+	setCenter(center) {
+		this.setState({ center });
 	}
 
 	setModal(args) {

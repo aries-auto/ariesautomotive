@@ -14,8 +14,9 @@ class ControlPanel extends Component {
 		className: PropTypes.string,
 		local: PropTypes.bool,
 		google: PropTypes.object,
-		location: PropTypes.string,
+		currentLocation: PropTypes.string,
 		suggestions: PropTypes.array,
+		navigator: PropTypes.object,
 	};
 
 	constructor() {
@@ -32,6 +33,14 @@ class ControlPanel extends Component {
 
 	setLocal(l) {
 		BuyActions.setLocal(l);
+	}
+
+	handleCurrentLocation() {
+		this.props.navigator.geolocation.getCurrentPosition((pos) => {
+			BuyActions.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+		}, (err) => {
+			console.log(err);
+		});
 	}
 
 	searchAutocomplete(e) {
@@ -76,9 +85,9 @@ class ControlPanel extends Component {
 								</li>
 							</ul>
 						</div>
-						<div className={cx('col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row', s.location)} ng-show="display === 'local'">
+						<div className={cx('col-lg-6 col-md-6 col-sm-6 col-xs-12 wtb-search search-form row', s.location)}>
 							<div className={cx('pull-left col-lg-4 col-md-4 col-xs-4 col-sm-3 geo-lookup', s.locationtext)}>
-								<a href="#" ng-click="LookupGeoLoc()">
+								<a href="#" onClick={::this.handleCurrentLocation}>
 									<span className="glyphicon glyphicon-globe"></span>
 									<span>Use my Location</span>
 								</a>

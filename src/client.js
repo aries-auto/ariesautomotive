@@ -49,6 +49,7 @@ function run() {
 	let currentLocation = null;
 	let currentState = null;
 	const google = window.google;
+	const navigator = window.navigator;
 	// Make taps on links and buttons work fast on mobiles
 	FastClick.attach(document.body);
 
@@ -61,6 +62,7 @@ function run() {
 			state: location.state,
 			context,
 			google,
+			navigator,
 		});
 		render(currentState);
 	});
