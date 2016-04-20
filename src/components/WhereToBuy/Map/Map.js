@@ -4,8 +4,9 @@ import s from './../WhereToBuy.scss';
 import withStyles from '../../../decorators/withStyles';
 import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer, Polygon } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, Polygon } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import Directions from './../Directions/Directions';
 
 @withStyles(s)
 @connectToStores
@@ -24,6 +25,7 @@ class Map extends Component {
 		showRegions: PropTypes.bool,
 		regions: PropTypes.array,
 		zoom: PropTypes.number,
+		markerHack: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -47,22 +49,10 @@ class Map extends Component {
 		if (!next.fetchDirections || !next.origin || !next.destination) {
 			return;
 		}
-		const DirectionsService = new this.props.google.maps.DirectionsService();
-		DirectionsService.route({
-			origin: next.origin,
-			destination: next.destination,
-			travelMode: this.props.google.maps.TravelMode.DRIVING,
-		}, (result, status) => {
-			if (status === this.props.google.maps.DirectionsStatus.OK) {
-				BuyActions.setDirections(result);
-			} else {
-				console.error(`error fetching directions ${ result }`);
-			}
-		});
 	}
 
 	shouldComponentUpdate(next) {
-		if (next.center === this.props.center && next.markers === this.props.markers && next.zoom === this.props.zoom) {
+		if (next.center === this.props.center && next.markers === this.props.markers && next.zoom === this.props.zoom && next.fetchDirections === false) {
 			return false;
 		}
 		return true;
@@ -134,34 +124,7 @@ class Map extends Component {
 	}
 
 	renderDirections() {
-		const origin = new this.props.google.maps.LatLng(41.8507300, -87.6512600);
-		return (
-			<GoogleMapLoader
-				containerElement={
-					<div
-						{...this.props}
-						style={{
-							height: '100%',
-						}}
-					/>
-				}
-				googleMapElement={
-				<GoogleMap
-					containerProps={{
-						...this.props,
-						style: {
-							height: `100%`,
-						},
-					}}
-					defaultZoom={13}
-					defaultCenter={origin}
-					zoom={this.props.zoom}
-				>
-					<DirectionsRenderer directions={this.props.directions} />
-				</GoogleMap>
-				}
-			/>
-		);
+		return (<Directions {...this.props} />);
 	}
 
 	renderRegions() {
@@ -226,7 +189,7 @@ class Map extends Component {
 	render() {
 		return (
 			<div className={cx(s.mapContainer)}>
-				{ this.props.directions ? this.renderDirections() : this.renderMap() }
+				{ this.props.fetchDirections ? this.renderDirections() : this.renderMap() }
 			</div>
 		);
 	}

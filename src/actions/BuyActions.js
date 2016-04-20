@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class BuyActions {
 	constructor() {
-		this.generateActions('setLocal', 'bounds', 'setMarkers', 'online', 'setModal', 'setOrigin', 'showDirections', 'direction', 'setDirections', 'setSuggestions', 'setCurrentLocation', 'setCenter', 'setShowRegions', 'regions', 'setCenterAndZoom');
+		this.generateActions('setLocal', 'bounds', 'setMarkers', 'online', 'setModal', 'setOrigin', 'showDirections', 'direction', 'setDirections', 'setSuggestions', 'setCurrentLocation', 'setCenter', 'setShowRegions', 'regions', 'setCenterAndZoom', 'unsetMarkerHack');
 	}
 }
 

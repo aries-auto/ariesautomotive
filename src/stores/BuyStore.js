@@ -34,6 +34,7 @@ class BuyStore extends EventEmitter {
 			showRegions: false,
 			regions: [],
 			zoom: 13,
+			markerHack: null,
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -50,6 +51,7 @@ class BuyStore extends EventEmitter {
 			setShowRegions: BuyActions.setShowRegions,
 			regions: BuyActions.regions,
 			setCenterAndZoom: BuyActions.setCenterAndZoom,
+			unsetMarkerHack: BuyActions.unsetMarkerHack,
 		});
 	}
 
@@ -63,7 +65,7 @@ class BuyStore extends EventEmitter {
 	}
 
 	setMarkers(markers) {
-		this.setState({ markers });
+		this.setState({ markers, markerHack: true });
 	}
 
 	setSuggestions(suggestions) {
@@ -76,6 +78,10 @@ class BuyStore extends EventEmitter {
 
 	setCenter(center) {
 		this.setState({ center });
+	}
+
+	unsetMarkerHack() {
+		this.setState({ markerHack: null });
 	}
 
 	setCenterAndZoom(args) {
@@ -102,11 +108,11 @@ class BuyStore extends EventEmitter {
 	}
 
 	showDirections(fetchDirections) {
-		this.setState({ fetchDirections });
+		this.setState({ fetchDirections, showModal: null });
 	}
 
 	setDirections(directions) {
-		this.setState({ directions, showModal: null, fetchDirections: false });
+		this.setState({ directions, showModal: null });
 	}
 
 	setShowRegions(showRegions) {
