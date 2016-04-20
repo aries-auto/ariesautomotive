@@ -120,6 +120,7 @@ class BuyStore extends EventEmitter {
 	}
 
 	async bounds(args) {
+		this.setState({ center: args[0], zoom: args[2] });
 		let showRegions = false;
 		if (args[2] < 7) {
 			showRegions = true;
@@ -138,7 +139,7 @@ class BuyStore extends EventEmitter {
 				if (data && data !== null && showRegions === false) {
 					markers = data;
 				}
-				this.setState({ markers, showRegions, center: args[0], zoom: args[2] });
+				this.setState({ markers, showRegions });
 			});
 		} catch (err) {
 			this.setState({

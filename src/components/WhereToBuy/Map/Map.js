@@ -45,19 +45,6 @@ class Map extends Component {
 		BuyActions.bounds(this.props.center, this.props.bounds);
 	}
 
-	componentWillReceiveProps(next) {
-		if (!next.fetchDirections || !next.origin || !next.destination) {
-			return;
-		}
-	}
-
-	shouldComponentUpdate(next) {
-		if (next.center === this.props.center && next.markers === this.props.markers && next.zoom === this.props.zoom && next.fetchDirections === false) {
-			return false;
-		}
-		return true;
-	}
-
 	static getStores() {
 		return [BuyStore];
 	}
@@ -164,7 +151,6 @@ class Map extends Component {
 						center={this.props.center}
 						onClick={::this.handleMapClick}
 						zoom={this.props.zoom}
-						options={{ scrollwheel: false }}
 					>
 					{this.props.markers.map((marker, index) => {
 						return (
