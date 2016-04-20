@@ -2,10 +2,11 @@ import BuyActions from '../actions/BuyActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { iapiBase } from '../config';
+import { googleApiKey, iapiBase } from '../config';
 const EventEmitter = events.EventEmitter;
 
 const KEY = process.env.API_KEY;
+const GOOGLE_API_KEY = googleApiKey;
 
 class BuyStore extends EventEmitter {
 	constructor() {
@@ -34,7 +35,7 @@ class BuyStore extends EventEmitter {
 			showRegions: false,
 			regions: [],
 			zoom: 13,
-			markerHack: null,
+			error: null,
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -51,7 +52,8 @@ class BuyStore extends EventEmitter {
 			setShowRegions: BuyActions.setShowRegions,
 			regions: BuyActions.regions,
 			setCenterAndZoom: BuyActions.setCenterAndZoom,
-			unsetMarkerHack: BuyActions.unsetMarkerHack,
+			setError: BuyActions.setError,
+			geocode: BuyActions.geocode,
 		});
 	}
 
@@ -65,7 +67,7 @@ class BuyStore extends EventEmitter {
 	}
 
 	setMarkers(markers) {
-		this.setState({ markers, markerHack: true });
+		this.setState({ markers });
 	}
 
 	setSuggestions(suggestions) {
@@ -80,8 +82,8 @@ class BuyStore extends EventEmitter {
 		this.setState({ center });
 	}
 
-	unsetMarkerHack() {
-		this.setState({ markerHack: null });
+	setError(error) {
+		this.setState({ error });
 	}
 
 	setCenterAndZoom(args) {
@@ -139,7 +141,7 @@ class BuyStore extends EventEmitter {
 				if (data && data !== null && showRegions === false) {
 					markers = data;
 				}
-				this.setState({ markers, showRegions });
+				this.setState({ markers, showRegions, error: null });
 			});
 		} catch (err) {
 			this.setState({
@@ -160,7 +162,9 @@ class BuyStore extends EventEmitter {
 				return resp.json();
 			}).then((data) => {
 				if (data && data !== null) {
-					this.setState({ markers: data });
+					this.setState({ markers: data, error: null });
+				} else {
+					this.setState({ error: 'Not enough results.' });
 				}
 			});
 		} catch (err) {
@@ -181,7 +185,32 @@ class BuyStore extends EventEmitter {
 				return resp.json();
 			}).then((data) => {
 				if (data && data !== null) {
-					this.setState({ regions: data });
+					this.setState({ regions: data, error: null });
+				} else {
+					this.setState({ error: 'Not enough results.' });
+				}
+			});
+		} catch (err) {
+			this.setState({
+				error: err,
+			});
+		}
+	}
+
+	async geocode(address) {
+		try {
+			await fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(address) + '&key=' + GOOGLE_API_KEY, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}).then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				if (data && data !== null && data.results.length > 0) {
+					this.setState({ center: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng }, error: null });
+				} else {
+					this.setState({ error: 'Not enough results.' });
 				}
 			});
 		} catch (err) {

@@ -17,6 +17,7 @@ class ControlPanel extends Component {
 		currentLocation: PropTypes.string,
 		suggestions: PropTypes.array,
 		navigator: PropTypes.object,
+		error: PropTypes.string,
 	};
 
 	constructor() {
@@ -35,11 +36,15 @@ class ControlPanel extends Component {
 		BuyActions.setLocal(l);
 	}
 
+	setOrigin(e) {
+		BuyActions.geocode(e.target.value);
+	}
+
 	handleCurrentLocation() {
 		this.props.navigator.geolocation.getCurrentPosition((pos) => {
 			BuyActions.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
 		}, (err) => {
-			console.log(err);
+			BuyActions.setError(err);
 		});
 	}
 
@@ -50,7 +55,7 @@ class ControlPanel extends Component {
 		const autocomplete = new this.props.google.maps.places.AutocompleteService();
 		autocomplete.getQueryPredictions({ input: e.target.value }, (predictions, status) => {
 			if (status !== this.props.google.maps.places.PlacesServiceStatus.OK) {
-				console.log('err');
+				BuyActions.setError(status);
 			}
 			BuyActions.setSuggestions(predictions);
 		});
@@ -59,7 +64,7 @@ class ControlPanel extends Component {
 	renderSuggestions() {
 		const suggestions = [];
 		this.props.suggestions.map((suggestion, index) => {
-			suggestions.push(<option value={suggestion.description} key={index}>{suggestion.description}</option>);
+			suggestions.push(<option value={suggestion.description} key={index} >{suggestion.description}</option>);
 		});
 		return (
 			<datalist id="suggestions">{suggestions}</datalist>
@@ -93,10 +98,11 @@ class ControlPanel extends Component {
 								</a>
 							</div>
 						<div className="pull-right col-lg-8 col-md-8 col-xs-8 col-sm-9">
-							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions" />
+							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions" onBlur={::this.setOrigin} />
 							{this.props.suggestions.length > 0 ? this.renderSuggestions() : null}
 						</div>
 							<div className="clearfix"></div>
+							{this.props.error ? <div>{this.props.error}</div> : null}
 						</div>
 					<div className="clearfix"></div>
 					</div>
