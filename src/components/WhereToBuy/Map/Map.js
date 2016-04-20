@@ -6,7 +6,6 @@ import BuyActions from '../../../actions/BuyActions';
 import BuyStore from '../../../stores/BuyStore';
 import { GoogleMapLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer, Polygon } from 'react-google-maps';
 import connectToStores from 'alt-utils/lib/connectToStores';
-// import Regions from '../Regions/Regions';
 
 @withStyles(s)
 @connectToStores
@@ -62,6 +61,13 @@ class Map extends Component {
 		});
 	}
 
+	shouldComponentUpdate(next) {
+		if (next.center === this.props.center && next.markers === this.props.markers && next.zoom === this.props.zoom) {
+			return false;
+		}
+		return true;
+	}
+
 	static getStores() {
 		return [BuyStore];
 	}
@@ -82,38 +88,37 @@ class Map extends Component {
 		BuyActions.setMarkers(markers);
 	}
 
-	handleChange() {
-		if (this.refs.map.getZoom() < 13) {
-			BuyActions.setShowRegions(true);
-			return;
-		}
-		const center = {
-			lat: this.refs.map.getCenter().lat(),
-			lng: this.refs.map.getCenter().lng(),
+	handleMapChange() {
+		const center = this.refs.map.getCenter();
+		const bounds = this.refs.map.getBounds();
+		const newZoom = this.refs.map.getZoom();
+		const newPosition = {
+			lat: center.lat(),
+			lng: center.lng(),
 		};
+		const newBounds = {
+			ne: bounds.R.j + ',' + bounds.j.R,
+			sw: bounds.R.R + ',' + bounds.j.j,
+		};
+		BuyActions.bounds(newPosition, newBounds, newZoom);
+	}
+
+	handleRegionClick(e) {
+		const center = {
+			lat: e.latLng.lat(),
+			lng: e.latLng.lng(),
+		};
+		BuyActions.setCenterAndZoom(center, 9);
+
 		const bounds = {
 			ne: this.refs.map.getBounds().R.j + ',' + this.refs.map.getBounds().j.R,
 			sw: this.refs.map.getBounds().R.R + ',' + this.refs.map.getBounds().j.j,
 		};
-		BuyActions.bounds(center, bounds);
+		BuyActions.bounds(center, bounds, 8);
 	}
 
-	handleMapCenterChanged() {
-		const newCenter = this.refs.map.getCenter();
-		const newPos = {
-			lat: newCenter.lat(),
-			lng: newCenter.lng(),
-		};
-		if (newPos === this.props.center) {
-			return;
-		}
-		if (this._timeoutId) {
-			clearTimeout(this._timeoutId);
-		}
-		this._timeoutId = setTimeout(() => {
-			BuyActions.setCenter(this.props.center);
-		}, 3000);
-		BuyActions.setCenter(newPos);
+	handleMapClick(e) {
+		BuyActions.setCenter(e.latLng);
 	}
 
 	renderShowInfo(index, marker) {
@@ -166,7 +171,7 @@ class Map extends Component {
 			region.coordinates.map((coord) => {
 				coords.push({ lat: coord.latitude, lng: coord.longitude });
 			});
-			regions.push(<Polygon paths={coords} key={index} />);
+			regions.push(<Polygon paths={coords} key={index} onClick={ ::this.handleRegionClick } />);
 		});
 		return regions;
 	}
@@ -191,10 +196,12 @@ class Map extends Component {
 						ref="map"
 						defaultZoom={13}
 						defaultCenter={{ lat: 44.8167, lng: -91.5000 }}
-						onDragend={::this.handleChange}
-						onZoomChanged={::this.handleChange}
+						onDragend={::this.handleMapChange}
+						onZoomChanged={::this.handleMapChange}
 						center={this.props.center}
-						onCenterChanged={::this.handleMapCenterChanged}
+						onClick={::this.handleMapClick}
+						zoom={this.props.zoom}
+						options={{ scrollwheel: false }}
 					>
 					{this.props.markers.map((marker, index) => {
 						return (
@@ -220,7 +227,6 @@ class Map extends Component {
 		return (
 			<div className={cx(s.mapContainer)}>
 				{ this.props.directions ? this.renderDirections() : this.renderMap() }
-
 			</div>
 		);
 	}

@@ -33,6 +33,7 @@ class BuyStore extends EventEmitter {
 			suggestions: [],
 			showRegions: false,
 			regions: [],
+			zoom: 13,
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -48,6 +49,7 @@ class BuyStore extends EventEmitter {
 			setCenter: BuyActions.setCenter,
 			setShowRegions: BuyActions.setShowRegions,
 			regions: BuyActions.regions,
+			setCenterAndZoom: BuyActions.setCenterAndZoom,
 		});
 	}
 
@@ -74,6 +76,14 @@ class BuyStore extends EventEmitter {
 
 	setCenter(center) {
 		this.setState({ center });
+	}
+
+	setCenterAndZoom(args) {
+		let showRegions = false;
+		if (args[1] < 7) {
+			showRegions = true;
+		}
+		this.setState({ center: args[0], zoom: args[1], showRegions, markers: [] });
 	}
 
 	setModal(args) {
@@ -104,6 +114,10 @@ class BuyStore extends EventEmitter {
 	}
 
 	async bounds(args) {
+		let showRegions = false;
+		if (args[2] < 7) {
+			showRegions = true;
+		}
 		const params = `&brand=${this.state.brand}&skip=${this.state.skip}&sort=${this.state.sort}&count=${this.state.count}&center=${args[0].lat},${args[0].lng}&ne=${args[1].ne}&sw=${args[1].sw}`;
 		try {
 			await fetch(iapiBase + '/dealers/local/bounds?key=' + KEY + params, {
@@ -114,9 +128,11 @@ class BuyStore extends EventEmitter {
 			}).then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				if (data && data !== null) {
-					this.setState({ markers: data });
+				let markers = [];
+				if (data && data !== null && showRegions === false) {
+					markers = data;
 				}
+				this.setState({ markers, showRegions, center: args[0], zoom: args[2] });
 			});
 		} catch (err) {
 			this.setState({
