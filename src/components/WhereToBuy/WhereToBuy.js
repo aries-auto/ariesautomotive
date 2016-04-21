@@ -18,6 +18,9 @@ const customStyles = {
 		marginRight: '-50%',
 		transform: 'translate(-50%, -50%)',
 	},
+	overlay: {
+		backgroundColor: 'rgba(0, 0, 0, 0.55)',
+	},
 };
 
 @withStyles(s)
@@ -64,13 +67,14 @@ class WhereToBuy extends Component {
 				style={customStyles}
 				isOpen={this.props.showModal}
 				onRequestClose={this.hideModal}
+				className={s.getDirections}
 			>
 				<h2>Get Directions</h2>
 				<div className={cx('form-group')}>
 					<label htmlFor="startingLocation">Enter Your Location</label>
 					<input type="text" name="startingLocation" onBlur={this.handleChange}/>
 				</div>
-				<button className={cx('btn btn-primary')} type="submit" onClick={this.handleClick}>Map Route</button>
+				<button className={cx('btn btn-primary')} type="submit" onClick={this.handleClick}>MAP ROUTE</button>
 			</Modal>
 		);
 	}

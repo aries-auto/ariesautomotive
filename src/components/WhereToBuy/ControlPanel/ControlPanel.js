@@ -79,12 +79,12 @@ class ControlPanel extends Component {
 						<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 map-nav-tab-switch">
 							<ul className={cx(s.nav, 'nav-tabs')} role="tablist">
 								<li role="presentation" onClick={this.setLocal.bind(this, true)}>
-									<a href="#local" className={cx(this.props.local ? s.active : '')}>
+									<a href="#" className={cx(this.props.local ? s.active : '')}>
 									Buy Local
 									</a>
 								</li>
 								<li role="presentation" onClick={this.setLocal.bind(this, false)}>
-									<a href="#online" className={cx(!this.props.local ? s.active : '')}>
+									<a href="#" className={cx(!this.props.local ? s.active : '')}>
 									Buy Online
 									</a>
 								</li>

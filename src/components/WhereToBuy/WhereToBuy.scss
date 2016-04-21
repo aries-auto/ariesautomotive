@@ -5,3 +5,26 @@
     width: 100%;
     margin: 1em 0 2em 0;
 }
+
+.getDirections {
+	background-color: $off-white !important;
+	min-width: 400px;
+	border: none !important;
+	font-size: 1.4em;
+	button {
+		background-color: $new-red;
+		border: 1px solid $black;
+		font-size: 1.6em;
+	}
+	div {
+		label {
+			display: block;
+		}
+		input {
+			height: 2em;
+			border: 1px solid $gray-darker;
+			border-radius: 3px;
+			width: 100%;
+		}
+	}
+}
