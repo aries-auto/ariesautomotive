@@ -33,6 +33,7 @@ class WhereToBuy extends Component {
 		showModal: PropTypes.bool,
 		markers: PropTypes.array,
 		checked: PropTypes.object,
+		fetchDirections: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -59,20 +60,6 @@ class WhereToBuy extends Component {
 		BuyActions.setLocal(l);
 	}
 
-	// getThoseSexyIcons() {
-	// 	if (this.props.markers.length < 1) {
-	// 		return null;
-	// 	}
-	// 	const icons = [];
-	// 	this.props.markers.map((marker) => {
-	// 		if (marker.dealerType.mapIcon.mapIcon.Path && marker.dealerType.mapIcon.mapIcon.Host & marker.dealerType.mapIcon.mapIcon.Scheme) {
-	// 			const icon = marker.dealerType.mapIcon.mapIcon;
-	// 			icons.push(`${icon.Scheme}://${icon.Host}${icon.Path}`);
-	// 		}
-	// 	});
-	// 	return icons;
-	// }
-
 	handleChange(e) {
 		BuyActions.setOrigin(e.target.value);
 	}
@@ -86,23 +73,11 @@ class WhereToBuy extends Component {
 	}
 
 	handleTypeChange(e) {
-		// const selectedTier = e.target.value;
 		BuyActions.markerVisibility(e.target.value, e.target.checked);
-		// const checkbox = this.goddamCheckboxes(e.target.value, e.target.checked);
-		// console.log(checkbox); // TODO
-		// if (this.props.markers.length < 1) {
-		// 	return null;
-		// }
-		// this.props.markers.map((marker, i) => {
-		// 	if (marker.dealerTier && marker.dealerTier.tier && marker.dealerTier.tier.toLowerCase() === selectedTier) {
-		// 		if (!this.props.markers[i].hide) {
-		// 			this.props.markers[i].hide = true;
-		// 			return;
-		// 		}
-		// 		this.props.markers[i].hide = !this.props.markers[i].hide;
-		// 	}
-		// });
-		// BuyActions.setMarkers(this.props.markers);
+	}
+
+	handleResetDirection() {
+		BuyActions.showDirections(false);
 	}
 
 	renderLocationModal() {
@@ -142,6 +117,7 @@ class WhereToBuy extends Component {
 					<img src="http://www.curtmfg.com/Content/img/mapdot3.png" />
 					<span>Silver</span>
 				</div>
+				{this.props.fetchDirections ? <button className={cx(s.resetDirections)} onClick={::this.handleResetDirection}> Reset Directions </button> : null}
 			</div>
 		);
 	}
