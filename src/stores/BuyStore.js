@@ -36,6 +36,11 @@ class BuyStore extends EventEmitter {
 			regions: [],
 			zoom: 13,
 			error: null,
+			checked: {
+				platinum: true,
+				gold: true,
+				silver: true,
+			},
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -54,6 +59,7 @@ class BuyStore extends EventEmitter {
 			setCenterAndZoom: BuyActions.setCenterAndZoom,
 			setError: BuyActions.setError,
 			geocode: BuyActions.geocode,
+			markerVisibility: BuyActions.markerVisibility,
 		});
 	}
 
@@ -121,6 +127,25 @@ class BuyStore extends EventEmitter {
 		this.setState({ showRegions });
 	}
 
+	markerVisibility(args) {
+		const selectedTier = args[0];
+		const checked = args[1];
+
+		if (this.state.markers.length < 1) {
+			return;
+		}
+		this.state.markers.map((marker, i) => {
+			if (marker.dealerTier && marker.dealerTier.tier && marker.dealerTier.tier.toLowerCase() === selectedTier) {
+				if (!this.state.markers[i].hide) {
+					this.state.markers[i].hide = true;
+					return;
+				}
+				this.state.markers[i].hide = !this.state.markers[i].hide;
+			}
+		});
+		this.state.checked[selectedTier] = checked;
+		this.setState({ markers: this.state.markers, checked: this.state.checked });
+	}
 	async bounds(args) {
 		this.setState({ center: args[0], zoom: args[2] });
 		let showRegions = false;

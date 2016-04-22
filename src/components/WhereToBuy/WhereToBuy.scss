@@ -3,7 +3,7 @@
 .mapContainer {
     height: 600px;
     width: 100%;
-    margin: 1em 0 2em 0;
+    margin: 1em 0 0 0;
 }
 
 .getDirections {
@@ -26,5 +26,34 @@
 			border-radius: 3px;
 			width: 100%;
 		}
+	}
+}
+
+.mapFooter{
+	width: 100%;
+	background-color: $white-base;
+	padding: 1em 1em .2em 1em;
+	h4 {
+		display: inline;
+	}
+	.toggleContainer {
+		display: inline;
+	    font-size: 2em;
+	    background-color: #fff;
+	    padding: .3em;
+	    border-radius: 4px;
+	    margin: 5px;
+	    box-shadow: 0 0 8px 0 rgba(0,0,0,.6);
+	    height: 4em;
+	    input {
+			transform: scale(2);
+			margin: .8em;
+	    }
+	    span {
+	    	padding: 1em;
+	    }
+	    img {
+	    	max-height: 1em;
+	    }
 	}
 }

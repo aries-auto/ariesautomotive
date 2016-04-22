@@ -153,6 +153,9 @@ class Map extends Component {
 						zoom={this.props.zoom}
 					>
 					{this.props.markers.map((marker, index) => {
+						if (marker.hide) {
+							return null;
+						}
 						return (
 							<Marker
 								key={index}
