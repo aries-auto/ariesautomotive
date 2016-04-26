@@ -13,4 +13,4 @@ export const googleAnalyticsId = 'UA-XXXXX-X';
 export const googleApiKey = process.env.GOOGLE_API_KEY || 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA';
 export const hostAddress = process.env.WEBSITE_ADDRESS || `http://${host}`;
 export const iapiBase = process.env.NODE_ENV === 'development' ? 'http://localhost:8084' : 'https://iapi.curtmfg.com';
-export const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : 'https://goapi.curtmfg.com';
+export const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : 'https://goapi.curtmfg.com/v3';

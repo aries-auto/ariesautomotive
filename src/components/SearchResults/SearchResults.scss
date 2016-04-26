@@ -1,1 +1,17 @@
 @import '../classes.scss';
+
+.pagination {
+	display: block;
+    width: 60%;
+    height: 50px;
+    background-color: $lookup-color;
+    border: 1px solid $lookup-color;
+    text-align: center;
+    transition: all .2s ease-in;
+    margin: 15px auto;
+    span {
+    	line-height: 50px;
+    	font-size: 16px;
+    	text-decoration: none;
+    }
+}

@@ -119,7 +119,7 @@ class BecomeDealer extends Component {
 		this.checkDisabled();
 	}
 
-	submit() {
+	submit(event) {
 		event.preventDefault();
 		ContactActions.postContactData(28);
 	}

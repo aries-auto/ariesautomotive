@@ -19,6 +19,7 @@ import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
+import { apiBase } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = process.env.API_KEY;
@@ -31,7 +32,7 @@ const router = new Router(on => {
 			state.context = {};
 		}
 		const [yearResponse, catResponse] = await Promise.all([
-			fetch(`https://goapi.curtmfg.com/vehicle/mongo/allCollections?key=${KEY}`, {
+			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,7 +40,7 @@ const router = new Router(on => {
 				},
 				body: '{}',
 			}),
-			fetch(`http://api.curtmfg.com/v3/category?brandID=3&key=${KEY}`),
+			fetch(`${apiBase}/category?brandID=3&key=${KEY}`),
 		]);
 
 		try {
@@ -66,7 +67,7 @@ const router = new Router(on => {
 
 	on('/category/:id/:title', async (state) => {
 		try {
-			const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=${KEY}`;
+			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
 			const catResponse = await fetch(url, {
 				method: 'get',
 			});
@@ -81,12 +82,12 @@ const router = new Router(on => {
 
 	on('/category/:id/:title/:sub', async (state) => {
 		try {
-			const url = `http://api.curtmfg.com/v3/category/${state.params.id}?key=9${KEY}`;
+			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
 			const catResponse = await fetch(url, {
 				method: 'get',
 			});
 
-			const partURL = `http://api.curtmfg.com/v3/category/${state.params.id}/parts?key=9${KEY}`;
+			const partURL = `${apiBase}/category/${state.params.id}/parts?key=${KEY}`;
 			const partResponse = await fetch(partURL, {
 				method: 'get',
 			});
@@ -101,29 +102,33 @@ const router = new Router(on => {
 	});
 
 	on('/search/:term', async (state) => {
+		let searchResult = {};
+		let term = '';
 		try {
-			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.params.term}?key=${KEY}&brandID=3`);
+			const searchResponse = await fetch(`${apiBase}/search/${state.params.term}?key=${KEY}&brandID=3`);
 
-			state.context.searchResult = await searchResponse.json();
-			state.context.term = state.query.term;
+			searchResult = await searchResponse.json();
+			term = state.params.term;
 		} catch (e) {
 			state.context.error = e;
 		}
 
-		return <SearchResults context={state.context} />;
+		return <SearchResults context={state.context} searchResult={searchResult} term={term} />;
 	});
 
 	on('/search', async (state) => {
+		let searchResult = {};
+		let term = '';
 		try {
-			const searchResponse = await fetch(`http://api.curtmfg.com/v3/search/${state.query.term}?key=${KEY}&brandID=3`);
+			const searchResponse = await fetch(`${apiBase}/search/${state.query.term}?key=${KEY}&brandID=3`);
 
-			state.context.searchResult = await searchResponse.json();
-			state.context.term = state.query.term;
+			searchResult = await searchResponse.json();
+			term = state.query.term;
 		} catch (e) {
 			state.context.error = e;
 		}
 
-		return <SearchResults context={state.context} />;
+		return <SearchResults context={state.context} searchResult={searchResult} term={term} />;
 	});
 
 	on('/vehicle', async (state) => {
@@ -236,8 +241,8 @@ const router = new Router(on => {
 			},
 		];
 		try {
-			const featResponse = await fetch(`http://api.curtmfg.com/v3/part/featured?brandID=3&key=${KEY}`);
-			const testResponse = await fetch(`http://api.curtmfg.com/v3/testimonials?key=${KEY}&count=2&randomize=true&brandID=3`);
+			const featResponse = await fetch(`${apiBase}/part/featured?brandID=3&key=${KEY}`);
+			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=3`);
 
 			state.context.featuredProducts = await featResponse.json();
 			state.context.testimonials = await testResponse.json();
