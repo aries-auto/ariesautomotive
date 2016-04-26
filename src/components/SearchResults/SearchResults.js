@@ -22,6 +22,7 @@ class SearchResults extends Component {
 		super();
 		this.pagination = this.pagination.bind(this);
 		this.loadMore = this.loadMore.bind(this);
+		this.scrollTo = this.scrollTo.bind(this);
 	}
 
 	static getStores() {
@@ -32,8 +33,8 @@ class SearchResults extends Component {
 		return SearchStore.getState();
 	}
 
-	scrollTo(str) {
-		return str;
+	scrollTo() {
+		this.refs.header.scrollIntoView();
 	}
 
 	loadMore(e) {
@@ -66,10 +67,18 @@ class SearchResults extends Component {
 		}
 	}
 
+	renderScrollTo() {
+		return (
+			<div className={s.scrollTo} onClick={this.scrollTo}>
+				<span>Top</span>
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
-				<h2 id="catTitleProds">
+				<h2 id="catTitleProds" ref="header">
 					SEARCH RESULTS
 					<span className="small">1 - {this.props.searchResult.hits.hits.length} of {this.props.searchResult.hits.total} results for "<em>{this.props.term}</em>" returned in {this.took()} seconds</span>
 				</h2>
@@ -82,6 +91,7 @@ class SearchResults extends Component {
 				{/* Pagination */}
 				<div className="clearfix"></div>
 				{this.pagination()}
+				{this.renderScrollTo()}
 			</div>
 		);
 	}

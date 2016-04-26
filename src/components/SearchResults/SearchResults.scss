@@ -15,3 +15,25 @@
     	text-decoration: none;
     }
 }
+
+.scrollTo {
+	background-color: #c73031;
+    color: #fff;
+    width: 5em;
+    height: 3em;
+    position: fixed;
+    bottom: 1em;
+    right: 0;
+    text-align: center;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2em;
+    box-shadow: 4px 0 10px 2px #ccc;
+    span {
+    	font-size: 1.6em;
+	    top: 10%;
+	    cursor: pointer;
+	    position: relative;
+    }
+}
