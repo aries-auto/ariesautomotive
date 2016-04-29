@@ -1,0 +1,58 @@
+@import '../../variables.scss';
+
+.wrench {
+	display: block;
+}
+
+.header {
+	display: inline;
+}
+
+.install {
+	line-height: 30px;
+    margin: 35px 10px 5px;
+    font-size: 18px;
+    color: #c73031;
+    display: inline;
+}
+
+.downloads {
+	display: inline;
+	float: right;
+    background-color: white;
+    padding: 1em;
+    span, a {
+    	padding: .6em;
+    }
+    span {
+    	font-weight: 800;
+    }
+}
+
+.subheading {
+	clear: both;
+}
+
+.pagination{
+	padding: 1em;
+	text-align: center;
+	.left {
+		width: 0;
+		height: 0;
+		border-top: 20px solid transparent;
+		border-bottom: 20px solid transparent;
+		border-right: 100px solid $new-red;
+		display: inline-block;
+		margin: 2em;
+	}
+	.right {
+		width: 0;
+		height: 0;
+		border-top: 20px solid transparent;
+		border-bottom: 20px solid transparent;
+		border-left: 100px solid $new-red;
+		display: inline-block;
+		margin: 2em;
+
+	}
+}

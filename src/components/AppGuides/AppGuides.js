@@ -5,6 +5,7 @@ import AppGuideStore from '../../stores/AppGuideStore';
 import withStyles from '../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import AppGuide from './AppGuide/AppGuide';
 
 const title = 'Application Guides';
 
@@ -15,6 +16,7 @@ class AppGuides extends Component {
 	static propTypes = {
 		guides: PropTypes.array,
 		title: PropTypes.string,
+		guide: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -25,6 +27,7 @@ class AppGuides extends Component {
 	static defaultProps = {
 		guides: [],
 		title,
+		guide: null,
 	};
 
 	constructor() {
@@ -45,11 +48,21 @@ class AppGuides extends Component {
 		return AppGuideStore.getState();
 	}
 
+	handleAppGuide(i) {
+		AppGuideActions.set(this.props.guides[i], 0);
+	}
+
+	handleAppguides() {
+		AppGuideActions.reset();
+	}
+
 	renderGuides() {
 		const output = [];
+		output.push(<h1 key="head">APPLICATION GUIDES</h1>);
+		output.push(<p key="p">The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>);
 		this.props.guides.map((guide, i) => {
 			output.push(
-				<a key={i} className={cx(s.guide, 'row', 'well')} href={`/appguides/${guide}`}>
+				<a key={i} className={cx(s.guide, 'row', 'well')} onClick={this.handleAppGuide.bind(this, i)}>
 					<div className="pull-left">
 						{ guide }
 					</div>
@@ -63,18 +76,35 @@ class AppGuides extends Component {
 		return output;
 	}
 
+	renderGuide() {
+		return (
+			<AppGuide guide={this.props.guide} />
+		);
+	}
+
+	renderBreadCrumbs() {
+		const output = [];
+		const apps = <li key="apps" className="active">Application Guides</li>;
+		const appsinact = <li key="app" onClick={this.handleAppguides}><a>Application Guides</a></li>;
+		const app = <li key="apps" className="active">Application Guide</li>;
+		if (this.props.guide) {
+			output.push(appsinact);
+			output.push(app);
+		} else {
+			output.push(apps);
+		}
+		return output;
+	}
+
 	render() {
 		return (
 			<div className={s.appguidesContainer}>
 				<div className="container">
 					<ol className="breadcrumb">
 						<li><a href="/">Home</a></li>
-						<li className="active">Application Guides</li>
+						{this.renderBreadCrumbs()}
 					</ol>
-					<h1>APPLICATION GUIDES</h1>
-					<p>The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
-
-					{this.renderGuides()}
+					{this.props.guide ? this.renderGuide() : this.renderGuides()}
 				</div>
 			</div>
 		);
