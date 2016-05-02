@@ -15,6 +15,7 @@ import About from './components/About';
 import AppGuides from './components/AppGuides';
 import Terms from './components/Terms';
 import TechSupport from './components/TechSupport';
+import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
@@ -187,6 +188,11 @@ const router = new Router(on => {
 	on('/buy', async (state) => {
 		state.context.id = state.params.id;
 		return <WhereToBuy context={state.context} google={state.google} navigator={state.navigator} />;
+	});
+
+	on('/warranties', async (state) => {
+		state.context.id = state.params.id;
+		return <Warranties context={state.context} />;
 	});
 
 	on('/', async (state) => {
