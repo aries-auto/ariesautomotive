@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class WarrantiesActions {
 	constructor() {
-		this.generateActions('setFormValidation');
+		this.generateActions('setFields', 'postData');
 	}
 }
 

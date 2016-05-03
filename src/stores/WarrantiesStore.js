@@ -1,10 +1,10 @@
 import WarrantiesActions from '../actions/WarrantiesActions';
+import FormFieldActions from '../actions/FormFieldActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
 import { apiBase } from '../config';
 const EventEmitter = events.EventEmitter;
-
 const KEY = process.env.API_KEY;
 
 class WarrantiesStore extends EventEmitter {
@@ -12,37 +12,40 @@ class WarrantiesStore extends EventEmitter {
 		super();
 		this.state = {
 			inputs: [],
-			error: {},
-			success: {},
 			enabled: false,
 		};
 		this.bindListeners({
-			// getCountries: ContactActions.getCountries,
-			// getContactTypes: ContactActions.getContactTypes,
-			// postContactData: ContactActions.postContactData,
-			setFormValidation: WarrantiesActions.setFormValidation,
+			setInput: FormFieldActions.setInput,
+			postData: WarrantiesActions.postData,
 		});
 	}
 
-	async getCountries() {
+	setInput(input) {
+		this.state.inputs[input.name] = input.value;
+		this.setState({ inputs: this.state.inputs });
+	}
+
+	async postData() {
 		try {
-			await fetch(`${apiBase}/geography/countrystates?key=${KEY}`)
+			await fetch(`${apiBase}/warranty/24/false?key=${KEY}`, {
+				method: 'post',
+				data: this.state.inputs,
+			})
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				this.setState({
-					countries: data,
-				});
+				// console.log(data);
+				if (data.message) {
+					this.setState({
+						error: data.message,
+					});
+				}
 			});
 		} catch (err) {
 			this.setState({
 				error: err,
 			});
 		}
-	}
-
-	setFormValidation(enabled) {
-		this.setState({ enabled });
 	}
 
 }

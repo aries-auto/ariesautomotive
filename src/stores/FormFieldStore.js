@@ -15,6 +15,7 @@ class FormFieldStore extends EventEmitter {
 			error: {},
 			success: {},
 			inputs: [],
+			enabled: false,
 		};
 		this.bindListeners({
 			setInput: FormFieldActions.setInput,
@@ -64,12 +65,8 @@ class FormFieldStore extends EventEmitter {
 
 	setInput(input) {
 		this.state.inputs[input.name] = input.value;
-		// this.state.inputs.map((i) => {
-		// 	console.log(i, input);
-		// });
 		this.setState({ inputs: this.state.inputs });
 	}
-
 
 }
 

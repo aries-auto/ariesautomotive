@@ -1,14 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-// import s from './Form.scss';
-// import withStyles from '../../decorators/withStyles';
-// import { fields } from './FormFields';
 import FormFieldStore from '../../stores/FormFieldStore';
 import FormFieldActions from '../../actions/FormFieldActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { locationHtml } from '../../data/locations';
 
-// @withStyles(s)
 @connectToStores
 class FormField extends Component {
 
@@ -24,10 +20,6 @@ class FormField extends Component {
 		this.modifyValue = this.modifyValue.bind(this);
 	}
 
-	componentDidUpdate() {
-		console.log(this.props);
-	}
-
 	static getStores() {
 		return [FormFieldStore];
 	}
@@ -37,7 +29,6 @@ class FormField extends Component {
 	}
 
 	getField() {
-		// console.log(this.props);
 		const output = [];
 		const field = this.props.field;
 		switch (field.type) {
@@ -160,28 +151,11 @@ class FormField extends Component {
 	}
 
 	modifyValue(event) {
-		const name = event.target.name;
-		const value = event.target.value;
-		// this.props.inputs[name] = value;
 		const input = {};
-		input.value = value;
-		input.name = name;
+		input.value = event.target.value;
+		input.name = event.target.name;
 		FormFieldActions.setInput(input);
-		// console.log(this.props);
-		// this.checkDisabled();
 	}
-
-	// checkDisabled() {
-	// 	if (this.props.field.required === true) {
-	// 		const f = this.props.inputs[this.props.field.name];
-	// 		if (!f || f === undefined) {
-	// 			FormActions.setFormValidation(false);
-	// 			return;
-	// 		}
-	// 	}
-	// 	FormActions.setValidation(true);
-	// }
-
 
 	render() {
 		return (

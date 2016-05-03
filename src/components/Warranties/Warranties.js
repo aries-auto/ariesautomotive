@@ -4,9 +4,8 @@ import s from './Warranties.scss';
 import withStyles from '../../decorators/withStyles';
 import { fields } from './FormFields';
 import WarrantiesStore from '../../stores/WarrantiesStore';
-// import WarrantiesActions from '../../actions/WarrantiesActions';
-import FormFieldActions from '../../actions/FormFieldActions';
-import FormField from '../FormField/FormField';
+import WarrantiesActions from '../../actions/WarrantiesActions';
+import Form from '../Form/Form';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
@@ -15,18 +14,23 @@ class Warranties extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		inputs: PropTypes.array,
 		enabled: PropTypes.bool,
+		inputs: PropTypes.array,
 	};
 
 	constructor() {
 		super();
 		this.submit = this.submit.bind(this);
-		this.checkDisabled = this.checkDisabled.bind(this);
+		this.enabled = false;
 	}
 
-	componentWillUpdate() {
-		this.checkDisabled();
+	componentWillReceiveProps() {
+		for (let i = 0; i < fields.length; i++) {
+			if (!this.props.inputs[fields[i].name] || this.props.inputs[fields[i].name] === '') {
+				return;
+			}
+		}
+		this.enabled = true;
 	}
 
 	static getStores() {
@@ -38,37 +42,12 @@ class Warranties extends Component {
 	}
 
 	getForm() {
-		const output = [];
-		for (const i in fields) {
-			if (!fields[i]) {
-				continue;
-			}
-			fields[i].key = i;
-			output.push(<FormField key={i} field={fields[i]} inputs={this.props.inputs} />);
-		}
-		return output;
-	}
-
-	checkDisabled() {
-		for (const i in fields) {
-			if (!fields[i]) {
-				continue;
-			}
-			console.log(fields[i]);
-			if (fields[i].required === true) {
-				const f = this.props.inputs[fields[i].name];
-				if (!f || f === undefined) {
-					FormFieldActions.setFormValidation(false);
-					return;
-				}
-			}
-		}
-		FormFieldActions.setFormValidation(true);
+		return (<Form fields={fields} />);
 	}
 
 	submit(event) {
 		event.preventDefault();
-		// WarrantiesActions.postContactData(this.props.inputs.reason);
+		WarrantiesActions.postData(this.props.inputs);
 	}
 
 	render() {
@@ -85,7 +64,7 @@ class Warranties extends Component {
 						<form name="contactForm" role="form" noValidate>
 							{this.getForm()}
 							<div className="form-group col-xs-12">
-								<button type="submit" className="btn btn-primary" disabled={!this.props.enabled} onClick={this.submit}>SUBMIT</button>
+								<button type="submit" className="btn btn-primary" disabled={!this.enabled} onClick={this.submit}>SUBMIT</button>
 							</div>
 						</form>
 					</div>
