@@ -33,6 +33,8 @@ class FormField extends Component {
 		const field = this.props.field;
 		switch (field.type) {
 		case 'text':
+		case 'date':
+		case 'email':
 			output.push(
 				<div key={field.key} className={'form-group col-xs-' + field.width}>
 					<label htmlFor={field.name}>{field.label}</label>

@@ -67,11 +67,38 @@ module.exports.fields = [
 		required: true,
 	},
 	{
-		type: 'text',
+		type: 'email',
 		label: 'Enter your email address:',
 		placeholder: 'Enter your email address.',
 		name: 'email',
 		width: '12',
+		required: true,
+	},
+];
+
+
+module.exports.fields2 = [
+	{
+		type: 'text',
+		label: 'Part Number:',
+		placeholder: 'Enter a part number.',
+		name: 'partNumber',
+		width: '6',
+		required: true,
+	},
+	{
+		type: 'date',
+		label: 'Date',
+		name: 'date',
+		width: '6',
+		required: true,
+	},
+	{
+		type: 'text',
+		label: 'Serial Number:',
+		placeholder: 'Enter serial number.',
+		name: 'serialNumber',
+		width: '6',
 		required: true,
 	},
 ];
