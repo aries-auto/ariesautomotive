@@ -1,0 +1,19 @@
+@import '../variables.scss';
+
+.step4 {
+	text-align: center;
+	.contact {
+		margin: auto;
+		max-width: 40%;
+		text-align: left;
+	}
+}
+
+.submit {
+	background-color: $new-red;
+	border-color: $new-red;
+}
+
+.submit:hover {
+	background-color: $new-red;
+}
