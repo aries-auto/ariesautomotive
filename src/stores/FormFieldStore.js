@@ -14,7 +14,7 @@ class FormFieldStore extends EventEmitter {
 			contactTypes: [],
 			error: {},
 			success: {},
-			inputs: [],
+			inputs: {},
 			enabled: false,
 		};
 		this.bindListeners({

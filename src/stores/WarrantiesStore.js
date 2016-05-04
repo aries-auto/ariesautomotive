@@ -11,8 +11,10 @@ class WarrantiesStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
-			inputs: [],
+			inputs: {},
 			enabled: false,
+			success: false,
+			error: null,
 		};
 		this.bindListeners({
 			setInput: FormFieldActions.setInput,
@@ -26,18 +28,27 @@ class WarrantiesStore extends EventEmitter {
 	}
 
 	async postData() {
+		const inputs = JSON.stringify(this.makeData(this.state.inputs));
 		try {
-			await fetch(`${apiBase}/warranty/24/false?key=${KEY}`, {
+			await fetch(`${apiBase}/warranty/41/false?key=${KEY}`, {
 				method: 'post',
-				data: this.state.inputs,
+				body: inputs,
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			})
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				// console.log(data);
 				if (data.message) {
 					this.setState({
 						error: data.message,
+						success: false,
+					});
+				} else {
+					this.setState({
+						success: true,
+						error: null,
 					});
 				}
 			});
@@ -46,6 +57,28 @@ class WarrantiesStore extends EventEmitter {
 				error: err,
 			});
 		}
+	}
+
+	makeData(data) {
+		let output = {};
+		output = {
+			contact: {
+				firstName: data.firstName,
+				lastName: data.lastName,
+				email: data.email,
+				phone: data.phone,
+				city: data.city,
+				address1: data.address1,
+				state: data.state,
+				country: data.country,
+				postalCode: data.postalCode,
+			},
+			oldPartNumber: data.partNumber,
+			serialNumber: data.serialNumber,
+			date: new Date(data.date),
+			partNumber: 0,
+		};
+		return output;
 	}
 
 }

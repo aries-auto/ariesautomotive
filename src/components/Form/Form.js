@@ -10,7 +10,7 @@ class Form extends Component {
 
 	static propTypes = {
 		fields: PropTypes.array,
-		inputs: PropTypes.array,
+		inputs: PropTypes.object,
 	};
 
 	constructor() {

@@ -12,7 +12,7 @@ class FormField extends Component {
 		field: PropTypes.object,
 		countries: PropTypes.array,
 		contactTypes: PropTypes.array,
-		inputs: PropTypes.array,
+		inputs: PropTypes.object,
 	};
 
 	constructor() {
@@ -53,7 +53,7 @@ class FormField extends Component {
 						continue;
 					}
 					states.push(
-						<option key={k} value={this.props.countries[j].states[k].state_id}>
+						<option key={k} value={this.props.countries[j].states[k].state}>
 							{this.props.countries[j].states[k].state}
 						</option>
 						);
@@ -87,7 +87,7 @@ class FormField extends Component {
 						continue;
 					}
 					states.push(
-						<option key={k} value={this.props.countries[j].states[k].state_id}>
+						<option key={k} value={this.props.countries[j].states[k].state}>
 							{this.props.countries[j].states[k].state}
 						</option>
 						);

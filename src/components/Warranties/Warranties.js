@@ -15,7 +15,9 @@ class Warranties extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		enabled: PropTypes.bool,
-		inputs: PropTypes.array,
+		inputs: PropTypes.object,
+		success: PropTypes.bool,
+		error: PropTypes.string,
 	};
 
 	constructor() {
@@ -89,6 +91,8 @@ class Warranties extends Component {
 									<h1>STEP 3 OF 4: CLICK SUBMIT BELOW.</h1>
 									<h5>Click this button:</h5>
 									<button type="submit" className={cx('btn btn-primary', s.submit)} disabled={!this.enabled} onClick={this.submit}>SUBMIT</button>
+									{this.props.success ? <p>Success! <a href="/">Home</a></p> : null}
+									{this.props.error ? <p>Error: {this.props.error}</p> : null}
 								</div>
 								<div className={cx('col-xs-12 col-md-12 col-lg-12', s.step4)}>
 									<h1>STEP 4 OF 4: FAX, MAIL, OR EMAIL PROOF OF PURCHASE TO THE FOLLOWING LOCATION TO COMPLETE REGISTRATION.</h1>
