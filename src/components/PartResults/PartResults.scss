@@ -11,6 +11,7 @@
     box-shadow: 1px 0 10px 2px $lookup-color;
     float: left;
     min-height: 250px;
+    position: relative;
 
     .header {
         margin-bottom: 10px;
@@ -90,12 +91,16 @@
         padding: 0;
         width: 100%;
         text-align: center;
+        position: absolute;
+        bottom: .5em;
+        left: 0;
 
         a {
             margin: 10px auto 0;
             text-align: center;
             width: 40%;
         }
+
     }
     .viewDetails, .whereToBuy{
         min-width: 6em;
@@ -108,11 +113,11 @@
             margin: 10px;
             min-height: 450px;
             width: 45%;
-
-            .nav a:first-child {
-                margin-right: 10px;
-            }
         }
+         .nav>a{
+            margin: 1px;
+        }
+
     }
 }
 

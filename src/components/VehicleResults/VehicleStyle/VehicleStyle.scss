@@ -23,7 +23,8 @@
 	}
 	.greybox{
 		background-color: $lookup-color;
-		padding: 2em 2em 5em 2em;
+		padding: 2em 2em 2em 2em;
+		margin: 0 0 1em 0;
 		border: 1px solid $gray-lighter;
 		border-radius: 6px;
 		.select{
@@ -47,12 +48,7 @@
 			padding: 1em;
 			display: inline-block;
 			margin: .4em;
-		}
-		.container{
-			display: block;
-			width: 50%;
 			float: right;
-
 		}
 	}
 }
