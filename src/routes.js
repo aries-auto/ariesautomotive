@@ -195,6 +195,20 @@ const router = new Router(on => {
 		return <Warranties context={state.context} />;
 	});
 
+	on('/styleguard', async (state) => {
+		try {
+			const url = `${apiBase}/category/321?key=${KEY}`;
+			const catResponse = await fetch(url, {
+				method: 'get',
+			});
+			state.context.category = await catResponse.json();
+		} catch (e) {
+			state.context.error = e;
+		}
+
+		return <Category context={state.context} />;
+	});
+
 	on('/', async (state) => {
 		state.context.featuredProducts = [];
 		state.context.testimonials = [];
