@@ -107,6 +107,11 @@
     }
 }
 
+.nothing {
+    float: right;
+    width: 100%;
+}
+
 @media(min-width: $screen-md-min) {
     .root {
         .product {
@@ -118,6 +123,9 @@
             margin: 1px;
         }
 
+    }
+    .partBox {
+        width: 100%;
     }
 }
 

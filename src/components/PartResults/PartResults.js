@@ -95,7 +95,7 @@ class PartResults extends Component {
 								<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
 							</div>
 
-							<div className="side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1">
+							<div className={cx('side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1', s.partBox)}>
 
 								<div className={s.price}>
 									{this.getPrice(part)}
@@ -106,6 +106,7 @@ class PartResults extends Component {
 									</ul>
 								</div>
 							</div>
+							<div className={s.nothing}>&nbsp;</div>
 							<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
 								<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} aria-controls="Where to buy" role="button" data-toggle="tab">Where To Buy</a>
 								<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} aria-controls="Part details" role="button" data-toggle="tab">View Details</a>
