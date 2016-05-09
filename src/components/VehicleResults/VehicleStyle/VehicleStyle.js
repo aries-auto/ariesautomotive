@@ -89,7 +89,7 @@ class VehicleStyle extends Component {
 	getParts() {
 		const parts = this.props.catStyleParts.category[this.props.catStyleParts.name].available_styles[this.props.vehicle.style];
 		if (!parts || parts.length < 1) {
-			return <h3>No parts for this style</h3>;
+			return <h3 className={s.noParts}>No parts for this style</h3>;
 		}
 		return (<PartResults parts={parts} className={s.partResults}/>);
 	}
@@ -122,9 +122,10 @@ class VehicleStyle extends Component {
 	render() {
 		return (
 			<div className={s.root}>
+				<h1 className={s.categoryName}>{this.props.catStyleParts.name ? this.props.catStyleParts.name : null}</h1>
 				<div className={s.greybox}>
 					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
-					<span className={s.container}>
+					<span className={s.styleSelect}>
 						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.vehicle.style && !this.props.showStyle) ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
 						<br />{this.props && this.props.showStyle ? this.showStyleChoices() : ''}
 					</span>

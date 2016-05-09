@@ -5,6 +5,12 @@
 	display: inline-block;
 	background-color: $white-base;
 	min-height: 400px;
+
+	.categoryName {
+		padding: 0;
+		margin: 0 0 .4em 0;
+		text-align: center;
+	}
 	.selTopBar {
 		font-size: 22px;
 		float:left;
@@ -19,11 +25,14 @@
 	}
 	.greybox{
 		background-color: $lookup-color;
-		padding: 2em;
+		padding: 1em 0;
+		width: 85%;
 		margin: 1em auto 1em auto;
-		max-width: 85%;
 		border: 1px solid $gray-lighter;
 		border-radius: 6px;
+		.selTopBar, .styleSelect {
+			padding: 0 2em;
+		}
 		.select{
 			margin-top: 2em;
 		}
@@ -48,17 +57,25 @@
 			float: right;
 		}
 	}
+	.noParts {
+		text-align: center;
+		clear: both;
+	}
 }
 
 @media(min-width: $screen-md-min) {
 	.root {
 		width: 70%;
-		padding: 4em;
+		padding: 1em 4em;
 		overflow: inherit;
 		float:right;
+		.categoryName {
+			text-align: left;
+		}
 		.greybox{
 			padding: 2em 2em 2em 2em;
 			margin: 0 0 1em 0;
+			width: 100%;
 		}
 		.partResults {
 			max-width: 100%;

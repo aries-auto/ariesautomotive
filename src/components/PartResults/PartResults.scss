@@ -10,7 +10,6 @@
 
 .product{
     box-shadow: 1px 0 10px 2px $lookup-color;
-    float: left;
     min-height: 250px;
     position: relative;
     max-width: 85%;
@@ -107,6 +106,7 @@
     }
     .viewDetails, .whereToBuy{
         min-width: 6em;
+        font-size: 1em;
     }
 }
 
@@ -118,9 +118,7 @@
 @media(min-width: $screen-md-min) {
     .root {
         .product {
-            margin: 10px;
             min-height: 450px;
-            width: 45%;
         }
          .nav>a{
             margin: 1px;
@@ -135,7 +133,7 @@
 @media(min-width: $screen-lg-min) {
     .root {
         .product{
-            width: 31%;
+            width: 30%;
 
             .price,
             .attr{
