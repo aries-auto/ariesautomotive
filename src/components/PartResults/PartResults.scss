@@ -5,6 +5,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
+
 }
 
 .product{
@@ -12,6 +13,8 @@
     float: left;
     min-height: 250px;
     position: relative;
+    max-width: 85%;
+    margin: 0 auto 1em auto;
 
     .header {
         margin-bottom: 10px;

@@ -2,12 +2,9 @@
 @import '../../variables.scss';
 
 .root{
-	// width: 70%;
 	display: inline-block;
 	background-color: $white-base;
 	min-height: 400px;
-	// overflow: inherit;
-	// float:right;
 	.selTopBar {
 		font-size: 22px;
 		float:left;
@@ -23,10 +20,10 @@
 	.greybox{
 		background-color: $lookup-color;
 		padding: 2em;
-		margin: 1em;
+		margin: 1em auto 1em auto;
+		max-width: 85%;
 		border: 1px solid $gray-lighter;
 		border-radius: 6px;
-		// max-width: 80%;
 		.select{
 			margin-top: 2em;
 		}
@@ -62,6 +59,9 @@
 		.greybox{
 			padding: 2em 2em 2em 2em;
 			margin: 0 0 1em 0;
+		}
+		.partResults {
+			max-width: 100%;
 		}
 	}
 }
