@@ -77,7 +77,7 @@ class Product extends Component {
 
 		this.props.part.categories.slice().reverse().map((cat, i) => {
 			links.push(
-				<li key={i}>
+				<li key={`breadcrumb${i}`}>
 					<a href={`/category/${cat.id}`}>{ cat.title }</a>
 				</li>
 			);
@@ -134,7 +134,7 @@ class Product extends Component {
 
 				{/* Where To Buy */}
 				<div className={cx(s.installSheet, 'pull-left')}>
-					<a ng-href="/buy" aria-controls="Where to buy" role="button" data-toggle="tab">
+					<a href="/buy" role="button">
 						<span className="glyphicon glyphicon-usd"></span>
 						Where To Buy
 					</a>
@@ -219,12 +219,12 @@ class Product extends Component {
 
 			const path = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
 			items.push(
-				<CarouselItem key={i}>
+				<CarouselItem key={`carousel-${i}`}>
 					<img src={path} />
 				</CarouselItem>
 			);
 			thumbs.push(
-				<li className={s.thumb} onClick={this.setActiveImage(i)}>
+				<li key={`thumb-${i}`} className={s.thumb} onClick={this.setActiveImage(i)}>
 					<img className="thumbImg img-responsive" src={path} />
 				</li>
 			);
@@ -232,7 +232,7 @@ class Product extends Component {
 
 		this.props.part.videos.map((vid, i) => {
 			videoThumbs.push(
-				<li key={i} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox(vid, 'video')}>
+				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox(vid, 'video')}>
 					<div>
 						<img onClick={this.openLightbox(vid)} className="thumbImg img-responsive" src={vid.thumbnail} />
 						<span className={s.arrow} onClick={this.openLightbox(vid)}>
@@ -294,7 +294,7 @@ class Product extends Component {
 		const apps = [];
 		this.props.part.vehicle_applications.map((v, i) => {
 			apps.push(
-				<tr key={i}>
+				<tr key={`application-${i}`}>
 					<td className="year">{ v.year }</td>
 					<td className="make">{ v.make }</td>
 					<td className="model">{ v.model }</td>
@@ -348,7 +348,7 @@ class Product extends Component {
 				}
 			});
 			parts.push(
-				<div key={i} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
+				<div key={`related-${i}`} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
 					<h4>
 						<a href={`/part/${r.part_number}`}>
 							{r.short_description}
@@ -384,7 +384,7 @@ class Product extends Component {
 				}
 			});
 			parts.push(
-				<div key={i} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
+				<div key={`featured${i}`} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
 					<h4>
 						<a href={`/part/${r.part_number}`}>
 							{r.short_description}
@@ -420,7 +420,7 @@ class Product extends Component {
 		const details = [];
 		this.props.part.attributes.map((attr, i) => {
 			details.push(
-				<div className="row" key={i}>
+				<div className="row" key={`details-${i}`}>
 					<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<span className={s.field}>{ attr.name }</span>
 					</div>
@@ -462,7 +462,7 @@ class Product extends Component {
 
 	renderPart() {
 		if (!this.props.part || !this.props.part.id) {
-			return (<div>NO PART</div>);
+			return (<h3 className={s.loading}>Loading part...</h3>);
 		}
 
 		return (
