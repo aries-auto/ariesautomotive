@@ -20,7 +20,12 @@ class PartStore extends EventEmitter {
 		this.bindActions({
 			get: PartActions.get,
 			getFeatured: PartActions.featured,
+			setCarouselIndex: PartActions.setCarouselIndex,
 		});
+	}
+
+	setCarouselIndex(carouselIndex) {
+		this.setState({ carouselIndex });
 	}
 
 	async get(id) {

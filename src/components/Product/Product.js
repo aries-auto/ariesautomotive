@@ -43,6 +43,9 @@ class Product extends Component {
 
 		PartActions.get(props.context.id);
 		PartActions.featured();
+		this.setActiveImage = this.setActiveImage.bind(this);
+		this.shadowbox = this.shadowbox.bind(this);
+		this.handleSelect = this.handleSelect.bind(this);
 	}
 
 	componentWillMount() {
@@ -57,12 +60,16 @@ class Product extends Component {
 		return PartStore.getState();
 	}
 
-	setActiveImage() {
-
+	setActiveImage(e) {
+		PartActions.setCarouselIndex(e);
 	}
 
 	shadowbox() {
+		// TODO
+	}
 
+	handleSelect(e) {
+		PartActions.setCarouselIndex(e);
 	}
 
 	openLightbox() {
@@ -212,29 +219,31 @@ class Product extends Component {
 		const items = [];
 		let thumbs = [];
 		const videoThumbs = [];
-		this.props.part.images.map((img, i) => {
+		let carouselIndex = 0;
+		this.props.part.images.map((img) => {
 			if (img.size !== 'Venti') {
 				return;
 			}
 
 			const path = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
 			items.push(
-				<CarouselItem key={`carousel-${i}`}>
+				<CarouselItem key={`carousel-${carouselIndex}`}>
 					<img src={path} />
 				</CarouselItem>
 			);
 			thumbs.push(
-				<li key={`thumb-${i}`} className={s.thumb} onClick={this.setActiveImage(i)}>
+				<li key={`thumb-${carouselIndex}`} className={s.thumb} onClick={this.setActiveImage.bind(this, carouselIndex)}>
 					<img className="thumbImg img-responsive" src={path} />
 				</li>
 			);
+			carouselIndex++;
 		});
 
 		this.props.part.videos.map((vid, i) => {
 			videoThumbs.push(
-				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox(vid, 'video')}>
+				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox.bind(this, i)}>
 					<div>
-						<img onClick={this.openLightbox(vid)} className="thumbImg img-responsive" src={vid.thumbnail} />
+						<img className="thumbImg img-responsive" src={vid.thumbnail} />
 						<span className={s.arrow} onClick={this.openLightbox(vid)}>
 							<span className={s.arrowRight}></span>
 						</span>
@@ -254,8 +263,9 @@ class Product extends Component {
 			<div className={s.carousel}>
 				<Carousel
 					direction={this.props.carouselDirection}
-					onSelect={this.handleSelect}
 					indicators={false}
+					activeIndex={this.props.carouselIndex}
+					onSelect={this.handleSelect}
 				>
 					{items}
 				</Carousel>
