@@ -23,6 +23,7 @@ class Product extends Component {
 		carouselIndex: PropTypes.number,
 		carouselDirection: PropTypes.string,
 		featured: PropTypes.array,
+		video: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -64,16 +65,27 @@ class Product extends Component {
 		PartActions.setCarouselIndex(e);
 	}
 
-	shadowbox() {
-		// TODO
+	shadowbox(vid) {
+		PartActions.setVideo(vid);
 	}
 
 	handleSelect(e) {
 		PartActions.setCarouselIndex(e);
 	}
 
-	openLightbox() {
-
+	renderVideo() {
+		if (!this.props.video) {
+			return null;
+		}
+		const url = this.props.video.channel[0].link.replace('watch?v=', 'v/');
+		return (
+			<div className={s.shadow}>
+				<div className={s.shadowBackground}>
+					{this.renderPart()}
+				</div>
+				<iframe src={url} className={s.videoModal} onClick={this.closeShadowbox} />
+			</div>
+		);
 	}
 
 	renderCrumbs() {
@@ -241,10 +253,10 @@ class Product extends Component {
 
 		this.props.part.videos.map((vid, i) => {
 			videoThumbs.push(
-				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox.bind(this, i)}>
+				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox.bind(this, vid)}>
 					<div>
 						<img className="thumbImg img-responsive" src={vid.thumbnail} />
-						<span className={s.arrow} onClick={this.openLightbox(vid)}>
+						<span className={s.arrow}>
 							<span className={s.arrowRight}></span>
 						</span>
 					</div>
@@ -486,7 +498,7 @@ class Product extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
-				{this.renderPart()}
+				{this.props.video ? this.renderVideo() : this.renderPart()}
 			</div>
 		);
 	}
