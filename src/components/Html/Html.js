@@ -64,7 +64,7 @@ class Html extends Component {
 					<meta name="description" content={this.props.description} />
 					<meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
 					<meta name="keywords" ng-bind="pageKywds" content="" />
-					<meta name="viewport" content="width=device-width, initial-scale=1" />
+					<meta name="viewport" content="width=device-width, initial-scale=.9" />
 
 					{/* For iPad with high-resolution Retina display running iOS ≥ 7: */}
 					<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/path/to/favicon-152.png?v=2" />
