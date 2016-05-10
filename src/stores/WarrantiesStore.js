@@ -72,6 +72,7 @@ class WarrantiesStore extends EventEmitter {
 				state: data.state,
 				country: data.country,
 				postalCode: data.postalCode,
+				brand: 3,
 			},
 			oldPartNumber: data.partNumber,
 			serialNumber: data.serialNumber,

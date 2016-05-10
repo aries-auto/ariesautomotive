@@ -18,6 +18,7 @@ class FormField extends Component {
 	constructor() {
 		super();
 		this.modifyValue = this.modifyValue.bind(this);
+		this.states = [];
 	}
 
 	static getStores() {
@@ -47,21 +48,10 @@ class FormField extends Component {
 				if (!this.props.countries[j]) {
 					continue;
 				}
-				const states = [];
-				for (const k in this.props.countries[j].states) {
-					if (!this.props.countries[j].states[k]) {
-						continue;
-					}
-					states.push(
-						<option key={k} value={this.props.countries[j].states[k].state}>
-							{this.props.countries[j].states[k].state}
-						</option>
-						);
-				}
 				countryOptions.push(
-					<optgroup key={j} label={this.props.countries[j].country}>
-						{states}
-					</optgroup>
+					<option key={j} value={this.props.countries[j].country}>
+						{this.props.countries[j].country}
+					</option>
 				);
 			}
 
@@ -75,8 +65,50 @@ class FormField extends Component {
 				</div>
 			);
 			break;
+
 		case 'state':
-			const stateOptions = [];
+			if (!this.props.inputs || !this.props.inputs.country) {
+				output.push(
+					<div key={field.key} className={'form-group col-xs-' + field.width}>
+						<label htmlFor={field.name}>{field.label}</label>
+						<select className="form-control" name={field.name}>
+							<option value="">{field.placeholder}</option>
+						</select>
+					</div>
+				);
+			}
+
+			let stateOptions = [];
+			this.props.countries.map((country) => {
+				if (country.country === this.props.inputs.country) {
+					stateOptions = country.states;
+				}
+			});
+
+			const statesToSelect = [];
+			for (const k in stateOptions) {
+				if (!stateOptions[k]) {
+					continue;
+				}
+				statesToSelect.push(
+					<option key={k} value={stateOptions[k].state}>
+						{stateOptions[k].state}
+					</option>
+					);
+			}
+
+			output.push(
+				<div key={field.key} className={'form-group col-xs-' + field.width}>
+					<label htmlFor={field.name}>{field.label}</label>
+					<select className="form-control" name={field.name} onChange={this.modifyValue}>
+						<option value="">{field.placeholder}</option>
+						{statesToSelect}
+					</select>
+				</div>
+			);
+			break;
+		case 'stateCountry':
+			const stateCountryOptions = [];
 			for (const j in this.props.countries) {
 				if (!this.props.countries[j]) {
 					continue;
@@ -92,7 +124,7 @@ class FormField extends Component {
 						</option>
 						);
 				}
-				stateOptions.push(
+				stateCountryOptions.push(
 					<optgroup key={j} label={this.props.countries[j].country}>
 						{states}
 					</optgroup>
@@ -104,7 +136,7 @@ class FormField extends Component {
 					<label htmlFor={field.name}>{field.label}</label>
 					<select className="form-control" name={field.name} onChange={this.modifyValue}>
 						<option value="">{field.placeholder}</option>
-						{stateOptions}
+						{stateCountryOptions}
 					</select>
 				</div>
 			);
