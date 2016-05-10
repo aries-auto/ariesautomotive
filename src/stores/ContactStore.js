@@ -1,5 +1,6 @@
 import ContactActions from '../actions/ContactActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
+import FormFieldActions from '../actions/FormFieldActions';
 import events from 'events';
 import fetch from '../core/fetch';
 import { apiBase } from '../config';
@@ -14,15 +15,14 @@ class ContactStore extends EventEmitter {
 			countries: [],
 			contactTypes: [],
 			inputs: {},
-			error: {},
-			success: {},
-			enabled: false,
+			error: null,
+			success: null,
 		};
 		this.bindListeners({
 			getCountries: ContactActions.getCountries,
 			getContactTypes: ContactActions.getContactTypes,
 			postContactData: ContactActions.postContactData,
-			setFormValidation: ContactActions.setFormValidation,
+			setInput: FormFieldActions.setInput,
 		});
 		if (this.state.countries.length === 0) {
 			this.getCountries();
@@ -30,6 +30,11 @@ class ContactStore extends EventEmitter {
 		if (this.state.contactTypes.length === 0) {
 			this.getContactTypes();
 		}
+	}
+
+	setInput(input) {
+		this.state.inputs[input.name] = input.value;
+		this.setState({ inputs: this.state.inputs });
 	}
 
 	async getCountries() {
@@ -90,11 +95,6 @@ class ContactStore extends EventEmitter {
 			});
 		}
 	}
-
-	setFormValidation(enabled) {
-		this.setState({ enabled });
-	}
-
 }
 
 

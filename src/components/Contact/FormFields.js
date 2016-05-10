@@ -64,7 +64,7 @@ module.exports.fields = [
 		required: true,
 	},
 	{
-		type: 'country',
+		type: 'stateCountry',
 		label: 'Enter your state/province',
 		placeholder: 'Select State / Province',
 		name: 'state',

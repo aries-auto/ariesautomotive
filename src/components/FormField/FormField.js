@@ -108,6 +108,7 @@ class FormField extends Component {
 			);
 			break;
 		case 'stateCountry':
+		case 'countryState':
 			const stateCountryOptions = [];
 			for (const j in this.props.countries) {
 				if (!this.props.countries[j]) {
