@@ -74,8 +74,8 @@ class Map extends Component {
 			lng: center.lng(),
 		};
 		const newBounds = {
-			ne: bounds.R.j + ',' + bounds.j.R,
-			sw: bounds.R.R + ',' + bounds.j.j,
+			ne: bounds.H.j + ',' + bounds.j.H,
+			sw: bounds.H.H + ',' + bounds.j.j,
 		};
 		BuyActions.bounds(newPosition, newBounds, newZoom);
 	}
