@@ -65,7 +65,7 @@ module.exports.fields = [
 	},
 	{
 		type: 'stateCountry',
-		label: 'Enter your state/province',
+		label: 'Enter your state/province:',
 		placeholder: 'Select State / Province',
 		name: 'state',
 		options: '',
@@ -74,7 +74,7 @@ module.exports.fields = [
 	},
 	{
 		type: 'text',
-		label: 'Enter your postal code',
+		label: 'Enter your postal code:',
 		placeholder: 'Enter your postal code.',
 		name: 'postalCode',
 		width: '6',
@@ -82,7 +82,7 @@ module.exports.fields = [
 	},
 	{
 		type: 'text',
-		label: 'Enter the subject',
+		label: 'Enter the subject:',
 		placeholder: 'Enter the subject.',
 		name: 'subject',
 		width: '12',
@@ -90,7 +90,7 @@ module.exports.fields = [
 	},
 	{
 		type: 'textarea',
-		label: 'Enter the message',
+		label: 'Enter the message:',
 		placeholder: 'Enter the message.',
 		name: 'message',
 		width: '12',

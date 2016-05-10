@@ -1,24 +1,24 @@
-import WarrantiesActions from '../actions/WarrantiesActions';
-import FormFieldActions from '../actions/FormFieldActions';
+import TechSupportActions from '../actions/TechSupportActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
+import FormFieldActions from '../actions/FormFieldActions';
 import events from 'events';
 import fetch from '../core/fetch';
 import { apiBase } from '../config';
 const EventEmitter = events.EventEmitter;
+
 const KEY = process.env.API_KEY;
 
-class WarrantiesStore extends EventEmitter {
+class TechSupportStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
 			inputs: {},
-			enabled: false,
-			success: false,
 			error: null,
+			success: null,
 		};
 		this.bindListeners({
+			postContactData: TechSupportActions.postContactData,
 			setInput: FormFieldActions.setInput,
-			postData: WarrantiesActions.postData,
 		});
 	}
 
@@ -27,11 +27,12 @@ class WarrantiesStore extends EventEmitter {
 		this.setState({ inputs: this.state.inputs });
 	}
 
-	async postData() {
+	async postContactData() {
 		const inputs = JSON.stringify(this.makeData(this.state.inputs));
 		try {
-			await fetch(`${apiBase}/warranty/41/false?key=${KEY}`, {
-				method: 'post',
+			const url = `${apiBase}/techSupport/43/true?key=${KEY}&brandID=3`;
+			await fetch(url, {
+				method: 'POST',
 				body: inputs,
 				headers: {
 					'Content-Type': 'application/json',
@@ -40,21 +41,13 @@ class WarrantiesStore extends EventEmitter {
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				if (data.message) {
-					this.setState({
-						error: data.message,
-						success: false,
-					});
-				} else {
-					this.setState({
-						success: true,
-						error: null,
-					});
-				}
+				this.setState({
+					success: data,
+				});
 			});
 		} catch (err) {
 			this.setState({
-				error: err,
+				error: err.json(),
 			});
 		}
 	}
@@ -76,15 +69,19 @@ class WarrantiesStore extends EventEmitter {
 					id: 3,
 				},
 			},
-			oldPartNumber: data.partNumber,
-			serialNumber: data.serialNumber,
-			date: new Date(data.date),
-			partNumber: 0,
+			purchaseDate: new Date(data.purchaseDate),
+			brandId: 3,
+			vehicleMake: data.vehicleMake,
+			vehicleModel: data.vehicelModel,
+			vehicleYear: parseInt(data.vehicleYear, 10),
+			dealerName: data.dealerName,
+			purchasedFrom: data.purchasedFrom,
+			productCode: data.productCode,
+			issue: data.issue,
 		};
 		return output;
 	}
-
 }
 
 
-export default Dispatcher.createStore(WarrantiesStore, 'WarrantiesStore');
+export default Dispatcher.createStore(TechSupportStore, 'TechSupportStore');

@@ -24,7 +24,6 @@ class Contact extends Component {
 
 	constructor() {
 		super();
-		this.modifyValue = this.modifyValue.bind(this);
 		this.submit = this.submit.bind(this);
 		this.getLocations = this.getLocations.bind(this);
 		this.renderSuccess = this.renderSuccess.bind(this);
@@ -59,29 +58,6 @@ class Contact extends Component {
 				{locationHtml()}
 			</div>
 		);
-	}
-
-	checkDisabled() {
-		for (const i in fields) {
-			if (!fields[i]) {
-				continue;
-			}
-			if (fields[i].required === true) {
-				const f = this.props.inputs[fields[i].name];
-				if (!f || f === undefined) {
-					ContactActions.setFormValidation(false);
-					return;
-				}
-			}
-		}
-		ContactActions.setFormValidation(true);
-	}
-
-	modifyValue(event) {
-		const name = event.target.name;
-		const value = event.target.value;
-		this.props.inputs[name] = value;
-		this.checkDisabled();
 	}
 
 	submit(event) {
