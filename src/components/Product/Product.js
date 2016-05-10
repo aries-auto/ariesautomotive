@@ -47,6 +47,8 @@ class Product extends Component {
 		this.setActiveImage = this.setActiveImage.bind(this);
 		this.shadowbox = this.shadowbox.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
+		this.handleModalClose = this.handleModalClose.bind(this);
+		this.noScroll = this.noScroll.bind(this);
 	}
 
 	componentWillMount() {
@@ -67,23 +69,33 @@ class Product extends Component {
 
 	shadowbox(vid) {
 		PartActions.setVideo(vid);
+		window.addEventListener('wheel', this.noScroll);
+	}
+
+	noScroll(e) {
+		e.preventDefault();
 	}
 
 	handleSelect(e) {
 		PartActions.setCarouselIndex(e);
 	}
 
+	handleModalClose() {
+		window.removeEventListener('wheel', this.noScroll);
+		PartActions.setVideo(null);
+	}
+
 	renderVideo() {
 		if (!this.props.video) {
 			return null;
 		}
-		const url = this.props.video.channel[0].link.replace('watch?v=', 'v/');
+		const embedCode = () => { return { __html: this.props.video.channel[0].embed_code }; };
 		return (
-			<div className={s.shadow}>
+			<div className={s.shadow} onClick={this.handleModalClose}>
 				<div className={s.shadowBackground}>
 					{this.renderPart()}
 				</div>
-				<iframe src={url} className={s.videoModal} onClick={this.closeShadowbox} />
+				<div className={s.videoModal} dangerouslySetInnerHTML={embedCode()}></div>
 			</div>
 		);
 	}
