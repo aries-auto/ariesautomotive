@@ -7,7 +7,7 @@ import ContactStore from '../../stores/ContactStore';
 import ContactActions from '../../actions/ContactActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import Form from '../Form/Form';
-import { locationHtml } from '../../data/locations';
+import { locations } from '../../data/locations';
 
 @withStyles(s)
 @connectToStores
@@ -53,9 +53,11 @@ class Contact extends Component {
 	}
 
 	getLocations() {
+		const main = this.renderMainLocation();
+		const support = this.renderSupportLocations();
 		return (
-			<div className={'location'}>
-				{locationHtml()}
+			<div className={s.addresses}>{main}{support}
+				<div className="techsupport"><h4>TECH SUPPORT HOTLINE: <a href="tel:+18888002743">(888) 800-2743</a></h4></div>
 			</div>
 		);
 	}
@@ -63,6 +65,71 @@ class Contact extends Component {
 	submit(event) {
 		event.preventDefault();
 		ContactActions.postContactData(this.props.inputs.reason);
+	}
+
+	renderSupportLocations() {
+		const output = [];
+		locations.map((location, i) => {
+			let address2 = null;
+			if (location.address[0].address2 && location.address[0].address2 !== '') {
+				address2 = (<div itemProp="suite">{location.address[0].address2}</div>);
+			}
+			output.push(
+				<address itemType="//schema.org/Organization" key={i} className={s.supportLocation}>
+					<div>
+						<span className={s.addressname} itemProp="name">{location.name}</span>
+						<div itemProp="address" itemType="//schema.org/PostalAddress">
+							<div itemProp="streetAddress">{location.address[0].address1}</div>
+							{address2}
+							<div>
+								<span itemProp="addressLocality">{location.address[0].city}, </span>
+								<span itemProp="addressRegion">{location.address[0].state} </span>
+								<span itemProp="postalCode">{location.address[0].zip}</span>
+							</div>
+						</div>
+						Phone: <a href="tel:+18886359824" itemProp="telephone">{location.phone}</a><br />
+						Fax: <a href="tel:+19723522617" itemProp="faxNumber">{location.fax}</a><br />
+					</div>
+				</address>
+			);
+		});
+		return (
+			<div>
+				{output}
+			</div>
+		);
+	}
+
+	renderMainLocation() {
+		return (
+			<address itemType="//schema.org/Organization" className={s.mainLocation}>
+				<span className={s.addressname} itemProp="name">ARIES AUTOMOTIVE HEADQUARTERS - DALLAS AREA</span>
+				<div>
+					<div className={s.physical} itemProp="address" itemType="//schema.org/PostalAddress">
+						<strong>Physical Address</strong><br />
+						<span itemProp="streetAddress">2611 Regent Boulevard</span>
+						<br />
+						<span itemProp="suite">Suite 300</span>
+						<br />
+						<span itemProp="addressLocality">DFW Airport</span>,
+						<span itemProp="addressRegion">TX</span>
+						<span itemProp="postalCode">75261</span>
+					</div>
+					<div className={s.mailing} itemProp="address" itemType="//schema.org/PostalAddress">
+						<strong>Mailing Address</strong><br />
+						<span itemProp="streetAddress">PO BOX 1598</span>
+						<br />
+						<span itemProp="addressLocality">Grapevine</span>,
+						<span itemProp="addressRegion">TX</span>
+						<span itemProp="postalCode">76051</span>
+					</div>
+				</div>
+				<br />
+				Toll Free: <a href="tel:+18886359824" itemProp="telephone">(888) 635-9824</a><br />
+				Local: <a href="tel:+19724560222" itemProp="telephone">(972) 456-0222</a><br />
+				Fax: <a href="tel:+19723522617" itemProp="faxNumber">(972) 352-2617</a><br />
+			</address>
+		);
 	}
 
 	renderSuccess() {

@@ -4,3 +4,23 @@
 .hero {
 	background-image: url('http://storage.googleapis.com/aries-website/hero-images/truck.png');
 }
+
+.addresses {
+	.addressname {
+		font-weight: 800;
+	}
+
+	.supportLocation, .mainLocation {
+		background-color: $white-base;
+		padding: 1em;
+	}
+
+	.mainLocation {
+		.mailing, .physical {
+			display: inline-block;
+			width: 50%;
+		}
+	}
+
+}
+
