@@ -79,7 +79,6 @@ class WarrantiesStore extends EventEmitter {
 			oldPartNumber: data.partNumber,
 			serialNumber: data.serialNumber,
 			date: new Date(data.date),
-			partNumber: 0,
 		};
 		return output;
 	}

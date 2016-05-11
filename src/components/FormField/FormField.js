@@ -69,7 +69,7 @@ class FormField extends Component {
 		case 'state':
 			if (!this.props.inputs || !this.props.inputs.country) {
 				output.push(
-					<div key={field.key} className={'form-group col-xs-' + field.width}>
+					<div key={`${field.key}-state`} className={'form-group col-xs-' + field.width}>
 						<label htmlFor={field.name}>{field.label}</label>
 						<select className="form-control" name={field.name}>
 							<option value="">{field.placeholder}</option>
