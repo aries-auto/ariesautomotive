@@ -11,14 +11,27 @@
 	}
 
 	.supportLocation, .mainLocation {
-		background-color: $white-base;
+		background-color: $lookup-color;
 		padding: 1em;
+		border-radius: 3px;
 	}
 
 	.mainLocation {
+		.addressname {
+			float: left;
+			width: 100%;
+		}
 		.mailing, .physical {
-			display: inline-block;
+			padding-top: 1em;
 			width: 50%;
+			float: left;
+		}
+		.physical {
+			clear: both;
+		}
+		.mainTelephone {
+			padding-top: 1em;
+			clear: both;
 		}
 	}
 

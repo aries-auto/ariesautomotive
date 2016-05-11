@@ -104,30 +104,29 @@ class Contact extends Component {
 		return (
 			<address itemType="//schema.org/Organization" className={s.mainLocation}>
 				<span className={s.addressname} itemProp="name">ARIES AUTOMOTIVE HEADQUARTERS - DALLAS AREA</span>
-				<div>
-					<div className={s.physical} itemProp="address" itemType="//schema.org/PostalAddress">
-						<strong>Physical Address</strong><br />
-						<span itemProp="streetAddress">2611 Regent Boulevard</span>
-						<br />
-						<span itemProp="suite">Suite 300</span>
-						<br />
-						<span itemProp="addressLocality">DFW Airport</span>,
-						<span itemProp="addressRegion">TX</span>
-						<span itemProp="postalCode">75261</span>
-					</div>
-					<div className={s.mailing} itemProp="address" itemType="//schema.org/PostalAddress">
-						<strong>Mailing Address</strong><br />
-						<span itemProp="streetAddress">PO BOX 1598</span>
-						<br />
-						<span itemProp="addressLocality">Grapevine</span>,
-						<span itemProp="addressRegion">TX</span>
-						<span itemProp="postalCode">76051</span>
-					</div>
+				<div className={s.physical} itemProp="address" itemType="//schema.org/PostalAddress">
+					<strong>Physical Address</strong><br />
+					<span itemProp="streetAddress">2611 Regent Boulevard</span>
+					<br />
+					<span itemProp="suite">Suite 300</span>
+					<br />
+					<span itemProp="addressLocality">DFW Airport</span>,
+					<span itemProp="addressRegion">TX</span>
+					<span itemProp="postalCode">75261</span>
 				</div>
-				<br />
-				Toll Free: <a href="tel:+18886359824" itemProp="telephone">(888) 635-9824</a><br />
-				Local: <a href="tel:+19724560222" itemProp="telephone">(972) 456-0222</a><br />
-				Fax: <a href="tel:+19723522617" itemProp="faxNumber">(972) 352-2617</a><br />
+				<div className={s.mailing} itemProp="address" itemType="//schema.org/PostalAddress">
+					<strong>Mailing Address</strong><br />
+					<span itemProp="streetAddress">PO BOX 1598</span>
+					<br />
+					<span itemProp="addressLocality">Grapevine</span>,
+					<span itemProp="addressRegion">TX</span>
+					<span itemProp="postalCode">76051</span>
+				</div>
+				<div className={s.mainTelephone}>
+					Toll Free: <a href="tel:+18886359824" itemProp="telephone">(888) 635-9824</a><br />
+					Local: <a href="tel:+19724560222" itemProp="telephone">(972) 456-0222</a><br />
+					Fax: <a href="tel:+19723522617" itemProp="faxNumber">(972) 352-2617</a><br />
+				</div>
 			</address>
 		);
 	}
