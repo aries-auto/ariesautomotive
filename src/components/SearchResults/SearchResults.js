@@ -23,6 +23,15 @@ class SearchResults extends Component {
 		this.pagination = this.pagination.bind(this);
 		this.loadMore = this.loadMore.bind(this);
 		this.scrollTo = this.scrollTo.bind(this);
+		this.hits = 0;
+		this.total = 0;
+	}
+
+	componentWillMount() {
+		if (this.props.searchResult.hits && this.props.searchResult.hits.hits) {
+			this.hits = this.props.searchResult.hits.hits.length;
+			this.total = this.props.searchResult.hits.total;
+		}
 	}
 
 	static getStores() {
@@ -44,6 +53,9 @@ class SearchResults extends Component {
 	}
 
 	showParts() {
+		if (!this.props.searchResult || !this.props.searchResult.hits || !this.props.searchResult.hits.hits) {
+			return null;
+		}
 		const parts = [];
 		for (let i = 0; i < this.props.searchResult.hits.hits.length; i++) {
 			parts.push(this.props.searchResult.hits.hits[i]._source);
@@ -53,10 +65,16 @@ class SearchResults extends Component {
 	}
 
 	took() {
+		if (!this.props.searchResult.took) {
+			return '.0140';
+		}
 		return parseFloat((this.props.searchResult.took * 0.001).toFixed(4));
 	}
 
 	pagination() {
+		if (!this.props.searchResult || !this.props.searchResult.hits || !this.props.searchResult.hits.hits) {
+			return null;
+		}
 		const res = this.props.searchResult;
 		if (res.hits.hits.length > 0 && res.hits.hits.length < res.hits.total) {
 			return (
@@ -80,7 +98,7 @@ class SearchResults extends Component {
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<h2 id="catTitleProds" ref="header">
 					SEARCH RESULTS
-					<span className="small">1 - {this.props.searchResult.hits.hits.length} of {this.props.searchResult.hits.total} results for "<em>{this.props.term}</em>" returned in {this.took()} seconds</span>
+					<span className="small">1 - {this.hits} of {this.total} results for "<em>{this.props.term}</em>" returned in {this.took()} seconds</span>
 				</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
