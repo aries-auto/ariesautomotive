@@ -91,7 +91,6 @@ class Html extends Component {
 					<meta name="msapplication-TileColor" content="#FFFFFF" />
 					<meta name="msapplication-TileImage" content="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2" />
 
-					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
 				</head>
