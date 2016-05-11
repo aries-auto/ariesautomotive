@@ -72,12 +72,13 @@ class TechSupportStore extends EventEmitter {
 			purchaseDate: new Date(data.purchaseDate),
 			brandId: 3,
 			vehicleMake: data.vehicleMake,
-			vehicleModel: data.vehicelModel,
+			vehicleModel: data.vehicleModel,
 			vehicleYear: parseInt(data.vehicleYear, 10),
 			dealerName: data.dealerName,
 			purchasedFrom: data.purchasedFrom,
 			productCode: data.productCode,
 			issue: data.issue,
+			dateCode: data.dateCode,
 		};
 		return output;
 	}
