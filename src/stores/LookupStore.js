@@ -2,7 +2,7 @@ import LookupActions from '../actions/LookupActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiKey } from '../config';
+import { apiBase, apiKey } from '../config';
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
 
@@ -34,7 +34,7 @@ class LookupStore extends EventEmitter {
 			body = `year=${this.state.vehicle.year || 0}&make=${this.state.vehicle.make || ''}&model=${this.state.vehicle.model || ''}&style=${this.state.vehicle.style || ''}&collection=${this.state.vehicle.collection || ''}`;
 		}
 		try {
-			await fetch(`https://goapi.curtmfg.com/vehicle/mongo/allCollections?key=${KEY}`, {
+			await fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',

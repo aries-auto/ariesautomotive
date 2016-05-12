@@ -76,7 +76,8 @@ const config = {
 				test: /\.scss$/,
 				loaders: [
 					'isomorphic-style-loader',
-					'css-loader?' + (DEBUG ? 'sourceMap&' : 'minimize&sourceMap=true') +
+					// 'css-loader?' + (DEBUG ? 'sourceMap&' : 'minimize&sourceMap=true') +
+					'css-loader?' + (DEBUG ? 'sourceMap&' : 'sourceMap&') +
 					'modules&localIdentName=[name]_[local]_[hash:base64:3]',
 					'postcss-loader',
 				],

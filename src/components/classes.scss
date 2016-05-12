@@ -4,54 +4,54 @@
 :global button[type=submit].red-transparent-button,
 :global a.white-transparent-button, :global button.white-transparent-button,
 :global button[type=submit].white-transparent-button {
-    padding: 2px 15px;
-    margin-bottom: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: $lookup-color;
-    border-radius: 0;
+	padding: 2px 15px;
+	margin-bottom: 5px;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	background-color: $lookup-color;
+	border-radius: 0;
 
-    &:hover, &:focus, &:disabled {
-        text-decoration: none;
-        background-color: transparent;
-        transition: all .3s ease-in-out;
-    }
+	&:hover, &:focus, &:disabled {
+		text-decoration: none;
+		background-color: transparent;
+		transition: all .3s ease-in-out;
+	}
 }
 
 :global a.red-transparent-button, :global button.red-transparent-button,
 :global button[type=submit].red-transparent-button {
-    color: $alt-red;
-    border: 1px solid $alt-red;
+	color: $alt-red;
+	border: 1px solid $alt-red;
 
-    &:hover, &:focus, &:disabled {
-        color: $header-color;
-        border-color: $header-color;
-        transition: all .3s ease-in-out;
-    }
+	&:hover, &:focus, &:disabled {
+		color: $header-color;
+		border-color: $header-color;
+		transition: all .3s ease-in-out;
+	}
 }
 
 :global a.white-transparent-button, :global button.white-transparent-button,
 :global button[type=submit].white-transparent-button {
-    color: $white-base;
-    border: 1px solid $white-base;
+	color: $white-base;
+	border: 1px solid $white-base;
 
-    &:hover, &:focus, &:disabled {
-        transition: .3s ease-in-out;
-    }
+	&:hover, &:focus, &:disabled {
+		transition: .3s ease-in-out;
+	}
 }
 
 :global button[type=submit] {
-    font-size: 18px;
-    color: $white-base;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    cursor: pointer;
-    background-color: $alt-red;
-    border-color: $header-color;
+	font-size: 18px;
+	color: $white-base;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	cursor: pointer;
+	background-color: $alt-red;
+	border-color: $header-color;
 
-    &[disabled], &:hover, &:active, &:focus {
-        background-color: $new-red;
-        border-color: $new-red;
-    }
+	&[disabled], &:hover, &:active, &:focus {
+		background-color: $new-red;
+		border-color: $new-red;
+	}
 }

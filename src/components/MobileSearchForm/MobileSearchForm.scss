@@ -10,11 +10,11 @@
 	}
 
 	button[type=submit] {
-		border: 0;
 		float: right;
-		padding: 0;
 		width: 10%;
+		padding: 0;
 		background: none;
+		border: 0;
 
 		&:hover,
 		&:focus,
@@ -27,5 +27,4 @@
 			display: none;
 		}
 	}
-
 }

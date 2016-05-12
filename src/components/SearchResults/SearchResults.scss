@@ -2,38 +2,38 @@
 
 .pagination {
 	display: block;
-    width: 60%;
-    height: 50px;
-    background-color: $lookup-color;
-    border: 1px solid $lookup-color;
-    text-align: center;
-    transition: all .2s ease-in;
-    margin: 15px auto;
-    span {
-    	line-height: 50px;
-    	font-size: 16px;
-    	text-decoration: none;
-    }
+	width: 60%;
+	height: 50px;
+	margin: 15px auto;
+	text-align: center;
+	background-color: $lookup-color;
+	border: 1px solid $lookup-color;
+	transition: all .2s ease-in;
+	span {
+		font-size: 16px;
+		line-height: 50px;
+		text-decoration: none;
+	}
 }
 
 .scrollTo {
+	position: fixed;
+	right: 0;
+	bottom: 1em;
+	width: 5em;
+	height: 3em;
+	color: #fff;
+	text-align: center;
 	background-color: #c73031;
-    color: #fff;
-    width: 5em;
-    height: 3em;
-    position: fixed;
-    bottom: 1em;
-    right: 0;
-    text-align: center;
-    border-top-left-radius: 2em;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 2em;
-    box-shadow: 4px 0 10px 2px #ccc;
-    span {
-    	font-size: 1.6em;
-	    top: 10%;
-	    cursor: pointer;
-	    position: relative;
-    }
+	border-top-left-radius: 2em;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 2em;
+	box-shadow: 4px 0 10px 2px #ccc;
+	span {
+		position: relative;
+		top: 10%;
+		font-size: 1.6em;
+		cursor: pointer;
+	}
 }

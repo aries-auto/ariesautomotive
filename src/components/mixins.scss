@@ -1,4 +1,4 @@
 @mixin rgba($prop, $c1, $c2, $c3, $opacity) {
-  $prop: rgb($c1, $c2, $c3);
-  $prop: rgba($c1, $c2, $c3, $opacity);
+	$prop: rgb($c1, $c2, $c3);
+	$prop: rgba($c1, $c2, $c3, $opacity);
 }

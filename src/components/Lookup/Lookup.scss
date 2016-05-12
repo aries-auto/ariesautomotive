@@ -1,18 +1,18 @@
 @import '../variables.scss';
 
 .root {
-    width: 100%;
-    padding: 0;
-    background-color: $lookup-color;
+	width: 100%;
+	padding: 0;
+	background-color: $lookup-color;
 }
 
 .inlineForm {
-    max-width: $max-content-width;
-    margin: auto;
-    text-align: center;
+	max-width: $max-content-width;
+	margin: auto;
+	text-align: center;
 
-    .heading {
-        display: inline-block;
+	.heading {
+		display: inline-block;
         // height: 38px;
         font-size: 18px;
         font-weight: 900;
@@ -23,40 +23,39 @@
     }
 
     .formGroup {
-        margin: 10px;
+    	margin: 10px;
 
-        select {
-            text-transform: uppercase;
-        }
+    	select {
+    		text-transform: uppercase;
+    	}
 
-        .button {
-            margin-bottom: 0;
-        }
+    	.button {
+    		margin-bottom: 0;
+    	}
     }
 }
-.lookup{
-}
 
-.viewParts{
-    height: 38px;
-    margin: .5em .3em;
+
+.viewParts {
+	height: 38px;
+	margin: .5em .3em;
 }
-.disabled{
-    opacity: .3;
+.disabled {
+	opacity: .3;
 }
-.vehicleName{
-    text-align: center;
-    font-size: 1.3em;
-    font-weight: 800;
-    a {
-        color: $black-base;
-        padding: .6em;
-        text-decoration: underline;
-    }
+.vehicleName {
+	font-size: 1.3em;
+	font-weight: 800;
+	text-align: center;
+	a {
+		padding: .6em;
+		color: $black-base;
+		text-decoration: underline;
+	}
 }
 
 @media (min-width: 720px) {
-    .inlineForm {
-        // margin-left: 270px;
-    }
+	.inlineForm {
+// margin-left: 270px;
+}
 }

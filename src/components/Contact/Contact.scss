@@ -11,8 +11,8 @@
 	}
 
 	.supportLocation, .mainLocation {
-		background-color: $lookup-color;
 		padding: 1em;
+		background-color: $lookup-color;
 		border-radius: 3px;
 	}
 
@@ -22,9 +22,9 @@
 			width: 100%;
 		}
 		.mailing, .physical {
-			padding-top: 1em;
-			width: 50%;
 			float: left;
+			width: 50%;
+			padding-top: 1em;
 		}
 		.physical {
 			clear: both;
@@ -34,6 +34,4 @@
 			clear: both;
 		}
 	}
-
 }
-

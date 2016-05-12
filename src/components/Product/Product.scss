@@ -104,6 +104,7 @@
     &.mobile {
         display: flex;
         margin: 25px 0;
+
         justify-content: space-between;
 
         > div {
@@ -273,36 +274,36 @@
     }
 
     @media only screen and (max-width: 760px),
-       (min-device-width: 768px) and (max-device-width: 1024px) {
-        /* Force table to not be like tables anymore */
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+/* Force table to not be like tables anymore */
 
-        table, thead, tbody, th, td, tr {
-            display: block;
-        }/* Hide table headers (but not display: none;, for accessibility) */
+table, thead, tbody, th, td, tr {
+    display: block;
+}/* Hide table headers (but not display: none;, for accessibility) */
 
-        thead tr {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
+thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
 
-        tr {
-            border: 1px solid #ccc;
-        }
+tr {
+    border: 1px solid #ccc;
+}
 
-        td {
-            position: relative;
-            min-height: 30px;
-            padding-left: 50%;
-            line-height: 25px;
+td {
+    position: relative;
+    min-height: 30px;
+    padding-left: 50%;
+    line-height: 25px;
             /* Behave  like a "row" */
             border: none;
             border-bottom: 1px solid #e1e1e1;
         }
 
         td:before {
-            /* Now like a table header */
-            position: absolute;
+/* Now like a table header */
+position: absolute;
             /* Top/left values mimic padding */
             top: 2px;
             left: 6px;
@@ -323,22 +324,22 @@
 }
 
 .videoModal {
-    width: 100%;
-    background-color: rgba(0, 0, 0, .5);
     position: fixed;
     top: 0;
-    left: 0;
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 19;
+    width: 100%;
     height: 100vh;
-    iframe{
+    background-color: rgba(0, 0, 0, .5);
+    iframe {
         position: fixed;
         top: 25%;
-        left: 0%;
+        left: 0;
+        z-index: 20;
         width: 100%;
         height: 50%;
-        z-index: 20;
     }
 }
 
@@ -353,7 +354,7 @@
         line-height: 40px;
     }
     .videoModal {
-        iframe{
+        iframe {
             top: 25%;
             left: 30%;
             width: 40%;
@@ -363,7 +364,7 @@
 }
 
 @media only screen and (max-width: 760px),
-       (min-device-width: 768px) and (max-device-width: 1024px) {
+(min-device-width: 768px) and (max-device-width: 1024px) {
     .applicationsTbl {
         td:nth-of-type(1):before {
             font-weight: 900;

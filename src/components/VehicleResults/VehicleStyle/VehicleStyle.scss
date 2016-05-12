@@ -1,10 +1,10 @@
 @import '../../classes.scss';
 @import '../../variables.scss';
 
-.root{
+.root {
 	display: inline-block;
-	background-color: $white-base;
 	min-height: 400px;
+	background-color: $white-base;
 
 	.categoryName {
 		padding: 0;
@@ -12,70 +12,70 @@
 		text-align: center;
 	}
 	.selTopBar {
-		font-size: 22px;
-		float:left;
+		float: left;
 		margin-right: 15px;
+		font-size: 22px;
 	}
-	.partResults{
+	.partResults {
 		clear: both;
 	}
-	.clearfix{
+	.clearfix {
 		width: 100%;
 		clear: both;
 	}
-	.greybox{
-		background-color: $lookup-color;
-		padding: 1em 0;
+	.greybox {
 		width: 85%;
+		padding: 1em 0;
 		margin: 1em auto 1em auto;
+		background-color: $lookup-color;
 		border: 1px solid $gray-lighter;
 		border-radius: 6px;
 		.selTopBar, .styleSelect {
 			padding: 0 2em;
 		}
-		.select{
+		.select {
 			margin-top: 2em;
 		}
-		.styleButton{
-			font-weight: 600;
-			font-size: 1.4em;
+		.styleButton {
 			padding: .6em;
+			font-size: 1.4em;
+			font-weight: 600;
 		}
-		.styleChoices{
-			ul{
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			background-color: $white-base;
+		.styleChoices {
+			display: inline-block;
+			float: right;
 			width: auto;
+			padding: 1em;
+			margin: .4em;
+			background-color: $white-base;
 			border: 1px solid $gray-lighter;
 			border-radius: 6px;
-			padding: 1em;
-			display: inline-block;
-			margin: .4em;
-			float: right;
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style-type: none;
+			}
 		}
 	}
 	.noParts {
-		text-align: center;
 		clear: both;
+		text-align: center;
 	}
 }
 
 @media(min-width: $screen-md-min) {
 	.root {
+		float: right;
 		width: 70%;
 		padding: 1em 4em;
 		overflow: inherit;
-		float:right;
 		.categoryName {
 			text-align: left;
 		}
-		.greybox{
+		.greybox {
+			width: 100%;
 			padding: 2em 2em 2em 2em;
 			margin: 0 0 1em 0;
-			width: 100%;
 		}
 		.partResults {
 			max-width: 100%;

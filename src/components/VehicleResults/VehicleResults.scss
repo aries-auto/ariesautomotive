@@ -1,5 +1,5 @@
 @import '../classes.scss';
-.categoryStyle{
+.categoryStyle {
 	font-size: 14px;
 }
 
@@ -11,44 +11,44 @@
 .root {
 	padding: 0 1em 0 1em;
 	li {
-		margin: 0 0 6px;
 		width: 80%;
+		margin: 0 0 6px;
 		border-radius: 4px;
-		> a{
+		> a {
 			width: 80%;
-			font-size: 18px;
-			font-family: "ff-good-headline-web-pro-con",sans-serif;
-			font-weight: bold;
-			border: 0px;
-			text-align: left;
-			vertical-align: text-bottom;
 			padding: 5px;
 			overflow-x: auto;
 			overflow-y: hidden;
-			color: #C73031;
+			font-family: "ff-good-headline-web-pro-con",sans-serif;
+			font-size: 18px;
+			font-weight: bold;
+			color: #c73031;
+			text-align: left;
+			vertical-align: text-bottom;
+			border: 0;
 
-			&:hover, &:focus{
+			&:hover, &:focus {
+				background-color: rgba(255, 255, 255, .6);
 				border-radius: 4px 0 0 4px;
-				background-color: rgba(255, 255, 255, 0.6);
 			}
 		}
-		&.active > a{
+		&.active > a {
+			color: #c73031;
 			background-color: rgb(255, 255 ,255);
-			color: #C73031;
 			border-radius: 4px 0 0 4px;
 		}
 	}
-	.active{
+	.active {
 		background-color: white;
 	}
 }
 
-.clearfix{
-	clear:both;
+.clearfix {
+	clear: both;
 }
 
 @media(min-width: $screen-md-min) {
-	.container{
+	.container {
 		width: 100%;
 		padding: 2em;
 	}
@@ -58,7 +58,7 @@
 		padding: 0;
 		li {
 			width: 100%;
-			> a{
+			> a {
 				width: 100%;
 			}
 		}

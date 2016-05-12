@@ -1,54 +1,51 @@
 @import '../../variables.scss';
 
 .root {
-    
-    .textlocations {
-        width: 100%;
-        display: block;
+	.textlocations {
+		display: block;
+		width: 100%;
 
-        h2 {
-            color: $maroon;
-            border-bottom: $new-red 4px solid;
-        }
-   
-        .location {
-            background-color: $white-base;
-            position: relative;
-            padding: 10px 10px 0;
-            margin: 10px;
-            min-height: 190px;
-            border-bottom: 3px solid $maroon;
-            box-shadow: 3px 4px 7px $black-base;
-            font-weight: 800;
-        }
-    }
-    .name {
-        font-size: 2em;
-        color: $maroon;
-    }
-    .name, .type, .address {
-        display: block;
-    }
-    .address {
-        padding: 1em 0 0 0;
-    }
-    .actions{
-        padding: 2em 0 0 0;
-        a {
-            padding: 0 1em 0 0;
-        }
-    }
+		h2 {
+			color: $maroon;
+			border-bottom: $new-red 4px solid;
+		}
 
-    .onlinelocations{
-        .location {
-            position: relative;
-            padding: 10px 10px 0;
-            margin: 10px;
-            min-height: 100x;
-            border-bottom: $maroon 4px solid;
-            font-weight: 800;
-        }
+		.location {
+			position: relative;
+			min-height: 190px;
+			padding: 10px 10px 0;
+			margin: 10px;
+			font-weight: 800;
+			background-color: $white-base;
+			border-bottom: 3px solid $maroon;
+			box-shadow: 3px 4px 7px $black-base;
+		}
+	}
+	.name {
+		font-size: 2em;
+		color: $maroon;
+	}
+	.name, .type, .address {
+		display: block;
+	}
+	.address {
+		padding: 1em 0 0 0;
+	}
+	.actions {
+		padding: 2em 0 0 0;
+		a {
+			padding: 0 1em 0 0;
+		}
+	}
 
-    }
-
+	.onlinelocations {
+		.location {
+			position: relative;
+			min-height: 100x;
+			padding: 10px 10px 0;
+			margin: 10px;
+			font-weight: 800;
+			border-bottom: $maroon 4px solid;
+		}
+	}
 }
