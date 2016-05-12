@@ -52,18 +52,6 @@ class SearchResults extends Component {
 		SearchActions.search(this.props.term, page, this.props.searchResult);
 	}
 
-	showParts() {
-		if (!this.props.searchResult || !this.props.searchResult.hits || !this.props.searchResult.hits.hits) {
-			return null;
-		}
-		const parts = [];
-		for (let i = 0; i < this.props.searchResult.hits.hits.length; i++) {
-			parts.push(this.props.searchResult.hits.hits[i]._source);
-		}
-
-		return <PartResults parts={parts} />;
-	}
-
 	took() {
 		if (!this.props.searchResult.took) {
 			return '.0140';
@@ -85,6 +73,21 @@ class SearchResults extends Component {
 		}
 	}
 
+	renderParts() {
+		if (!this.props.searchResult || !this.props.searchResult.hits || !this.props.searchResult.hits.hits) {
+			return null;
+		}
+		const parts = [];
+		for (let i = 0; i < this.props.searchResult.hits.hits.length; i++) {
+			if (this.props.searchResult.hits.hits[i]._type === 'category') {
+				continue;
+			}
+			parts.push(this.props.searchResult.hits.hits[i]._source);
+		}
+
+		return <PartResults parts={parts} />;
+	}
+
 	renderScrollTo() {
 		return (
 			<div className={s.scrollTo} onClick={this.scrollTo}>
@@ -102,11 +105,9 @@ class SearchResults extends Component {
 				</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
-					{/* Products */}
-					{this.showParts()}
+					{this.renderParts()}
 				</div>
 
-				{/* Pagination */}
 				<div className="clearfix"></div>
 				{this.pagination()}
 				{this.renderScrollTo()}

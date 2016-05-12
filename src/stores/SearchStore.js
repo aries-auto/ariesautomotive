@@ -36,7 +36,7 @@ class SearchStore extends EventEmitter {
 		}
 		const params = `?key=${KEY}&brand=3&page=${page}`;
 		try {
-			await fetch(`${apiBase}/search/${term}${params}`)
+			await fetch(`${apiBase}/searchExactAndClose/${term}${params}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
