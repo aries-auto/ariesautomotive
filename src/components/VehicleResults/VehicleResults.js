@@ -135,9 +135,6 @@ class VehicleResults extends Component {
 					}
 				}
 			}
-			if (this.checkForStyleAll(catStyleParts)) {
-				VehicleActions.updateVehicleStyle('all');
-			}
 		}
 		VehicleActions.setCategoryStyleParts(catStyleParts);
 		return;

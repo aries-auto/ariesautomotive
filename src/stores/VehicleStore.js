@@ -143,7 +143,11 @@ class VehicleStore extends EventEmitter {
 	}
 
 	setCategoryStyleParts(catStyleParts) {
-		this.setState({ catStyleParts, category: catStyleParts.category.name });
+		const vehicle = this.state.vehicle;
+		if (catStyleParts.category[catStyleParts.name].available_styles.length === 1 || catStyleParts.category[catStyleParts.name].available_styles.all) {
+			vehicle.style = 'all';
+		}
+		this.setState({ catStyleParts, category: catStyleParts.category.name, vehicle });
 	}
 }
 
