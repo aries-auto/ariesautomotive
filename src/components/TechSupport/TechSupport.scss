@@ -1,25 +1,30 @@
 @import '../variables.scss';
 @import '../classes.scss';
 
-.content {
-	padding-left: 2em;
+.container {
+	width: 83.3%;
+	margin-left: 2em;
 
-	p {
-		font-size: .8em;
+	.content {
+		padding-left: 2em;
+
+		p {
+			font-size: .8em;
+		}
 	}
-}
 
-span.danger {
-	padding: 0 5px;
-}
+	span.danger {
+		padding: 0 5px;
+	}
 
-input.danger, textarea.danger {
-	border: 1px solid $red;
-}
+	input.danger, textarea.danger {
+		border: 1px solid $red;
+	}
 
-.link {
-	a:hover {
-		color: #333;
-		text-decoration: none;
+	.link {
+		a:hover {
+			color: #333;
+			text-decoration: none;
+		}
 	}
 }

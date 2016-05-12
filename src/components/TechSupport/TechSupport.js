@@ -74,7 +74,7 @@ class TechSupport extends Component {
 
 	render() {
 		return (
-			<div className="container">
+			<div className={cx('container', s.container)}>
 				<h1>TECH SUPPORT</h1>
 				<p><em>For tech support, you may:</em></p>
 				<div className="row">
