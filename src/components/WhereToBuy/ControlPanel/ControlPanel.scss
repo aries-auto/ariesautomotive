@@ -17,11 +17,12 @@
 }
 
 .nav {
-	position: relative;
-	display: block;
-	padding: 15px 15px;
+	padding: 0;
+	float: left;
+	width: 100%;
 	li {
 		list-style-type: none;
+		padding: .5em 0 0 0;
 		a {
 			padding: 10px 15px;
 			text-decoration: none;
@@ -30,6 +31,41 @@
 			:active {
 				color: $white-base;
 			}
+		}
+	}
+}
+
+.container {
+	width: 100%;
+	margin: 0;
+}
+
+
+.location, .locationtext {
+	display: inline;
+	
+}
+.search {
+	width: 55%;
+	display: inline-block;
+	input {
+		display: inline;
+		margin: 0 0 0 1em;
+	}
+}
+
+
+@media only screen and (min-width: 680px) {
+	.nav {
+		width: 50%;
+	}
+	.location {
+		float: right;
+	}
+	.search {
+		display: inline;
+		input {
+			width: 300px;
 		}
 	}
 }

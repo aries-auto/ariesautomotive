@@ -160,7 +160,7 @@ class Locations extends Component {
 
 	render() {
 		return (
-			<div className={cx(s.root, s.boom)}>
+			<div className={cx(s.root)}>
 				{this.props.local === true ? this.renderLocations() : this.renderOnlineLocations()}
 			</div>
 		);

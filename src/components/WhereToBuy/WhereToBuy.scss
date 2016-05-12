@@ -37,9 +37,6 @@
 		display: inline;
 	}
 	.toggleContainer {
-		display: inline;
-		height: 4em;
-		padding: .3em;
 		margin: 5px;
 		font-size: 2em;
 		background-color: #fff;
@@ -65,4 +62,21 @@
 	background-color: $new-red;
 	border: none;
 	border-radius: 3px;
+}
+
+.container {
+	width: 90%;
+	margin: auto;
+}
+
+@media only screen and (min-width: 680px) {
+	.toggleContainer {
+		display: inline;
+		height: 4em;
+		padding: .3em;
+		input {
+			transform: scale(1.4);
+		}
+	}
+
 }
