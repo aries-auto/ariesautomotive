@@ -3,7 +3,7 @@ import Dispatcher from '../dispatchers/AppDispatcher';
 import FormFieldActions from '../actions/FormFieldActions';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 const EventEmitter = events.EventEmitter;
 
 const KEY = apiKey;
@@ -56,7 +56,7 @@ class ContactStore extends EventEmitter {
 
 	async getContactTypes() {
 		try {
-			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=3`)
+			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -74,7 +74,7 @@ class ContactStore extends EventEmitter {
 	async postContactData(contactType) {
 		const inputs = JSON.stringify(this.state.inputs);
 		try {
-			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=3`;
+			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=${brand}`;
 			await fetch(url, {
 				method: 'POST',
 				body: inputs,

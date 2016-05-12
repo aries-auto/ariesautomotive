@@ -3,7 +3,7 @@ import FormFieldActions from '../actions/FormFieldActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
 
@@ -73,7 +73,7 @@ class WarrantiesStore extends EventEmitter {
 				country: data.country,
 				postalCode: data.postalCode,
 				brand: {
-					id: 3,
+					id: parseInt(brand, 10),
 				},
 			},
 			oldPartNumber: data.partNumber,

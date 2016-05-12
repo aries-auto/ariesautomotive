@@ -2,7 +2,7 @@ import NewsActions from '../actions/NewsActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 const KEY = apiKey;
 const EventEmitter = events.EventEmitter;
 
@@ -21,7 +21,7 @@ class NewsStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${apiBase}/news?key=${KEY}&brandID=3`)
+			await fetch(`${apiBase}/news?key=${KEY}&brandID=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -38,7 +38,7 @@ class NewsStore extends EventEmitter {
 
 	async get(id) {
 		try {
-			await fetch(`${apiBase}/news/${id}?key=${KEY}&brandID=3`)
+			await fetch(`${apiBase}/news/${id}?key=${KEY}&brandID=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {

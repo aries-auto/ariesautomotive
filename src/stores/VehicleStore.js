@@ -37,15 +37,6 @@ class VehicleStore extends EventEmitter {
 		this.bindListeners({
 			getCategoryStyles: VehicleActions.getCategoryStyles,
 		});
-		// this.bindActions({
-		// 	set: VehicleActions.set,
-		// 	setCategory: VehicleActions.setCategory,
-		// 	setCategoryParts: VehicleActions.setCategoryParts,
-		// 	setShowStyleState: VehicleActions.setShowStyleState,
-		// 	setParts: VehicleActions.setParts,
-		// 	setCategoryStyleParts: VehicleActions.setCategoryStyleParts,
-		// 	updateVehicleStyle: VehicleActions.updateVehicleStyle,
-		// });
 		this.bindActions(VehicleActions);
 		this.getCategoryStyles();
 	}

@@ -2,7 +2,7 @@ import SearchActions from '../actions/SearchActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 const EventEmitter = events.EventEmitter;
 
 const KEY = apiKey;
@@ -34,7 +34,7 @@ class SearchStore extends EventEmitter {
 		if (args.length > 2) {
 			searchResult = args[2];
 		}
-		const params = `?key=${KEY}&brand=3&page=${page}`;
+		const params = `?key=${KEY}&brand=${brand}&page=${page}`;
 		try {
 			await fetch(`${apiBase}/searchExactAndClose/${term}${params}`)
 			.then((resp) => {

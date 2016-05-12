@@ -2,7 +2,7 @@ import AppGuideActions from '../actions/AppGuideActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 
 const EventEmitter = events.EventEmitter;
 
@@ -26,7 +26,7 @@ class AppGuideStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${apiBase}/vehicle/mongo/cols?key=${KEY}&brandID=3`)
+			await fetch(`${apiBase}/vehicle/mongo/cols?key=${KEY}&brandID=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {

@@ -2,7 +2,7 @@ import PartActions from '../actions/PartActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 const EventEmitter = events.EventEmitter;
 
 const KEY = apiKey;
@@ -13,11 +13,6 @@ class PartStore extends EventEmitter {
 		this.part = {};
 		this.featured = [];
 		this.error = {};
-		// this.state = {
-		// 	part: {},
-		// 	featured: [],
-		// 	error: {},
-		// };
 		this.bindActions({
 			get: PartActions.get,
 			getFeatured: PartActions.featured,
@@ -36,7 +31,7 @@ class PartStore extends EventEmitter {
 
 	async get(id) {
 		try {
-			await fetch(`${apiBase}/part/${id}?key=${KEY}&brandID=3`)
+			await fetch(`${apiBase}/part/${id}?key=${KEY}&brandID=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -53,7 +48,7 @@ class PartStore extends EventEmitter {
 
 	async getFeatured() {
 		try {
-			await fetch(`${apiBase}/part/featured?brandID=3&key=${KEY}`)
+			await fetch(`${apiBase}/part/featured?brandID=${brand}&key=${KEY}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {

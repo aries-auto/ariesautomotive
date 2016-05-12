@@ -3,7 +3,7 @@ import Dispatcher from '../dispatchers/AppDispatcher';
 import FormFieldActions from '../actions/FormFieldActions';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 const EventEmitter = events.EventEmitter;
 
 const KEY = apiKey;
@@ -30,7 +30,7 @@ class TechSupportStore extends EventEmitter {
 	async postContactData() {
 		const inputs = JSON.stringify(this.makeData(this.state.inputs));
 		try {
-			const url = `${apiBase}/techSupport/43/true?key=${KEY}&brandID=3`;
+			const url = `${apiBase}/techSupport/43/true?key=${KEY}&brandID=${brand}`;
 			await fetch(url, {
 				method: 'POST',
 				body: inputs,
@@ -66,11 +66,11 @@ class TechSupportStore extends EventEmitter {
 				country: data.country,
 				postalCode: data.postalCode,
 				brand: {
-					id: 3,
+					id: parseInt(brand, 10),
 				},
 			},
 			purchaseDate: new Date(data.purchaseDate),
-			brandId: 3,
+			brandId: parseInt(brand, 10),
 			vehicleMake: data.vehicleMake,
 			vehicleModel: data.vehicleModel,
 			vehicleYear: parseInt(data.vehicleYear, 10),
