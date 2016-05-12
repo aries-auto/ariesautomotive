@@ -7,9 +7,9 @@
 }
 
 .inlineForm {
-	max-width: $max-content-width;
-	margin: auto;
-	text-align: center;
+	// max-width: $max-content-width;
+	// margin-left: 300px;
+	// text-align: center;
 
 	.heading {
 		display: inline-block;
@@ -56,6 +56,6 @@
 
 @media (min-width: 720px) {
 	.inlineForm {
-// margin-left: 270px;
-}
+		margin-left: 260px;
+	}
 }
