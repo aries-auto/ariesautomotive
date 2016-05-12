@@ -86,7 +86,7 @@ class AppGuides extends Component {
 		const output = [];
 		const apps = <li key="apps" className="active">Application Guides</li>;
 		const appsinact = <li key="app" onClick={this.handleAppguides}><a>Application Guides</a></li>;
-		const app = <li key="apps" className="active">Application Guide</li>;
+		const app = <li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>;
 		if (this.props.guide) {
 			output.push(appsinact);
 			output.push(app);
