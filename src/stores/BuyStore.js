@@ -2,10 +2,10 @@ import BuyActions from '../actions/BuyActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { googleApiKey, iapiBase } from '../config';
+import { googleApiKey, iapiBase, apiKey } from '../config';
 const EventEmitter = events.EventEmitter;
 
-const KEY = process.env.API_KEY;
+const KEY = apiKey;
 const GOOGLE_API_KEY = googleApiKey;
 
 class BuyStore extends EventEmitter {

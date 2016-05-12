@@ -140,6 +140,55 @@ class Home extends Component {
 		});
 	}
 
+	renderFeaturedProducts() {
+		return (
+			<div className="container">
+					<div className="row">
+						<div className="col-md-12">
+							<h3>FEATURED PRODUCTS</h3>
+							<div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
+								{this.state.context.featuredProducts.map((prod, i) => {
+									return (
+										<div key={i} className={cx(s.featuredProd, s.col5, 'col-xs-12', 'col-md-2')}>
+											<h4><a href={'/part/' + prod.part_number}>{prod.short_description}</a></h4>
+											<a href={'/part/' + prod.part_number}>
+												<img src={this.getFeaturedImage(prod)} className="img-responsive" alt={'Image for ' + prod.short_description} />
+											</a>
+											<hr className="visible-xs-block" />
+										</div>
+									);
+								})}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+	}
+
+	renderTestimonials() {
+		return (
+			<div className="container">
+					<div className="row">
+						<div className="col-md-12">
+							<h3>FROM OUR CUSTOMERS</h3>
+							<div className={cx('col-md-12', s.testimonials)}>
+								{this.state.context.testimonials.map((t, i) => {
+									return (
+										<div key={i} className={cx(s.testimonial, 'col-md-6')}>
+											<h4>"{t.title}"</h4>
+											<p>{t.content}</p>
+											<span className={cx(s.name)}>- {t.firstName} {t.lastName}, {t.location}</span>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					</div>
+				</div>
+			);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className, 'home-container')} role="navigation">
@@ -198,48 +247,9 @@ class Home extends Component {
 				{/* Catalogs */}
 				{this.getCatalogs()}
 
-				{/* Featured Products */}
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<h3>FEATURED PRODUCTS</h3>
-							<div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
-								{this.state.context.featuredProducts.map((prod, i) => {
-									return (
-										<div key={i} className={cx(s.featuredProd, s.col5, 'col-xs-12', 'col-md-2')}>
-											<h4><a href={'/part/' + prod.part_number}>{prod.short_description}</a></h4>
-											<a href={'/part/' + prod.part_number}>
-												<img src={this.getFeaturedImage(prod)} className="img-responsive" alt={'Image for ' + prod.short_description} />
-											</a>
-											<hr className="visible-xs-block" />
-										</div>
-									);
-								})}
+				{this.state.context.featuredProducts && this.state.context.featuredProducts.length ? this.renderFeaturedProducts() : null}
 
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{/* Testimonials */}
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<h3>FROM OUR CUSTOMERS</h3>
-							<div className={cx('col-md-12', s.testimonials)}>
-								{this.state.context.testimonials.map((t, i) => {
-									return (
-										<div key={i} className={cx(s.testimonial, 'col-md-6')}>
-											<h4>"{t.title}"</h4>
-											<p>{t.content}</p>
-											<span className={cx(s.name)}>- {t.firstName} {t.lastName}, {t.location}</span>
-										</div>
-									);
-								})}
-							</div>
-						</div>
-					</div>
-				</div>
+				{this.state.context.testimonials && this.state.context.testimonials.length ? this.renderTestimonials() : null}
 
 				{/* YouTube Modal */}
 				<Modal

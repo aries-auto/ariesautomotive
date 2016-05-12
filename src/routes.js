@@ -20,10 +20,10 @@ import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import { apiBase } from './config';
+import { apiBase, apiKey } from './config';
 
 const isBrowser = typeof window !== 'undefined';
-const KEY = process.env.API_KEY;
+const KEY = apiKey;
 const gaOptions = { debug: true };
 const MyWindowDependentLibrary = isBrowser ? ga.initialize('UA-61502306-1', gaOptions) : undefined;
 

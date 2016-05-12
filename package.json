@@ -15,6 +15,7 @@
     "fastclick": "1.0.6",
     "fbjs": "0.5.1",
     "front-matter": "2.0.1",
+    "gcloud": "^0.32.0",
     "history": "1.16.0",
     "jade": "^1.11.0",
     "net": "^1.0.2",
@@ -91,6 +92,7 @@
     "bundle": "babel-node tools/run bundle",
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
-    "start": "babel-node tools/run start"
+    "start": "node build/server.js",
+    "poop": "babel-node tools/run start"
   }
 }

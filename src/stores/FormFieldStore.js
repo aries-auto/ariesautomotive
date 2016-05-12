@@ -2,9 +2,9 @@ import FormFieldActions from '../actions/FormFieldActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase } from '../config';
+import { apiBase, apiKey } from '../config';
 const EventEmitter = events.EventEmitter;
-const KEY = process.env.API_KEY;
+const KEY = apiKey;
 
 class FormFieldStore extends EventEmitter {
 	constructor() {

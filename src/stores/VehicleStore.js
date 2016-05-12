@@ -2,8 +2,10 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
 import VehicleActions from '../actions/VehicleActions';
+import { apiBase, apiKey } from '../config';
 
 const EventEmitter = events.EventEmitter;
+const KEY = apiKey;
 
 const CHANGE_EVENT = 'change';
 
@@ -65,7 +67,7 @@ class VehicleStore extends EventEmitter {
 			return;
 		}
 		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + encodeURIComponent(this.state.vehicle.model);
-		await fetch('https://goapi.curtmfg.com/vehicle/mongo/allCollections/category?key=883d4046-8b96-11e4-9475-42010af00d4e' + params, {
+		await fetch(`${apiBase}/vehicle/mongo/allCollections/category?key=${KEY}` + params, {
 			method: 'post',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',

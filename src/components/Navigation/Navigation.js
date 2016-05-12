@@ -50,7 +50,7 @@ class Navigation extends Component {
 		return (
 			<div className={cx(s.root, this.props.className, 'navbar-collapse', 'collapse')} id="categoryMenu" role="navigation">
 				<ul className={cx(s.nav, 'nav', 'navbar-nav')}>
-					{this.getCategories()}
+					{this.props.categories && this.props.categories.length ? this.getCategories() : null}
 					<li role="presentation">
 						<a className={s.link} href="/appguides">
 							APPLICATION GUIDES
