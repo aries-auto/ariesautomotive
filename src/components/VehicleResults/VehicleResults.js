@@ -140,13 +140,6 @@ class VehicleResults extends Component {
 		return;
 	}
 
-	checkForStyleAll(catStyleParts) {
-		if (catStyleParts.category[catStyleParts.name].available_styles.length === 1 || catStyleParts.category[catStyleParts.name].available_styles.all) {
-			return true;
-		}
-		return false;
-	}
-
 	inVehicleApps(vehicle, style, applications) {
 		for (const i in applications) {
 			if (!applications[i]) {
