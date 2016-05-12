@@ -19,7 +19,7 @@ class Header extends Component {
 			<div className={s.root}>
 				<TopNav />
 				<div className={s.container}>
-					<div className="col-md-2 col-lg-2 col-sm-12 col-xs-12 navbar-header">
+					<div className="navbar-header">
 						<Link className={cx(s.brand, 'navbar-brand')} to="/">
 							<img src="https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg" alt="ARIES Automotive Logo" className="logo" />
 						</Link>
@@ -36,7 +36,7 @@ class Header extends Component {
 					<div className="col-md-8 col-lg-8 col-sm-12 col-xs-12">
 						<Navigation categories={this.props.categories} className={s.nav} />
 					</div>
-					<div className={cx(s.phoneNum, 'col-md-2', 'col-lg-2', 'visible-md', 'visible-lg')}>
+					<div className={cx(s.phoneNum, 'pull-right', 'visible-md', 'visible-lg')}>
 						<a className={s.callLink} href="tel:+18888002743">Call Us: (888) 800-2743</a>
 					</div>
 					<div className="clearfix"></div>

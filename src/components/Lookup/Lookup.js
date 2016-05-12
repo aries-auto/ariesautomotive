@@ -201,13 +201,13 @@ class Lookup extends Component {
 		const link = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
 		const v = `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model}`;
 		return (
-		<span className={cx(s.vehicleName, s.lookup)}>
-			<a href={link}>
-				{v.toUpperCase()}
-			</a>
-			{this.getViewButton(this.props.view)}
-			{this.getChangeButton()}
-		</span>
+			<span className={cx(s.vehicleName, s.lookup)}>
+				<a href={link}>
+					{v.toUpperCase()}
+				</a>
+				{this.getViewButton(this.props.view)}
+				{this.getChangeButton()}
+			</span>
 		);
 	}
 
