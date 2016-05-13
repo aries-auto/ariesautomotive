@@ -11,6 +11,7 @@
 
 .location {
 	font-size: 1.4em;
+	position: relative;
 	.locationtext {
 		padding: .5em 0 0 0;
 	}
@@ -51,6 +52,28 @@
 	input {
 		display: inline;
 		margin: 0 0 0 1em;
+	}
+}
+
+.suggestionsTable {
+	right: 0;
+    position: absolute;
+    z-index: 20;
+	tr {
+		td {
+			background-color: $white-base;
+			padding: 0 5px 0 5px;
+		}
+	}
+	tr:last-child {
+		td {
+			border-radius: 0 0 5px 5px;
+		}
+	}
+	tr:first-child {
+		td {
+			border-radius: 5px 5px 0 0;
+		}
 	}
 }
 

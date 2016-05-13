@@ -22,6 +22,7 @@ class ControlPanel extends Component {
 
 	constructor() {
 		super();
+		this.showAutocomplete = false;
 	}
 
 	static getStores() {
@@ -37,7 +38,9 @@ class ControlPanel extends Component {
 	}
 
 	setOrigin(e) {
+		console.log(e.target.value);
 		BuyActions.geocode(e.target.value);
+		this.showAutocomplete = false;
 	}
 
 	handleCurrentLocation() {
@@ -58,16 +61,27 @@ class ControlPanel extends Component {
 				BuyActions.setError(status);
 			}
 			BuyActions.setSuggestions(predictions);
+			this.showAutocomplete = true;
 		});
 	}
+
+	// renderSuggestionsX() {
+	// 	const suggestions = [];
+	// 	this.props.suggestions.map((suggestion, index) => {
+	// 		suggestions.push(<option value={suggestion.description} key={index} >{suggestion.description}</option>);
+	// 	});
+	// 	return (
+	// 		<datalist id="suggestions">{suggestions}</datalist>
+	// 	);
+	// }
 
 	renderSuggestions() {
 		const suggestions = [];
 		this.props.suggestions.map((suggestion, index) => {
-			suggestions.push(<option value={suggestion.description} key={index} >{suggestion.description}</option>);
+			suggestions.push(<tr key={index}><td value={suggestion.description} onClick={::this.setOrigin}>{suggestion.description}</td></tr>);
 		});
 		return (
-			<datalist id="suggestions">{suggestions}</datalist>
+			<table id="suggestions" className={s.suggestionsTable}><tbody>{suggestions}</tbody></table>
 		);
 	}
 
@@ -94,8 +108,8 @@ class ControlPanel extends Component {
 							</a>
 						</div>
 						<div className={s.search}>
-							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions" onBlur={::this.setOrigin} />
-							{this.props.suggestions.length > 0 ? this.renderSuggestions() : null}
+							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions"/>
+							{this.props.suggestions && this.props.suggestions.length && this.showAutocomplete > 0 ? this.renderSuggestions() : null}
 						</div>
 						<div className="clearfix"></div>
 						{this.props.error ? <div>{this.props.error}</div> : null}
