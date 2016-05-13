@@ -4,7 +4,9 @@
 	width: 100%;
 	padding: 0;
 	background-color: $lookup-color;
-	box-shadow: 0 0 20px $gray;
+	box-shadow: 0 10px 14px -8px $gray;
+	-webkit-box-shadow: 0 10px 14px -8px $gray;
+	-moz-box-shadow: 0 10px 14px -8px $gray;
 }
 
 .inlineForm {
