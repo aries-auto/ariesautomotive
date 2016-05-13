@@ -32,6 +32,7 @@ const router = new Router(on => {
 		if (!state.context) {
 			state.context = {};
 		}
+		state.context.params = state.params;
 		const [yearResponse, catResponse] = await Promise.all([
 			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',

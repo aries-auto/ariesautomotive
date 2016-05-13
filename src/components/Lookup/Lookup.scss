@@ -11,12 +11,10 @@
 
 .inlineForm {
 	max-width: $max-content-width;
-	padding-left: 34px;
-
+	margin: auto;
 
 	.heading {
 		display: inline-block;
-        // height: 38px;
         font-size: 18px;
         font-weight: 900;
         line-height: 38px;
@@ -58,7 +56,7 @@
 }
 
 @media (min-width: 720px) {
-	.inlineForm {
-		margin-left: 260px;
+	.lookup {
+		margin-left: 130px;
 	}
 }

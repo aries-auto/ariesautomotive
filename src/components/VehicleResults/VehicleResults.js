@@ -145,7 +145,7 @@ class VehicleResults extends Component {
 			if (!applications[i]) {
 				return false;
 			}
-			if (applications[i].year === vehicle.year && applications[i].make === vehicle.make && applications[i].model === vehicle.model && applications[i].style === style) {
+			if (applications[i].year.toLowerCase() === vehicle.year.toLowerCase() && applications[i].make.toLowerCase() === vehicle.make.toLowerCase() && applications[i].model.toLowerCase() === vehicle.model.toLowerCase() && applications[i].style.toLowerCase() === style.toLowerCase()) {
 				return true;
 			}
 		}

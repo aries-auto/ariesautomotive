@@ -21,6 +21,7 @@ class Lookup extends Component {
 			make: PropTypes.string,
 			model: PropTypes.string,
 		}),
+		params: PropTypes.object,
 	};
 
 	static defaultProps = {
@@ -43,6 +44,18 @@ class Lookup extends Component {
 			makes: [],
 			models: [],
 		};
+		this.vehicleSet = false;
+	}
+
+	componentWillMount() {
+		if (this.props.params && this.props.params.year && this.props.params.make && this.props.params.model) {
+			LookupActions.set({
+				year: this.props.params.year,
+				make: this.props.params.make,
+				model: this.props.params.model,
+			});
+			this.vehicleSet = true;
+		}
 	}
 
 	static getStores() {
@@ -97,7 +110,7 @@ class Lookup extends Component {
 	getViewButton(ok) {
 		const disabled = ok ? false : true;
 		return (
-			<button className={cx('red-transparent-button', s.viewParts, disabled ? s.disabled : '')} disabled={disabled} onClick={this.viewParts}>View Parts</button>
+			<button className={cx('red-transparent-button', s.viewParts, disabled ? s.disabled : '')} disabled={this.vehicleSet} onClick={this.viewParts}>View Parts</button>
 		);
 	}
 
@@ -111,8 +124,6 @@ class Lookup extends Component {
 		if (this.props.models && this.props.models.length > 0) {
 			models = true;
 		}
-		makes = makes;
-		models = models;
 		return (
 			<span className={s.lookup}>
 				<label className={s.heading}>Vehicle Lookup</label>
@@ -161,6 +172,7 @@ class Lookup extends Component {
 	}
 
 	resetVehicle() {
+		this.vehicleSet = false;
 		LookupActions.set({ year: '', make: '', model: '' });
 	}
 
@@ -201,13 +213,12 @@ class Lookup extends Component {
 		const link = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
 		const v = `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model}`;
 		return (
-			<span className={cx(s.vehicleName, s.lookup)}>
+			<div className={cx(s.vehicleName)}>
 				<a href={link}>
 					{v.toUpperCase()}
 				</a>
-				{this.getViewButton(this.props.view)}
 				{this.getChangeButton()}
-			</span>
+			</div>
 		);
 	}
 
@@ -215,7 +226,7 @@ class Lookup extends Component {
 		return (
 			<div className={cx(s.root, this.props.className, 'container-fluid')} role="navigation">
 				<form onSubmit={this.handleSubmit} className={cx(s.inlineForm, 'form-inline')}>
-					{this.props.vehicle.model ? this.showVehicle() : this.getLookup() }
+					{this.vehicleSet ? this.showVehicle() : this.getLookup()}
 				</form>
 			</div>
 		);
