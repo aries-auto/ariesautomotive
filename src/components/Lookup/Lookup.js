@@ -73,7 +73,7 @@ class Lookup extends Component {
 				<select className="form-control" name="make" disabled={disabled} onChange={this.changeVehicle} aria-labelledby="make_lookup_label">
 					<option value="">- Select Make -</option>
 					{this.props.makes.map((make, i) => {
-						return <option key={i} value={make}>{ make }</option>;
+						return <option key={i} value={make.toUpperCase()}>{ make.toUpperCase() }</option>;
 					})}
 				</select>
 			</div>
@@ -87,7 +87,7 @@ class Lookup extends Component {
 				<select className="form-control" name="model" disabled={disabled} onChange={this.changeVehicle} aria-labelledby="model_lookup_label">
 					<option value="">- Select Model -</option>
 					{this.props.models.map((model, i) => {
-						return <option key={i} value={model}>{ model }</option>;
+						return <option key={i} value={model.toUpperCase()}>{ model.toUpperCase() }</option>;
 					})}
 				</select>
 			</div>
