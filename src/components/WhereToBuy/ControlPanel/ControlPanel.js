@@ -38,7 +38,6 @@ class ControlPanel extends Component {
 	}
 
 	setOrigin(e) {
-		console.log(e.target.value);
 		BuyActions.geocode(e.target.value);
 		this.showAutocomplete = false;
 	}
@@ -64,16 +63,6 @@ class ControlPanel extends Component {
 			this.showAutocomplete = true;
 		});
 	}
-
-	// renderSuggestionsX() {
-	// 	const suggestions = [];
-	// 	this.props.suggestions.map((suggestion, index) => {
-	// 		suggestions.push(<option value={suggestion.description} key={index} >{suggestion.description}</option>);
-	// 	});
-	// 	return (
-	// 		<datalist id="suggestions">{suggestions}</datalist>
-	// 	);
-	// }
 
 	renderSuggestions() {
 		const suggestions = [];
