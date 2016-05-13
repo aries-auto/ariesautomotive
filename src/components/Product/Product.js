@@ -19,6 +19,7 @@ class Product extends Component {
 		className: PropTypes.string,
 		context: PropTypes.shape({
 			id: PropTypes.string,
+			part: PropTypes.object,
 		}),
 		carouselIndex: PropTypes.number,
 		carouselDirection: PropTypes.string,
@@ -32,18 +33,14 @@ class Product extends Component {
 	};
 
 	static defaultProps = {
-		part: {},
 		category: {},
 		carouselIndex: 0,
 		carouselDirection: 'next',
 		title,
 	};
 
-	constructor(props) {
+	constructor() {
 		super();
-
-		PartActions.get(props.context.id);
-		PartActions.featured();
 		this.setActiveImage = this.setActiveImage.bind(this);
 		this.shadowbox = this.shadowbox.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
@@ -53,6 +50,9 @@ class Product extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
+		if (!this.props.part || this.props.part.part_number !== this.props.context.id) {
+			PartActions.get(this.props.context.id);
+		}
 	}
 
 	static getStores() {

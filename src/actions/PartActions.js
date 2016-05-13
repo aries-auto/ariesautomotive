@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class PartActions {
 	constructor() {
-		this.generateActions('get', 'featured', 'setCarouselIndex', 'setVideo');
+		this.generateActions('get', 'featured', 'setCarouselIndex', 'setVideo', 'setPart');
 	}
 }
 

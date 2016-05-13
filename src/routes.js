@@ -20,7 +20,7 @@ import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import { apiBase, apiKey } from './config';
+import { apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -41,7 +41,7 @@ const router = new Router(on => {
 				},
 				body: '{}',
 			}),
-			fetch(`${apiBase}/category?brandID=3&key=${KEY}`),
+			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
 		]);
 
 		try {
@@ -63,7 +63,23 @@ const router = new Router(on => {
 
 	on('/part/:id', async (state) => {
 		state.context.id = state.params.id;
-		return <Product context={state.context} />;
+		try {
+			const url = `${apiBase}/part/${state.context.id}?key=${KEY}&brandID=${brand}`;
+			const featuredUrl = `${apiBase}/part/featured?brandID=${brand}&key=${KEY}`;
+			const [partResp, featuredResp] = await Promise.all([
+				fetch(url, {
+					method: 'get',
+				}),
+				fetch(featuredUrl, {
+					method: 'get',
+				}),
+			]);
+			state.part = await partResp.json();
+			state.featured = await featuredResp.json();
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <Product {...state} />;
 	});
 
 	on('/category/:id/:title', async (state) => {
@@ -106,7 +122,7 @@ const router = new Router(on => {
 		let searchResult = {};
 		let term = '';
 		try {
-			const searchResponse = await fetch(`${apiBase}/search/${state.params.term}?key=${KEY}&brandID=3`);
+			const searchResponse = await fetch(`${apiBase}/search/${state.params.term}?key=${KEY}&brandID=${brand}`);
 
 			searchResult = await searchResponse.json();
 			term = state.params.term;
@@ -121,7 +137,7 @@ const router = new Router(on => {
 		let searchResult = {};
 		let term = '';
 		try {
-			const searchResponse = await fetch(`${apiBase}/search/${state.query.term}?key=${KEY}&brandID=3`);
+			const searchResponse = await fetch(`${apiBase}/search/${state.query.term}?key=${KEY}&brandID=${brand}`);
 
 			searchResult = await searchResponse.json();
 			term = state.query.term;
@@ -261,8 +277,8 @@ const router = new Router(on => {
 			},
 		];
 		try {
-			const featResponse = await fetch(`${apiBase}/part/featured?brandID=3&key=${KEY}`);
-			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=3`);
+			const featResponse = await fetch(`${apiBase}/part/featured?brandID=${brand}&key=${KEY}`);
+			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=${brand}`);
 
 			state.context.featuredProducts = await featResponse.json();
 			state.context.testimonials = await testResponse.json();

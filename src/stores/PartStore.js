@@ -10,15 +10,18 @@ const KEY = apiKey;
 class PartStore extends EventEmitter {
 	constructor() {
 		super();
-		this.part = {};
-		this.featured = [];
 		this.error = {};
 		this.bindActions({
 			get: PartActions.get,
 			getFeatured: PartActions.featured,
 			setCarouselIndex: PartActions.setCarouselIndex,
 			setVideo: PartActions.setVideo,
+			setPart: PartActions.setPart,
 		});
+	}
+
+	setPart(part) {
+		this.setState({ part });
 	}
 
 	setCarouselIndex(carouselIndex) {
