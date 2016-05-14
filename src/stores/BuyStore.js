@@ -233,7 +233,8 @@ class BuyStore extends EventEmitter {
 				return resp.json();
 			}).then((data) => {
 				if (data && data !== null && data.results.length > 0) {
-					this.setState({ center: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng }, zoom: 7, error: null });
+					const center = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
+					this.setState({ center, zoom: 7, error: null });
 				} else {
 					this.setState({ error: 'Not enough results.' });
 				}
