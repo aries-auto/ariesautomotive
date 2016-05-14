@@ -224,6 +224,9 @@ class BuyStore extends EventEmitter {
 
 	async geocode(address) {
 		try {
+			let center = {};
+			let bounds = {};
+			const zoom = 13;
 			await fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(address) + '&key=' + GOOGLE_API_KEY, {
 				method: 'get',
 				headers: {
@@ -233,12 +236,17 @@ class BuyStore extends EventEmitter {
 				return resp.json();
 			}).then((data) => {
 				if (data && data !== null && data.results.length > 0) {
-					const center = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
-					this.setState({ center, zoom: 7, error: null });
+					center = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
+					bounds = {
+						ne: data.results[0].geometry.bounds.northeast.lat + ',' + data.results[0].geometry.bounds.northeast.lng,
+						sw: data.results[0].geometry.bounds.southwest.lat + ',' + data.results[0].geometry.bounds.southwest.lng,
+					};
+					this.setState({ center, zoom, error: null, bounds });
 				} else {
 					this.setState({ error: 'Not enough results.' });
 				}
 			});
+			await this.bounds([center, bounds, zoom]);
 		} catch (err) {
 			this.setState({
 				error: err,
