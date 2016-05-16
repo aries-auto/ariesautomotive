@@ -164,6 +164,13 @@ class BuyStore extends EventEmitter {
 			}).then((data) => {
 				let markers = [];
 				if (data && data !== null && showRegions === false) {
+					data.map((marker) => {
+						this.state.markers.map((currentMarker) => {
+							if (currentMarker.id === marker.id) {
+								marker.hide = currentMarker.hide;
+							}
+						});
+					});
 					markers = data;
 				}
 				this.setState({ markers, showRegions, error: null });
@@ -235,7 +242,7 @@ class BuyStore extends EventEmitter {
 			}).then((resp) => {
 				return resp.json();
 			}).then((data) => {
-				if (data && data !== null && data.results.length > 0) {
+				if (data && data !== null && data.status === 'OK' && data.results.length > 0) {
 					center = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
 					bounds = {
 						ne: data.results[0].geometry.viewport.northeast.lat + ',' + data.results[0].geometry.viewport.northeast.lng,
