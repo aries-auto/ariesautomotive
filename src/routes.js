@@ -199,7 +199,14 @@ const router = new Router(on => {
 
 	on('/news/:id', async (state) => {
 		state.context.id = state.params.id;
-		return <LatestNewsItem context={state.context} />;
+		try {
+			const url = `${apiBase}/news/${state.params.id}?brand=${brand}&key=${apiKey}`;
+			const resp = await fetch(url);
+			state.item = await resp.json();
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <LatestNewsItem context={state.context} item={state.item} />;
 	});
 
 	on('/buy', async (state) => {

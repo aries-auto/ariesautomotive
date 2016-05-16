@@ -22,6 +22,7 @@ const customStyles = {
 		backgroundColor: 'rgba(0, 0, 0, 0.55)',
 	},
 };
+const title = 'Where To Buy';
 
 @withStyles(s)
 @connectToStores
@@ -36,6 +37,12 @@ class WhereToBuy extends Component {
 		fetchDirections: PropTypes.bool,
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
 	static defaultProps = {
 		checked: {
 			platinum: true,
@@ -46,6 +53,11 @@ class WhereToBuy extends Component {
 
 	constructor() {
 		super();
+	}
+
+	componentWillMount() {
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 	}
 
 	static getStores() {

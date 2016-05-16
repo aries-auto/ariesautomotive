@@ -18,6 +18,12 @@ class LatestNews extends Component {
 		title: PropTypes.string,
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
 	static defaultProps = {
 		news: [],
 	};
@@ -29,9 +35,8 @@ class LatestNews extends Component {
 	}
 
 	componentWillMount() {
-		this.setState({
-			title,
-		});
+		this.context.onSetTitle(title);
+		this.context.onSetMeta(title);
 	}
 
 	static getStores() {
@@ -83,7 +88,7 @@ class LatestNews extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, 'container')}>
-				<h1>{this.state.title}</h1>
+				<h1>{title}</h1>
 				{this.renderNews()}
 			</div>
 		);

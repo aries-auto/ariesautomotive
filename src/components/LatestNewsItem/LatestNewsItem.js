@@ -6,8 +6,6 @@ import NewsActions from '../../actions/NewsActions';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
-const title = 'Latest News';
-
 @withStyles(s)
 @connectToStores
 class LatestNewsItem extends Component {
@@ -20,6 +18,13 @@ class LatestNewsItem extends Component {
 		}),
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
+
 	static defaultProps = {
 		item: {},
 		title: '',
@@ -28,16 +33,17 @@ class LatestNewsItem extends Component {
 		},
 	};
 
-	constructor(props) {
+	constructor() {
 		super();
-
-		NewsActions.get(props.context.id);
 	}
 
 	componentWillMount() {
-		this.setState({
-			title,
-		});
+		if (!this.props.item) {
+			NewsActions.get(this.props.context.id);
+		}
+		const title = this.props.item && this.props.item.title ? this.props.item.title : 'Lastest News';
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 	}
 
 	static getStores() {

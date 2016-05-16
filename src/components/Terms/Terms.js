@@ -10,10 +10,12 @@ class Terms extends Component {
 	static contextTypes = {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
 	};
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 	}
 
 	render() {

@@ -8,7 +8,6 @@ import PartStore from '../../stores/PartStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
-const title = 'Part Details';
 @withStyles(s)
 @connectToStores
 class Product extends Component {
@@ -30,13 +29,13 @@ class Product extends Component {
 	static contextTypes = {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
 		category: {},
 		carouselIndex: 0,
 		carouselDirection: 'next',
-		title,
 	};
 
 	constructor() {
@@ -49,7 +48,9 @@ class Product extends Component {
 	}
 
 	componentWillMount() {
+		const title = this.props.part.short_description && this.props.part.short_description ? this.props.part.short_description : 'Part Details';
 		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 		if (!this.props.part || this.props.part.part_number !== this.props.context.id) {
 			PartActions.get(this.props.context.id);
 		}

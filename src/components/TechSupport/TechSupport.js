@@ -9,6 +9,9 @@ import TechSupportActions from '../../actions/TechSupportActions';
 import Form from '../Form/Form';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
+const title = 'Tech Support';
+
+
 @withStyles(s)
 @connectToStores
 class TechSupport extends Component {
@@ -23,12 +26,18 @@ class TechSupport extends Component {
 	static contextTypes = {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
 	};
 
 	constructor() {
 		super();
 		this.submit = this.submit.bind(this);
 		this.enabled = false;
+	}
+
+	componentWillMount() {
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 	}
 
 	componentWillReceiveProps() {

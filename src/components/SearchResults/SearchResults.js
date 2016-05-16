@@ -18,6 +18,12 @@ class SearchResults extends Component {
 		term: PropTypes.string,
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
 	constructor() {
 		super();
 		this.pagination = this.pagination.bind(this);
@@ -28,6 +34,9 @@ class SearchResults extends Component {
 	}
 
 	componentWillMount() {
+		const title = this.props.term ? `Search: ${this.props.term}` : 'Search ARIES';
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 		if (this.props.searchResult.hits && this.props.searchResult.hits.hits) {
 			this.hits = this.props.searchResult.hits.hits.length;
 			this.total = this.props.searchResult.hits.total;
