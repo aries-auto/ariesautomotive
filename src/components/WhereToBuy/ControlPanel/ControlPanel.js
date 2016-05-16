@@ -22,7 +22,6 @@ class ControlPanel extends Component {
 
 	constructor() {
 		super();
-		this.showAutocomplete = false;
 	}
 
 	static getStores() {
@@ -39,7 +38,6 @@ class ControlPanel extends Component {
 
 	setOrigin(e) {
 		BuyActions.geocode(e.target.value);
-		this.showAutocomplete = false;
 	}
 
 	handleCurrentLocation() {
@@ -60,7 +58,6 @@ class ControlPanel extends Component {
 				BuyActions.setError(status);
 			}
 			BuyActions.setSuggestions(predictions);
-			this.showAutocomplete = true;
 		});
 	}
 
@@ -98,7 +95,7 @@ class ControlPanel extends Component {
 						</div>
 						<div className={s.search}>
 							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions"/>
-							{this.props.suggestions && this.props.suggestions.length && this.showAutocomplete > 0 ? this.renderSuggestions() : null}
+							{this.props.suggestions && this.props.suggestions.length > 0 ? this.renderSuggestions() : null}
 						</div>
 						<div className="clearfix"></div>
 						{this.props.error ? <div>{this.props.error}</div> : null}

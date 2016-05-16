@@ -238,10 +238,10 @@ class BuyStore extends EventEmitter {
 				if (data && data !== null && data.results.length > 0) {
 					center = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
 					bounds = {
-						ne: data.results[0].geometry.bounds.northeast.lat + ',' + data.results[0].geometry.bounds.northeast.lng,
-						sw: data.results[0].geometry.bounds.southwest.lat + ',' + data.results[0].geometry.bounds.southwest.lng,
+						ne: data.results[0].geometry.viewport.northeast.lat + ',' + data.results[0].geometry.viewport.northeast.lng,
+						sw: data.results[0].geometry.viewport.southwest.lat + ',' + data.results[0].geometry.viewport.southwest.lng,
 					};
-					this.setState({ center, zoom, error: null, bounds });
+					this.setState({ center, zoom, error: null, bounds, suggestions: null });
 				} else {
 					this.setState({ error: 'Not enough results.' });
 				}
