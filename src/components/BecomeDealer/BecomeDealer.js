@@ -7,6 +7,7 @@ import ContactStore from '../../stores/ContactStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { fields } from './FormFields';
 
+const title = 'Become an Aries Dealer';
 
 @withStyles(s)
 @connectToStores
@@ -19,11 +20,22 @@ class BecomeDealer extends Component {
 		inputs: PropTypes.object,
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
 	constructor() {
 		super();
 		this.modifyValue = this.modifyValue.bind(this);
 		this.submit = this.submit.bind(this);
 		this.checkDisabled = this.checkDisabled.bind(this);
+	}
+
+	componentWillMount() {
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 	}
 
 	static getStores() {

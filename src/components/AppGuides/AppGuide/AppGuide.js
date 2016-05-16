@@ -7,8 +7,6 @@ import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
 
-const title = 'Application Guide';
-
 @withStyles(s)
 @connectToStores
 class AppGuide extends Component {
@@ -22,11 +20,11 @@ class AppGuide extends Component {
 	static contextTypes = {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
 		guides: [],
-		title,
 	};
 
 	constructor() {
@@ -35,7 +33,9 @@ class AppGuide extends Component {
 	}
 
 	componentWillMount() {
+		const title = this.props.guide && this.props.guide.name ? this.props.guide.name : 'Application Guide';
 		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', `${title} Application Guides`);
 	}
 
 	static getStores() {

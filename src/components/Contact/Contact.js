@@ -9,6 +9,8 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 import Form from '../Form/Form';
 import { locations } from '../../data/locations';
 
+const title = 'Contact Aries';
+
 @withStyles(s)
 @connectToStores
 class Contact extends Component {
@@ -22,12 +24,23 @@ class Contact extends Component {
 		error: PropTypes.object,
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
 	constructor() {
 		super();
 		this.submit = this.submit.bind(this);
 		this.getLocations = this.getLocations.bind(this);
 		this.renderSuccess = this.renderSuccess.bind(this);
 		this.enabled = false;
+	}
+
+	componentWillMount() {
+		this.context.onSetTitle(title);
+		this.context.onSetMeta(title);
 	}
 
 	componentWillReceiveProps() {

@@ -15,6 +15,12 @@ class SearchResults extends Component {
 		}),
 	};
 
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+	};
+
 	constructor() {
 		super();
 
@@ -28,6 +34,10 @@ class SearchResults extends Component {
 		if (!this.props || !this.props.context || !this.props.context.category) {
 			return;
 		}
+
+		const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : 'Aries Automotive Product Categories';
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 
 		this.setState({
 			context: this.props.context,
