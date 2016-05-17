@@ -73,6 +73,8 @@ class Html extends Component {
 					<meta name="twitter:title" content={this.props.metas['twitter:title']} />
 					<meta name="twitter:description" content={this.props.metas['twitter:description']} />
 					<meta name="twitter:image" content={this.props.metas['twitter:image']} />
+					<meta name="twitter:card" content="summary_large_image" />
+					<meta name="twitter:site" content="@ariesautomotive" />
 					<meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
 					<meta name="keywords" ng-bind="pageKywds" content="" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
