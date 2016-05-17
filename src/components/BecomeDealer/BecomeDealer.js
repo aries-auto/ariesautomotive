@@ -39,8 +39,7 @@ class BecomeDealer extends Component {
 		this.context.onSetMeta('description', title);
 		const seo = {
 			title,
-			description: 'Become an ARIES Automotive Dealer',
-			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+			description: 'Become an ARIES Automotive Dealer - You are one simple form away from carrying the ultimate truck accessories',
 		};
 		this.context.seo(seo);
 	}

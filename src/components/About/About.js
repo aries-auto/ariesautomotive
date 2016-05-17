@@ -19,8 +19,6 @@ class About extends Component {
 		this.context.onSetMeta('description', title);
 		const seo = {
 			title,
-			description: 'ARIES Automotive has been providing unparalleled aftermarket products with reliable service for 18 years.',
-			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		};
 		this.context.seo(seo);
 	}

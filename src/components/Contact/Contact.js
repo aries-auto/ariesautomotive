@@ -44,8 +44,6 @@ class Contact extends Component {
 		this.context.onSetMeta(title);
 		const seo = {
 			title,
-			description: 'Contact ARIES Automotive',
-			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		};
 		this.context.seo(seo);
 	}

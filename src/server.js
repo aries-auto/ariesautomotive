@@ -40,6 +40,15 @@ server.get('*', async (req, res, next) => {
 						if (!i) {
 							continue;
 						}
+						if (!props.image) {
+							props.image = 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent).png';
+						}
+						if (!props.title) {
+							props.title = 'ARIES Automotive';
+						}
+						if (!props.description) {
+							props.description = 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.';
+						}
 						const key = tag.use + ':' + i;
 						data.metas[key] = props[i];
 					}

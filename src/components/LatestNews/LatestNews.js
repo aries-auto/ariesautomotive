@@ -40,8 +40,6 @@ class LatestNews extends Component {
 		this.context.onSetMeta(title);
 		const seo = {
 			title: 'ARIES Latest News',
-			description: 'Latest News',
-			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		};
 		this.context.seo(seo);
 	}

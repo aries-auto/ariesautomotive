@@ -48,7 +48,6 @@ class LatestNewsItem extends Component {
 		const seo = {
 			title,
 			description: this.props.item.content ? this.props.item.content : 'News',
-			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		};
 		this.context.seo(seo);
 	}

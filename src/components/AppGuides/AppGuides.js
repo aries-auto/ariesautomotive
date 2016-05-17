@@ -44,7 +44,6 @@ class AppGuides extends Component {
 		const seo = {
 			title,
 			description: 'ARIES Automotive Application Guides',
-			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
 		};
 		this.context.seo(seo);
 	}

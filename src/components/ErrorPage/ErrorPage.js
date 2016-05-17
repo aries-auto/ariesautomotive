@@ -15,7 +15,10 @@ class ErrorPage extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.seo({});
+		const seo = {
+			title,
+		};
+		this.context.seo(seo);
 	}
 
 	render() {

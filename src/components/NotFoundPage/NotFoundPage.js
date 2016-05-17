@@ -16,7 +16,10 @@ class NotFoundPage extends Component {
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onPageNotFound();
-		this.context.seo({});
+		const seo = {
+			title,
+		};
+		this.context.seo(seo);
 	}
 
 	render() {
