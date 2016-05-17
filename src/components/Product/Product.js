@@ -30,6 +30,7 @@ class Product extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
@@ -48,12 +49,33 @@ class Product extends Component {
 	}
 
 	componentWillMount() {
+		// title
 		const title = this.props.part.short_description && this.props.part.short_description ? this.props.part.short_description : 'Part Details';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 		if (!this.props.part || this.props.part.part_number !== this.props.context.id) {
 			PartActions.get(this.props.context.id);
 		}
+		// desc
+		let description = 'Part';
+		this.props.part.content.map((con) => {
+			if (con.contentType.type.toLowerCase() === 'marketingdescription') {
+				description = con.text;
+			}
+		});
+		// image
+		let image = {};
+		this.props.part.images.map((i) => {
+			if ((i.height < image.height || !image.height) && i.sort === 'a') {
+				image = i;
+			}
+		});
+		const seo = {
+			title,
+			description,
+			image: `${image.path.Scheme}://${image.path.Host}${image.path.Path}`,
+		};
+		this.context.seo(seo);
 	}
 
 	static getStores() {

@@ -27,6 +27,7 @@ class TechSupport extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	constructor() {
@@ -38,6 +39,12 @@ class TechSupport extends Component {
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
+		const seo = {
+			title,
+			description: title,
+			image: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
+		};
+		this.context.seo(seo);
 	}
 
 	componentWillReceiveProps() {

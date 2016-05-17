@@ -116,7 +116,7 @@ const router = new Router(on => {
 			state.context.error = e;
 		}
 
-		return <Category context={state.context} />;
+		return <Category context={state.context} category={state.context.category} />;
 	});
 
 	on('/search/:term', async (state) => {

@@ -27,6 +27,7 @@ class App extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	getChildContext() {
@@ -36,6 +37,7 @@ class App extends Component {
 			onSetTitle: context.onSetTitle || emptyFunction,
 			onSetMeta: context.onSetMeta || emptyFunction,
 			onPageNotFound: context.onPageNotFound || emptyFunction,
+			seo: context.seo || emptyFunction,
 		};
 	}
 

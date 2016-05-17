@@ -10,6 +10,7 @@ class SearchResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		category: PropTypes.object,
 		context: PropTypes.shape({
 			category: PropTypes.object,
 		}),
@@ -19,6 +20,7 @@ class SearchResults extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	constructor() {
@@ -39,9 +41,12 @@ class SearchResults extends Component {
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 
-		this.setState({
-			context: this.props.context,
-		});
+		const seo = {
+			title: this.props.context.category.meta_description,
+			description: this.props.context.category.long_description,
+			image: `${this.props.context.category.image.Scheme}://${this.props.context.category.image.Host}${this.props.context.category.image.Path}`,
+		};
+		this.context.seo(seo);
 	}
 
 	componentWillUpdate() {
@@ -52,7 +57,7 @@ class SearchResults extends Component {
 
 	getContent() {
 		let content = '';
-		this.state.context.category.content.map((con) => {
+		this.props.category.content.map((con) => {
 			content = `${content} ${con.text}`;
 		});
 
@@ -62,17 +67,17 @@ class SearchResults extends Component {
 	}
 
 	loadMore() {
-		ga.pageview('/category/' + this.state.context.category.id + '#page=');
+		ga.pageview('/category/' + this.props.category.id + '#page=');
 	}
 
 	showParts() {
-		if (this.state.context.category.parts.parts.length > 0) {
-			return <PartResults parts={this.state.context.category.parts.parts} />;
+		if (this.props.category && this.props.category.parts && this.props.category.parts.parts.length > 0) {
+			return <PartResults parts={this.props.category.parts.parts} />;
 		}
 	}
 
 	pagination() {
-		const res = this.state.context.category.parts;
+		const res = this.props.category.parts;
 		if (res.length > 0) {
 			return (
 				<a href="#" className="pagination" onClick={this.loadMore()}>
@@ -87,7 +92,7 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
-		if (this.state.context.category.vehicle_specific) {
+		if (this.props.category.vehicle_specific) {
 			return (
 				<div className="container">
 					<div className={cx(s.findProducts, 'col-lg-12')}>
@@ -101,7 +106,7 @@ class SearchResults extends Component {
 		}
 		return (
 			<div className="container">
-				<h2 id="categoryProdHeader">{this.props.context.category.title} Products</h2>
+				<h2 id="categoryProdHeader">{this.props.category.title} Products</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
 					{/* Products */}
@@ -119,7 +124,7 @@ class SearchResults extends Component {
 		return (
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<div className="category-content container">
-					<h1 id="catTitle">{this.state.context.category.title}</h1>
+					<h1 id="catTitle">{this.props.category.title}</h1>
 					<div dangerouslySetInnerHTML={this.getContent()} />
 				</div>
 				{this.renderParts()}

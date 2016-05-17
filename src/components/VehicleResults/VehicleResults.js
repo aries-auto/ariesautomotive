@@ -43,6 +43,7 @@ class VehicleResults extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	constructor() {
@@ -60,9 +61,16 @@ class VehicleResults extends Component {
 			make: this.props.context.params.make,
 			model: this.props.context.params.model,
 		});
+		// title
 		const title = this.props.context.params.year && this.props.context.params.make && this.props.context.params.model ? `${this.props.context.params.year} ${this.props.context.params.make} ${this.props.context.params.model}` : 'Vehicle Results';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
+		const seo = {
+			title,
+			description: title,
+			image: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
+		};
+		this.context.seo(seo);
 	}
 
 	static getStores() {

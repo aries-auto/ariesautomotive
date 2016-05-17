@@ -22,6 +22,7 @@ class LatestNews extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
@@ -37,6 +38,12 @@ class LatestNews extends Component {
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onSetMeta(title);
+		const seo = {
+			title: 'ARIES Latest News',
+			description: 'Latest News',
+			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+		};
+		this.context.seo(seo);
 	}
 
 	static getStores() {

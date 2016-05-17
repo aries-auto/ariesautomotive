@@ -9,6 +9,7 @@ class Html extends Component {
 		css: PropTypes.string,
 		body: PropTypes.string.isRequired,
 		entry: PropTypes.string.isRequired,
+		metas: PropTypes.object,
 	};
 
 	static defaultProps = {
@@ -62,6 +63,16 @@ class Html extends Component {
 					<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 					<title>ARIES Automotive | {this.props.title}</title>
 					<meta name="description" content={this.props.description} />
+					<meta property="og:type" content={this.props.metas['og:type']} />
+					<meta property="og:url" content={this.props.metas['og:url']} />
+					<meta property="og:title" content={this.props.metas['og:title']} />
+					<meta property="og:description" content={this.props.metas['og:description']} />
+					<meta property="og:image" content={this.props.metas['og:image']} />
+					<meta name="twitter:type" content={this.props.metas['twitter:type']} />
+					<meta name="twitter:url" content={this.props.metas['twitter:url']} />
+					<meta name="twitter:title" content={this.props.metas['twitter:title']} />
+					<meta name="twitter:description" content={this.props.metas['twitter:description']} />
+					<meta name="twitter:image" content={this.props.metas['twitter:image']} />
 					<meta name="google-site-verification" content="2YAIw2si-iBLQTUFUuNXfq8u5uoXzTysfiBTsFntY00" />
 					<meta name="keywords" ng-bind="pageKywds" content="" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />

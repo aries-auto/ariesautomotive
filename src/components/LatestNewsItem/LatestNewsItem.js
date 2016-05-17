@@ -22,6 +22,7 @@ class LatestNewsItem extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 
@@ -44,6 +45,12 @@ class LatestNewsItem extends Component {
 		const title = this.props.item && this.props.item.title ? this.props.item.title : 'Lastest News';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
+		const seo = {
+			title,
+			description: this.props.item.content ? this.props.item.content : 'News',
+			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+		};
+		this.context.seo(seo);
 	}
 
 	static getStores() {

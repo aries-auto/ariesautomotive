@@ -28,6 +28,23 @@ server.get('*', async (req, res, next) => {
 			onSetTitle: value => data.title = value,
 			onSetMeta: (key, value) => data[key] = value,
 			onPageNotFound: () => statusCode = 404,
+			seo: (seoInput) => {
+				const props = seoInput;
+				data.metas = {};
+				props.url = 'http://www.ariesautomotive.com';
+				props.type = 'website';
+				props.card = 'summary_large_card';
+				const metaTags = [{ use: 'og', label: 'property' }, { use: 'twitter', label: 'name' }];
+				metaTags.forEach((tag) => {
+					for (const i in props) {
+						if (!i) {
+							continue;
+						}
+						const key = tag.use + ':' + i;
+						data.metas[key] = props[i];
+					}
+				});
+			},
 		};
 
 		await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {

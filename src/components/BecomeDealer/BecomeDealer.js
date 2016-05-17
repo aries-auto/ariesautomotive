@@ -24,6 +24,7 @@ class BecomeDealer extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	constructor() {
@@ -36,6 +37,12 @@ class BecomeDealer extends Component {
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
+		const seo = {
+			title,
+			description: 'Become an ARIES Automotive Dealer',
+			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+		};
+		this.context.seo(seo);
 	}
 
 	static getStores() {

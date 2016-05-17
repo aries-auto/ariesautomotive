@@ -10,11 +10,13 @@ class NotFoundPage extends Component {
 	static contextTypes = {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onPageNotFound();
+		this.context.seo({});
 	}
 
 	render() {

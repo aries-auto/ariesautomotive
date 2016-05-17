@@ -10,10 +10,12 @@ class ErrorPage extends Component {
 	static contextTypes = {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
+		this.context.seo({});
 	}
 
 	render() {

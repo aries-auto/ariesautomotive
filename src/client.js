@@ -10,19 +10,41 @@ const appContainer = document.getElementById('app');
 const context = {
 	insertCss: styles => styles._insertCss(),
 	onSetTitle: value => document.title = value,
-	onSetMeta: (name, content) => {
+	onSetMeta: (name, content, type) => {
 		// Remove and create a new <meta /> tag in order to make it work
 		// with bookmarks in Safari
 		const elements = document.getElementsByTagName('meta');
+		let metaType = 'name';
+		if (type) {
+			metaType = type;
+		}
 		[].slice.call(elements).forEach((element) => {
-			if (element.getAttribute('name') === name) {
+			if (element.getAttribute(metaType) === name) {
 				element.parentNode.removeChild(element);
 			}
 		});
 		const meta = document.createElement('meta');
-		meta.setAttribute('name', name);
+		meta.setAttribute(metaType, name);
 		meta.setAttribute('content', content);
 		document.getElementsByTagName('head')[0].appendChild(meta);
+	},
+	seo: (seoInput) => {
+		const props = seoInput;
+		props.url = 'http://www.ariesautomotive.com';
+		props.type = 'website';
+		props.card = 'summary_large_card';
+		const metaTags = [{ use: 'og', label: 'property' }, { use: 'twitter', label: 'name' }];
+		metaTags.forEach((tag) => {
+			for (const i in props) {
+				if (!i) {
+					continue;
+				}
+				const meta = document.createElement('meta');
+				meta.setAttribute(tag.label, tag.use + ':' + i);
+				meta.setAttribute('content', props[i]);
+				document.getElementsByTagName('head')[0].appendChild(meta);
+			}
+		});
 	},
 };
 

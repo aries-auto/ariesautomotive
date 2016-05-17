@@ -11,11 +11,18 @@ class About extends Component {
 		onSetTitle: PropTypes.func.isRequired,
 		onPageNotFound: PropTypes.func.isRequired,
 		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
+		const seo = {
+			title,
+			description: 'ARIES Automotive has been providing unparalleled aftermarket products with reliable service for 18 years.',
+			image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+		};
+		this.context.seo(seo);
 	}
 
 	getMission() {
