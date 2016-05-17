@@ -77,7 +77,7 @@ class SearchResults extends Component {
 	}
 
 	pagination() {
-		const res = this.props.category.parts;
+		const res = this.props.category.parts ? this.props.category.parts : [];
 		if (res.length > 0) {
 			return (
 				<a href="#" className="pagination" onClick={this.loadMore()}>
