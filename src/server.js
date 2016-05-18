@@ -36,18 +36,18 @@ server.get('*', async (req, res, next) => {
 				props.card = 'summary_large_card';
 				const metaTags = [{ use: 'og', label: 'property' }, { use: 'twitter', label: 'name' }];
 				metaTags.forEach((tag) => {
+					if (!props.image) {
+						props.image = 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent).png';
+					}
+					if (!props.title) {
+						props.title = 'ARIES Automotive';
+					}
+					if (!props.description) {
+						props.description = 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.';
+					}
 					for (const i in props) {
 						if (!i) {
 							continue;
-						}
-						if (!props.image) {
-							props.image = 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent).png';
-						}
-						if (!props.title) {
-							props.title = 'ARIES Automotive';
-						}
-						if (!props.description) {
-							props.description = 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.';
 						}
 						const key = tag.use + ':' + i;
 						data.metas[key] = props[i];
