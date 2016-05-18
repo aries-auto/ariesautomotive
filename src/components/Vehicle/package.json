@@ -1,6 +1,0 @@
-{
-  "name": "Vehicle",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./Vehicle.js"
-}
