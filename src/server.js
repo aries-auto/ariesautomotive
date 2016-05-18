@@ -40,7 +40,7 @@ server.get('*', async (req, res, next) => {
 				const metaTags = [{ use: 'og', label: 'property' }, { use: 'twitter', label: 'name' }];
 				metaTags.forEach((tag) => {
 					if (!props.image) {
-						props.image = 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent).png';
+						props.image = 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png';
 					}
 					if (!props.title) {
 						props.title = 'ARIES Automotive';

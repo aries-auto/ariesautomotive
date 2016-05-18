@@ -68,7 +68,7 @@ class Html extends Component {
 					<meta property="og:title" content={this.props.metas['og:title']} />
 					<meta property="og:description" content={this.props.metas['og:description']} />
 					<meta property="og:image" content={this.props.metas['og:image']} />
-					<meta property="fb:app_id" content="" />
+					<meta property="fb:app_id" content="1176652602358801" />
 					<meta name="twitter:type" content={this.props.metas['twitter:type']} />
 					<meta name="twitter:url" content={this.props.metas['twitter:url']} />
 					<meta name="twitter:title" content={this.props.metas['twitter:title']} />
