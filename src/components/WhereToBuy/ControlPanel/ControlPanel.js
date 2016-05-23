@@ -42,7 +42,8 @@ class ControlPanel extends Component {
 
 	handleCurrentLocation() {
 		this.props.navigator.geolocation.getCurrentPosition((pos) => {
-			BuyActions.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+			// BuyActions.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+			BuyActions.getAddressFromLatLng(pos.coords.latitude + ',' + pos.coords.longitude);
 		}, (err) => {
 			BuyActions.setError(err);
 		});

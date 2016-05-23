@@ -151,6 +151,8 @@ class Map extends Component {
 						center={this.props.center}
 						onClick={::this.handleMapClick}
 						zoom={this.props.zoom}
+						onCenterChanged={::this.handleMapChange}
+						onBoundsChanged={::this.handleMapChange}
 					>
 					{this.props.markers.map((marker, index) => {
 						if (marker.hide) {

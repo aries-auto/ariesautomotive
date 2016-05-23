@@ -60,6 +60,7 @@ class BuyStore extends EventEmitter {
 			setError: BuyActions.setError,
 			geocode: BuyActions.geocode,
 			markerVisibility: BuyActions.markerVisibility,
+			getAddressFromLatLng: BuyActions.getAddressFromLatLng,
 		});
 	}
 
@@ -233,7 +234,7 @@ class BuyStore extends EventEmitter {
 		try {
 			let center = {};
 			let bounds = {};
-			const zoom = 13;
+			const zoom = 12;
 			await fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(address) + '&key=' + GOOGLE_API_KEY, {
 				method: 'get',
 				headers: {
@@ -245,8 +246,8 @@ class BuyStore extends EventEmitter {
 				if (data && data !== null && data.status === 'OK' && data.results.length > 0) {
 					center = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
 					bounds = {
-						ne: data.results[0].geometry.viewport.northeast.lat + ',' + data.results[0].geometry.viewport.northeast.lng,
-						sw: data.results[0].geometry.viewport.southwest.lat + ',' + data.results[0].geometry.viewport.southwest.lng,
+						ne: (data.results[0].geometry.viewport.northeast.lat) + ',' + (data.results[0].geometry.viewport.northeast.lng),
+						sw: (data.results[0].geometry.viewport.southwest.lat) + ',' + (data.results[0].geometry.viewport.southwest.lng),
 					};
 					this.setState({ center, zoom, error: null, bounds, suggestions: null });
 				} else {
@@ -254,6 +255,29 @@ class BuyStore extends EventEmitter {
 				}
 			});
 			await this.bounds([center, bounds, zoom]);
+		} catch (err) {
+			this.setState({
+				error: err,
+			});
+		}
+	}
+
+	async getAddressFromLatLng(latLng) {
+		let address = '';
+		try {
+			await fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + encodeURIComponent(latLng) + '&key=' + GOOGLE_API_KEY, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}).then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				if (data && data !== null && data.status === 'OK' && data.results.length > 0) {
+					address = data.results[0].formatted_address;
+				}
+			});
+			await this.geocode(address);
 		} catch (err) {
 			this.setState({
 				error: err,
