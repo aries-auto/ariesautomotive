@@ -45,7 +45,7 @@ class ControlPanel extends Component {
 			// BuyActions.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
 			BuyActions.getAddressFromLatLng(pos.coords.latitude + ',' + pos.coords.longitude);
 		}, (err) => {
-			BuyActions.setError(err);
+			BuyActions.setError(err.message);
 		});
 	}
 

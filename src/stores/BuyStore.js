@@ -178,7 +178,7 @@ class BuyStore extends EventEmitter {
 			});
 		} catch (err) {
 			this.setState({
-				error: err,
+				error: err.message,
 			});
 		}
 	}
@@ -202,7 +202,7 @@ class BuyStore extends EventEmitter {
 			});
 		} catch (err) {
 			this.setState({
-				error: err,
+				error: err.message,
 			});
 		}
 	}
@@ -225,7 +225,7 @@ class BuyStore extends EventEmitter {
 			});
 		} catch (err) {
 			this.setState({
-				error: err,
+				error: err.message,
 			});
 		}
 	}
@@ -257,7 +257,7 @@ class BuyStore extends EventEmitter {
 			await this.bounds([center, bounds, zoom]);
 		} catch (err) {
 			this.setState({
-				error: err,
+				error: err.message,
 			});
 		}
 	}
@@ -280,7 +280,7 @@ class BuyStore extends EventEmitter {
 			await this.geocode(address);
 		} catch (err) {
 			this.setState({
-				error: err,
+				error: err.message,
 			});
 		}
 	}
