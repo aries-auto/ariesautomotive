@@ -244,8 +244,7 @@ const router = new Router(on => {
 		} catch (e) {
 			state.context.error = e;
 		}
-
-		return <Category context={state.context} />;
+		return <Category context={state.context} category={state.context.category} />;
 	});
 
 	on('/', async (state) => {
