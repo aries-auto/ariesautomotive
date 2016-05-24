@@ -396,9 +396,13 @@ class Product extends Component {
 
 	renderRelated() {
 		const parts = [];
+		const header = (<h3>YOU MAY ALSO LIKE</h3>);
 		const rel = this.props.part.related.slice(0, 4);
 		rel.map((r, i) => {
 			let image;
+			if (!r.images) {
+				return;
+			}
 			r.images.map((img) => {
 				if (img.sort === 'a' && img.size === 'Grande') {
 					image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
@@ -420,7 +424,7 @@ class Product extends Component {
 		});
 		return (
 			<div className={s.upsell}>
-				<h3>YOU MAY ALSO LIKE</h3>
+				{parts.length ? header : null}
 				<div>
 					{parts}
 				</div>
@@ -430,12 +434,15 @@ class Product extends Component {
 
 	renderFeatured() {
 		const parts = [];
-
+		const header = (<h3>YOU MAY ALSO LIKE (featured)</h3>);
 		const rel = this.props.featured.slice(0, 4);
 
 		rel.map((r, i) => {
 			let image;
 			r.images.map((img) => {
+				if (!r.images) {
+					return;
+				}
 				if (img.sort === 'a' && img.size === 'Grande') {
 					image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
 				}
@@ -456,7 +463,7 @@ class Product extends Component {
 		});
 		return (
 			<div className={s.upsell}>
-				<h3>YOU MAY ALSO LIKE (featured)</h3>
+				{parts.length ? header : null}
 				<div>
 					{parts}
 					<Upsell parts={parts} />
