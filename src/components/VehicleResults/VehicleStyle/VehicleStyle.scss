@@ -31,7 +31,8 @@
 		border: 1px solid $gray-lighter;
 		border-radius: 6px;
 		.selTopBar, .styleSelect {
-			padding: 0 2em;
+			display: inline-block;
+			width: 45%;
 		}
 		.select {
 			margin-top: 2em;
@@ -43,7 +44,6 @@
 		}
 		.styleChoices {
 			display: inline-block;
-			float: right;
 			width: auto;
 			padding: 1em;
 			margin: .4em;
