@@ -15,12 +15,14 @@ class AppGuideStore extends EventEmitter {
 			guides: [],
 			error: {},
 			guide: null,
+			applicationGuides: [],
 		};
 		this.bindListeners({
 			all: AppGuideActions.all,
 			set: AppGuideActions.set,
 			reset: AppGuideActions.reset,
 			setPage: AppGuideActions.setPage,
+			getApplicationGuides: AppGuideActions.getApplicationGuides,
 		});
 	}
 
@@ -84,6 +86,23 @@ class AppGuideStore extends EventEmitter {
 		this.setState({
 			page,
 		});
+	}
+
+	async getApplicationGuides() {
+		try {
+			await fetch(`${apiBase}/applicationGuide/website/${brand}?key=${KEY}&brandID=${brand}`)
+			.then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				this.setState({
+					applicationGuides: data,
+				});
+			});
+		} catch (err) {
+			this.setState({
+				error: err,
+			});
+		}
 	}
 
 }

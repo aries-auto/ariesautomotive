@@ -6,6 +6,7 @@ import withStyles from '../../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
+import { appguides } from './data';
 
 @withStyles(s)
 @connectToStores
@@ -104,20 +105,32 @@ class AppGuide extends Component {
 		);
 	}
 
+	renderDownloadLinks() {
+		const page = this.props.guide.name;
+		const links = [];
+		appguides.map((guide, i) => {
+			if ((guide.cats.indexOf(page) !== -1) || (guide.type !== 'xls')) {
+				links.push(
+					<a key={i} href={guide.link} target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
+						<img src={guide.icon} alt="App Guide" className={cx('icon', s.appguideIcon)} />
+					</a>
+				);
+			}
+		});
+		return (
+			<div className={s.downloads}>
+				<span className="heading">Download a Copy</span>
+				{links}
+			</div>
+			);
+	}
+
 	render() {
 		return (
 			<div className={s.appguideContainer}>
 				<h1 className={s.header}>{this.props.guide.name}</h1>
 				<div className={s.install}>Click the <Glyphicon glyph="wrench"/> next to a product for installation instructions.</div>
-				<div className={s.downloads}>
-					<span className="heading">Download a Copy</span>
-					<a href="https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.pdf" target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
-						<img src="https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png" alt="3 IN Round Side Bars PDF" className="icon" />
-					</a>
-					<a href="https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%203%20IN%20SIDE%20BARS%20App%20Guide.xlsx" target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
-						<img src="https://storage.googleapis.com/curt-icons/Excel-Icon.png" alt="3 IN Round Side Bars Excel" className="icon" />
-					</a>
-				</div>
+				{this.renderDownloadLinks()}
 				<p className={s.subheading}>The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
 
 				{this.renderApplications()}
