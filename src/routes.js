@@ -83,6 +83,21 @@ const router = new Router(on => {
 		return <Product {...state} />;
 	});
 
+	on('/category/:id', async (state) => {
+		try {
+			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
+			const catResponse = await fetch(url, {
+				method: 'get',
+			});
+
+			state.context.category = await catResponse.json();
+		} catch (e) {
+			state.context.error = e;
+		}
+
+		return <Category context={state.context} category={state.context.category} />;
+	});
+
 	on('/category/:id/:title', async (state) => {
 		try {
 			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
