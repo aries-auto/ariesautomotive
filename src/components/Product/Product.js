@@ -268,7 +268,7 @@ class Product extends Component {
 		const videoThumbs = [];
 		let carouselIndex = 0;
 		this.props.part.images.map((img) => {
-			if (img.size !== 'Venti') {
+			if (img.size !== 'Venti' || !img.path) {
 				return;
 			}
 
@@ -290,7 +290,7 @@ class Product extends Component {
 			videoThumbs.push(
 				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox.bind(this, vid)}>
 					<div>
-						<img className="thumbImg img-responsive" src={vid.thumbnail} />
+						{vid.thumbnail ? <img className="thumbImg img-responsive" src={vid.thumbnail} /> : null}
 						<span className={s.arrow}>
 							<span className={s.arrowRight}></span>
 						</span>
@@ -483,6 +483,9 @@ class Product extends Component {
 
 		const details = [];
 		this.props.part.attributes.map((attr, i) => {
+			if (!attr.name || !attr.value) {
+				return;
+			}
 			details.push(
 				<div className="row" key={`details-${i}`}>
 					<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -506,12 +509,12 @@ class Product extends Component {
 			<div className={cx(s.bottom, 'container-fluid')}>
 				<div className="container">
 					<div className={cx(s.more, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-7')}>
-						<h3>More Details</h3>
+						{catBrief ? <h3>More Details</h3> : null}
 						<div dangerouslySetInnerHTML={{ __html: catBrief }}></div>
 					</div>
 
 					<div className={cx(s.attributes, 'col-xs-12', 'col-sm-12', 'col-md-4', 'col-lg-4', 'col-lg-offset-1', 'col-md-offset-1')}>
-						<h3>Technical Details</h3>
+						{details.length ? <h3>Technical Details</h3> : null}
 						{details}
 					</div>
 
