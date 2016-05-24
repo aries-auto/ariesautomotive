@@ -90,10 +90,9 @@ class Locations extends Component {
 						<a className={s.name} onClick={this.viewOnMap.bind(this, location)}>{location.name}</a>
 						<span className={cx(s.type)}>{location.dealerType.label}</span>
 						<span className={cx(s.address)}>{location.address}</span>
-						<span className={cx(s.city)}>{location.city},</span>
-						<span className={cx(s.state)}>{location.state.abbreviation}</span>
+						<span className={cx(s.city)}>{location.city},&nbsp;</span>
+						<span className={cx(s.state)}>{location.state.abbreviation}&nbsp;</span>
 						<span className={cx(s.zip)}>{location.postalCode}</span>
-						<span className={cx(s.country)}>{location.state.country.abbreviation}</span>
 						<div className={cx(s.actions)}>
 							<a href={telephone}>
 								<span className="glyphicon glyphicon-earphone"></span>
