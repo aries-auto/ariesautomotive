@@ -59,10 +59,19 @@ server.get('*', async (req, res, next) => {
 			},
 		};
 
+		let redirect = null;
 		await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {
+			if (state.redirect) {
+				redirect = state.redirect;
+			}
 			data.body = ReactDOM.renderToString(component);
 			data.css = css.join('');
 		});
+
+		if (redirect) {
+			res.redirect(redirect);
+			return;
+		}
 
 		const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
 		res.status(statusCode).send('<!doctype html>\n' + html);
