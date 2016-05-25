@@ -50,6 +50,9 @@ const context = {
 
 function render(state) {
 	Router.dispatch(state, (newState, component) => {
+		if (component.props.context.params === '/envision') {
+			return;
+		}
 		ReactDOM.render(component, appContainer, () => {
 			// Restore the scroll position if it was saved into the state
 			if (state.scrollY !== undefined) {
@@ -86,7 +89,9 @@ function run() {
 			google,
 			navigator,
 		});
-		render(currentState);
+		if (currentState.path !== '/envision') {
+			render(currentState);
+		}
 	});
 
 	// Save the page scroll position into the current location's state
