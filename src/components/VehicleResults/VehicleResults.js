@@ -186,7 +186,7 @@ class VehicleResults extends Component {
 	render() {
 		return (
 			<div className={s.container}>
-				<Loader loaded={this.props.categoryparts} top="30%" loadedClassName={s.loader}>
+				<Loader loaded={(this.props.categoryparts !== null)} top="30%" loadedClassName={s.loader}>
 					<div className={cx(s.root, this.props.className)} role="navigation">
 						<div className="tab-wrap">
 							<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
