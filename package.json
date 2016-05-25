@@ -99,6 +99,6 @@
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
     "start": "NODE_ENV=production node build/server.js",
-    "poop": "babel-node tools/run start"
+    "dev": "babel-node tools/run start"
   }
 }
