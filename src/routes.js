@@ -214,7 +214,8 @@ const router = new Router(on => {
 	});
 
 	on('/envision', async (state) => {
-		return <Envision context={state.context} />;
+		const loc = typeof window !== 'undefined' ? window.location : '';
+		return <Envision context={state.context} protocol={loc.protocol}/>;
 	});
 
 
