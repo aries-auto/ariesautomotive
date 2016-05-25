@@ -71,7 +71,7 @@ class Footer extends Component {
 							<div className="row col-lg-2 col-md-2 col-xs-4">
 								<div className={s.semaLogo}>
 									<a href="http://www.sema.org" title="SEMA Website">
-										<img src="/img/sema-logo.png" alt="SEMA Logo" />
+										<img src="/img/sema-logo.png" width="64px" alt="SEMA Logo" />
 									</a>
 								</div>
 							</div>
