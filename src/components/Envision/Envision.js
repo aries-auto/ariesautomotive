@@ -19,10 +19,6 @@ class Envision extends Component {
 		seo: PropTypes.func.isRequired,
 	};
 
-	constructor() {
-		super();
-	}
-
 	componentWillMount() {
 		this.context.onSetTitle(title);
 		this.context.onSetMeta(title);

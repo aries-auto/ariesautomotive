@@ -1,17 +1,21 @@
 @import '../variables.scss';
 
 .root {
-	width: 100%;
-	padding: 0;
-	background-color: $lookup-color;
-	box-shadow: 0 10px 14px -8px $gray;
-	-webkit-box-shadow: 0 10px 14px -8px $gray;
-	-moz-box-shadow: 0 10px 14px -8px $gray;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0;
+    background-color: $lookup-color;
+    -webkit-box-shadow: 0 10px 14px -8px $gray;
+       -moz-box-shadow: 0 10px 14px -8px $gray;
+            box-shadow: 0 10px 14px -8px $gray;
 }
 
 .inlineForm {
-	.heading {
-		display: inline-block;
+    padding: 0 15px;
+
+    .heading {
+        display: inline-block;
         font-size: 18px;
         font-weight: 900;
         line-height: 38px;
@@ -21,39 +25,47 @@
     }
 
     .formGroup {
-    	margin: 10px;
+        margin: 10px 0;
 
-    	select {
-    		text-transform: uppercase;
-    	}
+        select {
+            text-transform: uppercase;
+        }
 
-    	.button {
-    		margin-bottom: 0;
-    	}
+        .button {
+            margin-bottom: 0;
+        }
     }
 }
 
-
 .viewParts {
-	height: 38px;
-	margin: .5em .3em;
+    height: 38px;
+    margin: .5em .3em;
 }
+
 .disabled {
-	opacity: .3;
+    opacity: .3;
 }
+
 .vehicleName {
-	font-size: 1.3em;
-	font-weight: 800;
-	text-align: center;
-	a {
-		padding: .6em;
-		color: $black-base;
-		text-decoration: underline;
-	}
+    font-size: 1.3em;
+    font-weight: 800;
+    text-align: center;
+
+    a {
+        padding: .6em;
+        color: $black-base;
+        text-decoration: underline;
+    }
 }
 
 @media (min-width: 720px) {
-	.inlineForm {
-		margin-left: 242px;
-	}
+    .inlineForm {
+        > span {
+            margin-left: 242px;
+        }
+
+        .formGroup {
+            margin: 0 0 0 10px;
+        }
+    }
 }

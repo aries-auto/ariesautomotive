@@ -19,7 +19,7 @@ class VehicleStore extends EventEmitter {
 				model: '',
 				style: '',
 			},
-			categoryparts: {},
+			categoryparts: null,
 			totalNumberOfParts: '',
 			showStyle: false,
 			category: '',

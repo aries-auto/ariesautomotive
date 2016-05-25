@@ -1,30 +1,27 @@
 @import '../variables.scss';
 
 .root {
-	width: 100%;
+    width: 100%;
 
-	.searchIcon {
-		font-size: 20px;
-		line-height: 40px;
-		vertical-align: bottom;
-	}
+    .searchIcon {
+        font-size: 20px;
+        line-height: 40px;
+        vertical-align: bottom;
+    }
 
-	button[type=submit] {
-		float: right;
-		width: 10%;
-		padding: 0;
-		background: none;
-		border: 0;
+    button[type=submit] {
+        width: 10%;
+        padding: 0;
+        background: none;
+        border: 0;
 
-		&:hover,
-		&:focus,
-		&:active {
-			color: $white-base;
-			text-shadow: 0 1px 2px $gray;
-		}
+        &:hover, &:focus, &:active {
+            color: $white-base;
+            text-shadow: 0 1px 2px $gray;
+        }
 
-		.nodisplay {
-			display: none;
-		}
-	}
+        .nodisplay {
+            display: none;
+        }
+    }
 }

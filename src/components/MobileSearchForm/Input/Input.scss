@@ -1,94 +1,93 @@
 @import '../../variables.scss';
 
 .transitionEnter {
-	opacity: .01;
+    opacity: .01;
 }
 
 .transitionEnterActive {
-	opacity: 1;
-	transition: opacity 4.5s ease-in;
+    opacity: 1;
+    transition: opacity 4.5s ease-in;
 }
 
 .root {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 101;
-	width: 100%;
-	height: 51px;
-	padding: 0;
-	margin: 0;
-	background-color: $white-base;
-	border: 0;
-	box-shadow: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    width: 100%;
+    height: 51px;
+    padding: 0;
+    margin: 0;
+    background-color: $white-base;
+    border: 0;
+    box-shadow: none;
 
-	.nodisplay,
-	label {
-		display: none;
-	}
+    .nodisplay, label {
+        display: none;
+    }
 
-	.group {
-		width: 100%;
-		height: 100%;
-		padding: 0;
-		margin: 0;
+    .group {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
 
-		input {
-			width: 96%;
-			height: 100%;
-			padding: 0 2%;
-			margin: 0;
-			font-family: $font-family-base;
-			font-size: 16px;
-			border: 0;
-		}
-	}
+        input {
+            width: 96%;
+            height: 100%;
+            padding: 0 2%;
+            margin: 0;
+            font-family: $font-family-base;
+            font-size: 16px;
+            border: 0;
+        }
+    }
 
-	button[type=button] {
-		position: absolute;
-		top: 5px;
-		right: 70px;
-		width: 40px;
-		padding: 0;
-		color: $gray-light;
+    button[type=button] {
+        position: absolute;
+        top: 5px;
+        right: 50px;
+        width: 40px;
+        padding: 0;
+        color: $gray-light;
 
-		span {
-			line-height: 40px;
-		}
-	}
+        span {
+            line-height: 40px;
+        }
+    }
 
-	button[type=submit] {
-		position: absolute;
-		top: 5px;
-		right: 0;
-		color: $alt-red;
+    button[type=submit] {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        color: $alt-red;
 
-		.searchIcon {
-			font-size: 20px;
-			line-height: 40px;
-			vertical-align: bottom;
-		}
-	}
+        .searchIcon {
+            font-size: 20px;
+            line-height: 40px;
+            vertical-align: bottom;
+        }
+    }
 }
 
 .overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 100;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, .6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .6);
 }
 
-@media(min-width: $screen-md-min) {
-	.root .group {
-		width: 200px;
-	}
+@media (min-width: $screen-md-min) {
+    .root .group {
+        width: 200px;
+    }
 }
 
-@media(min-width: $screen-lg-min) {
-	.root .group {
-		width: 80%;
-	}
+@media (min-width: $screen-lg-min) {
+    .root .group {
+        width: 80%;
+    }
 }
