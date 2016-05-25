@@ -20,6 +20,7 @@ import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
+import Envision from './components/Envision/Envision';
 import { apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
@@ -211,6 +212,11 @@ const router = new Router(on => {
 	on('/news', async (state) => {
 		return <LatestNews context={state.context} />;
 	});
+
+	on('/envision', async (state) => {
+		return <Envision context={state.context} />;
+	});
+
 
 	on('/news/:id', async (state) => {
 		state.context.id = state.params.id;
