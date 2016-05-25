@@ -1,66 +1,81 @@
 @import '../classes.scss';
+@import '../variables.scss';
+
 .categoryStyle {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .container {
-	width: 100%;
-	margin-top: .4em;
+    width: 100%;
+    min-height: 300px;
+    margin-top: .4em;
+}
+
+.loader {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
 }
 
 .root {
-	padding: 0 1em 0 1em;
-	li {
-		width: 80%;
-		margin: 0 0 6px;
-		border-radius: 4px;
-		> a {
-			width: 80%;
-			padding: 5px;
-			overflow-x: auto;
-			overflow-y: hidden;
-			font-family: "ff-good-headline-web-pro-con",sans-serif;
-			font-size: 18px;
-			font-weight: bold;
-			color: #c73031;
-			text-align: left;
-			vertical-align: text-bottom;
-			border: 0;
+    li {
+        width: 100%;
+        margin: 0 0 6px;
+        border-radius: 4px;
 
-			&:hover, &:focus {
-				background-color: rgba(255, 255, 255, .6);
-				border-radius: 4px 0 0 4px;
-			}
-		}
-		&.active > a {
-			color: #c73031;
-			background-color: rgb(255, 255 ,255);
-			border-radius: 4px 0 0 4px;
-		}
-	}
-	.active {
-		background-color: white;
-	}
+        > a {
+            padding: 5px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-family: $font-family-base;
+            font-size: 18px;
+            font-weight: bold;
+            color: $new-red;
+            text-align: left;
+            vertical-align: text-bottom;
+            border: 0;
+            border-radius: 4px;
+
+            &:hover, &:focus {
+                cursor: pointer;
+                background-color: $off-white;
+            }
+        }
+
+        &.active > a {
+            background-color: $white-base;
+        }
+    }
+
+    .active {
+        background-color: white;
+    }
 }
 
 .clearfix {
-	clear: both;
+    clear: both;
 }
 
-@media(min-width: $screen-md-min) {
-	.container {
-		width: 100%;
-		padding: 2em;
-	}
-	.root {
-		display: inline-block;
-		width: 30%;
-		padding: 0;
-		li {
-			width: 100%;
-			> a {
-				width: 100%;
-			}
-		}
-	}
+@media (min-width: $screen-md-min) {
+    .container {
+        width: 100%;
+        padding: 2em;
+    }
+
+    .loader {
+        flex-direction: row;
+    }
+
+    .root {
+        padding: 0;
+
+        li {
+            width: 100%;
+
+            > a {
+                width: 100%;
+                border-radius: 4px 0 0 4px;
+            }
+        }
+    }
 }

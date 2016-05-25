@@ -68,7 +68,8 @@ class VehicleStyle extends Component {
 				return styleOptions;
 			}
 			styleOptions.push(
-				<li key={i} onClick={this.setVehicleStyle.bind(this, i)} value={i}>{i.toUpperCase()}
+				<li key={i} onClick={this.setVehicleStyle.bind(this, i)} value={i}>
+					{i.toUpperCase()}
 				</li>
 			);
 		}
@@ -124,11 +125,13 @@ class VehicleStyle extends Component {
 			<div className={s.root}>
 				<h1 className={s.categoryName}>{this.props.catStyleParts.name ? this.props.catStyleParts.name : null}</h1>
 				<div className={s.greybox}>
-					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
-					<span className={s.styleSelect}>
+					<div>
+						<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
+					</div>
+					<div className={s.styleSelect}>
 						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.vehicle.style && !this.props.showStyle) ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
 						<br />{this.props && this.props.showStyle ? this.showStyleChoices() : ''}
-					</span>
+					</div>
 				</div>
 				<div>
 					{this.props.vehicle.style ? this.getParts() : ''}

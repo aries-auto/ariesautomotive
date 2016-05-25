@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import Loader from 'react-loader';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
@@ -168,18 +169,34 @@ class VehicleResults extends Component {
 		return false;
 	}
 
+	renderParts() {
+		if (!this.props.catStyleParts || !this.props.catStyleParts.name) {
+			return <div></div>;
+		}
+
+		return (
+			<VehicleStyle
+				className={s.vheicleStyle}
+				catStyleParts={this.props.catStyleParts}
+				category={this.props.catStyleParts.name}
+			/>
+		);
+	}
+
 	render() {
 		return (
 			<div className={s.container}>
-				<div className={cx(s.root, this.props.className)} role="navigation">
-					<div className="tab-wrap">
-						<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
-							{this.getCategoryStyles()}
-						</ul>
+				<Loader loaded={this.props.categoryparts} top="30%" loadedClassName={s.loader}>
+					<div className={cx(s.root, this.props.className)} role="navigation">
+						<div className="tab-wrap">
+							<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
+								{this.getCategoryStyles()}
+							</ul>
+						</div>
 					</div>
-				</div>
-				{this.props.catStyleParts.name ? <VehicleStyle className={s.vehicleStyle} catStyleParts={this.catStyleParts} category={this.props.catStyleParts.name} /> : null}
-				<div className={s.clearfix}></div>
+					{this.renderParts()}
+					<div className={s.clearfix}></div>
+				</Loader>
 			</div>
 		);
 	}
