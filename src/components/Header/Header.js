@@ -23,15 +23,15 @@ class Header extends Component {
 						<Link className={cx(s.brand, 'navbar-brand')} to="/">
 							<img src="https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg" alt="ARIES Automotive Logo" className="logo" />
 						</Link>
-						<div className={cx('visible-xs', 'visible-sm', 'col-xs-6', 'col-sm-7', s.mobileContainer)}>
-							<MobileSearchForm />
-						</div>
 						<button type="button" className={cx('navbar-toggle', 'collapsed', s.collapse)} data-toggle="collapse" data-target="#categoryMenu" aria-expanded="false">
 							<span className="sr-only">Toggle navigation</span>
 							<span className="icon-bar"></span>
 							<span className="icon-bar"></span>
 							<span className="icon-bar"></span>
 						</button>
+						<div className={cx('visible-xs', 'visible-sm', s.mobileContainer)}>
+							<MobileSearchForm />
+						</div>
 					</div>
 					<div className="col-md-8 col-lg-8 col-sm-12 col-xs-12">
 						<Navigation categories={this.props.categories} className={s.nav} />
