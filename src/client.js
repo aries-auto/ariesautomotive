@@ -86,7 +86,9 @@ function run() {
 			google,
 			navigator,
 		});
-		render(currentState);
+		if (currentState.path !== '/envision') {
+			render(currentState);
+		}
 	});
 
 	// Save the page scroll position into the current location's state
