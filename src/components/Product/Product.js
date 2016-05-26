@@ -70,10 +70,11 @@ class Product extends Component {
 				image = i;
 			}
 		});
+
 		const seo = {
 			title,
 			description,
-			image: `${image.path.Scheme}://${image.path.Host}${image.path.Path}`,
+			image: image.path ? `${image.path.Scheme}://${image.path.Host}${image.path.Path}` : '',
 		};
 		this.context.seo(seo);
 	}
@@ -285,6 +286,13 @@ class Product extends Component {
 			);
 			carouselIndex++;
 		});
+		if (items.length === 0) {
+			items.push(
+				<CarouselItem key={1}>
+					<img src="/img/partImgPlaceholder.jpg" />
+				</CarouselItem>
+			);
+		}
 
 		this.props.part.videos.map((vid, i) => {
 			videoThumbs.push(
