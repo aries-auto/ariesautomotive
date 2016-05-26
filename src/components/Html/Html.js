@@ -108,7 +108,6 @@ class Html extends Component {
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
 					<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-					<script src="http://ver1.iconfigurators.com/src/embed.cfm?ky=539D7C9D0B8B72F4966C"></script>
 				</head>
 				<body>
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
