@@ -77,7 +77,11 @@ class VehicleStore extends EventEmitter {
 	}
 
 	async set(vehicle) {
-		this.setState({ vehicle });
+		let showStyle = true;
+		if (vehicle.style && vehicle.style !== '') {
+			showStyle = false;
+		}
+		this.setState({ vehicle, showStyle });
 		await this.getCategoryStyles();
 	}
 
@@ -95,7 +99,7 @@ class VehicleStore extends EventEmitter {
 			}
 		}
 		this.setState(() => {
-			return { categoryparts, totalNumberOfParts };
+			return { categoryparts, totalNumberOfParts, showStyle: false };
 		});
 	}
 

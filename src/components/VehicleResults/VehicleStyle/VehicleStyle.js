@@ -40,6 +40,7 @@ class VehicleStyle extends Component {
 			}),
 		}),
 	};
+
 	constructor() {
 		super();
 		this.showStyleChoices = this.showStyleChoices.bind(this);
@@ -47,6 +48,7 @@ class VehicleStyle extends Component {
 		this.showStyleChoices = this.showStyleChoices.bind(this);
 		this.unhideChoices = this.unhideChoices.bind(this);
 		this.setVehicleStyle = this.setVehicleStyle.bind(this);
+		this.getParts = this.getParts.bind(this);
 		// this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
 	}
 
@@ -84,7 +86,6 @@ class VehicleStyle extends Component {
 			style,
 		};
 		VehicleActions.set(v);
-		VehicleActions.setShowStyleState(false);
 	}
 
 	getParts() {
@@ -105,19 +106,9 @@ class VehicleStyle extends Component {
 				<ul>
 					{this.getStyleChoices()}
 				</ul>
+				<span />
 			</div>
 		);
-	}
-
-	findVehicleApplicationMatch(part, style) {
-		for (const j in part.vehicle_applications) {
-			if (!part.vehicle_applications[j]) {
-				continue;
-			}
-			if (part.vehicle_applications[j].make.toString() === this.props.vehicle.make && part.vehicle_applications[j].model.toString() === this.props.vehicle.model && part.vehicle_applications[j].year.toString() === this.props.vehicle.year && part.vehicle_applications[j].style === style) {
-				return part;
-			}
-		}
 	}
 
 	render() {
@@ -130,7 +121,7 @@ class VehicleStyle extends Component {
 					</div>
 					<div className={s.styleSelect}>
 						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.vehicle.style && !this.props.showStyle) ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
-						<br />{this.props && this.props.showStyle ? this.showStyleChoices() : ''}
+						{(this.props && this.props.showStyle) ? this.showStyleChoices() : null}
 					</div>
 				</div>
 				<div>
