@@ -87,6 +87,22 @@ class Product extends Component {
 		return PartStore.getState();
 	}
 
+	getCmpFunc(primer, reverse) {
+		const dfc = this.defaultCmp; // closer in scope
+		let cmp = this.defaultCmp;
+		if (primer) {
+			cmp = (a, b) => {
+				return dfc(primer(a), primer(b));
+			};
+		}
+		if (reverse) {
+			return (a, b) => {
+				return -1 * cmp(a, b);
+			};
+		}
+		return cmp;
+	}
+
 	setActiveImage(e) {
 		PartActions.setCarouselIndex(e);
 	}
@@ -94,6 +110,52 @@ class Product extends Component {
 	shadowbox(vid) {
 		PartActions.setVideo(vid);
 		window.addEventListener('wheel', this.noScroll);
+	}
+
+	defaultCmp(a, b) {
+		if (a === b) {
+			return 0;
+		}
+		return a < b ? -1 : 1;
+	}
+
+	sortBy() {
+		const fields = [];
+		const nFields = arguments.length;
+		let field;
+		let name;
+		let cmp;
+
+		// preprocess sorting options
+		for (let i = 0; i < nFields; i++) {
+			field = arguments[i];
+			if (typeof field === 'string') {
+				name = field;
+				cmp = this.defaultCmp;
+			} else {
+				name = field.name;
+				cmp = this.getCmpFunc(field.primer, field.reverse);
+			}
+			fields.push({
+				name,
+				cmp,
+			});
+		}
+
+		// final comparison function
+		return (A, B) => {
+			let n;
+			let result;
+			for (let i = 0; i < nFields; i++) {
+				result = 0;
+				field = fields[i];
+				n = field.name;
+
+				result = field.cmp(A[n], B[n]);
+				if (result !== 0) break;
+			}
+			return result;
+		};
 	}
 
 	noScroll(e) {
@@ -357,6 +419,14 @@ class Product extends Component {
 		}
 
 		const apps = [];
+		this.props.part.vehicle_applications.sort(
+			this.sortBy(
+				{ name: 'year', primer: parseInt, reverse: true },
+				'make',
+				'model',
+				'style',
+			),
+		);
 		this.props.part.vehicle_applications.map((v, i) => {
 			apps.push(
 				<tr key={`application-${i}`}>
