@@ -15,14 +15,17 @@ class SearchStore extends EventEmitter {
 			search: SearchActions.search,
 			setResult: SearchActions.setResult,
 		});
+		this.state = {
+			page: 1,
+		};
 	}
 
 	async search(args) {
 		if (args.length === 0) {
 			return;
 		}
+		let page = this.state.page;
 		const term = args[0];
-		let page = 0;
 		let searchResult = {
 			hits: {
 				hits: [],
@@ -43,6 +46,7 @@ class SearchStore extends EventEmitter {
 				searchResult.hits.hits.push(...data.hits.hits);
 				this.setState({
 					searchResult,
+					page,
 				});
 			});
 		} catch (err) {

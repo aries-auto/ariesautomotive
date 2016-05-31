@@ -16,6 +16,7 @@ class SearchResults extends Component {
 		context: PropTypes.object,
 		searchResult: PropTypes.object,
 		term: PropTypes.string,
+		page: PropTypes.number,
 	};
 
 	static contextTypes = {
@@ -62,8 +63,7 @@ class SearchResults extends Component {
 
 	loadMore(e) {
 		e.preventDefault();
-		const page = 1;
-		SearchActions.search(this.props.term, page, this.props.searchResult);
+		SearchActions.search(this.props.term, this.props.page + 1, this.props.searchResult);
 	}
 
 	took() {
