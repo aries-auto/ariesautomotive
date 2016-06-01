@@ -7,6 +7,7 @@ import BecomeDealer from './components/BecomeDealer';
 import Product from './components/Product';
 import Category from './components/Category';
 import Contact from './components/Contact';
+import CustomContent from './components/CustomContent';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
@@ -34,7 +35,7 @@ const router = new Router(on => {
 			state.context = {};
 		}
 		state.context.params = state.params;
-		const [yearResponse, catResponse] = await Promise.all([
+		const [yearResponse, catResponse, contentReponse] = await Promise.all([
 			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',
 				headers: {
@@ -44,6 +45,7 @@ const router = new Router(on => {
 				body: '{}',
 			}),
 			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
+			fetch(`${apiBase}/site/content/all?siteID=${brand}&brand=${brand}&key=${KEY}`),
 		]);
 
 		try {
@@ -52,6 +54,7 @@ const router = new Router(on => {
 			if (vehicleResponse.available_years !== undefined) {
 				state.context.years = vehicleResponse.available_years;
 			}
+			state.context.siteContents = await contentReponse.json();
 		} catch (e) {
 			state.context.error = e;
 		}
@@ -244,6 +247,16 @@ const router = new Router(on => {
 	on('/styleguard', (state, next) => {
 		state.redirect = '/category/321/Interior/StyleGuard%20Floor%20Liners';
 		next();
+	});
+
+	on('/page/:id', async (state) => {
+		state.context.id = state.params.id;
+		for (let i = 0; i < state.context.siteContents.length; i++) {
+			if (state.context.siteContents[i].id.toString() === state.params.id) {
+				state.context.customContent = state.context.siteContents[i];
+			}
+		}
+		return <CustomContent context={state.context} />;
 	});
 
 	on('/', async (state) => {

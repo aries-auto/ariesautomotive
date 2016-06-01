@@ -17,6 +17,7 @@ class App extends Component {
 			years: PropTypes.array,
 			categories: PropTypes.array,
 			params: PropTypes.object,
+			siteContents: PropTypes.array,
 		}),
 		children: PropTypes.element.isRequired,
 		error: PropTypes.object,
@@ -60,7 +61,7 @@ class App extends Component {
 				<div className="children">
 					{this.props.children}
 				</div>
-				<Footer />
+				<Footer siteContents={this.props.context.siteContents} />
 			</div>
 		) : this.props.children;
 	}
