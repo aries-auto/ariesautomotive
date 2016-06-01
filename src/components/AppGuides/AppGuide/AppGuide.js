@@ -108,8 +108,10 @@ class AppGuide extends Component {
 	renderDownloadLinks() {
 		const page = this.props.guide.name;
 		const links = [];
+		let render = false;
 		appguides.map((guide, i) => {
-			if ((guide.cats.indexOf(page) !== -1) || (guide.type !== 'xls')) {
+			if ((guide.cats.indexOf(page.toLowerCase()) !== -1)) {
+				render = true;
 				links.push(
 					<a key={i} href={guide.link} target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
 						<img src={guide.icon} alt="App Guide" className={cx('icon', s.appguideIcon)} />
@@ -117,6 +119,9 @@ class AppGuide extends Component {
 				);
 			}
 		});
+		if (!render) {
+			return null;
+		}
 		return (
 			<div className={s.downloads}>
 				<span className="heading">Download a Copy</span>

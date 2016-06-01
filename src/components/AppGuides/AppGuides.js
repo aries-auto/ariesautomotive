@@ -81,7 +81,10 @@ class AppGuides extends Component {
 			);
 		});
 
-		return output;
+		return (
+			<div>
+				{output}
+			</div>);
 	}
 
 	renderGuide() {
