@@ -58,18 +58,22 @@ class Product extends Component {
 		}
 		// desc
 		let description = 'Part';
-		this.props.part.content.map((con) => {
-			if (con.contentType.type.toLowerCase() === 'marketingdescription') {
-				description = con.text;
-			}
-		});
+		if (this.props.part.content) {
+			this.props.part.content.map((con) => {
+				if (con.contentType && con.contentType.type && con.contentType.type.toLowerCase() === 'marketingdescription') {
+					description = con.text;
+				}
+			});
+		}
 		// image
 		let image = {};
-		this.props.part.images.map((i) => {
-			if ((i.height < image.height || !image.height) && i.sort === 'a') {
-				image = i;
-			}
-		});
+		if (this.props.part.images) {
+			this.props.part.images.map((i) => {
+				if ((i.height < image.height || !image.height) && i.sort === 'a') {
+					image = i;
+				}
+			});
+		}
 
 		const seo = {
 			title,
