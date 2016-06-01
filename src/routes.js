@@ -45,7 +45,7 @@ const router = new Router(on => {
 				body: '{}',
 			}),
 			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
-			fetch(`${apiBase}/site/content/all?siteID=${brand}&brand=${brand}&key=${KEY}`),
+			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
 		]);
 
 		try {
