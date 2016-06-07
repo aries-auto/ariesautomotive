@@ -1,3 +1,6 @@
+require('@google/cloud-trace').start();
+require('@google/cloud-debug');
+
 import 'babel-core/polyfill';
 import path from 'path';
 import express from 'express';
