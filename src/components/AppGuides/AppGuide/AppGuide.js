@@ -8,6 +8,8 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
 import { appguides } from './data';
 
+const cache = '06072016';
+
 @withStyles(s)
 @connectToStores
 class AppGuide extends Component {
@@ -112,8 +114,9 @@ class AppGuide extends Component {
 		appguides.map((guide, i) => {
 			if ((guide.cats.indexOf(page.toLowerCase()) !== -1)) {
 				render = true;
+				const link = `${guide.link}?cache=${cache}`;
 				links.push(
-					<a key={i} href={guide.link} target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
+					<a key={i} href={link} target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
 						<img src={guide.icon} alt="App Guide" className={cx('icon', s.appguideIcon)} />
 					</a>
 				);
