@@ -60,6 +60,9 @@
     .container {
         padding: 15px 0 0;
     }
+    .navbarHeader {
+        min-width: 165px;
+    }
 }
 
 @media (min-width: $screen-lg-min) {

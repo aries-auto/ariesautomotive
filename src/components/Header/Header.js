@@ -19,7 +19,7 @@ class Header extends Component {
 			<div className={s.root}>
 				<TopNav />
 				<div className={s.container}>
-					<div className="navbar-header">
+					<div className={cx('navbar-header', s.navbarHeader)}>
 						<Link className={cx(s.brand, 'navbar-brand')} to="/">
 							<img src="https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg" alt="ARIES Automotive Logo" className="logo" />
 						</Link>
