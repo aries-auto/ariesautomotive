@@ -67,8 +67,15 @@ class VehicleStore extends EventEmitter {
 	}
 
 	checkStyle(activeCategory) {
+		// cat has one style called 'all'
 		if (activeCategory.styles.length === 1 && activeCategory.styles[0].name === 'all') {
 			return activeCategory.styles[0];
+		}
+		// cat has style with same name as current style
+		for (const i in activeCategory.styles) {
+			if (this.state.style && activeCategory.styles[i].name === this.state.style.name) {
+				return activeCategory.styles[i];
+			}
 		}
 		return null;
 	}
