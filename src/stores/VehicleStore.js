@@ -17,15 +17,7 @@ class VehicleStore extends EventEmitter {
 				model: '',
 			},
 			showStyle: false,
-			catStyleParts: [{
-				category: {
-					name: '',
-					styles: {
-						name: '',
-						parts: [],
-					},
-				},
-			}],
+			catStyleParts: null,
 			activeCategory: null,
 		};
 		this.bindListeners({
