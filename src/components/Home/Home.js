@@ -7,6 +7,8 @@ import cx from 'classnames';
 import s from './Home.scss';
 import withStyles from '../../decorators/withStyles';
 
+const title = 'ARIES Automotive';
+
 @withStyles(s)
 class Home extends Component {
 
@@ -85,6 +87,8 @@ class Home extends Component {
 			},
 			modalIsOpen: false,
 		});
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
 		const seo = {
 			title: 'ARIES Automotive',
 			description: 'They change the rules, so we make up our own. They put up road blocks; we find a way around. They tell us there is no path ahead; we blaze a trail. At ARIES, we get revved up about going off the beaten path. From our Pro Series grille guards and modular Jeep bumpers to our StyleGuard™ floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.',
