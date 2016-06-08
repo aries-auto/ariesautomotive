@@ -185,6 +185,14 @@ const serverConfig = merge({}, config, {
 		new webpack.DefinePlugin(GLOBALS),
 		new webpack.BannerPlugin('require("source-map-support").install();',
 		{ raw: true, entryOnly: false }),
+		new webpack.BannerPlugin(
+			'require("@google/cloud-trace").start();',
+			{ raw: true, entryOnly: false },
+		),
+		new webpack.BannerPlugin(
+			'require("@google/cloud-debug");',
+			{ raw: true, entryOnly: false },
+		),
 	],
 });
 

@@ -59,9 +59,10 @@
 @media (min-width: $screen-md-min) {
     .container {
         padding: 15px 0 0;
-    }
-    .navbarHeader {
-        min-width: 165px;
+
+        .header {
+            min-width: 200px;
+        }
     }
 }
 
