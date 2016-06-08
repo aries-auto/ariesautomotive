@@ -19,26 +19,10 @@ class VehicleStyle extends Component {
 				model: PropTypes.string,
 			}),
 		}),
-		vehicle: PropTypes.shape({
-			year: PropTypes.string,
-			make: PropTypes.string,
-			model: PropTypes.string,
-			categoryparts: PropTypes.object,
-			style: PropTypes.string,
-		}),
-		// categoryparts: PropTypes.object,
-		category: PropTypes.string,
+		category: PropTypes.object,
 		showStyle: PropTypes.bool,
 		parts: PropTypes.array,
-		catStyleParts: PropTypes.shape({
-			name: PropTypes.string,
-			category: PropTypes.shape({
-				available_styles: PropTypes.shape({
-					name: PropTypes.string,
-					parts: PropTypes.array,
-				}),
-			}),
-		}),
+		style: PropTypes.object,
 	};
 
 	constructor() {
@@ -49,7 +33,6 @@ class VehicleStyle extends Component {
 		this.unhideChoices = this.unhideChoices.bind(this);
 		this.setVehicleStyle = this.setVehicleStyle.bind(this);
 		this.getParts = this.getParts.bind(this);
-		// this.getCategoryPartsForVehicleStyle = this.getCategoryPartsForVehicleStyle.bind(this);
 	}
 
 	static getStores() {
@@ -63,15 +46,15 @@ class VehicleStyle extends Component {
 	getStyleChoices() {
 		const styleOptions = [];
 		let styles = {};
-		styles = this.props.catStyleParts.category[this.props.catStyleParts.name].available_styles;
+		styles = this.props.category.styles;
 
 		for (const i in styles) {
 			if (!i) {
 				return styleOptions;
 			}
 			styleOptions.push(
-				<li key={i} onClick={this.setVehicleStyle.bind(this, i)} value={i}>
-					{i.toUpperCase()}
+				<li key={i} onClick={this.setVehicleStyle.bind(this, styles[i])} value={styles[i].name}>
+					{styles[i].name.toUpperCase()}
 				</li>
 			);
 		}
@@ -79,17 +62,11 @@ class VehicleStyle extends Component {
 	}
 
 	setVehicleStyle(style) {
-		const v = {
-			year: this.props.vehicle.year,
-			make: this.props.vehicle.make,
-			model: this.props.vehicle.model,
-			style,
-		};
-		VehicleActions.set(v);
+		VehicleActions.setStyle(style);
 	}
 
 	getParts() {
-		const parts = this.props.catStyleParts.category[this.props.catStyleParts.name].available_styles[this.props.vehicle.style];
+		const parts = this.props.style.parts;
 		if (!parts || parts.length < 1) {
 			return <h3 className={s.noParts}>No parts for this style</h3>;
 		}
@@ -114,18 +91,18 @@ class VehicleStyle extends Component {
 	render() {
 		return (
 			<div className={s.root}>
-				<h1 className={s.categoryName}>{this.props.catStyleParts.name ? this.props.catStyleParts.name : null}</h1>
+				<h1 className={s.categoryName}>{this.props.category.name ? this.props.category.name : null}</h1>
 				<div className={s.greybox}>
 					<div>
 						<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
 					</div>
 					<div className={s.styleSelect}>
-						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.vehicle.style && !this.props.showStyle) ? this.props.vehicle.style : 'Select a Style'} <span className="caret"></span></button>
+						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.style && !this.props.showStyle) ? this.props.style.name : 'Select a Style'} <span className="caret"></span></button>
 						{(this.props && this.props.showStyle) ? this.showStyleChoices() : null}
 					</div>
 				</div>
 				<div>
-					{this.props.vehicle.style ? this.getParts() : ''}
+					{this.props.style ? this.getParts() : ''}
 				</div>
 			</div>
 		);

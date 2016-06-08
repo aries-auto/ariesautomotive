@@ -26,18 +26,8 @@ class VehicleResults extends Component {
 			make: PropTypes.string,
 			model: PropTypes.string,
 		}),
-		categoryparts: PropTypes.object,
-		category: PropTypes.string,
-		showStyle: PropTypes.bool,
-		catStyleParts: PropTypes.shape({
-			name: PropTypes.string,
-			category: PropTypes.shape({
-				available_styles: PropTypes.shape({
-					name: PropTypes.string,
-					parts: PropTypes.array,
-				}),
-			}),
-		}),
+		catStyleParts: PropTypes.array,
+		activeCategory: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -52,8 +42,6 @@ class VehicleResults extends Component {
 		this.state = {
 			context: {},
 		};
-		this.getCategoryStyles = this.getCategoryStyles.bind(this);
-		this.setCategoryStyle = this.setCategoryStyle.bind(this);
 	}
 
 	componentWillMount() {
@@ -62,7 +50,6 @@ class VehicleResults extends Component {
 			make: this.props.context.params.make,
 			model: this.props.context.params.model,
 		});
-		// title
 		const title = this.props.context.params.year && this.props.context.params.make && this.props.context.params.model ? `${this.props.context.params.year} ${this.props.context.params.make} ${this.props.context.params.model}` : 'Vehicle Results';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
@@ -82,103 +69,30 @@ class VehicleResults extends Component {
 	}
 
 	getCategoryStyles() {
-		this.setFirstCategoryByDefault();
 		const output = [];
-		for (const cat in this.props.categoryparts) {
-			if (!cat) {
-				return output;
+		for (const i in this.props.catStyleParts) {
+			if (!this.props.catStyleParts[i]) {
+				continue;
 			}
-			const active = this.props.catStyleParts.name === cat;
+			const active = this.props.activeCategory === this.props.catStyleParts[i];
 			output.push(
-				<li key={cat} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
-					<a onClick={this.setCategoryStyle.bind(this, cat, this.props.categoryparts[cat])}>{cat.toUpperCase()}</a>
+				<li key={i} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
+					<a onClick={this.setActiveCategory.bind(this, this.props.catStyleParts[i])}>{this.props.catStyleParts[i].name}</a>
 				</li>
 			);
 		}
 		return output;
 	}
 
-	setFirstCategoryByDefault() {
-		let i = 0;
-		for (const cat in this.props.categoryparts) {
-			if (!cat) {
-				return;
-			}
-			if (this.props.category === '' && i === 0) {
-				this.makeCatStyleParts(cat);
-				return;
-			}
-			i++;
-		}
-	}
-
-	setCategoryStyle(cat) {
-		this.makeCatStyleParts(cat);
-		VehicleActions.setShowStyleState(false);
-		VehicleActions.setParts(null);
-	}
-
-	makeCatStyleParts(cat) {
-		const catStyleParts = {};
-		for (const i in this.props.categoryparts) {
-			if (!this.props.categoryparts[i]) {
-				return;
-			}
-
-			if (i !== cat) {
-				continue;
-			}
-
-			if (!catStyleParts.category) {
-				catStyleParts.category = {};
-			}
-			catStyleParts.category[i] = {
-				available_styles: {},
-			};
-			catStyleParts.name = i;
-			for (const j in this.props.categoryparts[i].available_styles) {
-				if (!this.props.categoryparts[i].available_styles[j]) {
-					return;
-				}
-				catStyleParts.category[i].available_styles[this.props.categoryparts[i].available_styles[j]] = [];
-				const style = this.props.categoryparts[i].available_styles[j];
-				for (const k in this.props.categoryparts[i].parts) {
-					if (!this.props.categoryparts[i].parts[k]) {
-						return;
-					}
-					const vehicleApplications = this.props.categoryparts[i].parts[k].vehicle_applications;
-					if (this.inVehicleApps(this.props.vehicle, style, vehicleApplications)) {
-						catStyleParts.category[i].available_styles[this.props.categoryparts[i].available_styles[j]].push(this.props.categoryparts[i].parts[k]);
-					}
-				}
-			}
-		}
-		VehicleActions.setCategoryStyleParts(catStyleParts);
-		return;
-	}
-
-	inVehicleApps(vehicle, style, applications) {
-		for (const i in applications) {
-			if (!applications[i]) {
-				return false;
-			}
-			if (applications[i].year.toLowerCase() === vehicle.year.toLowerCase() && applications[i].make.toLowerCase() === vehicle.make.toLowerCase() && applications[i].model.toLowerCase() === vehicle.model.toLowerCase() && applications[i].style.toLowerCase() === style.toLowerCase()) {
-				return true;
-			}
-		}
-		return false;
+	setActiveCategory(cat) {
+		VehicleActions.setActiveCategory(cat);
 	}
 
 	renderParts() {
-		if (!this.props.catStyleParts || !this.props.catStyleParts.name) {
-			return <div></div>;
-		}
-
 		return (
 			<VehicleStyle
-				className={s.vheicleStyle}
-				catStyleParts={this.props.catStyleParts}
-				category={this.props.catStyleParts.name}
+				className={s.vehicleStyle}
+				category={this.props.activeCategory}
 			/>
 		);
 	}
@@ -186,7 +100,7 @@ class VehicleResults extends Component {
 	render() {
 		return (
 			<div className={s.container}>
-				<Loader loaded={(this.props.categoryparts !== null)} top="30%" loadedClassName={s.loader}>
+				<Loader loaded={(this.props.catStyleParts !== null)} top="30%" loadedClassName={s.loader}>
 					<div className={cx(s.root, this.props.className)} role="navigation">
 						<div className="tab-wrap">
 							<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
@@ -194,8 +108,8 @@ class VehicleResults extends Component {
 							</ul>
 						</div>
 					</div>
-					{this.renderParts()}
 					<div className={s.clearfix}></div>
+					{this.props.activeCategory ? this.renderParts() : null}
 				</Loader>
 			</div>
 		);
