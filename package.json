@@ -103,6 +103,6 @@
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
     "start": "GCLOUD_PROJECT=aries-auto NODE_ENV=production node build/server.js",
-    "dev": "babel-node tools/run start"
+    "dev": "GCLOUD_PROJECT=aries-auto babel-node tools/run start"
   }
 }
