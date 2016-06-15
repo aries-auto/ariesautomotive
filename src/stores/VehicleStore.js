@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
 import VehicleActions from '../actions/VehicleActions';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, iapiBase } from '../config';
 
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
@@ -19,11 +19,8 @@ class VehicleStore extends EventEmitter {
 			showStyle: false,
 			catStyleParts: null,
 			activeCategory: null,
+			error: null,
 		};
-		this.bindListeners({
-			setActiveCategory: VehicleActions.setActiveCategory,
-			setStyle: VehicleActions.setStyle,
-		});
 		this.bindActions(VehicleActions);
 	}
 
@@ -94,7 +91,66 @@ class VehicleStore extends EventEmitter {
 	}
 
 	setStyle(style) {
-		this.setState({ showStyle: false, style });
+		const vehicle = this.state.vehicle;
+		vehicle.style = style.name;
+		this.setState({ showStyle: false, style, vehicle });
+	}
+
+	addPartToVehicle(part) {
+		const vehicle = this.state.vehicle;
+		if (!vehicle.parts) {
+			vehicle.parts = [];
+		}
+		vehicle.parts.push(part);
+		this.setState({ vehicle });
+	}
+
+	// envision
+	async getVehicleImage() {
+		await fetch(`${iapiBase}/envision/vehicles/ymm?key=${KEY}&year=${this.state.vehicle.year}&make=${this.state.vehicle.make}&model=${this.state.vehicle.model}`, {
+			method: 'get',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Accept': 'application/json',
+			},
+		}).then((resp) => {
+			return resp.json();
+		}).then((resp) => {
+			if (resp.Message !== 'OK') {
+				this.setState({ error: resp.Message });
+				return;
+			}
+			if (resp.Result < 1) {
+				this.setState({ error: 'No Vehicle Images' });
+				return;
+			}
+			const image = this.findImageFromIConnMediaResponse(resp.Vehicles);
+			if (image) {
+				const vehicle = this.state.vehicle;
+				vehicle.image = image;
+				this.setState({ vehicle });
+				return;
+			}
+			this.setState({ error: 'No Matching Vehicle Images' });
+			return;
+		});
+	}
+
+	// TODO - how do ARIES styles map to iConn BodyStyles? Then, fix this.
+	findImageFromIConnMediaResponse(vehicles) {
+		// match
+		for (const i in vehicles) {
+			if (vehicles[i].strBodyType === this.state.vehicle.style) {
+				return vehicles[i].strImageURL;
+			}
+		}
+		// base ok
+		for (const i in vehicles) {
+			if (vehicles[i].strBodyType === 'Base') {
+				return vehicles[i].strImageURL;
+			}
+		}
+		return null;
 	}
 }
 

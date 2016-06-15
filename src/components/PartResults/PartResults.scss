@@ -96,15 +96,16 @@
         padding: 0;
         clear: both;
         text-align: center;
-
-        a {
-            width: 40%;
-            margin: 10px auto 0;
-            text-align: center;
-        }
     }
     .viewDetails, .whereToBuy {
         min-width: 6em;
+        font-size: 1em;
+        width: 40%;
+        margin: 10px auto 0;
+        text-align: center;
+    }
+    .addToVehicle {
+        width: 80%;
         font-size: 1em;
     }
 }

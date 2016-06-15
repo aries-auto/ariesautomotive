@@ -7,6 +7,7 @@ import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
+import Envision from './Envision';
 
 @withStyles(s)
 @connectToStores
@@ -25,6 +26,7 @@ class VehicleResults extends Component {
 			year: PropTypes.string,
 			make: PropTypes.string,
 			model: PropTypes.string,
+			parts: PropTypes.array,
 		}),
 		catStyleParts: PropTypes.array,
 		activeCategory: PropTypes.object,
@@ -100,6 +102,7 @@ class VehicleResults extends Component {
 	render() {
 		return (
 			<div className={s.container}>
+				{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <Envision /> : null}
 				<Loader loaded={(this.props.catStyleParts !== null)} top="30%" loadedClassName={s.loader}>
 					<div className={cx(s.root, this.props.className)} role="navigation">
 						<div className="tab-wrap">

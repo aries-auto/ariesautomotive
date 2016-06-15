@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './PartResults.scss';
 import withStyles from '../../decorators/withStyles';
+import VehicleActions from '../../actions/VehicleActions';
 
 @withStyles(s)
 class PartResults extends Component {
@@ -77,6 +78,10 @@ class PartResults extends Component {
 		return attrs;
 	}
 
+	handleAddToVehicle(part) {
+		VehicleActions.addPartToVehicle(part);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
@@ -107,7 +112,9 @@ class PartResults extends Component {
 								</div>
 							</div>
 							<div className={s.nothing}>&nbsp;</div>
+
 							<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
+								<a className={cx('btn', 'red-transparent-button', s.addToVehicle)} role="button" onClick={this.handleAddToVehicle.bind(this, part)} value={part}>Add To Vehicle</a>
 								<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 								<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
 							</div>

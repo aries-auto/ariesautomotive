@@ -1,0 +1,32 @@
+
+
+.imageContainer {
+	display: inline-block;
+	width: 65%;
+	.image {
+		max-width: 750px;
+		width: 65%;
+	}
+}
+
+.partList {
+	display: inline-block;
+	width: 30%;
+}
+
+.partContainer {
+	display: inline;
+	.partImage {
+		max-width: 50px;
+		width: 30%;
+	}
+	.partContent {
+		width: 60%;
+		.partShortDescription {
+			font-weight: 800;
+		}
+	}
+	.partClose {
+		width: 10%;
+	}
+}
