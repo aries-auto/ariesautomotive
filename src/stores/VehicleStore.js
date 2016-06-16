@@ -7,8 +7,6 @@ import { apiBase, apiKey } from '../config';
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
 
-const CHANGE_EVENT = 'change';
-
 class VehicleStore extends EventEmitter {
 	constructor() {
 		super();
@@ -17,40 +15,24 @@ class VehicleStore extends EventEmitter {
 				year: '',
 				make: '',
 				model: '',
-				style: '',
 			},
-			categoryparts: null,
-			totalNumberOfParts: '',
 			showStyle: false,
-			category: '',
-			parts: [],
-			catStyleParts: {
-				category: {
-					name: '',
-					available_styles: {
-						name: '',
-						parts: [],
-					},
-				},
-			},
+			catStyleParts: null,
+			activeCategory: null,
 		};
 		this.bindListeners({
-			getCategoryStyles: VehicleActions.getCategoryStyles,
+			setActiveCategory: VehicleActions.setActiveCategory,
+			setStyle: VehicleActions.setStyle,
 		});
 		this.bindActions(VehicleActions);
-		this.getCategoryStyles();
 	}
 
-	emitChange() {
-		this.emit(CHANGE_EVENT);
-	}
-
-	addChangeListener(callback) {
-		this.on(CHANGE_EVENT, callback);
-	}
-
-	removeChangeListener(callback) {
-		this.removeListener(CHANGE_EVENT, callback);
+	setActiveCategory(category) {
+		let style = null;
+		if (this.checkStyle(category)) {
+			style = this.checkStyle(category);
+		}
+		this.setState({ activeCategory: category, style });
 	}
 
 	async getCategoryStyles() {
@@ -58,22 +40,44 @@ class VehicleStore extends EventEmitter {
 			return;
 		}
 		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + encodeURIComponent(this.state.vehicle.model);
-		await fetch(`${apiBase}/vehicle/mongo/allCollections/category?key=${KEY}` + params, {
-			method: 'post',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Accept': 'application/json',
-			},
-		}).then((resp) => {
-			return resp.json();
-		}).then((resp) => {
-			this.setUpCategoryParts(resp);
-			this.emitChange();
-		}).catch((err) => {
-			this.setState({
-				error: err,
-			});
+		Promise.all([
+			await fetch(`${apiBase}/vehicle/mongo/categoryStyleParts?key=${KEY}` + params, {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Accept': 'application/json',
+				},
+			}),
+			await fetch(`${apiBase}/category/320/parts?key=${KEY}`),
+		]).then((resps) => {
+			return Promise.all([resps[0].json(), resps[1].json()]);
+		}).then((resps) => {
+			resps[0].push({ 'name': 'Seat Defenders', 'styles': [{ 'name': 'all', 'parts': resps[1].parts }] });
+			let activeCategory = this.state.activeCategory;
+			if (!activeCategory) {
+				activeCategory = resps[0][0];
+			}
+			let style = this.state.style;
+			if (this.checkStyle(activeCategory)) {
+				style = this.checkStyle(activeCategory);
+			}
+
+			this.setState({ catStyleParts: resps[0], activeCategory, showStyle: false, style });
 		});
+	}
+
+	checkStyle(activeCategory) {
+		// cat has one style called 'all'
+		if (activeCategory.styles.length === 1 && activeCategory.styles[0].name === 'all') {
+			return activeCategory.styles[0];
+		}
+		// cat has style with same name as current style
+		for (const i in activeCategory.styles) {
+			if (this.state.style && activeCategory.styles[i].name === this.state.style.name) {
+				return activeCategory.styles[i];
+			}
+		}
+		return null;
 	}
 
 	async set(vehicle) {
@@ -85,64 +89,12 @@ class VehicleStore extends EventEmitter {
 		await this.getCategoryStyles();
 	}
 
-	setUpCategoryParts(categories) {
-		const categoryparts = {};
-		let totalNumberOfParts = 0;
-		for (const title in categories) {
-			if (title) {
-				categoryparts[title] = categories[title];
-				categoryparts[title].name = title;
-				if (this.state.vehicle.style && this.state.vehicle.style !== '') {
-					categoryparts[title].style = this.state.vehicle.style;
-				}
-				totalNumberOfParts += categoryparts[title].length;
-			}
-		}
-		this.setState(() => {
-			return { categoryparts, totalNumberOfParts, showStyle: false };
-		});
-	}
-
-	updateVehicleStyle(s) {
-		const vehicle = this.state.vehicle;
-		this.setState({
-			vehicle: {
-				make: vehicle.make,
-				model: vehicle.model,
-				year: vehicle.year,
-				style: s,
-			},
-		});
-	}
-
-	setVehicle(vehicle) {
-		this.setState({
-			vehicle,
-		});
-	}
-
 	setShowStyleState(showStyle) {
 		this.setState({ showStyle });
 	}
 
-	setCategoryParts(categoryparts) {
-		this.setState({ categoryparts });
-	}
-
-	setCategory(category) {
-		this.setState({ category });
-	}
-
-	setParts(parts) {
-		this.setState({ parts });
-	}
-
-	setCategoryStyleParts(catStyleParts) {
-		const vehicle = this.state.vehicle;
-		if (catStyleParts.category[catStyleParts.name].available_styles.length === 1 || catStyleParts.category[catStyleParts.name].available_styles.all) {
-			vehicle.style = 'all';
-		}
-		this.setState({ catStyleParts, category: catStyleParts.category.name, vehicle });
+	setStyle(style) {
+		this.setState({ showStyle: false, style });
 	}
 }
 
