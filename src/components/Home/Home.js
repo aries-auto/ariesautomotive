@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ga from 'react-ga';
-import Link from '../Link';
 import { Carousel, CarouselItem } from 'react-bootstrap';
 import Modal from 'react-modal';
 import cx from 'classnames';
@@ -123,14 +122,13 @@ class Home extends Component {
 					<img src={ cat.image } alt={ cat.title } />
 					<div>
 						<h3>{ cat.title }</h3>
-						<Link to={ cat.link }
-							className={cx(
-								'red-transparent-button'
-							)}
-							title={'Download' + cat.title }
+						<a href={ cat.link }
+							className={'red-transparent-button'}
+							title={ `Download ${cat.title}` }
+							target="_blank"
 						>
 							Download
-						</Link>
+						</a>
 					</div>
 				</div>
 			);
