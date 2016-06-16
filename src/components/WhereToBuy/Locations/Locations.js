@@ -86,7 +86,8 @@ class Locations extends Component {
 			for (let i = 0; i < tiers[tierName].length; i++) {
 				const location = tiers[tierName][i];
 				const telephone = `tel:${location.phone}`;
-				locationHtml.push(<div className={cx('col-md-4 col-sm-6 col-xs-12', s.location)} key={tierName + i}>
+				locationHtml.push(
+					<div className={cx('col-md-4 col-sm-6 col-xs-12', s.location)} key={tierName + i}>
 						<a className={s.name} onClick={this.viewOnMap.bind(this, location)}>{location.name}</a>
 						<span className={cx(s.type)}>{location.dealerType.label}</span>
 						<span className={cx(s.address)}>{location.address}</span>
@@ -141,7 +142,8 @@ class Locations extends Component {
 			for (let i = 0; i < tiers[tierName].length; i++) {
 				const location = tiers[tierName][i];
 				const url = `${location.website.Scheme !== '' ? location.website.Scheme : 'http'}://${location.website.Host}${location.website.Path}`;
-				locationHtml.push(<div className={cx('col-md-3 col-sm-12 col-xs-12', s.location)} key={tierName + i}>
+				locationHtml.push(
+					<div className={cx('col-md-3 col-sm-12 col-xs-12', s.location)} key={tierName + i}>
 						<a className={s.name}>{location.name}</a>
 						<div className={cx(s.actions)}>
 							<a href={url} target="_blank">

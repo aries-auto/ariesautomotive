@@ -75,33 +75,33 @@ class ControlPanel extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className, s.container)}>
-					<ul className={cx(s.nav, 'nav-tabs')} role="tablist">
-						<li role="presentation" onClick={this.setLocal.bind(this, true)}>
-							<a href="#" className={cx(this.props.local ? s.active : '')}>
-							Buy Local
-							</a>
-						</li>
-						<li role="presentation" onClick={this.setLocal.bind(this, false)}>
-							<a href="#" className={cx(!this.props.local ? s.active : '')}>
-							Buy Online
-							</a>
-						</li>
-					</ul>
-					<div className={cx(s.location)}>
-						<div className={cx(s.locationtext)}>
-							<a href="#" onClick={::this.handleCurrentLocation}>
-								<span className="glyphicon glyphicon-globe"></span>
-								<span>Use my Location</span>
-							</a>
-						</div>
-						<div className={s.search}>
-							<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions"/>
-							{this.props.suggestions && this.props.suggestions.length > 0 ? this.renderSuggestions() : null}
-						</div>
-						<div className="clearfix"></div>
-						{this.props.error ? <div>{this.props.error}</div> : null}
+				<ul className={cx(s.nav, 'nav-tabs')} role="tablist">
+					<li role="presentation" onClick={this.setLocal.bind(this, true)}>
+						<a href="#" className={cx(this.props.local ? s.active : '')}>
+						Buy Local
+						</a>
+					</li>
+					<li role="presentation" onClick={this.setLocal.bind(this, false)}>
+						<a href="#" className={cx(!this.props.local ? s.active : '')}>
+						Buy Online
+						</a>
+					</li>
+				</ul>
+				<div className={cx(s.location)}>
+					<div className={cx(s.locationtext)}>
+						<a href="#" onClick={::this.handleCurrentLocation}>
+							<span className="glyphicon glyphicon-globe"></span>
+							<span>Use my Location</span>
+						</a>
+					</div>
+					<div className={s.search}>
+						<input type="search" autoComplete="on" className={cx('form-control', 'autocomplete')} placeholder="Search for location" onChange={::this.searchAutocomplete} list="suggestions"/>
+						{this.props.suggestions && this.props.suggestions.length > 0 ? this.renderSuggestions() : null}
 					</div>
 					<div className="clearfix"></div>
+					{this.props.error ? <div>{this.props.error}</div> : null}
+				</div>
+				<div className="clearfix"></div>
 			</div>
 		);
 	}

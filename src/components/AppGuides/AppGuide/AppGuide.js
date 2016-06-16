@@ -83,10 +83,21 @@ class AppGuide extends Component {
 	}
 
 	renderApplications() {
-		return (<table className={cx('table table-hover table-bordered')}><thead><tr><th>Make</th><th>Model</th>
-		<th>Style</th><th>Start Year</th><th>End Year</th>
-		{this.getFinishes()}</tr></thead><tbody>
-		{this.renderApplicationRows()}</tbody></table>);
+		return (
+			<table className={cx('table table-hover table-bordered')}>
+				<thead>
+					<tr>
+						<th>Make</th>
+						<th>Model</th>
+						<th>Style</th>
+						<th>Start Year</th>
+						<th>End Year</th>
+						{this.getFinishes()}
+					</tr>
+				</thead>
+				<tbody>{this.renderApplicationRows()}</tbody>
+			</table>
+		);
 	}
 
 	renderApplicationRows() {
