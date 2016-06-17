@@ -62,7 +62,7 @@ class Configurator extends Component {
 	render() {
 		return (
 			<div className={cx(s.root)}>
-				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 				<script src="http://www.iconfigurators.com/pop/src/iconfig-ar.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div className={cx('vehicle-wrapper', s.vehicleWrapper)} id="ic-vehicle-wrapper" data-part="" data-year={this.props.vehicle.year} data-make={this.props.vehicle.make} data-model={this.props.vehicle.model} title="The Vehicle Accessory Desc"></div>
 				<div className="hidden">
