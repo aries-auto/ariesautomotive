@@ -46,6 +46,10 @@ class Envision extends Component {
 		return `${part.images[0].path.Scheme}://${part.images[0].path.Host}${part.images[0].path.Path}`;
 	}
 
+	handleRemovePart(part) {
+		VehicleActions.removePartFromVehicle(part);
+	}
+
 	renderImage() {
 		return (
 			<div className={s.imageContainer}>
@@ -56,8 +60,8 @@ class Envision extends Component {
 
 	renderPartList() {
 		const parts = [];
-		this.props.vehicle.parts.map((part) => {
-			parts.push(this.renderPart(part));
+		this.props.vehicle.parts.map((part, i) => {
+			parts.push(this.renderPart(part, i));
 		});
 		return (
 			<div className={s.partList}>
@@ -67,24 +71,21 @@ class Envision extends Component {
 		);
 	}
 
-	renderPart(part) {
-		// console.log(part);
+	renderPart(part, key) {
 		const image = this.findPartImage(part);
 		return (
-			<div className={s.partContainer}>
-				{part.id}
+			<div className={s.partContainer} key={key}>
 				<img className={s.partImage} src={image} alt={part.short_description} />
 				<div className={s.partContent}>
 					<p className={s.partShortDescription}>{part.short_description}</p>
 					<p className={s.partPartNumber}>{part.part_number}</p>
 				</div>
-				<div className={s.partClose}>X</div>
+				<div className={s.partClose}><span className={cx('glyphicon glyphicon-remove', s.x)} onClick={this.handleRemovePart.bind(this, part)}></span></div>
 			</div>
 		);
 	}
 
 	render() {
-		// console.log(this.props);
 		return (
 			<div className={cx(s.root)}>
 				<Loader loaded={(this.props.vehicle.image !== '')} top="40%" loadedClassName={s.loader}>

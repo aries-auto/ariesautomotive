@@ -97,11 +97,31 @@ class VehicleStore extends EventEmitter {
 	}
 
 	addPartToVehicle(part) {
+		// must have iconLayer
+		if (part.iconLayer === '') {
+			return;
+		}
 		const vehicle = this.state.vehicle;
 		if (!vehicle.parts) {
 			vehicle.parts = [];
 		}
+		// remove part with same iconLayer
+		for (const i in vehicle.parts) {
+			if (vehicle.parts[i].iconLayer === part.iconLayer) {
+				vehicle.parts.splice(i);
+			}
+		}
 		vehicle.parts.push(part);
+		this.setState({ vehicle });
+	}
+
+	removePartFromVehicle(part) {
+		const vehicle = this.state.vehicle;
+		for (const i in vehicle.parts) {
+			if (vehicle.parts[i].id === part.id) {
+				vehicle.parts.splice(i, 1);
+			}
+		}
 		this.setState({ vehicle });
 	}
 

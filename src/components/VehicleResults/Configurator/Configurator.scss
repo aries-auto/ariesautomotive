@@ -1,0 +1,18 @@
+.vehicleWrapper {
+	div {
+		width: 60%;
+		ul {
+			list-style-type: none;
+			padding: 0;
+    		text-align: center;
+			li {
+				display: inline;
+				margin: 10px;
+				cursor: pointer;
+				img {
+					max-width: 50px;
+				}
+			}
+		}
+	}
+}

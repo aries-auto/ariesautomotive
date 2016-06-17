@@ -15,18 +15,33 @@
 }
 
 .partContainer {
-	display: inline;
+	display: inline-block;
+	width: 100%;
 	.partImage {
-		max-width: 50px;
-		width: 30%;
+		width: 20%;
+		display: inline;
+		padding-right: .2em;
 	}
 	.partContent {
-		width: 60%;
+		display: inline-block;
+		width: 67%;
+		vertical-align: middle;
 		.partShortDescription {
-			font-weight: 800;
+			font-weight: 600;
+			padding: 0;
+			margin: 0;
+		}
+		.partPartNumber{
+			padding: 0;
+			margin: 0;
 		}
 	}
 	.partClose {
 		width: 10%;
+		display: inline;
+		font-weight: 800;
+		.x {
+			cursor: pointer;
+		}
 	}
 }
