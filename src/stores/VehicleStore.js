@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
 import VehicleActions from '../actions/VehicleActions';
-import { apiBase, apiKey, iapiBase } from '../config';
+import { apiBase, apiKey } from '../config';
 
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
@@ -20,6 +20,8 @@ class VehicleStore extends EventEmitter {
 			catStyleParts: null,
 			activeCategory: null,
 			error: null,
+			partToAdd: null,
+			partToRemove: null,
 		};
 		this.bindActions(VehicleActions);
 	}
@@ -97,7 +99,7 @@ class VehicleStore extends EventEmitter {
 	}
 
 	addPartToVehicle(part) {
-		// must have iconLayer
+		// must have iconLayer - TODO is this true?
 		if (part.iconLayer === '') {
 			return;
 		}
@@ -106,13 +108,15 @@ class VehicleStore extends EventEmitter {
 			vehicle.parts = [];
 		}
 		// remove part with same iconLayer
+		let partToRemove = null;
 		for (const i in vehicle.parts) {
 			if (vehicle.parts[i].iconLayer === part.iconLayer) {
 				vehicle.parts.splice(i);
+				partToRemove = vehicle.parts[i];
 			}
 		}
 		vehicle.parts.push(part);
-		this.setState({ vehicle });
+		this.setState({ vehicle, partToAdd: part, partToRemove });
 	}
 
 	removePartFromVehicle(part) {
@@ -122,55 +126,7 @@ class VehicleStore extends EventEmitter {
 				vehicle.parts.splice(i, 1);
 			}
 		}
-		this.setState({ vehicle });
-	}
-
-	// envision
-	async getVehicleImage() {
-		await fetch(`${iapiBase}/envision/vehicles/ymm?key=${KEY}&year=${this.state.vehicle.year}&make=${this.state.vehicle.make}&model=${this.state.vehicle.model}`, {
-			method: 'get',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				'Accept': 'application/json',
-			},
-		}).then((resp) => {
-			return resp.json();
-		}).then((resp) => {
-			if (resp.Message !== 'OK') {
-				this.setState({ error: resp.Message });
-				return;
-			}
-			if (resp.Result < 1) {
-				this.setState({ error: 'No Vehicle Images' });
-				return;
-			}
-			const image = this.findImageFromIConnMediaResponse(resp.Vehicles);
-			if (image) {
-				const vehicle = this.state.vehicle;
-				vehicle.image = image;
-				this.setState({ vehicle });
-				return;
-			}
-			this.setState({ error: 'No Matching Vehicle Images' });
-			return;
-		});
-	}
-
-	// TODO - how do ARIES styles map to iConn BodyStyles? Then, fix this.
-	findImageFromIConnMediaResponse(vehicles) {
-		// match
-		for (const i in vehicles) {
-			if (vehicles[i].strBodyType === this.state.vehicle.style) {
-				return vehicles[i].strImageURL;
-			}
-		}
-		// base ok
-		for (const i in vehicles) {
-			if (vehicles[i].strBodyType === 'Base') {
-				return vehicles[i].strImageURL;
-			}
-		}
-		return null;
+		this.setState({ vehicle, partToRemove: part });
 	}
 }
 

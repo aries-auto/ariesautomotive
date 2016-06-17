@@ -29,10 +29,6 @@ class Envision extends Component {
 		};
 	}
 
-	componentDidMount() {
-		VehicleActions.getVehicleImage();
-	}
-
 	static getStores() {
 		return [VehicleStore];
 	}

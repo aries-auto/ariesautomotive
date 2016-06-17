@@ -105,8 +105,10 @@ class VehicleResults extends Component {
 		return (
 			<div className={s.container}>
 				{this.props.error ? <p className={s.error}>{this.props.error}</p> : null}
-				<Configurator />
-				{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <Envision /> : null}
+				<div className={s.configurator}>
+					<Configurator />
+				</div>
+				{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <div className={s.envision}><Envision /></div> : null}
 				<Loader loaded={(this.props.catStyleParts !== null)} top="30%" loadedClassName={s.loader}>
 					<div className={cx(s.root, this.props.className)} role="navigation">
 						<div className="tab-wrap">

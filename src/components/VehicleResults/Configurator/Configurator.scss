@@ -1,6 +1,5 @@
 .vehicleWrapper {
 	div {
-		width: 60%;
 		ul {
 			list-style-type: none;
 			padding: 0;
@@ -15,4 +14,8 @@
 			}
 		}
 	}
+}
+
+.hidden {
+	display: none;
 }
