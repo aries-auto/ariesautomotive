@@ -38,8 +38,23 @@ class Envision extends Component {
 	}
 
 	findPartImage(part) {
-		// TODO make this good
-		return `${part.images[0].path.Scheme}://${part.images[0].path.Host}${part.images[0].path.Path}`;
+		let image = {
+			path: {
+				Scheme: '',
+				Host: '',
+				Path: '',
+			},
+		};
+		for (const i in part.images) {
+			if ((image.path.Host === '' || image.path.Scheme === '' || image.path.Path === '') && (part.images[i].path.Scheme && part.images[i].path.Host && part.images[i].path.Path)) {
+				image = part.images[i];
+				continue;
+			}
+			if (part.images[i].height < image.height && part.images[i].sort <= part.sort && (part.images[i].path.Scheme && part.images[i].path.Host && part.images[i].path.Path)) {
+				image = part.images[i];
+			}
+		}
+		return `${image.path.Scheme}://${image.path.Host}${image.path.Path}`;
 	}
 
 	handleRemovePart(part) {
