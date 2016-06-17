@@ -66,7 +66,6 @@ class Configurator extends Component {
 				<script src="http://www.iconfigurators.com/pop/src/iconfig-ar.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div className={cx('vehicle-wrapper', s.vehicleWrapper)} id="ic-vehicle-wrapper" data-part="" data-year={this.props.vehicle.year} data-make={this.props.vehicle.make} data-model={this.props.vehicle.model} title="The Vehicle Accessory Desc"></div>
 				<div className="hidden">
-					// TODO trigger clicks from addPartToVehicle
 					Code to Add Product:
 					<a
 						className="pop_up_vehicle"
