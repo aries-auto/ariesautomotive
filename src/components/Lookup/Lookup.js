@@ -210,8 +210,9 @@ class Lookup extends Component {
 	}
 
 	showVehicle() {
-		const link = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
-		const v = `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model}`;
+		const vehicle = this.props.params;
+		const link = `/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`;
+		const v = `${vehicle.year} ${vehicle.make} ${vehicle.model}`;
 		return (
 			<div className={cx(s.vehicleName)}>
 				<a href={link}>
