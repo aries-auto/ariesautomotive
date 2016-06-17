@@ -154,6 +154,17 @@ const clientConfig = merge({}, config, {
 // Configuration for the server-side bundle (server.js)
 // -----------------------------------------------------------------------------
 
+const gcloudPlugins = process.env.NODE_ENV === 'production' ? [
+	new webpack.BannerPlugin(
+		'require("@google/cloud-debug");',
+		{ raw: true, entryOnly: false },
+	),
+	new webpack.BannerPlugin(
+		'require("@google/cloud-trace").start();',
+		{ raw: true, entryOnly: false },
+	),
+] : [];
+
 const serverConfig = merge({}, config, {
 	entry: './src/server.js',
 	output: {
@@ -185,14 +196,7 @@ const serverConfig = merge({}, config, {
 		new webpack.DefinePlugin(GLOBALS),
 		new webpack.BannerPlugin('require("source-map-support").install();',
 		{ raw: true, entryOnly: false }),
-		new webpack.BannerPlugin(
-			'require("@google/cloud-trace").start();',
-			{ raw: true, entryOnly: false },
-		),
-		new webpack.BannerPlugin(
-			'require("@google/cloud-debug");',
-			{ raw: true, entryOnly: false },
-		),
+		...gcloudPlugins,
 	],
 });
 
