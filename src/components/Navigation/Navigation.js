@@ -16,31 +16,45 @@ class Navigation extends Component {
 		if (!this.props.categories || this.props.categories.length === 0) {
 			return cats;
 		}
+
+		this.props.categories.sort((a, b) => a.sort > b.sort);
 		this.props.categories.map((cat) => {
 			if (cat.children && cat.children.length > 0) {
-				cats.push(
+				return cats.push(
 					<li key={cat.id} role="presentation" className="dropdown">
-						<a className={cx(s.link, 'dropdown-toggle')} data-toggle="dropdown" href={'/category/' + cat.id + '/' + cat.title} role="button" aria-haspopup="true" aria-expanded="false">
+						<a
+							className={cx(s.link, 'dropdown-toggle')}
+							data-toggle="dropdown"
+							href={`/category/${cat.id}/${cat.title}`}
+							role="button"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
 							{cat.title.toUpperCase()} <span className="caret"></span>
 						</a>
 						<ul className={cx(s.subMenu, 'dropdown-menu')} role="menu">
-							{cat.children.map((sub) => {
+							{cat.children.sort((a, b) => a.sort > b.sort).map((sub) => {
 								return (
-									<li key={sub.id}><a href={'/category/' + sub.id + '/' + cat.title + '/' + sub.title}>{sub.title}</a></li>
+									<li key={sub.id}>
+										<a
+											href={`/category/${sub.id}/${cat.title}/${sub.title}`}
+										>
+											{sub.title}
+										</a>
+									</li>
 								);
 							})}
 						</ul>
 					</li>
 				);
-			} else {
-				cats.push(
-					<li key={cat.id} role="presentation">
-						<a className={s.link} href={'/category/' + cat.id + '/' + cat.title} aria-haspopup="true">
-							{cat.title}
-						</a>
-					</li>
-				);
 			}
+			return cats.push(
+				<li key={cat.id} role="presentation">
+					<a className={s.link} href={`/category/${cat.id}/${cat.title}`} aria-haspopup="true">
+						{cat.title}
+					</a>
+				</li>
+			);
 		});
 
 		return cats;
@@ -48,7 +62,11 @@ class Navigation extends Component {
 
 	render() {
 		return (
-			<div className={cx(s.root, this.props.className, 'navbar-collapse', 'collapse')} id="categoryMenu" role="navigation">
+			<div
+				className={cx(s.root, this.props.className, 'navbar-collapse', 'collapse')}
+				id="categoryMenu"
+				role="navigation"
+			>
 				<ul className={cx(s.nav, 'nav', 'navbar-nav')}>
 					{this.props.categories && this.props.categories.length ? this.getCategories() : null}
 					<li role="presentation">

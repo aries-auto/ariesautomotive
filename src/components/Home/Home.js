@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ga from 'react-ga';
-import Link from '../Link';
 import { Carousel, CarouselItem } from 'react-bootstrap';
 import Modal from 'react-modal';
 import cx from 'classnames';
@@ -123,14 +122,13 @@ class Home extends Component {
 					<img src={ cat.image } alt={ cat.title } />
 					<div>
 						<h3>{ cat.title }</h3>
-						<Link to={ cat.link }
-							className={cx(
-								'red-transparent-button'
-							)}
-							title={'Download' + cat.title }
+						<a href={ cat.link }
+							className={'red-transparent-button'}
+							title={ `Download ${cat.title}` }
+							target="_blank"
 						>
 							Download
-						</Link>
+						</a>
 					</div>
 				</div>
 			);
@@ -159,50 +157,50 @@ class Home extends Component {
 	renderFeaturedProducts() {
 		return (
 			<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<h3>FEATURED PRODUCTS</h3>
-							<div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
-								{this.state.context.featuredProducts.map((prod, i) => {
-									return (
-										<div key={i} className={cx(s.featuredProd, s.col5, 'col-xs-12', 'col-md-2')}>
-											<h4><a href={'/part/' + prod.part_number}>{prod.short_description}</a></h4>
-											<a href={'/part/' + prod.part_number}>
-												<img src={this.getFeaturedImage(prod)} className="img-responsive" alt={'Image for ' + prod.short_description} />
-											</a>
-											<hr className="visible-xs-block" />
-										</div>
-									);
-								})}
+				<div className="row">
+					<div className="col-md-12">
+						<h3>FEATURED PRODUCTS</h3>
+						<div className={cx(s.featuredProducts, 'col-xs-12', 'col-sm-12', 'col-md-12', 'col-lg-12')}>
+							{this.state.context.featuredProducts.map((prod, i) => {
+								return (
+									<div key={i} className={cx(s.featuredProd, s.col5, 'col-xs-12', 'col-md-2')}>
+										<h4><a href={'/part/' + prod.part_number}>{prod.short_description}</a></h4>
+										<a href={'/part/' + prod.part_number}>
+											<img src={this.getFeaturedImage(prod)} className="img-responsive" alt={'Image for ' + prod.short_description} />
+										</a>
+										<hr className="visible-xs-block" />
+									</div>
+								);
+							})}
 
-							</div>
 						</div>
 					</div>
 				</div>
-			);
+			</div>
+		);
 	}
 
 	renderTestimonials() {
 		return (
 			<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<h3>FROM OUR CUSTOMERS</h3>
-							<div className={cx('col-md-12', s.testimonials)}>
-								{this.state.context.testimonials.map((t, i) => {
-									return (
-										<div key={i} className={cx(s.testimonial, 'col-md-6')}>
-											<h4>"{t.title}"</h4>
-											<p>{t.content}</p>
-											<span className={cx(s.name)}>- {t.firstName} {t.lastName}, {t.location}</span>
-										</div>
-									);
-								})}
-							</div>
+				<div className="row">
+					<div className="col-md-12">
+						<h3>FROM OUR CUSTOMERS</h3>
+						<div className={cx('col-md-12', s.testimonials)}>
+							{this.state.context.testimonials.map((t, i) => {
+								return (
+									<div key={i} className={cx(s.testimonial, 'col-md-6')}>
+										<h4>"{t.title}"</h4>
+										<p>{t.content}</p>
+										<span className={cx(s.name)}>- {t.firstName} {t.lastName}, {t.location}</span>
+									</div>
+								);
+							})}
 						</div>
 					</div>
 				</div>
-			);
+			</div>
+		);
 	}
 
 	render() {

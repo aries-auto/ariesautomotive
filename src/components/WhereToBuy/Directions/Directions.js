@@ -75,20 +75,20 @@ class Directions extends Component {
 					/>
 				}
 				googleMapElement={
-				<GoogleMap
-					containerProps={{
-						...this.props,
-						style: {
-							height: `100%`,
-						},
-					}}
-					defaultZoom={13}
-					defaultCenter={origin}
-					zoom={this.props.zoom}
-				>
-					<DirectionsRenderer directions={this.props.directions} />
-					{this.props.error ? <div>{this.props.error}</div> : null}
-				</GoogleMap>
+					<GoogleMap
+						containerProps={{
+							...this.props,
+							style: {
+								height: '100%',
+							},
+						}}
+						defaultZoom={13}
+						defaultCenter={origin}
+						zoom={this.props.zoom}
+					>
+						<DirectionsRenderer directions={this.props.directions} />
+						{this.props.error ? <div>{this.props.error}</div> : null}
+					</GoogleMap>
 				}
 			/>
 		);
