@@ -54,7 +54,7 @@ class ControlPanel extends Component {
 			return;
 		}
 		const autocomplete = new this.props.google.maps.places.AutocompleteService();
-		autocomplete.getQueryPredictions({ input: e.target.value }, (predictions, status) => {
+		autocomplete.getPlacePredictions({ input: e.target.value }, (predictions, status) => {
 			if (status !== this.props.google.maps.places.PlacesServiceStatus.OK) {
 				BuyActions.setError(status);
 			}
