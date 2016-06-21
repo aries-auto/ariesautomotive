@@ -38,7 +38,7 @@ class VehicleStore extends EventEmitter {
 		if (this.state.vehicle.year === '' || this.state.vehicle.make === '' || this.state.vehicle.model === '') {
 			return;
 		}
-		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + encodeURIComponent(this.state.vehicle.model);
+		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + encodeURIComponent(this.state.vehicle.model) + '&envision=true';
 		Promise.all([
 			await fetch(`${apiBase}/vehicle/mongo/categoryStyleParts?key=${KEY}` + params, {
 				method: 'post',
@@ -51,17 +51,32 @@ class VehicleStore extends EventEmitter {
 		]).then((resps) => {
 			return Promise.all([resps[0].json(), resps[1].json()]);
 		}).then((resps) => {
-			resps[0].push({ 'name': 'Seat Defenders', 'styles': [{ 'name': 'all', 'parts': resps[1].parts }] });
-			let activeCategory = this.state.activeCategory;
-			if (!activeCategory) {
-				activeCategory = resps[0][0];
+			let catStyleParts = [];
+			if (Array.isArray(resps[0])) {
+				catStyleParts = resps[0];
 			}
-			let style = this.state.style;
-			if (this.checkStyle(activeCategory)) {
-				style = this.checkStyle(activeCategory);
+			if (!Array.isArray(resps[1].parts) && !Array.isArray(resps[0])) {
+				this.setState({ error: 'no parts returned.' });
+				return;
 			}
+			if (!Array.isArray(resps[0])) {
+				this.setState({ error: resps[0].message });
+			}
+			try {
+				catStyleParts.push({ 'name': 'Seat Defenders', 'styles': [{ 'name': 'all', 'parts': resps[1].parts }] });
+				let activeCategory = this.state.activeCategory;
+				if (!activeCategory) {
+					activeCategory = catStyleParts[0];
+				}
+				let style = this.state.style;
+				if (this.checkStyle(activeCategory)) {
+					style = this.checkStyle(activeCategory);
+				}
 
-			this.setState({ catStyleParts: resps[0], activeCategory, showStyle: false, style });
+				this.setState({ catStyleParts, activeCategory, showStyle: false, style });
+			} catch (e) {
+				this.setState({ error: e });
+			}
 		});
 	}
 
