@@ -6,7 +6,9 @@
   },
   "rules": {
     "indent": [2, "tab"],
+    "react/prefer-stateless-function": 0,
     "react/jsx-quotes": 0,
+    "react/jsx-indent": [2, "tab"],
     "react/jsx-indent-props": [2, "tab"],
     "jsx-quotes": [2, "prefer-double"]
   }

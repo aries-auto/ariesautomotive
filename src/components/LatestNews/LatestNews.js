@@ -73,15 +73,15 @@ class LatestNews extends Component {
 				out.push(
 					<div className={s.news} key={i}>
 						<a href={`/news/${n.id}`}>
-                            <h4>{n.title}</h4>
-                            <h5 className={s.bigger}>
+							<h4>{n.title}</h4>
+							<h5 className={s.bigger}>
 								<div className="col-xs-8">{n.lead}</div>
-                                <div className="col-xs-4">
+								<div className="col-xs-4">
 									<small>{dt.toDateString()}</small>
 								</div>
 								<div className="clearfix"></div>
-                            </h5>
-                        </a>
+							</h5>
+						</a>
 					</div>
 				);
 			}

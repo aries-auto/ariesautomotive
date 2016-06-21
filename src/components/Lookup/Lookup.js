@@ -68,12 +68,12 @@ class Lookup extends Component {
 
 	getYearElement() {
 		return (
-		<div className={cx(s.formGroup, 'form-group')}>
-			<select className="form-control" name="year" onChange={this.changeVehicle} aria-labelledby="year_lookup_label">
-				<option value="">- Select Year -</option>
-				{this.props.years.map((year, i) => {
-					return <option key={i} value={year}>{ year }</option>;
-				})}
+			<div className={cx(s.formGroup, 'form-group')}>
+				<select className="form-control" name="year" onChange={this.changeVehicle} aria-labelledby="year_lookup_label">
+					<option value="">- Select Year -</option>
+					{this.props.years.map((year, i) => {
+						return <option key={i} value={year}>{ year }</option>;
+					})}
 				</select>
 			</div>
 		);
