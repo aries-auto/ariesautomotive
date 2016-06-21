@@ -15,7 +15,6 @@ import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
 import Terms from './components/Terms';
-import TechSupport from './components/TechSupport';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
@@ -206,10 +205,6 @@ const router = new Router(on => {
 
 	on('/terms', async (state) => {
 		return <Terms context={state.context} />;
-	});
-
-	on('/techsupport', async (state) => {
-		return <TechSupport context={state.context} />;
 	});
 
 	on('/news', async (state) => {

@@ -23,7 +23,6 @@ class TopNav extends Component {
 						<li className={s.item}><a href="http://orders.ariesautomotive.com/" title="COMNET Login">COMNET LOGIN</a></li>
 						<li className={s.item}><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a></li>
 						<li className={s.item}><a href="/about" title="About Us">ABOUT</a></li>
-						<li className={s.item}><a href="/techsupport" title="Technical Support">TECH SUPPORT</a></li>
 						<li className={s.item}><a href="/contact" title="Contact Us">CONTACT</a></li>
 					</ul>
 				</div>
