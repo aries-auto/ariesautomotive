@@ -55,17 +55,10 @@
 .clearfix {
     clear: both;
 }
-
 .envision {
-    width: 38%;
-    display: inline-block;
-    vertical-align: top;
+    text-align: center;
 }
 
-.configurator {
-    width: 60%;
-    display: inline-block;
-}
 
 @media (min-width: $screen-md-min) {
     .container {
@@ -88,5 +81,16 @@
                 border-radius: 4px 0 0 4px;
             }
         }
+    }
+    .envision {
+        width: 38%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left
+    }
+
+    .configurator {
+        width: 60%;
+        display: inline-block;
     }
 }
