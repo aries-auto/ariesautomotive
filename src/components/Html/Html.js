@@ -15,6 +15,7 @@ class Html extends Component {
 	static defaultProps = {
 		title: '',
 		description: '',
+		metas: {},
 	};
 
 	trackingCode() {
@@ -52,6 +53,12 @@ class Html extends Component {
 					`var s = document.getElementsByTagName('script')[0];` +
 					`s.parentNode.insertBefore(tk, s);` +
 					`})();`,
+		});
+	}
+
+	typekit2() {
+		return ({ __html:
+			`try{Typekit.load({ async: true });}catch(e){}`,
 		});
 	}
 
@@ -113,7 +120,8 @@ class Html extends Component {
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
 					<script src={this.props.entry}></script>
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
-					<script dangerouslySetInnerHTML={this.typekit()} />
+					<script src="https://use.typekit.net/zgp0frb.js"></script>
+					<script dangerouslySetInnerHTML={this.typekit2()} />
 					<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 				</body>

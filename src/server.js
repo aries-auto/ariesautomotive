@@ -64,7 +64,9 @@ server.get('*', async (req, res, next) => {
 			if (state.redirect) {
 				redirect = state.redirect;
 			}
+			// if (req.path.indexOf('/vehicle') === -1) {
 			data.body = ReactDOM.renderToString(component);
+			// }
 			data.css = css.join('');
 		});
 

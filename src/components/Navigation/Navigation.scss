@@ -1,52 +1,52 @@
 @import '../variables.scss';
 
 .root {
-	padding-left: 0;
+    padding-left: 0;
 
-	.nav {
-		color: $white-base;
-	}
+    .nav {
+        color: $white-base;
+    }
 
-	.nav .link {
-		font-family: $font-family-base;
-		font-size: 18px;
-		color: $white-base;
-		background-color: transparent;
+    .nav .link {
+        font-family: $font-family-base;
+        font-size: 18px;
+        color: $white-base;
+        background-color: transparent;
 
-		&:hover,
-		&:focus {
-			background-color: transparent;
-		}
-	}
+        &:hover, &:focus {
+            background-color: transparent;
+        }
+    }
 
-	.nav .subMenu {
-		margin: 0 0 0 -1px;
-		font-size: 18px;
-		background-color: $white-base;
-		border-top: 0;
-		border-bottom: 4px solid $alt-red;
-		border-radius: 0 0 4px 4px;
+    .nav .subMenu {
+        margin: 0 0 0 -1px;
+        font-size: 18px;
+        background-color: $white-base;
+        border-top: 0;
+        border-bottom: 4px solid $alt-red;
+        border-radius: 0 0 4px 4px;
 
-		li a {
-			padding: 10px 8px;
-			font-family: "ff-good-headline-web-pro-con", sans-serif;
-			color: $header-color;
-// color: $headerMenuBackColor;
-border-radius: 0;
-}
+        li a {
+            padding: 10px 8px;
+            font-family: "ff-good-headline-web-pro-con", sans-serif;
+            color: $header-color;
+            //: $headerMenuBackColor;
+            border-radius: 0;
+        }
 
-li:hover a {
-	background-color: #ccc;
-}
-}
-.nav > li > a {
-	padding: 14px 14px;
-}
+        li:hover a {
+            background-color: #ccc;
+        }
+    }
+
+    .nav > li > a {
+        padding: 14px 14px;
+    }
 }
 
 @media screen and (width >= $screen-lg-min) {
-	.root .nav .subMenu {
-		padding-top: 22px;
-		margin-top: 20px;
-	}
+    .root .nav .subMenu {
+        padding-top: 22px;
+        margin-top: 20px;
+    }
 }

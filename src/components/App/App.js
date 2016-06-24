@@ -57,7 +57,7 @@ class App extends Component {
 		return !this.props.error ? (
 			<div className={cx(s.root)} style={styles}>
 				<Header categories={this.props.context.categories} />
-				<Lookup years={this.props.context.years} params={this.props.context.params} />
+				<Lookup {...this.props.context} />
 				<div className="children">
 					{this.props.children}
 				</div>

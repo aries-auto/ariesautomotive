@@ -25,7 +25,7 @@ class LookupStore extends EventEmitter {
 			get: LookupActions.get,
 		});
 		this.bindAction(LookupActions.set, this.set);
-		this.get();
+		// this.get();
 	}
 
 	async get() {
