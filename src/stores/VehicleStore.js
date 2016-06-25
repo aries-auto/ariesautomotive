@@ -22,6 +22,7 @@ class VehicleStore extends EventEmitter {
 			error: null,
 			partToAdd: null,
 			partToRemove: null,
+			showIconMediaVehicle: false,
 		};
 		this.bindActions(VehicleActions);
 	}
@@ -105,6 +106,13 @@ class VehicleStore extends EventEmitter {
 
 	setShowStyleState(showStyle) {
 		this.setState({ showStyle });
+	}
+	setShowIconMediaVehicleState(showIconMediaVehicle) {
+		this.setState({ showIconMediaVehicle });
+	}
+
+	setIconMediaVehicle(iconMediaVehicle) {
+		this.setState({ iconMediaVehicle, showIconMediaVehicle: false });
 	}
 
 	setStyle(style) {

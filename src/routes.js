@@ -184,6 +184,10 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
+		const url = `${apiBase}/vehicle/mongo/iconMediaVehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
+		const result = await fetch(url, { method: 'post' });
+		const iconMediaVehicle = await result.json();
+		state.context.iconMediaVehicle = iconMediaVehicle;
 		state.context.params = state.params;
 		return <VehicleResults context={state.context} />;
 	});

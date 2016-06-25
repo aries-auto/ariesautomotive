@@ -32,6 +32,7 @@ class VehicleResults extends Component {
 		catStyleParts: PropTypes.array,
 		activeCategory: PropTypes.object,
 		error: PropTypes.string,
+		iconMediaVehicle: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -106,7 +107,7 @@ class VehicleResults extends Component {
 			<div className={s.container}>
 				{this.props.error ? <p className={s.error}>{this.props.error}</p> : null}
 				<div className={s.configurator}>
-					<Configurator />
+					<Configurator context={this.props.context} />
 				</div>
 				{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <div className={s.envision}><Envision /></div> : null}
 				<Loader loaded={(this.props.catStyleParts !== null)} top="30%" loadedClassName={s.loader}>
