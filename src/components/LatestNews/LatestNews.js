@@ -37,11 +37,6 @@ class LatestNews extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta(title);
-		const seo = {
-			title: 'ARIES Latest News',
-		};
-		this.context.seo(seo);
 	}
 
 	static getStores() {

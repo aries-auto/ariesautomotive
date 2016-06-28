@@ -41,11 +41,6 @@ class Contact extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta(title);
-		const seo = {
-			title,
-		};
-		this.context.seo(seo);
 	}
 
 	componentWillReceiveProps() {

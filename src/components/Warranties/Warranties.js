@@ -38,11 +38,6 @@ class Warranties extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', title);
-		const seo = {
-			title,
-		};
-		this.context.seo(seo);
 	}
 
 	componentWillReceiveProps() {

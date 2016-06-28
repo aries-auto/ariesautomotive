@@ -58,11 +58,6 @@ class WhereToBuy extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', title);
-		const seo = {
-			title,
-		};
-		this.context.seo(seo);
 	}
 
 	static getStores() {
