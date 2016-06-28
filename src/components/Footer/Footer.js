@@ -19,7 +19,7 @@ class Footer extends Component {
 		if (this.props.siteContents && this.props.siteContents.length > 0) {
 			this.props.siteContents.map((content, i) => {
 				const path = `/page/${content.id}`;
-				if (content.title) {
+				if (content.title && (content.requireAuthentication === undefined || content.requireAuthentication === false)) {
 					customContent.push(<li key={i}><a href={path} title={content.title}>{content.title.toUpperCase()}</a></li>);
 				}
 			});
