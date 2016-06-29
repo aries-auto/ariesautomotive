@@ -18,6 +18,7 @@ import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
+import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
@@ -275,6 +276,18 @@ const router = new Router(on => {
 			}
 		}
 		return <CustomContent context={state.context} />;
+	});
+
+	on('/lp/:id', async (state) => {
+		state.context.id = state.params.id;
+		try {
+			const url = `${apiBase}/lp/${state.params.id}?brand=${brand}&key=${apiKey}`;
+			const resp = await fetch(url);
+			state.page = await resp.json();
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <LandingPage context={state.context} page={state.page} />;
 	});
 
 	on('/', async (state) => {
