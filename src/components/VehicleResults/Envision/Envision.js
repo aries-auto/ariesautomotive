@@ -61,14 +61,6 @@ class Envision extends Component {
 		VehicleActions.removePartFromVehicle(part);
 	}
 
-	renderImage() {
-		return (
-			<div className={s.imageContainer}>
-				<img className={s.image} src={this.props.vehicle.image} />
-			</div>
-		);
-	}
-
 	renderPartList() {
 		const parts = [];
 		this.props.vehicle.parts.map((part, i) => {
@@ -100,7 +92,6 @@ class Envision extends Component {
 		return (
 			<div className={cx(s.root)}>
 				<Loader loaded={(this.props.vehicle.image !== '')} top="40%" loadedClassName={s.loader}>
-					{this.props.vehicle.image ? this.renderImage() : null}
 					{this.props.vehicle.parts && this.props.vehicle.parts.length ? this.renderPartList() : null}
 				</Loader>
 			</div>
