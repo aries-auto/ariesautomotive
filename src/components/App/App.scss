@@ -6,21 +6,22 @@
 * Base styles
 * ========================================================================== */
 
+:global html, :global html.wf-loading {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+:global html.wf-active {
+	visibility: visible;
+	opacity: 1;
+}
+
 html {
     font-family: $font-family-base;
     font-size: 14px;
     line-height: 1;
     color: #222;
-
-    &.wf-loading {
-        font-size: 18px;
-        line-height: 1.375;
-    }
-
-    &.wf-active {
-        font-size: 1em;
-        line-height: 1.375;
-    }
 }
 
 body {
