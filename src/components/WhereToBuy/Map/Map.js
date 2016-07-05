@@ -68,14 +68,14 @@ class Map extends Component {
 	handleMapChange() {
 		const center = this.refs.map.getCenter();
 		const bounds = this.refs.map.getBounds();
+		const newBounds = {
+			ne: bounds.getNorthEast().lat() + ',' + bounds.getNorthEast().lng(),
+			sw: bounds.getSouthWest().lat() + ',' + bounds.getSouthWest().lng(),
+		};
 		const newZoom = this.refs.map.getZoom();
 		const newPosition = {
 			lat: center.lat(),
 			lng: center.lng(),
-		};
-		const newBounds = {
-			ne: bounds.H.j + ',' + bounds.j.H,
-			sw: bounds.H.H + ',' + bounds.j.j,
 		};
 		BuyActions.bounds(newPosition, newBounds, newZoom);
 	}
