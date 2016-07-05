@@ -22,6 +22,7 @@ import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
+import LookupActions from './actions/LookupActions';
 import { apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
@@ -198,16 +199,28 @@ const router = new Router(on => {
 
 	on('/vehicle/:year', async (state) => {
 		state.context.params = state.params;
+		LookupActions.set({
+			year: state.params.year,
+		});
 		return <VehicleResults context={state.context} />;
 	});
 
 	on('/vehicle/:year/:make', async (state) => {
 		state.context.params = state.params;
+		LookupActions.set({
+			year: state.params.year,
+			make: state.params.make,
+		});
 		return <VehicleResults context={state.context} />;
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
 		state.context.params = state.params;
+		LookupActions.set({
+			year: state.params.year,
+			make: state.params.make,
+			model: state.params.model,
+		});
 		return <VehicleResults context={state.context} />;
 	});
 

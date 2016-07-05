@@ -64,6 +64,12 @@ class PartResults extends Component {
 		return '/img/partImgPlaceholder.jpg';
 	}
 
+	chunkParts(chunkSize, parts) {
+		return [].concat.apply([], parts.map((elem, i) => {
+			return i % chunkSize ? [] : [parts.slice(i, i + chunkSize)];
+		}));
+	}
+
 	showAttributes(p) {
 		if (!p.attributes || p.attributes.length === 0) {
 			return [];
@@ -80,37 +86,43 @@ class PartResults extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
-				{this.state.parts.map((part, i) => {
+				{this.chunkParts(3, this.state.parts).map((chunk, j) => {
 					return (
-						<div key={i} className={cx(s.product, 'row', 'well')}>
-							<div className={s.header}>
-								<span className={s.desc}>
-									<a href={'/part/' + part.part_number}>{part.short_description}
-										<span className={s.partNum}>{part.part_number}</span>
-									</a>
-								</span>
-							</div>
+						<div className={s.chunk} key={j}>
+							{chunk.map((part, i) => {
+								return (
+									<div key={i} className={cx(s.product, 'row', 'well')}>
+										<div className={s.header}>
+											<span className={s.desc}>
+												<a href={'/part/' + part.part_number}>{part.short_description}
+													<span className={s.partNum}>{part.part_number}</span>
+												</a>
+											</span>
+										</div>
 
-							<div className={cx(s.image, 'col-xs-12', 'col-sm-12', 'col-md-3', 'col-lg-2')}>
-								<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
-							</div>
+										<div className={s.image}>
+											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
+										</div>
 
-							<div className={cx('side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1', s.partBox)}>
+										<div className={cx('side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1', s.partBox)}>
 
-								<div className={s.price}>
-									{this.getPrice(part)}
-								</div>
-								<div className={s.attr}>
-									<ul>
-										{this.showAttributes(part)}
-									</ul>
-								</div>
-							</div>
-							<div className={s.nothing}>&nbsp;</div>
-							<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
-								<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
-								<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
-							</div>
+											<div className={s.price}>
+												{this.getPrice(part)}
+											</div>
+											<div className={s.attr}>
+												<ul>
+													{this.showAttributes(part)}
+												</ul>
+											</div>
+										</div>
+										<div className={s.nothing}>&nbsp;</div>
+										<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
+											<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
+											<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
+										</div>
+									</div>
+								);
+							})}
 						</div>
 					);
 				})}

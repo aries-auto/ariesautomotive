@@ -3,24 +3,43 @@
 
 .root {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
 
-    flex-flow: row wrap;
+.chunk {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
 }
 
 .product {
     position: relative;
+    min-width: 300px;
     max-width: 85%;
     min-height: 250px;
-    margin: 0 auto 1em auto;
+    margin: 10px auto;
     box-shadow: 1px 0 10px 2px $lookup-color;
+    transition: all .2s ease-in-out;
+    transform: scale(.98);
+
+    &:hover {
+        box-shadow: 1px 0 10px 2px $gray-lighter;
+        transform: scale(1);
+    }
 
     .header {
+        min-height: 65px;
         margin-bottom: 10px;
+        overflow: hidden;
     }
 
     .header .desc {
-        font-family: "ff-good-headline-web-pro-con",sans-serif;
+        font-family: "ff-good-headline-web-pro-con", sans-serif;
         font-size: 28px;
         font-weight: 400;
         line-height: 28px;
@@ -49,21 +68,25 @@
     }
 
     .image {
+        z-index: 10;
         min-width: 100px;
         min-height: 100px;
         padding: 0;
         margin-bottom: 25px;
+
         img {
+            width: 100%;
             margin: 0 auto;
             -webkit-box-shadow: 1px 0 10px 2px #ccc;
-            -moz-box-shadow: 1px 0 10px 2px #ccc;
-            box-shadow: 1px 0 10px 2px #ccc;
+               -moz-box-shadow: 1px 0 10px 2px #ccc;
+                    box-shadow: 1px 0 10px 2px #ccc;
         }
     }
 
     .attr {
         float: left;
         margin-left: 30px;
+
         .title {
             font-size: 18px;
             font-weight: 900;
@@ -72,6 +95,7 @@
         ul {
             padding: 0;
             list-style: none;
+
             li {
                 padding: 0;
             }
@@ -83,7 +107,7 @@
         font-size: 20px;
 
         .priceValue {
-            font-family: "proxima-nova-condensed",sans-serif;
+            font-family: "proxima-nova-condensed", sans-serif;
             color: $alt-red;
         }
     }
@@ -103,6 +127,7 @@
             text-align: center;
         }
     }
+
     .viewDetails, .whereToBuy {
         min-width: 6em;
         font-size: 1em;
@@ -114,27 +139,28 @@
     width: 100%;
 }
 
-@media(min-width: $screen-md-min) {
+@media (min-width: $screen-md-min) {
     .root {
         .product {
             min-height: 450px;
         }
+
         .nav > a {
             margin: 1px;
         }
     }
+
     .partBox {
         width: 100%;
     }
 }
 
-@media(min-width: $screen-lg-min) {
+@media (min-width: $screen-lg-min) {
     .root {
         .product {
             width: 30%;
 
-            .price,
-            .attr {
+            .price, .attr {
                 float: none;
             }
 
