@@ -65,7 +65,7 @@ class Configurator extends Component {
 		return (
 			<div className={cx(s.root)}>
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-				<script src="http://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
+				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div className={cx('vehicle-wrapper', s.vehicleWrapper)} id="ic-vehicle-wrapper" data-part="" data-vehicleid={this.props.context.iconMediaVehicle.intVehicleID} title="The Vehicle Accessory Desc"></div>
 				<div className="hidden">
 					Code to Add Product:
