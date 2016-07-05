@@ -18,6 +18,7 @@ import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
 import LatestNewsItem from './components/LatestNewsItem';
+import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
@@ -35,7 +36,9 @@ const router = new Router(on => {
 			state.context = {};
 		}
 		state.context.params = state.params;
-		const [yearResponse, catResponse, contentReponse] = await Promise.all([
+		const slugContainer = state.params[0];
+		const slug = slugContainer.replace('/', '');
+		const [yearResponse, catResponse, contentAllReponse, siteContentResponse] = await Promise.all([
 			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',
 				headers: {
@@ -46,6 +49,13 @@ const router = new Router(on => {
 			}),
 			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
 			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
+			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Accept': 'application/json',
+				},
+			}),
 		]);
 
 		try {
@@ -54,7 +64,21 @@ const router = new Router(on => {
 			if (vehicleResponse.available_years !== undefined) {
 				state.context.years = vehicleResponse.available_years;
 			}
-			state.context.siteContents = await contentReponse.json();
+			state.context.siteContents = await contentAllReponse.json();
+			const siteContent = await siteContentResponse.json();
+			if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
+				const seo = {
+					description: siteContent.metaDescription,
+					title: siteContent.metaTitle,
+				};
+				state.context.seo(seo);
+			} else {
+				const seo = {
+					description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
+					title: 'Aries Automotive',
+				};
+				state.context.seo(seo);
+			}
 		} catch (e) {
 			state.context.error = e;
 		}
@@ -265,6 +289,18 @@ const router = new Router(on => {
 			}
 		}
 		return <CustomContent context={state.context} />;
+	});
+
+	on('/lp/:id', async (state) => {
+		state.context.id = state.params.id;
+		try {
+			const url = `${apiBase}/lp/${state.params.id}?brand=${brand}&key=${apiKey}`;
+			const resp = await fetch(url);
+			state.page = await resp.json();
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <LandingPage context={state.context} page={state.page} />;
 	});
 
 	on('/', async (state) => {

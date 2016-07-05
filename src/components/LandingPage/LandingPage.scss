@@ -1,0 +1,6 @@
+@import '../classes.scss';
+@import '../variables.scss';
+.root {
+	max-width: $max-content-width;
+	margin: auto;
+}
