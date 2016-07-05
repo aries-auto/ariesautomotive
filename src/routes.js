@@ -29,6 +29,7 @@ const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
 const gaOptions = { debug: true };
 const MyWindowDependentLibrary = isBrowser ? ga.initialize('UA-61502306-1', gaOptions) : undefined;
+const FIXED_TITLE = 'ARIES Automotive';
 
 const router = new Router(on => {
 	on('*', async (state, next) => {
@@ -39,14 +40,7 @@ const router = new Router(on => {
 		const slugContainer = state.params[0];
 		const slug = slugContainer.replace('/', '');
 		const [yearResponse, catResponse, contentAllReponse, siteContentResponse] = await Promise.all([
-			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-				body: '{}',
-			}),
+			LookupActions.get(),
 			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
 			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
 			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
@@ -71,12 +65,7 @@ const router = new Router(on => {
 					description: siteContent.metaDescription,
 					title: siteContent.metaTitle,
 				};
-				state.context.seo(seo);
-			} else {
-				const seo = {
-					description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
-					title: 'Aries Automotive',
-				};
+				state.context.onSetTitle(siteContent.title);
 				state.context.seo(seo);
 			}
 		} catch (e) {
@@ -104,6 +93,8 @@ const router = new Router(on => {
 				}),
 			]);
 			state.part = await partResp.json();
+			const title = state.part.short_description && state.part.short_description ? state.part.short_description : 'Part Details';
+			state.context.onSetTitle(`${FIXED_TITLE} | ${title}`);
 			state.featured = await featuredResp.json();
 		} catch (e) {
 			state.context.error = e;
@@ -119,6 +110,13 @@ const router = new Router(on => {
 			});
 
 			state.context.category = await catResponse.json();
+			const title = state.context.category && state.context.category.title ? state.context.category.title : 'Product Categories';
+			const seo = {
+				title: `${FIXED_TITLE} | ${title}`,
+				description: state.context.category.long_description,
+				image: `${state.context.category.image.Scheme}://${state.context.category.image.Host}${state.context.category.image.Path}`,
+			};
+			state.context.seo(seo);
 		} catch (e) {
 			state.context.error = e;
 		}
@@ -134,6 +132,13 @@ const router = new Router(on => {
 			});
 
 			state.context.category = await catResponse.json();
+			const title = state.context.category && state.context.category.title ? state.context.category.title : 'Product Categories';
+			const seo = {
+				title: `${FIXED_TITLE} | ${title}`,
+				description: state.context.category.long_description,
+				image: `${state.context.category.image.Scheme}://${state.context.category.image.Host}${state.context.category.image.Path}`,
+			};
+			state.context.seo(seo);
 		} catch (e) {
 			state.context.error = e;
 		}
@@ -154,6 +159,13 @@ const router = new Router(on => {
 			});
 
 			state.context.category = await catResponse.json();
+			const title = state.context.category && state.context.category.title ? state.context.category.title : 'Product Categories';
+			const seo = {
+				title: `${FIXED_TITLE} | ${title}`,
+				description: state.context.category.long_description,
+				image: `${state.context.category.image.Scheme}://${state.context.category.image.Host}${state.context.category.image.Path}`,
+			};
+			state.context.seo(seo);
 			state.context.category.parts = await partResponse.json();
 		} catch (e) {
 			state.context.error = e;

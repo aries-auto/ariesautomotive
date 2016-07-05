@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import s from './LandingPage.scss';
+import Location from '../../core/Location';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
 
@@ -19,9 +20,13 @@ class LandingPage extends Component {
 	};
 
 	componentWillMount() {
+		if (!this.props.page || !this.props.page.Name) {
+			Location.push('/404');
+			return;
+		}
 		const title = (this.props.page && this.props.page.Name) ? this.props.page.Name : 'ARIES';
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', this.props.page.Name);
+		this.context.onSetMeta('description', this.props.page ? this.props.page.Name : 'ARIES');
 		const seo = {
 			title,
 		};
@@ -41,7 +46,7 @@ class LandingPage extends Component {
 	render() {
 		return (
 			<div className={cx(s.root)}>
-				<h2>{this.props.page.Name}</h2>
+				<h2>{this.props.page ? this.props.page.Name : 'ARIES'}</h2>
 				{this.renderText()}
 			</div>
 		);

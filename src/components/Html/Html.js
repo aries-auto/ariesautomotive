@@ -34,7 +34,7 @@ class Html extends Component {
 			`
 			(function() {
 				var config = {
-					kitId: 'abc1def',
+					kitId: 'zgp0frb',
 					scriptTimeout: 3000
 				};
 				var h = document.getElementsByTagName('html')[0];
@@ -59,12 +59,6 @@ class Html extends Component {
 				s.parentNode.insertBefore(tk, s);
 			})();
 			`,
-		});
-	}
-
-	typekit2() {
-		return ({ __html:
-			`try{Typekit.load({ async: true });}catch(e){}`,
 		});
 	}
 
@@ -119,15 +113,14 @@ class Html extends Component {
 					<meta name="msapplication-TileImage" content="/assets/img/ico/apple-touch-icon-144x144-precompressed.png?v=2" />
 
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
-					<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 				</head>
 				<body>
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
 					<script src={this.props.entry}></script>
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
-					<script src="https://use.typekit.net/zgp0frb.js"></script>
-					<script dangerouslySetInnerHTML={this.typekit2()} />
+					<script dangerouslySetInnerHTML={this.typekit()} />
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
+					<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 					<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 				</body>

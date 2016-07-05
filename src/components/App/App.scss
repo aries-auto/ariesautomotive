@@ -6,7 +6,7 @@
 * Base styles
 * ========================================================================== */
 
-:global html, :global html.wf-loading {
+:global html.wf-loading {
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 0s linear 300ms, opacity 300ms;
@@ -25,13 +25,13 @@ html {
 }
 
 body {
-    font-family: 'ff-good-headline-web-pro-con', sans-serif;
+    font-family: $font-family-base;
     background: url('/img/bgtexture.png');
     -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'ff-good-headline-web-pro-con', sans-serif;
+    font-family: $font-family-base;
     font-weight: 700;
     color: $header-color;
 }
@@ -53,7 +53,7 @@ h4 {
 }
 
 p, li {
-    font-family: "proxima-nova-condensed", sans-serif;
+    font-family: $font-family-nova;
     font-size: 18px;
 }
 

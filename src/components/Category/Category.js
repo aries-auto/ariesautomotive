@@ -32,22 +32,22 @@ class SearchResults extends Component {
 		};
 	}
 
-	componentWillMount() {
-		if (!this.props || !this.props.context || !this.props.context.category) {
-			return;
-		}
-
-		const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : 'Aries Automotive Product Categories';
-		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', title);
-
-		const seo = {
-			title: this.props.context.category.meta_description,
-			description: this.props.context.category.long_description,
-			image: `${this.props.context.category.image.Scheme}://${this.props.context.category.image.Host}${this.props.context.category.image.Path}`,
-		};
-		this.context.seo(seo);
-	}
+	// componentWillMount() {
+	// 	if (!this.props || !this.props.context || !this.props.context.category) {
+	// 		return;
+	// 	}
+	//
+	// 	const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : 'Aries Automotive Product Categories';
+	// 	this.context.onSetTitle(title);
+	// 	this.context.onSetMeta('description', title);
+	//
+	// 	const seo = {
+	// 		title: this.props.context.category.meta_description,
+	// 		description: this.props.context.category.long_description,
+	// 		image: `${this.props.context.category.image.Scheme}://${this.props.context.category.image.Host}${this.props.context.category.image.Path}`,
+	// 	};
+	// 	this.context.seo(seo);
+	// }
 
 	componentWillUpdate() {
 		const node = this.getDOMNode();

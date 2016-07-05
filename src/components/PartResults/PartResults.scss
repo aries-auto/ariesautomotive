@@ -39,7 +39,7 @@
     }
 
     .header .desc {
-        font-family: "ff-good-headline-web-pro-con", sans-serif;
+        font-family: $font-family-base;
         font-size: 28px;
         font-weight: 400;
         line-height: 28px;
@@ -107,7 +107,7 @@
         font-size: 20px;
 
         .priceValue {
-            font-family: "proxima-nova-condensed", sans-serif;
+            font-family: $font-family-nova;
             color: $alt-red;
         }
     }

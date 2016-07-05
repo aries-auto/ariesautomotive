@@ -1,5 +1,9 @@
 @import '../variables.scss';
 
+:global html.wf-active .collapse .nav li a {
+	font-size: 18px;
+}
+
 .root {
     padding-left: 0;
 
@@ -9,7 +13,7 @@
 
     .nav .link {
         font-family: $font-family-base;
-        font-size: 18px;
+        font-size: 14px;
         color: $white-base;
         background-color: transparent;
 
@@ -28,7 +32,7 @@
 
         li a {
             padding: 10px 8px;
-            font-family: "ff-good-headline-web-pro-con", sans-serif;
+            font-family: $font-family-base;
             color: $header-color;
             border-radius: 0;
         }

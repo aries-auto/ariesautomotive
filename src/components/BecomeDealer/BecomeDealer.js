@@ -7,7 +7,7 @@ import ContactStore from '../../stores/ContactStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { fields } from './FormFields';
 
-const title = 'Become an Aries Dealer';
+// const title = 'Become an Aries Dealer';
 
 @withStyles(s)
 @connectToStores
@@ -35,7 +35,7 @@ class BecomeDealer extends Component {
 	}
 
 	componentWillMount() {
-		this.context.onSetTitle(title);
+		// this.context.onSetTitle(title);
 	}
 
 	static getStores() {

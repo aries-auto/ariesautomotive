@@ -54,7 +54,7 @@ class App extends Component {
 		const styles = {
 			background: "url('/img/bgtexture.png')",
 		};
-		return !this.props.error ? (
+		return (
 			<div className={cx(s.root)} style={styles}>
 				<Header categories={this.props.context.categories} />
 				<Lookup {...this.props.context} />
@@ -63,7 +63,7 @@ class App extends Component {
 				</div>
 				<Footer siteContents={this.props.context.siteContents} />
 			</div>
-		) : this.props.children;
+		);
 	}
 
 }

@@ -30,6 +30,9 @@ const context = {
 	},
 	seo: (seoInput) => {
 		const props = seoInput;
+		if (props.title) {
+			context.onSetTitle(props.title);
+		}
 		props.url = 'http://www.ariesautomotive.com';
 		props.type = 'website';
 		props.card = 'summary_large_card';

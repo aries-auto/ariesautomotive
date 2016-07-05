@@ -33,7 +33,7 @@
     background: $trans-black;
 
     .big-text {
-        font-family: "proxima-nova-condensed", sans-serif;
+        font-family: $font-family-nova;
         font-size: 40px;
         font-weight: 700;
         color: $white-base;

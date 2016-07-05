@@ -51,7 +51,6 @@ class Product extends Component {
 	componentWillMount() {
 		// title
 		const title = this.props.part.short_description && this.props.part.short_description ? this.props.part.short_description : 'Part Details';
-		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 		if (!this.props.part || this.props.part.part_number !== this.props.context.id) {
 			PartActions.get(this.props.context.id);
@@ -490,6 +489,7 @@ class Product extends Component {
 					image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
 				}
 			});
+			console.log(r);
 			parts.push(
 				<div key={`related-${i}`} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
 					<h4>
@@ -498,7 +498,7 @@ class Product extends Component {
 						</a>
 					</h4>
 					<a href={`/part/${r.part_number}`}>
-						<img src={image} className="img-responsive" alt={`Image for ${r.title}`} />
+						<img src={image} className="img-responsive" alt={`Image for ${r.short_description}`} />
 					</a>
 					<hr className="visible-xs-block" />
 				</div>
@@ -537,7 +537,7 @@ class Product extends Component {
 						</a>
 					</h4>
 					<a href={`/part/${r.part_number}`}>
-						<img src={image} className="img-responsive" alt={`Image for ${r.title}`} />
+						<img src={image} className="img-responsive" alt={`Image for ${r.short_description}`} />
 					</a>
 					<hr className="visible-xs-block" />
 				</div>
