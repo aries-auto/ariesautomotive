@@ -21,7 +21,7 @@ class LandingPage extends Component {
 	componentWillMount() {
 		const title = (this.props.page && this.props.page.Name) ? this.props.page.Name : 'ARIES';
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', this.props.page.Name);
+		this.context.onSetMeta('description', (this.props.page && this.props.page.Name ? this.props.page.Name : 'Aries Automotive'));
 		const seo = {
 			title,
 		};
