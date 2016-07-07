@@ -1,4 +1,7 @@
+@import '../../variables.scss';
+
 .vehicleWrapper {
+	min-height: 230px;
 	img {
 		max-width: 100%;
 	}
@@ -19,6 +22,16 @@
 	}
 }
 
+
+
 .hidden {
 	display: none;
+}
+
+
+
+@media (min-width: $screen-md-min) {
+	.vehicleWrapper {
+		min-height: 450px;
+	}
 }
