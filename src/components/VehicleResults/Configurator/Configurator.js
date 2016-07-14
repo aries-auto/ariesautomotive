@@ -3,6 +3,7 @@ import cx from 'classnames';
 import s from './Configurator.scss';
 import withStyles from '../../../decorators/withStyles';
 import VehicleStore from '../../../stores/VehicleStore';
+import VehicleActions from '../../../actions/VehicleActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import $ from 'jquery';
 
@@ -30,6 +31,14 @@ class Configurator extends Component {
 		this.state = {
 			context: {},
 		};
+	}
+
+	componentDidMount() {
+		// HIDE vehicle wrapper if iConns vehicles - this is YUCKY
+		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
+			$('.vehicle-wrapper').hide();
+			VehicleActions.setShowIconMediaVehicleState(false);
+		}
 	}
 
 	componentWillReceiveProps(next) {
@@ -61,6 +70,7 @@ class Configurator extends Component {
 	handleRemoveProduct() {
 		$('#removePart')[0].click();
 	}
+
 	render() {
 		return (
 			<div className={cx(s.root)}>
