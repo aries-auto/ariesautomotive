@@ -22,7 +22,6 @@ class Configurator extends Component {
 		}),
 		partToAdd: PropTypes.object,
 		partToRemove: PropTypes.object,
-		iconMediaVehicle: PropTypes.object,
 		context: PropTypes.object,
 	};
 

@@ -22,7 +22,7 @@ class VehicleStore extends EventEmitter {
 			error: null,
 			partToAdd: null,
 			partToRemove: null,
-			showIconMediaVehicle: false,
+			showIconMediaVehicle: true,
 		};
 		this.bindActions(VehicleActions);
 	}

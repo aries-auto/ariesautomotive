@@ -96,21 +96,6 @@ class PartResults extends Component {
 		VehicleActions.addPartToVehicle(part);
 	}
 
-	checkPartLayer(part) {
-		if (!this.props.vehicle || !this.props.vehicle.parts || this.props.vehicle.parts.length === 0) {
-			return false;
-		}
-		for (const i in this.props.vehicle.parts) {
-			if (!this.props.vehicle.parts[i]) {
-				return false;
-			}
-			if (this.props.vehicle.parts[i].iconLayer === part.iconLayer) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
@@ -144,7 +129,7 @@ class PartResults extends Component {
 
 							<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
 								{!part.iconLayer || !
-									part.mappedToVehicle || !this.props.showIconMediaVehicle ? null : <a className={cx('btn', 'red-transparent-button', s.addToVehicle)} disabled={this.checkPartLayer(part)} role="button" onClick={this.checkPartLayer(part) ? null : this.handleAddToVehicle.bind(this, part)} value={part}>Add To Vehicle</a>}
+									part.mappedToVehicle || !this.props.showIconMediaVehicle ? null : <a className={cx('btn', 'red-transparent-button', s.addToVehicle)} role="button" onClick={this.handleAddToVehicle.bind(this, part)} value={part}>Add To Vehicle</a>}
 								<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 								<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
 							</div>
