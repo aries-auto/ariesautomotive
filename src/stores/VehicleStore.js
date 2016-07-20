@@ -136,7 +136,7 @@ class VehicleStore extends EventEmitter {
 		for (const i in vehicle.parts) {
 			if (vehicle.parts[i].iconLayer === part.iconLayer && !this.partIsOnVehicle(part)) {
 				partToRemove = vehicle.parts[i];
-				vehicle.parts.splice(i);
+				vehicle.parts.splice(i, 1);
 			}
 		}
 		if (!this.partIsOnVehicle(part)) {
