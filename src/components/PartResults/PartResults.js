@@ -16,7 +16,7 @@ class PartResults extends Component {
 		context: PropTypes.shape({}),
 		parts: PropTypes.array,
 		vehicle: PropTypes.object,
-		showIconMediaVehicle: PropTypes.boolean,
+		showIconMediaVehicle: PropTypes.bool,
 	};
 
 	constructor() {

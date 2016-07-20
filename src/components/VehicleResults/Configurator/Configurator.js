@@ -41,15 +41,15 @@ class Configurator extends Component {
 	}
 
 	componentWillReceiveProps(next) {
-		if (next.partToAdd && next.partToAdd !== this.props.partToAdd) {
-			const newPart = next.partToAdd;
-			$('#addPart').attr('data-part', newPart.part_number);
-			this.handleAddProduct();
-		}
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
 			const newPart = next.partToRemove;
 			$('#removePart').attr('data-part', newPart.part_number);
 			this.handleRemoveProduct();
+		}
+		if (next.partToAdd && next.partToAdd !== this.props.partToAdd) {
+			const newPart = next.partToAdd;
+			$('#addPart').attr('data-part', newPart.part_number);
+			this.handleAddProduct();
 		}
 		return;
 	}
