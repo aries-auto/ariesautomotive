@@ -121,6 +121,7 @@ class VehicleStore extends EventEmitter {
 		this.setState({ showStyle: false, style, vehicle });
 	}
 
+	// adds part to state.vehicle.parts; removes part of same layer
 	addPartToVehicle(part) {
 		// must have iconLayer - TODO is this true?
 		if (part.iconLayer === '') {
@@ -133,15 +134,18 @@ class VehicleStore extends EventEmitter {
 		// remove part with same iconLayer
 		let partToRemove = null;
 		for (const i in vehicle.parts) {
-			if (vehicle.parts[i].iconLayer === part.iconLayer) {
+			if (vehicle.parts[i].iconLayer === part.iconLayer && !this.partIsOnVehicle(part)) {
 				partToRemove = vehicle.parts[i];
 				vehicle.parts.splice(i);
 			}
 		}
-		vehicle.parts.push(part);
+		if (!this.partIsOnVehicle(part)) {
+			vehicle.parts.push(part);
+		}
 		this.setState({ vehicle, partToAdd: part, partToRemove });
 	}
 
+	// removes part from state.vehicle.parts
 	removePartFromVehicle(part) {
 		const vehicle = this.state.vehicle;
 		for (const i in vehicle.parts) {
@@ -150,6 +154,16 @@ class VehicleStore extends EventEmitter {
 			}
 		}
 		this.setState({ vehicle, partToRemove: part });
+	}
+
+	// returns true if part is already in state.vehicle.parts; otherwise false
+	partIsOnVehicle(part) {
+		for (const i in this.state.vehicle.parts) {
+			if (part.id === this.state.vehicle.parts[i].id) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
