@@ -32,14 +32,6 @@ class Configurator extends Component {
 		};
 	}
 
-	componentDidMount() {
-		// HIDE vehicle wrapper if iConns vehicles - this is YUCKY
-		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
-			$('.vehicle-wrapper').hide();
-			VehicleActions.setShowIconMediaVehicleState(false);
-		}
-	}
-
 	componentWillReceiveProps(next) {
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
 			const newPart = next.partToRemove;
@@ -50,6 +42,10 @@ class Configurator extends Component {
 			const newPart = next.partToAdd;
 			$('#addPart').attr('data-part', newPart.part_number);
 			this.handleAddProduct();
+		}
+		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
+			$('.vehicle-wrapper').hide();
+			VehicleActions.setShowIconMediaVehicleState(false);
 		}
 		return;
 	}
