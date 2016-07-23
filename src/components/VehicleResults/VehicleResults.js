@@ -23,6 +23,7 @@ class VehicleResults extends Component {
 				model: PropTypes.string,
 			}),
 			iconMediaVehicle: PropTypes.object,
+			iconParts: PropTypes.object,
 		}),
 		vehicle: PropTypes.shape({
 			year: PropTypes.string,
@@ -32,7 +33,7 @@ class VehicleResults extends Component {
 		}),
 		catStyleParts: PropTypes.array,
 		activeCategory: PropTypes.object,
-		error: PropTypes.string,
+		error: PropTypes.object,
 		iconMediaVehicle: PropTypes.object,
 	};
 
@@ -55,7 +56,7 @@ class VehicleResults extends Component {
 			year: this.props.context.params.year,
 			make: this.props.context.params.make,
 			model: this.props.context.params.model,
-		});
+		}, this.props.context.iconParts);
 		const title = this.props.context.params.year && this.props.context.params.make && this.props.context.params.model ? `${this.props.context.params.year} ${this.props.context.params.make} ${this.props.context.params.model}` : 'Vehicle Results';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
@@ -106,7 +107,7 @@ class VehicleResults extends Component {
 	render() {
 		return (
 			<div className={s.container}>
-				{this.props.error ? <p className={s.error}>{this.props.error}</p> : null}
+				{this.props.error ? <p className={s.error}>{this.props.error.message}</p> : null}
 				<div className={s.configurator}>
 					{this.props.context.iconMediaVehicle && this.props.context.iconMediaVehicle.intVehicleID ? <Configurator context={this.props.context} /> : null}
 				</div>

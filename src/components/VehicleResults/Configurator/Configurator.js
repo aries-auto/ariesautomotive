@@ -3,7 +3,7 @@ import cx from 'classnames';
 import s from './Configurator.scss';
 import withStyles from '../../../decorators/withStyles';
 import VehicleStore from '../../../stores/VehicleStore';
-import VehicleActions from '../../../actions/VehicleActions';
+// import VehicleActions from '../../../actions/VehicleActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import $ from 'jquery';
 
@@ -45,7 +45,7 @@ class Configurator extends Component {
 		}
 		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
 			$('.vehicle-wrapper').hide();
-			VehicleActions.setShowIconMediaVehicleState(false);
+			// VehicleActions.setShowIconMediaVehicleState(false);
 		}
 		return;
 	}

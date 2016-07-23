@@ -60,7 +60,7 @@ class VehicleStore extends EventEmitter {
 				this.setState({ error: 'no parts returned.' });
 				return;
 			}
-			if (!Array.isArray(resps[0])) {
+			if (!Array.isArray(resps[0]) && resps[0]) {
 				this.setState({ error: resps[0].message });
 			}
 			try {
@@ -73,12 +73,34 @@ class VehicleStore extends EventEmitter {
 				if (this.checkStyle(activeCategory)) {
 					style = this.checkStyle(activeCategory);
 				}
-
+				catStyleParts = this.setIconPartMappings(catStyleParts);
 				this.setState({ catStyleParts, activeCategory, showStyle: false, style });
 			} catch (e) {
 				this.setState({ error: e });
 			}
 		});
+	}
+
+	setIconPartMappings(catStyleParts) {
+		if (!this.state.iconParts) {
+			return catStyleParts;
+		}
+		for (const i in catStyleParts) {
+			if (!catStyleParts[i]) {
+				return catStyleParts;
+			}
+			for (const j in catStyleParts[i].styles) {
+				if (catStyleParts[i].styles[j].id === 0) {
+					return catStyleParts;
+				}
+				for (const k in catStyleParts[i].styles[j].parts) {
+					if (this.state.iconParts[catStyleParts[i].styles[j].parts[k].part_number]) {
+						catStyleParts[i].styles[j].parts[k].iconLayer = this.state.iconParts[catStyleParts[i].styles[j].parts[k].part_number];
+					}
+				}
+			}
+		}
+		return catStyleParts;
 	}
 
 	checkStyle(activeCategory) {
@@ -95,24 +117,22 @@ class VehicleStore extends EventEmitter {
 		return null;
 	}
 
-	async set(vehicle) {
+	async set(args) {
+		const vehicle = args[0];
+		let iconParts = null;
+		if (args[1]) {
+			iconParts = args[1];
+		}
 		let showStyle = true;
 		if (vehicle.style && vehicle.style !== '') {
 			showStyle = false;
 		}
-		this.setState({ vehicle, showStyle });
+		this.setState({ vehicle, showStyle, iconParts });
 		await this.getCategoryStyles();
 	}
 
 	setShowStyleState(showStyle) {
 		this.setState({ showStyle });
-	}
-	setShowIconMediaVehicleState(showIconMediaVehicle) {
-		this.setState({ showIconMediaVehicle });
-	}
-
-	setIconMediaVehicle(iconMediaVehicle) {
-		this.setState({ iconMediaVehicle, showIconMediaVehicle: false });
 	}
 
 	setStyle(style) {
@@ -164,6 +184,10 @@ class VehicleStore extends EventEmitter {
 			}
 		}
 		return false;
+	}
+
+	setIconParts(iconParts) {
+		this.setState({ iconParts });
 	}
 }
 

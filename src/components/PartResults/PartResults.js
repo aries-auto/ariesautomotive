@@ -16,7 +16,7 @@ class PartResults extends Component {
 		context: PropTypes.shape({}),
 		parts: PropTypes.array,
 		vehicle: PropTypes.object,
-		showIconMediaVehicle: PropTypes.bool,
+		iconParts: PropTypes.object,
 	};
 
 	constructor() {
@@ -128,8 +128,7 @@ class PartResults extends Component {
 							<div className={s.nothing}>&nbsp;</div>
 
 							<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
-								{!part.iconLayer || !
-									part.mappedToVehicle || !this.props.showIconMediaVehicle ? null : <a className={cx('btn', 'red-transparent-button', s.addToVehicle)} role="button" onClick={this.handleAddToVehicle.bind(this, part)} value={part}>Add To Vehicle</a>}
+								{!part.iconLayer || !this.props.iconParts ? null : <a className={cx('btn', 'red-transparent-button', s.addToVehicle)} role="button" onClick={this.handleAddToVehicle.bind(this, part)} value={part}>Add To Vehicle</a>}
 								<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 								<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
 							</div>

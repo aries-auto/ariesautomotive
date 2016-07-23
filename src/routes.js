@@ -22,7 +22,7 @@ import LatestNewsItem from './components/LatestNewsItem';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
-import { apiBase, apiKey, brand } from './config';
+import { iapiBase, apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -184,12 +184,17 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
-		const url = `${apiBase}/vehicle/mongo/iconMediaVehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
-		const icon = await fetch(url, { method: 'post' }).then((result) => {
-			return result.json();
-		});
-		if (icon.strModel) {
-			state.context.iconMediaVehicle = icon;
+		try {
+			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
+			const icon = await fetch(url, { method: 'get' }).then((result) => {
+				return result.json();
+			});
+			if (icon.vehicle && icon.vehicle.strModel) {
+				state.context.iconMediaVehicle = icon.vehicle;
+				state.context.iconParts = icon.parts;
+			}
+		} catch (e) {
+			state.context.error = e.message;
 		}
 		state.context.params = state.params;
 		return <VehicleResults context={state.context} />;
