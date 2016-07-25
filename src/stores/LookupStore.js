@@ -29,18 +29,23 @@ class LookupStore extends EventEmitter {
 	}
 
 	async get() {
-		let body = '';
-		if (this.state.vehicle.year !== '') {
-			body = `year=${this.state.vehicle.year || 0}&make=${this.state.vehicle.make || ''}&model=${this.state.vehicle.model || ''}&style=${this.state.vehicle.style || ''}&collection=${this.state.vehicle.collection || ''}`;
+		let params = '';
+		if (this.state.vehicle.year) {
+			params += '/' + this.state.vehicle.year;
+		}
+		if (this.state.vehicle.make) {
+			params += '/' + this.state.vehicle.make;
+		}
+		if (this.state.vehicle.model) {
+			params += '/' + this.state.vehicle.model;
 		}
 		try {
-			await fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
-				method: 'post',
+			await fetch(`${apiBase}/vehicle/category${params}?key=${KEY}`, {
+				method: 'get',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 					'Accept': 'application/json',
 				},
-				body,
 			}).then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -48,26 +53,26 @@ class LookupStore extends EventEmitter {
 					makes: this.state.makes,
 					models: this.state.models,
 				});
-				if (data.available_years !== undefined) {
+				if (data.availableYears !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
-						years: data.available_years,
+						years: data.availableYears,
 						makes: [],
 						models: [],
 					});
-				} else if (data.available_makes !== undefined) {
+				} else if (data.availableMakes !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
-						makes: data.available_makes,
+						makes: data.availableMakes,
 						models: [],
 					});
-				} else if (data.available_models !== undefined) {
+				} else if (data.availableModels !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
 						makes: this.state.makes,
-						models: data.available_models,
+						models: data.availableModels,
 					});
 				} else {
 					this.setState({

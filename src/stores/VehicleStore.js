@@ -52,17 +52,21 @@ class VehicleStore extends EventEmitter {
 		]).then((resps) => {
 			return Promise.all([resps[0].json(), resps[1].json()]);
 		}).then((resps) => {
-			resps[0].push({ 'name': 'Seat Defenders', 'styles': [{ 'name': 'all', 'parts': resps[1].parts }] });
+			let catStyleParts = resps[0];
+			if (!catStyleParts) {
+				catStyleParts = [];
+			}
+			catStyleParts.push({ 'name': 'Seat Defenders', 'styles': [{ 'name': 'all', 'parts': resps[1].parts }] });
 			let activeCategory = this.state.activeCategory;
 			if (!activeCategory) {
-				activeCategory = resps[0][0];
+				activeCategory = catStyleParts[0];
 			}
 			let style = this.state.style;
 			if (this.checkStyle(activeCategory)) {
 				style = this.checkStyle(activeCategory);
 			}
 
-			this.setState({ catStyleParts: resps[0], activeCategory, showStyle: false, style });
+			this.setState({ catStyleParts, activeCategory, showStyle: false, style });
 		});
 	}
 

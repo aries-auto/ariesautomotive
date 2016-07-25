@@ -38,7 +38,17 @@ const router = new Router(on => {
 		state.context.params = state.params;
 		const slugContainer = state.params[0];
 		const slug = slugContainer.replace('/', '');
-		const [yearResponse, catResponse, contentAllReponse, siteContentResponse] = await Promise.all([
+		let siteContentResponse = null;
+		if (slug !== '') {
+			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Accept': 'application/json',
+				},
+			});
+		}
+		const [yearResponse, catResponse, contentAllReponse] = await Promise.all([
 			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
 				method: 'post',
 				headers: {
@@ -49,13 +59,6 @@ const router = new Router(on => {
 			}),
 			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
 			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
-			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-			}),
 		]);
 
 		try {
