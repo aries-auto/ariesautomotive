@@ -37,7 +37,7 @@ const router = new Router(on => {
 		}
 		state.context.params = state.params;
 		const slugContainer = state.params[0];
-		const slug = slugContainer.replace('/', '');
+		const slug = slugContainer.replace(/\//g, '');
 		let siteContentResponse = null;
 		if (slug !== '') {
 			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
