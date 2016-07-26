@@ -197,7 +197,7 @@ const router = new Router(on => {
 			state.context.error = e.message;
 		}
 		state.context.params = state.params;
-		return <VehicleResults context={state.context} />;
+		return <VehicleResults context={state.context} win={state.win} />;
 	});
 
 	on('/about', async (state) => {

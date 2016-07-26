@@ -3,7 +3,6 @@ import cx from 'classnames';
 import s from './Configurator.scss';
 import withStyles from '../../../decorators/withStyles';
 import VehicleStore from '../../../stores/VehicleStore';
-// import VehicleActions from '../../../actions/VehicleActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import $ from 'jquery';
 
@@ -23,6 +22,7 @@ class Configurator extends Component {
 		partToAdd: PropTypes.object,
 		partToRemove: PropTypes.object,
 		context: PropTypes.object,
+		win: PropTypes.object,
 	};
 
 	constructor() {
@@ -32,7 +32,16 @@ class Configurator extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.props.win.onerror = () => {
+			$('.vehicle-wrapper').hide();
+			$('.error').html('<h4>No image of vehicle with parts available.</h4>');
+			$('.error').removeClass('hidden');
+		};
+	}
+
 	componentWillReceiveProps(next) {
+		$('.error').addClass('hidden');
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
 			const newPart = next.partToRemove;
 			$('#removePart').attr('data-part', newPart.part_number);
@@ -45,7 +54,6 @@ class Configurator extends Component {
 		}
 		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
 			$('.vehicle-wrapper').hide();
-			// VehicleActions.setShowIconMediaVehicleState(false);
 		}
 		return;
 	}
@@ -69,6 +77,7 @@ class Configurator extends Component {
 	render() {
 		return (
 			<div className={cx(s.root)}>
+				<div className="error hidden"></div>
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div className={cx('vehicle-wrapper', s.vehicleWrapper)} id="ic-vehicle-wrapper" data-part="" data-vehicleid={this.props.context.iconMediaVehicle.intVehicleID} title="The Vehicle Accessory Desc"></div>
