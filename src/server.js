@@ -3,13 +3,16 @@ import path from 'path';
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
+import fetch from './core/fetch';
 import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
+import { apiBase, apiKey, brandID } from './config';
 
 const server = global.server = express();
-
+const KEY = apiKey;
+const BRAND = brandID;
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
@@ -23,6 +26,28 @@ server.get('*', async (req, res, next) => {
 		let statusCode = 200;
 		const data = { title: 'Product Information', description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.', css: '', body: '', entry: assets.main.js };
 		const css = [];
+
+		const slugContainer = req.originalUrl;
+		const slug = slugContainer.replace('/', '');
+		const [siteContentResponse] = await Promise.all([
+			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${BRAND}`, { // change this once we switch brand over, hardcoded 4 is for testing
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Accept': 'application/json',
+				},
+			}),
+		]);
+
+		try {
+			const siteContent = await siteContentResponse.json();
+			if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
+				data.title = siteContent.metaTitle;
+				data.description = siteContent.metaDescription;
+			}
+		} catch (e) {
+			// use default meta title and description
+		}
 		const context = {
 			insertCss: styles => css.push(styles._getCss()),
 			onSetTitle: value => data.title = value,
@@ -64,7 +89,9 @@ server.get('*', async (req, res, next) => {
 			if (state.redirect) {
 				redirect = state.redirect;
 			}
+			// if (req.path.indexOf('/vehicle') === -1) {
 			data.body = ReactDOM.renderToString(component);
+			// }
 			data.css = css.join('');
 		});
 

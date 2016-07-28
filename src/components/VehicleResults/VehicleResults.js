@@ -31,7 +31,7 @@ class VehicleResults extends Component {
 			model: PropTypes.string,
 			parts: PropTypes.array,
 		}),
-		catStyleParts: PropTypes.array,
+		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
 		error: PropTypes.object,
 		iconMediaVehicle: PropTypes.object,
@@ -78,14 +78,17 @@ class VehicleResults extends Component {
 
 	getCategoryStyles() {
 		const output = [];
-		for (const i in this.props.catStyleParts) {
-			if (!this.props.catStyleParts[i]) {
+		for (const i in this.props.categories) {
+			if (!this.props.categories[i]) {
 				continue;
 			}
-			const active = this.props.activeCategory === this.props.catStyleParts[i];
+			let active = false;
+			if (this.props.activeCategory && this.props.activeCategory.category.title === this.props.categories[i].category.title) {
+				active = true;
+			}
 			output.push(
 				<li key={i} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
-					<a onClick={this.setActiveCategory.bind(this, this.props.catStyleParts[i])}>{this.props.catStyleParts[i].name}</a>
+					<a onClick={this.setActiveCategory.bind(this, this.props.categories[i])}>{this.props.categories[i].category.title}</a>
 				</li>
 			);
 		}
@@ -96,11 +99,10 @@ class VehicleResults extends Component {
 		VehicleActions.setActiveCategory(cat);
 	}
 
-	renderParts() {
+	renderVehicleStyle() {
 		return (
 			<VehicleStyle
 				className={s.vehicleStyle}
-				category={this.props.activeCategory}
 			/>
 		);
 	}
@@ -113,7 +115,8 @@ class VehicleResults extends Component {
 					{this.props.context.iconMediaVehicle && this.props.context.iconMediaVehicle.intVehicleID ? <Configurator win={this.props.win} context={this.props.context} /> : null}
 				</div>
 				{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <div className={s.envision}><Envision /></div> : null}
-				<Loader loaded={(this.props.catStyleParts !== null)} top="30%" loadedClassName={s.loader}>
+				<Loader loaded={(this.props.categories !== null)} top="30%" loadedClassName={s.loader}>
+
 					<div className={cx(s.root, this.props.className)} role="navigation">
 						<div className="tab-wrap">
 							<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
@@ -122,7 +125,7 @@ class VehicleResults extends Component {
 						</div>
 					</div>
 					<div className={s.clearfix}></div>
-					{this.props.activeCategory ? this.renderParts() : null}
+					{this.props.activeCategory ? this.renderVehicleStyle() : null}
 				</Loader>
 			</div>
 		);

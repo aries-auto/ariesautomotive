@@ -15,6 +15,7 @@ class Html extends Component {
 	static defaultProps = {
 		title: '',
 		description: '',
+		metas: {},
 	};
 
 	trackingCode() {
@@ -30,28 +31,40 @@ class Html extends Component {
 
 	typekit() {
 		return ({ __html:
-			`(function() {` +
-			`var config = {` +
-			`	kitId: 'zgp0frb'` +
-			`};` +
-			`var d = false;` +
-			`var tk = document.createElement('script');` +
-			`tk.src = '//use.typekit.net/' + config.kitId + '.js';` +
-			`tk.type = 'text/javascript';` +
-			`tk.async = 'true';` +
-			`tk.onload = tk.onreadystatechange = function() {` +
-				`	var rs = this.readyState;` +
-				`	if (d || rs && rs !== 'complete' && rs !== 'loaded') {` +
-				`		return;` +
-				`	}` +
-				`	d = true;` +
-				`	try {` +
-					`		Typekit.load(config);` +
-					`	} catch (e) {}` +
-					`};` +
-					`var s = document.getElementsByTagName('script')[0];` +
-					`s.parentNode.insertBefore(tk, s);` +
-					`})();`,
+			`
+			(function() {
+				var config = {
+					kitId: 'abc1def',
+					scriptTimeout: 3000
+				};
+				var h = document.getElementsByTagName('html')[0];
+				h.className += ' wf-loading';
+				var t = setTimeout(function() {
+					h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, ' ');
+					h.className += ' wf-inactive';
+				}, config.scriptTimeout);
+				var d = false;
+				var tk = document.createElement('script');
+				tk.src = '//use.typekit.net/' + config.kitId + '.js';
+				tk.type = 'text/javascript';
+				tk.async = 'true';
+				tk.onload = tk.onreadystatechange = function() {
+					var rs = this.readyState;
+					if (d || rs && rs != 'complete' && rs != 'loaded') return;
+					d = true;
+					clearTimeout(t);
+					try { Typekit.load(config); } catch (e) {}
+				};
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(tk, s);
+			})();
+			`,
+		});
+	}
+
+	typekit2() {
+		return ({ __html:
+			`try{Typekit.load({ async: true });}catch(e){}`,
 		});
 	}
 
@@ -113,7 +126,8 @@ class Html extends Component {
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
 					<script src={this.props.entry}></script>
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
-					<script dangerouslySetInnerHTML={this.typekit()} />
+					<script src="https://use.typekit.net/zgp0frb.js"></script>
+					<script dangerouslySetInnerHTML={this.typekit2()} />
 					<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 				</body>

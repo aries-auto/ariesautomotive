@@ -16,11 +16,6 @@ class About extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', title);
-		const seo = {
-			title,
-		};
-		this.context.seo(seo);
 	}
 
 	getMission() {

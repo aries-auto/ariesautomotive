@@ -130,11 +130,12 @@ class AppGuide extends Component {
 	}
 
 	renderDownloadLinks() {
-		const page = this.props.guide.name;
+		let page = this.props.guide.name;
+		page = page.toLowerCase();
 		const links = [];
 		let render = false;
 		appguides.map((guide, i) => {
-			if ((guide.cats.indexOf(page.toLowerCase()) !== -1)) {
+			if ((guide.cats.indexOf(page) !== -1)) {
 				render = true;
 				const link = `${guide.link}?cache=${cache}`;
 				links.push(

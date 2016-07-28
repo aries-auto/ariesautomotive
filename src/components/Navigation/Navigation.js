@@ -33,9 +33,9 @@ class Navigation extends Component {
 							{cat.title.toUpperCase()} <span className="caret"></span>
 						</a>
 						<ul className={cx(s.subMenu, 'dropdown-menu')} role="menu">
-							{cat.children.sort((a, b) => a.sort > b.sort).map((sub) => {
+							{cat.children.sort((a, b) => a.sort > b.sort).map((sub, j) => {
 								return (
-									<li key={sub.id}>
+									<li key={j + 'sub' + sub.id}>
 										<a
 											href={`/category/${sub.id}/${cat.title}/${sub.title}`}
 										>

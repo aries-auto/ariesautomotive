@@ -41,11 +41,6 @@ class Contact extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta(title);
-		const seo = {
-			title,
-		};
-		this.context.seo(seo);
 	}
 
 	componentWillReceiveProps() {
@@ -74,8 +69,9 @@ class Contact extends Component {
 		const main = this.renderMainLocation();
 		const support = this.renderSupportLocations();
 		return (
-			<div className={s.addresses}>{main}{support}
-				<div className="techsupport"><h4>TECH SUPPORT HOTLINE: <a href="tel:+18888002743">(888) 800-2743</a></h4></div>
+			<div className={s.addresses}>
+				<div className={s.techsupport}><h4>TECH SUPPORT HOTLINE: <a href="tel:+18888002743">(888) 800-2743</a></h4></div>
+				{main}{support}
 			</div>
 		);
 	}
@@ -182,7 +178,7 @@ class Contact extends Component {
 					</div>
 					<div className="col-xs-12 col-md-6 col-lg-6">
 						<div className={cx('head')}>
-							<h3>OUR LOCATIONS</h3>
+							<h1>OUR LOCATIONS</h1>
 						</div>
 						{this.getLocations()}
 					</div>

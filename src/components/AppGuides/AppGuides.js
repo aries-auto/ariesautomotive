@@ -40,12 +40,6 @@ class AppGuides extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', title);
-		const seo = {
-			title,
-			description: 'ARIES Automotive Application Guides',
-		};
-		this.context.seo(seo);
 	}
 
 	static getStores() {

@@ -36,12 +36,6 @@ class BecomeDealer extends Component {
 
 	componentWillMount() {
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', title);
-		const seo = {
-			title,
-			description: 'Become an ARIES Automotive Dealer - You are one simple form away from carrying the ultimate truck accessories',
-		};
-		this.context.seo(seo);
 	}
 
 	static getStores() {

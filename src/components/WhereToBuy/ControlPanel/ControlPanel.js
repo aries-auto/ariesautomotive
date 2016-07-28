@@ -36,13 +36,12 @@ class ControlPanel extends Component {
 		BuyActions.setLocal(l);
 	}
 
-	setOrigin(e) {
-		BuyActions.geocode(e.target.value);
+	setOrigin(suggestion) {
+		BuyActions.geocode(suggestion);
 	}
 
 	handleCurrentLocation() {
 		this.props.navigator.geolocation.getCurrentPosition((pos) => {
-			// BuyActions.setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
 			BuyActions.getAddressFromLatLng(pos.coords.latitude + ',' + pos.coords.longitude);
 		}, (err) => {
 			BuyActions.setError(err.message);
@@ -54,7 +53,7 @@ class ControlPanel extends Component {
 			return;
 		}
 		const autocomplete = new this.props.google.maps.places.AutocompleteService();
-		autocomplete.getQueryPredictions({ input: e.target.value }, (predictions, status) => {
+		autocomplete.getPlacePredictions({ input: e.target.value }, (predictions, status) => {
 			if (status !== this.props.google.maps.places.PlacesServiceStatus.OK) {
 				BuyActions.setError(status);
 			}
@@ -65,7 +64,7 @@ class ControlPanel extends Component {
 	renderSuggestions() {
 		const suggestions = [];
 		this.props.suggestions.map((suggestion, index) => {
-			suggestions.push(<tr key={index}><td value={suggestion.description} onClick={::this.setOrigin}>{suggestion.description}</td></tr>);
+			suggestions.push(<tr key={index}><td value={suggestion.description} onClick={this.setOrigin.bind(this, suggestion.description)}>{suggestion.description}</td></tr>);
 		});
 		return (
 			<table id="suggestions" className={s.suggestionsTable}><tbody>{suggestions}</tbody></table>

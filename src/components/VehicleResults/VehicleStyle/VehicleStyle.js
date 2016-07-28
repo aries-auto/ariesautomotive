@@ -19,7 +19,7 @@ class VehicleStyle extends Component {
 				model: PropTypes.string,
 			}),
 		}),
-		category: PropTypes.object,
+		activeCategory: PropTypes.object,
 		showStyle: PropTypes.bool,
 		parts: PropTypes.array,
 		style: PropTypes.object,
@@ -46,15 +46,15 @@ class VehicleStyle extends Component {
 	getStyleChoices() {
 		const styleOptions = [];
 		let styles = {};
-		styles = this.props.category.styles;
+		styles = this.props.activeCategory.style_options;
 
 		for (const i in styles) {
 			if (!i) {
 				return styleOptions;
 			}
 			styleOptions.push(
-				<li key={i} onClick={this.setVehicleStyle.bind(this, styles[i])} value={styles[i].name}>
-					{styles[i].name.toUpperCase()}
+				<li key={i} onClick={this.setVehicleStyle.bind(this, styles[i])} value={styles[i].style}>
+					{styles[i].style.toUpperCase()}
 				</li>
 			);
 		}
@@ -88,21 +88,40 @@ class VehicleStyle extends Component {
 		);
 	}
 
+	renderStyleChoices() {
+		if (
+			!this.props.activeCategory.style_options ||
+			this.props.activeCategory.style_options.length === 0
+		) {
+			return <span></span>;
+		}
+		if (
+			this.props.activeCategory.style_options.length === 1 &&
+			this.props.activeCategory.style_options[0].style.toLowerCase() === 'all'
+		) {
+			return <span></span>;
+		}
+		return (
+			<div className={s.greybox}>
+				<div>
+					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
+				</div>
+				<div className={s.styleSelect}>
+					<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.style && !this.props.showStyle) ? this.props.style.style : 'Select a Style'} <span className="caret"></span></button>
+					{(this.props && this.props.showStyle) ? this.showStyleChoices() : null}
+				</div>
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div className={s.root}>
-				<h1 className={s.categoryName}>{this.props.category.name ? this.props.category.name : null}</h1>
-				<div className={s.greybox}>
-					<div>
-						<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
-					</div>
-					<div className={s.styleSelect}>
-						<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.style && !this.props.showStyle) ? this.props.style.name : 'Select a Style'} <span className="caret"></span></button>
-						{(this.props && this.props.showStyle) ? this.showStyleChoices() : null}
-					</div>
-				</div>
+				<h1 className={s.categoryName}>{this.props.activeCategory.category ? this.props.activeCategory.category.title : null}</h1>
+				<hr/>
+				{this.renderStyleChoices()}
 				<div>
-					{this.props.style ? this.getParts() : ''}
+					{this.props.style ? this.getParts() : null}
 				</div>
 			</div>
 		);

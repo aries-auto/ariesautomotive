@@ -1,11 +1,21 @@
 @import '../../../node_modules/normalize.css/normalize.css';
 @import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css';
-
 @import '../variables.scss';
 
 /*
 * Base styles
 * ========================================================================== */
+
+:global html, :global html.wf-loading {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+:global html.wf-active {
+	visibility: visible;
+	opacity: 1;
+}
 
 html {
     font-family: $font-family-base;
@@ -14,23 +24,14 @@ html {
     color: #222;
 }
 
-html.wf-active {
-font-size: 1em; /* ~16px; */
-line-height: 1.375; /* ~22px */
-}
-
 body {
     font-family: 'ff-good-headline-web-pro-con', sans-serif;
     background: url('/img/bgtexture.png');
-
     -webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2,
-h3,
-h4 {
-    font-family: 'ff-good-headline-web-pro-con',sans-serif;
+h1, h2, h3, h4 {
+    font-family: 'ff-good-headline-web-pro-con', sans-serif;
     font-weight: 700;
     color: $header-color;
 }
@@ -51,10 +52,8 @@ h4 {
     font-size: 28px;
 }
 
-
-p,
-li {
-    font-family: "proxima-nova-condensed",sans-serif;
+p, li {
+    font-family: "proxima-nova-condensed", sans-serif;
     font-size: 18px;
 }
 
@@ -103,12 +102,7 @@ hr {
 * https://github.com/h5bp/html5-boilerplate/issues/440
 */
 
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
+audio, canvas, iframe, img, svg, video {
     vertical-align: middle;
 }
 
@@ -148,46 +142,36 @@ textarea {
 * ========================================================================== */
 
 @media print {
-    *,
-    *:before,
-    *:after {
-color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
-text-shadow: none !important;
-background: transparent !important;
-box-shadow: none !important;
-}
+    *, *:before, *:after {
+        color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+        text-shadow: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
 
-a,
-a:visited {
-    text-decoration: underline;
-}
+    a, a:visited {
+        text-decoration: underline;
+    }
 
-a[href]:after {
-    content: " (" attr(href) ")";
-}
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
 
-abbr[title]:after {
-    content: " (" attr(title) ")";
-}
-
-    /*
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }/*
     * Don't show links that are fragment identifiers,
     * or use the `javascript:` pseudo protocol
     */
 
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
+    a[href^="#"]:after, a[href^="javascript:"]:after {
         content: "";
     }
 
-    pre,
-    blockquote {
+    pre, blockquote {
         border: 1px solid #999;
-
         page-break-inside: avoid;
-    }
-
-    /*
+    }/*
     * Printing Tables:
     * http://css-discuss.incutio.com/wiki/Printing_Tables
     */
@@ -196,8 +180,7 @@ abbr[title]:after {
         display: table-header-group;
     }
 
-    tr,
-    img {
+    tr, img {
         page-break-inside: avoid;
     }
 
@@ -205,15 +188,12 @@ abbr[title]:after {
         max-width: 100% !important;
     }
 
-    p,
-    h2,
-    h3 {
+    p, h2, h3 {
         orphans: 3;
         widows: 3;
     }
 
-    h2,
-    h3 {
+    h2, h3 {
         page-break-after: avoid;
     }
 }

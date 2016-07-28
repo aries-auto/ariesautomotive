@@ -48,12 +48,8 @@ class Lookup extends Component {
 	}
 
 	componentWillMount() {
+		LookupActions.get();
 		if (this.props.params && this.props.params.year && this.props.params.make && this.props.params.model) {
-			LookupActions.set({
-				year: this.props.params.year,
-				make: this.props.params.make,
-				model: this.props.params.model,
-			});
 			this.vehicleSet = true;
 		}
 	}

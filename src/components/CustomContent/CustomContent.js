@@ -27,6 +27,12 @@ class CustomContent extends Component {
 		};
 		this.context.seo(seo);
 	}
+	shouldComponentUpdate() {
+		this.setState({
+			notusedstate: Math.random(),
+		});
+		return false;
+	}
 
 	renderText() {
 		if (!this.props.context.customContent || !this.props.context.customContent.contentRevisions || this.props.context.customContent.contentRevisions.length < 1) {
