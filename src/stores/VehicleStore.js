@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
 import VehicleActions from '../actions/VehicleActions';
-import { apiBase, apiKey } from '../config';
+import { apiBase, apiKey, brand } from '../config';
 
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
@@ -27,61 +27,73 @@ class VehicleStore extends EventEmitter {
 		this.bindActions(VehicleActions);
 	}
 
-	setActiveCategory(category) {
+	setActiveCategory(activeCategory) {
 		let style = null;
-		if (this.checkStyle(category)) {
-			style = this.checkStyle(category);
+		if (this.checkStyleOptions(activeCategory)) {
+			style = this.checkStyleOptions(activeCategory);
 		}
-		this.setState({ activeCategory: category, style });
+		this.getCategoryParts(activeCategory, style);
+	}
+
+	checkStyleOptions(category) {
+		// cat has one style called 'all'
+		if (category.style_options.length === 1 && category.style_options[0].style === 'all') {
+			return category.style_options[0];
+		}
+		// cat has style with same name as current style
+		for (const i in category.style_options) {
+			if (this.state.style && category.style_options[i].style === this.state.style.style) {
+				return category.style_options[i];
+			}
+		}
+		return null;
 	}
 
 	async getCategoryStyles() {
 		if (this.state.vehicle.year === '' || this.state.vehicle.make === '' || this.state.vehicle.model === '') {
 			return;
 		}
-		const params = '&year=' + this.state.vehicle.year + '&make=' + this.state.vehicle.make + '&model=' + encodeURIComponent(this.state.vehicle.model);
-		Promise.all([
-			await fetch(`${apiBase}/vehicle/mongo/categoryStyleParts?key=${KEY}` + params, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-			}),
-			await fetch(`${apiBase}/category/320/parts?key=${KEY}`),
-		]).then((resps) => {
-			return Promise.all([resps[0].json(), resps[1].json()]);
-		}).then((resps) => {
-			let catStyleParts = resps[0];
-			if (!catStyleParts) {
-				catStyleParts = [];
-			}
-			catStyleParts.push({ 'name': 'Seat Defenders', 'styles': [{ 'name': 'all', 'parts': resps[1].parts }] });
-			let activeCategory = this.state.activeCategory;
-			if (!activeCategory) {
-				activeCategory = catStyleParts[0];
-			}
-			let style = this.state.style;
-			if (this.checkStyle(activeCategory)) {
-				style = this.checkStyle(activeCategory);
-			}
-
-			this.setState({ catStyleParts, activeCategory, showStyle: false, style });
-		});
+		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
+		const apiResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&brands=${brand}`);
+		const resp = await apiResp.json();
+		if (!this.state.activeCategory) {
+			this.setActiveCategory(resp.lookup_category[0]);
+		}
+		this.setState({ categories: resp.lookup_category });
+		return;
 	}
 
-	checkStyle(activeCategory) {
-		// cat has one style called 'all'
-		if (activeCategory.styles.length === 1 && activeCategory.styles[0].name === 'all') {
-			return activeCategory.styles[0];
+	async getCategoryParts(activeCategory, style) {
+		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}/${activeCategory.category.title}`;
+		const catResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&withParts=true&brands=${brand}`);
+		const data = await catResp.json();
+		let s = style;
+		s = this.linkPartsToStyle(data, s);
+
+		this.setState({ activeCategory, style: s, showStyle: false });
+		return;
+	}
+
+	linkPartsToStyle(apiResp, style) {
+		if (!style) {
+			return null;
 		}
-		// cat has style with same name as current style
-		for (const i in activeCategory.styles) {
-			if (this.state.style && activeCategory.styles[i].name === this.state.style.name) {
-				return activeCategory.styles[i];
+		const parts = [];
+		for (const i in apiResp.products) {
+			if (!apiResp) {
+				continue;
+			}
+			for (const j in style.fitments) {
+				if (!style.fitments[j]) {
+					continue;
+				}
+				if (style.fitments[j].product_identifier === apiResp.products[i].part_number) {
+					parts.push(apiResp.products[i]);
+				}
 			}
 		}
-		return null;
+		style.parts = parts;
+		return style;
 	}
 
 	async set(vehicle) {
@@ -98,7 +110,11 @@ class VehicleStore extends EventEmitter {
 	}
 
 	setStyle(style) {
-		this.setState({ showStyle: false, style });
+		this.getCategoryParts(this.state.activeCategory, style);
+	}
+
+	setLookupCategories(lookupCategories) {
+		this.setState({ lookupCategories });
 	}
 }
 
