@@ -14,7 +14,7 @@ const title = 'Application Guides';
 class AppGuides extends Component {
 
 	static propTypes = {
-		guides: PropTypes.array,
+		guideGroups: PropTypes.array,
 		title: PropTypes.string,
 		guide: PropTypes.object,
 	};
@@ -27,7 +27,7 @@ class AppGuides extends Component {
 	};
 
 	static defaultProps = {
-		guides: [],
+		guideGroups: [],
 		title,
 		guide: null,
 	};
@@ -50,8 +50,8 @@ class AppGuides extends Component {
 		return AppGuideStore.getState();
 	}
 
-	handleAppGuide(i) {
-		AppGuideActions.set(this.props.guides[i], 0);
+	handleAppGuide(g) {
+		AppGuideActions.set(g.collection, 0);
 	}
 
 	handleAppguides() {
@@ -63,22 +63,25 @@ class AppGuides extends Component {
 		output.push(<h1 key="head">APPLICATION GUIDES</h1>);
 		output.push(<p key="p">The application guides below will help you determine which ARIES parts will fit your vehicle.<br /> Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>);
 
-
 		// loop through each main category ('Running boards, nerf bars, side steps, side steps, etc')
 		const mainGuides = [];
-		mainGuides.push(<h2 key="cat1">RUNNING BOARDS, NERF BARS & SIDE STEPS</h2>);
-		const ags = [];
-		// loop through each sub category (RidgeStep, 4 oval wheel to wheel, big step 4 inch round nerf bars, etc)
-		ags.push(
-			<div className={cx(s.guideRow, 'col-xs-12', 'col-sm-6', 'col-md-6', 'col-lg-6')}>
-				<a className={cx(s.guide, 'well')}>
-					<img className={cx(s.guideImage)} src="https://www.curtmfg.com/masterlibrary/01ARIES/B35-4014/images/B35-4014_300x225_a.jpg" />
-					<span>RidgeStep 6.5 Commercial Running Boards</span>
-				</a>
-			</div>
-		);
-		mainGuides.push(<div className={cx(s.subGuides, 'col-lg-12', 'col-md-12', 'col-sm-12')}>{ags}</div>);
+		this.props.guideGroups.map((group, i) => {
+			mainGuides.push(<h2 key={i}>{group.title}</h2>);
+			const ags = [];
 
+			// loop through each sub category (RidgeStep, 4 oval wheel to wheel, big step 4 inch round nerf bars, etc)
+			group.appGuides.map((g, ii) => {
+				ags.push(
+					<div key={ii} className={cx(s.guideRow, 'col-xs-12', 'col-sm-6', 'col-md-6', 'col-lg-6')}>
+						<a className={cx(s.guide, 'well')} onClick={this.handleAppGuide.bind(this, g)}>
+							<img className={cx(s.guideImage)} src={g.imagePath} />
+							<span>{g.title}</span>
+						</a>
+					</div>
+				);
+			});
+			mainGuides.push(<div className={cx(s.subGuides, 'col-lg-12', 'col-md-12', 'col-sm-12')}>{ags}</div>);
+		});
 		output.push(<div>{mainGuides}</div>);
 		// this.props.guides.map((guide, i) => {
 		// 	output.push(
