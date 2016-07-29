@@ -25,27 +25,22 @@ class LookupStore extends EventEmitter {
 			get: LookupActions.get,
 		});
 		this.bindAction(LookupActions.set, this.set);
-		// this.get();
+		this.get();
 	}
 
 	async get() {
-		let params = '';
-		if (this.state.vehicle.year) {
-			params += '/' + this.state.vehicle.year;
-		}
-		if (this.state.vehicle.make) {
-			params += '/' + this.state.vehicle.make;
-		}
-		if (this.state.vehicle.model) {
-			params += '/' + this.state.vehicle.model;
+		let body = '';
+		if (this.state.vehicle.year !== '') {
+			body = `year=${this.state.vehicle.year || 0}&make=${this.state.vehicle.make || ''}&model=${this.state.vehicle.model || ''}&style=${this.state.vehicle.style || ''}&collection=${this.state.vehicle.collection || ''}`;
 		}
 		try {
-			await fetch(`${apiBase}/vehicle/category${params}?key=${KEY}`, {
-				method: 'get',
+			await fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
+				method: 'post',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 					'Accept': 'application/json',
 				},
+				body,
 			}).then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -53,26 +48,26 @@ class LookupStore extends EventEmitter {
 					makes: this.state.makes,
 					models: this.state.models,
 				});
-				if (data.availableYears !== undefined) {
+				if (data.available_years !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
-						years: data.availableYears,
+						years: data.available_years,
 						makes: [],
 						models: [],
 					});
-				} else if (data.availableMakes !== undefined) {
+				} else if (data.available_makes !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
-						makes: data.availableMakes,
+						makes: data.available_makes,
 						models: [],
 					});
-				} else if (data.availableModels !== undefined) {
+				} else if (data.available_models !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
 						makes: this.state.makes,
-						models: data.availableModels,
+						models: data.available_models,
 					});
 				} else {
 					this.setState({
