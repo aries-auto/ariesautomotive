@@ -39,13 +39,13 @@ export const appguides = [
 		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.xlsx',
 		type: 'xls',
 		icon: 'https://storage.googleapis.com/curt-icons/Excel-Icon.png',
-		cats: ['4 in oval side bars, wheel to wheel'],
+		cats: ['4 in oval side bars, wheel-to-wheel'],
 	},
 	{
 		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.pdf',
 		type: 'pdf',
 		icon: 'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png',
-		cats: ['4 in oval side bars, wheel to wheel'],
+		cats: ['4 in oval side bars, wheel-to-wheel'],
 	},
 	{
 		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.xlsx',
