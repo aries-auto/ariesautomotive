@@ -134,8 +134,6 @@ class AppGuide extends Component {
 		const links = [];
 		let render = false;
 		appguides.map((guide, i) => {
-			console.log(guide);
-			console.log(page);
 			if ((guide.cats.indexOf(page) !== -1)) {
 				render = true;
 				const link = `${guide.link}?cache=${cache}`;
