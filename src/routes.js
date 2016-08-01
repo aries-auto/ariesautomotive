@@ -14,6 +14,7 @@ import VehicleResults from './components/VehicleResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
+// import AppGuide from './components/AppGuides/AppGuide/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -230,6 +231,25 @@ const router = new Router(on => {
 
 	on('/appguides', async (state) => {
 		return <AppGuides context={state.context} />;
+	});
+
+	on('/appguides/:guide/:page', async (state) => {
+		let guide = {};
+		const collection = state.params.guide;
+		const page = state.params.page;
+		try {
+			const guideResponse = await fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
+				method: 'post',
+				headers: {
+					'Accept': 'application/json',
+				},
+			});
+			guide = await guideResponse.json();
+			guide.name = collection;
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <AppGuides guide={guide} context={state.context} />;
 	});
 
 	on('/becomedealer', async (state) => {
