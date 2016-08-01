@@ -73,7 +73,7 @@ class AppGuides extends Component {
 			group.appGuides.map((g, ii) => {
 				ags.push(
 					<div key={ii} className={cx(s.guideRow, 'col-xs-12', 'col-sm-6', 'col-md-6', 'col-lg-6')}>
-						<a className={cx(s.guide, 'well')} onClick={this.handleAppGuide.bind(this, g)}>
+						<a className={cx(s.guide, 'well')} href={`/appguides/${g.collection}/0`}>
 							<img className={cx(s.guideImage)} src={g.imagePath} />
 							<span>{g.title}</span>
 						</a>
@@ -83,18 +83,6 @@ class AppGuides extends Component {
 			mainGuides.push(<div className={cx(s.subGuides, 'col-lg-12', 'col-md-12', 'col-sm-12')}>{ags}</div>);
 		});
 		output.push(<div>{mainGuides}</div>);
-		// this.props.guides.map((guide, i) => {
-		// 	output.push(
-		// 		<a key={i} className={cx(s.guide, 'row', 'well')} onClick={this.handleAppGuide.bind(this, i)}>
-		// 			<div className="pull-left">
-		// 				{ guide }
-		// 			</div>
-		// 			<div className="pull-right">
-		// 				<span className="glyphicon glyphicon-chevron-right"></span>
-		// 			</div>
-		// 		</a>
-		// 	);
-		// });
 
 		return (
 			<div>
@@ -111,7 +99,7 @@ class AppGuides extends Component {
 	renderBreadCrumbs() {
 		const output = [];
 		const apps = <li key="apps" className="active">Application Guides</li>;
-		const appsinact = <li key="app" onClick={this.handleAppguides}><a>Application Guides</a></li>;
+		const appsinact = <li key="app"><a href={`/appguides`}>Application Guides</a></li>;
 		const app = <li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>;
 		if (this.props.guide) {
 			output.push(appsinact);

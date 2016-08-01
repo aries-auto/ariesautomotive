@@ -14,7 +14,6 @@ class AppGuideStore extends EventEmitter {
 		this.state = {
 			guides: [],
 			error: {},
-			guide: null,
 			applicationGuides: [],
 		};
 		this.bindListeners({
