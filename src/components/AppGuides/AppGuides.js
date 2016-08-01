@@ -59,10 +59,6 @@ class AppGuides extends Component {
 	}
 
 	renderGuides() {
-		const output = [];
-		output.push(<h1 key="head">APPLICATION GUIDES</h1>);
-		output.push(<p key="p">The application guides below will help you determine which ARIES parts will fit your vehicle.<br /> Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>);
-
 		// loop through each main category ('Running boards, nerf bars, side steps, side steps, etc')
 		const mainGuides = [];
 		this.props.guideGroups.map((group, i) => {
@@ -82,32 +78,31 @@ class AppGuides extends Component {
 			});
 			mainGuides.push(<div className={cx(s.subGuides, 'col-lg-12', 'col-md-12', 'col-sm-12')}>{ags}</div>);
 		});
-		output.push(<div>{mainGuides}</div>);
 
 		return (
 			<div>
-				{output}
-			</div>);
-	}
-
-	renderGuide() {
-		return (
-			<AppGuide guide={this.props.guide} />
+				<h1>APPLICATION GUIDES</h1>
+				<p>
+					The application guides below will help you determine which
+					ARIES parts will fit your vehicle.<br /> Each app guide is
+					category-specific and broken down by vehicle make, model,
+					year and style.
+				</p>
+				{mainGuides}
+			</div>
 		);
 	}
 
 	renderBreadCrumbs() {
-		const output = [];
-		const apps = <li key="apps" className="active">Application Guides</li>;
-		const appsinact = <li key="app"><a href={`/appguides`}>Application Guides</a></li>;
-		const app = <li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>;
 		if (this.props.guide) {
-			output.push(appsinact);
-			output.push(app);
-		} else {
-			output.push(apps);
+			return (
+				[
+					<li key="app"><a href={`/appguides`}>Application Guides</a></li>,
+					<li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>,
+				]
+			);
 		}
-		return output;
+		return <li key="apps" className="active">Application Guides</li>;
 	}
 
 	render() {
@@ -118,7 +113,7 @@ class AppGuides extends Component {
 						<li><a href="/">Home</a></li>
 						{this.renderBreadCrumbs()}
 					</ol>
-					{this.props.guide ? this.renderGuide() : this.renderGuides()}
+					{this.props.guide ? <AppGuide guide={this.props.guide} /> : this.renderGuides()}
 				</div>
 			</div>
 		);
