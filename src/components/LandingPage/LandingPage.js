@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import s from './LandingPage.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
+import { brandName, brandNameShort } from '../../config';
 
 @withStyles(s)
 class LandingPage extends Component {
@@ -19,9 +20,9 @@ class LandingPage extends Component {
 	};
 
 	componentWillMount() {
-		const title = (this.props.page && this.props.page.Name) ? this.props.page.Name : 'ARIES';
+		const title = (this.props.page && this.props.page.Name) ? this.props.page.Name : brandNameShort;
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', (this.props.page && this.props.page.Name ? this.props.page.Name : 'Aries Automotive'));
+		this.context.onSetMeta('description', (this.props.page && this.props.page.Name ? this.props.page.Name : brandName));
 		const seo = {
 			title,
 		};

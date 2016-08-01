@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import s from './Footer.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
+import { brandName } from '../../config';
+import footer from '../../data/footer';
 
 @withStyles(s)
 class Footer extends Component {
@@ -26,15 +28,11 @@ class Footer extends Component {
 		}
 		return (
 			<ul className={cx(s.nav, 'nav')}>
-				<li><a href="/about" title="About Us">ABOUT</a></li>
-				<li><a href="/appguides" title="Application Guides">APPLICATION GUIDES</a></li>
-				<li><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a></li>
-				<li><a href="/buy" title="Where To Buy">WHERE TO BUY</a></li>
-				<li><a href="http://orders.ariesautomotive.com/" title="COMNET">COMNET</a></li>
-				<li><a href="/news" title="Latest News">LATEST NEWS</a></li>
-				<li><a href="/techsupport" title="Technical Support">TECH SUPPORT</a></li>
-				<li><a href="/warranties" title="Online Warranties">ONLINE WARRANTIES</a></li>
-				<li><a href="/contact" title="Contact Us">CONTACT</a></li>
+				{footer.links.map((link, i) => {
+					return (
+						<li key={i} className={s.item}><a href={link.href} title={link.title}>{link.value}</a></li>
+					);
+				})}
 				{customContent}
 			</ul>
 			);
@@ -100,7 +98,7 @@ class Footer extends Component {
 							<img src="https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent).svg" alt="Aries Automotive" className={cx('img-responsive', s.footerLogo)} />
 							<div className="clearfix">&nbsp;</div>
 							<br />
-							<span className={s.conditions}>&copy; 1997 - {this.getYear()} ARIES AUTOMOTIVE <a href="/terms" className={s.terms}>TERMS & CONDITIONS</a></span>
+							<span className={s.conditions}>&copy; 1997 - {this.getYear()} {brandName} <a href="/terms" className={s.terms}>TERMS & CONDITIONS</a></span>
 						</div>
 					</div>
 				</div>

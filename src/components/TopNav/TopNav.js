@@ -3,6 +3,7 @@ import cx from 'classnames';
 import s from './TopNav.scss';
 import SearchForm from '../SearchForm';
 import withStyles from '../../decorators/withStyles';
+import topnav from '../../data/topnav';
 
 @withStyles(s)
 class TopNav extends Component {
@@ -19,11 +20,11 @@ class TopNav extends Component {
 				</div>
 				<div className={cx('hidden-sm', 'hidden-xs', 'col-lg-8', 'col-md-8')}>
 					<ul className={cx('nav', 'navbar-nav', 'pull-right', s.menu)}>
-						<li className={s.item}><a href="/buy" title="Where to Buy">WHERE TO BUY</a></li>
-						<li className={s.item}><a href="http://orders.ariesautomotive.com/" title="COMNET Login">COMNET LOGIN</a></li>
-						<li className={s.item}><a href="/becomedealer" title="Become a Dealer">BECOME A DEALER</a></li>
-						<li className={s.item}><a href="/about" title="About Us">ABOUT</a></li>
-						<li className={s.item}><a href="/contact" title="Contact Us">CONTACT</a></li>
+						{topnav.links.map((link, i) => {
+							return (
+								<li key={i} className={s.item}><a href={link.href} title={link.title}>{link.value}</a></li>
+							);
+						})}
 					</ul>
 				</div>
 				<div className="clearfix"></div>

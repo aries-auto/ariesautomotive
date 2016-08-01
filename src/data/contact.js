@@ -1,3 +1,4 @@
+import React from 'react';
 
 module.exports.fields = [
 	{
@@ -57,3 +58,7 @@ module.exports.fields = [
 		required: true,
 	},
 ];
+
+module.exports.phone = (
+	<a rel="canonical" href="tel:+18888002743">(888) 800-2743</a>
+);
