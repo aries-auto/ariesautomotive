@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Warranties.scss';
 import withStyles from '../../decorators/withStyles';
-import { fields, fields2 } from './FormFields';
 import WarrantiesStore from '../../stores/WarrantiesStore';
 import WarrantiesActions from '../../actions/WarrantiesActions';
 import Form from '../Form/Form';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import warrantyData, { fields, fields2 } from '../../data/warranties';
 
 const title = 'Warranties';
 
@@ -88,6 +88,14 @@ class Warranties extends Component {
 			</div>);
 	}
 
+	renderAddress() {
+		return warrantyData.addressHtml;
+	}
+
+	renderWarrantySticker() {
+		return warrantyData.registrationStickerHtml;
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
@@ -108,9 +116,7 @@ class Warranties extends Component {
 								<h1>STEP 2 OF 4: PRODUCT REGISTRATION INFORMATION</h1>
 								<p>
 									<em>Find your registration sticker: </em>
-									<a href="https://www.curtmfg.com/assets/aries/warranty/bullbarregistrationsticker.jpg" target="blank">Bull Bar | </a>
-									<a href="https://www.curtmfg.com/assets/aries/warranty/grillguardregistrationsticker.jpg" target="blank">Grill Guard | </a>
-									<a href="https://www.curtmfg.com/assets/aries/warranty/sidebarregistrationsticker.jpg" target="blank">Side Bar</a>
+									{this.renderWarrantySticker()}
 								</p>
 								{this.getForm2()}
 							</div>
@@ -123,17 +129,7 @@ class Warranties extends Component {
 							<div className={cx('col-xs-12 col-md-12 col-lg-12', s.step4)}>
 								<h1>STEP 4 OF 4: FAX, MAIL, OR EMAIL PROOF OF PURCHASE TO THE FOLLOWING LOCATION TO COMPLETE REGISTRATION.</h1>
 								<div className={s.contact}>
-									<p>ATTN: WARRANTY DEPT.</p>
-									<p></p>
-									<p>ARIES AUTOMOTIVE</p>
-									<p>2611 Regent Boulevard</p>
-									<p>Suite 300</p>
-									<p>DFW Airport, TX 75261 USA</p>
-									<p></p>
-									<p>Phone: (888) 635-9824</p>
-									<p></p>
-									<p>Fax: (972) 352-2617</p>
-									<p>Email: <a href="mailto:customerservice@ariesautomotive.com">customerservice@ariesautomotive.com</a></p>
+									{this.renderAddress()}
 								</div>
 								<p><em>Warranty registration is valid within 90 days from the date of purchase as stated on the proof of purchase receipt.</em></p>
 							</div>
