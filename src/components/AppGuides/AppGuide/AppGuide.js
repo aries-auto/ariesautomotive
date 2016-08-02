@@ -58,17 +58,27 @@ class AppGuide extends Component {
 	}
 
 	getFinish(application) {
-		const partNumber = [];
+		const appguideSlice = [];
+		const finishToAppguide = {};
 		this.props.guide.finishes.map((finish) => {
+			finishToAppguide[finish] = [];
 			application.parts.map((part, j) => {
 				if (part.finish === finish) {
 					const url = `/part/${part.oldPartNumber}`;
 					const ins = `https://www.curtmfg.com/masterlibrary/01ARIES/206003-2/installsheet/${part.oldPartNumber}_INS.pdf`;
-					partNumber.push(<td key={j}><a href={url}>{part.oldPartNumber} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></td>);
+					const appguideCell = (<div key={j}><a href={url}>{part.oldPartNumber} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></div>);
+					finishToAppguide[finish].push(appguideCell);
 				}
 			});
 		});
-		return partNumber;
+		this.props.guide.finishes.map((finish) => {
+			for (const i in finishToAppguide) {
+				if (i === finish) {
+					appguideSlice.push(<td key={i}>{finishToAppguide[i]}</td>);
+				}
+			}
+		});
+		return appguideSlice;
 	}
 	handlePagination(inc) {
 		if (this.props.page && this.props.page === 0 && inc === -1) {
@@ -119,11 +129,12 @@ class AppGuide extends Component {
 	}
 
 	renderDownloadLinks() {
-		const page = this.props.guide.name;
+		let page = this.props.guide.name;
+		page = page.toLowerCase();
 		const links = [];
 		let render = false;
 		appguides.map((guide, i) => {
-			if ((guide.cats.indexOf(page.toLowerCase()) !== -1)) {
+			if ((guide.cats.indexOf(page) !== -1)) {
 				render = true;
 				const link = `${guide.link}?cache=${cache}`;
 				links.push(

@@ -7,3 +7,5 @@ export const iapiBase = process.env.NODE_ENV === 'development' ? 'http://localho
 export const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://goapi.curtmfg.com';
 export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !== 'undefined' ? process.env.API_KEY : '9300f7bc-2ca6-11e4-8758-42010af0fd79';
 export const brand = '3';
+export const brandName = 'Aries Automotive';
+export const brandNameShort = 'Aries';

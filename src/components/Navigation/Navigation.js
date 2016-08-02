@@ -18,10 +18,10 @@ class Navigation extends Component {
 		}
 
 		this.props.categories.sort((a, b) => a.sort > b.sort);
-		this.props.categories.map((cat) => {
+		this.props.categories.map((cat, i) => {
 			if (cat.children && cat.children.length > 0) {
 				return cats.push(
-					<li key={cat.id} role="presentation" className="dropdown">
+					<li key={i + 'cat' + cat.id} role="presentation" className="dropdown">
 						<a
 							className={cx(s.link, 'dropdown-toggle')}
 							data-toggle="dropdown"
@@ -33,9 +33,9 @@ class Navigation extends Component {
 							{cat.title.toUpperCase()} <span className="caret"></span>
 						</a>
 						<ul className={cx(s.subMenu, 'dropdown-menu')} role="menu">
-							{cat.children.sort((a, b) => a.sort > b.sort).map((sub) => {
+							{cat.children.sort((a, b) => a.sort > b.sort).map((sub, j) => {
 								return (
-									<li key={sub.id}>
+									<li key={j + 'sub' + sub.id}>
 										<a
 											href={`/category/${sub.id}/${cat.title}/${sub.title}`}
 										>
@@ -49,7 +49,7 @@ class Navigation extends Component {
 				);
 			}
 			return cats.push(
-				<li key={cat.id} role="presentation">
+				<li key={i + 'cat' + cat.id} role="presentation">
 					<a className={s.link} href={`/category/${cat.id}/${cat.title}`} aria-haspopup="true">
 						{cat.title}
 					</a>

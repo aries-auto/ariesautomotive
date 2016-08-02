@@ -36,13 +36,13 @@ export const appguides = [
 		cats: ['4 in oval side bars'],
 	},
 	{
-		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.xlsx',
+		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.xlsx',
 		type: 'xls',
 		icon: 'https://storage.googleapis.com/curt-icons/Excel-Icon.png',
 		cats: ['4 in oval side bars, wheel-to-wheel'],
 	},
 	{
-		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20App%20Guide.pdf',
+		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/ARIES%204%20IN%20OVAL%20SIDE%20BARS%20-%20W2W%20App%20Guide.pdf',
 		type: 'pdf',
 		icon: 'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png',
 		cats: ['4 in oval side bars, wheel-to-wheel'],
@@ -51,22 +51,22 @@ export const appguides = [
 		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.xlsx',
 		type: 'xls',
 		icon: 'https://storage.googleapis.com/curt-icons/Excel-Icon.png',
-		cats: ['5 in running boards, aerotread and mounting brackets', '6.5 in commercial running boards, ridgestep and mounting brackets'],
+		cats: ['5 in running boards, aerotread and mounting brackets'],
 	},
 	{
 		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.pdf',
 		type: 'pdf',
 		icon: 'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png',
-		cats: ['5 in running boards, aerotread and mounting brackets', '6.5 in commercial running boards, ridgestep and mounting brackets'],
+		cats: ['5 in running boards, aerotread and mounting brackets'],
 	},
 	{
-		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.xlsx',
+		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Side%20Bar.xlsx',
 		type: 'xls',
 		icon: 'https://storage.googleapis.com/curt-icons/Excel-Icon.png',
 		cats: ['5.5 in side bars, advantedge and mounting brackets'],
 	},
 	{
-		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AeroTread%20Running%20Boards%20and%20Brackets.pdf',
+		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/AdvantEdge%20Side%20Bar.pdf',
 		type: 'pdf',
 		icon: 'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png',
 		cats: ['5.5 in side bars, advantedge and mounting brackets'],
@@ -202,6 +202,18 @@ export const appguides = [
 		type: 'pdf',
 		icon: 'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png',
 		cats: ['jeep rocker steps'],
+	},
+	{
+		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.xlsx',
+		type: 'xls',
+		icon: 'https://storage.googleapis.com/curt-icons/Excel-Icon.png',
+		cats: ['6.5 in commercial running boards, ridgestep and mounting brackets'],
+	},
+	{
+		link: 'https://www.curtmfg.com/masterlibrary/01resources/appguides/ARIES/RidgeStep%20Running%20Boards%20and%20Brackets.pdf',
+		type: 'pdf',
+		icon: 'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png',
+		cats: ['6.5 in commercial running boards, ridgestep and mounting brackets'],
 	},
 
 ];

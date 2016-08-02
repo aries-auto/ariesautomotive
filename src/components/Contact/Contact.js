@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Contact.scss';
 import withStyles from '../../decorators/withStyles';
-import { fields } from './FormFields';
+import { fields } from '../../data/contact';
 import ContactStore from '../../stores/ContactStore';
 import ContactActions from '../../actions/ContactActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import Form from '../Form/Form';
-import { locations } from '../../data/locations';
+import { locations, mainLocation } from '../../data/locations';
+import { phone } from '../../data/contact';
 
 const title = 'Contact Aries';
 
@@ -70,7 +71,7 @@ class Contact extends Component {
 		const support = this.renderSupportLocations();
 		return (
 			<div className={s.addresses}>
-				<div className={s.techsupport}><h4>TECH SUPPORT HOTLINE: <a href="tel:+18888002743">(888) 800-2743</a></h4></div>
+				<div className={s.techsupport}><h4>TECH SUPPORT HOTLINE: {phone}</h4></div>
 				{main}{support}
 			</div>
 		);
@@ -117,29 +118,29 @@ class Contact extends Component {
 	renderMainLocation() {
 		return (
 			<address itemType="//schema.org/Organization" className={s.mainLocation}>
-				<span className={s.addressname} itemProp="name">ARIES AUTOMOTIVE HEADQUARTERS - DALLAS AREA</span>
+				<span className={s.addressname} itemProp="name">{mainLocation.physical.name}</span>
 				<div className={s.physical} itemProp="address" itemType="//schema.org/PostalAddress">
 					<strong>Physical Address</strong><br />
-					<span itemProp="streetAddress">2611 Regent Boulevard</span>
+					<span itemProp="streetAddress">{mainLocation.physical.address.address1}</span>
 					<br />
-					<span itemProp="suite">Suite 300</span>
+					<span itemProp="suite">{mainLocation.physical.address.address2}</span>
 					<br />
-					<span itemProp="addressLocality">DFW Airport</span>,
-					<span itemProp="addressRegion"> TX</span>
-					<span itemProp="postalCode"> 75261</span>
+					<span itemProp="addressLocality">{mainLocation.physical.address.city}</span>,
+					<span itemProp="addressRegion"> {mainLocation.physical.address.state}</span>
+					<span itemProp="postalCode"> {mainLocation.physical.address.zip}</span>
 				</div>
 				<div className={s.mailing} itemProp="address" itemType="//schema.org/PostalAddress">
 					<strong>Mailing Address</strong><br />
-					<span itemProp="streetAddress">PO BOX 1598</span>
+					<span itemProp="streetAddress">{mainLocation.mailing.address.address1}</span>
 					<br />
-					<span itemProp="addressLocality">Grapevine</span>,
-					<span itemProp="addressRegion"> TX</span>
-					<span itemProp="postalCode"> 76051</span>
+					<span itemProp="addressLocality">{mainLocation.mailing.address.city}</span>,
+					<span itemProp="addressRegion"> {mainLocation.mailing.address.state}</span>
+					<span itemProp="postalCode"> {mainLocation.mailing.address.zip}</span>
 				</div>
 				<div className={s.mainTelephone}>
-					Toll Free: <a href="tel:+18886359824" itemProp="telephone">(888) 635-9824</a><br />
-					Local: <a href="tel:+19724560222" itemProp="telephone">(972) 456-0222</a><br />
-					Fax: <a href="tel:+19723522617" itemProp="faxNumber">(972) 352-2617</a><br />
+					Toll Free: <a href={mainLocation.phone.ugly} itemProp="telephone">{mainLocation.phone.pretty}</a><br />
+					Local: <a href={mainLocation.local.ugly} itemProp="telephone">{mainLocation.local.pretty}</a><br />
+					Fax: <a href={mainLocation.fax.ugly} itemProp="faxNumber">{mainLocation.fax.pretty}</a><br />
 				</div>
 			</address>
 		);
