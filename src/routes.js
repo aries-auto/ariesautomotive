@@ -335,13 +335,13 @@ const router = new Router(on => {
 		state.context.testimonials = [];
 		state.context.carouselImages = [
 			{
-				image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+				image: 'https://storage.googleapis.com/aries-website/hero-images/jeep.png',
 				text: 'Never Fear the Uncertain Road',
 				button_text: 'VIEW BULL BARS',
 				link: '/category/332',
 				order: 5,
 				styles: {
-					backgroundImage: 'url(http://storage.googleapis.com/aries-website/hero-images/jeep.png)',
+					backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/jeep.png)',
 				},
 			}, {
 				image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
