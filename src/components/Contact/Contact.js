@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Contact.scss';
-import { BrandName, defaultContactReason } from '../../config';
+import { brandName, defaultContactReason } from '../../config';
 import withStyles from '../../decorators/withStyles';
 import { fields } from '../../data/contact';
 import ContactStore from '../../stores/ContactStore';
@@ -11,7 +11,7 @@ import Form from '../Form/Form';
 import { locations, mainLocation } from '../../data/locations';
 import { phone } from '../../data/contact';
 
-const title = `Contact ${BrandName}`;
+const title = `Contact ${brandName}`;
 
 @withStyles(s)
 @connectToStores
