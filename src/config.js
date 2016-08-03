@@ -9,3 +9,4 @@ export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !
 export const brand = '3';
 export const brandName = 'Aries Automotive';
 export const brandNameShort = 'Aries';
+export const defaultContactReason = 28;
