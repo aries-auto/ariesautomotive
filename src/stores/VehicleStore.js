@@ -109,7 +109,7 @@ class VehicleStore extends EventEmitter {
 					continue;
 				}
 				if (style.fitments[j].product_identifier === apiResp.products[i].part_number) {
-					apiResp.products[i].iconLayer = this.state.iconParts[apiResp.products[i].part_number];
+					apiResp.products[i].iconLayer = this.state.iconParts ? this.state.iconParts[apiResp.products[i].part_number] : '';
 					parts.push(apiResp.products[i]);
 				}
 			}
