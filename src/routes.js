@@ -224,9 +224,9 @@ const router = new Router(on => {
 			const icon = await fetch(url, { method: 'get' }).then((result) => {
 				return result.json();
 			});
-			if (icon.vehicle && icon.vehicle.strModel) {
-				state.context.iconMediaVehicle = icon.vehicle;
-				state.context.iconParts = icon.parts;
+			if (icon.vehicleParts.length > 0) {
+				state.context.vehicleParts = icon.vehicleParts;
+				state.context.iconParts = icon.partNumbers;
 			}
 		} catch (e) {
 			state.context.error = e.message;

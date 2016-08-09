@@ -27,25 +27,6 @@ class PartResults extends Component {
 		};
 	}
 
-	// componentWillMount() {
-	// 	if (!this.props || !this.props.parts) {
-	// 		return;
-	// 	}
-
-	// 	// this.setState({
-	// 	// 	parts: this.props.parts,
-	// 	// });
-	// }
-
-	// componentWillReceiveProps(newProps) {
-	// 	if (newProps.parts === this.props.parts) {
-	// 		return;
-	// 	}
-	// 	this.setState({
-	// 		parts: newProps.parts,
-	// 	});
-	// }
-
 	static getStores() {
 		return [VehicleStore];
 	}

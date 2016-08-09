@@ -3,8 +3,11 @@ import cx from 'classnames';
 import s from './Configurator.scss';
 import withStyles from '../../../decorators/withStyles';
 import VehicleStore from '../../../stores/VehicleStore';
+import fetch from '../../../core/fetch';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import $ from 'jquery';
+import { iapiBase, apiKey } from '../../../config';
+
 
 @withStyles(s)
 @connectToStores
@@ -30,6 +33,7 @@ class Configurator extends Component {
 		this.state = {
 			context: {},
 		};
+		this.vehiclePartsIndex = 0;
 	}
 
 	componentDidMount() {
@@ -41,6 +45,7 @@ class Configurator extends Component {
 	}
 
 	componentWillReceiveProps(next) {
+		let reportError = false;
 		$('.error').addClass('hidden');
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
 			const newPart = next.partToRemove;
@@ -54,7 +59,20 @@ class Configurator extends Component {
 		}
 		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
 			$('.vehicle-wrapper').hide();
+			reportError = true;
 		}
+		if (reportError) {
+			// VehicleActions.reportVehicleError(this.props.context.vehicleParts[this.vehiclePartsIndex].vehicle);
+			const data = JSON.stringify({
+				error: 'No image',
+				vehicle: this.props.context.vehicleParts[this.vehiclePartsIndex].vehicle,
+			});
+			fetch(`${iapiBase}/errormonitor/inserterror?key=${apiKey}`, {
+				method: 'post',
+				body: data,
+			});
+		}
+		this.vehiclePartsIndex = this.determineVehicleThatBestMatchesPartArray();
 		return;
 	}
 
@@ -64,6 +82,43 @@ class Configurator extends Component {
 
 	static getPropsFromStores() {
 		return VehicleStore.getState();
+	}
+
+	getPartArrayAssociatedWithIconVehicle(iconVehicle) {
+		const partArray = [];
+		for (const partNumber in iconVehicle.parts) {
+			if (partNumber) {
+				partArray.push(partNumber);
+			}
+		}
+		return partArray;
+	}
+
+	checkIconVehicleForAllVehicleParts(vehicle, iconVehicle) {
+		const partArray = this.getPartArrayAssociatedWithIconVehicle(iconVehicle);
+		for (const i in vehicle.parts) {
+			if (partArray.indexOf(vehicle.parts[i].part_number) === -1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// lots of loops - iterates over the parts assigned to the vehicle (for display on envision)
+	// compares to the arrays of partNumbers on each of the iconMediaVehcleParts to find the first
+	// iconMediaVehicleID that is associated with all the parts
+	determineVehicleThatBestMatchesPartArray() {
+		if (!this.props.vehicle.parts || this.props.vehicle.parts.length === 0) {
+			return this.vehiclePartsIndex;
+		}
+		for (const i in this.props.context.vehicleParts) {
+			if (!this.props.context.vehicleParts[i]) {
+				return this.vehiclePartsIndex;
+			}
+			if (this.checkIconVehicleForAllVehicleParts(this.props.vehicle, this.props.context.vehicleParts[i])) {
+				return i;
+			}
+		}
 	}
 
 	handleAddProduct() {
@@ -80,7 +135,7 @@ class Configurator extends Component {
 				<div className="error hidden"></div>
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
-				<div className={cx('vehicle-wrapper', s.vehicleWrapper)} id="ic-vehicle-wrapper" data-part="" data-vehicleid={this.props.context.iconMediaVehicle.intVehicleID} title="The Vehicle Accessory Desc"></div>
+				<div className={cx('vehicle-wrapper', s.vehicleWrapper)} id="ic-vehicle-wrapper" data-part="" data-vehicleid={this.props.context.vehicleParts[this.vehiclePartsIndex].vehicle.intVehicleID} title="The Vehicle Accessory Desc"></div>
 				<div className="hidden">
 					Code to Add Product:
 					<a
