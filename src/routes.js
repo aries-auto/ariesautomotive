@@ -23,7 +23,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
 import LookupActions from './actions/LookupActions';
-import { apiBase, apiKey, brand } from './config';
+import { apiBase, apiKey, brand, siteMenu } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -36,11 +36,12 @@ const router = new Router(on => {
 			state.context = {};
 		}
 		state.context.params = state.params;
+		state.context.siteMenu = siteMenu;
 		const slugContainer = state.params[0];
 		const slug = slugContainer.replace(/\//g, '');
 		let siteContentResponse = null;
 		if (slug !== '' && slug !== '_ahhealth') {
-			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
+			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`, {
 				method: 'get',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
@@ -57,8 +58,8 @@ const router = new Router(on => {
 				},
 				body: '{}',
 			}),
-			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
-			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
+			fetch(`${apiBase}/category?brandID=${brand.id}&key=${KEY}`),
+			fetch(`${apiBase}/site/content/all?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`),
 		]);
 
 		try {
@@ -96,8 +97,8 @@ const router = new Router(on => {
 	on('/part/:id', async (state) => {
 		state.context.id = state.params.id;
 		try {
-			const url = `${apiBase}/part/${state.context.id}?key=${KEY}&brandID=${brand}`;
-			const featuredUrl = `${apiBase}/part/featured?brandID=${brand}&key=${KEY}`;
+			const url = `${apiBase}/part/${state.context.id}?key=${KEY}&brandID=${brand.id}`;
+			const featuredUrl = `${apiBase}/part/featured?brandID=${brand.id}&key=${KEY}`;
 			const [partResp, featuredResp] = await Promise.all([
 				fetch(url, {
 					method: 'get',
@@ -169,7 +170,7 @@ const router = new Router(on => {
 		let searchResult = {};
 		let term = '';
 		try {
-			const searchResponse = await fetch(`${apiBase}/search/${state.params.term}?key=${KEY}&brandID=${brand}`);
+			const searchResponse = await fetch(`${apiBase}/search/${state.params.term}?key=${KEY}&brandID=${brand.id}`);
 
 			searchResult = await searchResponse.json();
 			term = state.params.term;
@@ -184,7 +185,7 @@ const router = new Router(on => {
 		let searchResult = {};
 		let term = '';
 		try {
-			const searchResponse = await fetch(`${apiBase}/search/${state.query.term}?key=${KEY}&brandID=${brand}`);
+			const searchResponse = await fetch(`${apiBase}/search/${state.query.term}?key=${KEY}&brandID=${brand.id}`);
 
 			searchResult = await searchResponse.json();
 			term = state.query.term;
@@ -260,7 +261,7 @@ const router = new Router(on => {
 	on('/news/:id', async (state) => {
 		state.context.id = state.params.id;
 		try {
-			const url = `${apiBase}/news/${state.params.id}?brand=${brand}&key=${apiKey}`;
+			const url = `${apiBase}/news/${state.params.id}?brand=${brand.id}&key=${apiKey}`;
 			const resp = await fetch(url);
 			state.item = await resp.json();
 		} catch (e) {
@@ -297,7 +298,7 @@ const router = new Router(on => {
 	on('/lp/:id', async (state, next) => {
 		state.context.id = state.params.id;
 		try {
-			const url = `${apiBase}/lp/${state.params.id}?brand=${brand}&key=${apiKey}`;
+			const url = `${apiBase}/lp/${state.params.id}?brand=${brand.id}&key=${apiKey}`;
 			const resp = await fetch(url);
 			state.page = await resp.json();
 		} catch (e) {
@@ -359,8 +360,8 @@ const router = new Router(on => {
 			},
 		];
 		try {
-			const featResponse = await fetch(`${apiBase}/part/featured?brandID=${brand}&key=${KEY}`);
-			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=${brand}`);
+			const featResponse = await fetch(`${apiBase}/part/featured?brandID=${brand.id}&key=${KEY}`);
+			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=${brand.id}`);
 
 			state.context.featuredProducts = await featResponse.json();
 			state.context.testimonials = await testResponse.json();

@@ -64,7 +64,7 @@ class Lookup extends Component {
 
 	getYearElement() {
 		return (
-			<div className={cx(s.formGroup, 'form-group')}>
+			<div className={cx(s.formGroup)}>
 				<select className="form-control" name="year" onChange={this.changeVehicle} aria-labelledby="year_lookup_label">
 					<option value="">- Select Year -</option>
 					{this.props.years.map((year, i) => {
@@ -103,31 +103,28 @@ class Lookup extends Component {
 		);
 	}
 
-	getViewButton(ok) {
-		const disabled = ok ? false : true;
-		return (
-			<button className={cx('red-transparent-button', s.viewParts, disabled ? s.disabled : '')} disabled={!this.props.vehicle.model} onClick={this.viewParts}>View Parts</button>
-		);
-	}
-
 	getLookup() {
-		let makes = false;
-		let models = false;
-		if (this.props.makes && this.props.makes.length > 0) {
-			makes = true;
-		}
-
-		if (this.props.models && this.props.models.length > 0) {
-			models = true;
-		}
+		// let makes = false;
+		// let models = false;
+		// if (this.props.makes && this.props.makes.length > 0) {
+		// 	makes = true;
+		// }
+		//
+		// if (this.props.models && this.props.models.length > 0) {
+		// 	models = true;
+		// }
 		return (
-			<span className={s.lookup}>
+			<form onSubmit={this.handleSubmit}>
 				<label className={s.heading}>Vehicle Lookup</label>
 				{this.getYearElement()}
-				{this.getMakeElement(makes)}
-				{this.getModelElement(models)}
-				{this.getViewButton(this.props.view)}
-			</span>
+				<button
+					className={cx('red-transparent-button', s.viewParts)}
+					disabled={!this.props.view}
+					onClick={this.viewParts}
+				>
+					View Parts
+				</button>
+			</form>
 		);
 	}
 
@@ -220,10 +217,8 @@ class Lookup extends Component {
 
 	render() {
 		return (
-			<div className={cx(s.root, this.props.className, 'container-fluid')} role="navigation">
-				<form onSubmit={this.handleSubmit} className={cx(s.inlineForm, 'form-inline')}>
-					{this.vehicleSet ? this.showVehicle() : this.getLookup()}
-				</form>
+			<div className={cx(s.root, this.props.className)} role="navigation">
+				{this.vehicleSet ? this.showVehicle() : this.getLookup()}
 			</div>
 		);
 	}

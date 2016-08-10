@@ -8,11 +8,10 @@ import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
-import { apiBase, apiKey, brandID } from './config';
+import { apiBase, apiKey, brand } from './config';
 
 const server = global.server = express();
 const KEY = apiKey;
-const BRAND = brandID;
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
@@ -24,13 +23,19 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.get('*', async (req, res, next) => {
 	try {
 		let statusCode = 200;
-		const data = { title: 'Product Information', description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.', css: '', body: '', entry: assets.main.js };
+		const data = {
+			title: 'Product Information',
+			description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
+			css: '',
+			body: '',
+			entry: assets.main.js,
+		};
 		const css = [];
 
 		const slugContainer = req.originalUrl;
 		const slug = slugContainer.replace('/', '');
 		const [siteContentResponse] = await Promise.all([
-			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${BRAND}`, { // change this once we switch brand over, hardcoded 4 is for testing
+			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`, {
 				method: 'get',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',

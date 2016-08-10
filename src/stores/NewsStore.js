@@ -21,7 +21,7 @@ class NewsStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${apiBase}/news?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/news?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -38,7 +38,7 @@ class NewsStore extends EventEmitter {
 
 	async get(id) {
 		try {
-			await fetch(`${apiBase}/news/${id}?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/news/${id}?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
