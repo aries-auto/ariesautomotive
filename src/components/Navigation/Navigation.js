@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Navigation.scss';
 import withStyles from '../../decorators/withStyles';
+import { brand } from '../../config';
+import Link from '../Link';
+import Lookup from '../Lookup';
 
 @withStyles(s)
 class Navigation extends Component {
@@ -9,6 +12,8 @@ class Navigation extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		categories: PropTypes.array,
+		menu: PropTypes.array,
+		vehicle: PropTypes.object,
 	};
 
 	getCategories() {
@@ -63,18 +68,23 @@ class Navigation extends Component {
 	render() {
 		return (
 			<div
-				className={cx(s.root, this.props.className, 'navbar-collapse', 'collapse')}
-				id="categoryMenu"
+				className={cx(s.root, this.props.className)}
 				role="navigation"
 			>
-				<ul className={cx(s.nav, 'nav', 'navbar-nav')}>
+				<div className={s.logo}>
+					<Link className={s.brand} to="/" title={brand.name}>
+						<img src={brand.logo} alt={`${brand.name} Logo`} className="logo" />
+					</Link>
+				</div>
+				<Lookup vehicle={this.props.vehicle} />
+				{/* <ul className={cx(s.nav, 'nav', 'navbar-nav')}>
 					{this.props.categories && this.props.categories.length ? this.getCategories() : null}
 					<li role="presentation">
 						<a className={s.link} href="/appguides">
 							APPLICATION GUIDES
 						</a>
 					</li>
-				</ul>
+				</ul> */}
 			</div>
 		);
 	}

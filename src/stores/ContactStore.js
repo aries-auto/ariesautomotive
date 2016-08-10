@@ -56,7 +56,7 @@ class ContactStore extends EventEmitter {
 
 	async getContactTypes() {
 		try {
-			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -74,7 +74,7 @@ class ContactStore extends EventEmitter {
 	async postContactData(contactType) {
 		const inputs = JSON.stringify(this.state.inputs);
 		try {
-			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=${brand}`;
+			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=${brand.id}`;
 			await fetch(url, {
 				method: 'POST',
 				body: inputs,

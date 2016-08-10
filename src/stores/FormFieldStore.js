@@ -47,7 +47,7 @@ class FormFieldStore extends EventEmitter {
 
 	async getContactTypes() {
 		try {
-			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {

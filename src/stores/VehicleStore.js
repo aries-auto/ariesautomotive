@@ -54,7 +54,7 @@ class VehicleStore extends EventEmitter {
 			return;
 		}
 		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
-		const apiResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&brands=${brand}`);
+		const apiResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&brands=${brand.id}`);
 		const resp = await apiResp.json();
 		if (!this.state.activeCategory) {
 			this.setActiveCategory(resp.lookup_category[0]);
@@ -65,7 +65,7 @@ class VehicleStore extends EventEmitter {
 
 	async getCategoryParts(activeCategory, style) {
 		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}/${activeCategory.category.title}`;
-		const catResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&withParts=true&brands=${brand}`);
+		const catResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&withParts=true&brands=${brand.id}`);
 		const data = await catResp.json();
 		let s = style;
 		s = this.linkPartsToStyle(data, s);

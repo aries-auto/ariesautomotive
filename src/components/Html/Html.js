@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { googleAnalyticsId, brandName } from '../../config';
+import { googleAnalyticsId, brand } from '../../config';
 
 class Html extends Component {
 
@@ -74,7 +74,7 @@ class Html extends Component {
 				<head>
 					<meta charSet="utf-8" />
 					<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-					<title>{`${brandName} | ${this.props.title}`}</title>
+					<title>{(brand.name === this.props.title) ? brand.name : `${brand.name} | ${this.props.title}`}</title>
 					<meta name="description" content={this.props.description} />
 					<meta property="og:type" content={this.props.metas['og:type']} />
 					<meta property="og:url" content={this.props.metas['og:url']} />

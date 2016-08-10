@@ -34,7 +34,7 @@ class PartStore extends EventEmitter {
 
 	async get(id) {
 		try {
-			await fetch(`${apiBase}/part/${id}?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/part/${id}?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -51,7 +51,7 @@ class PartStore extends EventEmitter {
 
 	async getFeatured() {
 		try {
-			await fetch(`${apiBase}/part/featured?brandID=${brand}&key=${KEY}`)
+			await fetch(`${apiBase}/part/featured?brandID=${brand.id}&key=${KEY}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
