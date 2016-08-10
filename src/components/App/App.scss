@@ -6,16 +6,7 @@
 * Base styles
 * ========================================================================== */
 
-// :global html, :global html.wf-loading {
-// 	visibility: hidden;
-// 	opacity: 0;
-// 	transition: visibility 0s linear 300ms, opacity 300ms;
-// }
-//
-// :global html.wf-active {
-// 	visibility: visible;
-// 	opacity: 1;
-// }
+
 
 html {
     font-family: $font-family-base;

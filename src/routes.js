@@ -24,7 +24,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
 import LookupActions from './actions/LookupActions';
-import { apiBase, apiKey, brand } from './config';
+import { iapiBase, apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -238,17 +238,29 @@ const router = new Router(on => {
 
 	on('/appguides/:guide/:page', async (state) => {
 		let guide = {};
+		let appGuideInfo = {};
 		const collection = state.params.guide;
 		const page = state.params.page;
 		try {
-			const guideResponse = await fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
-				method: 'post',
-				headers: {
-					'Accept': 'application/json',
-				},
-			});
+			const [guideResponse, appGuideInfoResponse] = await Promise.all([
+				fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
+					method: 'post',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+				fetch(`${iapiBase}/appguides/guide?collection=${collection}&key=${KEY}&brandID=${brand}`, {
+					method: 'get',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+			]);
+
 			guide = await guideResponse.json();
+			appGuideInfo = await appGuideInfoResponse.json();
 			guide.name = collection;
+			guide.appGuide = appGuideInfo;
 		} catch (e) {
 			state.context.error = e;
 		}
