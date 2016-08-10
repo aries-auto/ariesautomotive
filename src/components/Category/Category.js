@@ -71,7 +71,7 @@ class SearchResults extends Component {
 	}
 
 	showParts() {
-		if (this.props.category && this.props.category.parts && this.props.category.parts.parts.length > 0) {
+		if (this.props.category && this.props.category.parts && this.props.category.parts.parts && this.props.category.parts.parts.length > 0) {
 			return <PartResults parts={this.props.category.parts.parts} />;
 		}
 	}
