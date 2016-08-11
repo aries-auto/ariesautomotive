@@ -19,6 +19,12 @@ class LandingPage extends Component {
 		seo: PropTypes.func.isRequired,
 	};
 
+	static defaultProps = {
+		page: {
+			Name: null,
+		},
+	};
+
 	componentWillMount() {
 		const title = (this.props.page && this.props.page.Name) ? this.props.page.Name : brandNameShort;
 		this.context.onSetTitle(title);
@@ -34,15 +40,13 @@ class LandingPage extends Component {
 			return null;
 		}
 		const html = { __html: this.props.page.HtmlContent };
-		return (
-			<div dangerouslySetInnerHTML={html} />
-			);
+		return <div dangerouslySetInnerHTML={html} />;
 	}
 
 	render() {
 		return (
 			<div className={cx(s.root)}>
-				<h2>{this.props.page.Name}</h2>
+				<h2>{this.props.page.Name || ''}</h2>
 				{this.renderText()}
 			</div>
 		);

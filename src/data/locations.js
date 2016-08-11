@@ -71,14 +71,14 @@ module.exports.mainLocation = {
 	},
 	phone: {
 		pretty: '(888) 635-9824',
-		ugly: 'tel+8886359824',
+		ugly: 'tel:+18886359824',
 	},
 	local: {
 		pretty: '(972) 456-0222',
-		ugly: 'tel+9724560222',
+		ugly: 'tel:+19724560222',
 	},
 	fax: {
 		pretty: '(972) 352-2617',
-		ugly: 'tel+9723522617',
+		ugly: 'tel:+19723522617',
 	},
 };

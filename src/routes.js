@@ -294,7 +294,7 @@ const router = new Router(on => {
 		return <CustomContent context={state.context} />;
 	});
 
-	on('/lp/:id', async (state) => {
+	on('/lp/:id', async (state, next) => {
 		state.context.id = state.params.id;
 		try {
 			const url = `${apiBase}/lp/${state.params.id}?brand=${brand}&key=${apiKey}`;
@@ -303,7 +303,8 @@ const router = new Router(on => {
 		} catch (e) {
 			state.context.error = e;
 		}
-		return <LandingPage context={state.context} page={state.page} />;
+		const comp = await next();
+		return comp && <LandingPage context={state.context} page={state.page} />;
 	});
 
 	on('/', async (state) => {
