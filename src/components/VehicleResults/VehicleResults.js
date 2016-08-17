@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
+// import cx from 'classnames';
 import Loader from 'react-loader';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
@@ -9,6 +9,7 @@ import CategoryStore from '../../stores/CategoryStore';
 import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
+import Category from './Category';
 
 @withStyles(s)
 @connectToStores
@@ -78,33 +79,31 @@ class VehicleResults extends Component {
 
 	getCategoryStyles() {
 		const output = [];
-		const temp = [];
 
-		this.props.catGroups.map((c) => {
-			const group = {
-				id: c.id,
-				name: c.title,
-				sub: [],
-			};
-			temp.push(group);
-		});
-
-		for (const i in this.props.categories) {
-			if (!this.props.categories[i]) {
-				continue;
-			}
-			let active = false;
-			if (this.props.activeCategory && this.props.activeCategory.category.title === this.props.categories[i].category.title) {
-				active = true;
-			}
-			output.push(
-				<li key={i} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
-					<a onClick={this.setActiveCategory.bind(this, this.props.categories[i])}>{this.props.categories[i].category.title}</a>
-				</li>
-			);
+		if (!this.props.catGroups || this.props.catGroups[0].id === 0 || !this.props.categories || this.props.categories[0].id === 0) {
+			return <span></span>;
 		}
 
-		return <span></span>;
+		this.props.catGroups.map((c) => {
+			const subs = [];
+			this.props.categories.map((cat) => {
+				console.log(cat);
+				if (cat.category.parent_id === c.id) {
+					subs.push({
+						parent: c.id,
+						title: cat.category.title,
+					});
+				}
+			});
+
+			output.push(
+				<div className={'col-sm-12'}>
+					<Category catTitle={c.title} subs={subs} />
+				</div>
+			);
+		});
+
+		return output;
 	}
 
 	setActiveCategory(cat) {
@@ -120,11 +119,9 @@ class VehicleResults extends Component {
 	}
 
 	render() {
-		console.log('GROUPS: ', this.props.catGroups);
-		console.log('CATS: ', this.props.categories);
 		return (
 			<div className={s.container}>
-				<Loader loaded={(this.props.categories !== null)} top="30%" loadedClassName={s.loader}>
+				<Loader loaded={(this.props.categories !== null)} top="30%">
 					{this.getCategoryStyles()}
 					{this.props.activeCategory ? this.renderVehicleStyle() : null}
 				</Loader>
