@@ -103,9 +103,6 @@ class VehicleStyle extends Component {
 		}
 		return (
 			<div className={s.greybox}>
-				<div>
-					<span className={s.selTopBar}>Please select a style that properly matches your vehicle.</span>
-				</div>
 				<div className={s.styleSelect}>
 					<button className={cx('btn btn-default', s.styleButton)} type="button" data-toggle="dropdown" onClick={this.unhideChoices}>{(this.props.style && !this.props.showStyle) ? this.props.style.style : 'Select a Style'} <span className="caret"></span></button>
 					{(this.props && this.props.showStyle) ? this.showStyleChoices() : null}

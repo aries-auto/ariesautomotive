@@ -5,7 +5,6 @@
     display: block;
     min-height: 400px;
     margin: 0;
-    background-color: $white-base;
 
     .categoryName {
         padding: 0;
@@ -28,12 +27,7 @@
         width: 85%;
         padding: 10px;
         margin: 1em auto 1em auto;
-        flex-direction: column;
-        background-color: $lookup-color;
-        border: 1px solid $gray-lighter;
-        border-radius: 6px;
-        justify-content: space-around;
-        align-items: center;
+        align-items: left;
 
         .selTopBar {
             margin-right: 15px;

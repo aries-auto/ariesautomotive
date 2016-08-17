@@ -5,6 +5,8 @@ import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
+import CategoryStore from '../../stores/CategoryStore';
+import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
 
@@ -29,6 +31,7 @@ class VehicleResults extends Component {
 		catStyleParts: PropTypes.array, //
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
+		catGroups: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -59,18 +62,33 @@ class VehicleResults extends Component {
 			description: 'ARIES Automotive parts for ' + title,
 		};
 		this.context.seo(seo);
+		CategoryActions.getCats();
 	}
 
 	static getStores() {
-		return [VehicleStore];
+		return [VehicleStore, CategoryStore];
 	}
 
 	static getPropsFromStores() {
-		return VehicleStore.getState();
+		return {
+			...VehicleStore.getState(),
+			...CategoryStore.getState(),
+		};
 	}
 
 	getCategoryStyles() {
 		const output = [];
+		const temp = [];
+
+		this.props.catGroups.map((c) => {
+			const group = {
+				id: c.id,
+				name: c.title,
+				sub: [],
+			};
+			temp.push(group);
+		});
+
 		for (const i in this.props.categories) {
 			if (!this.props.categories[i]) {
 				continue;
@@ -85,7 +103,8 @@ class VehicleResults extends Component {
 				</li>
 			);
 		}
-		return output;
+
+		return <span></span>;
 	}
 
 	setActiveCategory(cat) {
@@ -101,17 +120,12 @@ class VehicleResults extends Component {
 	}
 
 	render() {
+		console.log('GROUPS: ', this.props.catGroups);
+		console.log('CATS: ', this.props.categories);
 		return (
 			<div className={s.container}>
 				<Loader loaded={(this.props.categories !== null)} top="30%" loadedClassName={s.loader}>
-					<div className={cx(s.root, this.props.className)} role="navigation">
-						<div className="tab-wrap">
-							<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
-								{this.getCategoryStyles()}
-							</ul>
-						</div>
-					</div>
-					<div className={s.clearfix}></div>
+					{this.getCategoryStyles()}
 					{this.props.activeCategory ? this.renderVehicleStyle() : null}
 				</Loader>
 			</div>
