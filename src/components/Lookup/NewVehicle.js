@@ -38,8 +38,13 @@ class NewVehicle extends Component {
 
 		this.changeVehicle = this.changeVehicle.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.isActive = this.isActive.bind(this);
 		this.state = {
-			vehicle: {},
+			vehicle: {
+				year: '',
+				make: '',
+				model: '',
+			},
 			makes: [],
 			models: [],
 		};
@@ -118,13 +123,44 @@ class NewVehicle extends Component {
 		this.props.onSubmit(this.state.vehicle);
 	}
 
+	isActive(prop) {
+		const v = this.state.vehicle;
+		switch (prop) {
+		case 'year':
+			if (!v.year || v.year === '') {
+				return s.active;
+			}
+			return '';
+		case 'make':
+			if (!v.year || v.year === '') {
+				return '';
+			}
+
+			if (!v.make || v.make === '') {
+				return s.active;
+			}
+			return '';
+		case 'model':
+			if (!v.year || v.year === '') {
+				return '';
+			}
+
+			if (!v.make || v.make === '') {
+				return '';
+			}
+
+			return s.active;
+		default:
+			return '';
+		}
+	}
+
 	render() {
-		console.log(this.props.models.length);
 		return (
 			<form className={s.root} onSubmit={this.handleSubmit}>
 				<label className={s.heading}>Vehicle Lookup</label>
 				<Select
-					className={s.formGroup}
+					className={cx(s.formGroup, this.isActive('year'))}
 					name="year"
 					change={this.changeVehicle}
 					aria="year_lookup_label"
@@ -132,7 +168,7 @@ class NewVehicle extends Component {
 					values={this.props.years}
 				/>
 				<Select
-					className={s.formGroup}
+					className={cx(s.formGroup, this.isActive('make'))}
 					name="make"
 					change={this.changeVehicle}
 					aria="make_lookup_label"
@@ -142,7 +178,7 @@ class NewVehicle extends Component {
 					disabledClassName={s.disabled}
 				/>
 				<Select
-					className={s.formGroup}
+					className={cx(s.formGroup, this.isActive('model'))}
 					name="model"
 					change={this.changeVehicle}
 					aria="model_lookup_label"

@@ -8,7 +8,6 @@ class Select extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		disabledClassName: PropTypes.string,
 		name: PropTypes.string,
 		change: PropTypes.func,
 		aria: PropTypes.string,
@@ -40,11 +39,9 @@ class Select extends Component {
 	}
 
 	render() {
-		console.log(this.props.disabled, this.props.disabledClassName);
 		return (
 			<div disabled={this.props.disabled} className={cx(
 					this.props.className || '',
-					this.props.disabled ? this.props.disabledClassName : '',
 				)}
 			>
 				<select
