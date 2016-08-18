@@ -94,15 +94,15 @@ class PartResults extends Component {
 									<div key={i} className={cx(s.product, 'row', 'well')}>
 										<div className={s.header}>
 											<span className={s.desc}>
-												<a href={'/part/' + part.part_number}>{part.short_description}
+												<a href={'/part/' + part.part_number} title={part.short_description}>{part.short_description}
 													<span className={s.partNum}>{part.part_number}</span>
 												</a>
 											</span>
 										</div>
 
-										<div className={s.image}>
+										<a href={'/part/' + part.part_number} title={`${part.short_description} - #${part.part_number}`} className={s.image}>
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
-										</div>
+										</a>
 
 										<div className={cx('side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1', s.partBox)}>
 
