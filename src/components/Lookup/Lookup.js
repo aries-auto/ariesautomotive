@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Lookup.scss';
+import NewVehicle from './NewVehicle';
 import LookupActions from '../../actions/LookupActions';
 import LookupStore from '../../stores/LookupStore';
 import withStyles from '../../decorators/withStyles';
@@ -15,7 +16,7 @@ class Lookup extends Component {
 		years: PropTypes.array,
 		makes: PropTypes.array,
 		models: PropTypes.array,
-		view: PropTypes.bool,
+		valid: PropTypes.bool,
 		vehicle: PropTypes.shape({
 			year: PropTypes.string,
 			make: PropTypes.string,
@@ -32,25 +33,16 @@ class Lookup extends Component {
 		},
 	};
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
-		this.changeVehicle = this.changeVehicle.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 		this.viewParts = this.viewParts.bind(this);
 		this.resetVehicle = this.resetVehicle.bind(this);
-		this.state = {
-			vehicle: {},
-			makes: [],
-			models: [],
-		};
-		this.vehicleSet = false;
-	}
 
-	componentWillMount() {
-		LookupActions.get();
-		if (this.props.params && this.props.params.year && this.props.params.make && this.props.params.model) {
-			this.vehicleSet = true;
+		if (props.vehicle.model && props.vehicle.model !== '') {
+			this.state = {
+				valid: true,
+			};
 		}
 	}
 
@@ -62,105 +54,8 @@ class Lookup extends Component {
 		return LookupStore.getState();
 	}
 
-	getYearElement() {
-		return (
-			<div className={cx(s.formGroup)}>
-				<select className="form-control" name="year" onChange={this.changeVehicle} aria-labelledby="year_lookup_label">
-					<option value="">- Select Year -</option>
-					{this.props.years.map((year, i) => {
-						return <option key={i} value={year}>{ year }</option>;
-					})}
-				</select>
-			</div>
-		);
-	}
-
-	getMakeElement(ok) {
-		const disabled = ok ? false : true;
-		return (
-			<div className={cx(s.formGroup, 'form-group')}>
-				<select className="form-control" name="make" disabled={disabled} onChange={this.changeVehicle} aria-labelledby="make_lookup_label">
-					<option value="">- Select Make -</option>
-					{this.props.makes.map((make, i) => {
-						return <option key={i} value={make.toUpperCase()}>{ make.toUpperCase() }</option>;
-					})}
-				</select>
-			</div>
-		);
-	}
-
-	getModelElement(ok) {
-		const disabled = ok ? false : true;
-		return (
-			<div className={cx(s.formGroup, 'form-group')}>
-				<select className="form-control" name="model" disabled={disabled} onChange={this.changeVehicle} aria-labelledby="model_lookup_label">
-					<option value="">- Select Model -</option>
-					{this.props.models.map((model, i) => {
-						return <option key={i} value={model.toUpperCase()}>{ model.toUpperCase() }</option>;
-					})}
-				</select>
-			</div>
-		);
-	}
-
-	getLookup() {
-		// let makes = false;
-		// let models = false;
-		// if (this.props.makes && this.props.makes.length > 0) {
-		// 	makes = true;
-		// }
-		//
-		// if (this.props.models && this.props.models.length > 0) {
-		// 	models = true;
-		// }
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<label className={s.heading}>Vehicle Lookup</label>
-				{this.getYearElement()}
-				<button
-					className={cx('red-transparent-button', s.viewParts)}
-					disabled={!this.props.view}
-					onClick={this.viewParts}
-				>
-					View Parts
-				</button>
-			</form>
-		);
-	}
-
-	getChangeButton() {
-		return (
-			<button className={cx('red-transparent-button', s.viewParts)} onClick={this.resetVehicle}>Change</button>
-		);
-	}
-
-	vehicleValid() {
-		if (!this.state.vehicle.year || this.state.vehicle.year === '') {
-			return false;
-		}
-		if (!this.state.vehicle.make || this.state.vehicle.make === '') {
-			return false;
-		}
-		if (!this.state.vehicle.model || this.state.vehicle.model === '') {
-			return false;
-		}
-
-		return true;
-	}
-
-	viewParts(e) {
-		e.preventDefault();
-		const loc = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
-		window.location.href = loc;
-	}
-
-	handleSubmit(e) {
-		e.preventDefault();
-		if (!this.vehicleValid()) {
-			return;
-		}
-
-		window.location.href = `/vehicle/${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
+	viewParts(vehicle) {
+		window.location.href = `/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`;
 		return;
 	}
 
@@ -169,56 +64,51 @@ class Lookup extends Component {
 		LookupActions.set({ year: '', make: '', model: '' });
 	}
 
-	changeVehicle(event) {
-		if (event.target === undefined || event.target.name === undefined) {
-			return;
-		}
-
-		switch (event.target.name.toLowerCase()) {
-		case 'year':
-			this.state.vehicle = {
-				year: event.target.value,
-				make: '',
-				model: '',
-			};
-			break;
-		case 'make':
-			this.state.vehicle = {
-				year: this.state.vehicle.year,
-				make: event.target.value,
-				model: '',
-			};
-			break;
-		case 'model':
-			this.state.vehicle = {
-				year: this.state.vehicle.year,
-				make: this.state.vehicle.make,
-				model: event.target.value,
-			};
-			break;
-		default:
-			break;
-		}
-		LookupActions.set(this.state.vehicle);
-	}
-
 	showVehicle() {
 		const link = `/vehicle/${this.props.vehicle.year}/${this.props.vehicle.make}/${this.props.vehicle.model}`;
 		const v = `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model}`;
 		return (
-			<div className={cx(s.vehicleName)}>
+			<div className={s.vehicleName}>
 				<a href={link}>
 					{v.toUpperCase()}
 				</a>
-				{this.getChangeButton()}
+				<button
+					className={cx('red-transparent-button', s.viewParts)}
+					onClick={this.resetVehicle}
+				>
+					Change
+				</button>
 			</div>
 		);
 	}
 
+	newVehicle() {
+		if (this.props.vehicle.year !== this.props.params.year) {
+			return false;
+		}
+		if (this.props.vehicle.make !== this.props.params.make) {
+			return false;
+		}
+		if (this.props.vehicle.model !== this.props.params.model) {
+			return false;
+		}
+		return true;
+	}
+
 	render() {
+		let valid = <NewVehicle onSubmit={this.viewParts} />;
+		if (
+			this.props.vehicle &&
+			this.props.vehicle.year !== '' &&
+			this.props.vehicle.make !== '' &&
+			this.props.vehicle.model !== '' &&
+			this.newVehicle()
+		) {
+			valid = this.showVehicle();
+		}
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
-				{this.vehicleSet ? this.showVehicle() : this.getLookup()}
+				{ valid }
 			</div>
 		);
 	}

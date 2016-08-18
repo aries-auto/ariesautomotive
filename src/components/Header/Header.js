@@ -30,6 +30,7 @@ class Header extends Component {
 				<Navigation
 					menu={this.props.context.siteMenu || []}
 					vehicle={this.props.context.vehicle}
+					params={this.props.context.params}
 				/>
 			</div>
 		);

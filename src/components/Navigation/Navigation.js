@@ -4,7 +4,7 @@ import s from './Navigation.scss';
 import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
 import Link from '../Link';
-import Lookup from '../Lookup';
+import Lookup from '../Lookup/Lookup';
 
 @withStyles(s)
 class Navigation extends Component {
@@ -14,6 +14,7 @@ class Navigation extends Component {
 		categories: PropTypes.array,
 		menu: PropTypes.array,
 		vehicle: PropTypes.object,
+		params: PropTypes.object,
 	};
 
 	getCategories() {
@@ -76,7 +77,7 @@ class Navigation extends Component {
 						<img src={brand.logo} alt={`${brand.name} Logo`} className="logo" />
 					</Link>
 				</div>
-				<Lookup vehicle={this.props.vehicle} />
+				<Lookup vehicle={this.props.vehicle} params={this.props.params} />
 				{/* <ul className={cx(s.nav, 'nav', 'navbar-nav')}>
 					{this.props.categories && this.props.categories.length ? this.getCategories() : null}
 					<li role="presentation">
