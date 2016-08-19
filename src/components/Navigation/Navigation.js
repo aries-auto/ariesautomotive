@@ -5,6 +5,7 @@ import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
 import Link from '../Link';
 import Lookup from '../Lookup/Lookup';
+import Menu from './Menu';
 
 @withStyles(s)
 class Navigation extends Component {
@@ -77,7 +78,9 @@ class Navigation extends Component {
 						<img src={brand.logo} alt={`${brand.name} Logo`} className="logo" />
 					</Link>
 				</div>
+				<Menu items={this.props.menu} />
 				<Lookup vehicle={this.props.vehicle} params={this.props.params} />
+
 				{/* <ul className={cx(s.nav, 'nav', 'navbar-nav')}>
 					{this.props.categories && this.props.categories.length ? this.getCategories() : null}
 					<li role="presentation">

@@ -1,14 +1,17 @@
 @import '../variables.scss';
 
 .root {
-	height: 75px;
+	min-height: 75px;
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: row;
+	align-items: center;
 	background: $new-red;
-	padding: 10px 0;
+	padding: 0;
 
 	.logo {
 		width: 200px;
+		order: 1;
 		> .brand {
 			display: block;
 			height: 100%;
@@ -22,6 +25,11 @@
 
 @media screen and (width >= $screen-md-min) {
 	.root {
-		flex-direction: row;
+		padding: 10px 0;
+		flex-wrap: nowrap;
+
+		.menuIcon {
+			display: none;
+		}
 	}
 }
