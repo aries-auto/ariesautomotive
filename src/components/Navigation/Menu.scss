@@ -1,0 +1,152 @@
+@import '../variables.scss';
+
+.root {
+	order: 2;
+	margin-left: auto;
+
+	.menuIcon {
+		border: none;
+		background: transparent;
+		display: block;
+
+		span {
+			background-color: $white-base;
+		}
+	}
+
+	nav {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+
+		position: fixed;
+		height: 0;
+		width: 0;
+		right: 0;
+		top: 0;
+		opacity: 0;
+		z-index: 100;
+		// transition: opacity 0s 0.3s, width 0s 0.3s;
+		transform: translateX(-100%);
+		background-color: rgba(1, 1, 1, 0.9);
+
+		&.open {
+			min-width: 300px;
+			width: auto;
+			height: 100%;
+			opacity: 1;
+			padding: 15px 10px 10px 20px;
+			transform: translateX(0);
+		}
+
+		> a {
+			font-size: 18px;
+			text-align: left;
+			letter-spacing: 1px;
+			padding: 12px 10px 10px;
+			position: relative;
+			display: block;
+			margin: 15px 25px;
+			outline: none;
+			color: $white-base;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: 400;
+
+			&:before, &:after {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				background: $white-base;
+				content: '';
+				transition: transform 0.3s;
+				transform: scale(0.85);
+			}
+
+			&:after {
+				opacity: 0;
+				transition: top 0.3s, opacity 0.3s, transform 0.3s;
+			}
+
+			&:hover::before, &:hover::after{
+				transform: scale(1);
+			}
+
+			&:hover::after{
+				top: 0;
+				opacity: 1;
+			}
+		}
+	}
+
+	ul {
+		display: none;
+	}
+}
+
+@media screen and (width >= $screen-md-min) {
+	.root {
+		order: 3;
+		padding: 0 20px;
+
+		.menuIcon {
+			display: none;
+		}
+
+		nav {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			height: 100%;
+			align-items: center;
+			background-color: transparent;
+			position: relative;
+			opacity: 1;
+			transform: translateX(0);
+			width: 100%;
+
+			> a {
+				position: relative;
+				margin: 10px;
+				text-align: center;
+				letter-spacing: 1px;
+				text-shadow: 0 0 1px $white-base;
+				display: block;
+				font-size: 18px;
+				text-decoration: none;
+				color: $white-base;
+
+				&:before, &:after {
+					background: transparent;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					width: 65px;
+					height: 65px;
+					border: 2px solid rgba(0,0,0,0.1);
+					border-radius: 50%;
+					content: '';
+					opacity: 0;
+					transition: transform 0.3s, opacity 0.3s;
+					transform: translateX(-50%) translateY(-50%) scale(0.2);
+				}
+
+				&:after {
+					width: 55px;
+					height: 55px;
+					border-width: 6px;
+					transform: translateX(-50%) translateY(-50%) scale(0.8);
+				}
+
+				&:hover::before, &:hover::after {
+					opacity: 1;
+					top: 50%;
+					transform: translateX(-50%) translateY(-50%) scale(1);
+				}
+			}
+		}
+	}
+}
