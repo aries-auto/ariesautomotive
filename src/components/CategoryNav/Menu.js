@@ -9,34 +9,25 @@ class Menu extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		openTitle: PropTypes.string,
 		items: PropTypes.array,
-		showChildren: PropTypes.bool,
+		open: PropTypes.bool,
 		isParent: PropTypes.bool,
+		openItem: PropTypes.func,
 	};
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			showChildren: props.showChildren,
+			open: props.open,
 		};
-
 		this.menuItems = this.menuItems.bind(this);
-		this.clearOpen = this.clearOpen.bind(this);
+		this.collapse = this.collapse.bind(this);
 	}
 
-	componentWillReceiveProps(props) {
-		if (this.props.showChildren !== props.showChildren) {
-			this.setState({
-				showChildren: props.showChildren,
-			});
-		}
-	}
-
-	clearOpen() {
-		this.setState({
-			showChildren: false,
-		});
+	collapse(title) {
+		this.props.openItem(title);
 	}
 
 	menuItems() {
@@ -55,7 +46,8 @@ class Menu extends Component {
 					title={item.title}
 					text={item.text}
 					children={item.children}
-					clearOpen={this.clearOpen}
+					open={this.props.openTitle === item.title}
+					openItem={this.props.isParent ? this.collapse : null}
 				/>
 			);
 		});
@@ -68,7 +60,7 @@ class Menu extends Component {
 			<div className={cx(
 					s.root,
 					this.props.className,
-					!this.state.showChildren && !this.props.isParent ? s.hide : '',
+					!this.props.open && !this.props.isParent ? s.hide : '',
 					this.props.isParent ? s.parent : '',
 				)}
 			>

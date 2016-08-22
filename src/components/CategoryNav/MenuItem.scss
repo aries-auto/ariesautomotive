@@ -49,10 +49,8 @@
     }
 
     > div {
-        position: absolute;
         top: 46px;
         display: flex;
-        //: 500px;
         padding: 0;
         margin: 0;
         flex-direction: row;
@@ -127,6 +125,10 @@
         width: auto;
         padding: 0 10px;
         border-right: 1px solid $black-base;
+
+        > div {
+            position: absolute;
+        }
 
         > a {
             display: flex;
