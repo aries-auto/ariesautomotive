@@ -24,6 +24,7 @@
 @media screen and (width >= $screen-md-min) {
     .root {
         width: auto;
+        min-width: 600px;
         flex-direction: row;
     }
 }

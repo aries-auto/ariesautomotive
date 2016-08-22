@@ -31,9 +31,22 @@ class CategoryNav extends Component {
 			return;
 		}
 
+		const allItem = {
+			title: 'View All Products',
+			to: '/categories',
+			text: 'View All Products',
+			children: [],
+		};
+
+		const catItems = [];
 		props.categories.map((cat) => {
-			this.state.items.push(this.categoryToItem(cat));
+			const tmp = this.categoryToItem(cat);
+			allItem.children = allItem.children.concat(tmp.children);
+			catItems.push(tmp);
 		});
+
+		this.state.items.push(allItem);
+		this.state.items = this.state.items.concat(catItems);
 
 		this.state.items.push({
 			title: 'Application Guides',
