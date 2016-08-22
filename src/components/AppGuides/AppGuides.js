@@ -61,6 +61,9 @@ class AppGuides extends Component {
 	renderGuides() {
 		// loop through each main category ('Running boards, nerf bars, side steps, side steps, etc')
 		const mainGuides = [];
+		if (!this.props.guideGroups) {
+			return null;
+		}
 		this.props.guideGroups.map((group, i) => {
 			mainGuides.push(<h2 key={i}>{group.title}</h2>);
 			const ags = [];
