@@ -80,15 +80,6 @@ class Navigation extends Component {
 				</div>
 				<Menu items={this.props.menu} />
 				<Lookup vehicle={this.props.vehicle} params={this.props.params} />
-
-				{/* <ul className={cx(s.nav, 'nav', 'navbar-nav')}>
-					{this.props.categories && this.props.categories.length ? this.getCategories() : null}
-					<li role="presentation">
-						<a className={s.link} href="/appguides">
-							APPLICATION GUIDES
-						</a>
-					</li>
-				</ul> */}
 			</div>
 		);
 	}

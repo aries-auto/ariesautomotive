@@ -14,7 +14,7 @@
 		}
 	}
 
-	nav {
+	> div {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -96,7 +96,7 @@
 			display: none;
 		}
 
-		nav {
+		> div {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
@@ -118,6 +118,7 @@
 				font-size: 18px;
 				text-decoration: none;
 				color: $white-base;
+				padding: 0;
 
 				&:before, &:after {
 					background: transparent;

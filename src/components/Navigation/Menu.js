@@ -91,9 +91,9 @@ class Menu extends Component {
 					<span className="icon-bar" />
 					<span className="icon-bar" />
 				</button>
-				<nav onMouseDown={this.mouseDownHandler} onMouseUp={this.mouseUpHandler} className={ this.state.open ? s.open : ''} itemScope itemType="http://www.schema.org/SiteNavigationElement">
+				<div onMouseDown={this.mouseDownHandler} onMouseUp={this.mouseUpHandler} className={ this.state.open ? s.open : ''}>
 					{this.items()}
-				</nav>
+				</div>
 			</div>
 		);
 	}

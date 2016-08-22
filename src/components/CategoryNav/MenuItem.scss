@@ -1,0 +1,140 @@
+@import '../variables.scss';
+
+.root {
+    display: block;
+    width: 100%;
+    padding: 10px;
+
+    > a {
+        position: relative;
+        display: block;
+        width: 0;
+        font-family: $font-family-em;
+        color: $black-base;
+        white-space: nowrap;
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+
+        > span:first-child {
+            padding: 0 5px;
+        }
+
+        > span:last-child {
+            display: none;
+            width: 0;
+            height: 0;
+            border-top: 5px solid $black-base;
+            border-right: 5px solid transparent;
+            border-left: 5px solid transparent;
+        }
+    }
+
+    &.parent {
+        > a {
+            font-size: 18px;
+            font-weight: 400;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            border-bottom: 3px solid transparent;
+            transition: .5s ease;
+        }
+
+        &:hover > a {
+            width: 100%;
+            border-bottom-color: $new-red;
+            opacity: .5;
+        }
+    }
+
+    > div {
+        position: absolute;
+        top: 46px;
+        display: flex;
+        max-width: 500px;
+        padding: 0;
+        margin: 0;
+        flex-direction: row;
+        background-color: $lookup-color-opacity;
+        align-items: stretch;
+        flex: auto;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        > div {
+            display: block;
+            width: auto;
+            padding: 10px;
+            margin: 0;
+            border: none;
+            flex: 1;
+
+            > a {
+                font-family: $font-family-base;
+                font-size: 16px;
+                text-decoration: none;
+                letter-spacing: .025em;
+                transition: border-bottom .2s ease;
+
+                &:hover {
+                    span:first-child {
+                        border-bottom: 1px solid $new-red;
+                    }
+                }
+
+                span:first-child {
+                    font-weight: 600;
+                    border-bottom: 1px solid transparent;
+                }
+
+                span:last-child {
+                    display: none;
+                }
+            }
+
+            > div {
+                position: relative;
+                top: 0;
+                display: block;
+                padding: 0;
+                background-color: transparent;
+
+                > div {
+                    padding: 0 0 0 10px;
+                    border: none;
+
+                    > a {
+                        &:hover span:first-child {
+                            text-decoration: underline;
+                            border-bottom: none;
+                        }
+
+                        span:first-child {
+                            font-size: 14px;
+                            font-weight: normal;
+                            letter-spacing: .03em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (width >= $screen-md-min) {
+    .root {
+        width: auto;
+        padding: 0 10px;
+        border-right: 1px solid $black-base;
+
+        > a {
+            display: flex;
+            width: auto;
+
+            span:last-child {
+                display: inline;
+            }
+        }
+    }
+}
