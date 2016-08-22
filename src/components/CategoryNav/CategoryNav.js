@@ -3,7 +3,7 @@ import cx from 'classnames';
 import s from './CategoryNav.scss';
 import withStyles from '../../decorators/withStyles';
 import Menu from './Menu';
-import Search from './Search';
+import Search from '../SearchForm';
 
 @withStyles(s)
 class CategoryNav extends Component {

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Input, Button, Glyphicon } from 'react-bootstrap';
-import cx from 'classnames';
+import { Glyphicon } from 'react-bootstrap';
 import s from './SearchForm.scss';
 import withStyles from '../../decorators/withStyles';
 
@@ -29,15 +28,13 @@ class SearchForm extends Component {
 
 	render() {
 		return (
-			<div className={cx(s.root)} role="navigation">
-				<form action="/search" method="get" className={cx(s.navbarSearch, 'navbar-form', 'navbar-left', 'row')} onSubmit={this.handleSubmit} role="search">
-					<Input type="search" name="term" ref="term" groupClassName={s.group} label="Enter search" placeholder="Search" />
-					<Button type="submit" bsStyle="default" className="">
-						<span className={s.nodisplay}>Search</span>
-						<Glyphicon glyph="search" />
-					</Button>
-				</form>
-			</div>
+			<form action="/search" method="get" className={s.root} onSubmit={this.handleSubmit} role="search">
+				<input type="search" name="search" ref="term" label="Enter search" placeholder="Search" />
+				<button type="submit">
+					<span className={s.nodisplay}>Search</span>
+					<Glyphicon glyph="search" />
+				</button>
+			</form>
 		);
 	}
 
