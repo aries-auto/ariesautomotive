@@ -87,11 +87,10 @@ class VehicleResults extends Component {
 		this.props.catGroups.map((c) => {
 			const subs = [];
 			this.props.categories.map((cat) => {
-				console.log(cat);
 				if (cat.category.parent_id === c.id) {
 					subs.push({
 						parent: c.id,
-						title: cat.category.title,
+						cat,
 					});
 				}
 			});

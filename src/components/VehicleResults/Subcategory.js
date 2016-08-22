@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import s from './Subcategory.scss';
+import VehicleActions from '../../actions/VehicleActions';
 
 class Subcategory extends Component {
 
@@ -12,6 +13,10 @@ class Subcategory extends Component {
 	}
 
 	componentWillMount() {
+	}
+
+	setActiveCategory(cat) {
+		VehicleActions.setActiveCategory(cat);
 	}
 
 	render() {
