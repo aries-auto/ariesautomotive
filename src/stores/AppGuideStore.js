@@ -27,7 +27,7 @@ class AppGuideStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${iapiBase}/appguides/groups?key=${KEY}&brandID=${brand}`)
+			await fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
