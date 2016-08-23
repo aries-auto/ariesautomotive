@@ -29,15 +29,18 @@ server.get('*', async (req, res, next) => {
 
 		const slugContainer = req.originalUrl;
 		const slug = slugContainer.replace('/', '');
-		const [siteContentResponse] = await Promise.all([
-			fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${BRAND}`, { // change this once we switch brand over, hardcoded 4 is for testing
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-			}),
-		]);
+		let siteContentResponse = null;
+		if (slug !== '' && slug !== '_ahhealth') {
+			siteContentResponse = await Promise.all([
+				fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${BRAND}`, { // change this once we switch brand over, hardcoded 4 is for testing
+					method: 'get',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'Accept': 'application/json',
+					},
+				}),
+			]);
+		}
 
 		try {
 			const siteContent = await siteContentResponse.json();

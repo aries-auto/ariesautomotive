@@ -40,7 +40,7 @@ const router = new Router(on => {
 		const slugContainer = state.params[0];
 		const slug = slugContainer.replace(/\//g, '');
 		let siteContentResponse = null;
-		if (slug !== '') {
+		if (slug !== '' && slug !== '_ahhealth') {
 			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
 				method: 'get',
 				headers: {
