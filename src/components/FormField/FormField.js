@@ -79,11 +79,13 @@ class FormField extends Component {
 			}
 
 			let stateOptions = [];
-			this.props.countries.map((country) => {
-				if (country.country === this.props.inputs.country) {
-					stateOptions = country.states;
-				}
-			});
+			if (this.props.countries) {
+				this.props.countries.map((country) => {
+					if (country.country === this.props.inputs.country) {
+						stateOptions = country.states;
+					}
+				});
+			}
 
 			const statesToSelect = [];
 			for (const k in stateOptions) {
