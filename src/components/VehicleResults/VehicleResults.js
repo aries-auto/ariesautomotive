@@ -101,11 +101,14 @@ class VehicleResults extends Component {
 			const countStr = count.toString();
 
 			output.push(<h3>{c.title}</h3>);
+			const subs = [];
 			this.props.categories.map((cat) => {
 				if (cat.category.parent_id === c.id) {
-					output.push(<div onClick={this.toggleKey.bind(this, countStr, cat)}>{cat.category.title}</div>);
+					subs.push(cat);
+					// subs.push(<div onClick={this.toggleKey.bind(this, countStr, cat)}>{cat.category.title}</div>);
 				}
 			});
+
 			output.push(
 				<Panel key={countStr}>
 					{this.props.activeCategory && this.state.activeKey === countStr ? this.renderVehicleStyle() : null}
