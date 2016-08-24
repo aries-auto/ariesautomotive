@@ -20,7 +20,7 @@
 @media screen and (width >= $screen-md-min) {
     .root {
         padding: 0;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
 
         > nav {
             background-color: transparent;
