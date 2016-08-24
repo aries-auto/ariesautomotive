@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './NewVehicle.scss';
 import Select from './Select';
-import LookupActions from '../../actions/LookupActions';
-import LookupStore from '../../stores/LookupStore';
+import VehicleActions from '../../actions/VehicleActions';
+import VehicleStore from '../../stores/VehicleStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -14,22 +14,32 @@ class NewVehicle extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		onSubmit: PropTypes.func.isRequired,
-		years: PropTypes.array,
-		makes: PropTypes.array,
-		models: PropTypes.array,
 		vehicle: PropTypes.shape({
-			year: PropTypes.string,
-			make: PropTypes.string,
-			model: PropTypes.string,
+			base: PropTypes.shape({
+				year: PropTypes.string,
+				make: PropTypes.string,
+				model: PropTypes.string,
+			}),
+			availableYears: PropTypes.array,
+			availableMakes: PropTypes.array,
+			availableModels: PropTypes.array,
+			lookup_category: PropTypes.array,
+			products: PropTypes.array,
 		}),
-		params: PropTypes.object,
 	};
 
 	static defaultProps = {
 		vehicle: {
-			year: '',
-			make: '',
-			model: '',
+			base: {
+				year: '',
+				make: '',
+				model: '',
+			},
+			availableYears: [],
+			availableMakes: [],
+			availableModels: [],
+			lookup_category: [],
+			products: [],
 		},
 	};
 
@@ -39,41 +49,18 @@ class NewVehicle extends Component {
 		this.changeVehicle = this.changeVehicle.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.isActive = this.isActive.bind(this);
-		this.state = {
-			vehicle: {
-				year: '',
-				make: '',
-				model: '',
-			},
-			makes: [],
-			models: [],
-		};
 	}
 
 	static getStores() {
-		return [LookupStore];
+		return [VehicleStore];
 	}
 
 	static getPropsFromStores() {
-		return LookupStore.getState();
-	}
-
-	vehicleValid() {
-		if (!this.state.vehicle.year || this.state.vehicle.year === '') {
-			return false;
-		}
-		if (!this.state.vehicle.make || this.state.vehicle.make === '') {
-			return false;
-		}
-		if (!this.state.vehicle.model || this.state.vehicle.model === '') {
-			return false;
-		}
-
-		return true;
+		return VehicleStore.getState();
 	}
 
 	resetVehicle() {
-		LookupActions.set({ year: '', make: '', model: '' });
+		VehicleActions.setVehicle('', '', '');
 	}
 
 	changeVehicle(event) {
@@ -92,15 +79,15 @@ class NewVehicle extends Component {
 			break;
 		case 'make':
 			v = {
-				year: this.state.vehicle.year,
+				year: this.props.vehicle.base.year,
 				make: event.target.value,
 				model: '',
 			};
 			break;
 		case 'model':
 			v = {
-				year: this.state.vehicle.year,
-				make: this.state.vehicle.make,
+				year: this.props.vehicle.base.year,
+				make: this.props.vehicle.base.make,
 				model: event.target.value,
 			};
 			break;
@@ -108,10 +95,7 @@ class NewVehicle extends Component {
 			break;
 		}
 
-		LookupActions.set(v);
-		this.setState({
-			vehicle: v,
-		});
+		VehicleStore.fetchVehicle(v.year, v.make, v.model);
 	}
 
 	handleSubmit(e) {
@@ -124,7 +108,7 @@ class NewVehicle extends Component {
 	}
 
 	isActive(prop) {
-		const v = this.state.vehicle;
+		const v = this.props.vehicle;
 		switch (prop) {
 		case 'year':
 			if (!v.year || v.year === '') {
@@ -165,7 +149,7 @@ class NewVehicle extends Component {
 					change={this.changeVehicle}
 					aria="year_lookup_label"
 					placeholder="- Select Year -"
-					values={this.props.years}
+					values={this.props.vehicle.availableYears}
 				/>
 				<Select
 					className={cx(s.formGroup, this.isActive('make'))}
@@ -173,8 +157,8 @@ class NewVehicle extends Component {
 					change={this.changeVehicle}
 					aria="make_lookup_label"
 					placeholder="- Select Make -"
-					values={this.props.makes}
-					disabled={(this.props.makes.length === 0)}
+					values={this.props.vehicle.availableMakes}
+					disabled={(!this.props.vehicle.availableMakes || this.props.vehicle.availableMakes.length === 0)}
 					disabledClassName={s.disabled}
 				/>
 				<Select
@@ -183,14 +167,14 @@ class NewVehicle extends Component {
 					change={this.changeVehicle}
 					aria="model_lookup_label"
 					placeholder="- Select Model -"
-					values={this.props.models}
-					disabled={(this.props.models.length === 0)}
+					values={this.props.vehicle.availableModels}
+					disabled={(!this.props.vehicle.availableModels || this.props.vehicle.availableModels.length === 0)}
 					disabledClassName={s.disabled}
 				/>
 				<button
 					className={cx('red-transparent-button', s.viewParts)}
 					type="submit"
-					disabled={(this.state.vehicle.model === '')}
+					disabled={(this.props.vehicle.base.model === '')}
 				>
 					View Parts
 				</button>
