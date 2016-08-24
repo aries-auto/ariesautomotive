@@ -228,14 +228,13 @@ class Product extends Component {
 				</div>
 			);
 		}
-
-		if (this.props.part.video) {
+		if (this.props.part.videos) {
 			for (let i = this.props.part.videos.length - 1; i >= 0; i--) {
 				const vid = this.props.part.videos[i];
-				if (vid.Type === 'Installation Video') {
+				if (vid.subject_type === 'Installation Video') {
 					iVideo = (
 						<div className={cx(s.installSheet, 'pull-left')}>
-							<a onClick="openInstallVideo()" aria-controls="Installation Videos" role="button" data-toggle="tab">
+							<a onClick={this.shadowbox.bind(this, vid)} aria-controls="Installation Videos" role="button" data-toggle="tab">
 								<span className="glyphicon glyphicon-play"></span>
 								Install Video
 							</a>
