@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 // import cx from 'classnames';
 import Loader from 'react-loader';
+import Collapse, { Panel } from 'rc-collapse';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
@@ -9,7 +10,7 @@ import CategoryStore from '../../stores/CategoryStore';
 import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
-import Category from './Category';
+// import Category from './Category';
 
 @withStyles(s)
 @connectToStores
@@ -17,6 +18,7 @@ class VehicleResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		activeKey: PropTypes.string,
 		context: PropTypes.shape({
 			params: PropTypes.shape({
 				year: PropTypes.string,
@@ -46,7 +48,10 @@ class VehicleResults extends Component {
 		super();
 		this.state = {
 			context: {},
+			activeKey: '1',
 		};
+		this.onChange = this.onChange.bind(this);
+		this.toggleKey = this.toggleKey.bind(this);
 	}
 
 	componentWillMount() {
@@ -64,6 +69,12 @@ class VehicleResults extends Component {
 		};
 		this.context.seo(seo);
 		CategoryActions.getCats();
+	}
+
+	onChange(activeKey) {
+		this.setState({
+			activeKey,
+		});
 	}
 
 	static getStores() {
@@ -84,21 +95,21 @@ class VehicleResults extends Component {
 			return <span></span>;
 		}
 
+		let count = 0;
 		this.props.catGroups.map((c) => {
-			const subs = [];
+			count++;
+			const countStr = count.toString();
+
+			output.push(<h3>{c.title}</h3>);
 			this.props.categories.map((cat) => {
 				if (cat.category.parent_id === c.id) {
-					subs.push({
-						parent: c.id,
-						cat,
-					});
+					output.push(<div onClick={this.toggleKey.bind(this, countStr, cat)}>{cat.category.title}</div>);
 				}
 			});
-
 			output.push(
-				<div className={'col-sm-12'}>
-					<Category catTitle={c.title} subs={subs} />
-				</div>
+				<Panel key={countStr}>
+					{this.props.activeCategory && this.state.activeKey === countStr ? this.renderVehicleStyle() : null}
+				</Panel>
 			);
 		});
 
@@ -109,6 +120,13 @@ class VehicleResults extends Component {
 		VehicleActions.setActiveCategory(cat);
 	}
 
+	toggleKey(activeKey, cat) {
+		VehicleActions.setActiveCategory(cat);
+		this.setState({
+			activeKey,
+		});
+	}
+
 	renderVehicleStyle() {
 		return (
 			<VehicleStyle
@@ -117,12 +135,82 @@ class VehicleResults extends Component {
 		);
 	}
 
+
 	render() {
+		const accordionVal = true;
+
+		const accStyle = `
+			.rc-collapse {
+			  background-color: #f4f4f4;
+			  border-radius: 3px;
+			  border: 1px solid #d9d9d9;
+			}
+			.rc-collapse-anim-active {
+			  transition: height 0.2s ease-out;
+			}
+			.rc-collapse > .rc-collapse-item {
+			  border-top: 1px solid #d9d9d9;
+			}
+			.rc-collapse > .rc-collapse-item:first-child {
+			  border-top: none;
+			}
+			.rc-collapse > .rc-collapse-item > .rc-collapse-header {
+			  height: 38px;
+			  line-height: 38px;
+			  text-indent: 16px;
+			  color: #666;
+			  cursor: pointer;
+			}
+			.rc-collapse > .rc-collapse-item > .rc-collapse-header .arrow {
+			  display: inline-block;
+			  content: '\\20';
+			  width: 0;
+			  height: 0;
+			  font-size: 0;
+			  line-height: 0;
+			  border-top: 3px solid transparent;
+			  border-bottom: 3px solid transparent;
+			  border-left: 4px solid #666666;
+			  vertical-align: middle;
+			  margin-right: 8px;
+			}
+			.rc-collapse-content {
+			  overflow: hidden;
+			  color: #666666;
+			  padding: 0 16px;
+			  background-color: #fff;
+			}
+			.rc-collapse-content > .rc-collapse-content-box {
+			  margin-top: 16px;
+			  margin-bottom: 16px;
+			}
+			.rc-collapse-content-inactive {
+			  display: none;
+			}
+			.rc-collapse-item:last-child > .rc-collapse-content {
+			  border-radius: 0 0 3px 3px;
+			}
+			.rc-collapse > .rc-collapse-item-active > .rc-collapse-header .arrow {
+			  border-left: 3px solid transparent;
+			  border-right: 3px solid transparent;
+			  border-top: 4px solid #666666;
+			  margin-right: 6px;
+			}
+		`;
+
 		return (
 			<div className={s.container}>
+				<style>{accStyle}</style>
 				<Loader loaded={(this.props.categories !== null)} top="30%">
-					{this.getCategoryStyles()}
-					{this.props.activeCategory ? this.renderVehicleStyle() : null}
+					<div>
+						<Collapse accordion={accordionVal}
+							onChange={this.onChange}
+							activeKey={this.state.activeKey}
+							defaultActiveKey="2"
+						>
+							{this.getCategoryStyles()}
+						</Collapse>
+					</div>
 				</Loader>
 			</div>
 		);
