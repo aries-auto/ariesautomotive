@@ -51,8 +51,8 @@ const router = new Router(on => {
 
 		VehicleStore.fetchVehicle();
 		const [catResponse, contentAllReponse] = await Promise.all([
-			fetch(`${apiBase}/category?brandID=${brand.id}&key=${KEY}`),
-			fetch(`${apiBase}/site/content/all?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`),
+			fetch(`/api/categories`),
+			fetch(`/api/content/all`),
 		]);
 
 		try {

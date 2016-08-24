@@ -2,6 +2,7 @@ import 'babel-core/polyfill';
 import path from 'path';
 import express from 'express';
 import React from 'react';
+import Memcached from 'memcached';
 import ReactDOM from 'react-dom/server';
 import fetch from './core/fetch';
 import Router from './routes';
@@ -10,12 +11,60 @@ import assets from './assets';
 import { port } from './config';
 import { apiBase, apiKey, brand } from './config';
 
+const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
+const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
+const memcached = new Memcached(memcachedAddr + ':' + memcachedPort);
+
 const server = global.server = express();
 const KEY = apiKey;
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
+
+server.get('/api/categories', (req, res) => {
+	memcached.get('api:categories', (err, val) => {
+		if (!err && val) {
+			res.send(val);
+			return;
+		}
+
+		fetch(`${apiBase}/category?brandID=${brand.id}&key=${KEY}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set('api:categories', data, 8640, (e) => {
+				if (e) {
+					res.error(e);
+					return;
+				}
+				res.send(data);
+			});
+		});
+	});
+});
+
+server.get('/api/content/all', (req, res) => {
+	memcached.get('api:content:all', (err, val) => {
+		if (!err && val) {
+			res.send(val);
+			return;
+		}
+
+		fetch(`${apiBase}/site/content/all?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set('api:content:all', data, 8640, (e) => {
+				if (e) {
+					res.error(e);
+					return;
+				}
+				res.send(data);
+			});
+		});
+	});
+});
 
 //
 // Register server-side rendering middleware
