@@ -6,7 +6,7 @@ import withStyles from '../../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
-import { appguides } from './data';
+// import { appguides } from './data';
 
 const cache = '06072016';
 
@@ -129,21 +129,36 @@ class AppGuide extends Component {
 	}
 
 	renderDownloadLinks() {
+		const guide = this.props.guide;
+		if (guide === undefined || guide === null) {
+			return <span></span>;
+		}
 		let page = this.props.guide.name;
+		let render = false;
 		page = page.toLowerCase();
 		const links = [];
-		let render = false;
-		appguides.map((guide, i) => {
-			if ((guide.cats.indexOf(page) !== -1)) {
-				render = true;
-				const link = `${guide.link}?cache=${cache}`;
-				links.push(
-					<a key={i} href={link} target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
-						<img src={guide.icon} alt="App Guide" className={cx('icon', s.appguideIcon)} />
-					</a>
-				);
-			}
-		});
+		if (guide.appGuide === undefined || guide.appGuide === null) {
+			return <span></span>;
+		}
+		if (guide.appGuide.pdfPath) {
+			const pdfLink = `${guide.appGuide.pdfPath}?cache=${cache}`;
+			links.push(
+				<a key={1} href={pdfLink} target="_blank" analytics-on="click" analytics-event={`${page}:pdf`}>
+					<img src={'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png'} alt="App Guide" className={cx('icon', s.appguideIcon)} />
+				</a>
+			);
+			render = true;
+		}
+		if (guide.appGuide.xlsPath) {
+			const xlsLink = `${guide.appGuide.xlsPath}?cache=${cache}`;
+			links.push(
+				<a key={2} href={xlsLink} target="_blank" analytics-on="click" analytics-event={`${page}:pdf`}>
+					<img src={'https://storage.googleapis.com/curt-icons/Excel-Icon.png'} alt="App Guide" className={cx('icon', s.appguideIcon)} />
+				</a>
+			);
+			render = true;
+		}
+
 		if (!render) {
 			return null;
 		}

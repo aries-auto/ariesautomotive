@@ -2,7 +2,7 @@ import AppGuideActions from '../actions/AppGuideActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey, brand } from '../config';
+import { iapiBase, apiBase, apiKey, brand } from '../config';
 
 const EventEmitter = events.EventEmitter;
 
@@ -14,7 +14,6 @@ class AppGuideStore extends EventEmitter {
 		this.state = {
 			guides: [],
 			error: {},
-			guide: null,
 			applicationGuides: [],
 		};
 		this.bindListeners({
@@ -28,12 +27,12 @@ class AppGuideStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${apiBase}/vehicle/mongo/cols?key=${KEY}&brandID=${brand}`)
+			await fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
 				this.setState({
-					guides: data,
+					guideGroups: data,
 				});
 			});
 		} catch (err) {

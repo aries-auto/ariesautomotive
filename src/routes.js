@@ -14,6 +14,7 @@ import VehicleResults from './components/VehicleResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
+// import AppGuide from './components/AppGuides/AppGuide/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -23,7 +24,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
 import LookupActions from './actions/LookupActions';
-import { apiBase, apiKey, brand } from './config';
+import { iapiBase, apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -238,6 +239,37 @@ const router = new Router(on => {
 		return <AppGuides context={state.context} />;
 	});
 
+	on('/appguides/:guide/:page', async (state) => {
+		let guide = {};
+		let appGuideInfo = {};
+		const collection = state.params.guide;
+		const page = state.params.page;
+		try {
+			const [guideResponse, appGuideInfoResponse] = await Promise.all([
+				fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
+					method: 'post',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+				fetch(`${iapiBase}/appguides/guide?collection=${collection}&key=${KEY}&brandID=${brand}`, {
+					method: 'get',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+			]);
+
+			guide = await guideResponse.json();
+			appGuideInfo = await appGuideInfoResponse.json();
+			guide.name = collection;
+			guide.appGuide = appGuideInfo;
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <AppGuides guide={guide} context={state.context} />;
+	});
+
 	on('/becomedealer', async (state) => {
 		return <BecomeDealer context={state.context} />;
 	});
@@ -315,13 +347,13 @@ const router = new Router(on => {
 		state.context.testimonials = [];
 		state.context.carouselImages = [
 			{
-				image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+				image: 'https://storage.googleapis.com/aries-website/hero-images/jeep.png',
 				text: 'Never Fear the Uncertain Road',
 				button_text: 'VIEW BULL BARS',
 				link: '/category/332',
 				order: 5,
 				styles: {
-					backgroundImage: 'url(http://storage.googleapis.com/aries-website/hero-images/jeep.png)',
+					backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/jeep.png)',
 				},
 			}, {
 				image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
