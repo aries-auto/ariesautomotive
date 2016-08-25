@@ -94,26 +94,47 @@ class VehicleResults extends Component {
 		if (!this.props.catGroups || this.props.catGroups[0].id === 0 || !this.props.categories || this.props.categories[0].id === 0) {
 			return <span></span>;
 		}
-
+		let key = 1;
 		let count = 0;
 		this.props.catGroups.map((c) => {
 			count++;
-			const countStr = count.toString();
 
 			output.push(<h3>{c.title}</h3>);
 			const subs = [];
+			const subsOutput = [];
 			this.props.categories.map((cat) => {
 				if (cat.category.parent_id === c.id) {
 					subs.push(cat);
-					// subs.push(<div onClick={this.toggleKey.bind(this, countStr, cat)}>{cat.category.title}</div>);
 				}
+			});
+			let i = 1;
+			subs.map((cat) => {
+				const keyStr = key.toString();
+				subsOutput.push(<div onClick={this.toggleKey.bind(this, keyStr, cat)}>{cat.category.title} {keyStr}</div>);
+				const isEven = (i % 2 === 0) ? true : false;
+				if (isEven) {
+					subsOutput.push(
+						<Panel key={keyStr}>
+							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
+						</Panel>
+					);
+					key++;
+				}
+				if (!isEven && i === subs.length) {
+					subsOutput.push(
+						<Panel key={keyStr}>
+							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
+						</Panel>
+					);
+					key++;
+				}
+				i++;
 			});
 
 			output.push(
-				<Panel key={countStr}>
-					{this.props.activeCategory && this.state.activeKey === countStr ? this.renderVehicleStyle() : null}
-				</Panel>
+				subsOutput
 			);
+			key++;
 		});
 
 		return output;
