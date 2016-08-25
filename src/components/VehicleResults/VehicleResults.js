@@ -98,7 +98,6 @@ class VehicleResults extends Component {
 		let count = 0;
 		this.props.catGroups.map((c) => {
 			count++;
-
 			output.push(<h3>{c.title}</h3>);
 			const subs = [];
 			const subsOutput = [];
@@ -110,7 +109,7 @@ class VehicleResults extends Component {
 			let i = 1;
 			subs.map((cat) => {
 				const keyStr = key.toString();
-				subsOutput.push(<div onClick={this.toggleKey.bind(this, keyStr, cat)}>{cat.category.title} {keyStr}</div>);
+				subsOutput.push(<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" onClick={this.toggleKey.bind(this, keyStr, cat)}>{cat.category.title}</div>);
 				const isEven = (i % 2 === 0) ? true : false;
 				if (isEven) {
 					subsOutput.push(
@@ -121,6 +120,7 @@ class VehicleResults extends Component {
 					key++;
 				}
 				if (!isEven && i === subs.length) {
+					subsOutput.push(<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">&nbsp;</div>);
 					subsOutput.push(
 						<Panel key={keyStr}>
 							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
@@ -230,7 +230,7 @@ class VehicleResults extends Component {
 						<Collapse accordion={accordionVal}
 							onChange={this.onChange}
 							activeKey={this.state.activeKey}
-							defaultActiveKey="2"
+							defaultActiveKey={"1"}
 						>
 							{this.getCategoryStyles()}
 						</Collapse>
