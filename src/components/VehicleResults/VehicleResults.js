@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-// import cx from 'classnames';
+import cx from 'classnames';
 import Loader from 'react-loader';
 import Collapse, { Panel } from 'rc-collapse';
 import s from './VehicleResults.scss';
@@ -48,7 +48,7 @@ class VehicleResults extends Component {
 		super();
 		this.state = {
 			context: {},
-			activeKey: '1',
+			activeKey: '0',
 		};
 		this.onChange = this.onChange.bind(this);
 		this.toggleKey = this.toggleKey.bind(this);
@@ -109,7 +109,15 @@ class VehicleResults extends Component {
 			let i = 1;
 			subs.map((cat) => {
 				const keyStr = key.toString();
-				subsOutput.push(<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" onClick={this.toggleKey.bind(this, keyStr, cat)}>{cat.category.title}</div>);
+				const image = cat.category.image.Path ? `${cat.category.image.Scheme}://${cat.category.image.Host}${cat.category.image.Path}` : '';
+				subsOutput.push(
+					<div className={cx(s.category, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')} onClick={this.toggleKey.bind(this, keyStr, cat)}>
+						<div className={cx(s.categoryBox)}>
+							<img className={cx(s.categoryImage)} src={image} />
+							<span className={cx(s.catTitle)}>{cat.category.title}</span>
+						</div>
+					</div>
+				);
 				const isEven = (i % 2 === 0) ? true : false;
 				if (isEven) {
 					subsOutput.push(
@@ -120,7 +128,7 @@ class VehicleResults extends Component {
 					key++;
 				}
 				if (!isEven && i === subs.length) {
-					subsOutput.push(<div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">&nbsp;</div>);
+					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
 					subsOutput.push(
 						<Panel key={keyStr}>
 							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
@@ -165,12 +173,9 @@ class VehicleResults extends Component {
 
 		const accStyle = `
 			.rc-collapse {
-			  background-color: #f4f4f4;
-			  border-radius: 3px;
-			  border: 1px solid #d9d9d9;
 			}
 			.rc-collapse-anim-active {
-			  transition: height 0.2s ease-out;
+			  transition: height 0.6s ease-out;
 			}
 			.rc-collapse > .rc-collapse-item {
 			  border-top: 1px solid #d9d9d9;
@@ -201,8 +206,7 @@ class VehicleResults extends Component {
 			.rc-collapse-content {
 			  overflow: hidden;
 			  color: #666666;
-			  padding: 0 16px;
-			  background-color: #fff;
+			  padding: 0 1px;
 			}
 			.rc-collapse-content > .rc-collapse-content-box {
 			  margin-top: 16px;
@@ -230,7 +234,6 @@ class VehicleResults extends Component {
 						<Collapse accordion={accordionVal}
 							onChange={this.onChange}
 							activeKey={this.state.activeKey}
-							defaultActiveKey={"1"}
 						>
 							{this.getCategoryStyles()}
 						</Collapse>

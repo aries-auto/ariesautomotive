@@ -25,7 +25,7 @@
     .greybox {
         display: flex;
         width: 85%;
-        padding: 10px;
+        padding: 0px;
         margin: 1em auto 1em auto;
         align-items: left;
 
@@ -85,7 +85,6 @@
 @media (min-width: $screen-md-min) {
     .root {
         width: 100%;
-        padding: 1em 4em;
         overflow: inherit;
 
         .categoryName {
@@ -93,6 +92,7 @@
         }
 
         .greybox {
+						padding:0px;
             width: 100%;
             margin: 0 0 1em 0;
             flex-direction: row;

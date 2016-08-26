@@ -114,8 +114,6 @@ class VehicleStyle extends Component {
 	render() {
 		return (
 			<div className={s.root}>
-				<h1 className={s.categoryName}>{this.props.activeCategory.category ? this.props.activeCategory.category.title : null}</h1>
-				<hr/>
 				{this.renderStyleChoices()}
 				<div>
 					{this.props.style ? this.getParts() : ''}
