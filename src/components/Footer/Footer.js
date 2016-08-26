@@ -40,7 +40,7 @@ class Footer extends Component {
 
 	render() {
 		const styles = {
-			background: "url('https://storage.googleapis.com/aries-website/site-assets/footerBackground.png')",
+			background: "url('/img/footerBackground.png')",
 		};
 		return (
 			<footer>

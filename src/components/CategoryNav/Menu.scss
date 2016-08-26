@@ -19,6 +19,10 @@
     &.hide {
         display: none;
     }
+
+	> .root {
+		display: block;
+	}
 }
 
 @media screen and (width >= $screen-md-min) {

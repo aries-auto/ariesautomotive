@@ -19,6 +19,7 @@ class Link extends Component {
 		query: PropTypes.object,
 		state: PropTypes.object,
 		onClick: PropTypes.func,
+		external: PropTypes.bool,
 	};
 
 	static handleClick = (event) => {
@@ -29,7 +30,7 @@ class Link extends Component {
 			clickResult = this.props.onClick(event);
 		}
 
-		if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
+		if (isModifiedEvent(event) || !isLeftClickEvent(event) || (this.props && this.props.external)) {
 			return;
 		}
 

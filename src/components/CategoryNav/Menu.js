@@ -60,7 +60,7 @@ class Menu extends Component {
 			<div className={cx(
 					s.root,
 					this.props.className,
-					!this.props.open && !this.props.isParent ? s.hide : '',
+					this.props.open || this.props.isParent ? '' : s.hide,
 					this.props.isParent ? s.parent : '',
 				)}
 			>
