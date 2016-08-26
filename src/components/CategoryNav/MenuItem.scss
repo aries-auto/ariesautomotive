@@ -122,8 +122,6 @@
 
 @media screen and (width >= $screen-md-min) {
     .root {
-        width: auto;
-        padding: 0 10px;
         border-right: 1px solid $black-base;
 
         > div {
