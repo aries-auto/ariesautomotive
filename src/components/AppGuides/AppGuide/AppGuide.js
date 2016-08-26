@@ -32,7 +32,7 @@ class AppGuide extends Component {
 
 	constructor() {
 		super();
-		this.getFinish = this.getFinish.bind(this);
+		this.getAttr = this.getAttr.bind(this);
 	}
 
 	componentWillMount() {
@@ -49,37 +49,53 @@ class AppGuide extends Component {
 		return AppGuideStore.getState();
 	}
 
-	getFinishes() {
+	getAttrs() {
 		const output = [];
-		this.props.guide.finishes.map((finish, i) => {
-			output.push(<th key={i}>{finish}</th>);
-		});
+		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
+			this.props.guide.colors.map((color, i) => {
+				output.push(<th key={i}>{color}</th>);
+			});
+		} else {
+			this.props.guide.finishes.map((finish, i) => {
+				output.push(<th key={i}>{finish}</th>);
+			});
+		}
 		return output;
 	}
 
-	getFinish(application) {
+	getAttr(application) {
 		const appguideSlice = [];
-		const finishToAppguide = {};
-		this.props.guide.finishes.map((finish) => {
-			finishToAppguide[finish] = [];
+		const attrToAppguide = {};
+		let attrToSearch = [];
+		let isFloorLiner = false;
+		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
+			isFloorLiner = true;
+			attrToSearch = this.props.guide.colors;
+		} else {
+			attrToSearch = this.props.guide.finishes;
+		}
+
+		attrToSearch.map((attr) => {
+			attrToAppguide[attr] = [];
 			application.parts.map((part, j) => {
-				if (part.finish === finish) {
+				if ((part.color === attr && isFloorLiner) || (part.finish === attr && !isFloorLiner)) {
 					const url = `/part/${part.oldPartNumber}`;
 					const ins = `https://www.curtmfg.com/masterlibrary/01ARIES/206003-2/installsheet/${part.oldPartNumber}_INS.pdf`;
 					const appguideCell = (<div key={j}><a href={url}>{part.oldPartNumber} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></div>);
-					finishToAppguide[finish].push(appguideCell);
+					attrToAppguide[attr].push(appguideCell);
 				}
 			});
 		});
-		this.props.guide.finishes.map((finish) => {
-			for (const i in finishToAppguide) {
-				if (i === finish) {
-					appguideSlice.push(<td key={i}>{finishToAppguide[i]}</td>);
+		attrToSearch.map((attr) => {
+			for (const i in attrToAppguide) {
+				if (i === attr) {
+					appguideSlice.push(<td key={i}>{attrToAppguide[i]}</td>);
 				}
 			}
 		});
 		return appguideSlice;
 	}
+
 	handlePagination(inc) {
 		if (this.props.page && this.props.page === 0 && inc === -1) {
 			return;
@@ -102,7 +118,7 @@ class AppGuide extends Component {
 						<th>Style</th>
 						<th>Start Year</th>
 						<th>End Year</th>
-						{this.getFinishes()}
+						{this.getAttrs()}
 					</tr>
 				</thead>
 				<tbody>{this.renderApplicationRows()}</tbody>
@@ -113,8 +129,9 @@ class AppGuide extends Component {
 	renderApplicationRows() {
 		const output = [];
 		this.props.guide.applications.map((app, i) => {
-			const fin = this.getFinish(app);
-			output.push(<tr key={i}><td>{app.make}</td><td>{app.model}</td><td>{app.style}</td><td>{app.min_year}</td><td>{app.max_year}</td>{fin}</tr>);
+			let attr = {};
+			attr = this.getAttr(app);
+			output.push(<tr key={i}><td>{app.make}</td><td>{app.model}</td><td>{app.style}</td><td>{app.min_year}</td><td>{app.max_year}</td>{attr}</tr>);
 		});
 		return output;
 	}
