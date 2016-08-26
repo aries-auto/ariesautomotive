@@ -40,7 +40,7 @@ class Footer extends Component {
 
 	render() {
 		const styles = {
-			background: "url('/img/footerBackground.png')",
+			background: "url('https://storage.googleapis.com/aries-website/site-assets/footerBackground.png')",
 		};
 		return (
 			<footer>
@@ -50,7 +50,7 @@ class Footer extends Component {
 							<h4>REACH US</h4>
 							<address itemScope itemType="//schema.org/Organization">
 								<div className={s.phoneNumber}>
-									<img src="/img/phone.png" alt="phone image" />
+									<img src="https://storage.googleapis.com/aries-website/site-assets/phone.png" alt="phone image" />
 									<span className={s.phone}>
 										CALL
 										<a itemProp="telephone" href="tel:+18888002743" title="Call Us (888) 800-2743">
@@ -76,20 +76,20 @@ class Footer extends Component {
 								<h4 className="hidden-xs hidden-sm">GET THE LATEST</h4>
 								<div className="col-xs-12 col-md-12 col-lg-12">
 									<a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
-										<img src="/img/facebook-icon.png" alt="Facebook Logo" />
+										<img src="https://storage.googleapis.com/aries-website/site-assets/facebook-icon.png" alt="Facebook Logo" />
 									</a>
 									<a href="https://twitter.com/ariesautomotive" title="Visit us on Twitter">
-										<img src="/img/twitter-icon.png" alt="Twitter Logo" />
+										<img src="https://storage.googleapis.com/aries-website/site-assets/twitter-icon.png" alt="Twitter Logo" />
 									</a>
 									<a href="http://www.youtube.com/user/AriesAutomotive" title="Visit us on YouTube">
-										<img src="/img/youtube-icon.png" alt="YouTube Logo" />
+										<img src="https://storage.googleapis.com/aries-website/site-assets/youtube-icon.png" alt="YouTube Logo" />
 									</a>
 								</div>
 							</div>
 							<div className="row col-lg-2 col-md-2 col-xs-4">
 								<div className={s.semaLogo}>
 									<a href="http://www.sema.org" title="SEMA Website">
-										<img src="/img/sema-logo.png" width="64px" alt="SEMA Logo" />
+										<img src="https://storage.googleapis.com/aries-website/site-assets/sema-logo.png" width="64px" alt="SEMA Logo" />
 									</a>
 								</div>
 							</div>

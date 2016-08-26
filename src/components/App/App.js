@@ -52,7 +52,7 @@ class App extends Component {
 
 	render() {
 		const styles = {
-			background: "url('/img/bgtexture.png')",
+			background: "url('https://storage.googleapis.com/aries-website/site-assets/bgtexture.png')",
 		};
 		return (
 			<div className={cx(s.root)} style={styles}>

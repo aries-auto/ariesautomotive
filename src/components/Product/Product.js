@@ -289,7 +289,7 @@ class Product extends Component {
 							<img src="/img/facebook-icon.png" alt="Facebook" />
 						</a>
 						<a href="#Twitter" title="Tweet Us on Twitter" onClick={this.shareTwitter}>
-							<img src="/img/twitter-icon.png" alt="Twitter" />
+							<img src="https://storage.googleapis.com/aries-website/site-assets/twitter-icon.png" alt="Twitter" />
 						</a>
 						<a href="#GooglePlus" title="Share Us on Google Plus" onClick={this.shareGoogle}>
 							<img src="/img/googleplus-icon.png" alt="Google Plus" />
