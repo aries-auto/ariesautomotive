@@ -5,15 +5,6 @@
     font-size: 14px;
 }
 
-.btnActive {
-	background-color:$new-red !important;
-	color: $white-base !important;
-	border-color: $new-red !important;
-	.catTitle {
-		color: $white-base !important;
-	}
-}
-
 .category {
 	min-height:40px;
 	padding:0px;
@@ -30,6 +21,14 @@
 		.catTitle {
 			font-size:1.2em;
 			color: $new-red;
+		}
+	}
+	.categoryBox.btnActive {
+		background-color:$new-red;
+		color: $white-base;
+		border-color: $new-red;
+		.catTitle {
+			color: $white-base;
 		}
 	}
 	.categoryImage {
