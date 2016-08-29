@@ -5,6 +5,15 @@
     font-size: 14px;
 }
 
+.btnActive {
+	background-color:$new-red !important;
+	color: $white-base !important;
+	border-color: $new-red !important;
+	.catTitle {
+		color: $white-base !important;
+	}
+}
+
 .category {
 	min-height:40px;
 	padding:0px;
@@ -19,6 +28,7 @@
 		background-color:#fff;
 
 		.catTitle {
+			font-size:1.2em;
 			color: $new-red;
 		}
 	}
@@ -107,6 +117,11 @@
         }
     }
 }
+
+.btnActive {
+	background-color:red;
+}
+
 
 .collapse {
 }

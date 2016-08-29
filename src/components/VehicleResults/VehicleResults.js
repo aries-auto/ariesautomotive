@@ -50,6 +50,7 @@ class VehicleResults extends Component {
 		this.state = {
 			context: {},
 			activeKey: '0',
+			activeCat: 0,
 		};
 		this.onChange = this.onChange.bind(this);
 		this.toggleKey = this.toggleKey.bind(this);
@@ -111,7 +112,7 @@ class VehicleResults extends Component {
 			subs.map((cat) => {
 				const keyStr = key.toString();
 				subsOutput.push(
-					<SubCategory cat={cat} keyStr={keyStr} toggleKey={this.toggleKey} />
+					<SubCategory cat={cat} keyStr={keyStr} toggleKey={this.toggleKey} btnActive={this.state.activeCat === cat.category.id ? true : false} />
 				);
 				const isEven = (i % 2 === 0) ? true : false;
 				if (isEven) {
@@ -148,11 +149,10 @@ class VehicleResults extends Component {
 	}
 
 	toggleKey(activeKey, cat) {
-		console.log('toggle key');
-		console.log(cat);
 		VehicleActions.setActiveCategory(cat);
 		this.setState({
 			activeKey,
+			activeCat: cat.category.id,
 		});
 	}
 
