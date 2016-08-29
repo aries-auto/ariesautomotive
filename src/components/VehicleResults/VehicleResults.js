@@ -10,6 +10,7 @@ import CategoryStore from '../../stores/CategoryStore';
 import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
+import SubCategory from './Subcategory';
 // import Category from './Category';
 
 @withStyles(s)
@@ -109,19 +110,13 @@ class VehicleResults extends Component {
 			let i = 1;
 			subs.map((cat) => {
 				const keyStr = key.toString();
-				const image = cat.category.image.Path ? `${cat.category.image.Scheme}://${cat.category.image.Host}${cat.category.image.Path}` : '';
 				subsOutput.push(
-					<div className={cx(s.category, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')} onClick={this.toggleKey.bind(this, keyStr, cat)}>
-						<div className={cx(s.categoryBox)}>
-							<img className={cx(s.categoryImage)} src={image} />
-							<span className={cx(s.catTitle)}>{cat.category.title}</span>
-						</div>
-					</div>
+					<SubCategory cat={cat} keyStr={keyStr} toggleKey={this.toggleKey} />
 				);
 				const isEven = (i % 2 === 0) ? true : false;
 				if (isEven) {
 					subsOutput.push(
-						<Panel key={keyStr}>
+						<Panel className={s.collapseItem} key={keyStr}>
 							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
 						</Panel>
 					);
@@ -130,7 +125,7 @@ class VehicleResults extends Component {
 				if (!isEven && i === subs.length) {
 					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
 					subsOutput.push(
-						<Panel key={keyStr}>
+						<Panel className={s.collapseItem} key={keyStr}>
 							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
 						</Panel>
 					);
@@ -153,6 +148,8 @@ class VehicleResults extends Component {
 	}
 
 	toggleKey(activeKey, cat) {
+		console.log('toggle key');
+		console.log(cat);
 		VehicleActions.setActiveCategory(cat);
 		this.setState({
 			activeKey,
@@ -171,69 +168,14 @@ class VehicleResults extends Component {
 	render() {
 		const accordionVal = true;
 
-		const accStyle = `
-			.rc-collapse {
-			}
-			.rc-collapse-anim-active {
-			  transition: height 0.6s ease-out;
-			}
-			.rc-collapse > .rc-collapse-item {
-			  border-top: 1px solid #d9d9d9;
-			}
-			.rc-collapse > .rc-collapse-item:first-child {
-			  border-top: none;
-			}
-			.rc-collapse > .rc-collapse-item > .rc-collapse-header {
-			  height: 38px;
-			  line-height: 38px;
-			  text-indent: 16px;
-			  color: #666;
-			  cursor: pointer;
-			}
-			.rc-collapse > .rc-collapse-item > .rc-collapse-header .arrow {
-			  display: inline-block;
-			  content: '\\20';
-			  width: 0;
-			  height: 0;
-			  font-size: 0;
-			  line-height: 0;
-			  border-top: 3px solid transparent;
-			  border-bottom: 3px solid transparent;
-			  border-left: 4px solid #666666;
-			  vertical-align: middle;
-			  margin-right: 8px;
-			}
-			.rc-collapse-content {
-			  overflow: hidden;
-			  color: #666666;
-			  padding: 0 1px;
-			}
-			.rc-collapse-content > .rc-collapse-content-box {
-			  margin-top: 16px;
-			  margin-bottom: 16px;
-			}
-			.rc-collapse-content-inactive {
-			  display: none;
-			}
-			.rc-collapse-item:last-child > .rc-collapse-content {
-			  border-radius: 0 0 3px 3px;
-			}
-			.rc-collapse > .rc-collapse-item-active > .rc-collapse-header .arrow {
-			  border-left: 3px solid transparent;
-			  border-right: 3px solid transparent;
-			  border-top: 4px solid #666666;
-			  margin-right: 6px;
-			}
-		`;
-
 		return (
 			<div className={s.container}>
-				<style>{accStyle}</style>
 				<Loader loaded={(this.props.categories !== null)} top="30%">
-					<div>
+					<div className={s.accordionContainer}>
 						<Collapse accordion={accordionVal}
 							onChange={this.onChange}
 							activeKey={this.state.activeKey}
+							prefixCls={s.collapse}
 						>
 							{this.getCategoryStyles()}
 						</Collapse>
