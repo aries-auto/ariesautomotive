@@ -11,7 +11,7 @@ import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
 import SubCategory from './Subcategory';
-// import Category from './Category';
+import CollapseStyle from './style';
 
 @withStyles(s)
 @connectToStores
@@ -98,6 +98,8 @@ class VehicleResults extends Component {
 		}
 		let key = 1;
 		let count = 0;
+
+		output.push(<style>{CollapseStyle.AnimationStyle}</style>);
 		this.props.catGroups.map((c) => {
 			count++;
 			const subs = [];
@@ -119,7 +121,7 @@ class VehicleResults extends Component {
 				const isEven = (i % 2 === 0) ? true : false;
 				if (isEven) {
 					subsOutput.push(
-						<Panel className={s.collapseItem} key={keyStr}>
+						<Panel key={keyStr}>
 							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
 						</Panel>
 					);
@@ -128,7 +130,7 @@ class VehicleResults extends Component {
 				if (!isEven && i === subs.length) {
 					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
 					subsOutput.push(
-						<Panel className={s.collapseItem} prefixCls={s.collapseItem} key={keyStr}>
+						<Panel key={keyStr}>
 							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
 						</Panel>
 					);
@@ -187,7 +189,6 @@ class VehicleResults extends Component {
 						<Collapse accordion={accordionVal}
 							onChange={this.onChange}
 							activeKey={this.state.activeKey}
-							prefixCls={s.collapse}
 						>
 							{this.getCategoryStyles()}
 						</Collapse>
