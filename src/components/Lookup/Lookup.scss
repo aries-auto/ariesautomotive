@@ -1,50 +1,18 @@
 @import '../variables.scss';
 
 .root {
-    position: relative;
-    z-index: 2;
+    z-index: 100;
+    display: flex;
     width: 100%;
     padding: 0;
-    background-color: $lookup-color;
-    -webkit-box-shadow: 0 10px 14px -8px $gray;
-       -moz-box-shadow: 0 10px 14px -8px $gray;
-            box-shadow: 0 10px 14px -8px $gray;
-}
-
-.inlineForm {
-    padding: 0 15px;
-
-    .heading {
-        display: inline-block;
-        font-size: 18px;
-        font-weight: 900;
-        line-height: 38px;
-        color: $black-base;
-        text-decoration: none;
-        text-transform: uppercase;
-    }
-
-    .formGroup {
-        margin: 10px 0;
-
-        select {
-            text-transform: uppercase;
-        }
-
-        .button {
-            margin-bottom: 0;
-        }
-    }
-}
-
-.viewParts {
-    height: 38px;
-    margin: .5em .3em;
-    opacity: 1;
-}
-
-.disabled {
-    opacity: .3;
+    padding: 10px 0;
+    flex-direction: row;
+    background: $lookup-color;
+    box-shadow: 0 1px 3px $gray-light;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 1;
+    order: 3;
 }
 
 .vehicleName {
@@ -53,20 +21,19 @@
     text-align: center;
 
     a {
-        padding: .6em;
+        padding: 0 .6em;
         color: $black-base;
         text-decoration: underline;
     }
 }
 
-@media (min-width: 720px) {
-    .inlineForm {
-        > span {
-            margin-left: 242px;
-        }
-
-        .formGroup {
-            margin: 0 0 0 10px;
-        }
+@media screen and (width >= $screen-md-min) {
+    .root {
+        width: auto;
+        min-width: 500px;
+        background: none;
+        box-shadow: none;
+        flex-grow: 0;
+        order: 2;
     }
 }

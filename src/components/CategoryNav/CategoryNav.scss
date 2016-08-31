@@ -1,0 +1,29 @@
+@import '../variables.scss';
+
+.root {
+    z-index: 202;
+    display: flex;
+    min-height: 50px;
+    flex-direction: row;
+    background-color: $lookup-color;
+    box-shadow: 0 1px 3px $gray-light;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    > nav {
+        width: 100%;
+        background-color: $white-base;
+    }
+}
+
+@media screen and (width >= $screen-md-min) {
+    .root {
+        padding: 0 15px;
+        flex-wrap: nowrap;
+
+        > nav {
+            background-color: transparent;
+        }
+    }
+}

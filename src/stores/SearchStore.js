@@ -37,7 +37,7 @@ class SearchStore extends EventEmitter {
 		if (args.length > 2) {
 			searchResult = args[2];
 		}
-		const params = `?key=${KEY}&brand=${brand}&page=${page}`;
+		const params = `?key=${KEY}&brand=${brand.id}&page=${page}`;
 		try {
 			await fetch(`${apiBase}/searchExactAndClose/${term}${params}`)
 			.then((resp) => {

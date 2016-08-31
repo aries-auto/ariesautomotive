@@ -3,7 +3,6 @@ import emptyFunction from 'fbjs/lib/emptyFunction';
 import cx from 'classnames';
 import s from './App.scss';
 import Header from '../Header';
-import Lookup from '../Lookup';
 import Footer from '../Footer';
 
 class App extends Component {
@@ -14,10 +13,11 @@ class App extends Component {
 			onSetTitle: PropTypes.func,
 			onSetMeta: PropTypes.func,
 			onPageNotFound: PropTypes.func,
-			years: PropTypes.array,
 			categories: PropTypes.array,
+			vehicle: PropTypes.array,
 			params: PropTypes.object,
 			siteContents: PropTypes.array,
+			siteMenu: PropTypes.array,
 		}),
 		children: PropTypes.element.isRequired,
 		error: PropTypes.object,
@@ -52,12 +52,11 @@ class App extends Component {
 
 	render() {
 		const styles = {
-			background: "url('/img/bgtexture.png')",
+			background: "url('https://storage.googleapis.com/aries-website/site-assets/bgtexture.png')",
 		};
 		return (
 			<div className={cx(s.root)} style={styles}>
-				<Header categories={this.props.context.categories} />
-				<Lookup {...this.props.context} />
+				<Header context={this.props.context} />
 				<div className="children">
 					{this.props.children}
 				</div>

@@ -22,7 +22,8 @@ $off-white: #f0f0f0;
 
 /* #c7c7c7 */
 $new-red: rgb(199, 48, 49);
-$lookup-color: #f5f5f5;
+$lookup-color: rgb(245, 245, 245);
+$lookup-color-opacity: rgba(245, 245, 245, .9);
 $topHeaderBackColor: #1c0104;
 $headerMenuBackColor: #31070c;
 $header-color: #26090d;
@@ -38,6 +39,7 @@ $maroon: #57111a;
  * Typography
  * ========================================================================== */
 $font-family-base: 'ff-good-headline-web-pro-con', arial;
+$font-family-em: 'proxima-nova-condensed', arial;
 
 /*
  * Layout

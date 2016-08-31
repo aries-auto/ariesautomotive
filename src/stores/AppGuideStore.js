@@ -28,7 +28,7 @@ class AppGuideStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${apiBase}/vehicle/mongo/cols?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/vehicle/mongo/cols?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
@@ -90,7 +90,7 @@ class AppGuideStore extends EventEmitter {
 
 	async getApplicationGuides() {
 		try {
-			await fetch(`${apiBase}/applicationGuide/website/${brand}?key=${KEY}&brandID=${brand}`)
+			await fetch(`${apiBase}/applicationGuide/website/${brand.id}?key=${KEY}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {

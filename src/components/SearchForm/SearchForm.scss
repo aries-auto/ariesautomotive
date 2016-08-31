@@ -1,56 +1,60 @@
 @import '../variables.scss';
 
 .root {
-	width: 100%;
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    flex-direction: row;
+    background-color: $lookup-color;
+    border-top: 1px solid $gray-light;
+    justify-content: flex-end;
+    align-items: center;
 
-	form {
-		width: 100%;
-		box-shadow: none;
-	}
+    input {
+        width: 100%;
+        height: 24px;
+        padding: 5px 10px;
+        margin: 0 10px;
+        font-family: $font-family-base;
+        font-size: 16px;
+        letter-spacing: .025em;
+        border: 1px solid $gray-light;
+        border-radius: 4px;
+        outline: none;
+        box-shadow: none;
 
-	label {
-		display: none;
-	}
+        &:focus, &:active {
+            border-color: $gray-light;
+            outline: 0;
+            box-shadow: inset 0 1px 1px $gray-lighter, 0 0 8px $gray-lighter;
+        }
+    }
 
-	.group {
-		width: 150px;
-		margin-right: 10px;
+    button[type=submit] {
+        width: 60px;
+        height: 35px;
+        font-size: 18px;
+        color: $white-base;
+        background-color: $black-base;
+        border-color: $black-base;
+        border-width: 1px;
+        border-radius: 4px;
+        transition: all .2s ease-in;
 
-		input {
-			width: 90%;
-			height: 24px;
-			margin-right: 5%;
-			font-family: $font-family-base;
-			font-size: 16px;
-		}
-	}
+        &:hover {
+            background-color: $new-red;
+        }
 
-	button[type=submit] {
-		width: 15%;
-		font-size: 18px;
-		color: $white-base;
-		background-color: $new-red;
-		border-color: $new-red;
-		transition: color .2s ease-in;
-
-		&:hover {
-			color: $black-base;
-		}
-
-		.nodisplay {
-			display: none;
-		}
-	}
+        .nodisplay {
+            display: none;
+        }
+    }
 }
 
-@media(min-width: $screen-md-min) {
-	.root .group {
-		width: 200px;
-	}
-}
-
-@media(min-width: $screen-lg-min) {
-	.root .group {
-		width: 80%;
-	}
+@media (min-width: $screen-md-min) {
+    .root {
+        max-width: 400px;
+        background-color: transparent;
+        border-top: 0;
+    }
 }
