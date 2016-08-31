@@ -100,7 +100,6 @@ class VehicleResults extends Component {
 		let count = 0;
 		this.props.catGroups.map((c) => {
 			count++;
-			output.push(<h3>{c.title}</h3>);
 			const subs = [];
 			const subsOutput = [];
 			this.props.categories.map((cat) => {
@@ -108,6 +107,9 @@ class VehicleResults extends Component {
 					subs.push(cat);
 				}
 			});
+			if (subs.length > 0) {
+				output.push(<h3>{c.title}</h3>);
+			}
 			let i = 1;
 			subs.map((cat) => {
 				const keyStr = key.toString();
@@ -140,7 +142,7 @@ class VehicleResults extends Component {
 			);
 			key++;
 		});
-
+		output.push(<div className={s.floatClear}>&nbsp;</div>); // needed for clearing floats
 		return output;
 	}
 
@@ -154,6 +156,15 @@ class VehicleResults extends Component {
 			activeKey,
 			activeCat: cat.category.id,
 		});
+	}
+
+	renderStaticContent() {
+		return (
+			<div>
+				<h1>VEHICLE LOOK UP RESULTS</h1>
+				<p>These are your produt results that fit your vehicle. Click each sub category below, additional vehicle style selection may be needed to find the best fit for your vehicle.</p>
+			</div>
+		);
 	}
 
 	renderVehicleStyle() {
@@ -171,6 +182,7 @@ class VehicleResults extends Component {
 		return (
 			<div className={s.container}>
 				<Loader loaded={(this.props.categories !== null)} top="30%">
+					{this.renderStaticContent()}
 					<div className={s.accordionContainer}>
 						<Collapse accordion={accordionVal}
 							onChange={this.onChange}
