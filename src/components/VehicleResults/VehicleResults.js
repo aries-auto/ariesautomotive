@@ -160,12 +160,20 @@ class VehicleResults extends Component {
 		});
 	}
 
+	renderBreadcrumbs() {
+		return (
+			<ol className="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li className="active">Vehicle Look Up Results</li>
+			</ol>
+		);
+	}
+
 	renderStaticContent() {
 		return (
 			<div>
 				<h1>VEHICLE LOOK UP RESULTS</h1>
 				<p>Choose a category below to see the products that fit your vehicle.
-					<br />
 					Some products may require the style of the vehicle to be specified.
 				</p>
 			</div>
@@ -187,6 +195,7 @@ class VehicleResults extends Component {
 		return (
 			<div className={s.container}>
 				<Loader loaded={(this.props.categories !== null)} top="30%">
+					{this.renderBreadcrumbs()}
 					{this.renderStaticContent()}
 					<div className={s.accordionContainer}>
 						<Collapse accordion={accordionVal}
