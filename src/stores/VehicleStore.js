@@ -19,6 +19,7 @@ class VehicleStore extends EventEmitter {
 			showStyle: false,
 			catStyleParts: null,
 			activeCategory: null,
+			categories: [],
 		};
 		this.bindListeners({
 			setActiveCategory: VehicleActions.setActiveCategory,
@@ -97,6 +98,14 @@ class VehicleStore extends EventEmitter {
 	}
 
 	async set(vehicle) {
+		if (
+			this.state.vehicle.year === vehicle.year &&
+			this.state.vehicle.make === vehicle.make &&
+			this.state.vehicle.model === vehicle.model
+		) {
+			return;
+		}
+
 		let showStyle = true;
 		if (vehicle.style && vehicle.style !== '') {
 			showStyle = false;
