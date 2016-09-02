@@ -164,7 +164,10 @@ class VehicleResults extends Component {
 		return (
 			<div>
 				<h1>VEHICLE LOOK UP RESULTS</h1>
-				<p>These are your produt results that fit your vehicle. Click each sub category below, additional vehicle style selection may be needed to find the best fit for your vehicle.</p>
+				<p>Choose a category below to see the products that fit your vehicle.
+					<br />
+					Some products may require the style of the vehicle to be specified.
+				</p>
 			</div>
 		);
 	}
