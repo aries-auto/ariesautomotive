@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import Loader from 'react-loader';
+import Collapse, { Panel } from 'rc-collapse';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
+import CategoryStore from '../../stores/CategoryStore';
+import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
+import SubCategory from './Subcategory';
+import CollapseStyle from './style';
 
 @withStyles(s)
 @connectToStores
@@ -14,6 +19,7 @@ class VehicleResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		activeKey: PropTypes.string,
 		context: PropTypes.shape({
 			params: PropTypes.shape({
 				year: PropTypes.string,
@@ -29,6 +35,7 @@ class VehicleResults extends Component {
 		catStyleParts: PropTypes.array, //
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
+		catGroups: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -42,7 +49,11 @@ class VehicleResults extends Component {
 		super();
 		this.state = {
 			context: {},
+			activeKey: '0',
+			activeCat: 0,
 		};
+		this.onChange = this.onChange.bind(this);
+		this.toggleKey = this.toggleKey.bind(this);
 	}
 
 	componentWillMount() {
@@ -59,37 +70,103 @@ class VehicleResults extends Component {
 			description: 'ARIES Automotive parts for ' + title,
 		};
 		this.context.seo(seo);
+		CategoryActions.getCats();
+	}
+
+	onChange(activeKey) {
+		this.setState({
+			activeKey,
+		});
 	}
 
 	static getStores() {
-		return [VehicleStore];
+		return [VehicleStore, CategoryStore];
 	}
 
 	static getPropsFromStores() {
-		return VehicleStore.getState();
+		return {
+			...VehicleStore.getState(),
+			...CategoryStore.getState(),
+		};
 	}
 
 	getCategoryStyles() {
 		const output = [];
-		for (const i in this.props.categories) {
-			if (!this.props.categories[i]) {
-				continue;
-			}
-			let active = false;
-			if (this.props.activeCategory && this.props.activeCategory.category.title === this.props.categories[i].category.title) {
-				active = true;
-			}
-			output.push(
-				<li key={i} className={cx(s.categoryStyle, (active ? s.active : ''))} role="presentation">
-					<a onClick={this.setActiveCategory.bind(this, this.props.categories[i])}>{this.props.categories[i].category.title}</a>
-				</li>
-			);
+
+		if (!this.props.catGroups || this.props.catGroups[0].id === 0 || !this.props.categories || this.props.categories[0].id === 0) {
+			return <span></span>;
 		}
+		let key = 1;
+		let count = 0;
+
+		output.push(<style>{CollapseStyle.AnimationStyle}</style>);
+		this.props.catGroups.map((c) => {
+			count++;
+			const subs = [];
+			const subsOutput = [];
+			this.props.categories.map((cat) => {
+				if (cat.category.parent_id === c.id) {
+					subs.push(cat);
+				}
+			});
+			if (subs.length > 0) {
+				output.push(<h3>{c.title}</h3>);
+			}
+			let i = 1;
+			subs.map((cat) => {
+				const keyStr = key.toString();
+				subsOutput.push(
+					<SubCategory cat={cat} keyStr={keyStr} toggleKey={this.toggleKey} btnActive={this.state.activeCat === cat.category.id ? true : false} />
+				);
+				const isEven = (i % 2 === 0) ? true : false;
+				if (isEven) {
+					subsOutput.push(
+						<Panel key={keyStr}>
+							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
+						</Panel>
+					);
+					key++;
+				}
+				if (!isEven && i === subs.length) {
+					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
+					subsOutput.push(
+						<Panel key={keyStr}>
+							{this.props.activeCategory && this.state.activeKey === keyStr ? this.renderVehicleStyle() : null}
+						</Panel>
+					);
+					key++;
+				}
+				i++;
+			});
+
+			output.push(
+				subsOutput
+			);
+			key++;
+		});
+		output.push(<div className={s.floatClear}>&nbsp;</div>); // needed for clearing floats
 		return output;
 	}
 
 	setActiveCategory(cat) {
 		VehicleActions.setActiveCategory(cat);
+	}
+
+	toggleKey(activeKey, cat) {
+		VehicleActions.setActiveCategory(cat);
+		this.setState({
+			activeKey,
+			activeCat: cat.category.id,
+		});
+	}
+
+	renderStaticContent() {
+		return (
+			<div>
+				<h1>VEHICLE LOOK UP RESULTS</h1>
+				<p>These are your produt results that fit your vehicle. Click each sub category below, additional vehicle style selection may be needed to find the best fit for your vehicle.</p>
+			</div>
+		);
 	}
 
 	renderVehicleStyle() {
@@ -100,19 +177,22 @@ class VehicleResults extends Component {
 		);
 	}
 
+
 	render() {
+		const accordionVal = true;
+
 		return (
 			<div className={s.container}>
-				<Loader loaded={(this.props.categories !== null)} top="30%" loadedClassName={s.loader}>
-					<div className={cx(s.root, this.props.className)} role="navigation">
-						<div className="tab-wrap">
-							<ul className="nav nav-pills nav-stacked lg-tabs" role="tablist">
-								{this.getCategoryStyles()}
-							</ul>
-						</div>
+				<Loader loaded={(this.props.categories !== null)} top="30%">
+					{this.renderStaticContent()}
+					<div className={s.accordionContainer}>
+						<Collapse accordion={accordionVal}
+							onChange={this.onChange}
+							activeKey={this.state.activeKey}
+						>
+							{this.getCategoryStyles()}
+						</Collapse>
 					</div>
-					<div className={s.clearfix}></div>
-					{this.props.activeCategory ? this.renderVehicleStyle() : null}
 				</Loader>
 			</div>
 		);

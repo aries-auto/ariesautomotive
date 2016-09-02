@@ -5,6 +5,43 @@
     font-size: 14px;
 }
 
+.category {
+	min-height:40px;
+	padding:0px;
+	padding-right:15px;
+	padding-bottom:15px;
+
+	.categoryBox {
+		cursor:pointer;
+		border:1px solid #fff;
+		border-radius:5px;
+		padding:5px;
+		background-color:#fff;
+
+		.catTitle {
+			font-size:1.2em;
+			color: $new-red;
+		}
+	}
+	.categoryBox.btnActive {
+		background-color:$new-red;
+		color: $white-base;
+		border-color: $new-red;
+		.catTitle {
+			color: $white-base;
+		}
+	}
+	.categoryImage {
+		height:60px;
+		width:auto;
+		margin-right:10px;
+	}
+
+}
+.emptyCategory {
+	min-height:90px;
+}
+
 .container {
     width: 100%;
     min-height: 300px;
@@ -78,4 +115,8 @@
             }
         }
     }
+}
+
+.btnActive {
+	background-color:red;
 }
