@@ -49,7 +49,7 @@ export const locations = [
 	},
 ];
 
-module.exports.mainLocation = {
+module.exports.main = {
 	physical: {
 		name: 'ARIES AUTOMOTIVE HEADQUARTERS - DALLAS AREA',
 		address: {

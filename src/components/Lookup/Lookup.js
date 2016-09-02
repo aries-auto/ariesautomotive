@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import parsePath from 'history/lib/parsePath';
+import Location from '../../core/Location';
 import s from './Lookup.scss';
 import NewVehicle from './NewVehicle';
 import VehicleActions from '../../actions/VehicleActions';
@@ -57,9 +59,14 @@ class Lookup extends Component {
 		return VehicleStore.getState();
 	}
 
-	viewParts(vehicle) {
-		window.location.href = `/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`;
-		return;
+	viewParts() {
+		const vehicle = this.props.vehicle.base || {};
+		Location.push({
+			...(parsePath(
+				`/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`
+			)),
+			state: this.props,
+		});
 	}
 
 	resetVehicle() {
@@ -86,13 +93,13 @@ class Lookup extends Component {
 	}
 
 	render() {
-		let valid = <NewVehicle onSubmit={this.viewParts} />;
+		let valid = <NewVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
 		if (
 			this.props.vehicle &&
 			this.props.vehicle.base.year !== '' &&
 			this.props.vehicle.base.make !== '' &&
 			this.props.vehicle.base.model !== '' &&
-			this.newVehicle()
+			this.props.vehicle.products
 		) {
 			valid = this.showVehicle();
 		}

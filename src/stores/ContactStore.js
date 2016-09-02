@@ -1,101 +1,66 @@
-import ContactActions from '../actions/ContactActions';
-import Dispatcher from '../dispatchers/AppDispatcher';
-import FormFieldActions from '../actions/FormFieldActions';
+import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-import fetch from '../core/fetch';
-import { apiBase, apiKey, brand } from '../config';
-const EventEmitter = events.EventEmitter;
+import ContactActions from '../actions/ContactActions';
+import ContactSource from '../sources/ContactSource';
 
-const KEY = apiKey;
+const EventEmitter = events.EventEmitter;
 
 class ContactStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
-			countries: [],
-			contactTypes: [],
+			types: [],
 			inputs: {},
-			error: null,
-			success: null,
 		};
+
 		this.bindListeners({
-			getCountries: ContactActions.getCountries,
-			getContactTypes: ContactActions.getContactTypes,
-			postContactData: ContactActions.postContactData,
-			setInput: FormFieldActions.setInput,
+			handleUpdateTypes: ContactActions.UPDATE_TYPES,
+			handleFailedTypes: ContactActions.FAILED_TYPES,
+			handleSetInput: ContactActions.SET_INPUT,
 		});
-		if (this.state.countries.length === 0) {
-			this.getCountries();
-		}
-		if (this.state.contactTypes.length === 0) {
-			this.getContactTypes();
-		}
+
+		this.exportPublicMethods({
+			getContactTypes: this.getContactTypes,
+		});
+
+		this.exportAsync(ContactSource);
 	}
 
-	setInput(input) {
-		this.state.inputs[input.name] = input.value;
-		this.setState({ inputs: this.state.inputs });
-	}
-
-	async getCountries() {
-		try {
-			await fetch(`${apiBase}/geography/countrystates?key=${KEY}`)
-			.then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				this.setState({
-					countries: data,
-				});
-			});
-		} catch (err) {
+	handleUpdateTypes(types) {
+		if (types && (!this.state.types || types.length > this.state.types.length)) {
 			this.setState({
-				error: err,
+				types,
+				error: null,
 			});
 		}
 	}
 
-	async getContactTypes() {
-		try {
-			await fetch(`${apiBase}/contact/types?key=${KEY}&brandID=${brand.id}`)
-			.then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				this.setState({
-					contactTypes: data,
-				});
-			});
-		} catch (err) {
-			this.setState({
-				error: err,
-			});
-		}
+	handleFailedTypes(err) {
+		this.setState({
+			error: err,
+		});
 	}
 
-	async postContactData(contactType) {
-		const inputs = JSON.stringify(this.state.inputs);
-		try {
-			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=${brand.id}`;
-			await fetch(url, {
-				method: 'POST',
-				body: inputs,
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-			.then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				this.setState({
-					success: data,
-				});
-			});
-		} catch (err) {
-			this.setState({
-				error: err.json(),
-			});
-		}
+	getContactTypes() {
+		return this.state.types;
 	}
+
+	handleSetInput(input) {
+		if (!input.name) {
+			this.setState({
+				error: 'can\'t set an input without a name',
+			});
+			return;
+		}
+
+		this.state.inputs[input.name] = input.name;
+		this.setState({
+			inputs: this.state.inputs,
+		});
+	}
+
 }
 
+ContactStore.dispatchToken = null;
 
-export default Dispatcher.createStore(ContactStore, 'ContactStore');
+export default AppDispatcher.createStore(ContactStore);

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import FormFieldStore from '../../stores/FormFieldStore';
-import FormFieldActions from '../../actions/FormFieldActions';
+import ContactStore from '../../stores/ContactStore';
+import GeographyStore from '../../stores/GeographyStore';
+import ContactActions from '../../actions/ContactActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { locationHtml } from '../../data/locations';
 
@@ -22,11 +22,14 @@ class FormField extends Component {
 	}
 
 	static getStores() {
-		return [FormFieldStore];
+		return [ContactStore, GeographyStore];
 	}
 
 	static getPropsFromStores() {
-		return FormFieldStore.getState();
+		return {
+			...ContactStore.getState(),
+			...GeographyStore.getState(),
+		};
 	}
 
 	getField() {
@@ -189,16 +192,11 @@ class FormField extends Component {
 		const input = {};
 		input.value = event.target.value;
 		input.name = event.target.name;
-		FormFieldActions.setInput(input);
+		ContactActions.setInput(input);
 	}
 
 	render() {
-		return (
-			<div className={cx('form_field')}>
-				{this.getField()}
-			</div>
-
-		);
+		return <div>{this.getField()}</div>;
 	}
 
 }
