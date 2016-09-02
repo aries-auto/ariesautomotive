@@ -29,6 +29,7 @@ class Menu extends Component {
 
 	componentDidMount() {
 		window.addEventListener('mousedown', this.pageClick, false);
+		window.addEventListener('touchstart', this.pageClick, false);
 	}
 
 	pageClick() {
@@ -69,7 +70,7 @@ class Menu extends Component {
 
 		this.props.items.map((item, i) => {
 			items.push(
-				<Link key={i} itemProp="url" to={item.href} title={item.title}>
+				<Link key={i} external={item.external || false} itemProp="url" to={item.href} title={item.title}>
 					{item.value}
 				</Link>
 			);
@@ -91,7 +92,7 @@ class Menu extends Component {
 					<span className="icon-bar" />
 					<span className="icon-bar" />
 				</button>
-				<div onMouseDown={this.mouseDownHandler} onMouseUp={this.mouseUpHandler} className={ this.state.open ? s.open : ''}>
+				<div onTouchStart={this.mouseDownHandler} onTouchEnd={this.mouseUpHandler} onMouseDown={this.mouseDownHandler} onMouseUp={this.mouseUpHandler} className={ this.state.open ? s.open : ''}>
 					{this.items()}
 				</div>
 			</div>

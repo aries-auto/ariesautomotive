@@ -39,6 +39,9 @@ class CategoryNav extends Component {
 		};
 
 		const catItems = [];
+		if (props.categories && props.categories.length > 0) {
+			props.categories.sort((a, b) => a.sort > b.sort);
+		}
 		props.categories.map((cat) => {
 			const tmp = this.categoryToItem(cat);
 			allItem.children = allItem.children.concat(tmp.children);
@@ -56,6 +59,9 @@ class CategoryNav extends Component {
 	}
 
 	categoryToItem(cat) {
+		if (cat.children && cat.children.length > 0) {
+			cat.children.sort((a, b) => a.sort > b.sort);
+		}
 		const item = {
 			title: cat.title,
 			to: `/category/${cat.id}/${cat.title}`,

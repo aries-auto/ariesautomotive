@@ -28,6 +28,10 @@
 		padding: 10px 0;
 		flex-wrap: nowrap;
 
+		.logo > .brand {
+			padding: 0 15px;
+		}
+
 		.menuIcon {
 			display: none;
 		}
