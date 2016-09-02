@@ -1,0 +1,17 @@
+@import '../variables.scss';
+@import '../classes.scss';
+
+.root {
+    margin: 25px auto;
+    text-align: center;
+    text-transform: uppercase;
+
+    > div {
+		margin: 70px 0 15px;
+
+        > img {
+            width: 100%;
+            max-width: 249px;
+        }
+    }
+}

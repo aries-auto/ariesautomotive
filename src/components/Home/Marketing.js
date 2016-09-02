@@ -4,8 +4,6 @@ import { Carousel, CarouselItem } from 'react-bootstrap';
 import Modal from 'react-modal';
 import cx from 'classnames';
 import s from './Home.scss';
-import Catalogs from './Catalogs';
-import FeaturedProducts from './FeaturedProducts';
 import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
 
@@ -262,8 +260,9 @@ class Home extends Component {
 				</div>
 
 				{/* Catalogs */}
-				<Catalogs />
-				<FeaturedProducts products={this.state.context.featuredProducts} />
+				{this.getCatalogs()}
+
+				{this.state.context.featuredProducts && this.state.context.featuredProducts.length ? this.renderFeaturedProducts() : null}
 
 				{this.state.context.testimonials && this.state.context.testimonials.length ? this.renderTestimonials() : null}
 
