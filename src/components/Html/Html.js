@@ -122,8 +122,6 @@ class Html extends Component {
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
 					<script src={this.props.entry}></script>
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
-					<script src="https://use.typekit.net/zgp0frb.js"></script>
-					<script dangerouslySetInnerHTML={this.typekit2()} />
 					<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 				</body>
