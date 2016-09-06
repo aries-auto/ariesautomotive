@@ -64,6 +64,7 @@ const router = new Router(on => {
 
 		try {
 			state.context.categories = await catResponse.json();
+			state.context.catGroups = state.context.categories;
 			const vehicleResponse = await yearResponse.json();
 			if (vehicleResponse.available_years !== undefined) {
 				state.context.years = vehicleResponse.available_years;

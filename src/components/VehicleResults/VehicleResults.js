@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import Loader from 'react-loader';
+// import Loader from 'react-loader';
 import Collapse, { Panel } from 'rc-collapse';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
@@ -92,7 +92,6 @@ class VehicleResults extends Component {
 
 	getCategoryStyles() {
 		const output = [];
-
 		if (!this.props.catGroups || this.props.catGroups[0].id === 0 || !this.props.categories || this.props.categories[0].id === 0) {
 			return <span></span>;
 		}
@@ -191,21 +190,18 @@ class VehicleResults extends Component {
 
 	render() {
 		const accordionVal = true;
-
 		return (
 			<div className={s.container}>
-				<Loader loaded={(this.props.categories !== null)} top="30%">
-					{this.renderBreadcrumbs()}
-					{this.renderStaticContent()}
-					<div className={s.accordionContainer}>
-						<Collapse accordion={accordionVal}
-							onChange={this.onChange}
-							activeKey={this.state.activeKey}
-						>
-							{this.getCategoryStyles()}
-						</Collapse>
-					</div>
-				</Loader>
+				{this.renderBreadcrumbs()}
+				{this.renderStaticContent()}
+				<div className={s.accordionContainer}>
+					<Collapse accordion={accordionVal}
+						onChange={this.onChange}
+						activeKey={this.state.activeKey}
+					>
+						{this.getCategoryStyles()}
+					</Collapse>
+				</div>
 			</div>
 		);
 	}
