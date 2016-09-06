@@ -8,7 +8,10 @@ import Link from '../Link';
 class FeaturedProducts extends Component {
 
 	static propTypes = {
+		className: PropTypes.string,
+		title: PropTypes.string,
 		products: PropTypes.array,
+		featured: PropTypes.array,
 	};
 
 	getFeaturedImage(prod) {
@@ -55,8 +58,8 @@ class FeaturedProducts extends Component {
 		});
 
 		return (
-			<div className={cx(s.root, 'container')}>
-				<h3>FEATURED PRODUCTS</h3>
+			<div className={cx(s.root, 'container', this.props.className)}>
+				<h3>{this.props.title || `FEATURED PRODUCTS`}</h3>
 				{output}
 			</div>
 		);

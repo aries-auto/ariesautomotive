@@ -25,7 +25,9 @@ import Envision from './components/Envision/Envision';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import ContactStore from './stores/ContactStore';
+import ProductStore from './stores/ProductStore';
 import GeographyStore from './stores/GeographyStore';
+import SiteStore from './stores/SiteStore';
 import { apiBase, apiKey, brand, siteMenu } from './config';
 
 const isBrowser = typeof window !== 'undefined';
@@ -36,54 +38,6 @@ const seo = {
 	description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
 	title: 'Aries Automotive',
 };
-const carouselImages = [
-	{
-		image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
-		text: 'Never Fear the Uncertain Road',
-		button_text: 'VIEW BULL BARS',
-		link: '/category/332',
-		order: 5,
-		styles: {
-			backgroundImage: 'url(http://storage.googleapis.com/aries-website/hero-images/jeep.png)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
-		text: 'Find Out What It Means to Be a Pro',
-		button_text: 'VIEW PRO SERIES',
-		link: '/category/331',
-		order: 2,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png',
-		text: 'Choose Your Configuration and Start Customizing',
-		button_text: 'VIEW MODULAR BUMPERS',
-		link: '/category/324',
-		order: 3,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/JeepWrangler2015.png)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg',
-		text: 'ARIES Unveils StyleGuard™ as New Name for Floor Liners',
-		button_text: 'READ MORE',
-		link: '/news/47',
-		order: 1,
-		styles: {
-			backgroundImage: `url('https://storage.googleapis.com/aries-website/hero-images/Floor%20Liner%20-%20Grey%20(1).jpg')`,
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/navyjeep.jpg',
-		text: 'Decked Out Jeep to Be Donated to Navy SEAL Foundation',
-		button_text: 'READ MORE',
-		link: '/news/48',
-		order: 4,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/navyjeep.jpg)',
-		},
-	},
-];
 
 const router = new Router(on => {
 	on('*', async (state, next) => {
@@ -128,23 +82,8 @@ const router = new Router(on => {
 	});
 
 	on('/part/:id', async (state) => {
-		state.context.id = state.params.id;
-		try {
-			const url = `${apiBase}/part/${state.context.id}?key=${KEY}&brandID=${brand.id}`;
-			const featuredUrl = `${apiBase}/part/featured?brandID=${brand.id}&key=${KEY}`;
-			const [partResp, featuredResp] = await Promise.all([
-				fetch(url, {
-					method: 'get',
-				}),
-				fetch(featuredUrl, {
-					method: 'get',
-				}),
-			]);
-			state.part = await partResp.json();
-			state.featured = await featuredResp.json();
-		} catch (e) {
-			state.context.error = e;
-		}
+		ProductStore.fetchFeatured();
+		ProductStore.fetchProduct(state.params.id);
 		return <Product {...state} />;
 	});
 
@@ -340,18 +279,8 @@ const router = new Router(on => {
 	});
 
 	on('/', async (state) => {
-		state.context.featuredProducts = [];
-		state.context.testimonials = [];
-		state.context.carouselImages = carouselImages;
-		try {
-			const featResponse = await fetch(`${apiBase}/part/featured?brandID=${brand.id}&key=${KEY}`);
-			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=${brand.id}`);
-
-			state.context.featuredProducts = await featResponse.json();
-			state.context.testimonials = await testResponse.json();
-		} catch (e) {
-			state.context.error = e;
-		}
+		ProductStore.fetchFeatured();
+		SiteStore.fetchTestimonials();
 
 		return <Home context={state.context} />;
 	});

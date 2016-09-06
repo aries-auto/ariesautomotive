@@ -66,6 +66,51 @@ server.get('/api/content/all', (req, res) => {
 	});
 });
 
+server.get('/api/testimonials', (req, res) => {
+	memcached.get('api:testimonials', (err, val) => {
+		if (!err && val) {
+			res.send(val);
+			return;
+		}
+
+		fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set('api:testimonials', data, 8640, (e) => {
+				if (e) {
+					res.error(e);
+					return;
+				}
+				res.send(data);
+			});
+		});
+	});
+});
+
+server.get('/api/products/featured', (req, res) => {
+	console.log('getting featured');
+	memcached.get('api:products:featured', (err, val) => {
+		if (!err && val) {
+			res.send(val);
+			return;
+		}
+
+		fetch(`${apiBase}/part/featured?brandID=${brand.id}&key=${KEY}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set('api:products:featured', data, 8640, (e) => {
+				if (e) {
+					res.error(e);
+					return;
+				}
+				res.send(data);
+			});
+		});
+	});
+});
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------

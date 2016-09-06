@@ -26,15 +26,13 @@ class Catalogs extends Component {
 		const output = [];
 		catalogs.map((cat, i) => {
 			output.push(
-				<div key={i} className={cx('col-xs-12', 'col-sm-4', 'col-md-4', 'col-lg-4')}>
+				<Link key={i} title={ `Download ${cat.title}` } external target="_blank" to={cat.link}>
 					<img src={ cat.image } alt={ cat.title } />
 					<div>
 						<h3>{ cat.title }</h3>
-						<Link className={`red-transparent-button`} title={ `Download ${cat.title}` } external target="_blank" to={cat.link}>
-							Download
-						</Link>
+						<button type="button" className={`red-transparent-button`} >Download</button>
 					</div>
-				</div>
+				</Link>
 			);
 		});
 

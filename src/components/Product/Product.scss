@@ -1,214 +1,17 @@
 @import '../classes.scss';
 
 .top {
-    h1 {
-        margin-top: 0;
-        text-transform: uppercase;
-    }
-}
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
 
-.images {
-    padding: 10px;
-}
-
-.breadcrumb {
-    padding-bottom: 9px;
-    padding-left: 0;
-    margin-bottom: 0;
-    background-color: transparent;
-
-    li + li:before {
-        font-weight: 400;
-        color: $header-color;
-        content: ">\00a0";
-    }
-
-    li {
-        font-size: 14px;
-        font-weight: 900;
-        color: $header-color;
-        text-transform: uppercase;
-
-        a, a.active {
-            font-style: normal;
-            font-weight: 400;
-            color: #666;
-            text-decoration: underline;
-        }
-
-        a:hover {
-            color: #888;
-        }
-    }
-}
-
-.linkContainer {
-    padding: 0;
-
-    .partNum {
-        span:first-child {
-            padding: 0;
-            margin-right: 10px;
-            font-size: 20px;
-            font-weight: 900;
-            color: $header-color;
-        }
-    }
-
-    .shareIcons {
-        margin: 10px 0;
-
-        a {
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            margin: 0 1px;
-            line-height: 40px;
-
-            img {
-                width: 100%;
-                height: 100%;
-                transform: scale(.9);
-            }
-
-            &:hover {
-                img {
-                    transform: scale(1);
-                }
-            }
-        }
-    }
-}
-
-.installContainer {
-    padding: 0;
-    margin: 5px 0;
-
-    .installSheet {
-        margin: 5px 0;
-
-        a {
-            display: block;
-            min-width: 115px;
-            padding: 0 3px;
-            margin: 0 2px;
-            font-size: 12px;
-            text-align: center;
-            text-transform: uppercase;
-            border: 2px solid $new-red;
-
-            span {
-                margin-right: 5px;
-                font-size: 12px;
-                vertical-align: baseline;
-            }
-        }
-    }
-
-    &.mobile {
-        display: flex;
-        margin: 25px 0;
-
-        justify-content: space-between;
-
-        > div {
-            width: 30%;
-
-            a {
-                padding: 10px 5px;
-            }
-        }
-    }
-}
-
-:global .carousel {
-    max-width: 450px;
-    box-shadow: 1px 0 10px -2px #ccc;
-
-    .carouselInner .item {
-        background: none;
-    }
-}
-
-:global .carousel-control.left, :global .carousel-control.right {
-    background: none;
-}
-
-:global .carousel-control .glyphicon {
-    color: $header-color;
-}
-
-.carouselImg {
-    max-width: 450px;
-    max-height: 450px;
-}
-
-.thumbs {
-    max-width: 450px;
-    min-height: 80px;
-    padding: 10px 0 0 0;
-    margin-bottom: 0;
-    list-style: none;
-
-    .thumb {
-        display: inline-block;
-        width: 50%;
-        padding: 0;
-        padding-right: 10px;
-        overflow: hidden;
-        list-style: none;
-        cursor: pointer;
-
-        img {
-            width: 100%;
-            height: 100%;
-            box-shadow: 1px 0 10px 2px #ccc;
-        }
-    }
-
-    .videoThumb {
-        position: relative;
-        height: 100px;
-
-        div {
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
-            background: black;
-
-            img {
-                height: 70px;
-                margin: 15px 0;
-                box-shadow: none;
-            }
-        }
-
-        .arrow {
-            position: absolute;
-            top: 40px;
-            left: 35px;
-            z-index: 10;
-            display: block;
-            width: 30px;
-            height: 20px;
-            background-color: #ce1e1e;
-            border-radius: 12px/5px;
-        }
-
-        .arrowRight {
-            position: absolute;
-            top: 6px;
-            left: 14px;
-            z-index: 11;
-            display: block;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            border-left: 5px solid #eee;
-        }
+    > .images {
+        display: none;
     }
 }
 
 .bottom {
+    padding-bottom: 50px;
     background-color: $white-base;
 
     .more {
@@ -237,7 +40,7 @@
 }
 
 .applications {
-    margin: 15px 0;
+    margin: 50px auto;
 
     .vehicle {
         margin-bottom: 0;
@@ -278,36 +81,36 @@
     }
 
     @media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
-/* Force table to not be like tables anymore */
+       (min-device-width: 768px) and (max-device-width: 1024px) {
+        /* Force table to not be like tables anymore */
 
-table, thead, tbody, th, td, tr {
-    display: block;
-}/* Hide table headers (but not display: none;, for accessibility) */
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }/* Hide table headers (but not display: none;, for accessibility) */
 
-thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-}
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
 
-tr {
-    border: 1px solid #ccc;
-}
+        tr {
+            border: 1px solid #ccc;
+        }
 
-td {
-    position: relative;
-    min-height: 30px;
-    padding-left: 50%;
-    line-height: 25px;
+        td {
+            position: relative;
+            min-height: 30px;
+            padding-left: 50%;
+            line-height: 25px;
             /* Behave  like a "row" */
             border: none;
             border-bottom: 1px solid #e1e1e1;
         }
 
         td:before {
-/* Now like a table header */
-position: absolute;
+            /* Now like a table header */
+            position: absolute;
             /* Top/left values mimic padding */
             top: 2px;
             left: 6px;
@@ -316,10 +119,6 @@ position: absolute;
             white-space: nowrap;
         }
     }
-}
-
-.loading {
-    text-align: center;
 }
 
 // shadowbox
@@ -337,6 +136,7 @@ position: absolute;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, .5);
+
     iframe {
         position: fixed;
         top: 25%;
@@ -348,15 +148,30 @@ position: absolute;
 }
 
 @media (min-width: $screen-md-min) {
-    .thumbs {
-        .thumb {
-            width: 25%;
+    .top {
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        > div {
+            flex: 100%;
+
+            &:first-child {
+                padding-right: 25px;
+            }
+        }
+
+        .left {
+            .images {
+                display: none;
+            }
+        }
+
+        > .images {
+            display: block;
+            margin: 0 auto;
         }
     }
 
-    .installSheet {
-        line-height: 40px;
-    }
     .videoModal {
         iframe {
             top: 25%;
@@ -368,7 +183,7 @@ position: absolute;
 }
 
 @media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
+       (min-device-width: 768px) and (max-device-width: 1024px) {
     .applicationsTbl {
         td:nth-of-type(1):before {
             font-weight: 900;

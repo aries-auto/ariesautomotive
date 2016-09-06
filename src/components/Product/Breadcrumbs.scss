@@ -1,0 +1,38 @@
+@import '../variables.scss';
+
+.root {
+    display: flex;
+    padding: 10px 0;
+    margin: 0 0 20px 0;
+    list-style: none;
+    flex-direction: row;
+    background: $lookup-color;
+    border-radius: 0 0 4px 4px;
+    justify-content: flex-start;
+
+    li + li:before {
+        font-weight: 400;
+        color: $header-color;
+        content: ">\00a0";
+    }
+
+    li {
+        display: block;
+        padding: 0 5px;
+        font-size: 14px;
+        font-weight: 900;
+        color: $header-color;
+        text-transform: uppercase;
+
+        a, a.active {
+            font-style: normal;
+            font-weight: 400;
+            color: #666;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #888;
+        }
+    }
+}

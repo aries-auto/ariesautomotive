@@ -1,0 +1,46 @@
+@import '../variables.scss';
+@import '../classes.scss';
+
+.root {
+    display: flex;
+    padding: 10px 0;
+    margin: 20px 0;
+    flex-direction: row;
+    background-color: $lookup-color;
+    border: 1px solid $gray-light;
+    border-radius: 3px;
+    justify-content: flex-start;
+    align-items: center;
+
+    > div {
+        padding: 0 15px;
+    }
+
+    > div:first-child {
+        font-size: 28px;
+        font-weight: bold;
+        color: $new-red;
+    }
+
+    > div:nth-child(2) {
+        > span {
+            display: block;
+            font-size: 12px;
+
+            &:first-child {
+                font-size: 16px;
+            }
+        }
+    }
+
+    > div:last-child {
+        margin-left: auto;
+
+        > a > img {
+            width: 25px;
+        }
+    }
+}
+
+@media (min-width: $screen-md-min) {
+}

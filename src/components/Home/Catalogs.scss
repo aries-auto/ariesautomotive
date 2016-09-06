@@ -2,16 +2,29 @@
 @import '../classes.scss';
 
 .root {
-    margin: 25px auto;
-    text-align: center;
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: top;
     text-transform: uppercase;
+	margin: 50px auto;
 
-    > div {
-		margin: 70px 0 15px;
+	> a {
+		padding: 25px 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		text-decoration: none;
 
-        > img {
-            width: 100%;
-            max-width: 249px;
-        }
-    }
+		> div {
+			text-align: center;
+		}
+	}
+}
+
+@media (min-width: $screen-md-min) {
+	.root {
+		flex-direction: row;
+	}
 }
