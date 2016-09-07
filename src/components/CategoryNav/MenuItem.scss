@@ -32,7 +32,7 @@
 
     &.parent {
         > a {
-            font-size: 16px;
+            font-size: 1em;
             font-weight: 600;
             text-decoration: none;
             text-transform: uppercase;
@@ -123,6 +123,12 @@
 @media screen and (width >= $screen-md-min) {
     .root {
         border-right: 1px solid $black-base;
+
+        &.parent {
+            > a {
+                font-size: .8em;
+            }
+        }
 
         > div {
             position: absolute;

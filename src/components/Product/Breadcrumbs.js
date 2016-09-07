@@ -14,7 +14,6 @@ class Product extends Component {
 	};
 
 	render() {
-		console.log(this.props.categories);
 		if (!this.props.categories || this.props.categories.length === 0) {
 			return <div></div>;
 		}

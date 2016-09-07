@@ -10,6 +10,7 @@ class ProductStore extends EventEmitter {
 		super();
 		this.state = {
 			featuredProducts: [],
+			product: {},
 		};
 
 		this.bindListeners({

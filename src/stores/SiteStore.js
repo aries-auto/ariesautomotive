@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-import ProductActions from '../actions/ProductActions';
+import SiteActions from '../actions/SiteActions';
 import SiteSource from '../sources/SiteSource';
 
 const EventEmitter = events.EventEmitter;
@@ -9,12 +9,12 @@ class SiteStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
-			featuredProducts: [],
+			testimonials: [],
 		};
 
 		this.bindListeners({
-			handleUpdateTestimonials: ProductActions.UPDATE_FEATURED,
-			handleFailedTestimonials: ProductActions.FAILED_FEATURED,
+			handleUpdateTestimonials: SiteActions.UPDATE_TESTIMONIALS,
+			handleFailedTestimonials: SiteActions.FAILED_TESTIMONIALS,
 		});
 
 		this.exportPublicMethods({

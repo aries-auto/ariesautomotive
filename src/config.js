@@ -11,10 +11,12 @@ export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !
 export const brand = {
 	id: '3',
 	name: 'ARIES Automotive',
+	description: 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.',
 	code: 'ARIES',
 	twitter: '@ariesautomotive',
 	defaultContactType: 28,
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
+	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
 };
 
 export const siteMenu = [

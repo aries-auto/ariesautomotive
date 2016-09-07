@@ -1,76 +1,8 @@
 @import '../variables.scss';
 @import '../classes.scss';
 
-.ytWrapper {
-    position: relative;
-    height: 0;
-    padding-bottom: 56.25%;
-    //: 30px;
-    margin-bottom: 30px;
-    overflow: hidden;
-
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-}
-
-.ytWrapper:nth-child(2) {
-    margin: 20px 0;
-}
-
-.whatsNew {
-    max-width: 100%;
-    padding: 20px 15px 0;
-    margin: auto;
-
-    .header {
-        max-width: 100%;
-    }
-
-    .callout {
-        position: relative;
-
-        img {
-            max-width: 100%;
-            margin-top: 10px;
-            opacity: .6;
-        }
-
-        span {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: block;
-            width: 100%;
-            padding: 5px 0;
-            font-size: 20px;
-            text-align: center;
-            background-color: $gray-lighter;
-        }
-    }
-}
-
-.styleguard {
-    cursor: pointer;
-}
-
-.catalogs {
-    margin: 25px auto;
-    text-align: center;
-    text-transform: uppercase;
-
-    .catalog {
-        margin-bottom: 15px;
-
-        img {
-            width: 100%;
-            max-width: 249px;
-        }
-    }
+.root {
+    padding: 0;
 }
 
 .modalIframe {
@@ -78,59 +10,8 @@
     height: 100%;
 }
 
-.envision img {
-    width: 100%;
-}
-
-.catalog {
-    margin: 70px 0;
-}
-
-.featuredProducts {
-    margin: 8px auto 0;
-    text-align: center;
-    background-color: $white-base;
-    box-shadow: 1px 0 10px 2px $gray-lighter;
-
-    .featuredProd {
-        img {
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        h4 {
-            font-size: 20px;
-            font-weight: bold;
-            color: $altRed;
-        }
-    }
-}
-
-.testimonials {
-    margin-bottom: 30px;
-
-    h4 {
-        font-size: 24px;
-        color: $new-red;
-        text-transform: uppercase;
-    }
-
-    p {
-        margin: 0 0 2px;
-    }
-
-    .name {
-        margin-top: 0;
-        font-size: 16px;
-        font-weight: bold;
-        color: $black-base;
-    }
-}
-
 @media (min-width: $screen-md-min) {
-    .featuredProducts {
-        .col5 {
-            width: 20%;
-        }
+    .root {
+        padding-bottom: 50px;
     }
 }
