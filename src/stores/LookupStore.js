@@ -10,11 +10,11 @@ class LookupStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
-			vehicle: {
-				year: '',
-				make: '',
-				model: '',
-			},
+			// vehicle: {
+			// 	year: '',
+			// 	make: '',
+			// 	model: '',
+			// },
 			years: [],
 			makes: [],
 			models: [],
@@ -25,7 +25,6 @@ class LookupStore extends EventEmitter {
 			get: LookupActions.get,
 		});
 		this.bindAction(LookupActions.set, this.set);
-		this.get();
 	}
 
 	async get() {
