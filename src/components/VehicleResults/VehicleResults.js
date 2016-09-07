@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import Loader from 'react-loader';
+// import Loader from 'react-loader';
 import Collapse, { Panel } from 'rc-collapse';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
@@ -41,7 +41,6 @@ class VehicleResults extends Component {
 		catStyleParts: PropTypes.array, //
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
-		catGroups: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -96,31 +95,24 @@ class VehicleResults extends Component {
 
 	getCategoryStyles() {
 		const output = [];
-
-		if (!this.props.catGroups || this.props.catGroups[0].id === 0 || !this.props.categories || this.props.categories[0].id === 0) {
+		if (!this.props.categories || this.props.categories.length === 0) {
 			return <span></span>;
 		}
 		let key = 1;
 		let count = 0;
 
 		output.push(<style>{CollapseStyle.AnimationStyle}</style>);
-		this.props.catGroups.map((c) => {
+		this.props.categories.map((c) => {
 			count++;
-			const subs = [];
 			const subsOutput = [];
-			this.props.categories.map((cat) => {
-				if (cat.category.parent_id === c.id) {
-					subs.push(cat);
-				}
-			});
-			if (subs.length > 0) {
+			if (c.children && c.children.length > 0) {
 				output.push(<h3>{c.title}</h3>);
 			}
 			let i = 1;
-			subs.map((cat) => {
+			(c.children || []).map((cat) => {
 				const keyStr = key.toString();
 				subsOutput.push(
-					<SubCategory cat={cat} keyStr={keyStr} toggleKey={this.toggleKey} btnActive={this.state.activeCat === cat.category.id ? true : false} />
+					<SubCategory cat={cat} keyStr={keyStr} toggleKey={this.toggleKey} btnActive={this.state.activeCat === cat.id ? true : false} />
 				);
 				const isEven = (i % 2 === 0) ? true : false;
 				if (isEven) {
@@ -131,7 +123,7 @@ class VehicleResults extends Component {
 					);
 					key++;
 				}
-				if (!isEven && i === subs.length) {
+				if (!isEven && i === c.children.length) {
 					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
 					subsOutput.push(
 						<Panel key={keyStr}>
@@ -143,9 +135,7 @@ class VehicleResults extends Component {
 				i++;
 			});
 
-			output.push(
-				subsOutput
-			);
+			output.push(subsOutput);
 			key++;
 		});
 		output.push(<div className={s.floatClear}>&nbsp;</div>); // needed for clearing floats
@@ -195,21 +185,18 @@ class VehicleResults extends Component {
 
 	render() {
 		const accordionVal = true;
-
 		return (
 			<div className={s.container}>
-				<Loader loaded={(this.props.categories !== null)} top="30%">
-					{this.renderBreadcrumbs()}
-					{this.renderStaticContent()}
-					<div className={s.accordionContainer}>
-						<Collapse accordion={accordionVal}
-							onChange={this.onChange}
-							activeKey={this.state.activeKey}
-						>
-							{this.getCategoryStyles()}
-						</Collapse>
-					</div>
-				</Loader>
+				{this.renderBreadcrumbs()}
+				{this.renderStaticContent()}
+				<div className={s.accordionContainer}>
+					<Collapse accordion={accordionVal}
+						onChange={this.onChange}
+						activeKey={this.state.activeKey}
+					>
+						{this.getCategoryStyles()}
+					</Collapse>
+				</div>
 			</div>
 		);
 	}

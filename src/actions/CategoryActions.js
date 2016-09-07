@@ -2,7 +2,11 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class CategoryActions {
 	constructor() {
-		this.generateActions('getCats');
+		this.generateActions(
+			'fetchCategories',
+			'updateCategories',
+			'failedCategories',
+		);
 	}
 }
 
