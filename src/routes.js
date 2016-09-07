@@ -54,7 +54,9 @@ const router = new Router(on => {
 			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`);
 		}
 
-		VehicleStore.fetchVehicle();
+		if (state.params && state.params[0] && state.params[0].indexOf('/vehicle') === -1) {
+			VehicleStore.fetchVehicle();
+		}
 		CategoryStore.fetchCategories();
 		const contentAllReponse = await fetch(`/api/content/all`);
 
@@ -190,6 +192,7 @@ const router = new Router(on => {
 
 	on('/vehicle/:year/:make/:model', async (state) => {
 		state.context.params = state.params;
+		VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 		return <VehicleResults context={state.context} />;
 	});
 
