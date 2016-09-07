@@ -100,11 +100,8 @@ class NewVehicle extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		if (!this.vehicleValid()) {
-			return;
-		}
 
-		this.props.onSubmit(this.state.vehicle);
+		this.props.onSubmit();
 	}
 
 	isActive(prop) {

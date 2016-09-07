@@ -2,7 +2,12 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class ContactActions {
 	constructor() {
-		this.generateActions('getCountries', 'getContactTypes', 'postContactData');
+		this.generateActions(
+			'fetchTypes',
+			'updateTypes',
+			'failedTypes',
+			'setInput',
+		);
 	}
 }
 

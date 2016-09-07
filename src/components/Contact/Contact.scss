@@ -2,7 +2,11 @@
 @import '../classes.scss';
 
 .hero {
-	background-image: url('http://storage.googleapis.com/aries-website/hero-images/truck.png');
+	display: none;
+}
+
+s.root textarea {
+	min-height: 300px;
 }
 
 .addresses {
@@ -34,7 +38,16 @@
 			clear: both;
 		}
 	}
-	.techsupport {
-		text-align: center;
+	.techsupport > h4 {
+		font-size: 24px;
+	}
+}
+
+@media screen and (width >= $screen-md-min) {
+	.hero {
+		background-image: url('http://storage.googleapis.com/aries-website/hero-images/truck.png');
+		min-height: 400px;
+		background-position: center;
+		background-size: cover;
 	}
 }

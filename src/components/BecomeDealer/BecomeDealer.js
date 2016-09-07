@@ -3,9 +3,9 @@ import cx from 'classnames';
 import s from './BecomeDealer.scss';
 import withStyles from '../../decorators/withStyles';
 import ContactActions from '../../actions/ContactActions';
-import ContactStore from '../../stores/ContactStore';
+import GeographyStore from '../../stores/GeographyStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import { fields } from './FormFields';
+import { fields } from './fields';
 
 const title = 'Become an Aries Dealer';
 
@@ -39,11 +39,11 @@ class BecomeDealer extends Component {
 	}
 
 	static getStores() {
-		return [ContactStore];
+		return [GeographyStore];
 	}
 
 	static getPropsFromStores() {
-		return ContactStore.getState();
+		return GeographyStore.getState();
 	}
 
 	getForm() {

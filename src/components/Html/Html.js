@@ -115,11 +115,10 @@ class Html extends Component {
 					<meta name="msapplication-TileImage" content="https://storage.googleapis.com/aries-website/favicons/apple-icon-144x144.png?v=2.1" />
 
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
-					<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 				</head>
 				<body>
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
 					<script src={this.props.entry}></script>
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
 					<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>

@@ -1,46 +1,6 @@
 @import '../variables.scss';
 @import '../classes.scss';
 
-.carouselImg {
-    min-height: 350px;
-    background-repeat: no-repeat;
-    background-position: 50% 60%;
-    background-size: cover;
-}
-
-:global .carousel-control.left, :global .carousel-control.right {
-    top: 50%;
-    z-index: 20;
-    height: 50%;
-    background-image: none;
-    opacity: .8;
-
-    &:focus, &:hover {
-        opacity: 1;
-    }
-}
-
-:global .carousel-indicators {
-    display: none;
-}
-
-:global .carousel-caption {
-    top: auto;
-    right: auto;
-    bottom: 0;
-    left: auto;
-    width: 100%;
-    background: $trans-black;
-
-    .big-text {
-        font-family: "proxima-nova-condensed", sans-serif;
-        font-size: 40px;
-        font-weight: 700;
-        color: $white-base;
-        text-shadow: 0 0 4px $black-base;
-    }
-}
-
 .ytWrapper {
     position: relative;
     height: 0;

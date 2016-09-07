@@ -1,4 +1,4 @@
-import WarrantiesActions from '../actions/WarrantiesActions';
+// import WarrantiesActions from '../actions/WarrantiesActions';
 import FormFieldActions from '../actions/FormFieldActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
@@ -18,7 +18,7 @@ class WarrantiesStore extends EventEmitter {
 		};
 		this.bindListeners({
 			setInput: FormFieldActions.setInput,
-			postData: WarrantiesActions.postData,
+			// postData: WarrantiesActions.postData,
 		});
 	}
 

@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { Carousel, CarouselItem } from 'react-bootstrap';
 import cx from 'classnames';
 import s from './Product.scss';
-import Upsell from './Upsell';
-import PartActions from '../../actions/PartActions';
-import PartStore from '../../stores/PartStore';
+import FeaturedProducts from '../Home/FeaturedProducts';
+import Content from './Content';
+import Actions from './Actions';
+import InstallButtons from './InstallButtons';
+import Images from './Images';
+import Breadcrumbs from './Breadcrumbs';
+import ProductStore from '../../stores/ProductStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -13,7 +16,7 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 class Product extends Component {
 
 	static propTypes = {
-		part: PropTypes.object,
+		product: PropTypes.object,
 		category: PropTypes.object,
 		className: PropTypes.string,
 		context: PropTypes.shape({
@@ -22,7 +25,7 @@ class Product extends Component {
 		}),
 		carouselIndex: PropTypes.number,
 		carouselDirection: PropTypes.string,
-		featured: PropTypes.array,
+		featuredProducts: PropTypes.array,
 		video: PropTypes.object,
 	};
 
@@ -50,16 +53,13 @@ class Product extends Component {
 
 	componentWillMount() {
 		// title
-		const title = this.props.part.short_description && this.props.part.short_description ? this.props.part.short_description : 'Part Details';
+		const title = this.props.product && this.props.product.short_description ? this.props.product.short_description : 'Part Details';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
-		if (!this.props.part || this.props.part.part_number !== this.props.context.id) {
-			PartActions.get(this.props.context.id);
-		}
 		// desc
 		let description = 'Part';
-		if (this.props.part.content) {
-			this.props.part.content.map((con) => {
+		if (this.props.product && this.props.product.content) {
+			this.props.product.content.map((con) => {
 				if (con.contentType && con.contentType.type && con.contentType.type.toLowerCase() === 'marketingdescription') {
 					description = con.text;
 				}
@@ -67,8 +67,8 @@ class Product extends Component {
 		}
 		// image
 		let image = {};
-		if (this.props.part.images) {
-			this.props.part.images.map((i) => {
+		if (this.props.product && this.props.product.images) {
+			this.props.product.images.map((i) => {
 				if ((i.height < image.height || !image.height) && i.sort === 'a') {
 					image = i;
 				}
@@ -84,11 +84,11 @@ class Product extends Component {
 	}
 
 	static getStores() {
-		return [PartStore];
+		return [ProductStore];
 	}
 
 	static getPropsFromStores() {
-		return PartStore.getState();
+		return ProductStore.getState();
 	}
 
 	getCmpFunc(primer, reverse) {
@@ -108,11 +108,13 @@ class Product extends Component {
 	}
 
 	setActiveImage(e) {
-		PartActions.setCarouselIndex(e);
+		console.log(e);
+		// PartActions.setCarouselIndex(e);
 	}
 
 	shadowbox(vid) {
-		PartActions.setVideo(vid);
+		console.log(vid);
+		// PartActions.setVideo(vid);
 		window.addEventListener('wheel', this.noScroll);
 	}
 
@@ -167,12 +169,13 @@ class Product extends Component {
 	}
 
 	handleSelect(e) {
-		PartActions.setCarouselIndex(e);
+		console.log(e);
+		// PartActions.setCarouselIndex(e);
 	}
 
 	handleModalClose() {
 		window.removeEventListener('wheel', this.noScroll);
-		PartActions.setVideo(null);
+		// PartActions.setVideo(null);
 	}
 
 	renderVideo() {
@@ -190,240 +193,13 @@ class Product extends Component {
 		);
 	}
 
-	renderCrumbs() {
-		const links = [];
-		if (!this.props.part.categories || this.props.part.categories.length === 0) {
-			return links;
-		}
-
-		this.props.part.categories.slice().reverse().map((cat, i) => {
-			links.push(
-				<li key={`breadcrumb${i}`}>
-					<a href={`/category/${cat.id}`}>{ cat.title }</a>
-				</li>
-			);
-		});
-
-		return (
-			<div className="breadcrumbs">
-				<ol className={cx(s.breadcrumb, 'breadcrumb')}>
-					{links}
-					<li className={s.active}>Part #{ this.props.part.part_number}</li>
-				</ol>
-			</div>
-		);
-	}
-
-	renderInstallButtons() {
-		let iSheet;
-		let iVideo;
-		if (this.props.part.install_sheet && this.props.part.install_sheet.Path !== '') {
-			const l = this.props.part.install_sheet;
-			iSheet = (
-				<div className={cx(s.installSheet, 'pull-left')}>
-					<a href={`${l.Scheme}://${l.Host}${l.Path}`} target="_blank">
-						<span className="glyphicon glyphicon-wrench"></span>
-						Install Sheet
-					</a>
-				</div>
-			);
-		}
-
-		if (this.props.part.video) {
-			for (let i = this.props.part.videos.length - 1; i >= 0; i--) {
-				const vid = this.props.part.videos[i];
-				if (vid.Type === 'Installation Video') {
-					iVideo = (
-						<div className={cx(s.installSheet, 'pull-left')}>
-							<a onClick="openInstallVideo()" aria-controls="Installation Videos" role="button" data-toggle="tab">
-								<span className="glyphicon glyphicon-play"></span>
-								Install Video
-							</a>
-						</div>
-					);
-				}
-			}
-		}
-
-		return (
-			<div className={cx(s.installContainer, 'col-lg-8')}>
-				{/* Install Sheet */}
-				{iSheet}
-
-				{/* Install Video */}
-				{iVideo}
-
-				{/* Where To Buy */}
-				<div className={cx(s.installSheet, 'pull-left')}>
-					<a href="/buy" role="button">
-						<span className="glyphicon glyphicon-usd"></span>
-						Where To Buy
-					</a>
-				</div>
-			</div>
-		);
-	}
-
-	renderActions() {
-		let price;
-		for (let i = this.props.part.pricing.length - 1; i >= 0; i--) {
-			const pr = this.props.part.pricing[i];
-			if (pr.type === 'List' && pr.price > 0) {
-				price = (
-					<span>MSRP ${ pr.price }</span>
-				);
-			}
-		}
-		return (
-			<div className={s.actions}>
-				<div className={cx(s.linkContainer, 'col-xs-4', 'col-sm-4', 'col-md-4', 'col-lg-4')}>
-					<div className={s.partNum}>
-						<span>PART #{ this.props.part.part_number }</span>
-					</div>
-					<div>{price}</div>
-
-
-					{/* Share Icons */}
-					<div className={s.shareIcons}>
-						<a href="#Facebook" title="Share us on Facebook" onClick={this.shareFacebook}>
-							<img src="/img/facebook-icon.png" alt="Facebook" />
-						</a>
-						<a href="#Twitter" title="Tweet Us on Twitter" onClick={this.shareTwitter}>
-							<img src="https://storage.googleapis.com/aries-website/site-assets/twitter-icon.png" alt="Twitter" />
-						</a>
-						<a href="#GooglePlus" title="Share Us on Google Plus" onClick={this.shareGoogle}>
-							<img src="/img/googleplus-icon.png" alt="Google Plus" />
-						</a>
-					</div>
-				</div>
-
-				{this.renderInstallButtons()}
-				<div className="clearfix"></div>
-			</div>
-		);
-	}
-
-	renderContent() {
-		if (!this.props.part.content || this.props.part.content.length === 0) {
-			return (<div></div>);
-		}
-		let htmlDesc;
-		let bulls = [];
-		this.props.part.content.map((c, i) => {
-			if (c.contentType.type === 'HTMLDescription') {
-				htmlDesc = c.text;
-				return;
-			} else if (c.contentType.type === 'Bullet') {
-				bulls.push(<li key={i}>{c.text}</li>);
-			}
-		});
-		bulls = (
-			<ul>{bulls}</ul>
-		);
-		return (
-			<div className={s.content}>
-				<div dangerouslySetInnerHTML={{ __html: htmlDesc }}></div>
-
-				{bulls}
-			</div>
-		);
-	}
-
-	renderImages() {
-		const items = [];
-		let thumbs = [];
-		const videoThumbs = [];
-		let carouselIndex = 0;
-		this.props.part.images.map((img) => {
-			if (img.size !== 'Venti' || !img.path) {
-				return;
-			}
-
-			const path = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
-			items.push(
-				<CarouselItem key={`carousel-${carouselIndex}`}>
-					<img src={path} />
-				</CarouselItem>
-			);
-			thumbs.push(
-				<li key={`thumb-${carouselIndex}`} className={s.thumb} onClick={this.setActiveImage.bind(this, carouselIndex)}>
-					<img className="thumbImg img-responsive" src={path} />
-				</li>
-			);
-			carouselIndex++;
-		});
-		if (items.length === 0) {
-			items.push(
-				<CarouselItem key={1}>
-					<img src="/img/partImgPlaceholder.jpg" />
-				</CarouselItem>
-			);
-		}
-
-		this.props.part.videos.map((vid, i) => {
-			videoThumbs.push(
-				<li key={`video-${i}`} className={cx(s.thumb, s.videoThumb)} onClick={this.shadowbox.bind(this, vid)}>
-					<div>
-						{vid.thumbnail ? <img className="thumbImg img-responsive" src={vid.thumbnail} /> : null}
-						<span className={s.arrow}>
-							<span className={s.arrowRight}></span>
-						</span>
-					</div>
-				</li>
-			);
-		});
-
-		thumbs = (
-			<ol className={s.thumbs}>
-				{thumbs}
-				{videoThumbs}
-			</ol>
-		);
-
-		return (
-			<div className={s.carousel}>
-				<Carousel
-					direction={this.props.carouselDirection}
-					indicators={false}
-					activeIndex={this.props.carouselIndex}
-					onSelect={this.handleSelect}
-				>
-					{items}
-				</Carousel>
-				{thumbs}
-			</div>
-		);
-	}
-
-	renderTop() {
-		return (
-			<div className={cx(s.top, 'container')}>
-				<div className={cx(s.leftSection, 'col-sm-12', 'col-xs-12', 'col-md-6')}>
-					{this.renderCrumbs()}
-					<h1>{ this.props.part.short_description }</h1>
-
-					<div className="visible-xs visible-sm">
-						{this.renderImages()}
-					</div>
-
-					{this.renderActions()}
-
-					{this.renderContent()}
-				</div>
-				<div className={cx(s.rightSection, 'col-sm-12', 'col-xs-12', 'col-md-6', 'hidden-xs', 'hidden-sm')}>
-					{this.renderImages()}
-				</div>
-			</div>
-		);
-	}
-
 	renderApplications() {
-		if (!this.props.part.vehicle_applications || this.props.part.vehicle_applications.length === 0) {
+		if (!this.props.product.vehicle_applications || this.props.product.vehicle_applications.length === 0) {
 			return (<div></div>);
 		}
 
 		const apps = [];
-		this.props.part.vehicle_applications.sort(
+		this.props.product.vehicle_applications.sort(
 			this.sortBy(
 				{ name: 'year', primer: parseInt, reverse: true },
 				'make',
@@ -431,9 +207,9 @@ class Product extends Component {
 				'style',
 			),
 		);
-		this.props.part.vehicle_applications.map((v, i) => {
+		this.props.product.vehicle_applications.map((v, i) => {
 			apps.push(
-				<tr key={`application-${i}`}>
+				<tr key={i}>
 					<td className="year">{ v.year }</td>
 					<td className="make">{ v.make }</td>
 					<td className="model">{ v.model }</td>
@@ -443,15 +219,7 @@ class Product extends Component {
 		});
 
 		return (
-			<div
-				className={cx(
-					s.applications,
-					'col-xs-12',
-					'col-sm-12',
-					'col-md-12',
-					'col-lg-12'
-				)}
-			>
+			<div className={cx(s.applications, 'container')}>
 				<h3>Application</h3>
 				<p>Check out our Application Guides to see what fits your vehicle.</p>
 				<div className={s.vehicle}>
@@ -476,87 +244,9 @@ class Product extends Component {
 		);
 	}
 
-	renderRelated() {
-		const parts = [];
-		const header = (<h3>YOU MAY ALSO LIKE</h3>);
-		const rel = this.props.part.related.slice(0, 4);
-		rel.map((r, i) => {
-			let image;
-			if (!r.images) {
-				return;
-			}
-			r.images.map((img) => {
-				if (img.sort === 'a' && img.size === 'Grande') {
-					image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
-				}
-			});
-			parts.push(
-				<div key={`related-${i}`} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
-					<h4>
-						<a href={`/part/${r.part_number}`}>
-							{r.short_description}
-						</a>
-					</h4>
-					<a href={`/part/${r.part_number}`}>
-						<img src={image} className="img-responsive" alt={`Image for ${r.title}`} />
-					</a>
-					<hr className="visible-xs-block" />
-				</div>
-			);
-		});
-		return (
-			<div className={s.upsell}>
-				{parts.length ? header : null}
-				<div>
-					{parts}
-				</div>
-			</div>
-		);
-	}
-
-	renderFeatured() {
-		const parts = [];
-		const header = (<h3>YOU MAY ALSO LIKE (featured)</h3>);
-		const rel = this.props.featured.slice(0, 4);
-
-		rel.map((r, i) => {
-			let image;
-			r.images.map((img) => {
-				if (!r.images) {
-					return;
-				}
-				if (img.sort === 'a' && img.size === 'Grande') {
-					image = `${img.path.Scheme}://${img.path.Host}${img.path.Path}`;
-				}
-			});
-			parts.push(
-				<div key={`featured${i}`} className={cx(s.featuredProd, 'col-xs-12', 'col-md-3', 'col-5')}>
-					<h4>
-						<a href={`/part/${r.part_number}`}>
-							{r.short_description}
-						</a>
-					</h4>
-					<a href={`/part/${r.part_number}`}>
-						<img src={image} className="img-responsive" alt={`Image for ${r.title}`} />
-					</a>
-					<hr className="visible-xs-block" />
-				</div>
-			);
-		});
-		return (
-			<div className={s.upsell}>
-				{parts.length ? header : null}
-				<div>
-					{parts}
-					<Upsell parts={parts} />
-				</div>
-			</div>
-		);
-	}
-
 	renderBottom() {
 		let catBrief = '';
-		this.props.part.content.map((c) => {
+		this.props.product.content.map((c) => {
 			if (c.contentType.type === 'CategoryBrief') {
 				catBrief = c.text;
 				return;
@@ -564,12 +254,12 @@ class Product extends Component {
 		});
 
 		const details = [];
-		this.props.part.attributes.map((attr, i) => {
+		this.props.product.attributes.map((attr, i) => {
 			if (!attr.name || !attr.value) {
 				return;
 			}
 			details.push(
-				<div className="row" key={`details-${i}`}>
+				<div className="row" key={i}>
 					<div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<span className={s.field}>{ attr.name }</span>
 					</div>
@@ -579,13 +269,6 @@ class Product extends Component {
 				</div>
 			);
 		});
-
-		let upsell;
-		if (this.props.part.related && this.props.part.related.length > 0) {
-			upsell = this.renderRelated();
-		} else {
-			upsell = this.renderFeatured();
-		}
 
 		return (
 			<div className={cx(s.bottom, 'container-fluid')}>
@@ -603,29 +286,49 @@ class Product extends Component {
 					<div className="clearfix"></div>
 
 					{this.renderApplications()}
-					{upsell}
+					<FeaturedProducts
+						products={this.props.product.related.length || this.props.featuredProducts}
+						className={cx(s.upsell, 'container')}
+						title={(this.props.product.related.length) ? 'Related Products' : 'Featured Products'}
+					/>
 				</div>
 			</div>
 		);
 	}
 
-	renderPart() {
-		if (!this.props.part || !this.props.part.id) {
-			return (<h3 className={s.loading}>Loading part...</h3>);
+	render() {
+		if (!this.props.product || !this.props.product.id) {
+			return <div></div>;
 		}
 
 		return (
-			<div>
-				{this.renderTop()}
-				{this.renderBottom()}
-			</div>
-		);
-	}
+			<div className={s.root}>
+				<div className={cx(s.top, 'container')}>
+					<div className={s.left}>
+						<Breadcrumbs categories={this.props.product.categories} partNumber={this.props.product.part_number} />
+						<h1>{this.props.product.short_description}</h1>
+						<Actions
+							pricing={this.props.product.pricing}
+							sku={this.props.product.part_number}
+							upc={this.props.product.upc}
+							className={s.actions}
+						/>
+						<InstallButtons
+							installSheet={this.props.product.install_sheet}
+							videos={this.props.product.videos}
+						/>
+						<Content content={this.props.product.content || []} />
+					</div>
 
-	render() {
-		return (
-			<div className={cx(s.root, this.props.className)} role="navigation">
-				{this.props.video ? this.renderVideo() : this.renderPart()}
+					<Images images={this.props.product.images} video={this.props.product.videos} className={s.images} />
+				</div>
+				<div className={cx(s.bottom, 'container-fluid')}>
+					<FeaturedProducts
+						products={this.props.product.related.length || this.props.featuredProducts}
+						className={s.upsell}
+						title={(this.props.product.related.length) ? 'Related Products' : 'Featured Products'}
+					/>
+				</div>
 			</div>
 		);
 	}

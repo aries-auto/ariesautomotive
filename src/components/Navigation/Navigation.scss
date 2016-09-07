@@ -7,6 +7,7 @@
 	flex-direction: row;
 	align-items: center;
 	background: $new-red;
+	justify-content: flex-start;
 	padding: 0;
 
 	.logo {
@@ -26,7 +27,6 @@
 @media screen and (width >= $screen-md-min) {
 	.root {
 		padding: 10px 0;
-		flex-wrap: nowrap;
 
 		.logo > .brand {
 			padding: 0 15px;

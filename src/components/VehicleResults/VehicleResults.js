@@ -7,7 +7,6 @@ import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
 import CategoryStore from '../../stores/CategoryStore';
-import CategoryActions from '../../actions/CategoryActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import VehicleStyle from './VehicleStyle';
 import SubCategory from './Subcategory';
@@ -28,9 +27,16 @@ class VehicleResults extends Component {
 			}),
 		}),
 		vehicle: PropTypes.shape({
-			year: PropTypes.string,
-			make: PropTypes.string,
-			model: PropTypes.string,
+			base: PropTypes.shape({
+				year: PropTypes.string,
+				make: PropTypes.string,
+				model: PropTypes.string,
+			}),
+			availableYears: PropTypes.array,
+			availableMakes: PropTypes.array,
+			availableModels: PropTypes.array,
+			lookup_category: PropTypes.array,
+			products: PropTypes.array,
 		}),
 		catStyleParts: PropTypes.array, //
 		categories: PropTypes.array,
@@ -57,12 +63,11 @@ class VehicleResults extends Component {
 	}
 
 	componentWillMount() {
-		VehicleActions.set({
-			year: this.props.context.params.year,
-			make: this.props.context.params.make,
-			model: this.props.context.params.model,
-		});
-		const title = this.props.context.params.year && this.props.context.params.make && this.props.context.params.model ? `${this.props.context.params.year} ${this.props.context.params.make} ${this.props.context.params.model}` : 'Vehicle Results';
+		const base = this.props.vehicle.base || {};
+		let title = 'Vehicle Results';
+		if (base.year && base.make && base.model) {
+			title = `${base.year} ${base.make} ${base.model} Fitment Results`;
+		}
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 		const seo = {
@@ -70,7 +75,6 @@ class VehicleResults extends Component {
 			description: 'ARIES Automotive parts for ' + title,
 		};
 		this.context.seo(seo);
-		CategoryActions.getCats();
 	}
 
 	onChange(activeKey) {

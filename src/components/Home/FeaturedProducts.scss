@@ -1,0 +1,47 @@
+@import '../variables.scss';
+@import '../classes.scss';
+
+.root {
+    margin: 8px auto 0;
+    text-align: center;
+    background-color: $white-base;
+    box-shadow: 1px 0 10px 2px $gray-lighter;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: top;
+
+	> h3 {
+		width: 100%;
+		display: block;
+		flex: 0 1 100%;
+	}
+
+    > div {
+		padding: 10px;
+		cursor: pointer;
+
+        img {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        h4 {
+            font-size: 20px;
+            font-weight: bold;
+            color: $new-red;
+        }
+    }
+}
+
+
+@media (min-width: $screen-md-min) {
+    .root {
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		> div {
+	        width: 20%;
+	    }
+	}
+}
