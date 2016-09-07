@@ -1,13 +1,13 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 
-class ProductActions {
+class SiteActions {
 	constructor() {
 		this.generateActions(
-			'fetchFeatured',
-			'updateFeatured',
-			'failedFeatured',
+			'fetchTestimonials',
+			'updateTestimonials',
+			'failedTestimonials',
 		);
 	}
 }
 
-export default AppDispatcher.createActions(ProductActions);
+export default AppDispatcher.createActions(SiteActions);

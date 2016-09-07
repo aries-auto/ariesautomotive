@@ -89,7 +89,6 @@ server.get('/api/testimonials', (req, res) => {
 });
 
 server.get('/api/products/featured', (req, res) => {
-	console.log('getting featured');
 	memcached.get('api:products:featured', (err, val) => {
 		if (!err && val) {
 			res.send(val);
@@ -167,13 +166,13 @@ server.get('*', async (req, res, next) => {
 				const metaTags = [{ use: 'og', label: 'property' }, { use: 'twitter', label: 'name' }];
 				metaTags.forEach((tag) => {
 					if (!props.image) {
-						props.image = 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png';
+						props.image = brand.seoLogo;
 					}
 					if (!props.title) {
-						props.title = 'ARIES Automotive';
+						props.title = brand.name;
 					}
 					if (!props.description) {
-						props.description = 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.';
+						props.description = brand.description;
 					}
 					for (const i in props) {
 						if (!i) {

@@ -1,153 +1,152 @@
 @import '../variables.scss';
 
 .root {
-	order: 2;
-	margin-left: auto;
+    margin-left: auto;
+    order: 2;
 
-	.menuIcon {
-		border: none;
-		background: transparent;
-		display: block;
+    .menuIcon {
+        display: block;
+        background: transparent;
+        border: none;
 
-		span {
-			background-color: $white-base;
-		}
-	}
+        span {
+            background-color: $white-base;
+        }
+    }
 
-	> div {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: flex-start;
+    > div {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 300;
+        display: flex;
+        width: 0;
+        height: 0;
+        flex-direction: column;
+        background-color: rgba(1, 1, 1, .9);
+        opacity: 0;
+        transform: translateX(-100%);
+        justify-content: flex-start;
+        align-items: flex-start;
 
-		position: fixed;
-		height: 0;
-		width: 0;
-		right: 0;
-		top: 0;
-		opacity: 0;
-		z-index: 300;
-		transform: translateX(-100%);
-		background-color: rgba(1, 1, 1, 0.9);
+        &.open {
+            width: auto;
+            min-width: 300px;
+            height: 100%;
+            padding: 15px 10px 10px 20px;
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-		&.open {
-			min-width: 300px;
-			width: auto;
-			height: 100%;
-			opacity: 1;
-			padding: 15px 10px 10px 20px;
-			transform: translateX(0);
-		}
+        > a {
+            position: relative;
+            display: block;
+            padding: 12px 10px 10px;
+            margin: 15px 25px;
+            font-size: 18px;
+            font-weight: 400;
+            color: $white-base;
+            text-align: left;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            outline: none;
 
-		> a {
-			font-size: 18px;
-			text-align: left;
-			letter-spacing: 1px;
-			padding: 12px 10px 10px;
-			position: relative;
-			display: block;
-			margin: 15px 25px;
-			outline: none;
-			color: $white-base;
-			text-decoration: none;
-			text-transform: uppercase;
-			font-weight: 400;
+            &:before, &:after {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                content: '';
+                background: $white-base;
+                transition: transform .3s;
+                transform: scale(.85);
+            }
 
-			&:before, &:after {
-				position: absolute;
-				top: 100%;
-				left: 0;
-				width: 100%;
-				height: 3px;
-				background: $white-base;
-				content: '';
-				transition: transform 0.3s;
-				transform: scale(0.85);
-			}
+            &:after {
+                opacity: 0;
+                transition: top .3s, opacity .3s, transform .3s;
+            }
 
-			&:after {
-				opacity: 0;
-				transition: top 0.3s, opacity 0.3s, transform 0.3s;
-			}
+            &:hover::before, &:hover::after {
+                transform: scale(1);
+            }
 
-			&:hover::before, &:hover::after{
-				transform: scale(1);
-			}
+            &:hover::after {
+                top: 0;
+                opacity: 1;
+            }
+        }
+    }
 
-			&:hover::after{
-				top: 0;
-				opacity: 1;
-			}
-		}
-	}
-
-	ul {
-		display: none;
-	}
+    ul {
+        display: none;
+    }
 }
 
 @media screen and (width >= $screen-md-min) {
-	.root {
-		order: 3;
-		padding: 0 20px;
-		margin: 0;
+    .root {
+        padding: 0 20px;
+        margin: 0;
+        order: 3;
 
-		.menuIcon {
-			display: none;
-		}
+        .menuIcon {
+            display: none;
+        }
 
-		> div {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-around;
-			height: 100%;
-			align-items: center;
-			background-color: transparent;
-			position: relative;
-			opacity: 1;
-			transform: translateX(0);
-			width: 100%;
+        > div {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: row;
+            background-color: transparent;
+            opacity: 1;
+            transform: translateX(0);
+            justify-content: space-around;
+            align-items: center;
 
-			> a {
-				position: relative;
-				margin: 10px;
-				text-align: center;
-				letter-spacing: 1px;
-				text-shadow: 0 0 1px $white-base;
-				display: block;
-				font-size: 14px;
-				text-decoration: none;
-				color: $white-base;
-				padding: 0;
+            > a {
+                position: relative;
+                display: block;
+                padding: 0;
+                margin: 10px;
+                font-size: .72em;
+                color: $white-base;
+                text-align: center;
+                text-decoration: none;
+                text-shadow: 0 0 1px $white-base;
+                letter-spacing: 1px;
 
-				&:before, &:after {
-					background: transparent;
-					position: absolute;
-					top: 50%;
-					left: 50%;
-					width: 65px;
-					height: 65px;
-					border: 2px solid rgba(0,0,0,0.1);
-					border-radius: 50%;
-					content: '';
-					opacity: 0;
-					transition: transform 0.3s, opacity 0.3s;
-					transform: translateX(-50%) translateY(-50%) scale(0.2);
-				}
+                &:before, &:after {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 65px;
+                    height: 65px;
+                    content: '';
+                    background: transparent;
+                    border: 2px solid rgba(0, 0, 0, .1);
+                    border-radius: 50%;
+                    opacity: 0;
+                    transition: transform .3s, opacity .3s;
+                    transform: translateX(-50%) translateY(-50%) scale(.2);
+                }
 
-				&:after {
-					width: 55px;
-					height: 55px;
-					border-width: 6px;
-					transform: translateX(-50%) translateY(-50%) scale(0.8);
-				}
+                &:after {
+                    width: 55px;
+                    height: 55px;
+                    border-width: 6px;
+                    transform: translateX(-50%) translateY(-50%) scale(.8);
+                }
 
-				&:hover::before, &:hover::after {
-					opacity: 1;
-					top: 50%;
-					transform: translateX(-50%) translateY(-50%) scale(1);
-				}
-			}
-		}
-	}
+                &:hover::before, &:hover::after {
+                    top: 50%;
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(-50%) scale(1);
+                }
+            }
+        }
+    }
 }

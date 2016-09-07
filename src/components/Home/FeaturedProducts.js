@@ -16,7 +16,7 @@ class FeaturedProducts extends Component {
 
 	getFeaturedImage(prod) {
 		if (!prod.images) {
-			return '';
+			return null;
 		}
 		let url;
 		prod.images.map((img) => {
@@ -35,7 +35,7 @@ class FeaturedProducts extends Component {
 		const output = [];
 		(this.props.products || []).map((prod, i) => {
 			const path = this.getFeaturedImage(prod);
-			if (path === '') {
+			if (!path) {
 				return;
 			}
 			output.push(

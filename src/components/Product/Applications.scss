@@ -1,0 +1,42 @@
+@import '../classes.scss';
+
+.root {
+    margin: 50px auto;
+
+    .vehicle {
+        margin-bottom: 0;
+        font-size: 18px;
+
+        .applicationsTbl {
+            text-transform: capitalize;
+        }
+    }
+
+    .appguideLink {
+        display: block;
+        margin-top: 10px;
+        font-size: 18px;
+        color: $alt-red;
+    }
+}
+
+.responsiveTable {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+
+    th {
+        font-weight: bold;
+        color: white;
+        background: #333;
+    }
+
+    td, th {
+        padding: 2px;
+        text-align: left;
+        border: 1px solid #ccc;
+    }
+}
