@@ -8,6 +8,7 @@ import InstallButtons from './InstallButtons';
 import Images from './Images';
 import Info from './Info';
 import Applications from './Applications';
+import ShadowboxVideo from '../ShadowboxVideo';
 import Breadcrumbs from './Breadcrumbs';
 import ProductStore from '../../stores/ProductStore';
 import withStyles from '../../decorators/withStyles';
@@ -117,6 +118,7 @@ class Product extends Component {
 						title={(this.props.product.related.length) ? 'Related Products' : 'Featured Products'}
 					/>
 				</div>
+				<ShadowboxVideo video={this.props.video} />
 			</div>
 		);
 	}

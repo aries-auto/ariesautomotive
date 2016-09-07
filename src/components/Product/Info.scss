@@ -1,0 +1,48 @@
+@import '../classes.scss';
+
+.root {
+    padding-bottom: 50px;
+    background-color: $white-base;
+
+	> div {
+		display: flex;
+		flex-direction: column-reverse;
+		justify-content: space-between;
+		align-items: flex-start;
+
+		> div:first-child {
+			flex: 50%;
+			padding: 0 15px 0 0;
+		}
+
+	    > div:last-child {
+
+	        > div {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+
+				> span:first-child {
+		            font-size: 16px;
+		            font-weight: bold;
+		            text-align: right;
+		        }
+
+		        > span:last-child {
+		            font-size: 14px;
+					text-align: right;
+		        }
+			}
+	    }
+	}
+}
+
+
+@media (min-width: $screen-md-min) {
+    .root {
+		> div {
+			flex-direction: row;
+		}
+	}
+}

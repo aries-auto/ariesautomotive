@@ -1,0 +1,6 @@
+{
+  "name": "ShadowboxVideo",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ShadowboxVideo.js"
+}

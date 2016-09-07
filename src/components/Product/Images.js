@@ -11,38 +11,7 @@ class Product extends Component {
 		images: PropTypes.array,
 		videos: PropTypes.array,
 		className: PropTypes.string,
-		carouselIndex: PropTypes.number,
-		carouselDirection: PropTypes.string,
 	};
-
-	constructor() {
-		super();
-		this.setActiveImage = this.setActiveImage.bind(this);
-		this.shadowbox = this.shadowbox.bind(this);
-		this.handleSelect = this.handleSelect.bind(this);
-		this.handleModalClose = this.handleModalClose.bind(this);
-	}
-
-	setActiveImage(e) {
-		console.log(e);
-		// PartActions.setCarouselIndex(e);
-	}
-
-	shadowbox(vid) {
-		console.log('shadowbox', vid);
-		// PartActions.setVideo(vid);
-		window.addEventListener('wheel', (e) => e.preventDefault);
-	}
-
-	handleSelect(e) {
-		console.log(e);
-		// PartActions.setCarouselIndex(e);
-	}
-
-	handleModalClose() {
-		window.removeEventListener('wheel', this.noScroll);
-		// PartActions.setVideo(null);
-	}
 
 	renderCarousel() {
 		const items = [];
@@ -60,7 +29,6 @@ class Product extends Component {
 		});
 		return (
 			<Carousel
-				direction={this.props.carouselDirection}
 				indicators={false}
 			>
 				{items}
