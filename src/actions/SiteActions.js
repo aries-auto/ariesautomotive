@@ -6,6 +6,14 @@ class SiteActions {
 			'fetchTestimonials',
 			'updateTestimonials',
 			'failedTestimonials',
+
+			'fetchLandingPage',
+			'updateLandingPage',
+			'failedLandingPage',
+
+			'fetchNewsItem',
+			'updateNewsItem',
+			'failedNewsItem',
 		);
 	}
 }
