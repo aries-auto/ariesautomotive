@@ -27,6 +27,7 @@ import VehicleStore from './stores/VehicleStore';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
 import GeographyStore from './stores/GeographyStore';
+import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
 import { apiBase, apiKey, brand, siteMenu } from './config';
 
@@ -54,14 +55,10 @@ const router = new Router(on => {
 		}
 
 		VehicleStore.fetchVehicle();
-		const [catResponse, contentAllReponse] = await Promise.all([
-			fetch(`/api/categories`),
-			fetch(`/api/content/all`),
-		]);
+		CategoryStore.fetchCategories();
+		const contentAllReponse = await fetch(`/api/content/all`);
 
 		try {
-			state.context.categories = await catResponse.json();
-			state.context.catGroups = state.context.categories;
 			state.context.siteContents = await contentAllReponse.json();
 			const siteContent = await siteContentResponse.json();
 			if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {

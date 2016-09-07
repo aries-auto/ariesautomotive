@@ -1,32 +1,49 @@
-import CategoryActions from '../actions/CategoryActions';
-import Dispatcher from '../dispatchers/AppDispatcher';
+import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-import fetch from '../core/fetch';
+import CategoryActions from '../actions/CategoryActions';
+import CategorySource from '../sources/CategorySource';
+
 const EventEmitter = events.EventEmitter;
-import { apiBase, apiKey, brand } from '../config';
-import FetchUtils from '../utils/FetchUtils';
 
 class CategoryStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
+			categories: [],
 		};
+
 		this.bindListeners({
+			handleUpdateCategories: CategoryActions.UPDATE_CATEGORIES,
+			handleFailedCategories: CategoryActions.FAILED_CATEGORIES,
 		});
-		this.catGroups = {};
 
-		this.bindActions(CategoryActions);
+		this.exportPublicMethods({
+			getCategories: this.getCategories,
+		});
+
+		this.exportAsync(CategorySource);
 	}
 
-	getCats() {
-		fetch(`${apiBase}/category?brandID=${brand}&key=${apiKey}`)
-		.then(FetchUtils.checkStatus)
-		.then(FetchUtils.parseJSON)
-		.then((cats) => {
-			this.setState({ catGroups: cats });
-		}).catch((err) => new Error(err));
+	handleUpdateCategories(cats) {
+		if (cats && (!this.state.categories || cats.length > this.state.categories.length)) {
+			this.setState({
+				categories: cats,
+				error: null,
+			});
+		}
 	}
 
+	handleFailedCategories(err) {
+		this.setState({
+			error: err,
+		});
+	}
+
+	getCategories() {
+		return this.state.categories;
+	}
 }
 
-export default Dispatcher.createStore(CategoryStore, 'CategoryStore');
+CategoryStore.dispatchToken = null;
+
+export default AppDispatcher.createStore(CategoryStore);
