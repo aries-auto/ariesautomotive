@@ -54,7 +54,9 @@ const router = new Router(on => {
 			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`);
 		}
 
-		VehicleStore.fetchVehicle();
+		if (state.params && state.params[0] && state.params[0].indexOf('/vehicle') === -1) {
+			VehicleStore.fetchVehicle();
+		}
 		CategoryStore.fetchCategories();
 		const contentAllReponse = await fetch(`/api/content/all`);
 
@@ -190,6 +192,7 @@ const router = new Router(on => {
 
 	on('/vehicle/:year/:make/:model', async (state) => {
 		state.context.params = state.params;
+		VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -225,17 +228,9 @@ const router = new Router(on => {
 		return <Envision context={state.context} protocol={loc.protocol}/>;
 	});
 
-
 	on('/news/:id', async (state) => {
-		state.context.id = state.params.id;
-		try {
-			const url = `${apiBase}/news/${state.params.id}?brand=${brand.id}&key=${apiKey}`;
-			const resp = await fetch(url);
-			state.item = await resp.json();
-		} catch (e) {
-			state.context.error = e;
-		}
-		return <LatestNewsItem context={state.context} item={state.item} />;
+		SiteStore.fetchNewsItem(state.params.id);
+		return <LatestNewsItem context={state.context} />;
 	});
 
 	on('/buy', async (state) => {
@@ -263,17 +258,9 @@ const router = new Router(on => {
 		return <CustomContent context={state.context} />;
 	});
 
-	on('/lp/:id', async (state, next) => {
-		state.context.id = state.params.id;
-		try {
-			const url = `${apiBase}/lp/${state.params.id}?brand=${brand.id}&key=${apiKey}`;
-			const resp = await fetch(url);
-			state.page = await resp.json();
-		} catch (e) {
-			state.context.error = e;
-		}
-		const comp = await next();
-		return comp && <LandingPage context={state.context} page={state.page} />;
+	on('/lp/:id', async (state) => {
+		SiteStore.fetchLandingPage(state.params.id);
+		return <LandingPage context={state.context} />;
 	});
 
 	on('/', async (state) => {

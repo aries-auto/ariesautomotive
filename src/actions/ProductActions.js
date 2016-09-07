@@ -10,6 +10,9 @@ class ProductActions {
 			'fetchProduct',
 			'updateProduct',
 			'failedProduct',
+
+			'setActiveImage',
+			'setActiveVideo',
 		);
 	}
 }

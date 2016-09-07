@@ -22,7 +22,8 @@ class Product extends Component {
 		product: PropTypes.object.isRequired,
 		className: PropTypes.string,
 		featuredProducts: PropTypes.array,
-		video: PropTypes.object,
+		activeImageIndex: PropTypes.number,
+		activeVideo: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -72,28 +73,22 @@ class Product extends Component {
 		return ProductStore.getState();
 	}
 
-	renderVideo() {
-		if (!this.props.video) {
-			return null;
-		}
-		const embedCode = () => { return { __html: this.props.video.channel[0].embed_code }; };
-		return (
-			<div className={s.shadow} onClick={this.handleModalClose}>
-				<div className={s.shadowBackground}>
-					{this.renderPart()}
-				</div>
-				<div className={s.videoModal} dangerouslySetInnerHTML={embedCode()}></div>
-			</div>
-		);
-	}
-
 	render() {
+		if (!this.props.product || !this.props.product.id) {
+			return <div></div>;
+		}
+
 		return (
 			<div className={s.root}>
 				<div className={cx(s.top, 'container')}>
 					<div className={s.left}>
 						<Breadcrumbs categories={this.props.product.categories} partNumber={this.props.product.part_number} />
 						<h1>{this.props.product.short_description}</h1>
+						<Images
+							activeImageIndex={this.props.activeImageIndex}
+							images={this.props.product.images}
+							videos={this.props.product.videos} className={s.images}
+						/>
 						<Actions
 							pricing={this.props.product.pricing}
 							sku={this.props.product.part_number}
@@ -107,7 +102,11 @@ class Product extends Component {
 						<Content content={this.props.product.content} />
 					</div>
 
-					<Images images={this.props.product.images} video={this.props.product.videos} className={s.images} />
+					<Images
+						activeImageIndex={this.props.activeImageIndex}
+						images={this.props.product.images}
+						videos={this.props.product.videos} className={s.images}
+					/>
 				</div>
 				<div className={cx(s.bottom, 'container-fluid')}>
 					<Info attributes={this.props.product.attributes} content={this.props.product.content} />
@@ -118,7 +117,7 @@ class Product extends Component {
 						title={(this.props.product.related.length) ? 'Related Products' : 'Featured Products'}
 					/>
 				</div>
-				<ShadowboxVideo video={this.props.video} />
+				{(this.props.activeVideo) ? <ShadowboxVideo video={this.props.activeVideo} /> : null}
 			</div>
 		);
 	}

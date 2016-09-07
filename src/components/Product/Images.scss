@@ -1,24 +1,15 @@
 @import '../classes.scss';
 
-:global .carousel {
+.carousel {
     box-shadow: 1px 0 10px -2px #ccc;
 
-    .carouselInner .item {
+    > div > div {
         background: none;
     }
-}
 
-:global .carousel-control.left, :global .carousel-control.right {
-    background: none;
-}
-
-:global .carousel-control .glyphicon {
-    color: $header-color;
-}
-
-.carouselImg {
-    max-width: 450px;
-    max-height: 450px;
+	> a {
+		display: none;
+	}
 }
 
 .thumbs {

@@ -11,6 +11,8 @@ class ProductStore extends EventEmitter {
 		this.state = {
 			featuredProducts: [],
 			product: {},
+			activeImageIndex: null,
+			activeVideo: null,
 		};
 
 		this.bindListeners({
@@ -18,6 +20,8 @@ class ProductStore extends EventEmitter {
 			handleFailedFeatured: ProductActions.FAILED_FEATURED,
 			handleUpdateProduct: ProductActions.UPDATE_PRODUCT,
 			handleFailedProduct: ProductActions.FAILED_PRODUCT,
+			handleSetActiveImageIndex: ProductActions.SET_ACTIVE_IMAGE,
+			handleSetActiveVideo: ProductActions.SET_ACTIVE_VIDEO,
 		});
 
 		this.exportPublicMethods({
@@ -62,9 +66,22 @@ class ProductStore extends EventEmitter {
 		});
 	}
 
+	handleSetActiveImageIndex(idx) {
+		this.setState({
+			activeImageIndex: idx,
+		});
+	}
+
+	handleSetActiveVideo(vid) {
+		this.setState({
+			activeVideo: vid || null,
+		});
+	}
+
 	getProduct() {
 		return this.state.product;
 	}
+
 }
 
 ProductStore.dispatchToken = null;

@@ -28,7 +28,6 @@ class VehicleStore extends EventEmitter {
 		this.bindListeners({
 			setActiveCategory: VehicleActions.setActiveCategory,
 			setStyle: VehicleActions.setStyle,
-			// handleFetchVehicle: VehicleActions.FETCH_VEHICLE,
 			handleUpdateVehicle: VehicleActions.UPDATE_VEHICLE,
 			handleVehicleFailed: VehicleActions.FAILED_VEHICLE,
 		});
@@ -40,10 +39,6 @@ class VehicleStore extends EventEmitter {
 		this.exportAsync(VehicleSource);
 	}
 
-	// handleFetchVehicle() {
-	//
-	// }
-
 	handleUpdateVehicle(v) {
 		if (v.base.year !== '' && !v.availableYears) {
 			v.availableYears = this.state.vehicle.availableYears;
@@ -54,6 +49,7 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
+
 		this.setState({
 			vehicle: v,
 			error: null,

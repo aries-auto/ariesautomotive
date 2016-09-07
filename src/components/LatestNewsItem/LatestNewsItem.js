@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import Link from '../Link';
 import s from './LatestNewsItem.scss';
 import cx from 'classnames';
-import NewsStore from '../../stores/NewsStore';
-import NewsActions from '../../actions/NewsActions';
+import SiteStore from '../../stores/SiteStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -11,7 +11,7 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 class LatestNewsItem extends Component {
 
 	static propTypes = {
-		item: PropTypes.object,
+		newsItem: PropTypes.object,
 		title: PropTypes.string,
 		context: PropTypes.shape({
 			id: PropTypes.string,
@@ -27,55 +27,38 @@ class LatestNewsItem extends Component {
 
 
 	static defaultProps = {
-		item: {},
-		title: '',
 		context: {
 			id: '',
 		},
 	};
 
-	constructor() {
-		super();
-	}
-
 	componentWillMount() {
-		if (!this.props.item) {
-			NewsActions.get(this.props.context.id);
-		}
-		const title = this.props.item && this.props.item.title ? this.props.item.title : 'Lastest News';
+		const title = this.props.newsItem && this.props.newsItem.title ? this.props.newsItem.title : 'Lastest News';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 		const seo = {
 			title,
-			description: this.props.item.content ? this.props.item.content : 'News',
+			description: this.props.newsItem.content ? this.props.newsItem.content : 'News',
 		};
 		this.context.seo(seo);
 	}
 
 	static getStores() {
-		return [NewsStore];
+		return [SiteStore];
 	}
 
 	static getPropsFromStores() {
-		return NewsStore.getState();
-	}
-
-	renderItem() {
-		if (this.props.item) {
-			return (
-				<div>
-					<h1 className="newsitem-header">{this.props.item.title}</h1>
-					<div dangerouslySetInnerHTML={{ __html: this.props.item.content }} />
-				</div>
-			);
-		}
+		return SiteStore.getState();
 	}
 
 	render() {
 		return (
 			<div className={cx(s.root, 'container')}>
-				{this.renderItem()}
-				<a href="/news">BACK TO NEWS</a>
+				<div>
+					<h1 className="newsitem-header">{this.props.newsItem.title}</h1>
+					<div dangerouslySetInnerHTML={{ __html: this.props.newsItem.content }} />
+				</div>
+				<Link to={`/news`} title="Back to News">BACK TO NEWS</Link>
 			</div>
 		);
 	}

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import s from './InstallButtons.scss';
+import ProductActions from '../../actions/ProductActions';
 import withStyles from '../../decorators/withStyles';
+import Link from '../Link';
 
 @withStyles(s)
 class InstallButtons extends Component {
@@ -9,6 +11,10 @@ class InstallButtons extends Component {
 		installSheet: PropTypes.object,
 		videos: PropTypes.array,
 	};
+
+	setActiveVideo(vid) {
+		ProductActions.setActiveVideo(vid);
+	}
 
 	renderSheet() {
 		if (!this.props.installSheet || this.props.installSheet.Path === '') {
@@ -29,7 +35,7 @@ class InstallButtons extends Component {
 		(this.props.videos || []).map((vid) => {
 			if (vid.subject_type && vid.subject_type.toLowerCase() === 'installation video') {
 				video = (
-					<a aria-controls="Installation Videos" role="button" data-toggle="tab">
+					<a aria-controls="Installation Videos" role="button" onClick={this.setActiveVideo.bind(this, vid)}>
 						<span className="glyphicon glyphicon-play"></span>
 						Install Video
 					</a>
@@ -49,10 +55,10 @@ class InstallButtons extends Component {
 				{this.renderVideo()}
 
 				{/* Where To Buy */}
-				<a href="/buy" role="button">
+				<Link to={`/buy`} title="Where To Buy" role="button">
 					<span className="glyphicon glyphicon-usd"></span>
 					Where To Buy
-				</a>
+				</Link>
 			</div>
 		);
 	}
