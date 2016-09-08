@@ -1,52 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import { Panel } from 'rc-collapse';
 import s from './VehicleStyle.scss';
 import withStyles from '../../../decorators/withStyles';
-import VehicleStore from '../../../stores/VehicleStore';
 import VehicleActions from '../../../actions/VehicleActions';
 import PartResults from '../../PartResults/PartResults';
-import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
-@connectToStores
 class VehicleStyle extends Component {
 	static propTypes = {
 		className: PropTypes.string,
-		context: PropTypes.shape({
-			params: PropTypes.shape({
-				year: PropTypes.string,
-				make: PropTypes.string,
-				model: PropTypes.string,
-			}),
-		}),
-		activeCategory: PropTypes.object,
+		category: PropTypes.object,
 		showStyle: PropTypes.bool,
 		parts: PropTypes.array,
 		style: PropTypes.object,
 	};
 
-	constructor() {
-		super();
-		this.showStyleChoices = this.showStyleChoices.bind(this);
-		this.getStyleChoices = this.getStyleChoices.bind(this);
-		this.showStyleChoices = this.showStyleChoices.bind(this);
-		this.unhideChoices = this.unhideChoices.bind(this);
-		this.setVehicleStyle = this.setVehicleStyle.bind(this);
-		this.getParts = this.getParts.bind(this);
-	}
-
-	static getStores() {
-		return [VehicleStore];
-	}
-
-	static getPropsFromStores() {
-		return VehicleStore.getState();
-	}
-
 	getStyleChoices() {
 		const styleOptions = [];
 		let styles = {};
-		styles = this.props.activeCategory.style_options;
+		styles = this.props.category.style_options;
 
 		for (const i in styles) {
 			if (!i) {
@@ -90,17 +63,18 @@ class VehicleStyle extends Component {
 
 	renderStyleChoices() {
 		if (
-			!this.props.activeCategory.style_options ||
-			this.props.activeCategory.style_options.length === 0
+			!this.props.category.style_options ||
+			this.props.category.style_options.length === 0
 		) {
 			return <span></span>;
 		}
 		if (
-			this.props.activeCategory.style_options.length === 1 &&
-			this.props.activeCategory.style_options[0].style.toLowerCase() === 'all'
+			this.props.category.style_options.length === 1 &&
+			this.props.category.style_options[0].style.toLowerCase() === 'all'
 		) {
 			return <span></span>;
 		}
+
 		return (
 			<div className={s.greybox}>
 				<div className={s.styleSelect}>
@@ -112,13 +86,26 @@ class VehicleStyle extends Component {
 	}
 
 	render() {
-		return (
+		if (!this.props.category || !this.props.category.category) {
+			return <div></div>;
+		}
+
+		const content = (
 			<div className={s.root}>
 				{this.renderStyleChoices()}
 				<div>
 					{this.props.style ? this.getParts() : ''}
 				</div>
 			</div>
+		);
+
+		return (
+			<Panel
+				key={this.props.category.category.id.toString()}
+				prefixCls={this.props.category.category.id.toString()}
+				children={content}
+				isActive
+			/>
 		);
 	}
 

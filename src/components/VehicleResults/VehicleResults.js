@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import Collapse, { Panel } from 'rc-collapse';
+import Collapse from 'rc-collapse';
+import Link from '../Link';
 import s from './VehicleResults.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
@@ -93,38 +94,46 @@ class VehicleResults extends Component {
 	}
 
 	getCategoryStyles() {
-		if (!this.props.categories || this.props.categories.length === 0) {
+		if (
+			!this.props.vehicle ||
+			!this.props.vehicle.lookup_category ||
+			this.props.vehicle.lookup_category.length === 0 ||
+			!this.props.categories ||
+			this.props.categories.length === 0
+		) {
 			return <span></span>;
 		}
 
 		const output = [];
-		let key = 1;
+		let key = 0;
 		this.props.categories.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;
 			}
 
-			let i = 1;
 			const subsOutput = [];
-			(c.children || []).map((cat) => {
+			(c.children || []).map((cat, i) => {
 				const match = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.id);
 				if (match.length === 0) {
 					return;
 				}
 
 				subsOutput.push(
-					<SubCategory cat={cat} keyStr={key} toggleKey={this.toggleKey} btnActive={this.state.activeCat === cat.id ? true : false} />
+					<SubCategory
+						cat={match[0]}
+						keyRef={key}
+						toggleKey={this.toggleKey}
+						btnActive={(this.props.activeCategory && this.props.activeCategory.category.id === cat.id) ? true : false}
+					/>
 				);
 				if ((i % 2 === 0) && i === c.children.length) {
 					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
 				}
+
 				subsOutput.push(
-					<Panel key={key}>
-						{this.props.activeCategory && this.state.activeKey === key ? <VehicleStyle className={s.vehicleStyle} /> : null}
-					</Panel>
+					<VehicleStyle category={this.props.activeCategory} className={s.vehicleStyle} />
 				);
 				key++;
-				i++;
 			});
 
 			if (subsOutput.length === 0) {
@@ -149,24 +158,15 @@ class VehicleResults extends Component {
 		);
 	}
 
-	setActiveCategory(cat) {
-		VehicleActions.setActiveCategory(cat);
-	}
-
 	toggleKey(activeKey, cat) {
 		VehicleActions.setActiveCategory(cat);
-		this.setState({
-			activeKey,
-			activeCat: cat.category.id,
-		});
 	}
 
 	render() {
-		const accordionVal = true;
 		return (
 			<div className={s.container}>
 				<ol className="breadcrumb">
-					<li><a href="/">Home</a></li>
+					<li><Link to="/" title="Home">Home</Link></li>
 					<li className="active">Vehicle Look Up Results</li>
 				</ol>
 				<div>
@@ -176,9 +176,10 @@ class VehicleResults extends Component {
 					</p>
 				</div>
 				<div className={s.accordionContainer}>
-					<Collapse accordion={accordionVal}
+					<Collapse
+						accordion
 						onChange={this.onChange}
-						activeKey={this.state.activeKey}
+						activeKey={this.props.activeCategory ? this.props.activeCategory.category.id.toString() : null}
 					>
 						{this.getCategoryStyles()}
 					</Collapse>

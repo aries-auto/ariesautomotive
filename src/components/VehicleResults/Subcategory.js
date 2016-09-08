@@ -6,7 +6,7 @@ class Subcategory extends Component {
 
 	static propTypes = {
 		cat: PropTypes.object,
-		keyStr: PropTypes.string,
+		keyRef: PropTypes.number,
 		toggleKey: PropTypes.func.isRequired,
 		btnActive: PropTypes.bool,
 	};
@@ -18,18 +18,18 @@ class Subcategory extends Component {
 
 	toggleKey(e) {
 		e.preventDefault();
-		this.props.toggleKey(this.props.keyStr, this.props.cat);
+		this.props.toggleKey(this.props.keyRef, this.props.cat);
 	}
 
 	render() {
 		const cat = this.props.cat;
-		const image = cat.image.Path ? `${cat.image.Scheme}://${cat.image.Host}${cat.image.Path}` : '';
+		const image = cat.category.image.Path ? `${cat.category.image.Scheme}://${cat.category.image.Host}${cat.category.image.Path}` : '';
 		const activeClass = this.props.btnActive ? s.btnActive : '';
 		return (
 			<div className={cx(s.category, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')} onClick={this.toggleKey}>
 				<div className={cx(s.categoryBox, activeClass)}>
 					<img className={cx(s.categoryImage)} src={image} />
-					<span className={cx(s.catTitle)}>{cat.title}</span>
+					<span className={cx(s.catTitle)}>{cat.category.title}</span>
 				</div>
 			</div>
 		);
