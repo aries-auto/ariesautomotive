@@ -10,5 +10,9 @@
     .root {
         flex-direction: row;
         flex-wrap: wrap;
+
+        .mobileResult {
+            display: none;
+        }
     }
 }

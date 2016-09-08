@@ -10,6 +10,7 @@ class Result extends Component {
 	static propTypes = {
 		result: PropTypes.object.isRequired,
 		activeIndex: PropTypes.number,
+		className: PropTypes.string,
 	};
 
 	constructor() {
@@ -55,6 +56,7 @@ class Result extends Component {
 			<div
 				className={cx(
 					s.root,
+					this.props.className,
 					(this.props.activeIndex === this.props.result.category.id) ? s.active : '',
 				)}
 			>
