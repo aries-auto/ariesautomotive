@@ -1,16 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import Collapse from 'rc-collapse';
 import Link from '../Link';
 import s from './VehicleResults.scss';
+import CategorizedResult from './CategorizedResult';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import VehicleActions from '../../actions/VehicleActions';
 import CategoryStore from '../../stores/CategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import VehicleStyle from './VehicleStyle';
-import SubCategory from './Subcategory';
-import CollapseStyle from './style';
 
 @withStyles(s)
 @connectToStores
@@ -18,7 +14,7 @@ class VehicleResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		activeKey: PropTypes.number,
+		activeIndex: PropTypes.number,
 		context: PropTypes.shape({
 			params: PropTypes.shape({
 				year: PropTypes.string,
@@ -38,7 +34,6 @@ class VehicleResults extends Component {
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
-		catStyleParts: PropTypes.array, //
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
 	};
@@ -59,6 +54,7 @@ class VehicleResults extends Component {
 		};
 		this.onChange = this.onChange.bind(this);
 		this.toggleKey = this.toggleKey.bind(this);
+		this.getMatched = this.getMatched.bind(this);
 	}
 
 	componentWillMount() {
@@ -93,7 +89,7 @@ class VehicleResults extends Component {
 		};
 	}
 
-	getCategoryStyles() {
+	getMatched() {
 		if (
 			!this.props.vehicle ||
 			!this.props.vehicle.lookup_category ||
@@ -104,58 +100,25 @@ class VehicleResults extends Component {
 			return <span></span>;
 		}
 
-		const output = [];
-		let key = 0;
+		const groups = [];
 		this.props.categories.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;
 			}
 
-			const subsOutput = [];
-			(c.children || []).map((cat, i) => {
-				const match = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.id);
-				if (match.length === 0) {
-					return;
+			let subs = [];
+			(c.children || []).map((cat) => {
+				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.id);
+				if (tmp.length > 0) {
+					subs = subs.concat(tmp);
 				}
-
-				subsOutput.push(
-					<SubCategory
-						cat={match[0]}
-						keyRef={key}
-						toggleKey={this.toggleKey}
-						btnActive={(this.props.activeCategory && this.props.activeCategory.category.id === cat.id) ? true : false}
-					/>
-				);
-				if ((i % 2 === 0) && i === c.children.length) {
-					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
-				}
-
-				subsOutput.push(
-					<VehicleStyle category={this.props.activeCategory} className={s.vehicleStyle} />
-				);
-				key++;
 			});
-
-			if (subsOutput.length === 0) {
-				return;
+			if (subs.length > 0) {
+				groups.push(<CategorizedResult activeIndex={this.props.activeIndex} parent={c} subs={subs} />);
 			}
-
-			output.push(
-				<div>
-					<h3>{c.title}</h3>
-					{subsOutput}
-					<div className={s.floatClear}>&nbsp;</div>
-				</div>
-			);
-			key++;
 		});
-		return (
-			<div>
-				<style>{CollapseStyle.AnimationStyle}</style>
-				{output}
-				<div className={s.floatClear}>&nbsp;</div>
-			</div>
-		);
+
+		return groups;
 	}
 
 	toggleKey(activeKey, cat) {
@@ -163,6 +126,8 @@ class VehicleResults extends Component {
 	}
 
 	render() {
+		const matched = this.getMatched();
+
 		return (
 			<div className={s.container}>
 				<ol className="breadcrumb">
@@ -175,15 +140,7 @@ class VehicleResults extends Component {
 						Some products may require the style of the vehicle to be specified.
 					</p>
 				</div>
-				<div className={s.accordionContainer}>
-					<Collapse
-						accordion
-						onChange={this.onChange}
-						activeKey={this.props.activeCategory ? this.props.activeCategory.category.id.toString() : null}
-					>
-						{this.getCategoryStyles()}
-					</Collapse>
-				</div>
+				{matched}
 			</div>
 		);
 	}

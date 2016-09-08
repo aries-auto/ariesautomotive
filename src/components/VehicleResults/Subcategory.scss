@@ -1,0 +1,55 @@
+@import '../variables.scss';
+
+.root {
+    display: flex;
+    padding: 5px;
+    margin: 10px;
+    cursor: pointer;
+    flex-direction: row;
+    background-color: $off-white;
+    border: 1px solid $off-white;
+    border-radius: 5px;
+    transition: background-color .2s ease;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 45%;
+
+    span {
+        font-size: 1.2em;
+        color: $new-red;
+    }
+
+    img {
+        width: auto;
+        height: 60px;
+        margin-right: 10px;
+        opacity: .8;
+    }
+
+    &.active {
+        color: $off-white;
+        background-color: $new-red;
+        border-color: $new-red;
+
+        img {
+            opacity: 1;
+        }
+
+        span {
+            color: $off-white;
+        }
+
+        &:hover {
+            background-color: $new-red;
+        }
+    }
+
+    &:hover {
+        text-decoration: none;
+        background-color: $lookup-color;
+
+        img {
+            opacity: 1;
+        }
+    }
+}

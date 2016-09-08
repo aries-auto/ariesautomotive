@@ -1,0 +1,16 @@
+@import '../variables.scss';
+
+.root {
+    > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: $screen-md-min) {
+    .root > div {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
