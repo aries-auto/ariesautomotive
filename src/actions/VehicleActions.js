@@ -4,10 +4,15 @@ class VehicleActions {
 	constructor() {
 		this.generateActions(
 			'setActiveIndex',
+			'setStyle',
 
 			'fetchVehicle',
 			'updateVehicle',
 			'failedVehicle',
+
+			'fetchFitments',
+			'updateFitments',
+			'failedFitments',
 		);
 	}
 }

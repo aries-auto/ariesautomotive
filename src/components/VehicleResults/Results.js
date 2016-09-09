@@ -11,12 +11,15 @@ class Results extends Component {
 		results: PropTypes.array.isRequired,
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
+		fitments: PropTypes.array,
 	};
 
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				{this.props.results.map((r) => <Result result={r} activeIndex={this.props.activeIndex} />)}
+				{this.props.results.map((r, i) => {
+					return <Result key={i} fitments={this.props.fitments} result={r} activeIndex={this.props.activeIndex} />;
+				})}
 			</div>
 		);
 	}

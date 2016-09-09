@@ -11,6 +11,7 @@ class CategorizedResult extends Component {
 		parent: PropTypes.object,
 		subs: PropTypes.array,
 		activeIndex: PropTypes.number,
+		fitments: PropTypes.array,
 	};
 
 	render() {
@@ -19,9 +20,9 @@ class CategorizedResult extends Component {
 		while (tmp.length > 0) {
 			const res = tmp.splice(0, 2);
 			segments.push(
-				<div>
-					<ResultSegment activeIndex={this.props.activeIndex} results={res} />
-					<Results activeIndex={this.props.activeIndex} results={res} />
+				<div key={segments.length}>
+					<ResultSegment fitments={this.props.fitments} activeIndex={this.props.activeIndex} results={res} />
+					<Results fitments={this.props.fitments} activeIndex={this.props.activeIndex} results={res} />
 				</div>);
 		}
 

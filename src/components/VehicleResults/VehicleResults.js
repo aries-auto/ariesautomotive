@@ -4,7 +4,6 @@ import s from './VehicleResults.scss';
 import CategorizedResult from './CategorizedResult';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
-import VehicleActions from '../../actions/VehicleActions';
 import CategoryStore from '../../stores/CategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -36,6 +35,7 @@ class VehicleResults extends Component {
 		}),
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
+		fitments: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -52,8 +52,6 @@ class VehicleResults extends Component {
 			activeKey: '0',
 			activeCat: 0,
 		};
-		this.onChange = this.onChange.bind(this);
-		this.toggleKey = this.toggleKey.bind(this);
 		this.getMatched = this.getMatched.bind(this);
 	}
 
@@ -69,12 +67,6 @@ class VehicleResults extends Component {
 		this.context.seo({
 			title,
 			description: 'ARIES Automotive parts for ' + title,
-		});
-	}
-
-	onChange(activeKey) {
-		this.setState({
-			activeKey,
 		});
 	}
 
@@ -114,22 +106,26 @@ class VehicleResults extends Component {
 				}
 			});
 			if (subs.length > 0) {
-				groups.push(<CategorizedResult activeIndex={this.props.activeIndex} parent={c} subs={subs} />);
+				groups.push(
+					<CategorizedResult
+						activeIndex={this.props.activeIndex}
+						parent={c}
+						subs={subs}
+						fitments={this.props.fitments}
+						key={groups.length}
+					/>
+				);
 			}
 		});
 
 		return groups;
 	}
 
-	toggleKey(activeKey, cat) {
-		VehicleActions.setActiveCategory(cat);
-	}
-
 	render() {
 		const matched = this.getMatched();
 
 		return (
-			<div className={s.container}>
+			<div className={s.root}>
 				<ol className="breadcrumb">
 					<li><Link to="/" title="Home">Home</Link></li>
 					<li className="active">Vehicle Look Up Results</li>

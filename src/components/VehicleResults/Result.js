@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import VehicleActions from '../../actions/VehicleActions';
+import VehicleStore from '../../stores/VehicleStore';
 import s from './Result.scss';
 import withStyles from '../../decorators/withStyles';
+import PartResults from '../PartResults';
 
 @withStyles(s)
 class Result extends Component {
@@ -11,26 +12,61 @@ class Result extends Component {
 		result: PropTypes.object.isRequired,
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
+		fitments: PropTypes.array,
 	};
 
 	constructor() {
 		super();
 
+		this.state = {
+			products: [],
+		};
+
 		this.updateStyle = this.updateStyle.bind(this);
+	}
+
+	componentWillReceiveProps(props) {
+		const products = [];
+		if (props.fitments && props.fitments.length > 0) {
+			props.fitments.map((ft) => {
+				if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
+					return;
+				}
+
+				if (ft.product.categories[0].id === props.result.category.id) {
+					products.push(ft.product);
+				}
+			});
+		}
+
+		if (products.length !== this.state.products.length) {
+			this.setState({
+				products,
+			});
+		}
 	}
 
 	updateStyle(e) {
 		e.preventDefault();
 
-		VehicleActions.setStyle(this.props.result.category, this.refs.style.value);
+		VehicleStore.fetchFitments(this.props.result, this.refs.style.value);
 	}
 
 	renderStyles() {
 		if (
 			!this.props.result.style_options ||
-			this.props.result.style_options.length === 0 ||
-			this.props.result.style_options[0].style.toLowerCase() === 'all'
+			this.props.result.style_options.length === 0
 		) {
+			return null;
+		}
+
+		if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
+			// TODO: this needs to autoload the fitment information for 'all',
+			// no need to make the user select it.
+			// However, the following creates a dispatch loop.
+			//
+			// VehicleStore.fetchFitments(this.props.result, 'all');
+
 			return null;
 		}
 
@@ -38,7 +74,7 @@ class Result extends Component {
 			<div className={'form-group'}>
 				<select ref="style" onChange={this.updateStyle} className="form-control">
 					<option value="">- Select Style -</option>
-					{this.props.result.style_options.map((so) => <option>{so.style.toUpperCase()}</option>)}
+					{this.props.result.style_options.map((so, i) => <option key={i}>{so.style.toUpperCase()}</option>)}
 				</select>
 			</div>
 		);
@@ -64,6 +100,7 @@ class Result extends Component {
 					<span>{this.props.result.category.title}</span>
 					{this.renderStyles()}
 				</div>
+				<PartResults className={`test`} parts={this.state.products} />
 			</div>
 		);
 	}
