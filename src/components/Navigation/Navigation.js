@@ -25,7 +25,7 @@ class Navigation extends Component {
 				role="navigation"
 			>
 				<div className={s.logo}>
-					<Link className={s.brand} to="/" title={brand.name}>
+					<Link className={s.brand} to={`/`} title={brand.name}>
 						<img src={brand.logo} alt={`${brand.name} Logo`} className="logo" />
 					</Link>
 				</div>

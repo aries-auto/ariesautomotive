@@ -22,7 +22,13 @@ class Link extends Component {
 		external: PropTypes.bool,
 	};
 
-	static handleClick = (event) => {
+	constructor() {
+		super();
+
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(event) {
 		let allowTransition = true;
 		let clickResult;
 
@@ -57,11 +63,11 @@ class Link extends Component {
 				});
 			}
 		}
-	};
+	}
 
 	render() {
 		const { to, query, ...props } = this.props;
-		return <a href={Location.createHref(to, query)} onClick={Link.handleClick.bind(this)} {...props} />;
+		return <a href={Location.createHref(to, query)} onClick={this.handleClick} {...props} />;
 	}
 
 }
