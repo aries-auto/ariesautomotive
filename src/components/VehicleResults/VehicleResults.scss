@@ -9,6 +9,10 @@
     width: 100%;
     min-height: 300px;
     margin-top: .4em;
+	.visual {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .loader {
@@ -64,6 +68,11 @@
     .container {
         width: 100%;
         padding: 2em;
+
+		.visual {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
     }
 
     .loader {
@@ -90,7 +99,6 @@
     }
 
     .configurator {
-        width: 60%;
         display: inline-block;
     }
 }

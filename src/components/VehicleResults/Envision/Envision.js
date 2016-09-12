@@ -69,7 +69,7 @@ class Envision extends Component {
 		return (
 			<div className={s.partList}>
 				<h3>PARTS LIST</h3>
-				{parts}
+				<div>{parts}</div>
 			</div>
 		);
 	}
@@ -77,13 +77,13 @@ class Envision extends Component {
 	renderPart(part, key) {
 		const image = this.findPartImage(part);
 		return (
-			<div className={s.partContainer} key={key}>
+			<div className={s.partContainer} key={key} onClick={this.handleRemovePart.bind(this, part)}>
 				<img className={s.partImage} src={image} alt={part.short_description} />
 				<div className={s.partContent}>
 					<p className={s.partShortDescription}>{part.short_description}</p>
 					<p className={s.partPartNumber}>{part.part_number}</p>
 				</div>
-				<div className={s.partClose}><span className={cx('glyphicon glyphicon-remove', s.x)} onClick={this.handleRemovePart.bind(this, part)}></span></div>
+				<div className={s.partClose}><span className={cx('glyphicon glyphicon-remove', s.x)}></span></div>
 			</div>
 		);
 	}

@@ -30,7 +30,7 @@ class Envision extends Component {
 
 	render() {
 		return (
-			<div className={cx(s.root)}>
+			<div className={cx(s.root, this.props.className)}>
 				<h3>Envision ARIES</h3>
 				<p>See what your vehicle will look like with ARIES accessories fully installed, even before deciding which ones you actually want! Simply select your year, make, model, style and color. Then select one or more accessories to preview. When you're satisfied with your selections, connect to one of our dealers by going to <a href="/buy">Where to Buy</a>.</p>
 				<div id="icf_page"></div>

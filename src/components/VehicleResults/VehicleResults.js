@@ -82,6 +82,7 @@ class VehicleResults extends Component {
 
 	getCategoryStyles() {
 		const output = [];
+		this.props.categories.sort((a, b) => a.sort > b.sort);
 		for (const i in this.props.categories) {
 			if (!this.props.categories[i]) {
 				continue;
@@ -115,10 +116,10 @@ class VehicleResults extends Component {
 		return (
 			<div className={s.container}>
 				{this.props.error ? <p className={s.error}>{this.props.error.message}</p> : null}
-				<div className={s.configurator}>
-					{this.props.context.vehicleParts ? <Configurator win={this.props.win} context={this.props.context} /> : null}
+				<div className={s.visual}>
+					{this.props.context.vehicleParts ? <Configurator win={this.props.win} className={s.configurator} context={this.props.context} /> : null}
+					{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <Envision className={s.envision} /> : null}
 				</div>
-				{this.props.vehicle.parts && this.props.vehicle.parts.length > 0 ? <div className={s.envision}><Envision /></div> : null}
 				<Loader loaded={(this.props.categories !== null)} top="30%" loadedClassName={s.loader}>
 
 					<div className={cx(s.root, this.props.className)} role="navigation">
