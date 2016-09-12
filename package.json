@@ -30,7 +30,7 @@
     "react-bootstrap": "^0.28.2",
     "react-dom": "0.14.3",
     "react-ga": "^1.2.0",
-    "react-google-maps": "^4.9.1",
+    "react-google-maps": "=4.9.1",
     "react-loader": "^2.4.0",
     "react-modal": "^0.6.1",
     "react-routing": "0.0.6",

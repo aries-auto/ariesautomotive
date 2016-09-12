@@ -31,11 +31,6 @@ module.exports = {
 			value: 'NEWS',
 		},
 		{
-			href: '/techsupport',
-			title: 'Technical Support',
-			value: 'TECHNICAL SUPPORT',
-		},
-		{
 			href: '/warranties',
 			title: 'Online Warranties',
 			value: 'ONLINE WARRANTIES',

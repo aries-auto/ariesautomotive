@@ -44,20 +44,21 @@ class VehicleStyle extends Component {
 	}
 
 	getStyleChoices() {
-		const styleOptions = [];
-		let styles = {};
-		styles = this.props.activeCategory.style_options;
+		if (!this.props.activeCategory || !this.props.activeCategory.style_options) {
+			return [];
+		}
 
-		for (const i in styles) {
-			if (!i) {
-				return styleOptions;
-			}
+		this.props.activeCategory.style_options.sort((a, b) => {
+			return a.style > b.style;
+		});
+		const styleOptions = [];
+		this.props.activeCategory.style_options.map((option, i) => {
 			styleOptions.push(
-				<li key={i} onClick={this.setVehicleStyle.bind(this, styles[i])} value={styles[i].style}>
-					{styles[i].style.toUpperCase()}
+				<li key={i} onClick={this.setVehicleStyle.bind(this, option)} value={option.style}>
+					{option.style.toUpperCase()}
 				</li>
 			);
-		}
+		});
 		return styleOptions;
 	}
 

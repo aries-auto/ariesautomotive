@@ -249,12 +249,6 @@ class Home extends Component {
 									<span>Introducing StyleGuard&trade; Floor Liners</span>
 								</div>
 							</div>
-
-							<div className={cx(s.whatsNew, s.envision, 'row')}>
-								<a href="/envision">
-									<img src="https://storage.googleapis.com/aries-website/whatsnew/Envision-Website-Graphic.png" alt="Envision ARIES" />
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>

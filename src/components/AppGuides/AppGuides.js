@@ -14,7 +14,7 @@ const title = 'Application Guides';
 class AppGuides extends Component {
 
 	static propTypes = {
-		guides: PropTypes.array,
+		guideGroups: PropTypes.array,
 		title: PropTypes.string,
 		guide: PropTypes.object,
 	};
@@ -27,7 +27,7 @@ class AppGuides extends Component {
 	};
 
 	static defaultProps = {
-		guides: [],
+		guideGroups: [],
 		title,
 		guide: null,
 	};
@@ -50,8 +50,8 @@ class AppGuides extends Component {
 		return AppGuideStore.getState();
 	}
 
-	handleAppGuide(i) {
-		AppGuideActions.set(this.props.guides[i], 0);
+	handleAppGuide(g) {
+		AppGuideActions.set(g.collection, 0);
 	}
 
 	handleAppguides() {
@@ -59,46 +59,53 @@ class AppGuides extends Component {
 	}
 
 	renderGuides() {
-		const output = [];
-		output.push(<h1 key="head">APPLICATION GUIDES</h1>);
-		output.push(<p key="p">The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>);
-		this.props.guides.map((guide, i) => {
-			output.push(
-				<a key={i} className={cx(s.guide, 'row', 'well')} onClick={this.handleAppGuide.bind(this, i)}>
-					<div className="pull-left">
-						{ guide }
+		// loop through each main category ('Running boards, nerf bars, side steps, side steps, etc')
+		const mainGuides = [];
+		if (!this.props.guideGroups) {
+			return null;
+		}
+		this.props.guideGroups.map((group, i) => {
+			mainGuides.push(<h2 key={i}>{group.title}</h2>);
+			const ags = [];
+
+			// loop through each sub category (RidgeStep, 4 oval wheel to wheel, big step 4 inch round nerf bars, etc)
+			group.appGuides.map((g, ii) => {
+				ags.push(
+					<div key={ii} className={cx(s.guideRow, 'col-xs-12', 'col-sm-6', 'col-md-6', 'col-lg-6')}>
+						<a className={cx(s.guide, 'well')} href={`/appguides/${g.collection}/0`}>
+							<img className={cx(s.guideImage)} src={g.imagePath} />
+							<span>{g.title}</span>
+						</a>
 					</div>
-					<div className="pull-right">
-						<span className="glyphicon glyphicon-chevron-right"></span>
-					</div>
-				</a>
-			);
+				);
+			});
+			mainGuides.push(<div className={cx(s.subGuides, 'col-lg-12', 'col-md-12', 'col-sm-12')}>{ags}</div>);
 		});
 
 		return (
 			<div>
-				{output}
-			</div>);
-	}
-
-	renderGuide() {
-		return (
-			<AppGuide guide={this.props.guide} />
+				<h1>APPLICATION GUIDES</h1>
+				<p>
+					The application guides below will help you determine which
+					ARIES parts will fit your vehicle.<br /> Each app guide is
+					category-specific and broken down by vehicle make, model,
+					year and style.
+				</p>
+				{mainGuides}
+			</div>
 		);
 	}
 
 	renderBreadCrumbs() {
-		const output = [];
-		const apps = <li key="apps" className="active">Application Guides</li>;
-		const appsinact = <li key="app" onClick={this.handleAppguides}><a>Application Guides</a></li>;
-		const app = <li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>;
 		if (this.props.guide) {
-			output.push(appsinact);
-			output.push(app);
-		} else {
-			output.push(apps);
+			return (
+				[
+					<li key="app"><a href={`/appguides`}>Application Guides</a></li>,
+					<li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>,
+				]
+			);
 		}
-		return output;
+		return <li key="apps" className="active">Application Guides</li>;
 	}
 
 	render() {
@@ -109,7 +116,7 @@ class AppGuides extends Component {
 						<li><a href="/">Home</a></li>
 						{this.renderBreadCrumbs()}
 					</ol>
-					{this.props.guide ? this.renderGuide() : this.renderGuides()}
+					{this.props.guide ? <AppGuide guide={this.props.guide} /> : this.renderGuides()}
 				</div>
 			</div>
 		);

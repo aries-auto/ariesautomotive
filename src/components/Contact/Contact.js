@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Contact.scss';
+import { brandName, defaultContactReason } from '../../config';
 import withStyles from '../../decorators/withStyles';
 import { fields } from '../../data/contact';
 import ContactStore from '../../stores/ContactStore';
@@ -10,7 +11,7 @@ import Form from '../Form/Form';
 import { locations, mainLocation } from '../../data/locations';
 import { phone } from '../../data/contact';
 
-const title = 'Contact Aries';
+const title = `Contact ${brandName}`;
 
 @withStyles(s)
 @connectToStores
@@ -79,7 +80,7 @@ class Contact extends Component {
 
 	submit(event) {
 		event.preventDefault();
-		ContactActions.postContactData(this.props.inputs.reason);
+		ContactActions.postContactData(this.props.inputs.reason ? this.props.inputs.reason : defaultContactReason);
 	}
 
 	renderSupportLocations() {

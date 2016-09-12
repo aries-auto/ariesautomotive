@@ -70,15 +70,15 @@ module.exports.mainLocation = {
 		},
 	},
 	phone: {
-		pretty: '(888) 635-9824',
-		ugly: 'tel+8886359824',
+		pretty: '(877) 287 8634',
+		ugly: 'tel:+18772878634',
 	},
 	local: {
 		pretty: '(972) 456-0222',
-		ugly: 'tel+9724560222',
+		ugly: 'tel:+19724560222',
 	},
 	fax: {
 		pretty: '(972) 352-2617',
-		ugly: 'tel+9723522617',
+		ugly: 'tel:+19723522617',
 	},
 };

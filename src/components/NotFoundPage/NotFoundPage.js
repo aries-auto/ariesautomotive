@@ -24,7 +24,7 @@ class NotFoundPage extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className={s.root}>
 				<h1>{title}</h1>
 				<p>Sorry, but the page you were trying to view does not exist.</p>
 			</div>

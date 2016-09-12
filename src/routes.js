@@ -14,6 +14,7 @@ import VehicleResults from './components/VehicleResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
+// import AppGuide from './components/AppGuides/AppGuide/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -24,7 +25,7 @@ import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
 import { iapiBase, apiBase, apiKey, brand } from './config';
 import LookupActions from './actions/LookupActions';
-
+import VehicleActions from './actions/VehicleActions';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -240,6 +241,11 @@ const router = new Router(on => {
 			make: state.params.make,
 			model: state.params.model,
 		});
+		VehicleActions.set({
+			year: state.params.year,
+			make: state.params.make,
+			model: state.params.model,
+		});
 		return <VehicleResults context={state.context} win={state.win} />;
 	});
 
@@ -249,6 +255,37 @@ const router = new Router(on => {
 
 	on('/appguides', async (state) => {
 		return <AppGuides context={state.context} />;
+	});
+
+	on('/appguides/:guide/:page', async (state) => {
+		let guide = {};
+		let appGuideInfo = {};
+		const collection = state.params.guide;
+		const page = state.params.page;
+		try {
+			const [guideResponse, appGuideInfoResponse] = await Promise.all([
+				fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
+					method: 'post',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+				fetch(`${iapiBase}/appguides/guide?collection=${collection}&key=${KEY}&brandID=${brand}`, {
+					method: 'get',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+			]);
+
+			guide = await guideResponse.json();
+			appGuideInfo = await appGuideInfoResponse.json();
+			guide.name = collection;
+			guide.appGuide = appGuideInfo;
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <AppGuides guide={guide} context={state.context} />;
 	});
 
 	on('/becomedealer', async (state) => {
@@ -310,7 +347,7 @@ const router = new Router(on => {
 		return <CustomContent context={state.context} />;
 	});
 
-	on('/lp/:id', async (state) => {
+	on('/lp/:id', async (state, next) => {
 		state.context.id = state.params.id;
 		try {
 			const url = `${apiBase}/lp/${state.params.id}?brand=${brand}&key=${apiKey}`;
@@ -319,7 +356,8 @@ const router = new Router(on => {
 		} catch (e) {
 			state.context.error = e;
 		}
-		return <LandingPage context={state.context} page={state.page} />;
+		const comp = await next();
+		return comp && <LandingPage context={state.context} page={state.page} />;
 	});
 
 	on('/', async (state) => {
@@ -327,13 +365,13 @@ const router = new Router(on => {
 		state.context.testimonials = [];
 		state.context.carouselImages = [
 			{
-				image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+				image: 'https://storage.googleapis.com/aries-website/hero-images/jeep.png',
 				text: 'Never Fear the Uncertain Road',
 				button_text: 'VIEW BULL BARS',
 				link: '/category/332',
 				order: 5,
 				styles: {
-					backgroundImage: 'url(http://storage.googleapis.com/aries-website/hero-images/jeep.png)',
+					backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/jeep.png)',
 				},
 			}, {
 				image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',

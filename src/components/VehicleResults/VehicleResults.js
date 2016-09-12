@@ -82,7 +82,6 @@ class VehicleResults extends Component {
 
 	getCategoryStyles() {
 		const output = [];
-		this.props.categories.sort((a, b) => a.sort > b.sort);
 		for (const i in this.props.categories) {
 			if (!this.props.categories[i]) {
 				continue;
