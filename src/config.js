@@ -4,8 +4,24 @@ export const googleAnalyticsId = 'UA-61502306-1';
 export const googleApiKey = process.env.GOOGLE_API_KEY || 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA';
 export const hostAddress = process.env.WEBSITE_ADDRESS || `http://${host}`;
 
-export const iapiBase = process.env.NODE_ENV === 'development' ? 'http://localhost:8084' : 'https://iapi.curtmfg.com';
-export const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://goapi.curtmfg.com';
+let iapi = '';
+let api = '';
+switch (process.env.NODE_ENV) {
+case 'staging':
+	iapi = 'http://104.154.72.47';
+	api = 'http://104.155.147.144';
+	break;
+case 'production':
+	iapi = 'http://iapi.curtmfg.com';
+	api = 'http://goapi.curtmfg.com';
+	break;
+default:
+	iapi = 'http://localhost:8084';
+	api = 'http://localhost:8080';
+}
+
+export const iapiBase = iapi;
+export const apiBase = api;
 export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !== 'undefined' ? process.env.API_KEY : '9300f7bc-2ca6-11e4-8758-42010af0fd79';
 
 export const brand = {

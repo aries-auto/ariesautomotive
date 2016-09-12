@@ -3,6 +3,7 @@ import path from 'path';
 import express from 'express';
 import React from 'react';
 import Memcached from 'memcached';
+import morgan from 'morgan';
 import ReactDOM from 'react-dom/server';
 import fetch from './core/fetch';
 import Router from './routes';
@@ -13,7 +14,11 @@ import { apiBase, apiKey, brand } from './config';
 
 const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
 const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
-const memcached = new Memcached(memcachedAddr + ':' + memcachedPort);
+const memcached = new Memcached(memcachedAddr + ':' + memcachedPort, {
+	retries: 2,
+	timeout: 500,
+	maxExpiration: 86400,
+});
 
 const server = global.server = express();
 const KEY = apiKey;
@@ -21,6 +26,7 @@ const KEY = apiKey;
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
+server.use(morgan('combined'));
 
 server.get('/api/categories', (req, res) => {
 	memcached.get('api:categories', (err, val) => {
