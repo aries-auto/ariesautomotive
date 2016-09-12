@@ -1,15 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import Collapse, { Panel } from 'rc-collapse';
+import Link from '../Link';
 import s from './VehicleResults.scss';
+import CategorizedResult from './CategorizedResult';
 import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
-import VehicleActions from '../../actions/VehicleActions';
 import CategoryStore from '../../stores/CategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import VehicleStyle from './VehicleStyle';
-import SubCategory from './Subcategory';
-import CollapseStyle from './style';
 
 @withStyles(s)
 @connectToStores
@@ -17,7 +13,7 @@ class VehicleResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		activeKey: PropTypes.number,
+		activeIndex: PropTypes.number,
 		context: PropTypes.shape({
 			params: PropTypes.shape({
 				year: PropTypes.string,
@@ -37,9 +33,9 @@ class VehicleResults extends Component {
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
-		catStyleParts: PropTypes.array, //
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
+		fitments: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -56,8 +52,7 @@ class VehicleResults extends Component {
 			activeKey: '0',
 			activeCat: 0,
 		};
-		this.onChange = this.onChange.bind(this);
-		this.toggleKey = this.toggleKey.bind(this);
+		this.getMatched = this.getMatched.bind(this);
 	}
 
 	componentWillMount() {
@@ -75,12 +70,6 @@ class VehicleResults extends Component {
 		});
 	}
 
-	onChange(activeKey) {
-		this.setState({
-			activeKey,
-		});
-	}
-
 	static getStores() {
 		return [VehicleStore, CategoryStore];
 	}
@@ -92,80 +81,53 @@ class VehicleResults extends Component {
 		};
 	}
 
-	getCategoryStyles() {
-		if (!this.props.categories || this.props.categories.length === 0) {
+	getMatched() {
+		if (
+			!this.props.vehicle ||
+			!this.props.vehicle.lookup_category ||
+			this.props.vehicle.lookup_category.length === 0 ||
+			!this.props.categories ||
+			this.props.categories.length === 0
+		) {
 			return <span></span>;
 		}
 
-		const output = [];
-		let key = 1;
+		const groups = [];
 		this.props.categories.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;
 			}
-			let i = 1;
-			const subsOutput = [];
+
+			let subs = [];
 			(c.children || []).map((cat) => {
-				const match = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.id);
-				if (match.length === 0) {
-					return;
+				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.id);
+				if (tmp.length > 0) {
+					subs = subs.concat(tmp);
 				}
-
-				subsOutput.push(
-					<SubCategory cat={cat} keyStr={key} toggleKey={this.toggleKey} btnActive={this.state.activeCat === cat.id ? true : false} />
-				);
-				if ((i % 2 === 0) && i === c.children.length) {
-					subsOutput.push(<div className={cx(s.emptyCategory, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')}>&nbsp;</div>);
-				}
-				subsOutput.push(
-					<Panel key={key}>
-						{this.props.activeCategory && this.state.activeKey === key ? <VehicleStyle className={s.vehicleStyle} /> : null}
-					</Panel>
-				);
-				key++;
-				i++;
 			});
-
-			if (subsOutput.length === 0) {
-				return;
+			if (subs.length > 0) {
+				groups.push(
+					<CategorizedResult
+						activeIndex={this.props.activeIndex}
+						parent={c}
+						subs={subs}
+						fitments={this.props.fitments}
+						key={groups.length}
+					/>
+				);
 			}
-
-			output.push(
-				<div>
-					<h3>{c.title}</h3>
-					{subsOutput}
-					<div className={s.floatClear}>&nbsp;</div>
-				</div>
-			);
-			key++;
 		});
-		return (
-			<div>
-				<style>{CollapseStyle.AnimationStyle}</style>
-				{output}
-				<div className={s.floatClear}>&nbsp;</div>
-			</div>
-		);
-	}
 
-	setActiveCategory(cat) {
-		VehicleActions.setActiveCategory(cat);
-	}
-
-	toggleKey(activeKey, cat) {
-		VehicleActions.setActiveCategory(cat);
-		this.setState({
-			activeKey,
-			activeCat: cat.category.id,
-		});
+		return groups;
 	}
 
 	render() {
-		const accordionVal = true;
+		const matched = this.getMatched();
+
 		return (
-			<div className={s.container}>
+			<div className={s.root}>
 				<ol className="breadcrumb">
-					<li><a href="/">Home</a></li>
+					<li><Link to="/" title="Home">Home</Link></li>
 					<li className="active">Vehicle Look Up Results</li>
 				</ol>
 				<div>
@@ -174,14 +136,7 @@ class VehicleResults extends Component {
 						Some products may require the style of the vehicle to be specified.
 					</p>
 				</div>
-				<div className={s.accordionContainer}>
-					<Collapse accordion={accordionVal}
-						onChange={this.onChange}
-						activeKey={this.state.activeKey}
-					>
-						{this.getCategoryStyles()}
-					</Collapse>
-				</div>
+				{matched}
 			</div>
 		);
 	}

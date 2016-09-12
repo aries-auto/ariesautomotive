@@ -3,16 +3,16 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 class VehicleActions {
 	constructor() {
 		this.generateActions(
-			'getCategoryStyles',
-			'set',
-			'setShowStyleState',
-			'setActiveCategory',
+			'setActiveIndex',
 			'setStyle',
-			'setLookupCategories',
 
 			'fetchVehicle',
 			'updateVehicle',
 			'failedVehicle',
+
+			'fetchFitments',
+			'updateFitments',
+			'failedFitments',
 		);
 	}
 }

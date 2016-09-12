@@ -1,37 +1,36 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import s from './VehicleResults.scss';
+import s from './Subcategory.scss';
+import withStyles from '../../decorators/withStyles';
+import VehicleActions from '../../actions/VehicleActions';
 
+@withStyles(s)
 class Subcategory extends Component {
 
 	static propTypes = {
-		cat: PropTypes.object,
-		keyStr: PropTypes.string,
-		toggleKey: PropTypes.func.isRequired,
-		btnActive: PropTypes.bool,
+		id: PropTypes.number,
+		image: PropTypes.string,
+		title: PropTypes.string,
+		active: PropTypes.bool,
 	};
 
 	constructor() {
 		super();
-		this.toggleKey = this.toggleKey.bind(this);
+
+		this.setActiveIndex = this.setActiveIndex.bind(this);
 	}
 
-	toggleKey(e) {
+	setActiveIndex(e) {
 		e.preventDefault();
-		this.props.toggleKey(this.props.keyStr, this.props.cat);
+		VehicleActions.setActiveIndex(this.props.id);
 	}
 
 	render() {
-		const cat = this.props.cat;
-		const image = cat.image.Path ? `${cat.image.Scheme}://${cat.image.Host}${cat.image.Path}` : '';
-		const activeClass = this.props.btnActive ? s.btnActive : '';
 		return (
-			<div className={cx(s.category, 'col-lg-6', 'col-md-6', 'col-sm-6', 'col-xs-12')} onClick={this.toggleKey}>
-				<div className={cx(s.categoryBox, activeClass)}>
-					<img className={cx(s.categoryImage)} src={image} />
-					<span className={cx(s.catTitle)}>{cat.title}</span>
-				</div>
-			</div>
+			<a onClick={this.setActiveIndex} className={cx(s.root, this.props.active ? s.active : '')}>
+				<img alt={this.props.title} src={this.props.image} />
+				<span>{this.props.title}</span>
+			</a>
 		);
 	}
 

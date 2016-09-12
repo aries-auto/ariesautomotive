@@ -1,126 +1,13 @@
 @import '../classes.scss';
 @import '../variables.scss';
 
-.categoryStyle {
-    font-size: 14px;
-}
-
-.category {
-	min-height:40px;
-	padding:0px;
-	padding-right:15px;
-	padding-bottom:15px;
-
-	.categoryBox {
-		cursor:pointer;
-		border:1px solid #fff;
-		border-radius:5px;
-		padding:5px;
-		background-color:#fff;
-
-		.catTitle {
-			font-size:1.2em;
-			color: $new-red;
-		}
-	}
-	.categoryBox.btnActive {
-		background-color:$new-red;
-		color: $white-base;
-		border-color: $new-red;
-		.catTitle {
-			color: $white-base;
-		}
-	}
-	.categoryImage {
-		height:60px;
-		width:auto;
-		margin-right:10px;
-	}
-
-}
-.emptyCategory {
-	min-height:90px;
-}
-
-.floatClear {
-	clear: both;
-}
-
-.container {
-    width: 100%;
-    min-height: 300px;
-    margin-top: .4em;
-}
-
-.loader {
-    display: flex;
-    padding: 20px;
-    flex-direction: column;
-}
-
 .root {
-    li {
-        width: 100%;
-        margin: 0 0 6px;
-        border-radius: 4px;
-
-        > a {
-            padding: 5px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            font-family: $font-family-base;
-            font-size: 18px;
-            font-weight: bold;
-            color: $new-red;
-            text-align: left;
-            vertical-align: text-bottom;
-            border: 0;
-            border-radius: 4px;
-
-            &:hover, &:focus {
-                cursor: pointer;
-                background-color: $off-white;
-            }
-        }
-
-        &.active > a {
-            background-color: $white-base;
-        }
-    }
-
-    .active {
-        background-color: white;
-    }
-}
-
-.clearfix {
-    clear: both;
+    padding: 15px;
 }
 
 @media (min-width: $screen-md-min) {
-    .container {
+    .root {
         width: 100%;
         padding: 2em;
     }
-
-    .loader {
-        flex-direction: row;
-    }
-
-    .root {
-        padding: 0;
-
-        li {
-            width: 100%;
-
-            > a {
-                width: 100%;
-                border-radius: 4px 0 0 4px;
-            }
-        }
-    }
-}
-
-.btnActive {
-	background-color:red;
 }

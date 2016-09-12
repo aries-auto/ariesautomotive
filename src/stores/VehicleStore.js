@@ -1,12 +1,9 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-import fetch from '../core/fetch';
 import VehicleActions from '../actions/VehicleActions';
 import VehicleSource from '../sources/VehicleSource';
-import { apiBase, apiKey, brand } from '../config';
 
 const EventEmitter = events.EventEmitter;
-const KEY = apiKey;
 
 class VehicleStore extends EventEmitter {
 	constructor() {
@@ -24,16 +21,21 @@ class VehicleStore extends EventEmitter {
 				lookup_category: [],
 				products: [],
 			},
+			activeIndex: 0,
+			fitments: [],
 		};
+
 		this.bindListeners({
-			setActiveCategory: VehicleActions.setActiveCategory,
-			setStyle: VehicleActions.setStyle,
 			handleUpdateVehicle: VehicleActions.UPDATE_VEHICLE,
-			handleVehicleFailed: VehicleActions.FAILED_VEHICLE,
+			handleFailedVehicle: VehicleActions.FAILED_VEHICLE,
+			handleSetActiveIndex: VehicleActions.SET_ACTIVE_INDEX,
+			handleUpdateFitments: VehicleActions.UPDATE_FITMENTS,
+			handleFailedFitments: VehicleActions.FAILED_FITMENTS,
 		});
 
 		this.exportPublicMethods({
 			getVehicle: this.getVehicle,
+			getFitments: this.getFitments,
 		});
 
 		this.exportAsync(VehicleSource);
@@ -56,105 +58,40 @@ class VehicleStore extends EventEmitter {
 		});
 	}
 
-	handleVehicleFailed(err) {
+	handleFailedVehicle(err) {
 		this.setState({
 			error: err,
 		});
 	}
 
 	getVehicle() {
-		return this.vehicle;
+		return this.state.vehicle;
 	}
 
-	setActiveCategory(activeCategory) {
-		let style = null;
-		if (this.checkStyleOptions(activeCategory)) {
-			style = this.checkStyleOptions(activeCategory);
-		}
-		this.getCategoryParts(activeCategory, style);
+	handleUpdateFitments(fit) {
+		this.setState({
+			fitments: fit,
+			error: null,
+		});
 	}
 
-	checkStyleOptions(category) {
-		// cat has one style called 'all'
-		if (category.style_options.length === 1 && category.style_options[0].style === 'all') {
-			return category.style_options[0];
-		}
-		// cat has style with same name as current style
-		for (const i in category.style_options) {
-			if (this.state.style && category.style_options[i].style === this.state.style.style) {
-				return category.style_options[i];
-			}
-		}
-		return null;
+	handleFailedFitments(err) {
+		this.setState({
+			error: err,
+		});
 	}
 
-	async getCategoryStyles() {
-		if (this.state.vehicle.year === '' || this.state.vehicle.make === '' || this.state.vehicle.model === '') {
-			return;
-		}
-		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
-		const apiResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&brands=${brand.id}`);
-		const resp = await apiResp.json();
-		if (!this.state.activeCategory) {
-			this.setActiveCategory(resp.lookup_category[0]);
-		}
-		this.setState({ categories: resp.lookup_category });
-		return;
+	getFitments() {
+		return this.state.vehicle;
 	}
 
-	async getCategoryParts(activeCategory, style) {
-		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}/${activeCategory.category.title}`;
-		const catResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&withParts=true&brands=${brand.id}`);
-		const data = await catResp.json();
-		let s = style;
-		s = this.linkPartsToStyle(data, s);
-
-		this.setState({ activeCategory, style: s, showStyle: false });
-		return;
+	handleSetActiveIndex(id) {
+		const t = (id === this.state.activeIndex) ? t : id;
+		this.setState({
+			activeIndex: t,
+		});
 	}
 
-	linkPartsToStyle(apiResp, style) {
-		if (!style) {
-			return null;
-		}
-		const parts = [];
-		for (const i in apiResp.products) {
-			if (!apiResp) {
-				continue;
-			}
-			for (const j in style.fitments) {
-				if (!style.fitments[j]) {
-					continue;
-				}
-				if (style.fitments[j].product_identifier === apiResp.products[i].part_number) {
-					parts.push(apiResp.products[i]);
-				}
-			}
-		}
-		style.parts = parts;
-		return style;
-	}
-
-	async set(vehicle) {
-		let showStyle = true;
-		if (vehicle.style && vehicle.style !== '') {
-			showStyle = false;
-		}
-		this.setState({ vehicle, showStyle });
-		await this.getCategoryStyles();
-	}
-
-	setShowStyleState(showStyle) {
-		this.setState({ showStyle });
-	}
-
-	setStyle(style) {
-		this.getCategoryParts(this.state.activeCategory, style);
-	}
-
-	setLookupCategories(lookupCategories) {
-		this.setState({ lookupCategories });
-	}
 }
 
 VehicleStore.dispatchToken = null;

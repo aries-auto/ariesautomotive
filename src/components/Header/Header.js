@@ -3,23 +3,34 @@ import s from './Header.scss';
 import withStyles from '../../decorators/withStyles';
 import Navigation from '../Navigation';
 import CategoryNav from '../CategoryNav';
+import CategoryStore from '../../stores/CategoryStore';
+import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
+@connectToStores
 class Header extends Component {
 
 	static propTypes = {
+		categories: PropTypes.array,
 		context: PropTypes.shape({
 			insertCss: PropTypes.func,
 			onSetTitle: PropTypes.func,
 			onSetMeta: PropTypes.func,
 			onPageNotFound: PropTypes.func,
-			categories: PropTypes.array,
 			vehicle: PropTypes.array,
 			params: PropTypes.object,
 			siteContents: PropTypes.array,
 			siteMenu: PropTypes.array,
 		}),
 	};
+
+	static getStores() {
+		return [CategoryStore];
+	}
+
+	static getPropsFromStores() {
+		return CategoryStore.getState();
+	}
 
 	render() {
 		return (
@@ -29,7 +40,7 @@ class Header extends Component {
 					vehicle={this.props.context.vehicle}
 					params={this.props.context.params}
 				/>
-				<CategoryNav categories={this.props.context.categories} />
+				<CategoryNav categories={this.props.categories} />
 			</div>
 		);
 	}
