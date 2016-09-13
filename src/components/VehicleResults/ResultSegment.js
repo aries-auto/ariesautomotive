@@ -16,6 +16,9 @@ class ResultSegment extends Component {
 	render() {
 		let out = [];
 		this.props.results.map((res, i) => {
+			if (res.style_options[0].style.toLowerCase() === 'all') {
+				console.log('res all');
+			}
 			out = out.concat([
 				<Subcategory key={`sub-${i}`}
 					title={res.category.title}
