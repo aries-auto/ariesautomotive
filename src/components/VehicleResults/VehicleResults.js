@@ -6,6 +6,9 @@ import withStyles from '../../decorators/withStyles';
 import VehicleStore from '../../stores/VehicleStore';
 import CategoryStore from '../../stores/CategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
+// import VehicleStyle from './VehicleStyle';
+import Envision from './Envision';
+import Configurator from './Configurator';
 
 @withStyles(s)
 @connectToStores
@@ -20,6 +23,12 @@ class VehicleResults extends Component {
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
+			iconMediaVehicle: PropTypes.object,
+			iconParts: PropTypes.oneOfType([
+				React.PropTypes.object,
+				React.PropTypes.array,
+			]),
+			vehicleParts: PropTypes.array,
 		}),
 		vehicle: PropTypes.shape({
 			base: PropTypes.shape({
@@ -36,6 +45,9 @@ class VehicleResults extends Component {
 		categories: PropTypes.array,
 		activeCategory: PropTypes.object,
 		fitments: PropTypes.array,
+		error: PropTypes.object,
+		iconMediaVehicle: PropTypes.object,
+		win: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -61,7 +73,6 @@ class VehicleResults extends Component {
 		if (base.year && base.make && base.model) {
 			title = `${base.year} ${base.make} ${base.model} Fitment Results`;
 		}
-
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 		this.context.seo({
@@ -135,6 +146,10 @@ class VehicleResults extends Component {
 					<p>Choose a category below to see the products that fit your vehicle.
 						Some products may require the style of the vehicle to be specified.
 					</p>
+				</div>
+				<div className={s.visual}>
+					{this.props.context.vehicleParts ? <Configurator win={this.props.win} className={s.configurator} context={this.props.context} /> : null}
+					{this.props.vehicle.products && this.props.vehicle.products.length > 0 ? <Envision className={s.envision} /> : null}
 				</div>
 				{matched}
 			</div>

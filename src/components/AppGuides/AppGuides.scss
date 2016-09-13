@@ -11,4 +11,28 @@
         text-transform: capitalize;
         cursor: pointer;
     }
+	.guideRow {
+		padding-left:0px;
+	}
+
+	.subGuides {
+		padding-left:0px;
+	}
+	a.guide {
+		display: block;
+		padding:0;
+		margin-bottom: 0;
+		margin-bottom: 5px;
+		font-size: 1.5em;
+		text-transform: capitalize;
+		cursor: pointer;
+
+		.guideImage {
+			max-width:80px;
+			min-width:60px;
+			height:auto;
+			margin-right:10px;
+			padding-left:10px;
+		}
+	}
 }

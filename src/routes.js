@@ -14,6 +14,7 @@ import VehicleResults from './components/VehicleResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
+// import AppGuide from './components/AppGuides/AppGuide/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -22,6 +23,7 @@ import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
+import { iapiBase, apiBase, apiKey, brand, siteMenu } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import ContactStore from './stores/ContactStore';
@@ -29,7 +31,6 @@ import ProductStore from './stores/ProductStore';
 import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
-import { apiBase, apiKey, brand, siteMenu } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -56,6 +57,18 @@ const router = new Router(on => {
 
 		if (state.params && state.params[0] && state.params[0].indexOf('/vehicle') === -1) {
 			VehicleStore.fetchVehicle();
+		}
+		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
+			return null;
+		}
+		if (slug !== '') {
+			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Accept': 'application/json',
+				},
+			});
 		}
 		CategoryStore.fetchCategories();
 		const contentAllReponse = await fetch(`/api/content/all`);
@@ -191,9 +204,21 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
+		try {
+			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
+			const icon = await fetch(url, { method: 'get' }).then((result) => {
+				return result.json();
+			});
+			if (icon.vehicleParts.length > 0) {
+				state.context.vehicleParts = icon.vehicleParts;
+				state.context.iconParts = icon.partNumbers;
+			}
+		} catch (e) {
+			state.context.error = e.message;
+		}
 		state.context.params = state.params;
 		VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
-		return <VehicleResults context={state.context} />;
+		return <VehicleResults context={state.context} win={state.win} />;
 	});
 
 	on('/about', async (state) => {
@@ -202,6 +227,37 @@ const router = new Router(on => {
 
 	on('/appguides', async (state) => {
 		return <AppGuides context={state.context} />;
+	});
+
+	on('/appguides/:guide/:page', async (state) => {
+		let guide = {};
+		let appGuideInfo = {};
+		const collection = state.params.guide;
+		const page = state.params.page;
+		try {
+			const [guideResponse, appGuideInfoResponse] = await Promise.all([
+				fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
+					method: 'post',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+				fetch(`${iapiBase}/appguides/guide?collection=${collection}&key=${KEY}&brandID=${brand}`, {
+					method: 'get',
+					headers: {
+						'Accept': 'application/json',
+					},
+				}),
+			]);
+
+			guide = await guideResponse.json();
+			appGuideInfo = await appGuideInfoResponse.json();
+			guide.name = collection;
+			guide.appGuide = appGuideInfo;
+		} catch (e) {
+			state.context.error = e;
+		}
+		return <AppGuides guide={guide} context={state.context} />;
 	});
 
 	on('/becomedealer', async (state) => {
@@ -266,7 +322,6 @@ const router = new Router(on => {
 	on('/', async (state) => {
 		ProductStore.fetchFeatured();
 		SiteStore.fetchTestimonials();
-
 		return <Home context={state.context} />;
 	});
 

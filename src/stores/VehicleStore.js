@@ -23,6 +23,13 @@ class VehicleStore extends EventEmitter {
 			},
 			activeIndex: 0,
 			fitments: [],
+			showStyle: false,
+			activeCategory: null,
+			error: null,
+			partToAdd: null,
+			partToRemove: null,
+			showIconMediaVehicle: true,
+			categories: [],
 		};
 
 		this.bindListeners({
@@ -32,6 +39,8 @@ class VehicleStore extends EventEmitter {
 			handleUpdateFitments: VehicleActions.UPDATE_FITMENTS,
 			handleFailedFitments: VehicleActions.FAILED_FITMENTS,
 		});
+
+		this.bindActions(VehicleActions);
 
 		this.exportPublicMethods({
 			getVehicle: this.getVehicle,
@@ -92,6 +101,54 @@ class VehicleStore extends EventEmitter {
 		});
 	}
 
+	// adds part to state.vehicle.parts; removes part of same layer
+	addPartToVehicle(part) {
+		// must have iconLayer - TODO is this true?
+		if (part.iconLayer === '') {
+			return;
+		}
+		const vehicle = this.state.vehicle;
+		if (!vehicle.parts) {
+			vehicle.parts = [];
+		}
+		// remove part with same iconLayer
+		let partToRemove = null;
+		for (const i in vehicle.parts) {
+			if (vehicle.parts[i].iconLayer === part.iconLayer && !this.partIsOnVehicle(part)) {
+				partToRemove = vehicle.parts[i];
+				vehicle.parts.splice(i, 1);
+			}
+		}
+		if (!this.partIsOnVehicle(part)) {
+			vehicle.parts.push(part);
+		}
+		this.setState({ vehicle, partToAdd: part, partToRemove });
+	}
+
+	// removes part from state.vehicle.parts
+	removePartFromVehicle(part) {
+		const vehicle = this.state.vehicle;
+		for (const i in vehicle.parts) {
+			if (vehicle.parts[i].id === part.id) {
+				vehicle.parts.splice(i, 1);
+			}
+		}
+		this.setState({ vehicle, partToRemove: part });
+	}
+
+	// returns true if part is already in state.vehicle.parts; otherwise false
+	partIsOnVehicle(part) {
+		for (const i in this.state.vehicle.parts) {
+			if (part.id === this.state.vehicle.parts[i].id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	setIconParts(iconParts) {
+		this.setState({ iconParts });
+	}
 }
 
 VehicleStore.dispatchToken = null;

@@ -70,8 +70,8 @@ module.exports.main = {
 		},
 	},
 	phone: {
-		pretty: '(888) 635-9824',
-		ugly: 'tel:+18886359824',
+		pretty: '(877) 287 8634',
+		ugly: 'tel:+18772878634',
 	},
 	local: {
 		pretty: '(972) 456-0222',
