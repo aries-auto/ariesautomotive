@@ -127,6 +127,10 @@ class SearchResults extends Component {
 	}
 
 	render() {
+		if (!this.props.category || !this.props.category.title) {
+			return <div></div>;
+		}
+
 		return (
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<div className="category-content container">
