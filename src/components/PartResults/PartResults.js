@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import ga from 'react-ga';
 import s from './PartResults.scss';
+import AddToVehicle from './AddToVehicle';
 import withStyles from '../../decorators/withStyles';
 import VehicleActions from '../../actions/VehicleActions';
 import VehicleStore from '../../stores/VehicleStore';
@@ -80,6 +82,11 @@ class PartResults extends Component {
 	}
 
 	handleAddToVehicle(part) {
+		ga.event({
+			category: 'Envision',
+			action: 'Add Part',
+			label: `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model} ${part.part_number || ''}`,
+		});
 		VehicleActions.addPartToVehicle(part);
 	}
 
@@ -117,7 +124,7 @@ class PartResults extends Component {
 										</div>
 										<div className={s.nothing}>&nbsp;</div>
 										<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
-											{!part.iconLayer || !this.props.iconParts ? null : <a className={cx('btn', 'red-transparent-button', s.addToVehicle)} role="button" onClick={this.handleAddToVehicle.bind(this, part)} value={part}>Add To Vehicle</a>}
+											<AddToVehicle className={s.addToVehicle} vehicle={this.props.vehicle} part={part} iconParts={this.props.iconParts} />
 											<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 											<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
 										</div>

@@ -123,15 +123,23 @@
     }
 
     .viewDetails, .whereToBuy {
-        min-width: 6em;
-        font-size: 1em;
         width: 40%;
+        min-width: 6em;
         margin: 10px auto 0;
+        font-size: 1em;
         text-align: center;
     }
+
     .addToVehicle {
         width: 80%;
         font-size: 1em;
+        transition: all .2s ease;
+
+        &.active {
+            color: $white-base;
+            background-color: $new-red;
+            opacity: .8;
+        }
     }
 }
 
