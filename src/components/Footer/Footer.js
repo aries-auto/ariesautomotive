@@ -4,12 +4,23 @@ import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
 import { brandName } from '../../config';
 import footer from '../../data/footer';
+import SiteStore from '../../stores/SiteStore';
+import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
+@connectToStores
 class Footer extends Component {
 
 	static propTypes = {
-		siteContents: PropTypes.array,
+		contentMenus: PropTypes.array,
+	}
+
+	static getStores() {
+		return [SiteStore];
+	}
+
+	static getPropsFromStores() {
+		return SiteStore.getState();
 	}
 
 	getYear() {
@@ -18,8 +29,8 @@ class Footer extends Component {
 
 	renderFooterNav() {
 		const customContent = [];
-		if (this.props.siteContents && this.props.siteContents.length > 0) {
-			this.props.siteContents.map((content, i) => {
+		if (this.props.contentMenus && this.props.contentMenus.length > 0) {
+			this.props.contentMenus.map((content, i) => {
 				const path = `/page/${content.id}`;
 				if (content.title && (content.requireAuthentication === undefined || content.requireAuthentication === false)) {
 					customContent.push(<li key={i}><a href={path} title={content.title}>{content.title.toUpperCase()}</a></li>);

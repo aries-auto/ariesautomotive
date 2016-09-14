@@ -1,65 +1,61 @@
-import SearchActions from '../actions/SearchActions';
-import Dispatcher from '../dispatchers/AppDispatcher';
+import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-import fetch from '../core/fetch';
-import { apiBase, apiKey, brand } from '../config';
-const EventEmitter = events.EventEmitter;
+import SearchActions from '../actions/SearchActions';
+import SearchSource from '../sources/SearchSource';
 
-const KEY = apiKey;
+const EventEmitter = events.EventEmitter;
 
 class SearchStore extends EventEmitter {
 	constructor() {
 		super();
-		this.error = {};
-		this.bindActions({
-			search: SearchActions.search,
-			setResult: SearchActions.setResult,
-		});
 		this.state = {
-			page: 1,
+			SearchResults: [],
+			searchTerm: '',
 		};
+
+		this.bindListeners({
+			handleUpdateSearchResults: SearchActions.UPDATE_SEARCH_RESULTS,
+			handleFailedSearchResults: SearchActions.FAILED_SEARCH_RESULTS,
+			handleLoadingSearchResults: SearchActions.LOADING_SEARCH_RESULTS,
+		});
+
+		this.exportPublicMethods({
+			getSearchResults: this.getSearchResults,
+		});
+
+		this.exportAsync(SearchSource);
 	}
 
-	async search(args) {
-		if (args.length === 0) {
-			return;
-		}
-		let page = this.state.page;
-		const term = args[0];
-		let searchResult = {
-			hits: {
-				hits: [],
-			},
-		};
-		if (args.length > 1) {
-			page = args[1];
-		}
-		if (args.length > 2) {
-			searchResult = args[2];
-		}
-		const params = `?key=${KEY}&brand=${brand.id}&page=${page}`;
-		try {
-			await fetch(`${apiBase}/searchExactAndClose/${term}${params}`)
-			.then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				searchResult.hits.hits.push(...data.hits.hits);
-				this.setState({
-					searchResult,
-					page,
-				});
-			});
-		} catch (err) {
+	handleUpdateSearchResults(args) {
+		const results = args[0] || {};
+		if (results.hits && (args[1] && args[1] !== this.state.searchTerm)) {
 			this.setState({
-				error: err,
+				searchResults: results,
+				searchTerm: args[1] || '',
+				error: null,
+				loading: false,
 			});
 		}
 	}
 
-	setResult(searchResult) {
-		this.setState({ searchResult });
+	handleFailedSearchResults(err) {
+		this.setState({
+			error: err,
+			loading: false,
+		});
 	}
 
+	handleLoadingSearchResults() {
+		this.setState({
+			loading: true,
+		});
+	}
+
+	getSearchResults() {
+		return this.state.searchResults;
+	}
 }
 
-export default Dispatcher.createStore(SearchStore, 'SearchStore');
+SearchStore.dispatchToken = null;
+
+export default AppDispatcher.createStore(SearchStore);

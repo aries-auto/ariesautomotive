@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Glyphicon } from 'react-bootstrap';
+import ga from 'react-ga';
+import Location from '../../core/Location';
 import s from './SearchForm.scss';
 import withStyles from '../../decorators/withStyles';
 
@@ -22,8 +24,9 @@ class SearchForm extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		const term = this.refs.term.getValue();
-		window.location = `/search/${term}`;
+		const term = this.refs.term.value;
+		ga.event({ category: 'Search', action: 'Form Submission', label: term });
+		Location.push(`/search/${term}`);
 	}
 
 	render() {

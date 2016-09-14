@@ -29,16 +29,17 @@ import ProductStore from './stores/ProductStore';
 import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
-import { apiBase, apiKey, brand, siteMenu } from './config';
+import SearchStore from './stores/SearchStore';
+import { apiBase, apiKey, siteMenu } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
 const gaOptions = { debug: true };
 const MyWindowDependentLibrary = isBrowser ? ga.initialize('UA-61502306-1', gaOptions) : undefined;
-const seo = {
-	description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
-	title: 'Aries Automotive',
-};
+// const seo = {
+// 	description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
+// 	title: 'Aries Automotive',
+// };
 
 const router = new Router(on => {
 	on('*', async (state, next) => {
@@ -49,41 +50,50 @@ const router = new Router(on => {
 		state.context.siteMenu = siteMenu;
 		const slug = state.params[0].replace(/\//g, '');
 
-		let siteContentResponse = null;
-		if (slug !== '' && slug !== '_ahhealth') {
-			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`);
-		}
+		// let siteContentReq = null;
+		// if (slug !== '' && slug !== '_ahhealth') {
+		// 	siteContentReq = fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`);
+		// }
 
+		let vehicleReq = null;
 		if (state.params && state.params[0] && state.params[0].indexOf('/vehicle') === -1) {
-			VehicleStore.fetchVehicle();
+			vehicleReq = VehicleStore.fetchVehicle;
 		}
-		CategoryStore.fetchCategories();
-		const contentAllReponse = await fetch(`/api/content/all`);
 
-		try {
-			state.context.siteContents = await contentAllReponse.json();
-			const siteContent = await siteContentResponse.json();
-			if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
-				seo.description = siteContent.metaDescription;
-				seo.title = siteContent.metaTitle;
-			}
+		Promise.all([
+			SiteStore.fetchPageData(slug),
+			vehicleReq ? vehicleReq() : null,
+			CategoryStore.fetchCategories(),
+			SiteStore.fetchContentMenus(),
+		]);
 
-			state.context.seo(seo);
-		} catch (e) {
-			state.context.error = e;
-		}
+		// try {
+		// 	const siteContent = await pageContentResp.json();
+		// 	if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
+		// 		seo.description = siteContent.metaDescription;
+		// 		seo.title = siteContent.metaTitle;
+		// 	}
+		//
+		// 	state.context.seo(seo);
+		// } catch (e) {
+		// 	state.context.error = e;
+		// }
 
 		if (MyWindowDependentLibrary !== undefined) {
 			ga.initialize('UA-61502306-1', gaOptions);
 		}
-		ga.pageview('arieact:' + state.path);
+		ga.pageview('aries:' + state.path);
+
 		const component = await next();
 		return component && <App context={state.context}>{component}</App>;
 	});
 
 	on('/part/:id', async (state) => {
-		ProductStore.fetchFeatured();
-		ProductStore.fetchProduct(state.params.id);
+		Promise.all([
+			ProductStore.fetchFeatured(),
+			ProductStore.fetchProduct(state.params.id),
+		]);
+
 		return <Product {...state} />;
 	});
 
@@ -139,33 +149,13 @@ const router = new Router(on => {
 	});
 
 	on('/search/:term', async (state) => {
-		let searchResult = {};
-		let term = '';
-		try {
-			const searchResponse = await fetch(`${apiBase}/search/${state.params.term}?key=${KEY}&brandID=${brand.id}`);
-
-			searchResult = await searchResponse.json();
-			term = state.params.term;
-		} catch (e) {
-			state.context.error = e;
-		}
-
-		return <SearchResults context={state.context} searchResult={searchResult} term={term} />;
+		await SearchStore.fetchSearchResults(state.params.term);
+		return <SearchResults context={state.context} />;
 	});
 
 	on('/search', async (state) => {
-		let searchResult = {};
-		let term = '';
-		try {
-			const searchResponse = await fetch(`${apiBase}/search/${state.query.term}?key=${KEY}&brandID=${brand.id}`);
-
-			searchResult = await searchResponse.json();
-			term = state.query.term;
-		} catch (e) {
-			state.context.error = e;
-		}
-
-		return <SearchResults context={state.context} searchResult={searchResult} term={term} />;
+		await SearchStore.fetchSearchResults(state.query.term);
+		return <SearchResults context={state.context} />;
 	});
 
 	on('/vehicle', async (state) => {
@@ -192,7 +182,7 @@ const router = new Router(on => {
 
 	on('/vehicle/:year/:make/:model', async (state) => {
 		state.context.params = state.params;
-		VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
+		await VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -205,13 +195,16 @@ const router = new Router(on => {
 	});
 
 	on('/becomedealer', async (state) => {
-		GeographyStore.fetchCountries();
+		await GeographyStore.fetchCountries();
 		return <BecomeDealer context={state.context} />;
 	});
 
 	on('/contact', async (state) => {
-		ContactStore.fetchTypes();
-		GeographyStore.fetchCountries();
+		Promise.all([
+			ContactStore.fetchTypes(),
+			GeographyStore.fetchCountries(),
+		]);
+
 		return <Contact context={state.context} />;
 	});
 
@@ -264,8 +257,10 @@ const router = new Router(on => {
 	});
 
 	on('/', async (state) => {
-		ProductStore.fetchFeatured();
-		SiteStore.fetchTestimonials();
+		Promise.all([
+			ProductStore.fetchFeatured(),
+			SiteStore.fetchTestimonials(),
+		]);
 
 		return <Home context={state.context} />;
 	});

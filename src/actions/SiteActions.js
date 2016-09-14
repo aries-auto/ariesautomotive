@@ -14,6 +14,14 @@ class SiteActions {
 			'fetchNewsItem',
 			'updateNewsItem',
 			'failedNewsItem',
+
+			'fetchContentMenus',
+			'updateContentMenus',
+			'failedContentMenus',
+
+			'fetchPageData',
+			'updatePageData',
+			'failedPageData',
 		);
 	}
 }

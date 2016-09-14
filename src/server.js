@@ -72,6 +72,37 @@ server.get('/api/content/all', (req, res) => {
 	});
 });
 
+server.get('/api/content/:slug', (req, res) => {
+	const slug = req.params.slug;
+	if (slug === '' || slug.indexOf('_ah') !== -1) {
+		res.end('[]');
+		return;
+	}
+
+	memcached.get(`api:content:${slug}`, (err, val) => {
+		if (!err && val) {
+			res.send(val);
+			return;
+		}
+
+		fetch(`${apiBase}/site/content/${slug}?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set(`api:content:${slug}`, data, 8640, (e) => {
+				if (e) {
+					res.error(e);
+					return;
+				}
+				res.send(data);
+			});
+		}).catch((e) => {
+			res.send(e);
+			res.end();
+		});
+	});
+});
+
 server.get('/api/testimonials', (req, res) => {
 	memcached.get('api:testimonials', (err, val) => {
 		if (!err && val) {

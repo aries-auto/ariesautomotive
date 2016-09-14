@@ -14,8 +14,8 @@ class SearchResults extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		context: PropTypes.object,
-		searchResult: PropTypes.object,
-		term: PropTypes.string,
+		searchResults: PropTypes.object,
+		searchTerm: PropTypes.string,
 		page: PropTypes.number,
 	};
 
@@ -36,12 +36,12 @@ class SearchResults extends Component {
 	}
 
 	componentWillMount() {
-		const title = this.props.term ? `Search: ${this.props.term}` : 'Search ARIES';
+		const title = this.props.searchTerm ? `Search: ${this.props.searchTerm}` : 'Search ARIES';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
-		if (this.props.searchResult.hits && this.props.searchResult.hits.hits) {
-			this.hits = this.props.searchResult.hits.hits.length;
-			this.total = this.props.searchResult.hits.total;
+		if (this.props.searchResults.hits && this.props.searchResults.hits.hits) {
+			this.hits = this.props.searchResults.hits.hits.length;
+			this.total = this.props.searchResults.hits.total;
 		}
 		const seo = {
 			title,
@@ -63,21 +63,21 @@ class SearchResults extends Component {
 
 	loadMore(e) {
 		e.preventDefault();
-		SearchActions.search(this.props.term, this.props.page + 1, this.props.searchResult);
+		SearchActions.search(this.props.searchTerm, this.props.page + 1, this.props.searchResults);
 	}
 
 	took() {
-		if (!this.props.searchResult.took) {
+		if (!this.props.searchResults) {
 			return '.0140';
 		}
-		return parseFloat((this.props.searchResult.took * 0.001).toFixed(4));
+		return parseFloat(((this.props.searchResults.took || 1) * 0.001).toFixed(4));
 	}
 
 	pagination() {
-		if (!this.props.searchResult || !this.props.searchResult.hits || !this.props.searchResult.hits.hits) {
+		if (!this.props.searchResults || !this.props.searchResults.hits || !this.props.searchResults.hits.hits) {
 			return null;
 		}
-		const res = this.props.searchResult;
+		const res = this.props.searchResults;
 		if (res.hits.hits.length > 0 && res.hits.hits.length < res.hits.total) {
 			return (
 				<a href="#" className={s.pagination} onClick={this.loadMore}>
@@ -88,15 +88,15 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
-		if (!this.props.searchResult || !this.props.searchResult.hits || !this.props.searchResult.hits.hits) {
+		if (!this.props.searchResults || !this.props.searchResults.hits || !this.props.searchResults.hits.hits) {
 			return null;
 		}
 		const parts = [];
-		for (let i = 0; i < this.props.searchResult.hits.hits.length; i++) {
-			if (this.props.searchResult.hits.hits[i]._type === 'category') {
+		for (let i = 0; i < this.props.searchResults.hits.hits.length; i++) {
+			if (this.props.searchResults.hits.hits[i]._type === 'category') {
 				continue;
 			}
-			parts.push(this.props.searchResult.hits.hits[i]._source);
+			parts.push(this.props.searchResults.hits.hits[i]._source);
 		}
 
 		return <PartResults parts={parts} />;
@@ -115,7 +115,7 @@ class SearchResults extends Component {
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<h2 id="catTitleProds" ref="header">
 					SEARCH RESULTS
-					<span className="small">1 - {this.hits} of {this.total} results for "<em>{this.props.term}</em>" returned in {this.took()} seconds</span>
+					<span className="small">1 - {this.hits} of {this.total} results for "<em>{this.props.searchTerm}</em>" returned in {this.took()} seconds</span>
 				</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">

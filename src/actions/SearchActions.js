@@ -2,7 +2,12 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class SearchActions {
 	constructor() {
-		this.generateActions('search', 'setResult');
+		this.generateActions(
+			'fetchSearchResults',
+			'updateSearchResults',
+			'failedSearchResults',
+			'loadingSearchResults',
+		);
 	}
 }
 

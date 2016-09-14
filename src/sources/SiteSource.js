@@ -77,6 +77,56 @@ const SiteSource = {
 			loading: SiteActions.fetchNewsItem,
 		};
 	},
+
+	fetchContentMenus() {
+		return {
+			remote() {
+				return new Promise((res, rej) => {
+					fetch(`/api/content/all`)
+					.then((resp) => {
+						return resp.json();
+					}).then(res).catch(rej);
+				});
+			},
+
+			local(st) {
+				if (!st.contentMenus || !st.contentMenus.length) {
+					return null;
+				}
+
+				return st.contentMenus;
+			},
+
+			success: SiteActions.updateContentMenus,
+			error: SiteActions.failedContentMenus,
+			loading: SiteActions.fetchContentMenus,
+		};
+	},
+
+	fetchPageData() {
+		return {
+			remote(st, slug) {
+				return new Promise((res, rej) => {
+					fetch(`/api/content/${slug}`)
+					.then((resp) => {
+						return resp.json();
+					}).then((data) => res(data, slug)).catch(rej);
+				});
+			},
+
+			local(st) {
+				if (!st.pageData.id) {
+					return null;
+				}
+
+				return st.pageData;
+			},
+
+			success: SiteActions.updatePageData,
+			error: SiteActions.failedPageData,
+			loading: SiteActions.fetchPageData,
+		};
+	},
 };
 
 module.exports = SiteSource;
