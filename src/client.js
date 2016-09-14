@@ -72,6 +72,7 @@ function run() {
 	let currentState = null;
 	const google = window.google;
 	const navigator = window.navigator;
+	const win = window;
 	// Make taps on links and buttons work fast on mobiles
 	FastClick.attach(document.body);
 
@@ -85,6 +86,7 @@ function run() {
 			context,
 			google,
 			navigator,
+			win,
 		});
 		if (currentState.path !== '/envision') {
 			render(currentState);

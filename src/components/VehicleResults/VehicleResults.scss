@@ -9,6 +9,10 @@
     width: 100%;
     min-height: 300px;
     margin-top: .4em;
+	.visual {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .loader {
@@ -55,11 +59,20 @@
 .clearfix {
     clear: both;
 }
+.envision {
+    text-align: center;
+}
+
 
 @media (min-width: $screen-md-min) {
     .container {
         width: 100%;
         padding: 2em;
+
+		.visual {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
     }
 
     .loader {
@@ -77,5 +90,15 @@
                 border-radius: 4px 0 0 4px;
             }
         }
+    }
+    .envision {
+        width: 38%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left
+    }
+
+    .configurator {
+        display: inline-block;
     }
 }

@@ -9,7 +9,7 @@
     "@google/cloud-trace": "^0.5.2",
     "alt": "^0.18.2",
     "alt-utils": "^1.0.0",
-    "babel-core": "5.8.34",
+    "babel-core": "=5.8.34",
     "bluebird": "3.1.1",
     "bootstrap-sass": "^3.3.6",
     "classnames": "2.2.1",
@@ -103,6 +103,6 @@
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
     "start": "GCLOUD_PROJECT=aries-auto NODE_ENV=production node build/server.js",
-    "dev": "GCLOUD_PROJECT=aries-auto babel-node tools/run start"
+    "dev": "babel-node tools/run start"
   }
 }

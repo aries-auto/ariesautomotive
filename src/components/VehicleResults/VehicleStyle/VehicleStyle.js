@@ -59,6 +59,7 @@ class VehicleStyle extends Component {
 				</li>
 			);
 		});
+		return styleOptions;
 	}
 
 	setVehicleStyle(style) {
@@ -121,7 +122,7 @@ class VehicleStyle extends Component {
 				<hr/>
 				{this.renderStyleChoices()}
 				<div>
-					{this.props.style ? this.getParts() : ''}
+					{this.props.style ? this.getParts() : null}
 				</div>
 			</div>
 		);

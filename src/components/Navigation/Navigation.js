@@ -21,7 +21,7 @@ class Navigation extends Component {
 		this.props.categories.map((cat, i) => {
 			if (cat.children && cat.children.length > 0) {
 				return cats.push(
-					<li key={i + 'cat' + cat.id} role="presentation" className="dropdown">
+					<li key={i + 'child' + cat.id} role="presentation" className="dropdown">
 						<a
 							className={cx(s.link, 'dropdown-toggle')}
 							data-toggle="dropdown"
@@ -49,7 +49,7 @@ class Navigation extends Component {
 				);
 			}
 			return cats.push(
-				<li key={i + 'cat' + cat.id} role="presentation">
+				<li key={i + 'parent' + cat.id} role="presentation">
 					<a className={s.link} href={`/category/${cat.id}/${cat.title}`} aria-haspopup="true">
 						{cat.title}
 					</a>
