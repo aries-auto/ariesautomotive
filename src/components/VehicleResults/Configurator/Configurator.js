@@ -38,7 +38,10 @@ class Configurator extends Component {
 	}
 
 	componentDidMount() {
-		this.props.win.onerror = () => {
+		console.log('component did mount', this.props.vehicle);
+		this.props.win.onerror = (e) => {
+			console.log('on error');
+			console.log(e);
 			$('.vehicle-wrapper').hide();
 			$('.error').html('<h4>No image of vehicle with parts available.</h4>');
 			$('.error').removeClass('hidden');

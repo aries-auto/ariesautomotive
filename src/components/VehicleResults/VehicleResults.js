@@ -134,7 +134,6 @@ class VehicleResults extends Component {
 
 	render() {
 		const matched = this.getMatched();
-
 		return (
 			<div className={s.root}>
 				<ol className="breadcrumb">

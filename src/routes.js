@@ -204,6 +204,7 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
+		// TODO move this to vehicle source at some point
 		try {
 			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
 			const icon = await fetch(url, { method: 'get' }).then((result) => {
@@ -216,8 +217,9 @@ const router = new Router(on => {
 		} catch (e) {
 			state.context.error = e.message;
 		}
+		// END TODO
 		state.context.params = state.params;
-		VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
+		await VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 		return <VehicleResults context={state.context} win={state.win} />;
 	});
 
