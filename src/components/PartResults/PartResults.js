@@ -1,15 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
+import ga from 'react-ga';
 import s from './PartResults.scss';
+import AddToVehicle from './AddToVehicle';
 import withStyles from '../../decorators/withStyles';
+import VehicleActions from '../../actions/VehicleActions';
+import VehicleStore from '../../stores/VehicleStore';
+import connectToStores from 'alt-utils/lib/connectToStores';
+
 
 @withStyles(s)
+@connectToStores
 class PartResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
 		context: PropTypes.shape({}),
 		parts: PropTypes.array,
+		vehicle: PropTypes.object,
+		iconParts: PropTypes.object,
 	};
 
 	constructor() {
@@ -20,23 +29,12 @@ class PartResults extends Component {
 		};
 	}
 
-	componentWillMount() {
-		if (!this.props || !this.props.parts) {
-			return;
-		}
-
-		this.setState({
-			parts: this.props.parts,
-		});
+	static getStores() {
+		return [VehicleStore];
 	}
 
-	componentWillReceiveProps(newProps) {
-		if (newProps.parts === this.props.parts) {
-			return;
-		}
-		this.setState({
-			parts: newProps.parts,
-		});
+	static getPropsFromStores() {
+		return VehicleStore.getState();
 	}
 
 	getPrice(p) {
@@ -83,10 +81,19 @@ class PartResults extends Component {
 		return attrs;
 	}
 
+	handleAddToVehicle(part) {
+		ga.event({
+			category: 'Envision',
+			action: 'Add Part',
+			label: `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model} ${part.part_number || ''}`,
+		});
+		VehicleActions.addPartToVehicle(part);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
-				{this.chunkParts(3, this.state.parts).map((chunk, j) => {
+				{this.chunkParts(3, this.props.parts).map((chunk, j) => {
 					return (
 						<div className={s.chunk} key={j}>
 							{chunk.map((part, i) => {
@@ -117,6 +124,7 @@ class PartResults extends Component {
 										</div>
 										<div className={s.nothing}>&nbsp;</div>
 										<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
+											<AddToVehicle className={s.addToVehicle} vehicle={this.props.vehicle} part={part} iconParts={this.props.iconParts} />
 											<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 											<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
 										</div>

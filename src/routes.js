@@ -23,9 +23,9 @@ import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import Envision from './components/Envision/Envision';
+import { iapiBase, apiBase, apiKey, brand } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleActions from './actions/VehicleActions';
-import { iapiBase, apiBase, apiKey, brand } from './config';
 
 const isBrowser = typeof window !== 'undefined';
 const KEY = apiKey;
@@ -223,6 +223,18 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
+		try {
+			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
+			const icon = await fetch(url, { method: 'get' }).then((result) => {
+				return result.json();
+			});
+			if (icon.vehicleParts.length > 0) {
+				state.context.vehicleParts = icon.vehicleParts;
+				state.context.iconParts = icon.partNumbers;
+			}
+		} catch (e) {
+			state.context.error = e.message;
+		}
 		state.context.params = state.params;
 		LookupActions.set({
 			year: state.params.year,
@@ -234,7 +246,7 @@ const router = new Router(on => {
 			make: state.params.make,
 			model: state.params.model,
 		});
-		return <VehicleResults context={state.context} />;
+		return <VehicleResults context={state.context} win={state.win} />;
 	});
 
 	on('/about', async (state) => {
