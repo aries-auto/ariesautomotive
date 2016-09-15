@@ -16,6 +16,10 @@ class ResultSegment extends Component {
 	render() {
 		let out = [];
 		this.props.results.map((res, i) => {
+			let tmp = null;
+			if (this.props.activeIndex !== null && res.category.id === this.props.activeIndex) {
+				tmp = <Result key={`result-${i}`} fitments={this.props.fitments} className={s.mobileResult} result={res} activeIndex={this.props.activeIndex} />;
+			}
 			out = out.concat([
 				<Subcategory key={`sub-${i}`}
 					title={res.category.title}
@@ -23,7 +27,7 @@ class ResultSegment extends Component {
 					active={(this.props.activeIndex !== null && res.category.id === this.props.activeIndex)}
 					image={`${res.category.image.Scheme}://${res.category.image.Host}${res.category.image.Path}`}
 				/>,
-				<Result key={`result-${i}`} fitments={this.props.fitments} className={s.mobileResult} result={res} activeIndex={this.props.activeIndex} />,
+				tmp,
 			]);
 		});
 

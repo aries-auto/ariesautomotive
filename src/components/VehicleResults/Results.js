@@ -15,9 +15,13 @@ class Results extends Component {
 	};
 
 	render() {
+		console.log(this.props.fitments);
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				{this.props.results.map((r, i) => {
+					if (this.props.activeIndex === null || r.category.id !== this.props.activeIndex) {
+						return null;
+					}
 					return <Result key={i} fitments={this.props.fitments} result={r} activeIndex={this.props.activeIndex} />;
 				})}
 			</div>

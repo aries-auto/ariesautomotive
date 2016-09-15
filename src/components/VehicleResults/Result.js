@@ -65,7 +65,10 @@ class Result extends Component {
 			// no need to make the user select it.
 			// However, the following creates a dispatch loop.
 			//
-			// VehicleStore.fetchFitments(this.props.result, 'all');
+			console.log('all');
+			if (this.props.result.category.id === this.props.activeIndex) {
+				VehicleStore.fetchFitments(this.props.result, 'all');
+			}
 
 			return null;
 		}

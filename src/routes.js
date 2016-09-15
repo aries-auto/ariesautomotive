@@ -214,6 +214,7 @@ const router = new Router(on => {
 				state.context.vehicleParts = icon.vehicleParts;
 				state.context.iconParts = icon.partNumbers;
 			}
+			console.log(icon);
 		} catch (e) {
 			state.context.error = e.message;
 		}

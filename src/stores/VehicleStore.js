@@ -77,11 +77,25 @@ class VehicleStore extends EventEmitter {
 		return this.state.vehicle;
 	}
 
-	handleUpdateFitments(fit) {
+	handleUpdateFitments(fits) {
+		// console.log('fits', fit);
+		// console.log('fitments', this.state.fitments);
+
+		// fits.sort((a, b) => a.product_identifier > b.product_identifier);
+		//
+		// let same = true;
+		// this.state.fitments.map((ft, i) => {
+		// 	if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
+		// 		same = false;
+		// 	}
+		// });
+		// // if fit doesnt equal fitments dont set state
+		// if (!same) {
 		this.setState({
-			fitments: fit,
+			fitments: fits,
 			error: null,
 		});
+		// }
 	}
 
 	handleFailedFitments(err) {
