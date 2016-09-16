@@ -1,7 +1,6 @@
 import React from 'react';
 import ga from 'react-ga';
 import Router from 'react-routing/src/Router';
-import fetch from './core/fetch';
 import App from './components/App';
 import BecomeDealer from './components/BecomeDealer';
 import Product from './components/Product';
@@ -30,12 +29,11 @@ import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
 import SearchStore from './stores/SearchStore';
-import { apiBase, apiKey, siteMenu } from './config';
+import { siteMenu, googleAnalyticsId } from './config';
 
 const isBrowser = typeof window !== 'undefined';
-const KEY = apiKey;
 const gaOptions = { debug: true };
-const MyWindowDependentLibrary = isBrowser ? ga.initialize('UA-61502306-1', gaOptions) : undefined;
+const MyWindowDependentLibrary = isBrowser ? ga.initialize(googleAnalyticsId, gaOptions) : undefined;
 // const seo = {
 // 	description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
 // 	title: 'Aries Automotive',
@@ -80,7 +78,7 @@ const router = new Router(on => {
 		// }
 
 		if (MyWindowDependentLibrary !== undefined) {
-			ga.initialize('UA-61502306-1', gaOptions);
+			ga.initialize(googleAnalyticsId, gaOptions);
 		}
 		ga.pageview('aries:' + state.path);
 
@@ -98,54 +96,24 @@ const router = new Router(on => {
 	});
 
 	on('/category/:id', async (state) => {
-		try {
-			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
-			const catResponse = await fetch(url, {
-				method: 'get',
-			});
+		await CategoryStore.fetchCategory(state.params.id);
+		const cat = CategoryStore.getCategory(state.params.id);
 
-			state.context.category = await catResponse.json();
-		} catch (e) {
-			state.context.error = e;
-		}
-
-		return <Category context={state.context} category={state.context.category} />;
+		return <Category context={state.context} category={cat} />;
 	});
 
 	on('/category/:id/:title', async (state) => {
-		try {
-			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
-			const catResponse = await fetch(url, {
-				method: 'get',
-			});
+		await CategoryStore.fetchCategory(state.params.id);
+		const cat = CategoryStore.getCategory(state.params.id);
 
-			state.context.category = await catResponse.json();
-		} catch (e) {
-			state.context.error = e;
-		}
-
-		return <Category context={state.context} category={state.context.category} />;
+		return <Category context={state.context} category={cat} />;
 	});
 
 	on('/category/:id/:title/:sub', async (state) => {
-		try {
-			const url = `${apiBase}/category/${state.params.id}?key=${KEY}`;
-			const catResponse = await fetch(url, {
-				method: 'get',
-			});
+		await CategoryStore.fetchCategory(state.params.id);
+		const cat = CategoryStore.getCategory(state.params.id);
 
-			const partURL = `${apiBase}/category/${state.params.id}/parts?key=${KEY}`;
-			const partResponse = await fetch(partURL, {
-				method: 'get',
-			});
-
-			state.context.category = await catResponse.json();
-			state.context.category.parts = await partResponse.json();
-		} catch (e) {
-			state.context.error = e;
-		}
-
-		return <Category context={state.context} category={state.context.category} />;
+		return <Category context={state.context} category={cat} />;
 	});
 
 	on('/search/:term', async (state) => {
@@ -222,7 +190,7 @@ const router = new Router(on => {
 	});
 
 	on('/news/:id', async (state) => {
-		SiteStore.fetchNewsItem(state.params.id);
+		await SiteStore.fetchNewsItem(state.params.id);
 		return <LatestNewsItem context={state.context} />;
 	});
 
@@ -252,7 +220,7 @@ const router = new Router(on => {
 	});
 
 	on('/lp/:id', async (state) => {
-		SiteStore.fetchLandingPage(state.params.id);
+		await SiteStore.fetchLandingPage(state.params.id);
 		return <LandingPage context={state.context} />;
 	});
 

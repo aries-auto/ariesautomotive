@@ -118,11 +118,8 @@ class Html extends Component {
 				</head>
 				<body>
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"></script>
 					<script src={this.props.entry}></script>
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
-					<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 				</body>
 			</html>
 		);

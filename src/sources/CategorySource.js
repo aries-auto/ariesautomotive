@@ -9,7 +9,7 @@ const CategorySource = {
 					fetch(`/api/categories`)
 					.then((resp) => {
 						return resp.json();
-					}).then(res).catch(rej);
+					}).then((data) => res(data)).catch(rej);
 				});
 			},
 
@@ -26,6 +26,32 @@ const CategorySource = {
 			loading: CategoryActions.fetchCategories,
 		};
 	},
+
+	fetchCategory() {
+		return {
+			remote(state, id) {
+				return new Promise((res, rej) => {
+					fetch(`/api/categories/${id}`)
+					.then((resp) => {
+						return resp.json();
+					}).then(res).catch(rej);
+				});
+			},
+
+			local(state, id) {
+				if (!state.categoryMap || !state.categoryMap[id]) {
+					return null;
+				}
+
+				return state.categoryMap[id];
+			},
+
+			success: CategoryActions.updateCategory,
+			error: CategoryActions.failedCategory,
+			loading: CategoryActions.fetchCategory,
+		};
+	},
+
 };
 
 module.exports = CategorySource;

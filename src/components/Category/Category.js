@@ -27,9 +27,6 @@ class SearchResults extends Component {
 		super();
 
 		this.scrollTo = this.scrollTo.bind(this);
-		this.state = {
-			context: {},
-		};
 	}
 
 	componentWillMount() {

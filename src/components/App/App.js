@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import bt from 'bootstrap/dist/css/bootstrap.css?root=./node_modules/bootstrap/dist/'; // eslint-disable-line import/no-unresolved, max-len
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import cx from 'classnames';
 import s from './App.scss';
@@ -44,10 +45,12 @@ class App extends Component {
 
 	componentWillMount() {
 		this.removeCss = this.props.context.insertCss(s);
+		this.removeBootstrap = this.props.context.insertCss(bt);
 	}
 
 	componentWillUnmount() {
 		this.removeCss();
+		this.removeBootstrap();
 	}
 
 	render() {

@@ -1,9 +1,11 @@
 import 'babel-core/polyfill';
 import path from 'path';
+import zlib from 'zlib';
 import express from 'express';
 import React from 'react';
 import Memcached from 'memcached';
 import morgan from 'morgan';
+import compression from 'compression';
 import ReactDOM from 'react-dom/server';
 import fetch from './core/fetch';
 import Router from './routes';
@@ -27,6 +29,36 @@ const KEY = apiKey;
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
 server.use(morgan('combined'));
+server.use(compression());
+
+server.get('/api/categories/:id', (req, res) => {
+	memcached.get(`api:categories:${req.params.id}`, (err, val) => {
+		if (!err && val) {
+			zlib.gunzip(val, (e, result) => {
+				if (!e && result) {
+					res.status(200).json(result.toString('utf8'));
+					return;
+				}
+			});
+		} else {
+			fetch(`${apiBase}/category/${req.params.id}?brandID=${brand.id}&key=${KEY}`)
+			.then((resp) => {
+				return resp.json();
+			}).then((data) => {
+				zlib.gzip(JSON.stringify(data), (e, result) => {
+					if (e) {
+						res.status(200).json(data.toString('utf8'));
+						return;
+					}
+					memcached.set(`api:categories:${req.params.id}`, result, 8640, () => {
+						res.status(200).json(data);
+						return;
+					});
+				});
+			});
+		}
+	});
+});
 
 server.get('/api/categories', (req, res) => {
 	memcached.get('api:categories', (err, val) => {
@@ -70,6 +102,10 @@ server.get('/api/content/all', (req, res) => {
 			});
 		});
 	});
+});
+
+server.get('/api/content', (req, res) => {
+	res.end('[]');
 });
 
 server.get('/api/content/:slug', (req, res) => {
@@ -227,9 +263,7 @@ server.get('*', async (req, res, next) => {
 			if (state.redirect) {
 				redirect = state.redirect;
 			}
-			// if (req.path.indexOf('/vehicle') === -1) {
 			data.body = ReactDOM.renderToString(component);
-			// }
 			data.css = css.join('');
 		});
 

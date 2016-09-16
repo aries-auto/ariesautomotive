@@ -6,6 +6,10 @@ class CategoryActions {
 			'fetchCategories',
 			'updateCategories',
 			'failedCategories',
+
+			'fetchCategory',
+			'updateCategory',
+			'failedCategory',
 		);
 	}
 }
