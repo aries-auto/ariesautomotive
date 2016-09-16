@@ -70,7 +70,7 @@ class ContactStore extends EventEmitter {
 
 		const inputs = JSON.stringify(frm);
 		try {
-			fetch(`${apiBase}/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
+			fetch(`${apiBase}/contact/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
