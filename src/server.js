@@ -73,7 +73,7 @@ server.get('/api/vehicle/:year', (req, res) => {
 });
 
 server.get('/api/vehicle/:year/:make', (req, res) => {
-	const key = `api:vehicle:${req.params.year}:${req.params.make}`;
+	const key = `api:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
@@ -94,7 +94,7 @@ server.get('/api/vehicle/:year/:make', (req, res) => {
 });
 
 server.get('/api/vehicle/:year/:make/:model', (req, res) => {
-	const key = `api:vehicle:${req.params.year}:${req.params.make}:${req.params.model}`;
+	const key = `api:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
@@ -115,7 +115,7 @@ server.get('/api/vehicle/:year/:make/:model', (req, res) => {
 });
 
 server.get('/api/vehicle/:year/:make/:model/:category', (req, res) => {
-	const key = `api:vehicle:${req.params.year}:${req.params.make}:${req.params.model}:${req.params.category}`;
+	const key = `api:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}:${req.params.category.replace(/ /g, '_')}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
