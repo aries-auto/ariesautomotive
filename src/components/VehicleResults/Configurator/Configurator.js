@@ -62,9 +62,12 @@ class Configurator extends Component {
 			$('#addPart').attr('data-part', newPart.part_number);
 			this.handleAddProduct();
 		}
+
 		if ($('.vehicle-wrapper').has('#image-wrapper').length === 0) {
 			$('.vehicle-wrapper').hide();
 			reportError = true;
+		} else {
+			$('.vehicle-wrapper').show();
 		}
 		if (reportError) {
 			// VehicleActions.reportVehicleError(this.props.context.vehicleParts[this.vehiclePartsIndex].vehicle);
