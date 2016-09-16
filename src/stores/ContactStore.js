@@ -77,11 +77,9 @@ class ContactStore extends EventEmitter {
 				},
 				body: inputs,
 			}).then((resp) => {
-				if (resp.status === 200) {
-					this.setState({
-						success: 'true',
-					});
-				}
+				this.setState({
+					success: 'true',
+				});
 				return resp.json();
 			});
 		} catch (err) {
