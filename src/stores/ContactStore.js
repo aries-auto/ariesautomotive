@@ -12,6 +12,8 @@ class ContactStore extends EventEmitter {
 		this.state = {
 			contactTypes: [],
 			inputs: {},
+			error: null,
+			success: null,
 		};
 
 		this.bindListeners({
@@ -68,16 +70,18 @@ class ContactStore extends EventEmitter {
 
 		const inputs = JSON.stringify(frm);
 		try {
-			// fetch(`${apiBase}/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
-			fetch(`http://localhost:8080/contact/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
+			fetch(`${apiBase}/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: inputs,
 			}).then((resp) => {
-				console.log(resp);
-				this.setState({ error: null });
+				if (resp.status === 200) {
+					this.setState({
+						success: 'true',
+					});
+				}
 				return resp.json();
 			});
 		} catch (err) {
