@@ -5,7 +5,7 @@ import Catalogs from './Catalogs';
 import FeaturedProducts from './FeaturedProducts';
 import Testimonials from './Testimonials';
 import Hero from './Hero';
-import Marketing from './Marketing';
+// import Marketing from './Marketing';
 import withStyles from '../../decorators/withStyles';
 import ProductStore from '../../stores/ProductStore';
 import SiteStore from '../../stores/SiteStore';
@@ -56,7 +56,7 @@ class Home extends Component {
 			<div className={cx(s.root, this.props.className, 'home-container')} role="navigation">
 
 				<Hero />
-				<Marketing />
+				{/* <Marketing /> */}
 				<Catalogs />
 				<FeaturedProducts products={this.props.featuredProducts} />
 				<Testimonials testimonials={this.props.testimonials} />

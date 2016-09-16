@@ -9,7 +9,7 @@ const CategorySource = {
 					fetch(`/api/categories`)
 					.then((resp) => {
 						return resp.json();
-					}).then((data) => res(data)).catch(rej);
+					}).then(res).catch(rej);
 				});
 			},
 

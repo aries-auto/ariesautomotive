@@ -16,6 +16,7 @@ class CategoryStore extends EventEmitter {
 		this.bindListeners({
 			handleUpdateCategories: CategoryActions.UPDATE_CATEGORIES,
 			handleFailedCategories: CategoryActions.FAILED_CATEGORIES,
+
 			handleUpdateCategoryMap: CategoryActions.UPDATE_CATEGORY,
 			handleFailedCategoryMap: CategoryActions.FAILED_CATEGORY,
 		});
