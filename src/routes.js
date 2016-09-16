@@ -40,23 +40,15 @@ const router = new Router(on => {
 		state.context.params = state.params;
 		const slugContainer = state.params[0];
 		const slug = slugContainer.replace(/\//g, '');
-		let siteContentResponse = null;
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
-		if (slug !== '') {
-			siteContentResponse = await fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand}`, {
-				method: 'get',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-			});
-		}
-		const [yearResponse, catResponse, contentAllReponse] = await Promise.all([
-			fetch(`/api/vehicle/category?key=${KEY}`),
-			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
-			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
+
+		const [yearResponse, catResponse, contentAllReponse, siteContentResponse] = await Promise.all([
+			fetch(`/api/vehicle/category`),
+			fetch(`/api/category`),
+			fetch(`/api/content/all`),
+			slug !== '' ? fetch(`/api/content/slug/${slug}`) : null,
 		]);
 
 		try {
@@ -405,7 +397,7 @@ const router = new Router(on => {
 			},
 		];
 		try {
-			const featResponse = await fetch(`${apiBase}/part/featured?brandID=${brand}&key=${KEY}`);
+			const featResponse = await fetch(`/api/part/featured`);
 			const testResponse = await fetch(`${apiBase}/testimonials?key=${KEY}&count=2&randomize=true&brandID=${brand}`);
 
 			state.context.featuredProducts = await featResponse.json();

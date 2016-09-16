@@ -30,8 +30,92 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use(morgan('combined'));
 server.use(compression());
 
+server.get('/api/category', (req, res) => {
+	const key = `api:memcached:category`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/category?brandID=${BRAND}&key=${KEY}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/content/all', (req, res) => {
+	const key = `api:memcached:content:all`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/site/content/all?siteID=${BRAND}&brandID=${BRAND}&key=${KEY}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/content/slug/:slug', (req, res) => {
+	const key = `api:memcached:content:slug:${req.params.slug}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/site/content/${req.params.slug}?key=${KEY}&brandID=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/part/featured', (req, res) => {
+	const key = `api:memcached:part:featured`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/part/featured?brandID=${BRAND}&key=${KEY}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
 server.get('/api/vehicle', (req, res) => {
-	const key = `api:vehicle:${req.params.year}`;
+	const key = `api:memcached:vehicle:${req.params.year}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
@@ -52,7 +136,7 @@ server.get('/api/vehicle', (req, res) => {
 });
 
 server.get('/api/vehicle/:year', (req, res) => {
-	const key = `api:vehicle:${req.params.year}`;
+	const key = `api:memcached:vehicle:${req.params.year}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
@@ -73,7 +157,7 @@ server.get('/api/vehicle/:year', (req, res) => {
 });
 
 server.get('/api/vehicle/:year/:make', (req, res) => {
-	const key = `api:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}`;
+	const key = `api:memcached:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
@@ -94,7 +178,7 @@ server.get('/api/vehicle/:year/:make', (req, res) => {
 });
 
 server.get('/api/vehicle/:year/:make/:model', (req, res) => {
-	const key = `api:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}`;
+	const key = `api:memcached:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
@@ -115,7 +199,7 @@ server.get('/api/vehicle/:year/:make/:model', (req, res) => {
 });
 
 server.get('/api/vehicle/:year/:make/:model/:category', (req, res) => {
-	const key = `api:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}:${req.params.category.replace(/ /g, '_')}`;
+	const key = `api:memcached:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}:${req.params.category.replace(/ /g, '_')}`;
 	memcached.get(key, (err, val) => {
 		if (!err && val) {
 			res.status(200).json(val);
