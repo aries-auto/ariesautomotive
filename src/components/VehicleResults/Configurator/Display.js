@@ -34,9 +34,7 @@ class Configurator extends Component {
 	}
 
 	componentDidUpdate() {
-		if (window.ICAPP) {
-			window.ICAPP.getRefVehicle();
-		}
+		window.ICAPP.getRefVehicle();
 	}
 
 	render() {

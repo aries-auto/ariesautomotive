@@ -49,18 +49,13 @@ const router = new Router(on => {
 		state.context.siteMenu = siteMenu;
 		const slug = state.params[0].replace(/\//g, '');
 
-		let vehicleReq = null;
-		if (state.params && state.params[0] && state.params[0].indexOf('/vehicle') === -1) {
-			console.log('vehicle request being made');
-			vehicleReq = VehicleStore.fetchVehicle;
-		}
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
 
 		Promise.all([
 			SiteStore.fetchPageData(slug),
-			vehicleReq ? vehicleReq() : null,
+			VehicleStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);
@@ -156,9 +151,11 @@ const router = new Router(on => {
 				return result.json();
 			});
 			if (icon.vehicleParts.length > 0) {
+				console.log('icon vehicle parts is greater than 0');
 				state.context.vehicleParts = icon.vehicleParts;
 				state.context.iconParts = icon.partNumbers;
 			}
+			// console.log(icon)
 		} catch (e) {
 			state.context.error = e.message;
 		}

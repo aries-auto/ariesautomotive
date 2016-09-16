@@ -48,6 +48,7 @@ class VehicleStore extends EventEmitter {
 		});
 
 		this.exportAsync(VehicleSource);
+		this.getVehicle = this.getVehicle.bind(this);
 	}
 
 	handleUpdateVehicle(v) {

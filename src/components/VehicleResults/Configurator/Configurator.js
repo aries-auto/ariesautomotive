@@ -38,6 +38,7 @@ class Configurator extends Component {
 	}
 
 	componentDidMount() {
+		console.log('component mounted');
 		this.props.win.onerror = (e) => {
 			console.log('on error');
 			console.log(e);
@@ -48,6 +49,8 @@ class Configurator extends Component {
 	}
 
 	componentWillReceiveProps(next) {
+		console.log('will receive props');
+		console.log('next vehicle', next.vehicle);
 		let reportError = false;
 		$('.error').addClass('hidden');
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
