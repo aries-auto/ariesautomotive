@@ -38,8 +38,6 @@ class Configurator extends Component {
 	}
 
 	componentDidMount() {
-		console.log('component did mount', this.props.vehicle);
-		console.log('win', this.props.win);
 		this.props.win.onerror = (e) => {
 			console.log('on error');
 			console.log(e);

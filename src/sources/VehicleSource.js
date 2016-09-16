@@ -41,7 +41,7 @@ const VehicleSource = {
 						return null;
 					}
 				}
-
+				console.log('returning vehicle state');
 				return st.vehicle;
 			},
 
