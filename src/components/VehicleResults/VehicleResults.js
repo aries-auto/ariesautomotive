@@ -93,6 +93,7 @@ class VehicleResults extends Component {
 		}
 
 		const groups = [];
+		console.log(this.props.categories);
 		this.props.categories.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;

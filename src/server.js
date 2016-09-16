@@ -32,7 +32,7 @@ server.use(morgan('combined'));
 server.use(compression());
 
 server.get('/api/categories/:id', (req, res) => {
-	memcached.get(`api:categories:${req.params.id}`, (err, val) => {
+	memcached.get(`api:categories:v2:${req.params.id}`, (err, val) => {
 		if (!err && val) {
 			zlib.gunzip(val, (e, result) => {
 				if (!e && result) {
@@ -50,7 +50,7 @@ server.get('/api/categories/:id', (req, res) => {
 						res.status(200).json(data.toString('utf8'));
 						return;
 					}
-					memcached.set(`api:categories:${req.params.id}`, result, 8640, () => {
+					memcached.set(`api:categories:v2:${req.params.id}`, result, 8640, () => {
 						res.status(200).json(data);
 						return;
 					});
@@ -61,7 +61,7 @@ server.get('/api/categories/:id', (req, res) => {
 });
 
 server.get('/api/categories', (req, res) => {
-	memcached.get('api:categories', (err, val) => {
+	memcached.get('api:v2:categories', (err, val) => {
 		if (!err && val) {
 			res.send(val);
 			return;
@@ -71,7 +71,7 @@ server.get('/api/categories', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:categories', data, 8640, (e) => {
+			memcached.set('api:v2:categories', data, 8640, (e) => {
 				if (e) {
 					res.error(e);
 					return;
