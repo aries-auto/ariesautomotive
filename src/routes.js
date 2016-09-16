@@ -54,14 +54,7 @@ const router = new Router(on => {
 			});
 		}
 		const [yearResponse, catResponse, contentAllReponse] = await Promise.all([
-			fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-				body: '{}',
-			}),
+			fetch(`/api/vehicle/category?key=${KEY}`),
 			fetch(`${apiBase}/category?brandID=${brand}&key=${KEY}`),
 			fetch(`${apiBase}/site/content/all?siteID=${brand}&brandID=${brand}&key=${KEY}`),
 		]);
@@ -69,8 +62,8 @@ const router = new Router(on => {
 		try {
 			state.context.categories = await catResponse.json();
 			const vehicleResponse = await yearResponse.json();
-			if (vehicleResponse.available_years !== undefined) {
-				state.context.years = vehicleResponse.available_years;
+			if (vehicleResponse.availableYears !== undefined) {
+				state.context.years = vehicleResponse.availableYears;
 			}
 			state.context.siteContents = await contentAllReponse.json();
 			const siteContent = await siteContentResponse.json();
