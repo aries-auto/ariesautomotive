@@ -37,11 +37,17 @@ class SearchResults extends Component {
 		const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : 'Aries Automotive Product Categories';
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
-
+		const image = this.props.context.category &&
+		this.props.context.category.image &&
+		this.props.context.category.image.Scheme &&
+		this.props.context.category.image.Host &&
+		this.props.context.category.image.Path ?
+		`${this.props.context.category.image.Scheme}://${this.props.context.category.image.Host}${this.props.context.category.image.Path}`
+		: '';
 		const seo = {
 			title: this.props.context.category.meta_description,
 			description: this.props.context.category.long_description,
-			image: `${this.props.context.category.image.Scheme}://${this.props.context.category.image.Host}${this.props.context.category.image.Path}`,
+			image,
 		};
 		this.context.seo(seo);
 	}
@@ -118,6 +124,10 @@ class SearchResults extends Component {
 	}
 
 	render() {
+		if (!this.props.category || !this.props.category.title) {
+			return <div></div>;
+		}
+
 		return (
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<div className="category-content container">

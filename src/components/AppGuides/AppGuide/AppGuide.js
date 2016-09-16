@@ -6,7 +6,7 @@ import withStyles from '../../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
-import { appguides } from './data';
+// import { appguides } from './data';
 
 const cache = '06072016';
 
@@ -32,7 +32,7 @@ class AppGuide extends Component {
 
 	constructor() {
 		super();
-		this.getFinish = this.getFinish.bind(this);
+		this.getAttr = this.getAttr.bind(this);
 	}
 
 	componentWillMount() {
@@ -49,37 +49,53 @@ class AppGuide extends Component {
 		return AppGuideStore.getState();
 	}
 
-	getFinishes() {
+	getAttrs() {
 		const output = [];
-		this.props.guide.finishes.map((finish, i) => {
-			output.push(<th key={i}>{finish}</th>);
-		});
+		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
+			this.props.guide.colors.map((color, i) => {
+				output.push(<th key={i}>{color}</th>);
+			});
+		} else {
+			this.props.guide.finishes.map((finish, i) => {
+				output.push(<th key={i}>{finish}</th>);
+			});
+		}
 		return output;
 	}
 
-	getFinish(application) {
+	getAttr(application) {
 		const appguideSlice = [];
-		const finishToAppguide = {};
-		this.props.guide.finishes.map((finish) => {
-			finishToAppguide[finish] = [];
+		const attrToAppguide = {};
+		let attrToSearch = [];
+		let isFloorLiner = false;
+		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
+			isFloorLiner = true;
+			attrToSearch = this.props.guide.colors;
+		} else {
+			attrToSearch = this.props.guide.finishes;
+		}
+
+		attrToSearch.map((attr) => {
+			attrToAppguide[attr] = [];
 			application.parts.map((part, j) => {
-				if (part.finish === finish) {
+				if ((part.color === attr && isFloorLiner) || (part.finish === attr && !isFloorLiner)) {
 					const url = `/part/${part.oldPartNumber}`;
 					const ins = `https://www.curtmfg.com/masterlibrary/01ARIES/206003-2/installsheet/${part.oldPartNumber}_INS.pdf`;
 					const appguideCell = (<div key={j}><a href={url}>{part.oldPartNumber} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></div>);
-					finishToAppguide[finish].push(appguideCell);
+					attrToAppguide[attr].push(appguideCell);
 				}
 			});
 		});
-		this.props.guide.finishes.map((finish) => {
-			for (const i in finishToAppguide) {
-				if (i === finish) {
-					appguideSlice.push(<td key={i}>{finishToAppguide[i]}</td>);
+		attrToSearch.map((attr) => {
+			for (const i in attrToAppguide) {
+				if (i === attr) {
+					appguideSlice.push(<td key={i}>{attrToAppguide[i]}</td>);
 				}
 			}
 		});
 		return appguideSlice;
 	}
+
 	handlePagination(inc) {
 		if (this.props.page && this.props.page === 0 && inc === -1) {
 			return;
@@ -102,7 +118,7 @@ class AppGuide extends Component {
 						<th>Style</th>
 						<th>Start Year</th>
 						<th>End Year</th>
-						{this.getFinishes()}
+						{this.getAttrs()}
 					</tr>
 				</thead>
 				<tbody>{this.renderApplicationRows()}</tbody>
@@ -113,8 +129,9 @@ class AppGuide extends Component {
 	renderApplicationRows() {
 		const output = [];
 		this.props.guide.applications.map((app, i) => {
-			const fin = this.getFinish(app);
-			output.push(<tr key={i}><td>{app.make}</td><td>{app.model}</td><td>{app.style}</td><td>{app.min_year}</td><td>{app.max_year}</td>{fin}</tr>);
+			let attr = {};
+			attr = this.getAttr(app);
+			output.push(<tr key={i}><td>{app.make}</td><td>{app.model}</td><td>{app.style}</td><td>{app.min_year}</td><td>{app.max_year}</td>{attr}</tr>);
 		});
 		return output;
 	}
@@ -129,21 +146,36 @@ class AppGuide extends Component {
 	}
 
 	renderDownloadLinks() {
+		const guide = this.props.guide;
+		if (guide === undefined || guide === null) {
+			return <span></span>;
+		}
 		let page = this.props.guide.name;
+		let render = false;
 		page = page.toLowerCase();
 		const links = [];
-		let render = false;
-		appguides.map((guide, i) => {
-			if ((guide.cats.indexOf(page) !== -1)) {
-				render = true;
-				const link = `${guide.link}?cache=${cache}`;
-				links.push(
-					<a key={i} href={link} target="_blank" analytics-on="click" analytics-event="AppGuides:3 IN Round Side Bars:pdf">
-						<img src={guide.icon} alt="App Guide" className={cx('icon', s.appguideIcon)} />
-					</a>
-				);
-			}
-		});
+		if (guide.appGuide === undefined || guide.appGuide === null) {
+			return <span></span>;
+		}
+		if (guide.appGuide.pdfPath) {
+			const pdfLink = `${guide.appGuide.pdfPath}?cache=${cache}`;
+			links.push(
+				<a key={1} href={pdfLink} target="_blank" analytics-on="click" analytics-event={`${page}:pdf`}>
+					<img src={'https://storage.googleapis.com/curt-icons/PDF-Icon-Aries.png'} alt="App Guide" className={cx('icon', s.appguideIcon)} />
+				</a>
+			);
+			render = true;
+		}
+		if (guide.appGuide.xlsPath) {
+			const xlsLink = `${guide.appGuide.xlsPath}?cache=${cache}`;
+			links.push(
+				<a key={2} href={xlsLink} target="_blank" analytics-on="click" analytics-event={`${page}:pdf`}>
+					<img src={'https://storage.googleapis.com/curt-icons/Excel-Icon.png'} alt="App Guide" className={cx('icon', s.appguideIcon)} />
+				</a>
+			);
+			render = true;
+		}
+
 		if (!render) {
 			return null;
 		}

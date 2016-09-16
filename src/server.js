@@ -201,9 +201,9 @@ server.get('*', async (req, res, next) => {
 		const slugContainer = req.originalUrl;
 		const slug = slugContainer.replace('/', '');
 		let siteContentResponse = null;
-		if (slug !== '' && slug !== '_ahhealth') {
+		if (slug !== '' && slug !== '_ahhealth' && slug.indexOf('health') === -1) {
 			siteContentResponse = await Promise.all([
-				fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`, {
+				fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`, { // change this once we switch brand over, hardcoded 4 is for testing
 					method: 'get',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',

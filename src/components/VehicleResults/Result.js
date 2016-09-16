@@ -60,16 +60,6 @@ class Result extends Component {
 			return null;
 		}
 
-		if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
-			// TODO: this needs to autoload the fitment information for 'all',
-			// no need to make the user select it.
-			// However, the following creates a dispatch loop.
-			//
-			// VehicleStore.fetchFitments(this.props.result, 'all');
-
-			return null;
-		}
-
 		return (
 			<div className={'form-group'}>
 				<select ref="style" onChange={this.updateStyle} className="form-control">
