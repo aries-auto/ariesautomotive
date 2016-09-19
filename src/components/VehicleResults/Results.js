@@ -13,6 +13,10 @@ class Results extends Component {
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
 		fitments: PropTypes.array,
+		iconParts: PropTypes.oneOfType([
+			React.PropTypes.object,
+			React.PropTypes.array,
+		]),
 	};
 
 	render() {
@@ -25,7 +29,7 @@ class Results extends Component {
 					if (this.props.fitments.length === 0 && r.style_options[0].style.toLowerCase() === 'all') {
 						VehicleStore.fetchFitments(r, 'all');
 					}
-					return <Result key={i} fitments={this.props.fitments} result={r} activeIndex={this.props.activeIndex} />;
+					return <Result key={i} fitments={this.props.fitments} result={r} activeIndex={this.props.activeIndex} iconParts={this.props.iconParts} />;
 				})}
 			</div>
 		);

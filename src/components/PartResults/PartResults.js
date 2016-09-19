@@ -18,7 +18,10 @@ class PartResults extends Component {
 		className: PropTypes.string,
 		parts: PropTypes.array,
 		vehicle: PropTypes.object,
-		iconParts: PropTypes.object,
+		iconParts: PropTypes.oneOfType([
+			React.PropTypes.object,
+			React.PropTypes.array,
+		]),
 	};
 
 	constructor() {

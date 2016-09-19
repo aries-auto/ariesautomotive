@@ -48,7 +48,6 @@ class VehicleStore extends EventEmitter {
 		});
 
 		this.exportAsync(VehicleSource);
-		this.getVehicle = this.getVehicle.bind(this);
 	}
 
 	handleUpdateVehicle(v) {
@@ -120,9 +119,9 @@ class VehicleStore extends EventEmitter {
 	// adds part to state.vehicle.parts; removes part of same layer
 	addPartToVehicle(part) {
 		// must have iconLayer - TODO is this true?
-		if (part.iconLayer === '') {
-			return;
-		}
+		// if (part.iconLayer === '') {
+		// 	return;
+		// }
 		const vehicle = this.state.vehicle;
 		if (!vehicle.parts) {
 			vehicle.parts = [];

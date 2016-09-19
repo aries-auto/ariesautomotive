@@ -12,6 +12,10 @@ class CategorizedResult extends Component {
 		subs: PropTypes.array,
 		activeIndex: PropTypes.number,
 		fitments: PropTypes.array,
+		iconParts: PropTypes.oneOfType([
+			React.PropTypes.object,
+			React.PropTypes.array,
+		]),
 	};
 
 	render() {
@@ -21,8 +25,8 @@ class CategorizedResult extends Component {
 			const res = tmp.splice(0, 2);
 			segments.push(
 				<div key={segments.length}>
-					<ResultSegment fitments={this.props.fitments} activeIndex={this.props.activeIndex} results={res} />
-					<Results fitments={this.props.fitments} activeIndex={this.props.activeIndex} results={res} />
+					<ResultSegment fitments={this.props.fitments} activeIndex={this.props.activeIndex} results={res} iconParts={this.props.iconParts} />
+					<Results fitments={this.props.fitments} activeIndex={this.props.activeIndex} results={res} iconParts={this.props.iconParts} />
 				</div>);
 		}
 

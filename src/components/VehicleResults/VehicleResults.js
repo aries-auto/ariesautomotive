@@ -124,6 +124,7 @@ class VehicleResults extends Component {
 						subs={subs}
 						fitments={this.props.fitments}
 						key={groups.length}
+						iconParts={this.props.context.iconParts}
 					/>
 				);
 			}

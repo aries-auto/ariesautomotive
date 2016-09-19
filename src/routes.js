@@ -151,11 +151,9 @@ const router = new Router(on => {
 				return result.json();
 			});
 			if (icon.vehicleParts.length > 0) {
-				console.log('icon vehicle parts is greater than 0');
 				state.context.vehicleParts = icon.vehicleParts;
 				state.context.iconParts = icon.partNumbers;
 			}
-			// console.log(icon)
 		} catch (e) {
 			state.context.error = e.message;
 		}

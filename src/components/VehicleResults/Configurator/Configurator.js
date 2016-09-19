@@ -44,9 +44,7 @@ class Configurator extends Component {
 	}
 
 	componentDidMount() {
-		console.log('component mounted');
-		this.props.win.onerror = (e) => {
-			console.log('on error', e);
+		this.props.win.onerror = () => {
 			$('.vehicle-wrapper').hide();
 			$('.error').html('<h4>No image of vehicle with parts available.</h4>');
 			$('.error').removeClass('hidden');
@@ -54,8 +52,6 @@ class Configurator extends Component {
 	}
 
 	componentWillReceiveProps(next) {
-		console.log('next vehicle', next.vehicle);
-		console.log('will receive props');
 		let reportError = false;
 		$('.error').addClass('hidden');
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
@@ -95,7 +91,6 @@ class Configurator extends Component {
 	}
 
 	static getPropsFromStores() {
-		console.log('getting props from stores');
 		return VehicleStore.getState();
 	}
 
@@ -145,7 +140,6 @@ class Configurator extends Component {
 	}
 
 	render() {
-		console.log('rendering configurator');
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<div className="error hidden"></div>

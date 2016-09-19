@@ -13,6 +13,10 @@ class Result extends Component {
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
 		fitments: PropTypes.array,
+		iconParts: PropTypes.oneOfType([
+			React.PropTypes.object,
+			React.PropTypes.array,
+		]),
 	};
 
 	constructor() {
@@ -90,7 +94,7 @@ class Result extends Component {
 					<span>{this.props.result.category.title}</span>
 					{this.renderStyles()}
 				</div>
-				<PartResults className={`test`} parts={this.state.products} />
+				<PartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} />
 			</div>
 		);
 	}

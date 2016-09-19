@@ -21,7 +21,6 @@ class Configurator extends Component {
 	}
 
 	componentWillMount() {
-		console.log('will mount');
 		const script = document.createElement('script');
 		script.src = 'https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C';
 		script.async = true;
@@ -42,15 +41,12 @@ class Configurator extends Component {
 	}
 
 	componentDidUpdate() {
-		console.log('display component did update', window.ICAPP);
 		if (window.ICAPP) {
 			window.ICAPP.getRefVehicle();
 		}
 	}
 
 	render() {
-		console.log('rendering display');
-		console.log(this.props.id);
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>

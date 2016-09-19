@@ -24,7 +24,7 @@ class AddToVehicle extends Component {
 	handler() {
 		let lbl = this.props.part.part_number || '';
 		if (this.props.vehicle) {
-			lbl = `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model} ${this.props.part.part_number}`;
+			lbl = `${this.props.vehicle.base.year} ${this.props.vehicle.base.make} ${this.props.vehicle.base.model} ${this.props.part.part_number}`;
 		}
 
 		ga.event({
@@ -51,7 +51,7 @@ class AddToVehicle extends Component {
 	}
 
 	render() {
-		if (!this.props.part.iconLayer || !this.props.iconParts) {
+		if (!this.props.iconParts && !this.props.part.iconLayer) {
 			return <span></span>;
 		}
 
