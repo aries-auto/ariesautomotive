@@ -78,24 +78,10 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleUpdateFitments(fits) {
-		// console.log('fits', fit);
-		// console.log('fitments', this.state.fitments);
-
-		// fits.sort((a, b) => a.product_identifier > b.product_identifier);
-		//
-		// let same = true;
-		// this.state.fitments.map((ft, i) => {
-		// 	if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
-		// 		same = false;
-		// 	}
-		// });
-		// // if fit doesnt equal fitments dont set state
-		// if (!same) {
 		this.setState({
 			fitments: fits,
 			error: null,
 		});
-		// }
 	}
 
 	handleFailedFitments(err) {
@@ -119,9 +105,9 @@ class VehicleStore extends EventEmitter {
 	// adds part to state.vehicle.parts; removes part of same layer
 	addPartToVehicle(part) {
 		// must have iconLayer - TODO is this true?
-		// if (part.iconLayer === '') {
-		// 	return;
-		// }
+		if (part.iconLayer === '') {
+			return;
+		}
 		const vehicle = this.state.vehicle;
 		if (!vehicle.parts) {
 			vehicle.parts = [];

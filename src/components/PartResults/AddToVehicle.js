@@ -51,7 +51,7 @@ class AddToVehicle extends Component {
 	}
 
 	render() {
-		if (!this.props.iconParts && !this.props.part.iconLayer) {
+		if (!this.props.iconParts || !this.props.part.iconLayer) {
 			return <span></span>;
 		}
 

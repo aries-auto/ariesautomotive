@@ -38,6 +38,7 @@ class Result extends Component {
 				}
 
 				if (ft.product.categories[0].id === props.result.category.id) {
+					ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
 					products.push(ft.product);
 				}
 			});
