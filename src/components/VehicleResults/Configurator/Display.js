@@ -20,6 +20,10 @@ class Configurator extends Component {
 		};
 	}
 
+	componentDidMount() {
+		window.ICAPP.getRefVehicle();
+	}
+
 	componentWillReceiveProps(props) {
 		const ids = [];
 		(props.parts || []).map((p) => {
@@ -40,7 +44,6 @@ class Configurator extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div
 					className={cx('vehicle-wrapper', s.vehicleWrapper)}
 					id="ic-vehicle-wrapper"
@@ -66,6 +69,7 @@ class Configurator extends Component {
 						id="removePart"
 					>REMOVE</a>
 				</div>
+				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
 			</div>
 		);
 	}

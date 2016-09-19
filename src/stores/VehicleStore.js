@@ -2,7 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
 import VehicleActions from '../actions/VehicleActions';
-import { apiBase, apiKey, brand } from '../config';
+import { apiBase, apiKey } from '../config';
 
 const EventEmitter = events.EventEmitter;
 const KEY = apiKey;
@@ -54,7 +54,7 @@ class VehicleStore extends EventEmitter {
 			return;
 		}
 		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}`;
-		const apiResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&brands=${brand}`);
+		const apiResp = await fetch(`/api/vehicle/${params}`);
 		const resp = await apiResp.json();
 		if (!this.state.activeCategory) {
 			this.setActiveCategory(resp.lookup_category[0]);
@@ -67,7 +67,7 @@ class VehicleStore extends EventEmitter {
 	async getCategoryParts(activeCategory, style) {
 		this.setState({ style }); // why does this work? style does not have parts associated yet...
 		const params = `${this.state.vehicle.year}/${this.state.vehicle.make}/${this.state.vehicle.model}/${activeCategory.category.title}`;
-		const catResp = await fetch(`${apiBase}/vehicle/category/${params}?key=${KEY}&withParts=true&brands=${brand}`);
+		const catResp = await fetch(`/api/vehicle/${params}`);
 		const data = await catResp.json();
 		let s = style;
 		s = this.linkPartsToStyle(data, s);

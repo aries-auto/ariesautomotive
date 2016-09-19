@@ -2,9 +2,7 @@ import LookupActions from '../actions/LookupActions';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { apiBase, apiKey } from '../config';
 const EventEmitter = events.EventEmitter;
-const KEY = apiKey;
 
 class LookupStore extends EventEmitter {
 	constructor() {
@@ -29,45 +27,45 @@ class LookupStore extends EventEmitter {
 	}
 
 	async get() {
-		let body = '';
+		let path = `/api/vehicle`;
 		if (this.state.vehicle.year !== '') {
-			body = `year=${this.state.vehicle.year || 0}&make=${this.state.vehicle.make || ''}&model=${this.state.vehicle.model || ''}&style=${this.state.vehicle.style || ''}&collection=${this.state.vehicle.collection || ''}`;
+			path = `${path}/${this.state.vehicle.year}`;
+		}
+		if (this.state.vehicle.make !== '') {
+			path = `${path}/${this.state.vehicle.make}`;
+		}
+		if (this.state.vehicle.model !== '') {
+			path = `${path}/${this.state.vehicle.model}`;
 		}
 		try {
-			await fetch(`${apiBase}/vehicle/mongo/allCollections?key=${KEY}`, {
-				method: 'post',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Accept': 'application/json',
-				},
-				body,
-			}).then((resp) => {
+			await fetch(`${path}`)
+			.then((resp) => {
 				return resp.json();
 			}).then((data) => {
 				this.setState({
 					makes: this.state.makes,
 					models: this.state.models,
 				});
-				if (data.available_years !== undefined) {
+				if (data.availableYears !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
-						years: data.available_years,
+						years: data.availableYears,
 						makes: [],
 						models: [],
 					});
-				} else if (data.available_makes !== undefined) {
+				} else if (data.availableMakes !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
-						makes: data.available_makes,
+						makes: data.availableMakes,
 						models: [],
 					});
-				} else if (data.available_models !== undefined) {
+				} else if (data.availableModels !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
 						makes: this.state.makes,
-						models: data.available_models,
+						models: data.availableModels,
 					});
 				} else {
 					this.setState({
