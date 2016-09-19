@@ -26,7 +26,7 @@ class Configurator extends Component {
 			ids.push(p.part_number);
 		});
 
-		if (ids.length !== this.state.ids.length) {
+		if (ids.length > 0) {
 			this.setState({
 				ids,
 			});
