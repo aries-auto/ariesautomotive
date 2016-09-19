@@ -19,6 +19,7 @@ class FormField extends Component {
 		super();
 		this.modifyValue = this.modifyValue.bind(this);
 		this.states = [];
+		ContactStore.fetchTypes();
 	}
 
 	static getStores() {
@@ -151,11 +152,14 @@ class FormField extends Component {
 				if (!this.props.contactTypes[j]) {
 					continue;
 				}
-				contactOptions.push(
-					<option key={j} value={this.props.contactTypes[j].id}>
-						{this.props.contactTypes[j].name}
-					</option>
-				);
+
+				if (this.props.contactTypes[j].brandId === 3) {
+					contactOptions.push(
+						<option key={j} value={this.props.contactTypes[j].id}>
+							{this.props.contactTypes[j].name}
+						</option>
+					);
+				}
 			}
 			output.push(
 				<div key={field.key} className={'form-group col-xs-' + field.width}>

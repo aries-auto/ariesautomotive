@@ -7,6 +7,7 @@ class ContactActions {
 			'updateTypes',
 			'failedTypes',
 			'setInput',
+			'postContactData',
 		);
 	}
 }
