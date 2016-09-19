@@ -2,21 +2,222 @@ import 'babel-core/polyfill';
 import path from 'path';
 import express from 'express';
 import React from 'react';
+import Memcached from 'memcached';
+import morgan from 'morgan';
+import compression from 'compression';
 import ReactDOM from 'react-dom/server';
 import fetch from './core/fetch';
 import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
-import { apiBase, apiKey, brandID } from './config';
+import { apiBase, apiKey, brand } from './config';
 
+const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
+const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
+const memcached = new Memcached(memcachedAddr + ':' + memcachedPort, {
+	retries: 2,
+	timeout: 500,
+	maxExpiration: 86400,
+});
 const server = global.server = express();
 const KEY = apiKey;
-const BRAND = brandID;
+const BRAND = brand;
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
+server.use(morgan('combined'));
+server.use(compression());
+
+server.get('/api/category', (req, res) => {
+	const key = `api:memcached:category`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/category?brandID=${BRAND}&key=${KEY}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/content/all', (req, res) => {
+	const key = `api:memcached:content:all`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/site/content/all?siteID=${BRAND}&brandID=${BRAND}&key=${KEY}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/content/slug/:slug', (req, res) => {
+	const key = `api:memcached:content:slug:${req.params.slug}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/site/content/${req.params.slug}?key=${KEY}&brandID=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/part/featured', (req, res) => {
+	const key = `api:memcached:part:featured`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/part/featured?brandID=${BRAND}&key=${KEY}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/vehicle', (req, res) => {
+	const key = `api:memcached:vehicle:${req.params.year}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/vehicle/category?key=${KEY}&brands=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/vehicle/:year', (req, res) => {
+	const key = `api:memcached:vehicle:${req.params.year}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/vehicle/category/${req.params.year}?key=${KEY}&brands=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/vehicle/:year/:make', (req, res) => {
+	const key = `api:memcached:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/vehicle/category/${req.params.year}/${req.params.make}?key=${KEY}&brands=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/vehicle/:year/:make/:model', (req, res) => {
+	const key = `api:memcached:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/vehicle/category/${req.params.year}/${req.params.make}/${req.params.model}?key=${KEY}&brands=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
+
+server.get('/api/vehicle/:year/:make/:model/:category', (req, res) => {
+	const key = `api:memcached:vehicle:${req.params.year}:${req.params.make.replace(/ /g, '_')}:${req.params.model.replace(/ /g, '_')}:${req.params.category.replace(/ /g, '_')}`;
+	memcached.get(key, (err, val) => {
+		if (!err && val) {
+			res.status(200).json(val);
+			return;
+		}
+
+		fetch(`${apiBase}/vehicle/category/${req.params.year}/${req.params.make}/${req.params.model}/${req.params.category}?withParts=true&key=${KEY}&brands=${BRAND}`)
+		.then((resp) => resp.json()).then((data) => {
+			memcached.set(key, data, 8640, () => {
+				res.status(200).json(data);
+			});
+		}).catch((e) => {
+			res.status(500).json({
+				error: e,
+			});
+		});
+	});
+});
 
 //
 // Register server-side rendering middleware
