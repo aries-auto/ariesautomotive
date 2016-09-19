@@ -31,25 +31,14 @@ class CategoryNav extends Component {
 			return;
 		}
 
-		const allItem = {
-			title: 'View All Products',
-			to: '/categories',
-			text: 'View All Products',
-			children: [],
-		};
-
-		const catItems = [];
 		if (props.categories && props.categories.length > 0) {
 			props.categories.sort((a, b) => a.sort > b.sort);
 		}
+
 		props.categories.map((cat) => {
 			const tmp = this.categoryToItem(cat);
-			allItem.children = allItem.children.concat(tmp.children);
-			catItems.push(tmp);
+			this.state.items.push(tmp);
 		});
-
-		this.state.items.push(allItem);
-		this.state.items = this.state.items.concat(catItems);
 
 		this.state.items.push({
 			title: 'Application Guides',

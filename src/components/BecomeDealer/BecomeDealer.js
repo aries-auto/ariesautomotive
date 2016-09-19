@@ -7,7 +7,7 @@ import GeographyStore from '../../stores/GeographyStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { fields } from './fields';
 
-const title = 'Become an Aries Dealer';
+// const title = 'Become an Aries Dealer';
 
 @withStyles(s)
 @connectToStores
@@ -20,12 +20,12 @@ class BecomeDealer extends Component {
 		inputs: PropTypes.object,
 	};
 
-	static contextTypes = {
-		onSetTitle: PropTypes.func.isRequired,
-		onPageNotFound: PropTypes.func.isRequired,
-		onSetMeta: PropTypes.func.isRequired,
-		seo: PropTypes.func.isRequired,
-	};
+	// static contextTypes = {
+	// 	onSetTitle: PropTypes.func.isRequired,
+	// 	onPageNotFound: PropTypes.func.isRequired,
+	// 	onSetMeta: PropTypes.func.isRequired,
+	// 	seo: PropTypes.func.isRequired,
+	// };
 
 	constructor() {
 		super();
@@ -34,9 +34,9 @@ class BecomeDealer extends Component {
 		this.checkDisabled = this.checkDisabled.bind(this);
 	}
 
-	componentWillMount() {
-		this.context.onSetTitle(title);
-	}
+	// componentWillMount() {
+	// 	this.context.onSetTitle(title);
+	// }
 
 	static getStores() {
 		return [GeographyStore];

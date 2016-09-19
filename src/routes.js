@@ -58,7 +58,7 @@ const router = new Router(on => {
 			vehicleReq = VehicleStore.fetchVehicle;
 		}
 
-		Promise.all([
+		await Promise.all([
 			SiteStore.fetchPageData(slug),
 			vehicleReq ? vehicleReq() : null,
 			CategoryStore.fetchCategories(),
@@ -225,7 +225,7 @@ const router = new Router(on => {
 	});
 
 	on('/', async (state) => {
-		Promise.all([
+		await Promise.all([
 			ProductStore.fetchFeatured(),
 			SiteStore.fetchTestimonials(),
 		]);

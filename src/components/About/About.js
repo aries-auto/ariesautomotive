@@ -1,22 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import s from './About.scss';
 import withStyles from '../../decorators/withStyles';
 
-const title = 'About Us';
+// const title = 'About Us';
 
 @withStyles(s)
 class About extends Component {
-
-	static contextTypes = {
-		onSetTitle: PropTypes.func.isRequired,
-		onPageNotFound: PropTypes.func.isRequired,
-		onSetMeta: PropTypes.func.isRequired,
-		seo: PropTypes.func.isRequired,
-	};
-
-	componentWillMount() {
-		this.context.onSetTitle(title);
-	}
 
 	getMission() {
 		return (
