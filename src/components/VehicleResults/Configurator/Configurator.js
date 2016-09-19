@@ -37,11 +37,16 @@ class Configurator extends Component {
 		this.vehiclePartsIndex = 0;
 	}
 
+	componentWillMount() {
+		const script = document.createElement('script');
+		script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js';
+		document.body.appendChild(script);
+	}
+
 	componentDidMount() {
 		console.log('component mounted');
 		this.props.win.onerror = (e) => {
-			console.log('on error');
-			console.log(e);
+			console.log('on error', e);
 			$('.vehicle-wrapper').hide();
 			$('.error').html('<h4>No image of vehicle with parts available.</h4>');
 			$('.error').removeClass('hidden');
@@ -49,8 +54,8 @@ class Configurator extends Component {
 	}
 
 	componentWillReceiveProps(next) {
-		console.log('will receive props');
 		console.log('next vehicle', next.vehicle);
+		console.log('will receive props');
 		let reportError = false;
 		$('.error').addClass('hidden');
 		if (next.partToRemove && next.partToRemove !== this.props.partToRemove) {
@@ -90,6 +95,7 @@ class Configurator extends Component {
 	}
 
 	static getPropsFromStores() {
+		console.log('getting props from stores');
 		return VehicleStore.getState();
 	}
 
@@ -139,10 +145,10 @@ class Configurator extends Component {
 	}
 
 	render() {
+		console.log('rendering configurator');
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<div className="error hidden"></div>
-				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 				<Display parts={this.props.vehicle.parts} id={this.props.context.vehicleParts[this.vehiclePartsIndex].vehicle.intVehicleID} />
 			</div>
 		);
