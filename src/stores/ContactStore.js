@@ -72,7 +72,17 @@ class ContactStore extends EventEmitter {
 	}
 
 	async postContactData(contactType) {
-		const inputs = JSON.stringify(this.state.inputs);
+		const frm = this.state.inputs;
+
+		if (frm.businessType) {
+			const btype = frm.businessType;
+			delete frm.businessType;
+			frm.businessType = {
+				type: btype,
+			};
+		}
+
+		const inputs = JSON.stringify(frm);
 		try {
 			const url = `${apiBase}/contact/${contactType}?key=${KEY}&brandID=${brand}`;
 			await fetch(url, {

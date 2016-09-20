@@ -15,7 +15,6 @@ class BecomeDealer extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		enabled: PropTypes.bool,
 		countries: PropTypes.array,
 		inputs: PropTypes.object,
 	};
@@ -31,7 +30,10 @@ class BecomeDealer extends Component {
 		super();
 		this.modifyValue = this.modifyValue.bind(this);
 		this.submit = this.submit.bind(this);
-		this.checkDisabled = this.checkDisabled.bind(this);
+
+		this.state = {
+			enabled: false,
+		};
 	}
 
 	componentWillMount() {
@@ -113,15 +115,20 @@ class BecomeDealer extends Component {
 			if (!fields[i]) {
 				continue;
 			}
+
 			if (fields[i].required === true) {
 				const f = this.props.inputs[fields[i].name];
 				if (!f || f === undefined) {
-					ContactActions.setFormValidation(false);
+					this.setState({
+						enabled: false,
+					});
 					return;
 				}
 			}
 		}
-		ContactActions.setFormValidation(true);
+		this.setState({
+			enabled: true,
+		});
 	}
 
 	modifyValue(event) {
@@ -149,7 +156,7 @@ class BecomeDealer extends Component {
 						<form name="contactForm" role="form" noValidate>
 							{this.getForm()}
 							<div className="form-group col-xs-12">
-								<button type="submit" className="btn btn-primary" disabled={!this.props.enabled} onClick={this.submit}>SEND</button>
+								<button type="submit" className="btn btn-primary" disabled={!this.state.enabled} onClick={this.submit}>SEND</button>
 							</div>
 						</form>
 					</div>
