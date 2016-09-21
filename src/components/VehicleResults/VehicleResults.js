@@ -116,7 +116,6 @@ class VehicleResults extends Component {
 			const tmp = this.createParentItem(cat);
 			categoriesGroup.children = categoriesGroup.children.concat(tmp.children);
 		});
-
 		categoriesGroup.children.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;
