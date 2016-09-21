@@ -65,6 +65,7 @@ class VehicleResults extends Component {
 			activeCat: 0,
 		};
 		this.getMatched = this.getMatched.bind(this);
+		this.createParentItem = this.createParentItem.bind(this);
 	}
 
 	componentWillMount() {
@@ -104,14 +105,26 @@ class VehicleResults extends Component {
 		}
 
 		const groups = [];
-		this.props.categories.map((c) => {
+		const categoriesGroup = {
+			children: [],
+		};
+
+		if (this.props.categories && this.props.categories.length > 0) {
+			this.props.categories.sort((a, b) => a.sort > b.sort);
+		}
+		this.props.categories.map((cat) => {
+			const tmp = this.createParentItem(cat);
+			categoriesGroup.children = categoriesGroup.children.concat(tmp.children);
+		});
+
+		categoriesGroup.children.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;
 			}
 
 			let subs = [];
 			(c.children || []).map((cat) => {
-				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.id);
+				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 				if (tmp.length > 0) {
 					subs = subs.concat(tmp);
 				}
@@ -131,6 +144,19 @@ class VehicleResults extends Component {
 		});
 
 		return groups;
+	}
+
+	createParentItem(cat) {
+		if (cat.children && cat.children.length > 0) {
+			cat.children.sort((a, b) => a.sort > b.sort);
+		}
+		const newCat = {
+			cat,
+			title: cat.title,
+			children: cat.children.map(this.createParentItem),
+		};
+
+		return newCat;
 	}
 
 	render() {
