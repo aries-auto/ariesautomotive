@@ -13,7 +13,12 @@ class VehicleActions {
 			'fetchFitments',
 			'updateFitments',
 			'failedFitments',
-		);
+			'set',
+			'setShowStyleState',
+			'addPartToVehicle',
+			'removePartFromVehicle',
+			'setIconParts',
+			'setLookupCategories');
 	}
 }
 

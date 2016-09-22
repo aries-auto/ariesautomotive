@@ -13,6 +13,10 @@ class Result extends Component {
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
 		fitments: PropTypes.array,
+		iconParts: PropTypes.oneOfType([
+			React.PropTypes.object,
+			React.PropTypes.array,
+		]),
 	};
 
 	constructor() {
@@ -34,6 +38,7 @@ class Result extends Component {
 				}
 
 				if (ft.product.categories[0].id === props.result.category.id) {
+					ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
 					products.push(ft.product);
 				}
 			});
@@ -59,14 +64,7 @@ class Result extends Component {
 		) {
 			return null;
 		}
-
 		if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
-			// TODO: this needs to autoload the fitment information for 'all',
-			// no need to make the user select it.
-			// However, the following creates a dispatch loop.
-			//
-			// VehicleStore.fetchFitments(this.props.result, 'all');
-
 			return null;
 		}
 
@@ -100,7 +98,7 @@ class Result extends Component {
 					<span>{this.props.result.category.title}</span>
 					{this.renderStyles()}
 				</div>
-				<PartResults className={`test`} parts={this.state.products} />
+				<PartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} />
 			</div>
 		);
 	}

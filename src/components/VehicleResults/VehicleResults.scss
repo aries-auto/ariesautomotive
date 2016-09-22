@@ -1,13 +1,103 @@
-@import '../classes.scss';
-@import '../variables.scss';
-
-.root {
-    padding: 15px;
+.categoryStyle {
+    font-size: 14px;
 }
 
+.container {
+    width: 100%;
+    min-height: 300px;
+    margin-top: .4em;
+	.visual {
+		display: flex;
+		flex-direction: column;
+	}
+}
+.root {
+	margin:15px;
+}
+
+.loader {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.matched {
+    li {
+        width: 100%;
+        margin: 0 0 6px;
+        border-radius: 4px;
+
+        > a {
+            padding: 5px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-family: $font-family-base;
+            font-size: 18px;
+            font-weight: bold;
+            color: $new-red;
+            text-align: left;
+            border: 0;
+            border-radius: 4px;
+
+            &:hover, &:focus {
+                cursor: pointer;
+                background-color: $off-white;
+            }
+        }
+
+        &.active > a {
+            background-color: $white-base;
+        }
+    }
+
+    .active {
+        background-color: white;
+    }
+}
+
+.clearfix {
+    clear: both;
+}
+.envision {
+    text-align: center;
+}
+
+
 @media (min-width: $screen-md-min) {
-    .root {
+    .container {
         width: 100%;
         padding: 2em;
+
+		.visual {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+    }
+
+    .loader {
+        flex-direction: row;
+    }
+
+    .root {
+        padding: 0;
+
+        li {
+            width: 100%;
+
+            > a {
+                width: 100%;
+                border-radius: 4px 0 0 4px;
+            }
+        }
+    }
+    .envision {
+        width: 38%;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left
+    }
+
+    .configurator {
+        display: inline-block;
     }
 }

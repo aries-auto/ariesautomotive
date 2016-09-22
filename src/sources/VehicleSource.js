@@ -41,7 +41,6 @@ const VehicleSource = {
 						return null;
 					}
 				}
-
 				return st.vehicle;
 			},
 
@@ -129,7 +128,7 @@ const VehicleSource = {
 
 				let same = true;
 				st.fitments.map((ft, i) => {
-					if (!fits[i || fits[i].product_identifier !== ft.product_identifier]) {
+					if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
 						same = false;
 					}
 				});
