@@ -7,7 +7,7 @@ const SiteSource = {
 		return {
 			remote() {
 				return new Promise((res, rej) => {
-					fetch(`/api/testimonials`)
+					fetch(`/api/testimonials.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);
@@ -82,7 +82,7 @@ const SiteSource = {
 		return {
 			remote() {
 				return new Promise((res, rej) => {
-					fetch(`/api/content/all`)
+					fetch(`/api/content/all.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);
@@ -107,7 +107,7 @@ const SiteSource = {
 		return {
 			remote(st, slug) {
 				return new Promise((res, rej) => {
-					fetch(`/api/content/${slug}`)
+					fetch(`/api/content/${slug}.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then((data) => res(data, slug)).catch(rej);

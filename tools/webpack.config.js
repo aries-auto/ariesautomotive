@@ -72,29 +72,37 @@ const config = {
 					path.resolve(__dirname, '../src'),
 				],
 				loaders: ['babel-loader', 'eslint'],
+			// }, {
+			// 	test: /\.scss$/,
+			// 	exclude: /node_modules/,
+			// 	loaders: [
+			// 		'isomorphic-style-loader',
+			// 		'css-loader?' + (DEBUG ? 'sourceMap&' : 'sourceMap&') +
+			// 		'modules&localIdentName=[name]_[local]_[hash:base64:3]',
+			// 		'postcss-loader',
+			// 	],
+			// }, {
 			}, {
 				test: /\.css/,
-				include: /node_modules/,
 				loaders: [
 					'isomorphic-style-loader',
 					`css-loader?${JSON.stringify({
 						sourceMap: DEBUG,
 						// CSS Modules https://github.com/css-modules/css-modules
-						modules: false,
-						localIdentName: '[local]',
+						modules: true,
+						localIdentName: DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
 						// CSS Nano http://cssnano.co/options/
-						minimize: !DEBUG,
+						minimize: true,
 					})}`,
-					// 'postcss-loader?pack=default',
+					'postcss-loader?pack=default',
 				],
 			}, {
 				test: /\.scss$/,
-				exclude: /node_modules/,
 				loaders: [
 					'isomorphic-style-loader',
-					'css-loader?' + (DEBUG ? 'sourceMap&' : 'sourceMap&') +
+					'css-loader?minimize&' + (DEBUG ? 'sourceMap&' : 'sourceMap&') +
 					'modules&localIdentName=[name]_[local]_[hash:base64:3]',
-					'postcss-loader',
+					'postcss-loader?pack=sass',
 				],
 			}, {
 				test: /\.json$/,
@@ -112,13 +120,22 @@ const config = {
 		],
 	},
 
-	postcss: function plugins(bundler) {
-		return [
-			require('postcss-import')({ addDependencyTo: bundler }),
-			require('precss')(),
-			require('postcss-media-minmax'),
-			require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
-		];
+	postcss(bundler) {
+		return {
+			default: [
+				require('postcss-import')({ addDependencyTo: bundler }),
+				require('precss')(),
+				require('postcss-color-function'),
+				require('postcss-media-minmax'),
+				require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
+			],
+			sass: [
+				require('postcss-import')({ addDependencyTo: bundler }),
+				require('precss')(),
+				require('postcss-media-minmax'),
+				require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
+			],
+		};
 	},
 };
 

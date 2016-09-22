@@ -6,7 +6,7 @@ const CategorySource = {
 		return {
 			remote() {
 				return new Promise((res, rej) => {
-					fetch(`/api/categories`)
+					fetch(`/api/categories.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);
@@ -31,7 +31,7 @@ const CategorySource = {
 		return {
 			remote(state, id) {
 				return new Promise((res, rej) => {
-					fetch(`/api/categories/${id}`)
+					fetch(`/api/categories/${id}.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);
