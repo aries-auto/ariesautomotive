@@ -31,8 +31,10 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use(morgan('combined'));
 server.use(compression());
 
-server.get('/api/categories/:id', (req, res) => {
+server.get('/api/categories/:id.json', (req, res) => {
 	memcached.get(`api:categories:${req.params.id}`, (err, val) => {
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
 			zlib.gunzip(val, (e, result) => {
 				if (!e && result) {
@@ -50,7 +52,8 @@ server.get('/api/categories/:id', (req, res) => {
 						res.status(200).json(data.toString('utf8'));
 						return;
 					}
-					memcached.set(`api:categories:${req.params.id}`, result, 8640, () => {
+
+					memcached.set(`api:categories:${req.params.id}`, result, 86400, () => {
 						res.status(200).json(data);
 						return;
 					});
@@ -60,10 +63,12 @@ server.get('/api/categories/:id', (req, res) => {
 	});
 });
 
-server.get('/api/categories', (req, res) => {
+server.get('/api/categories.json', (req, res) => {
 	memcached.get('api:categories', (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
 		if (!err && val) {
-			res.send(val);
+			res.json(val);
 			return;
 		}
 
@@ -71,21 +76,19 @@ server.get('/api/categories', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:categories', data, 8640, (e) => {
-				if (e) {
-					res.error(e);
-					return;
-				}
-				res.send(data);
+			memcached.set('api:categories', data, 86400, () => {
+				res.json(data);
 			});
 		});
 	});
 });
 
-server.get('/api/content/all', (req, res) => {
+server.get('/api/content/all.json', (req, res) => {
 	memcached.get('api:content:all', (err, val) => {
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
-			res.send(val);
+			res.json(val);
 			return;
 		}
 
@@ -93,31 +96,31 @@ server.get('/api/content/all', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:content:all', data, 8640, (e) => {
-				if (e) {
-					res.error(e);
-					return;
-				}
-				res.send(data);
+			memcached.set('api:content:all', data, 86400, () => {
+				res.json(data);
 			});
 		});
 	});
 });
 
-server.get('/api/content', (req, res) => {
-	res.end('[]');
+server.get('/api/content/.json', (req, res) => {
+	res.setHeader('Cache-Control', 'public, max-age=86400');
+	res.setHeader('Content-Type', 'application/json');
+	res.json('[]');
 });
 
-server.get('/api/content/:slug', (req, res) => {
+server.get('/api/content/:slug.json', (req, res) => {
 	const slug = req.params.slug;
 	if (slug === '' || slug.indexOf('_ah') !== -1) {
-		res.end('[]');
+		res.json('[]');
 		return;
 	}
 
 	memcached.get(`api:content:${slug}`, (err, val) => {
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
-			res.send(val);
+			res.json(val);
 			return;
 		}
 
@@ -125,24 +128,21 @@ server.get('/api/content/:slug', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set(`api:content:${slug}`, data, 8640, (e) => {
-				if (e) {
-					res.error(e);
-					return;
-				}
-				res.send(data);
+			memcached.set(`api:content:${slug}`, data, 86400, () => {
+				res.json(data);
 			});
 		}).catch((e) => {
-			res.send(e);
-			res.end();
+			res.json(e);
 		});
 	});
 });
 
-server.get('/api/testimonials', (req, res) => {
+server.get('/api/testimonials.json', (req, res) => {
 	memcached.get('api:testimonials', (err, val) => {
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
-			res.send(val);
+			res.json(val);
 			return;
 		}
 
@@ -150,21 +150,19 @@ server.get('/api/testimonials', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:testimonials', data, 8640, (e) => {
-				if (e) {
-					res.error(e);
-					return;
-				}
-				res.send(data);
+			memcached.set('api:testimonials', data, 86400, () => {
+				res.json(data);
 			});
 		});
 	});
 });
 
-server.get('/api/products/featured', (req, res) => {
+server.get('/api/products/featured.json', (req, res) => {
 	memcached.get('api:products:featured', (err, val) => {
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
-			res.send(val);
+			res.json(val);
 			return;
 		}
 
@@ -172,12 +170,8 @@ server.get('/api/products/featured', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:products:featured', data, 8640, (e) => {
-				if (e) {
-					res.error(e);
-					return;
-				}
-				res.send(data);
+			memcached.set('api:products:featured', data, 86400, () => {
+				res.json(data);
 			});
 		});
 	});

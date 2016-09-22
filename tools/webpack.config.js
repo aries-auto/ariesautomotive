@@ -92,7 +92,7 @@ const config = {
 						modules: true,
 						localIdentName: DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
 						// CSS Nano http://cssnano.co/options/
-						minimize: !DEBUG,
+						minimize: true,
 					})}`,
 					'postcss-loader?pack=default',
 				],
@@ -100,9 +100,9 @@ const config = {
 				test: /\.scss$/,
 				loaders: [
 					'isomorphic-style-loader',
-					`css-loader?${JSON.stringify({ sourceMap: DEBUG, minimize: !DEBUG })}`,
+					'css-loader?minimize&' + (DEBUG ? 'sourceMap&' : 'sourceMap&') +
+					'modules&localIdentName=[name]_[local]_[hash:base64:3]',
 					'postcss-loader?pack=sass',
-					'sass-loader',
 				],
 			}, {
 				test: /\.json$/,

@@ -9,7 +9,7 @@ const ProductSource = {
 		return {
 			remote() {
 				return new Promise((res, rej) => {
-					fetch(`/api/products/featured`)
+					fetch(`/api/products/featured.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);
