@@ -64,6 +64,9 @@ class Result extends Component {
 		) {
 			return null;
 		}
+		if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
+			return null;
+		}
 
 		return (
 			<div className={'form-group'}>
