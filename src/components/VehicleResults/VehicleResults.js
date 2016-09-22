@@ -176,7 +176,9 @@ class VehicleResults extends Component {
 					{this.props.context.vehicleParts ? <Configurator win={this.props.win} className={s.configurator} context={this.props.context} /> : null}
 					{this.props.context.vehicleParts ? <Envision className={s.envision} /> : null}
 				</div>
-				{matched}
+				<div className={s.matched}>
+					{matched}
+				</div>
 			</div>
 		);
 	}

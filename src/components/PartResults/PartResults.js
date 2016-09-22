@@ -114,7 +114,7 @@ class PartResults extends Component {
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
 										</a>
 
-										<div className={cx('side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1', s.partBox)}>
+										<div className={cx('side-box col-xs-12 col-sm-12 col-md-12 col-lg-12', s.partBox)}>
 
 											<div className={s.price}>
 												{this.getPrice(part)}

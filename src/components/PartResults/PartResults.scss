@@ -21,7 +21,7 @@
 .product {
     position: relative;
     min-width: 300px;
-    max-width: 85%;
+    max-width: 340px;
     min-height: 250px;
     margin: 10px auto;
     box-shadow: 1px 0 10px 2px $lookup-color;
@@ -34,16 +34,16 @@
     }
 
     .header {
-        min-height: 65px;
-        margin-bottom: 10px;
+        min-height: 45px;
+        margin-bottom: 2px;
         overflow: hidden;
     }
 
     .header .desc {
         font-family: "ff-good-headline-web-pro-con", sans-serif;
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 400;
-        line-height: 28px;
+        line-height: 24px;
 
         a {
             color: inherit;
@@ -62,7 +62,7 @@
 
     .header .partNum {
         margin: 0 5px;
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 400;
         line-height: 28px;
         color: $gray-light;
