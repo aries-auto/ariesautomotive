@@ -67,6 +67,16 @@ class Navigation extends Component {
 		return cats;
 	}
 	render() {
+		let lookup = null;
+		switch (brand.id) {
+		case 3:
+			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
+			break;
+		case 4:
+			// TODO: Implement Luverne Lookup here
+			break;
+		default:
+		}
 		return (
 			<div
 				className={cx(s.root, this.props.className)}
@@ -78,7 +88,7 @@ class Navigation extends Component {
 					</Link>
 				</div>
 				<Menu items={this.props.menu} />
-				<Lookup vehicle={this.props.vehicle} params={this.props.params} />
+				{lookup }
 			</div>
 		);
 	}
