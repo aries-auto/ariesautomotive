@@ -104,6 +104,9 @@ class VehicleResults extends Component {
 			return <span></span>;
 		}
 
+		// console.log('Cats: ', this.props.categories);
+		console.log('LK Cats: ', this.props.vehicle.lookup_category);
+
 		const groups = [];
 		const categoriesGroup = {
 			children: [],
@@ -128,6 +131,7 @@ class VehicleResults extends Component {
 					subs = subs.concat(tmp);
 				}
 			});
+			console.log(subs);
 			if (subs.length > 0) {
 				groups.push(
 					<CategorizedResult
