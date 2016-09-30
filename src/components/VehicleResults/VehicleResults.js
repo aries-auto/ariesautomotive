@@ -105,7 +105,7 @@ class VehicleResults extends Component {
 		}
 
 		// console.log('Cats: ', this.props.categories);
-		console.log('LK Cats: ', this.props.vehicle.lookup_category);
+		// console.log('LK Cats: ', this.props.vehicle.lookup_category);
 
 		const groups = [];
 		const categoriesGroup = {
@@ -126,12 +126,14 @@ class VehicleResults extends Component {
 
 			let subs = [];
 			(c.children || []).map((cat) => {
+				console.log(c);
+				console.log(cat);
 				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 				if (tmp.length > 0) {
 					subs = subs.concat(tmp);
 				}
 			});
-			console.log(subs);
+			// console.log(subs);
 			if (subs.length > 0) {
 				groups.push(
 					<CategorizedResult

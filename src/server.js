@@ -32,7 +32,7 @@ server.use(morgan('combined'));
 server.use(compression());
 
 server.get('/api/categories/:id.json', (req, res) => {
-	memcached.get(`api:categories:${req.params.id}`, (err, val) => {
+	memcached.get(`api:categories:${req.params.id}:${brand.id}`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -52,7 +52,7 @@ server.get('/api/categories/:id.json', (req, res) => {
 						res.status(200).json(data.toString('utf8'));
 						return;
 					}
-					memcached.set(`api:categories:${req.params.id}`, result, 86400, () => {
+					memcached.set(`api:categories:${req.params.id}:${brand.id}`, result, 86400, () => {
 						res.status(200).json(data);
 						return;
 					});
