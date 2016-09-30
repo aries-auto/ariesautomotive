@@ -82,12 +82,22 @@ class PartResults extends Component {
 	}
 
 	handleAddToVehicle(part) {
+		if (!this.isEnvisionPart(part)) {
+			return null;
+		}
 		ga.event({
 			category: 'Envision',
 			action: 'Add Part',
 			label: `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model} ${part.part_number || ''}`,
 		});
 		VehicleActions.addPartToVehicle(part);
+	}
+
+	isEnvisionPart(part) {
+		if (!part.iconLayer) {
+			return false;
+		}
+		return true;
 	}
 
 	render() {
@@ -101,13 +111,10 @@ class PartResults extends Component {
 									<div key={i} className={cx(s.product, 'row', 'well')}>
 										<div className={s.header}>
 											<span className={s.desc}>
-												<a href={'/part/' + part.part_number} title={part.short_description}>{part.short_description}
-													<span className={s.partNum}>{part.part_number}</span>
-												</a>
+												{part.short_description} <span className={s.partNum}>{part.part_number}</span>
 											</span>
 										</div>
-
-										<a href={'/part/' + part.part_number} title={`${part.short_description} - #${part.part_number}`} className={s.image}>
+										<a onClick={this.handleAddToVehicle.bind(this, part)} title={`${part.short_description} - #${part.part_number}`} className={cx(s.image, (this.isEnvisionPart(part)) ? s.clickable : s.notClickable)}>
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
 										</a>
 
@@ -124,9 +131,9 @@ class PartResults extends Component {
 										</div>
 										<div className={s.nothing}>&nbsp;</div>
 										<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
-											<AddToVehicle className={s.addToVehicle} vehicle={this.props.vehicle} part={part} iconParts={this.props.iconParts} />
-											<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 											<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
+											<a href="/buy" className={cx('btn', 'red-transparent-button', (this.isEnvisionPart(part)) ? s.whereToBuyEnvision : s.whereToBuy)} role="button">Where To Buy</a>
+											<AddToVehicle className={cx(s.addToVehicle, s.flexButton)} vehicle={this.props.vehicle} part={part} iconParts={this.props.iconParts} />
 										</div>
 									</div>
 								);

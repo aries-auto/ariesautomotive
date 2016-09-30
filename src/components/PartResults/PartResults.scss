@@ -17,6 +17,13 @@
     justify-content: flex-start;
 }
 
+.clickable {
+	cursor:pointer;
+}
+.notClickable{
+	cursor:default;
+}
+
 .product {
     position: relative;
     min-width: 300px;
@@ -122,8 +129,17 @@
         text-align: center;
     }
 
-    .viewDetails, .whereToBuy {
-        width: 40%;
+		.viewDetails {
+			width: 80%;
+		}
+		.whereToBuy {
+			width:80%;
+		}
+		.whereToBuyEnvision{
+			width:40%;
+		}
+
+    .viewDetails, .whereToBuy, .whereToBuyEnvision {
         min-width: 6em;
         margin: 10px auto 0;
         font-size: 1em;
@@ -131,7 +147,7 @@
     }
 
     .addToVehicle {
-        width: 80%;
+        width: 40%;
         font-size: 1em;
         transition: all .2s ease;
 
