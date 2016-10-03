@@ -24,6 +24,12 @@
 	cursor:default;
 }
 
+.nonEnvisionProduct {
+	transition: none !important;
+	transform: none !important;
+	box-shadow: none !important;
+}
+
 .product {
     position: relative;
     min-width: 300px;

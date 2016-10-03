@@ -108,7 +108,7 @@ class PartResults extends Component {
 						<div className={s.chunk} key={j}>
 							{chunk.map((part, i) => {
 								return (
-									<div key={i} className={cx(s.product, 'row', 'well')}>
+									<div key={i} className={cx(s.product, 'row', 'well', (this.isEnvisionPart(part)) ? '' : s.nonEnvisionProduct)}>
 										<div className={s.header}>
 											<span className={s.desc}>
 												{part.short_description} <span className={s.partNum}>{part.part_number}</span>
