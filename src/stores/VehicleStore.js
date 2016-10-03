@@ -10,14 +10,14 @@ class VehicleStore extends EventEmitter {
 		super();
 		this.state = {
 			vehicle: {
-				base: {
+				base_vehicle: {
 					year: '',
 					make: '',
 					model: '',
 				},
-				availableYears: [],
-				availableMakes: [],
-				availableModels: [],
+				available_years: [],
+				available_makes: [],
+				available_models: [],
 				lookup_category: [],
 				products: [],
 			},
@@ -51,13 +51,14 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleUpdateVehicle(v) {
-		if (v.base.year !== '' && !v.availableYears) {
-			v.availableYears = this.state.vehicle.availableYears;
+		console.log(v);
+		if (v.base_vehicle.year !== '' && !v.available_years) {
+			v.available_years = this.state.vehicle.available_years;
 		}
-		if (v.base.make !== '' && !v.availableMakes) {
+		if (v.base_vehicle.make !== '' && !v.available_makes) {
 			v.availableMakes = this.state.vehicle.availableMakes;
 		}
-		if (v.base.model !== '' && !v.availableModels) {
+		if (v.base_vehicle.model !== '' && !v.available_models) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
 

@@ -9,6 +9,7 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 // import VehicleStyle from './VehicleStyle';
 import Envision from './Envision';
 import Configurator from './Configurator';
+import { brand } from '../../config';
 
 @withStyles(s)
 @connectToStores
@@ -36,7 +37,7 @@ class VehicleResults extends Component {
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
-			availableYears: PropTypes.array,
+			available_years: PropTypes.array,
 			availableMakes: PropTypes.array,
 			availableModels: PropTypes.array,
 			lookup_category: PropTypes.array,
@@ -104,9 +105,6 @@ class VehicleResults extends Component {
 			return <span></span>;
 		}
 
-		// console.log('Cats: ', this.props.categories);
-		// console.log('LK Cats: ', this.props.vehicle.lookup_category);
-
 		const groups = [];
 		const categoriesGroup = {
 			children: [],
@@ -126,14 +124,67 @@ class VehicleResults extends Component {
 
 			let subs = [];
 			(c.children || []).map((cat) => {
-				console.log(c);
-				console.log(cat);
 				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 				if (tmp.length > 0) {
 					subs = subs.concat(tmp);
 				}
 			});
-			// console.log(subs);
+			if (subs.length > 0) {
+				groups.push(
+					<CategorizedResult
+						activeIndex={this.props.activeIndex}
+						parent={c}
+						subs={subs}
+						fitments={this.props.fitments}
+						key={groups.length}
+						iconParts={this.props.context.iconParts}
+					/>
+				);
+			}
+		});
+
+		return groups;
+	}
+
+	getLuverneMatched() {
+		if (
+			!this.props.vehicle ||
+			!this.props.vehicle.lookup_category ||
+			this.props.vehicle.lookup_category.length === 0 ||
+			!this.props.categories ||
+			this.props.categories.length === 0
+		) {
+			return <span></span>;
+		}
+
+		console.log(this.props.vehicle.lookup_category);
+
+		const groups = [];
+		const categoriesGroup = {
+			children: [],
+		};
+
+		if (this.props.categories && this.props.categories.length > 0) {
+			this.props.categories.sort((a, b) => a.sort > b.sort);
+		}
+		this.props.categories.map((cat) => {
+			const tmp = this.createParentItem(cat);
+			console.log(tmp);
+
+			categoriesGroup.children = categoriesGroup.children.concat(tmp.children);
+		});
+		categoriesGroup.children.map((c) => {
+			if (!c.children || !c.children.length === 0) {
+				return;
+			}
+
+			let subs = [];
+			(c.children || []).map((cat) => {
+				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
+				if (tmp.length > 0) {
+					subs = subs.concat(tmp);
+				}
+			});
 			if (subs.length > 0) {
 				groups.push(
 					<CategorizedResult
@@ -165,7 +216,10 @@ class VehicleResults extends Component {
 	}
 
 	render() {
-		const matched = this.getMatched();
+		let matched = this.getMatched();
+		if (brand.id === '4') {
+			matched = this.getLuverneMatched();
+		}
 		return (
 			<div className={s.root}>
 				<ol className="breadcrumb">

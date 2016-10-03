@@ -17,14 +17,14 @@ class Lookup extends Component {
 		className: PropTypes.string,
 		valid: PropTypes.bool,
 		vehicle: PropTypes.shape({
-			base: PropTypes.shape({
+			base_vehicle: PropTypes.shape({
 				year: PropTypes.string,
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
-			availableYears: PropTypes.array,
-			availableMakes: PropTypes.array,
-			availableModels: PropTypes.array,
+			available_years: PropTypes.array,
+			available_makes: PropTypes.array,
+			available_odels: PropTypes.array,
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
@@ -44,7 +44,7 @@ class Lookup extends Component {
 		this.viewParts = this.viewParts.bind(this);
 		this.resetVehicle = this.resetVehicle.bind(this);
 
-		if (props.vehicle.base.model && props.vehicle.base.model !== '') {
+		if (props.vehicle.base_vehicle.model && props.vehicle.base_vehicle.model !== '') {
 			this.state = {
 				valid: true,
 			};
@@ -60,7 +60,7 @@ class Lookup extends Component {
 	}
 
 	viewParts() {
-		const vehicle = this.props.vehicle.base || {};
+		const vehicle = this.props.vehicle.base_vehicle || {};
 		Location.push({
 			...(parsePath(
 				`/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`
@@ -75,8 +75,8 @@ class Lookup extends Component {
 	}
 
 	showVehicle() {
-		const link = `/vehicle/${this.props.vehicle.base.year}/${this.props.vehicle.base.make}/${this.props.vehicle.base.model}`;
-		const v = `${this.props.vehicle.base.year} ${this.props.vehicle.base.make} ${this.props.vehicle.base.model}`;
+		const link = `/vehicle/${this.props.vehicle.base_vehicle.year}/${this.props.vehicle.base_vehicle.make}/${this.props.vehicle.base_vehicle.model}`;
+		const v = `${this.props.vehicle.base_vehicle.year} ${this.props.vehicle.base_vehicle.make} ${this.props.vehicle.base_vehicle.model}`;
 		return (
 			<div className={s.vehicleName}>
 				<a href={link}>
@@ -96,9 +96,9 @@ class Lookup extends Component {
 		let valid = <NewVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
 		if (
 			this.props.vehicle &&
-			this.props.vehicle.base.year !== '' &&
-			this.props.vehicle.base.make !== '' &&
-			this.props.vehicle.base.model !== '' &&
+			this.props.vehicle.base_vehicle.year !== '' &&
+			this.props.vehicle.base_vehicle.make !== '' &&
+			this.props.vehicle.base_vehicle.model !== '' &&
 			this.props.vehicle.products
 		) {
 			valid = this.showVehicle();

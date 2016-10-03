@@ -32,16 +32,16 @@ const VehicleSource = {
 			},
 
 			local(st, args) {
-				if (!args && (!st.vehicle.availableYears || st.vehicle.availableYears.length === 0)) {
+				if (!args && (!st.vehicle.available_years || st.vehicle.available_years.length === 0)) {
 					return null;
 				} else if (args) {
-					if (args[0] && args[0] !== st.vehicle.base.year) {
+					if (args[0] && args[0] !== st.vehicle.base_vehicle.year) {
 						return null;
 					}
-					if (args[1] && args[1] !== st.vehicle.base.make) {
+					if (args[1] && args[1] !== st.vehicle.base_vehicle.make) {
 						return null;
 					}
-					if (args[2] && args[2] !== st.vehicle.base.model) {
+					if (args[2] && args[2] !== st.vehicle.base_vehicle.model) {
 						return null;
 					}
 				}
