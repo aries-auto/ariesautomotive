@@ -108,15 +108,16 @@ class PartResults extends Component {
 						<div className={s.chunk} key={j}>
 							{chunk.map((part, i) => {
 								return (
-									<div key={i} className={cx(s.product, 'row', 'well')}>
+									<div key={i} className={cx(s.product, 'row', 'well', (part.iconLayer) ? s.clickable : s.notClickable)} onClick={(part.iconLayer) ? this.handleAddToVehicle.bind(this, part) : null }>
 										<div className={s.header}>
 											<span className={s.desc}>
 												{part.short_description} <span className={s.partNum}>{part.part_number}</span>
 											</span>
 										</div>
-										<a onClick={this.handleAddToVehicle.bind(this, part)} title={`${part.short_description} - #${part.part_number}`} className={cx(s.image, (this.isEnvisionPart(part)) ? s.clickable : s.notClickable)}>
+
+										<div className={s.image}>
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
-										</a>
+										</div>
 
 										<div className={cx('side-box col-xs-12 col-sm-12 col-md-7 col-lg-8 col-offset-md-1 col-offset-lg-1', s.partBox)}>
 
