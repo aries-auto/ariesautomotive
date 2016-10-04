@@ -9,9 +9,6 @@ const VehicleSource = {
 		return {
 			remote(st, year, make, model) {
 				let path = `${apiBase}/vehicle/category`;
-				if (brand.id === '4') {
-					path = `${apiBase}/luverne/vehicle`;
-				}
 
 				if (year && year !== '') {
 					path = `${path}/${year}`;
@@ -32,16 +29,16 @@ const VehicleSource = {
 			},
 
 			local(st, args) {
-				if (!args && (!st.vehicle.available_years || st.vehicle.available_years.length === 0)) {
+				if (!args && (!st.vehicle.availableYears || st.vehicle.availableYears.length === 0)) {
 					return null;
 				} else if (args) {
-					if (args[0] && args[0] !== st.vehicle.base_vehicle.year) {
+					if (args[0] && args[0] !== st.vehicle.base.year) {
 						return null;
 					}
-					if (args[1] && args[1] !== st.vehicle.base_vehicle.make) {
+					if (args[1] && args[1] !== st.vehicle.base.make) {
 						return null;
 					}
-					if (args[2] && args[2] !== st.vehicle.base_vehicle.model) {
+					if (args[2] && args[2] !== st.vehicle.base.model) {
 						return null;
 					}
 				}

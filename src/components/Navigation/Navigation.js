@@ -73,7 +73,7 @@ class Navigation extends Component {
 			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
 			break;
 		case '4':
-			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
+			// TODO: Luverne goes here still
 			break;
 		default:
 		}
