@@ -48,7 +48,8 @@ const router = new Router(on => {
 			fetch(`/api/vehicle/category`),
 			fetch(`/api/category`),
 			fetch(`/api/content/all`),
-			slug !== '' ? fetch(`/api/content/slug/${slug}`) : null,
+			// slug !== '' ? fetch(`/api/content/slug/${slug}`) : null,
+			null,
 		]);
 
 		try {
