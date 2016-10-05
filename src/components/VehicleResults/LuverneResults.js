@@ -4,7 +4,7 @@ import s from './VehicleResults.scss';
 import CategorizedResult from './CategorizedResult';
 import withStyles from '../../decorators/withStyles';
 import LuverneStore from '../../stores/LuverneStore';
-import CategoryStore from '../../stores/CategoryStore';
+import CategoryStore from '../../stores/LvCategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 // import VehicleStyle from './VehicleStyle';
 import Envision from './Envision';
@@ -59,6 +59,7 @@ class LuverneResults extends Component {
 
 	constructor() {
 		super();
+		console.log('testing');
 		this.state = {
 			context: {},
 			activeKey: '0',
