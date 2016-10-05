@@ -31,14 +31,14 @@ class LuverneResults extends Component {
 			vehicleParts: PropTypes.array,
 		}),
 		vehicle: PropTypes.shape({
-			base: PropTypes.shape({
+			base_vehicle: PropTypes.shape({
 				year: PropTypes.string,
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
-			availableYears: PropTypes.array,
-			availableMakes: PropTypes.array,
-			availableModels: PropTypes.array,
+			available_years: PropTypes.array,
+			available_makes: PropTypes.array,
+			available_models: PropTypes.array,
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
