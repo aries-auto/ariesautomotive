@@ -26,11 +26,11 @@ export const locations = [
 	{
 		name: 'ARIES AUTOMOTIVE SEATTLE AREA',
 		address: [{
-			address1: '2108 \'B\' Street NW Suite 120',
-			address2: '',
-			city: 'Auburn',
+			address1: '14512 32nd St E',
+			address2: 'Suite 300',
+			city: 'Sumner',
 			state: 'WA',
-			zip: '98001',
+			zip: '98930',
 		}],
 		phone: '(877) 287-8634',
 		fax: '(715) 831-8712',
