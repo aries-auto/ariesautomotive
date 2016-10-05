@@ -58,6 +58,7 @@ const router = new Router(on => {
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
 			VehicleStore.fetchVehicle(),
+			LuverneStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);

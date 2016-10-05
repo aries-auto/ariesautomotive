@@ -137,6 +137,7 @@ class NewLvVehicle extends Component {
 	}
 
 	render() {
+		console.log(this.props.vehicle);
 		return (
 			<form className={s.root} onSubmit={this.handleSubmit}>
 				<label className={s.heading}>Vehicle Lookup</label>
