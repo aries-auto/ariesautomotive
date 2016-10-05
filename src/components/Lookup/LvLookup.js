@@ -3,9 +3,9 @@ import cx from 'classnames';
 import parsePath from 'history/lib/parsePath';
 import Location from '../../core/Location';
 import s from './Lookup.scss';
-import NewVehicle from './NewVehicle';
-import VehicleActions from '../../actions/LuverneActions';
-import VehicleStore from '../../stores/LuverneStore';
+import NewLvVehicle from './NewLvVehicle';
+import LuverneActions from '../../actions/LuverneActions';
+import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -52,11 +52,11 @@ class Lookup extends Component {
 	}
 
 	static getStores() {
-		return [VehicleStore];
+		return [LuverneStore];
 	}
 
 	static getPropsFromStores() {
-		return VehicleStore.getState();
+		return LuverneStore.getState();
 	}
 
 	viewParts() {
@@ -71,7 +71,7 @@ class Lookup extends Component {
 
 	resetVehicle() {
 		this.vehicleSet = false;
-		VehicleActions.setVehicle('', '', '');
+		LuverneActions.setVehicle('', '', '');
 	}
 
 	showVehicle() {
@@ -93,7 +93,7 @@ class Lookup extends Component {
 	}
 
 	render() {
-		let valid = <NewVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
+		let valid = <NewLvVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
 		if (
 			this.props.vehicle &&
 			this.props.vehicle.base_vehicle.year !== '' &&

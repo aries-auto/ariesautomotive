@@ -10,6 +10,7 @@ import CustomContent from './components/CustomContent';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
+import LuverneResults from './components/VehicleResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
@@ -25,7 +26,7 @@ import Envision from './components/Envision/Envision';
 import { iapiBase, apiBase, apiKey, brand, siteMenu, googleAnalyticsId } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
-// import LuverneStore from './stores/LuverneStore';
+import LuverneStore from './stores/LuverneStore';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
 import GeographyStore from './stores/GeographyStore';
@@ -124,6 +125,9 @@ const router = new Router(on => {
 
 	on('/vehicle', async (state) => {
 		state.context.params = state.params;
+		if (brand.id === '4') {
+			return <LuverneResults context={state.context} />;
+		}
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -132,6 +136,9 @@ const router = new Router(on => {
 		LookupActions.set({
 			year: state.params.year,
 		});
+		if (brand.id === '4') {
+			return <LuverneResults context={state.context} />;
+		}
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -141,6 +148,9 @@ const router = new Router(on => {
 			year: state.params.year,
 			make: state.params.make,
 		});
+		if (brand.id === '4') {
+			return <LuverneResults context={state.context} />;
+		}
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -160,6 +170,10 @@ const router = new Router(on => {
 		}
 		// END TODO
 		state.context.params = state.params;
+		if (brand.id === '4') {
+			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
+			return <LuverneResults context={state.context} win={state.win} />;
+		}
 		await VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 		return <VehicleResults context={state.context} win={state.win} />;
 	});

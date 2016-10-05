@@ -24,27 +24,27 @@ export const iapiBase = iapi;
 export const apiBase = api;
 export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !== 'undefined' ? process.env.API_KEY : '9300f7bc-2ca6-11e4-8758-42010af0fd79';
 
-export const brand = {
-	id: '3',
-	name: 'ARIES Automotive',
-	description: 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.',
-	code: 'ARIES',
-	twitter: '@ariesautomotive',
-	defaultContactType: 28,
-	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
-	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
-};
-
 // export const brand = {
-// 	id: '4',
-// 	name: 'Luverne Truck Equipment',
-// 	description: 'LTE',
-// 	code: 'LUVERNE',
-// 	twitter: '@lte',
+// 	id: '3',
+// 	name: 'ARIES Automotive',
+// 	description: 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.',
+// 	code: 'ARIES',
+// 	twitter: '@ariesautomotive',
 // 	defaultContactType: 28,
 // 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
 // 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
 // };
+
+export const brand = {
+	id: '4',
+	name: 'Luverne Truck Equipment',
+	description: 'LTE',
+	code: 'LUVERNE',
+	twitter: '@lte',
+	defaultContactType: 28,
+	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
+	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
+};
 
 export const siteMenu = [
 	{

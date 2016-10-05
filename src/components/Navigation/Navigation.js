@@ -5,6 +5,7 @@ import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
 import Link from '../Link';
 import Lookup from '../Lookup/Lookup';
+import LvLookup from '../Lookup/LvLookup';
 import Menu from './Menu';
 
 @withStyles(s)
@@ -73,7 +74,7 @@ class Navigation extends Component {
 			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
 			break;
 		case '4':
-			// TODO: Luverne goes here still
+			lookup = <LvLookup vehicle={this.props.vehicle} params={this.props.params} />;
 			break;
 		default:
 		}
