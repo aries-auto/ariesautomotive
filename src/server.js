@@ -12,7 +12,7 @@ import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
-import { apiBase, apiKey, brand } from './config';
+import { apiBase, iapiBase, apiKey, brand } from './config';
 
 const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
 const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
@@ -59,6 +59,30 @@ server.get('/api/categories/:id.json', (req, res) => {
 				});
 			});
 		}
+	});
+});
+
+server.get('/api/envision.json', (req, res) => {
+	const year = req.query.year;
+	const make = req.query.make;
+	const model = req.query.model;
+	const key = `api:envision:${year}:${make}:${model}`;
+	memcached.get(key, (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+
+		fetch(`${iapiBase}/envision/vehicle?key=${KEY}&year=${year}&make=${make}&model=${model}&brandID=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set(key, data, 86400, () => {
+				res.json(data);
+			});
+		});
 	});
 });
 

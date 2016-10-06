@@ -1,18 +1,10 @@
-/**
-* React Starter Kit (https://www.reactstarterkit.com/)
-*
-* Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
-*
-* This source code is licensed under the MIT license found in the
-* LICENSE.txt file in the root directory of this source tree.
-*/
-
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'lodash.merge';
 import AssetsPlugin from 'assets-webpack-plugin';
 
 const DEBUG = !process.argv.includes('--release');
+const LUVERNE = process.argv.includes('--luverne');
 const VERBOSE = process.argv.includes('--verbose');
 const AUTOPREFIXER_BROWSERS = [
 	'Android 2.3',
@@ -26,6 +18,7 @@ const AUTOPREFIXER_BROWSERS = [
 ];
 const GLOBALS = {
 	'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
+	'process.env.BRAND': LUVERNE ? '"luverne"' : '"aries"',
 	__DEV__: DEBUG,
 };
 
@@ -72,16 +65,6 @@ const config = {
 					path.resolve(__dirname, '../src'),
 				],
 				loaders: ['babel-loader', 'eslint'],
-			// }, {
-			// 	test: /\.scss$/,
-			// 	exclude: /node_modules/,
-			// 	loaders: [
-			// 		'isomorphic-style-loader',
-			// 		'css-loader?' + (DEBUG ? 'sourceMap&' : 'sourceMap&') +
-			// 		'modules&localIdentName=[name]_[local]_[hash:base64:3]',
-			// 		'postcss-loader',
-			// 	],
-			// }, {
 			}, {
 				test: /\.css/,
 				loaders: [

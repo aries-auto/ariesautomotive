@@ -77,6 +77,7 @@ class Navigation extends Component {
 			break;
 		default:
 		}
+
 		return (
 			<div
 				className={cx(s.root, this.props.className)}

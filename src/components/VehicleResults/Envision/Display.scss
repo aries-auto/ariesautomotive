@@ -1,0 +1,39 @@
+@import '../../variables.scss';
+
+.error > div {
+	float: none;
+}
+
+.vehicleWrapper {
+	display: flex;
+	min-height: 230px;
+	flex-direction: column;
+
+	img {
+		max-width: 100%;
+	}
+
+	div {
+		ul {
+			display: flex;
+			padding: 0;
+			text-align: center;
+			list-style-type: none;
+			flex-direction: row;
+
+			flex-wrap: wrap;
+			justify-content: center;
+
+			li {
+				display: block;
+				margin: 5px 0;
+				cursor: pointer;
+				border: 1px solid $gray-light;
+
+				img {
+					max-width: 50px;
+				}
+			}
+		}
+	}
+}

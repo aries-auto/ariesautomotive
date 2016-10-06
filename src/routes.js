@@ -21,7 +21,6 @@ import LatestNewsItem from './components/LatestNewsItem';
 import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import Envision from './components/Envision/Envision';
 import { iapiBase, apiBase, apiKey, brand, siteMenu, googleAnalyticsId } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
@@ -144,23 +143,11 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
-		// TODO move this to vehicle source at some point
-		try {
-			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
-			const icon = await fetch(url, { method: 'get' }).then((result) => {
-				return result.json();
-			});
-			if (icon.vehicleParts.length > 0) {
-				state.context.vehicleParts = icon.vehicleParts;
-				state.context.iconParts = icon.partNumbers;
-			}
-		} catch (e) {
-			state.context.error = e.message;
-		}
-		// END TODO
-		state.context.params = state.params;
-		await VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
-		return <VehicleResults context={state.context} win={state.win} />;
+		await Promise.all([
+			VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
+			VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),
+		]);
+		return <VehicleResults context={state.context} window={state.win} />;
 	});
 
 	on('/about', async (state) => {
@@ -222,11 +209,6 @@ const router = new Router(on => {
 
 	on('/news', async (state) => {
 		return <LatestNews context={state.context} />;
-	});
-
-	on('/envision', async (state) => {
-		const loc = typeof window !== 'undefined' ? window.location : '';
-		return <Envision context={state.context} protocol={loc.protocol}/>;
 	});
 
 	on('/news/:id', async (state) => {

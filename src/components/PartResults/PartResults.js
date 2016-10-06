@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import ga from 'react-ga';
 import s from './PartResults.scss';
 // import QuickView from '../Product/QuickView';
+import Link from '../Link';
 import AddToVehicle from './AddToVehicle';
 import withStyles from '../../decorators/withStyles';
 import VehicleActions from '../../actions/VehicleActions';
@@ -18,10 +18,7 @@ class PartResults extends Component {
 		className: PropTypes.string,
 		parts: PropTypes.array,
 		vehicle: PropTypes.object,
-		iconParts: PropTypes.oneOfType([
-			React.PropTypes.object,
-			React.PropTypes.array,
-		]),
+		envision: PropTypes.object,
 	};
 
 	constructor() {
@@ -30,6 +27,8 @@ class PartResults extends Component {
 		this.state = {
 			context: {},
 		};
+
+		this.handleAddToVehicle = this.handleAddToVehicle.bind(this);
 	}
 
 	static getStores() {
@@ -85,12 +84,7 @@ class PartResults extends Component {
 	}
 
 	handleAddToVehicle(part) {
-		ga.event({
-			category: 'Envision',
-			action: 'Add Part',
-			label: `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model} ${part.part_number || ''}`,
-		});
-		VehicleActions.addPartToVehicle(part);
+		VehicleActions.addEnvisionPart(part);
 	}
 
 	render() {
@@ -101,18 +95,17 @@ class PartResults extends Component {
 						<div className={s.chunk} key={j}>
 							{chunk.map((part, i) => {
 								return (
-									<div key={i} className={cx(s.product, 'row', 'well')}>
+									<div key={i} className={cx(s.product, 'row', 'well')} onClick={this.handleAddToVehicle.bind(this, part)}>
 										<div className={s.header}>
 											<span className={s.desc}>
-												<a href={'/part/' + part.part_number} title={part.short_description}>{part.short_description}
-													<span className={s.partNum}>{part.part_number}</span>
-												</a>
+												<span>{part.short_description}</span>
+												<span className={s.partNum}>{part.part_number}</span>
 											</span>
 										</div>
 
-										<a href={'/part/' + part.part_number} title={`${part.short_description} - #${part.part_number}`} className={s.image}>
+										<div className={s.image}>
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
-										</a>
+										</div>
 
 										<div className={cx('side-box col-xs-12 col-sm-12 col-md-12 col-lg-12', s.partBox)}>
 
@@ -127,9 +120,23 @@ class PartResults extends Component {
 										</div>
 										<div className={s.nothing}>&nbsp;</div>
 										<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
-											<AddToVehicle className={s.addToVehicle} vehicle={this.props.vehicle} part={part} iconParts={this.props.iconParts} />
-											<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
-											<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
+											<AddToVehicle className={s.addToVehicle} envision={this.props.envision} vehicle={this.props.vehicle} part={part} />
+											<Link
+												to={`/buy`}
+												className={cx('btn', 'red-transparent-button', s.whereToBuy)}
+												title={`Where To Buy ${part.short_description} ${part.part_number}`}
+												role="button"
+											>
+												Where To Buy
+											</Link>
+											<Link
+												to={`/part/${part.part_number}`}
+												className={cx('btn', 'red-transparent-button', s.viewDetails)}
+												title={part.short_description}
+												role="button"
+											>
+												View Details
+											</Link>
 										</div>
 									</div>
 								);
