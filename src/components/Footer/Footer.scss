@@ -71,7 +71,12 @@
 
 .addressInfo {
     font-size: 18px;
-
+		.region {
+			span:last-child{
+				padding-left:0px;
+				margin-left:0px;
+			}
+		}
     span:last-child {
         margin-left: 5px;
     }

@@ -65,8 +65,8 @@ class Footer extends Component {
 									<br />
 									<span itemProp="suite">{mainLocation.physical.address.address2}</span>
 									<br />
-									<span itemProp="addressLocality">{mainLocation.physical.address.city},</span>
-									<span itemProp="addressRegion">{mainLocation.physical.address.state}</span>
+									<span itemProp="addressLocality">{mainLocation.physical.address.city}</span>,
+									<span className={s.region} itemProp="addressRegion"> {mainLocation.physical.address.state}</span>
 									<span itemProp="postalCode">{mainLocation.physical.address.zip}</span>
 								</div>
 							</address>
