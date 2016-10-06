@@ -7,7 +7,7 @@ import LuverneStore from '../../stores/LuverneStore';
 import CategoryStore from '../../stores/LvCategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 // import VehicleStyle from './VehicleStyle';
-import Envision from '../VehicleResults/Envision';
+import Envision from './Envision';
 import Configurator from '../VehicleResults/Configurator';
 
 @withStyles(s)
@@ -113,7 +113,6 @@ class LuverneResults extends Component {
 			this.props.categories.sort((a, b) => a.sort > b.sort);
 		}
 		this.props.categories.map((cat) => {
-			console.log(cat);
 			const tmp = this.createParentItem(cat);
 			categoriesGroup.children = categoriesGroup.children.concat(tmp);
 		});
