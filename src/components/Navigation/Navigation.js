@@ -69,10 +69,10 @@ class Navigation extends Component {
 	render() {
 		let lookup = null;
 		switch (brand.id) {
-		case '3':
+		case 3:
 			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
 			break;
-		case '4':
+		case 4:
 			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
 			break;
 		default:
