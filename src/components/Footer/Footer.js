@@ -4,6 +4,7 @@ import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
 import { brandName } from '../../config';
 import footer from '../../data/footer';
+import { mainLocation } from '../../data/locations';
 
 @withStyles(s)
 class Footer extends Component {
@@ -60,11 +61,13 @@ class Footer extends Component {
 								</div>
 								<span itemProp="name" className={s.addressName}>ARIES Automotive</span>
 								<div className={s.addressInfo} itemProp="address" itemScope itemType="//schema.org/PostalAddress">
-									<span itemProp="streetAddress">6208 Industrial Drive</span>
+									<span itemProp="streetAddress">{mainLocation.physical.address.address1}</span>
 									<br />
-									<span itemProp="addressLocality">Eau Claire,</span>
-									<span itemProp="addressRegion">WI</span>
-									<span itemProp="postalCode">54701</span>
+									<span itemProp="suite">{mainLocation.physical.address.address2}</span>
+									<br />
+									<span itemProp="addressLocality">{mainLocation.physical.address.city},</span>
+									<span itemProp="addressRegion">{mainLocation.physical.address.state}</span>
+									<span itemProp="postalCode">{mainLocation.physical.address.zip}</span>
 								</div>
 							</address>
 						</div>
