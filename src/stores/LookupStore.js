@@ -47,26 +47,26 @@ class LookupStore extends EventEmitter {
 					makes: this.state.makes,
 					models: this.state.models,
 				});
-				if (data.available_years !== undefined) {
+				if (data.availableYears !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
-						years: data.available_years,
+						years: data.availableYears,
 						makes: [],
 						models: [],
 					});
-				} else if (data.available_makes !== undefined) {
+				} else if (data.availableMakes !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
-						makes: data.available_makes,
+						makes: data.availableMakes,
 						models: [],
 					});
-				} else if (data.available_models !== undefined) {
+				} else if (data.availableModels !== undefined) {
 					this.setState({
 						vehicle: this.state.vehicle,
 						years: this.state.years,
 						makes: this.state.makes,
-						models: data.available_models,
+						models: data.availableModels,
 					});
 				} else {
 					this.setState({

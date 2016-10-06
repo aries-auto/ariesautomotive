@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import s from './PartResults.scss';
+import s from './AddToVehicle.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleActions from '../../actions/VehicleActions';
 
@@ -51,6 +51,7 @@ class AddToVehicle extends Component {
 					'btn',
 					'red-transparent-button',
 					this.props.className,
+					s.root,
 					active ? s.active : '',
 				)}
 				role="button"

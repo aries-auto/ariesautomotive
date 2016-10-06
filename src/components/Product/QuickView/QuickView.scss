@@ -2,127 +2,122 @@
 @import '../../classes.scss';
 
 .root {
-    width: 100%;
-    padding: 10px;
-    box-shadow: 1px 0 1px 2px $lookup-color;
-	background-color: $white-base;
-    transition: all .2s ease-in-out;
+	min-height: 250px;
+	padding: 10px;
 	margin: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
-	text-decoration: none;
+	background: $lookup-color;
+	box-shadow: 1px 0 10px 2px $lookup-color;
+	transition: all .2s ease-in-out;
+	transform: scale(.98);
 
+	&.envision:hover {
+		cursor: pointer;
+		box-shadow: 1px 0 10px 2px $gray-lighter;
+		transform: scale(1);
+	}
 
-    &:hover {
-        box-shadow: 1px 0 4px 2px $gray-lighter;
-		text-decoration: none;
-    }
+	.header {
+		min-height: 45px;
+		margin-bottom: 2px;
+		overflow: hidden;
+	}
 
-	> div:first-child {
-        min-height: 65px;
-        margin-bottom: 10px;
-        overflow: hidden;
-		> span:first-child {
-	        font-family: $font-family-em;
-	        font-size: 28px;
-	        font-weight: 400;
-	        line-height: 28px;
+	.header .desc {
+		font-family: $font-family-em;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 24px;
 
-	        a {
-	            color: inherit;
-	            text-decoration: none;
-	        }
+		a {
+			text-decoration: none;
+		}
 
-	        a:hover {
-	            color: $gray-dark;
-	            text-decoration: none;
+		a:hover {
+			color: $gray-dark;
+			text-decoration: none;
 
-	            .partNum {
-	                color: $gray-darker;
-	            }
-	        }
-	    }
+			.partNum {
+				color: $gray-darker;
+			}
+		}
+	}
 
-	    > span:last-child {
-	        margin: 0 5px;
-	        font-size: 28px;
-	        font-weight: 400;
-	        line-height: 28px;
-	        color: $gray-light;
-	    }
-    }
+	.header .partNum {
+		margin: 0 5px;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 28px;
+		color: $gray-light;
+	}
 
-    > div:nth-child(2) {
-        z-index: 10;
-        display: block;
-        min-width: 100px;
-        min-height: 100px;
-        padding: 0;
-        margin-bottom: 25px;
+	.image {
+		z-index: 10;
+		display: block;
+		min-width: 100px;
+		min-height: 100px;
+		padding: 0;
+		margin-bottom: 25px;
 
-        img {
-            width: 100%;
-            margin: 0 auto;
-            box-shadow: 1px 0 10px 2px #ccc;
-        }
-    }
+		img {
+			width: 100%;
+			max-width: 300px;
+			margin: 0 auto;
+			box-shadow: 1px 0 10px 2px $gray-lighter;
+		}
+	}
 
-    .attr {
-        float: left;
-        margin-left: 30px;
+	.attr {
+		float: left;
+		margin-left: 30px;
 
-        .title {
-            font-size: 18px;
-            font-weight: 900;
-        }
+		.title {
+			font-size: 18px;
+			font-weight: 900;
+		}
 
-        ul {
-            padding: 0;
-            list-style: none;
+		ul {
+			padding: 0;
+			list-style: none;
 
-            li {
-                padding: 0;
-            }
-        }
-    }
+			li {
+				padding: 0;
+			}
+		}
+	}
 
-    .price {
-        float: left;
-        font-size: 20px;
+	.price {
+		font-size: 20px;
 
-        .priceValue {
-            font-family: "proxima-nova-condensed", sans-serif;
-            color: $alt-red;
-        }
-    }
+		.priceValue {
+			font-family: $font-family-em;
+			color: $alt-red;
+		}
+	}
 
-    .nav {
-        position: absolute;
-        bottom: .5em;
-        left: 0;
-        width: 100%;
-        padding: 0;
-        clear: both;
-        text-align: center;
+	.nav {
+		bottom: .5em;
+		left: 0;
+		width: 100%;
+		padding: 0;
+		clear: both;
+		text-align: center;
+	}
 
-        a {
-            width: 40%;
-            margin: 10px auto 0;
-            text-align: center;
-        }
-    }
+	.viewDetails, .whereToBuy {
+		width: 40%;
+		min-width: 6em;
+		margin: 10px auto 0;
+		font-size: 1em;
+		text-align: center;
+	}
 
-    .viewDetails, .whereToBuy {
-        min-width: 6em;
-        font-size: 1em;
-    }
+	.addToVehicle {
+		width: 80%;
+	}
 }
 
-
 @media (min-width: $screen-md-min) {
-    .root {
+	.root {
 		width: auto;
 	}
 }

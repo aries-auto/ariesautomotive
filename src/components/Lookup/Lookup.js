@@ -24,7 +24,7 @@ class Lookup extends Component {
 			}),
 			availableYears: PropTypes.array,
 			availableMakes: PropTypes.array,
-			availableModels: PropTypes.array,
+			available_odels: PropTypes.array,
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
