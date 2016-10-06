@@ -10,7 +10,7 @@ import CustomContent from './components/CustomContent';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
-import LuverneResults from './components/VehicleResults';
+import LuverneResults from './components/LuverneResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
