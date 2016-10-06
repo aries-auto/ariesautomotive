@@ -44,7 +44,6 @@ class Configurator extends Component {
 		}
 
 		const prods = this.props.products.map((p) => p.part_number);
-		console.log(prods.join(','));
 
 		return (
 			<div className={cx(s.root, this.props.className)}>
