@@ -112,18 +112,10 @@ class LuverneResults extends Component {
 		if (this.props.categories && this.props.categories.length > 0) {
 			this.props.categories.sort((a, b) => a.sort > b.sort);
 		}
-		// this.props.categories.map((cat) => {
-		// 	const tmp = this.createParentItem(cat);
-		// 	console.log(tmp);
-		// 	categoriesGroup.children = categoriesGroup.children.concat(tmp.children);
-		// 	console.log(categoriesGroup.children);
-		// });
-
 		this.props.categories.map((cat) => {
-			const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.parent_id === cat.id);
-			console.log(tmp);
-			// categoriesGroup.children = categoriesGroup.children.concat(tmp.children);
-			// console.log(categoriesGroup);
+			console.log(cat);
+			const tmp = this.createParentItem(cat);
+			categoriesGroup.children = categoriesGroup.children.concat(tmp);
 		});
 
 		categoriesGroup.children.map((c) => {
