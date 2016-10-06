@@ -26,6 +26,7 @@ import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
+import AppGuideStore from './stores/AppGuideStore';
 import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
@@ -155,6 +156,7 @@ const router = new Router(on => {
 	});
 
 	on('/appguides', async (state) => {
+		await AppGuideStore.fetchAppGuides();
 		return <AppGuides context={state.context} />;
 	});
 

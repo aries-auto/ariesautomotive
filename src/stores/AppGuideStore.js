@@ -1,4 +1,5 @@
 import AppGuideActions from '../actions/AppGuideActions';
+import AppGuideSource from '../sources/AppGuideSource';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
@@ -13,6 +14,7 @@ class AppGuideStore extends EventEmitter {
 		super();
 		this.state = {
 			guides: [],
+			guideGroups: [],
 			error: {},
 			applicationGuides: [],
 		};
@@ -22,6 +24,24 @@ class AppGuideStore extends EventEmitter {
 			reset: AppGuideActions.reset,
 			setPage: AppGuideActions.setPage,
 			getApplicationGuides: AppGuideActions.getApplicationGuides,
+			handleUpdateAppGuides: AppGuideActions.updateAppGuides,
+			handleFailedAppGuides: AppGuideActions.failedAppGuides,
+		});
+		this.exportAsync(AppGuideSource);
+	}
+
+	handleUpdateAppGuides(groups) {
+		if (groups && (!this.state.guideGroups || groups.length > this.state.guideGroups.length)) {
+			this.setState({
+				guideGroups: groups,
+				error: null,
+			});
+		}
+	}
+
+	handleFailedAppGuides(err) {
+		this.setState({
+			error: err,
 		});
 	}
 

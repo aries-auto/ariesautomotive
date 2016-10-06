@@ -86,6 +86,27 @@ server.get('/api/envision.json', (req, res) => {
 	});
 });
 
+server.get('/api/appguides.json', (req, res) => {
+	memcached.get('api:appguides', (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+
+		fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set('api:appguides', data, 86400, () => {
+				res.json(data);
+			});
+		});
+	});
+});
+
+
 server.get('/api/categories.json', (req, res) => {
 	memcached.get('api:categories', (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
