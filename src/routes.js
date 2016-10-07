@@ -200,9 +200,11 @@ const router = new Router(on => {
 
 	on('/page/:id', async (state) => {
 		state.context.id = state.params.id;
-		for (let i = 0; i < state.context.siteContents.length; i++) {
-			if (state.context.siteContents[i].id.toString() === state.params.id) {
-				state.context.customContent = state.context.siteContents[i];
+		if (state.context.siteContents) {
+			for (let i = 0; i < state.context.siteContents.length; i++) {
+				if (state.context.siteContents[i].id.toString() === state.params.id) {
+					state.context.customContent = state.context.siteContents[i];
+				}
 			}
 		}
 		return <CustomContent context={state.context} />;

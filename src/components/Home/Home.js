@@ -14,7 +14,7 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 
 const seo = {
 	title: brand.name,
-	description: 'Homepage: They change the rules, so we make up our own. They put up road blocks; we find a way around. They tell us there is no path ahead; we blaze a trail. At ARIES, we get revved up about going off the beaten path. From our Pro Series grille guards and modular Jeep bumpers to our StyleGuard™ floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.',
+	description: brand.seoDesc,
 };
 
 @withStyles(s)

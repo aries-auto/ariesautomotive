@@ -263,7 +263,7 @@ server.get('*', async (req, res, next) => {
 		let statusCode = 200;
 		const data = {
 			title: 'Product Information',
-			description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
+			description: brand.description,
 			css: '',
 			body: '',
 			entry: assets.main.js,
