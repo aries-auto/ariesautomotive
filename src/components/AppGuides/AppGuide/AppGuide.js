@@ -51,6 +51,9 @@ class AppGuide extends Component {
 
 	getAttrs() {
 		const output = [];
+		if (!this.props.guide.name) {
+			return null;
+		}
 		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
 			this.props.guide.colors.map((color, i) => {
 				output.push(<th key={i}>{color}</th>);
@@ -128,6 +131,9 @@ class AppGuide extends Component {
 
 	renderApplicationRows() {
 		const output = [];
+		if (!this.props.guide.applications) {
+			return null;
+		}
 		this.props.guide.applications.map((app, i) => {
 			let attr = {};
 			attr = this.getAttr(app);
@@ -152,7 +158,7 @@ class AppGuide extends Component {
 		}
 		let page = this.props.guide.name;
 		let render = false;
-		page = page.toLowerCase();
+		page = (page) ? page.toLowerCase() : '';
 		const links = [];
 		if (guide.appGuide === undefined || guide.appGuide === null) {
 			return <span></span>;
