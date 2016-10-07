@@ -34,10 +34,6 @@ import SearchStore from './stores/SearchStore';
 const isBrowser = typeof window !== 'undefined';
 const gaOptions = { debug: true };
 const MyWindowDependentLibrary = isBrowser ? ga.initialize(googleAnalyticsId, gaOptions) : undefined;
-// const seo = {
-// 	description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
-// 	title: 'Aries Automotive',
-// };
 
 const router = new Router(on => {
 	on('*', async (state, next) => {
