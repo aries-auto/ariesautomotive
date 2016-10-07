@@ -74,7 +74,7 @@ class Html extends Component {
 				<head>
 					<meta charSet="utf-8" />
 					<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-					<title>{(brand.name === this.props.title) ? brand.name : `${brand.name} | ${this.props.title}`}</title>
+					<title>{brand.name} | {this.props.title}</title>
 					<meta name="description" content={this.props.description} />
 					<meta property="og:type" content={this.props.metas['og:type']} />
 					<meta property="og:url" content={this.props.metas['og:url']} />
@@ -93,26 +93,8 @@ class Html extends Component {
 					<meta name="keywords" ng-bind="pageKywds" content="" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-					{/* For iPad with high-resolution Retina display running iOS ≥ 7: */}
-					<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://storage.googleapis.com/aries-website/favicons/apple-icon-152x152.png?v=2.1" />
-
-					{/* For iPad with high-resolution Retina display running iOS ≤ 6 */}
-					<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://storage.googleapis.com/aries-website/favicons/apple-icon-144x144.png?v=2.1" />
-
-					{/* For iPhone with high-resolution Retina display running iOS ≥ 7 */}
-					<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://storage.googleapis.com/aries-website/favicons/apple-icon-120x120.png?v=2.1" />
-
-					{/* For iPhone with high-resolution Retina display running iOS ≤ 6 */}
-					<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://storage.googleapis.com/aries-website/favicons/apple-icon-114x114.png?v=2" />
-
-					{/* For first- and second-generation iPad */}
-					<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://storage.googleapis.com/aries-website/favicons/apple-icon-72x72.png?v=2" />
-
-					{/* For non-Retina iPhone, iPod Touch, and Android 2.1+ devices */}
-					<link rel="apple-touch-icon-precomposed" href="https://storage.googleapis.com/aries-website/favicons/apple-icon-57x57.pngg?v=2" />
-					<link rel="icon" href="https://storage.googleapis.com/aries-website/favicons/favicon-32x32.png" sizes="32x32" />
-					<meta name="msapplication-TileColor" content="#FFFFFF" />
-					<meta name="msapplication-TileImage" content="https://storage.googleapis.com/aries-website/favicons/apple-icon-144x144.png?v=2.1" />
+					{(brand.favicons ? brand.favicons.apple || [] : []).map((fv) => <link rel={fv.rel} sizes={fv.sizes} href={`${fv.href}?v=${brand.favicons.version}`} />)}
+					{(brand.favicons ? brand.favicons.microsoft || [] : []).map((fv) => <meta name={fv.name} content={`${fv.content}?v=${brand.favicons.version}`} />)}
 
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
 				</head>

@@ -17,7 +17,7 @@ case 'production':
 	break;
 default:
 	iapi = 'http://104.154.72.47';
-	api = 'http://104.155.147.144';
+	api = 'http://goapi.curtmfg.com';
 }
 
 export const iapiBase = iapi;
@@ -33,6 +33,49 @@ const aries = {
 	defaultContactType: 28,
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
+	favicons: {
+		version: '2.1',
+		apple: [
+			{
+				rel: 'apple-touch-icon-precomposed',
+				sizes: '152x152',
+				href: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-152x152.png',
+			}, {
+				rel: 'apple-touch-icon-precomposed',
+				sizes: '72x72',
+				href: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-72x72.png',
+			}, {
+				rel: 'apple-touch-icon-precomposed',
+				sizes: '144x144',
+				href: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-144x144.png',
+			}, {
+				rel: 'apple-touch-icon-precomposed',
+				sizes: '120x120',
+				href: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-120x120.png',
+			}, {
+				rel: 'apple-touch-icon-precomposed',
+				sizes: '114x114',
+				href: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-114x114.png',
+			}, {
+				rel: 'apple-touch-icon-precomposed',
+				sizes: '57x57',
+				href: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-57x57.png',
+			}, {
+				rel: 'icon',
+				sizes: '32x32',
+				href: 'https://storage.googleapis.com/aries-website/favicons/favicon-32x32.png',
+			},
+		],
+		microsoft: [
+			{
+				name: 'msapplication-TileColor',
+				content: '#ffffff',
+			}, {
+				name: 'msapplication-TileImage',
+				content: 'https://storage.googleapis.com/aries-website/favicons/apple-icon-144x144.png',
+			},
+		],
+	},
 };
 
 const luverne = {

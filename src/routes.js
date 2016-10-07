@@ -13,7 +13,6 @@ import VehicleResults from './components/VehicleResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
-// import AppGuide from './components/AppGuides/AppGuide/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -45,6 +44,7 @@ const router = new Router(on => {
 		if (!state.context) {
 			state.context = {};
 		}
+
 		state.context.params = state.params;
 		state.context.siteMenu = siteMenu;
 		const slug = state.params[0].replace(/\//g, '');
@@ -60,21 +60,10 @@ const router = new Router(on => {
 			SiteStore.fetchContentMenus(),
 		]);
 
-		// try {
-		// 	const siteContent = await pageContentResp.json();
-		// 	if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
-		// 		seo.description = siteContent.metaDescription;
-		// 		seo.title = siteContent.metaTitle;
-		// 	}
-		//
-		// 	state.context.seo(seo);
-		// } catch (e) {
-		// 	state.context.error = e;
-		// }
-
 		if (MyWindowDependentLibrary !== undefined) {
 			ga.initialize(googleAnalyticsId, gaOptions);
 		}
+
 		ga.pageview('aries:' + state.path);
 
 		const component = await next();
