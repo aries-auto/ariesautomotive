@@ -64,18 +64,31 @@ class Result extends Component {
 		) {
 			return null;
 		}
-		// if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
-		// 	return null;
-		// }
 
-		return (
-			<div className={'form-group'}>
-				<select ref="style" onChange={this.updateStyle} className="form-control">
-					<option value="">- Select Style -</option>
-					{this.props.result.fitments.map((fit, i) => <option key={i}>{fit.title.toUpperCase()}</option>)}
-				</select>
-			</div>
-		);
+		const lst = [];
+		this.props.result.fitments.map((fit) => {
+			const opts = [];
+			if (fit.options.length > 0) {
+				fit.options.map((o, i) => {
+					opts.push(
+						<option key={i}>{o.toUpperCase()}</option>
+					);
+				});
+			}
+
+			lst.push(
+				<div className={'form-group'}>
+					<select ref="style" onChange={this.updateStyle} className="form-control">
+						<option value="">- {fit.title.toUpperCase()} -</option>
+							{ opts }
+					</select>
+				</div>
+			);
+		});
+
+		console.log(lst);
+
+		return lst;
 	}
 
 	render() {
