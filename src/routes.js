@@ -21,7 +21,7 @@ import LatestNewsItem from './components/LatestNewsItem';
 import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import { iapiBase, apiBase, apiKey, brand, siteMenu, googleAnalyticsId } from './config';
+import { siteMenu, googleAnalyticsId } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import ContactStore from './stores/ContactStore';
@@ -161,34 +161,10 @@ const router = new Router(on => {
 	});
 
 	on('/appguides/:guide/:page', async (state) => {
-		let guide = {};
-		let appGuideInfo = {};
 		const collection = state.params.guide;
 		const page = state.params.page;
-		try {
-			const [guideResponse, appGuideInfoResponse] = await Promise.all([
-				fetch(`${apiBase}/vehicle/mongo/apps?key=${apiKey}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
-					method: 'post',
-					headers: {
-						'Accept': 'application/json',
-					},
-				}),
-				fetch(`${iapiBase}/appguides/guide?collection=${collection}&key=${apiKey}&brandID=${brand}`, {
-					method: 'get',
-					headers: {
-						'Accept': 'application/json',
-					},
-				}),
-			]);
-
-			guide = await guideResponse.json();
-			appGuideInfo = await appGuideInfoResponse.json();
-			guide.name = collection;
-			guide.appGuide = appGuideInfo;
-		} catch (e) {
-			state.context.error = e;
-		}
-		return <AppGuides guide={guide} context={state.context} />;
+		await AppGuideStore.fetchAppGuide(collection, page);
+		return <AppGuides context={state.context} />;
 	});
 
 	on('/becomedealer', async (state) => {

@@ -106,6 +106,40 @@ server.get('/api/appguides.json', (req, res) => {
 	});
 });
 
+server.get('/api/appguide/:collection/:page.json', async (req, res) => {
+	memcached.get(`api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, async (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+		let guide = {};
+		let appGuideInfo = {};
+		const [guideResponse, appGuideInfoResponse] = await Promise.all([
+			fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand.id}&collection=${req.params.collection}&limit=1000&page=${req.params.page}`, {
+				method: 'post',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}),
+			fetch(`${iapiBase}/appguides/guide?collection=${req.params.collection}&key=${KEY}&brandID=${brand.id}`, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}),
+		]);
+		guide = await guideResponse.json();
+		appGuideInfo = await appGuideInfoResponse.json();
+		guide.name = req.params.collection;
+		guide.appGuide = appGuideInfo;
+		memcached.set(`api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, guide, 86400, () => {
+			res.status(200).json(guide);
+			return;
+		});
+	});
+});
 
 server.get('/api/categories.json', (req, res) => {
 	memcached.get('api:categories', (err, val) => {

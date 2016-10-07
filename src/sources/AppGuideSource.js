@@ -27,6 +27,31 @@ const AppGuideSource = {
 		};
 	},
 
+	fetchAppGuide() {
+		return {
+			remote(state, collection, page) {
+				return new Promise((res, rej) => {
+					fetch(`/api/appguide/${collection}/:${page}.json`)
+					.then((resp) => {
+						return resp.json();
+					}).then(res).catch(rej);
+				});
+			},
+
+			local(st) {
+				if (!st.guide || !st.guide.name) {
+					return null;
+				}
+
+				return st.guide;
+			},
+
+			success: AppGuideActions.updateAppGuide,
+			error: AppGuideActions.failedAppGuide,
+			loading: AppGuideActions.fetchAppGuide,
+		};
+	},
+
 };
 
 module.exports = AppGuideSource;

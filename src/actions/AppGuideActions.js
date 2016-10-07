@@ -8,7 +8,10 @@ class AppGuideActions {
 			'setPage',
 			'fetchAppGuides',
 			'updateAppGuides',
-			'failedAppGuides'
+			'failedAppGuides',
+			'fetchAppGuide',
+			'updateAppGuide',
+			'failedAppGuide'
 		);
 	}
 }

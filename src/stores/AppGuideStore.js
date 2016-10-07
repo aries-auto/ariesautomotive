@@ -22,6 +22,8 @@ class AppGuideStore extends EventEmitter {
 			setPage: AppGuideActions.setPage,
 			handleUpdateAppGuides: AppGuideActions.updateAppGuides,
 			handleFailedAppGuides: AppGuideActions.failedAppGuides,
+			handleUpdateAppGuide: AppGuideActions.updateAppGuide,
+			handleFailedAppGuide: AppGuideActions.failedAppGuide,
 		});
 		this.exportAsync(AppGuideSource);
 	}
@@ -36,6 +38,21 @@ class AppGuideStore extends EventEmitter {
 	}
 
 	handleFailedAppGuides(err) {
+		this.setState({
+			error: err,
+		});
+	}
+
+	handleUpdateAppGuide(guide) {
+		if (guide && (!this.state.guide)) {
+			this.setState({
+				guide,
+				error: null,
+			});
+		}
+	}
+
+	handleFailedAppGuide(err) {
 		this.setState({
 			error: err,
 		});
