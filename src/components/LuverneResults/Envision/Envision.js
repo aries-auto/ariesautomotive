@@ -89,7 +89,6 @@ class Envision extends Component {
 	}
 
 	render() {
-		console.log('is this here?');
 		return (
 			<div className={cx(s.root)}>
 				<Loader loaded={(this.props.vehicle.image !== '')} top="40%" loadedClassName={s.loader}>

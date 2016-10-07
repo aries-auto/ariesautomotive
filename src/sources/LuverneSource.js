@@ -108,10 +108,10 @@ const LuverneSource = {
 			local(st, result, style) {
 				const id = result.category.id;
 				let fits = [];
-
+				console.log(result);
 				// map fitments for all style options that fit the supplied style
 				// to back into the array.
-				result.style_options
+				result.fitments
 				.filter((so) => so.style.toLowerCase() === style.toLowerCase())
 				.map((so) => {
 					// push all fitment data into the array

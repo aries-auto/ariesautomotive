@@ -3,7 +3,7 @@ import cx from 'classnames';
 import s from './Results.scss';
 import Result from './Result';
 import withStyles from '../../decorators/withStyles';
-import LuverneStore from '../../stores/LuverneStore';
+// import LuverneStore from '../../stores/LuverneStore';
 
 @withStyles(s)
 class Results extends Component {
@@ -20,17 +20,17 @@ class Results extends Component {
 	};
 
 	render() {
-		console.log('testing results');
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				{this.props.results.map((r, i) => {
 					if (this.props.activeIndex === null || r.category.id !== this.props.activeIndex) {
 						return null;
 					}
-					if (this.props.fitments.length === 0 && r.style_options[0].style.toLowerCase() === 'all') {
-						LuverneStore.fetchFitments(r, 'all');
-					}
-					return <Result key={i} fitments={this.props.fitments} result={r} activeIndex={this.props.activeIndex} iconParts={this.props.iconParts} />;
+					// if (this.props.fitments.length === 0) {
+					// 	LuverneStore.fetchFitments(r, this.props.activeIndex);
+					// }
+
+					return <Result key={i} fitments={r.fitments} result={r} activeIndex={this.props.activeIndex} iconParts={this.props.iconParts} />;
 				})}
 			</div>
 		);

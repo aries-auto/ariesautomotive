@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../Link';
 import s from '../VehicleResults/VehicleResults.scss';
-import CategorizedResult from '../VehicleResults/CategorizedResult';
+import CategorizedResult from '../LuverneResults/CategorizedResult';
 import withStyles from '../../decorators/withStyles';
 import LuverneStore from '../../stores/LuverneStore';
 import CategoryStore from '../../stores/LvCategoryStore';

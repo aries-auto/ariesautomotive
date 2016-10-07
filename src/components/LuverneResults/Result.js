@@ -59,20 +59,20 @@ class Result extends Component {
 
 	renderStyles() {
 		if (
-			!this.props.result.style_options ||
-			this.props.result.style_options.length === 0
+			!this.props.result.fitments ||
+			this.props.result.fitments.length === 0
 		) {
 			return null;
 		}
-		if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
-			return null;
-		}
+		// if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
+		// 	return null;
+		// }
 
 		return (
 			<div className={'form-group'}>
 				<select ref="style" onChange={this.updateStyle} className="form-control">
 					<option value="">- Select Style -</option>
-					{this.props.result.style_options.map((so, i) => <option key={i}>{so.style.toUpperCase()}</option>)}
+					{this.props.result.fitments.map((fit, i) => <option key={i}>{fit.title.toUpperCase()}</option>)}
 				</select>
 			</div>
 		);
