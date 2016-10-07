@@ -6,6 +6,7 @@ import withStyles from '../../decorators/withStyles';
 import SearchActions from '../../actions/SearchActions';
 import SearchStore from '../../stores/SearchStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import { brand } from '../../config';
 
 @withStyles(s)
 @connectToStores
@@ -36,10 +37,13 @@ class SearchResults extends Component {
 	}
 
 	componentWillMount() {
-		const title = this.props.searchTerm ? `Search: ${this.props.searchTerm}` : 'Search ARIES';
+		const title = this.props.searchTerm ? `Search: ${this.props.searchTerm}` : `Search ${brand.name}`;
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
-		if (this.props.searchResults.hits && this.props.searchResults.hits.hits) {
+		if (!this.props.searchResults) {
+			this.hits = 0;
+			this.total = 0;
+		} else if (this.props.searchResults.hits && this.props.searchResults.hits.hits) {
 			this.hits = this.props.searchResults.hits.hits.length;
 			this.total = this.props.searchResults.hits.total;
 		}

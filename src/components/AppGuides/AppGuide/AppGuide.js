@@ -6,6 +6,7 @@ import withStyles from '../../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
+import { brand } from '../../../config';
 // import { appguides } from './data';
 
 const cache = '06072016';
@@ -199,7 +200,7 @@ class AppGuide extends Component {
 				<h1 className={s.header}>{this.props.guide.name}</h1>
 				<div className={s.install}>Click the <Glyphicon glyph="wrench"/> next to a product for installation instructions.</div>
 				{this.renderDownloadLinks()}
-				<p className={s.subheading}>The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
+				<p className={s.subheading}>The application guides below will help you determine which {brand.code} parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
 
 				{this.renderApplications()}
 				{this.props.guide.applications && this.props.guide.applications.length > 99 ? this.renderPagination() : null}
