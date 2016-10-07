@@ -96,7 +96,7 @@ class VehicleStore extends EventEmitter {
 	handleUpdateEnvision(e) {
 		// find the most vehicle that has the most product
 		// fitments.
-		e.vehicleParts.sort((a, b) => {
+		(e.vehicleParts || []).sort((a, b) => {
 			return Object.keys(b.parts).length - Object.keys(a.parts).length;
 		});
 
@@ -104,7 +104,7 @@ class VehicleStore extends EventEmitter {
 			envision: {
 				vehicleParts: e.vehicleParts,
 				partNumbers: e.partNumbers,
-				vehicleID: e.vehicleParts[0].vehicle.intVehicleID,
+				vehicleID: (e.vehicleParts) ? e.vehicleParts[0].vehicle.intVehicleID : '0',
 				colorID: this.state.envision.colorID,
 				matchedProducts: this.state.envision.matchedProducts,
 			},

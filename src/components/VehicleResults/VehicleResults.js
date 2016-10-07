@@ -76,12 +76,22 @@ class VehicleResults extends Component {
 			}
 
 			let subs = [];
-			(c.children || []).map((cat) => {
-				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
+			if (c.children && c.children.length > 0) {
+				(c.children || []).map((cat) => {
+					const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
+					if (tmp.length > 0) {
+						subs = subs.concat(tmp);
+					}
+				});
+			} else {
+				const tmp = this.props.vehicle.lookup_category.filter((t) => {
+					return t.category.id === c.cat.id;
+				});
 				if (tmp.length > 0) {
 					subs = subs.concat(tmp);
 				}
-			});
+			}
+
 			if (subs.length > 0) {
 				groups.push(
 					<CategorizedResult
