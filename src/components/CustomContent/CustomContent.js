@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import s from './CustomContent.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
+import { brand } from '../../config.js';
 
 @withStyles(s)
 class CustomContent extends Component {
@@ -19,9 +20,9 @@ class CustomContent extends Component {
 	};
 
 	componentWillMount() {
-		const title = (this.props.context.customContent && this.props.context.customContent.title) ? this.props.context.customContent.title : 'ARIES';
+		const title = (this.props.context.customContent && this.props.context.customContent.title) ? this.props.context.customContent.title : brand.code;
 		this.context.onSetTitle(title);
-		this.context.onSetMeta('description', this.props.context.customContent.metaTitle);
+		this.context.onSetMeta('description', (this.props.context.customContent) ? this.props.context.customContent.metaTitle : '');
 		const seo = {
 			title,
 		};
@@ -45,6 +46,9 @@ class CustomContent extends Component {
 	}
 
 	render() {
+		if (!this.props.context.customContent) {
+			return null;
+		}
 		return (
 			<div className={cx(s.root)}>
 				<h2>{this.props.context.customContent.title}</h2>

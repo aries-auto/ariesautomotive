@@ -6,6 +6,7 @@ import withStyles from '../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import AppGuide from './AppGuide/AppGuide';
+import { brand } from '../../config.js';
 
 const title = 'Application Guides';
 
@@ -87,7 +88,7 @@ class AppGuides extends Component {
 				<h1>APPLICATION GUIDES</h1>
 				<p>
 					The application guides below will help you determine which
-					ARIES parts will fit your vehicle.<br /> Each app guide is
+					{brand.code} parts will fit your vehicle.<br /> Each app guide is
 					category-specific and broken down by vehicle make, model,
 					year and style.
 				</p>
