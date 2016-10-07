@@ -38,7 +38,7 @@ server.get('/api/categories/:id.json', (req, res) => {
 		if (!err && val) {
 			zlib.gunzip(val, (e, result) => {
 				if (!e && result) {
-					res.status(200).json(result.toString('utf8'));
+					res.status(200).json(JSON.parse(result.toString('utf8')));
 					return;
 				}
 			});
@@ -49,7 +49,7 @@ server.get('/api/categories/:id.json', (req, res) => {
 			}).then((data) => {
 				zlib.gzip(JSON.stringify(data), (e, result) => {
 					if (e) {
-						res.status(200).json(data.toString('utf8'));
+						res.status(200).json(JSON.parse(data.toString('utf8')));
 						return;
 					}
 					memcached.set(`api:categories:${req.params.id}:${brand.id}`, result, 86400, () => {
