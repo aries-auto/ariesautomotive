@@ -29,45 +29,6 @@ class Html extends Component {
 		});
 	}
 
-	typekit() {
-		return ({ __html:
-			`
-			(function() {
-				var config = {
-					kitId: 'abc1def',
-					scriptTimeout: 3000
-				};
-				var h = document.getElementsByTagName('html')[0];
-				h.className += ' wf-loading';
-				var t = setTimeout(function() {
-					h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, ' ');
-					h.className += ' wf-inactive';
-				}, config.scriptTimeout);
-				var d = false;
-				var tk = document.createElement('script');
-				tk.src = '//use.typekit.net/' + config.kitId + '.js';
-				tk.type = 'text/javascript';
-				tk.async = 'true';
-				tk.onload = tk.onreadystatechange = function() {
-					var rs = this.readyState;
-					if (d || rs && rs != 'complete' && rs != 'loaded') return;
-					d = true;
-					clearTimeout(t);
-					try { Typekit.load(config); } catch (e) {}
-				};
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(tk, s);
-			})();
-			`,
-		});
-	}
-
-	typekit2() {
-		return ({ __html:
-			`try{Typekit.load({ async: true });}catch(e){}`,
-		});
-	}
-
 	render() {
 		return (
 			<html className="no-js" lang="" style={{ maxWidth: '100%' }}>

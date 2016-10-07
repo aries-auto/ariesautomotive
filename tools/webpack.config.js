@@ -67,6 +67,22 @@ const config = {
 				loaders: ['babel-loader', 'eslint'],
 			}, {
 				test: /\.css/,
+				include: /node_modules/,
+				loaders: [
+					'isomorphic-style-loader',
+					`css-loader?${JSON.stringify({
+						sourceMap: DEBUG,
+						// CSS Modules https://github.com/css-modules/css-modules
+						modules: false,
+						localIdentName: '[local]',
+						// CSS Nano http://cssnano.co/options/
+						minimize: true,
+					})}`,
+					'postcss-loader?pack=default',
+				],
+			}, {
+				test: /\.css/,
+				exclude: /node_modules/,
 				loaders: [
 					'isomorphic-style-loader',
 					`css-loader?${JSON.stringify({
@@ -127,7 +143,7 @@ const config = {
 // -----------------------------------------------------------------------------
 
 const clientConfig = merge({}, config, {
-	entry: ['bootstrap-loader', './src/client.js'],
+	entry: ['./src/client.js'],
 	output: {
 		path: path.join(__dirname, '../build/public'),
 		filename: DEBUG ? '[name].js?[hash]' : '[name].[hash].js',
