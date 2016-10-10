@@ -6,9 +6,6 @@ import withStyles from '../../decorators/withStyles';
 import LuverneStore from '../../stores/LuverneStore';
 import CategoryStore from '../../stores/LvCategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
-// import VehicleStyle from './VehicleStyle';
-import Envision from './Envision';
-import Configurator from '../VehicleResults/Configurator';
 
 @withStyles(s)
 @connectToStores
@@ -172,10 +169,6 @@ class LuverneResults extends Component {
 					<p>Choose a category below to see the products that fit your vehicle.
 						Some products may require the style of the vehicle to be specified.
 					</p>
-				</div>
-				<div className={s.visual}>
-					{this.props.context.vehicleParts ? <Configurator win={this.props.win} className={s.configurator} context={this.props.context} /> : null}
-					{this.props.context.vehicleParts ? <Envision className={s.envision} /> : null}
 				</div>
 				<div className={s.matched}>
 					{matched}

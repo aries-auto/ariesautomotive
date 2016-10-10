@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import ga from 'react-ga';
 import s from './PartResults.scss';
 // import QuickView from '../Product/QuickView';
-import AddToVehicle from './AddToVehicle';
 import withStyles from '../../decorators/withStyles';
-import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -84,15 +81,6 @@ class LvPartResults extends Component {
 		return attrs;
 	}
 
-	handleAddToVehicle(part) {
-		ga.event({
-			category: 'Envision',
-			action: 'Add Part',
-			label: `${this.props.vehicle.year} ${this.props.vehicle.make} ${this.props.vehicle.model} ${part.part_number || ''}`,
-		});
-		LuverneActions.addPartToVehicle(part);
-	}
-
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
@@ -127,7 +115,6 @@ class LvPartResults extends Component {
 										</div>
 										<div className={s.nothing}>&nbsp;</div>
 										<div className={cx(s.nav, 'col-xs-12', 'col-sm-12', 'col-md-7', 'col-lg-8', 'col-offset-md-1', 'col-offset-lg-1')}>
-											<AddToVehicle className={s.addToVehicle} vehicle={this.props.vehicle} part={part} iconParts={this.props.iconParts} />
 											<a href="/buy" className={cx('btn', 'red-transparent-button', s.whereToBuy)} role="button">Where To Buy</a>
 											<a href={'/part/' + part.part_number} className={cx('btn', 'red-transparent-button', s.viewDetails)} role="button">View Details</a>
 										</div>

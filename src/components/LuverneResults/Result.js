@@ -32,7 +32,6 @@ class Result extends Component {
 	}
 
 	componentWillMount() {
-		console.log(this.props.result);
 		const reqFits = [];
 
 		this.props.result.fitments.map((fit) => {
@@ -70,7 +69,6 @@ class Result extends Component {
 	setProducts() {
 		const prods = [];
 		const rq = this.state.reqFits;
-		console.log(rq);
 
 		this.props.result.products.map((p) => {
 			let matched = true;

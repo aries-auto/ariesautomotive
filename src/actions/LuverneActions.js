@@ -11,6 +11,7 @@ class LuverneActions {
 			'failedVehicle',
 
 			'fetchFitments',
+			'fetchParts',
 			'updateFitments',
 			'failedFitments',
 			'set',
