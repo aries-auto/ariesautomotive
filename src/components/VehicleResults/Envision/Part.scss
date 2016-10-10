@@ -1,0 +1,55 @@
+@import '../../variables.scss';
+
+.root {
+	display: flex;
+	width: 250px;
+	height: 100px;
+	padding: 10px;
+	margin: 0 5px;
+	cursor: pointer;
+	flex-direction: row;
+	background-color: $off-white;
+	border: 1px solid $gray-lighter;
+	border-radius: 4px;
+
+	justify-content: flex-start;
+	align-items: top;
+
+	> img {
+		display: block;
+		width: 60px;
+		height: 60px;
+		padding-right: .2em;
+
+		align-self: center;
+	}
+
+	> div {
+		display: flex;
+		padding: 0 5px;
+		flex-direction: column;
+
+		justify-content: space-between;
+		p {
+			margin: 0;
+			font-size: .9em;
+		}
+
+		p:first-child {
+			font-size: 1em;
+			font-weight: 600;
+			line-height: 1em;
+		}
+
+		> a {
+			max-width: 100px;
+			margin-top: 5px;
+			font-size: .9em;
+		}
+	}
+
+	> span {
+		margin-left: auto;
+		font-weight: 800;
+	}
+}

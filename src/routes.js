@@ -14,7 +14,6 @@ import LuverneResults from './components/LuverneResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
-// import AppGuide from './components/AppGuides/AppGuide/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -22,13 +21,13 @@ import LatestNewsItem from './components/LatestNewsItem';
 import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import Envision from './components/Envision/Envision';
-import { iapiBase, apiBase, apiKey, brand, siteMenu, googleAnalyticsId } from './config';
+import { siteMenu, googleAnalyticsId, iapiBase, apiKey, brand } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import LuverneStore from './stores/LuverneStore';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
+import AppGuideStore from './stores/AppGuideStore';
 import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
@@ -37,16 +36,13 @@ import SearchStore from './stores/SearchStore';
 const isBrowser = typeof window !== 'undefined';
 const gaOptions = { debug: true };
 const MyWindowDependentLibrary = isBrowser ? ga.initialize(googleAnalyticsId, gaOptions) : undefined;
-// const seo = {
-// 	description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
-// 	title: 'Aries Automotive',
-// };
 
 const router = new Router(on => {
 	on('*', async (state, next) => {
 		if (!state.context) {
 			state.context = {};
 		}
+
 		state.context.params = state.params;
 		state.context.siteMenu = siteMenu;
 		const slug = state.params[0].replace(/\//g, '');
@@ -63,21 +59,10 @@ const router = new Router(on => {
 			SiteStore.fetchContentMenus(),
 		]);
 
-		// try {
-		// 	const siteContent = await pageContentResp.json();
-		// 	if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
-		// 		seo.description = siteContent.metaDescription;
-		// 		seo.title = siteContent.metaTitle;
-		// 	}
-		//
-		// 	state.context.seo(seo);
-		// } catch (e) {
-		// 	state.context.error = e;
-		// }
-
 		if (MyWindowDependentLibrary !== undefined) {
 			ga.initialize(googleAnalyticsId, gaOptions);
 		}
+
 		ga.pageview('aries:' + state.path);
 
 		const component = await next();
@@ -177,6 +162,12 @@ const router = new Router(on => {
 		}
 		await VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 		return <VehicleResults context={state.context} win={state.win} />;
+
+		// await Promise.all([
+		// 	VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
+		// 	VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),
+		// ]);
+		// return <VehicleResults context={state.context} window={state.win} />;
 	});
 
 	on('/about', async (state) => {
@@ -184,38 +175,15 @@ const router = new Router(on => {
 	});
 
 	on('/appguides', async (state) => {
+		await AppGuideStore.fetchAppGuides();
 		return <AppGuides context={state.context} />;
 	});
 
 	on('/appguides/:guide/:page', async (state) => {
-		let guide = {};
-		let appGuideInfo = {};
 		const collection = state.params.guide;
 		const page = state.params.page;
-		try {
-			const [guideResponse, appGuideInfoResponse] = await Promise.all([
-				fetch(`${apiBase}/vehicle/mongo/apps?key=${apiKey}&brandID=${brand}&collection=${collection}&limit=1000&page=${page}`, {
-					method: 'post',
-					headers: {
-						'Accept': 'application/json',
-					},
-				}),
-				fetch(`${iapiBase}/appguides/guide?collection=${collection}&key=${apiKey}&brandID=${brand}`, {
-					method: 'get',
-					headers: {
-						'Accept': 'application/json',
-					},
-				}),
-			]);
-
-			guide = await guideResponse.json();
-			appGuideInfo = await appGuideInfoResponse.json();
-			guide.name = collection;
-			guide.appGuide = appGuideInfo;
-		} catch (e) {
-			state.context.error = e;
-		}
-		return <AppGuides guide={guide} context={state.context} />;
+		await AppGuideStore.fetchAppGuide(collection, page);
+		return <AppGuides context={state.context} />;
 	});
 
 	on('/becomedealer', async (state) => {
@@ -240,11 +208,6 @@ const router = new Router(on => {
 		return <LatestNews context={state.context} />;
 	});
 
-	on('/envision', async (state) => {
-		const loc = typeof window !== 'undefined' ? window.location : '';
-		return <Envision context={state.context} protocol={loc.protocol}/>;
-	});
-
 	on('/news/:id', async (state) => {
 		await SiteStore.fetchNewsItem(state.params.id);
 		return <LatestNewsItem context={state.context} />;
@@ -267,9 +230,11 @@ const router = new Router(on => {
 
 	on('/page/:id', async (state) => {
 		state.context.id = state.params.id;
-		for (let i = 0; i < state.context.siteContents.length; i++) {
-			if (state.context.siteContents[i].id.toString() === state.params.id) {
-				state.context.customContent = state.context.siteContents[i];
+		if (state.context.siteContents) {
+			for (let i = 0; i < state.context.siteContents.length; i++) {
+				if (state.context.siteContents[i].id.toString() === state.params.id) {
+					state.context.customContent = state.context.siteContents[i];
+				}
 			}
 		}
 		return <CustomContent context={state.context} />;

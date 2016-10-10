@@ -6,6 +6,7 @@ import withStyles from '../../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { Glyphicon } from 'react-bootstrap';
+import { brand } from '../../../config';
 // import { appguides } from './data';
 
 const cache = '06072016';
@@ -51,6 +52,9 @@ class AppGuide extends Component {
 
 	getAttrs() {
 		const output = [];
+		if (!this.props.guide.name) {
+			return null;
+		}
 		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
 			this.props.guide.colors.map((color, i) => {
 				output.push(<th key={i}>{color}</th>);
@@ -128,6 +132,9 @@ class AppGuide extends Component {
 
 	renderApplicationRows() {
 		const output = [];
+		if (!this.props.guide.applications) {
+			return null;
+		}
 		this.props.guide.applications.map((app, i) => {
 			let attr = {};
 			attr = this.getAttr(app);
@@ -152,7 +159,7 @@ class AppGuide extends Component {
 		}
 		let page = this.props.guide.name;
 		let render = false;
-		page = page.toLowerCase();
+		page = (page) ? page.toLowerCase() : '';
 		const links = [];
 		if (guide.appGuide === undefined || guide.appGuide === null) {
 			return <span></span>;
@@ -193,7 +200,7 @@ class AppGuide extends Component {
 				<h1 className={s.header}>{this.props.guide.name}</h1>
 				<div className={s.install}>Click the <Glyphicon glyph="wrench"/> next to a product for installation instructions.</div>
 				{this.renderDownloadLinks()}
-				<p className={s.subheading}>The application guides below will help you determine which ARIES parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
+				<p className={s.subheading}>The application guides below will help you determine which {brand.code} parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
 
 				{this.renderApplications()}
 				{this.props.guide.applications && this.props.guide.applications.length > 99 ? this.renderPagination() : null}

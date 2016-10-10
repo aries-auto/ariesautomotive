@@ -1,6 +1,6 @@
 {
-  "name": "Envision",
+  "name": "Configurator",
   "version": "0.0.0",
   "private": true,
-  "main": "./Envision.js"
+  "main": "./Configurator.js"
 }

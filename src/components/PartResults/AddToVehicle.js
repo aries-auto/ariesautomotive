@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import ga from 'react-ga';
-import s from './PartResults.scss';
+import s from './AddToVehicle.scss';
 import withStyles from '../../decorators/withStyles';
 import VehicleActions from '../../actions/VehicleActions';
 
@@ -11,8 +10,8 @@ class AddToVehicle extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		vehicle: PropTypes.object,
-		iconParts: PropTypes.object,
 		part: PropTypes.object,
+		envision: PropTypes.object,
 	};
 
 	constructor(props) {
@@ -22,26 +21,16 @@ class AddToVehicle extends Component {
 	}
 
 	handler() {
-		let lbl = this.props.part.part_number || '';
-		if (this.props.vehicle) {
-			lbl = `${this.props.vehicle.base.year} ${this.props.vehicle.base.make} ${this.props.vehicle.base.model} ${this.props.part.part_number}`;
-		}
-
-		ga.event({
-			category: 'Envision',
-			action: 'Add Part',
-			label: lbl,
-		});
-		VehicleActions.addPartToVehicle(this.props.part);
+		VehicleActions.addEnvisionPart(this.props.part);
 	}
 
 	isActive() {
-		if (!this.props.vehicle || !this.props.vehicle.parts) {
+		if (!this.props.envision || !this.props.envision.matchedProducts) {
 			return false;
 		}
 
 		let exists = false;
-		this.props.vehicle.parts.map((p) => {
+		this.props.envision.matchedProducts.map((p) => {
 			if (p.id === this.props.part.id) {
 				exists = true;
 			}
@@ -51,7 +40,7 @@ class AddToVehicle extends Component {
 	}
 
 	render() {
-		if (!this.props.iconParts || !this.props.part.iconLayer) {
+		if (!this.props.envision || !this.props.envision.matchedProducts) {
 			return <span></span>;
 		}
 
@@ -62,6 +51,7 @@ class AddToVehicle extends Component {
 					'btn',
 					'red-transparent-button',
 					this.props.className,
+					s.root,
 					active ? s.active : '',
 				)}
 				role="button"

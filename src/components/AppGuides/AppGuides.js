@@ -6,6 +6,7 @@ import withStyles from '../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import AppGuide from './AppGuide/AppGuide';
+import { brand } from '../../config.js';
 
 const title = 'Application Guides';
 
@@ -35,7 +36,7 @@ class AppGuides extends Component {
 	constructor() {
 		super();
 
-		AppGuideActions.all();
+		// AppGuideActions.all();
 	}
 
 	componentWillMount() {
@@ -74,7 +75,7 @@ class AppGuides extends Component {
 					<div key={ii} className={cx(s.guideRow, 'col-xs-12', 'col-sm-6', 'col-md-6', 'col-lg-6')}>
 						<a className={cx(s.guide, 'well')} href={`/appguides/${g.collection}/0`}>
 							<img className={cx(s.guideImage)} src={g.imagePath} />
-							<span>{g.title}</span>
+							<div className={cx(s.guideTitle)}>{g.title}</div>
 						</a>
 					</div>
 				);
@@ -87,7 +88,7 @@ class AppGuides extends Component {
 				<h1>APPLICATION GUIDES</h1>
 				<p>
 					The application guides below will help you determine which
-					ARIES parts will fit your vehicle.<br /> Each app guide is
+					{brand.code} parts will fit your vehicle.<br /> Each app guide is
 					category-specific and broken down by vehicle make, model,
 					year and style.
 				</p>

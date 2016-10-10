@@ -12,7 +12,7 @@ import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
-import { apiBase, apiKey, brand } from './config';
+import { apiBase, iapiBase, apiKey, brand } from './config';
 
 const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
 const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
@@ -38,7 +38,7 @@ server.get('/api/categories/:id.json', (req, res) => {
 		if (!err && val) {
 			zlib.gunzip(val, (e, result) => {
 				if (!e && result) {
-					res.status(200).json(result.toString('utf8'));
+					res.status(200).json(JSON.parse(result.toString('utf8')));
 					return;
 				}
 			});
@@ -49,7 +49,7 @@ server.get('/api/categories/:id.json', (req, res) => {
 			}).then((data) => {
 				zlib.gzip(JSON.stringify(data), (e, result) => {
 					if (e) {
-						res.status(200).json(data.toString('utf8'));
+						res.status(200).json(JSON.parse(data.toString('utf8')));
 						return;
 					}
 					memcached.set(`api:categories:${req.params.id}:${brand.id}`, result, 86400, () => {
@@ -59,6 +59,85 @@ server.get('/api/categories/:id.json', (req, res) => {
 				});
 			});
 		}
+	});
+});
+
+server.get('/api/envision.json', (req, res) => {
+	const year = req.query.year;
+	const make = req.query.make;
+	const model = req.query.model;
+	const key = `api:envision:${year}:${make}:${model}`;
+	memcached.get(key, (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+
+		fetch(`${iapiBase}/envision/vehicle?key=${KEY}&year=${year}&make=${make}&model=${model}&brandID=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set(key, data, 86400, () => {
+				res.json(data);
+			});
+		});
+	});
+});
+
+server.get('/api/appguides.json', (req, res) => {
+	memcached.get('api:appguides', (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+
+		fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set('api:appguides', data, 86400, () => {
+				res.json(data);
+			});
+		});
+	});
+});
+
+server.get('/api/appguide/:collection/:page.json', async (req, res) => {
+	memcached.get(`api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, async (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+		let guide = {};
+		let appGuideInfo = {};
+		const [guideResponse, appGuideInfoResponse] = await Promise.all([
+			fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand.id}&collection=${req.params.collection}&limit=1000&page=${req.params.page}`, {
+				method: 'post',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}),
+			fetch(`${iapiBase}/appguides/guide?collection=${req.params.collection}&key=${KEY}&brandID=${brand.id}`, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}),
+		]);
+		guide = await guideResponse.json();
+		appGuideInfo = await appGuideInfoResponse.json();
+		guide.name = req.params.collection;
+		guide.appGuide = appGuideInfo;
+		memcached.set(`api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, guide, 86400, () => {
+			res.status(200).json(guide);
+			return;
+		});
 	});
 });
 
@@ -184,37 +263,12 @@ server.get('*', async (req, res, next) => {
 		let statusCode = 200;
 		const data = {
 			title: 'Product Information',
-			description: 'From grille guards and modular Jeep bumpers to side bars, bull bars and floor liners, ARIES truck and SUV accessories offer a custom fit for your vehicle.',
+			description: brand.description,
 			css: '',
 			body: '',
 			entry: assets.main.js,
 		};
 		const css = [];
-
-		const slugContainer = req.originalUrl;
-		const slug = slugContainer.replace('/', '');
-		let siteContentResponse = null;
-		if (slug !== '' && slug !== '_ahhealth' && slug.indexOf('health') === -1) {
-			siteContentResponse = await Promise.all([
-				fetch(`${apiBase}/site/content/${slug}?key=${KEY}&brandID=${brand.id}`, { // change this once we switch brand over, hardcoded 4 is for testing
-					method: 'get',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-						'Accept': 'application/json',
-					},
-				}),
-			]);
-		}
-
-		try {
-			const siteContent = await siteContentResponse.json();
-			if (siteContent.metaDescription !== undefined && siteContent.metaTitle !== undefined) {
-				data.title = siteContent.metaTitle;
-				data.description = siteContent.metaDescription;
-			}
-		} catch (e) {
-			// use default meta title and description
-		}
 		const context = {
 			insertCss: styles => css.push(styles._getCss()),
 			onSetTitle: value => data.title = value,

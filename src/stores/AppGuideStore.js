@@ -1,8 +1,9 @@
 import AppGuideActions from '../actions/AppGuideActions';
+import AppGuideSource from '../sources/AppGuideSource';
 import Dispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import fetch from '../core/fetch';
-import { iapiBase, apiBase, apiKey, brand } from '../config';
+import { apiBase, apiKey } from '../config';
 
 const EventEmitter = events.EventEmitter;
 
@@ -12,34 +13,49 @@ class AppGuideStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
-			guides: [],
+			guideGroups: [],
 			error: {},
-			applicationGuides: [],
 		};
 		this.bindListeners({
-			all: AppGuideActions.all,
 			set: AppGuideActions.set,
 			reset: AppGuideActions.reset,
 			setPage: AppGuideActions.setPage,
-			getApplicationGuides: AppGuideActions.getApplicationGuides,
+			handleUpdateAppGuides: AppGuideActions.updateAppGuides,
+			handleFailedAppGuides: AppGuideActions.failedAppGuides,
+			handleUpdateAppGuide: AppGuideActions.updateAppGuide,
+			handleFailedAppGuide: AppGuideActions.failedAppGuide,
+		});
+		this.exportAsync(AppGuideSource);
+	}
+
+	handleUpdateAppGuides(groups) {
+		if (groups && (!this.state.guideGroups || groups.length > this.state.guideGroups.length)) {
+			this.setState({
+				guideGroups: groups,
+				error: null,
+			});
+		}
+	}
+
+	handleFailedAppGuides(err) {
+		this.setState({
+			error: err,
 		});
 	}
 
-	async all() {
-		try {
-			await fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand}`)
-			.then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				this.setState({
-					guideGroups: data,
-				});
-			});
-		} catch (err) {
+	handleUpdateAppGuide(guide) {
+		if (guide && (!this.state.guide)) {
 			this.setState({
-				error: err,
+				guide,
+				error: null,
 			});
 		}
+	}
+
+	handleFailedAppGuide(err) {
+		this.setState({
+			error: err,
+		});
 	}
 
 	async set(args) {
@@ -85,23 +101,6 @@ class AppGuideStore extends EventEmitter {
 		this.setState({
 			page,
 		});
-	}
-
-	async getApplicationGuides() {
-		try {
-			await fetch(`${apiBase}/applicationGuide/website/${brand.id}?key=${KEY}&brandID=${brand.id}`)
-			.then((resp) => {
-				return resp.json();
-			}).then((data) => {
-				this.setState({
-					applicationGuides: data,
-				});
-			});
-		} catch (err) {
-			this.setState({
-				error: err,
-			});
-		}
 	}
 
 }

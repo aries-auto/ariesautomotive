@@ -1,0 +1,42 @@
+@import '../../variables.scss';
+
+.root {
+	display: flex;
+	padding-bottom: 20px;
+	flex-direction: row;
+	border-bottom: 1px solid $gray-lighter;
+
+	flex-wrap: wrap;
+
+	> section {
+		width: 100%;
+		padding-bottom: 10px;
+
+		flex-grow: 1;
+		> p {
+			display: inline;
+			padding: 0;
+			margin: 0;
+			font-family: $font-family-em;
+			font-size: 24px;
+			font-weight: 600;
+			color: $black-base;
+			text-transform: uppercase;
+		}
+
+		> article > span {
+			padding: 0 3px;
+		}
+	}
+
+	> div {
+		display: flex;
+		flex-direction: row;
+
+		justify-content: space-around;
+		align-items: flex-start;
+	}
+}
+
+@media (min-width: $screen-md-min) {
+}

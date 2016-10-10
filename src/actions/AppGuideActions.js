@@ -2,7 +2,17 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 
 class AppGuideActions {
 	constructor() {
-		this.generateActions('all', 'set', 'reset', 'setPage', 'getApplicationGuides');
+		this.generateActions(
+			'set',
+			'reset',
+			'setPage',
+			'fetchAppGuides',
+			'updateAppGuides',
+			'failedAppGuides',
+			'fetchAppGuide',
+			'updateAppGuide',
+			'failedAppGuide'
+		);
 	}
 }
 

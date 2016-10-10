@@ -4,12 +4,13 @@ import FastClick from 'fastclick';
 import Router from './routes';
 import Location from './core/Location';
 import { addEventListener, removeEventListener } from './core/DOMUtils';
+import { brand } from './config';
 
 let cssContainer = document.getElementById('css');
 const appContainer = document.getElementById('app');
 const context = {
 	insertCss: styles => styles._insertCss(),
-	onSetTitle: value => document.title = value,
+	onSetTitle: value => document.title = `${brand.name} | ${value}`,
 	onSetMeta: (name, content, type) => {
 		// Remove and create a new <meta /> tag in order to make it work
 		// with bookmarks in Safari
@@ -88,9 +89,8 @@ function run() {
 			navigator,
 			win,
 		});
-		if (currentState.path !== '/envision') {
-			render(currentState);
-		}
+
+		render(currentState);
 	});
 
 	// Save the page scroll position into the current location's state

@@ -10,14 +10,20 @@ class VehicleActions {
 			'updateVehicle',
 			'failedVehicle',
 
+			'fetchEnvision',
+			'updateEnvision',
+			'failedEnvision',
+			'setEnvisionColor',
+			'setEnvisionVehicle',
+			'addEnvisionPart',
+			'removeEnvisionPart',
+
 			'fetchFitments',
 			'updateFitments',
 			'failedFitments',
+
 			'set',
 			'setShowStyleState',
-			'addPartToVehicle',
-			'removePartFromVehicle',
-			'setIconParts',
 			'setLookupCategories');
 	}
 }
