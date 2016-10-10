@@ -31,7 +31,7 @@ const context = {
 	},
 	seo: (seoInput) => {
 		const props = seoInput;
-		props.url = 'http://www.ariesautomotive.com';
+		props.url = brand.website;
 		props.type = 'website';
 		props.card = 'summary_large_card';
 		const metaTags = [{ use: 'og', label: 'property' }, { use: 'twitter', label: 'name' }];

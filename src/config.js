@@ -30,10 +30,17 @@ const aries = {
 	description: 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.',
 	seoDesc: 'They change the rules, so we make up our own. They put up road blocks; we find a way around. They tell us there is no path ahead; we blaze a trail. At ARIES, we get revved up about going off the beaten path. From our Pro Series grille guards and modular Jeep bumpers to our StyleGuard™ floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.',
 	code: 'ARIES',
-	twitter: '@ariesautomoßtive',
+	twitter: 'ariesautomoßtive',
+	facebook: {
+		link: 'https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023',
+	},
+	youtube: 'AriesAutomotive',
 	defaultContactType: 28,
+	copyrightStart: 1997,
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
+	footerLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
+	website: 'http://www.ariesautomotive.com',
 	favicons: {
 		version: '2.1',
 		apple: [
@@ -83,12 +90,18 @@ const luverne = {
 	id: 4,
 	name: 'Luverne Truck Equipment',
 	description: 'LTE',
-	seoDesc: 'Luverne Truck Eqkuipment',
+	seoDesc: 'Luverne Truck Equipment',
 	code: 'LUVERNE',
-	twitter: '@lte',
+	twitter: 'lte',
+	facebook: {
+		link: '',
+	},
+	youtube: '',
 	defaultContactType: 28,
-	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
-	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
+	logo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
+	seoLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_black%20on%20transparent).png',
+	footerLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
+	website: 'http://www.luvernetruck.com',
 	favicons: {
 		version: '2.1',
 		apple: [

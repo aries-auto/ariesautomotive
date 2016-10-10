@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import s from './Footer.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
-import { brandName } from '../../config';
+import { brand } from '../../config';
 import footer from '../../data/footer';
 import SiteStore from '../../stores/SiteStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -51,7 +51,7 @@ class Footer extends Component {
 
 	render() {
 		const styles = {
-			background: "url('/img/footerBackground.png')",
+			background: "url('https://storage.googleapis.com/luverne/website/misc-images/footerBackground.png')",
 		};
 		return (
 			<footer>
@@ -69,7 +69,7 @@ class Footer extends Component {
 										</a>
 									</span>
 								</div>
-								<span itemProp="name" className={s.addressName}>ARIES Automotive</span>
+								<span itemProp="name" className={s.addressName}>{brand.name}</span>
 								<div className={s.addressInfo} itemProp="address" itemScope itemType="//schema.org/PostalAddress">
 									<span itemProp="streetAddress">6208 Industrial Drive</span>
 									<br />
@@ -86,13 +86,13 @@ class Footer extends Component {
 							<div className={cx('row', 'col-lg-10', 'col-md-10', 'col-xs-8', s.social)}>
 								<h4 className="hidden-xs hidden-sm">GET THE LATEST</h4>
 								<div className="col-xs-12 col-md-12 col-lg-12">
-									<a href="https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023" title="Visit us on Facebook">
+									<a href={brand.facebook.link} title="Visit us on Facebook">
 										<img src="https://storage.googleapis.com/aries-website/site-assets/facebook-icon.png" alt="Facebook Logo" />
 									</a>
-									<a href="https://twitter.com/ariesautomotive" title="Visit us on Twitter">
+									<a href={`https://twitter.com/${brand.twitter}`} title="Visit us on Twitter">
 										<img src="https://storage.googleapis.com/aries-website/site-assets/twitter-icon.png" alt="Twitter Logo" />
 									</a>
-									<a href="http://www.youtube.com/user/AriesAutomotive" title="Visit us on YouTube">
+									<a href="http://www.youtube.com/user/${brand.youtube}" title="Visit us on YouTube">
 										<img src="https://storage.googleapis.com/aries-website/site-assets/youtube-icon.png" alt="YouTube Logo" />
 									</a>
 								</div>
@@ -106,10 +106,15 @@ class Footer extends Component {
 							</div>
 						</div>
 						<div className="col-xs-12 col-sm-3 col-md-3 col-lg-4">
-							<img src="https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent).svg" alt="Aries Automotive" className={cx('img-responsive', s.footerLogo)} />
+							<img src={brand.footerLogo} alt={brand.name} className={cx('img-responsive', s.footerLogo)} />
 							<div className="clearfix">&nbsp;</div>
 							<br />
-							<span className={s.conditions}>&copy; 1997 - {this.getYear()} {brandName} <a href="/terms" className={s.terms}>TERMS & CONDITIONS</a></span>
+							<span className={s.conditions}>
+								&copy;
+								{brand.copyrightStart ? `${brand.copyrightStart} - ${this.getYear()}` : this.getYear()}
+								{brand.name}
+								<a href="/terms" className={s.terms}>TERMS & CONDITIONS</a>
+							</span>
 						</div>
 					</div>
 				</div>
