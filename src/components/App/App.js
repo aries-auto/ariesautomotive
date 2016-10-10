@@ -44,13 +44,13 @@ class App extends Component {
 	}
 
 	componentWillMount() {
-		this.removeCss = this.props.context.insertCss(s);
 		this.removeBootstrap = this.props.context.insertCss(bt);
+		this.removeCss = this.props.context.insertCss(s);
 	}
 
 	componentWillUnmount() {
-		this.removeCss();
 		this.removeBootstrap();
+		this.removeCss();
 	}
 
 	render() {
