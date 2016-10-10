@@ -1,0 +1,6 @@
+{
+  "name": "LvPartResults",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LvPartResults.js"
+}

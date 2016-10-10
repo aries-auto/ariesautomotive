@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import LuverneStore from '../../stores/LuverneStore';
+// import LuverneStore from '../../stores/LuverneStore';
 import s from './Result.scss';
 import withStyles from '../../decorators/withStyles';
-import PartResults from '../PartResults';
+import LvPartResults from '../LvPartResults';
 
 @withStyles(s)
 class Result extends Component {
@@ -24,37 +24,95 @@ class Result extends Component {
 
 		this.state = {
 			products: [],
+			reqFits: [],
 		};
 
 		this.updateStyle = this.updateStyle.bind(this);
+		this.setProducts = this.setProducts.bind(this);
 	}
 
-	componentWillReceiveProps(props) {
-		const products = [];
-		if (props.fitments && props.fitments.length > 0) {
-			props.fitments.map((ft) => {
-				if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
-					return;
-				}
+	componentWillMount() {
+		console.log(this.props.result);
+		const reqFits = [];
 
-				if (ft.product.categories[0].id === props.result.category.id) {
-					ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
-					products.push(ft.product);
+		this.props.result.fitments.map((fit) => {
+			reqFits[fit.title.toLowerCase()] = '';
+		});
+
+		this.setState({
+			reqFits,
+		});
+	}
+
+	// componentWillReceiveProps(props) {
+	// 	const products = [];
+	// 	console.log('testing');
+	// 	if (this.props.result.fitments && this.props.result.fitments.length > 0) {
+	// 		props.fitments.map((ft) => {
+	// 			if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
+	// 				return;
+	// 			}
+	//
+	// 			if (ft.product.categories[0].id === props.result.category.id) {
+	// 				ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
+	// 				products.push(ft.product);
+	// 			}
+	// 		});
+	// 	}
+	//
+	// 	if (products.length !== this.state.products.length) {
+	// 		this.setState({
+	// 			products,
+	// 		});
+	// 	}
+	// }
+
+	setProducts() {
+		const prods = [];
+		const rq = this.state.reqFits;
+		console.log(rq);
+
+		this.props.result.products.map((p) => {
+			let matched = true;
+			p.fitment_attributes.map((fa) => {
+				const k = fa.key.toLowerCase();
+				if (fa.value.toLowerCase() !== rq[k]) {
+					matched = false;
 				}
 			});
-		}
 
-		if (products.length !== this.state.products.length) {
+			if (matched) {
+				prods.push(p.product_identifier);
+			}
+		});
+
+		if (prods.length > 0) {
 			this.setState({
-				products,
+				products: prods,
 			});
 		}
 	}
 
 	updateStyle(e) {
 		e.preventDefault();
+		let comp = true;
 
-		LuverneStore.fetchFitments(this.props.result, this.refs.style.value);
+		const sel = this.state.reqFits;
+		sel[e.target.id] = e.target.value;
+
+		this.setState({
+			reqFits: sel,
+		});
+
+		this.props.result.fitments.map((r) => {
+			if (sel[r.title.toLowerCase()] === '') {
+				comp = false;
+			}
+		});
+
+		if (comp) {
+			this.setProducts();
+		}
 	}
 
 	renderStyles() {
@@ -71,22 +129,20 @@ class Result extends Component {
 			if (fit.options.length > 0) {
 				fit.options.map((o, i) => {
 					opts.push(
-						<option key={i}>{o.toUpperCase()}</option>
+						<option key={i} value={o.toLowerCase()}>{o.toUpperCase()}</option>
 					);
 				});
 			}
 
 			lst.push(
 				<div className={'form-group'}>
-					<select ref="style" onChange={this.updateStyle} className="form-control">
+					<select ref="style" id={fit.title.toLowerCase()} onChange={this.updateStyle} className="form-control">
 						<option value="">- {fit.title.toUpperCase()} -</option>
 							{ opts }
 					</select>
 				</div>
 			);
 		});
-
-		console.log(lst);
 
 		return lst;
 	}
@@ -111,7 +167,7 @@ class Result extends Component {
 					<span>{this.props.result.category.title}</span>
 					{this.renderStyles()}
 				</div>
-				<PartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} />
+				<LvPartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} />
 			</div>
 		);
 	}

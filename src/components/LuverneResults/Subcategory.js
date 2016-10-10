@@ -26,6 +26,7 @@ class Subcategory extends Component {
 	}
 
 	render() {
+		// console.log(this.props);
 		return (
 			<a onClick={this.setActiveIndex} className={cx(s.root, this.props.active ? s.active : '')}>
 				<img alt={this.props.title} src={this.props.image} />
