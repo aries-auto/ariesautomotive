@@ -14,6 +14,7 @@ class ContactStore extends EventEmitter {
 			inputs: {},
 			error: null,
 			success: null,
+			enabled: false,
 		};
 
 		this.bindListeners({
@@ -21,11 +22,13 @@ class ContactStore extends EventEmitter {
 			handleFailedTypes: ContactActions.FAILED_TYPES,
 			handleSetInput: ContactActions.SET_INPUT,
 			postContactData: ContactActions.postContactData,
+			setFormValidation: ContactActions.setFormValidation,
 			all: ContactActions.fetchTypes,
 		});
 
 		this.exportPublicMethods({
 			getContactTypes: this.getContactTypes,
+			setFormValidation: this.setFormValidation,
 		});
 
 		this.exportAsync(ContactSource);
@@ -104,6 +107,12 @@ class ContactStore extends EventEmitter {
 				error: err,
 			});
 		}
+	}
+
+	setFormValidation(val) {
+		this.setState({
+			enabled: val,
+		});
 	}
 
 }

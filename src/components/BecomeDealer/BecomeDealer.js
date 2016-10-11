@@ -3,6 +3,7 @@ import cx from 'classnames';
 import s from './BecomeDealer.scss';
 import withStyles from '../../decorators/withStyles';
 import ContactActions from '../../actions/ContactActions';
+import ContactStore from '../../stores/ContactStore';
 import GeographyStore from '../../stores/GeographyStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { fields } from './fields';
@@ -39,11 +40,14 @@ class BecomeDealer extends Component {
 	// }
 
 	static getStores() {
-		return [GeographyStore];
+		return [GeographyStore, ContactStore];
 	}
 
 	static getPropsFromStores() {
-		return GeographyStore.getState();
+		return {
+			...GeographyStore.getState(),
+			...ContactStore.getState(),
+		};
 	}
 
 	getForm() {

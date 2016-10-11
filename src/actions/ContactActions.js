@@ -8,6 +8,7 @@ class ContactActions {
 			'failedTypes',
 			'setInput',
 			'postContactData',
+			'setFormValidation',
 		);
 	}
 }
