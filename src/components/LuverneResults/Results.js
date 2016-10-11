@@ -26,9 +26,6 @@ class Results extends Component {
 					if (this.props.activeIndex === null || r.category.id !== this.props.activeIndex) {
 						return null;
 					}
-					// if (this.props.fitments.length === 0) {
-					// 	LuverneStore.fetchFitments(r, this.props.activeIndex);
-					// }
 
 					return <Result key={i} fitments={r.fitments} result={r} activeIndex={this.props.activeIndex} iconParts={this.props.iconParts} />;
 				})}

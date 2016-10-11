@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-// import LuverneActions from '../../actions/LuverneActions';
-import connectToStores from 'alt-utils/lib/connectToStores';
+import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import s from './Result.scss';
 import withStyles from '../../decorators/withStyles';
+import connectToStores from 'alt-utils/lib/connectToStores';
 import LvPartResults from '../LvPartResults';
 
 @withStyles(s)
@@ -38,11 +38,9 @@ class Result extends Component {
 
 	componentWillMount() {
 		const reqFits = [];
-
 		this.props.result.fitments.map((fit) => {
 			reqFits[fit.title.toLowerCase()] = '';
 		});
-
 		this.setState({
 			reqFits,
 		});
@@ -50,17 +48,8 @@ class Result extends Component {
 
 	componentWillReceiveProps(props) {
 		const products = [];
-		// console.log(props);
 		if (this.props.result.fitments && this.props.result.fitments.length > 0) {
 			props.fitments.map((ft) => {
-				// if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
-				// 	return;
-				// }
-				//
-				// if (ft.product.categories[0].id === props.result.category.id) {
-				// 	ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
-				// 	products.push(ft.product);
-				// }
 				products.push(ft);
 			});
 		}
@@ -83,7 +72,6 @@ class Result extends Component {
 	setProducts() {
 		const prods = [];
 		const rq = this.state.reqFits;
-		// console.log(this.props.configs);
 
 		this.props.result.products.map((p) => {
 			let matched = true;
@@ -100,14 +88,18 @@ class Result extends Component {
 		});
 
 		if (prods.length > 0) {
-			const temp = this.props.configs;
+			const figs = this.props.configs;
+			const sel = this.state.reqFits;
+			const x = [];
+			x.push(sel);
 			const conf = {
-				id: this.props.result.category.title,
-				selection: temp,
+				id: this.props.result.category.id,
+				selection: x,
 			};
-			temp.concat(conf);
 
-			// LuverneActions.setConfigs(temp);
+			figs.push(conf);
+			LuverneActions.setConfigs(figs);
+
 			LuverneStore.fetchFitments(prods);
 		}
 	}
@@ -144,9 +136,19 @@ class Result extends Component {
 
 		const lst = [];
 		this.props.result.fitments.map((fit) => {
+			let sel = '';
 			const opts = [];
 			if (fit.options.length > 0) {
 				fit.options.map((o, i) => {
+					const conf = this.props.configs.filter((c) => c.id === this.props.result.category.id);
+					if (conf.length > 0) {
+						conf.map((c) => {
+							if (c.selection[o.toLowerCase()] !== '') {
+								sel = o.toLowerCase();
+							}
+						});
+					}
+
 					opts.push(
 						<option key={i} value={o.toLowerCase()}>{o.toUpperCase()}</option>
 					);
@@ -155,7 +157,7 @@ class Result extends Component {
 
 			lst.push(
 				<div className={'form-group'}>
-					<select ref="style" id={fit.title.toLowerCase()} onChange={this.updateStyle} className="form-control">
+					<select defaultValue={sel} ref="style" id={fit.title.toLowerCase()} onChange={this.updateStyle} className="form-control">
 						<option value="">- {fit.title.toUpperCase()} -</option>
 							{ opts }
 					</select>

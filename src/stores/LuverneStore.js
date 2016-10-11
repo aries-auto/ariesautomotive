@@ -41,6 +41,7 @@ class LuverneStore extends EventEmitter {
 			handleUpdateFitments: LuverneActions.UPDATE_FITMENTS,
 			handleFailedFitments: LuverneActions.FAILED_FITMENTS,
 			handleProducts: LuverneActions.SET_PRODUCTS,
+			handleConfigs: LuverneActions.SET_CONFIGS,
 		});
 
 		this.bindActions(LuverneActions);
@@ -81,7 +82,6 @@ class LuverneStore extends EventEmitter {
 	}
 
 	handleUpdateFitments(fits) {
-		// console.log(fits);
 		this.setState({
 			fitments: fits,
 			error: null,
@@ -158,13 +158,15 @@ class LuverneStore extends EventEmitter {
 		if (args.length === 2) {
 			const prods = args[0];
 			// const configs = args[1];
-			console.log('handle test');
 
 			LuverneSource.fetchFitments(prods);
-			// console.log(this.state.products);
-			// console.log(temp);
-			// this.setState({ configs });
 		}
+	}
+
+	handleConfigs(configs) {
+		this.setState({
+			configs,
+		});
 	}
 }
 

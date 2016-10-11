@@ -55,28 +55,7 @@ const LuverneSource = {
 		return {
 			remote(st, prods) {
 				const fits = [];
-				// console.log('remote');
-				// map fitments for all style options that fit the supplied style
-				// to back into the array.
-				// result.style_options
-				// .filter((so) => so.style.toLowerCase() === style.toLowerCase())
-				// .map((so) => {
-				// 	// push all fitment data into the array
-				// 	fits = fits.concat(
-				// 		so.fitments
-				// 	);
-				// });
 				return new Promise((res, rej) => {
-					// const ids = [];
-					// for (let i = 0; i < fits.length; i++) {
-					// 	const ft = fits[i];
-					// 	if (!ft.product_identifier) {
-					// 		continue;
-					// 	}
-					//
-					// 	ids.push(ft.product_identifier);
-					// }
-
 					fetch(
 						`${apiBase}/part/multi?key=${KEY}&brandID=${brand.id}`,
 						{
@@ -94,52 +73,26 @@ const LuverneSource = {
 						parts.map((p) => {
 							fits.push(p);
 						});
-						// parts.map((p) => {
-						// 	fits.map((f, j) => {
-						// 		if (f.product_identifier === p.part_number) {
-						// 			fits[j].product = p;
-						// 			if (fits.every((t) => t.product)) {
 						res(fits);
-						// 			}
-						// 		}
-						// 	});
-						// });
 					}).catch(rej);
 				});
 			},
 
 			local(st, prods) {
-				// const id = result.category.id;
 				const fits = [];
-				// console.log('remote');
-				// map fitments for all style options that fit the supplied style
-				// to back into the array.
-				// result.fitments
-				// .filter((so) => so.style.toLowerCase() === style.toLowerCase())
-				// .map((so) => {
-				// 	// push all fitment data into the array
-				// 	fits = fits.concat(
-				// 		so.fitments
-				// 	);
-				// });
-				//
+
 				if (!st.fitments || st.fitments.length === 0) {
 					return null;
 				}
 
-				st.fitments.sort((a, b) => a.product_identifier > b.product_identifier);
-				// fits.sort((a, b) => a.product_identifier > b.product_identifier);
+				st.fitments.sort((a, b) => a.part_number > b.part_number);
 
-				// let same = true;
 				st.fitments.map((ft) => {
 					prods.map((p) => {
-						if (ft.id === p) {
+						if (ft.part_number === p) {
 							fits.concat(ft);
 						}
 					});
-					// if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
-					// 	same = false;
-					// }
 				});
 
 				if (fits.length === 0) {
