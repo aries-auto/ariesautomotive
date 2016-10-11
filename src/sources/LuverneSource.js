@@ -53,29 +53,29 @@ const LuverneSource = {
 
 	fetchFitments() {
 		return {
-			remote(st, result, style) {
-				let fits = [];
-
+			remote(st, prods) {
+				const fits = [];
+				// console.log('remote');
 				// map fitments for all style options that fit the supplied style
 				// to back into the array.
-				result.style_options
-				.filter((so) => so.style.toLowerCase() === style.toLowerCase())
-				.map((so) => {
-					// push all fitment data into the array
-					fits = fits.concat(
-						so.fitments
-					);
-				});
+				// result.style_options
+				// .filter((so) => so.style.toLowerCase() === style.toLowerCase())
+				// .map((so) => {
+				// 	// push all fitment data into the array
+				// 	fits = fits.concat(
+				// 		so.fitments
+				// 	);
+				// });
 				return new Promise((res, rej) => {
-					const ids = [];
-					for (let i = 0; i < fits.length; i++) {
-						const ft = fits[i];
-						if (!ft.product_identifier) {
-							continue;
-						}
-
-						ids.push(ft.product_identifier);
-					}
+					// const ids = [];
+					// for (let i = 0; i < fits.length; i++) {
+					// 	const ft = fits[i];
+					// 	if (!ft.product_identifier) {
+					// 		continue;
+					// 	}
+					//
+					// 	ids.push(ft.product_identifier);
+					// }
 
 					fetch(
 						`${apiBase}/part/multi?key=${KEY}&brandID=${brand.id}`,
@@ -84,7 +84,7 @@ const LuverneSource = {
 							headers: {
 								'Accept': 'application/json',
 							},
-							body: JSON.stringify(ids),
+							body: JSON.stringify(prods),
 						},
 					)
 					.then((resp) => {
@@ -92,120 +92,62 @@ const LuverneSource = {
 					/* eslint-disable no-loop-func */
 					}).then((parts) => {
 						parts.map((p) => {
-							fits.map((f, j) => {
-								if (f.product_identifier === p.part_number) {
-									fits[j].product = p;
-									if (fits.every((t) => t.product)) {
-										res(fits);
-									}
-								}
-							});
+							fits.push(p);
 						});
+						// parts.map((p) => {
+						// 	fits.map((f, j) => {
+						// 		if (f.product_identifier === p.part_number) {
+						// 			fits[j].product = p;
+						// 			if (fits.every((t) => t.product)) {
+						res(fits);
+						// 			}
+						// 		}
+						// 	});
+						// });
 					}).catch(rej);
 				});
 			},
 
-			local(st, result, style) {
-				const id = result.category.id;
-				let fits = [];
-
+			local(st, prods) {
+				// const id = result.category.id;
+				const fits = [];
+				// console.log('remote');
 				// map fitments for all style options that fit the supplied style
 				// to back into the array.
-				result.fitments
-				.filter((so) => so.style.toLowerCase() === style.toLowerCase())
-				.map((so) => {
-					// push all fitment data into the array
-					fits = fits.concat(
-						so.fitments
-					);
-				});
-
-				if (!st.fitments[id] || fits.length > 0) {
+				// result.fitments
+				// .filter((so) => so.style.toLowerCase() === style.toLowerCase())
+				// .map((so) => {
+				// 	// push all fitment data into the array
+				// 	fits = fits.concat(
+				// 		so.fitments
+				// 	);
+				// });
+				//
+				if (!st.fitments || st.fitments.length === 0) {
 					return null;
 				}
 
 				st.fitments.sort((a, b) => a.product_identifier > b.product_identifier);
-				fits.sort((a, b) => a.product_identifier > b.product_identifier);
+				// fits.sort((a, b) => a.product_identifier > b.product_identifier);
 
-				let same = true;
-				st.fitments.map((ft, i) => {
-					if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
-						same = false;
-					}
+				// let same = true;
+				st.fitments.map((ft) => {
+					prods.map((p) => {
+						if (ft.id === p) {
+							fits.concat(ft);
+						}
+					});
+					// if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
+					// 	same = false;
+					// }
 				});
 
-				if (!same) {
+				if (fits.length === 0) {
 					return null;
 				}
 
-				return st.fitments[id];
+				return fits;
 			},
-
-			success: LuverneActions.updateFitments,
-			error: LuverneActions.failedFitments,
-			loading: LuverneActions.fetchFitments,
-		};
-	},
-
-	fetchParts() {
-		return {
-			remote(st, ids) {
-				return new Promise((res, rej) => {
-					// const fits = [];
-					fetch(
-						`${apiBase}/part/multi?key=${KEY}&brandID=${brand.id}`,
-						{
-							method: 'post',
-							headers: {
-								'Accept': 'application/json',
-							},
-							body: JSON.stringify(ids),
-						},
-					)
-					.then((resp) => {
-						return resp.json();
-					/* eslint-disable no-loop-func */
-					}).then((parts) => {
-						res(parts);
-					}).catch(rej);
-				});
-			},
-
-			// local(st, result) {
-			// 	const id = result.category.id;
-			// 	let fits = [];
-			//
-			// 	// map fitments for all style options that fit the supplied style
-			// 	// to back into the array.
-			// 	result.fitments
-			// 	.filter((so) => so.style.toLowerCase() === style.toLowerCase())
-			// 	.map((so) => {
-			// 		// push all fitment data into the array
-			// 		fits = fits.concat(
-			// 			so.fitments
-			// 		);
-			// 	});
-			//
-			// 	if (!st.fitments[id] || fits.length > 0) {
-			// 		return null;
-			// 	}
-			//
-			// 	st.fitments.sort((a, b) => a.product_identifier > b.product_identifier);
-			// 	fits.sort((a, b) => a.product_identifier > b.product_identifier);
-			//
-			// 	let same = true;
-			// 	st.fitments.map((ft, i) => {
-			// 		if (!fits[i] || fits[i].product_identifier !== ft.product_identifier) {
-			// 			same = false;
-			// 		}
-			// 	});
-			//
-			// 	if (!same) {
-			// 		return null;
-			// 	}
-			//
-			// 	return st.fitments[id];
-			// },
 
 			success: LuverneActions.updateFitments,
 			error: LuverneActions.failedFitments,
@@ -213,5 +155,6 @@ const LuverneSource = {
 		};
 	},
 };
+
 
 module.exports = LuverneSource;

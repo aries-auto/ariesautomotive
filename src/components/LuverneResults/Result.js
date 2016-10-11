@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-// import LuverneStore from '../../stores/LuverneStore';
+// import LuverneActions from '../../actions/LuverneActions';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import LuverneStore from '../../stores/LuverneStore';
 import s from './Result.scss';
 import withStyles from '../../decorators/withStyles';
 import LvPartResults from '../LvPartResults';
 
 @withStyles(s)
+@connectToStores
 class Result extends Component {
 
 	static propTypes = {
@@ -17,6 +20,8 @@ class Result extends Component {
 			React.PropTypes.object,
 			React.PropTypes.array,
 		]),
+		configs: PropTypes.array,
+		products: PropTypes.array,
 	};
 
 	constructor() {
@@ -43,32 +48,42 @@ class Result extends Component {
 		});
 	}
 
-	// componentWillReceiveProps(props) {
-	// 	const products = [];
-	// 	console.log('testing');
-	// 	if (this.props.result.fitments && this.props.result.fitments.length > 0) {
-	// 		props.fitments.map((ft) => {
-	// 			if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
-	// 				return;
-	// 			}
-	//
-	// 			if (ft.product.categories[0].id === props.result.category.id) {
-	// 				ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
-	// 				products.push(ft.product);
-	// 			}
-	// 		});
-	// 	}
-	//
-	// 	if (products.length !== this.state.products.length) {
-	// 		this.setState({
-	// 			products,
-	// 		});
-	// 	}
-	// }
+	componentWillReceiveProps(props) {
+		const products = [];
+		// console.log(props);
+		if (this.props.result.fitments && this.props.result.fitments.length > 0) {
+			props.fitments.map((ft) => {
+				// if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
+				// 	return;
+				// }
+				//
+				// if (ft.product.categories[0].id === props.result.category.id) {
+				// 	ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
+				// 	products.push(ft.product);
+				// }
+				products.push(ft);
+			});
+		}
+
+		if (products.length !== this.state.products.length) {
+			this.setState({
+				products,
+			});
+		}
+	}
+
+	static getStores() {
+		return [LuverneStore];
+	}
+
+	static getPropsFromStores() {
+		return LuverneStore.getState();
+	}
 
 	setProducts() {
 		const prods = [];
 		const rq = this.state.reqFits;
+		// console.log(this.props.configs);
 
 		this.props.result.products.map((p) => {
 			let matched = true;
@@ -85,9 +100,15 @@ class Result extends Component {
 		});
 
 		if (prods.length > 0) {
-			this.setState({
-				products: prods,
-			});
+			const temp = this.props.configs;
+			const conf = {
+				id: this.props.result.category.title,
+				selection: temp,
+			};
+			temp.concat(conf);
+
+			// LuverneActions.setConfigs(temp);
+			LuverneStore.fetchFitments(prods);
 		}
 	}
 

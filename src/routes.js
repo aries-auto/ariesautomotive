@@ -111,7 +111,7 @@ const router = new Router(on => {
 
 	on('/vehicle', async (state) => {
 		state.context.params = state.params;
-		if (brand.id === '4') {
+		if (brand.id === 4) {
 			return <LuverneResults context={state.context} />;
 		}
 		return <VehicleResults context={state.context} />;
@@ -122,7 +122,7 @@ const router = new Router(on => {
 		LookupActions.set({
 			year: state.params.year,
 		});
-		if (brand.id === '4') {
+		if (brand.id === 4) {
 			return <LuverneResults context={state.context} />;
 		}
 		return <VehicleResults context={state.context} />;
@@ -134,7 +134,7 @@ const router = new Router(on => {
 			year: state.params.year,
 			make: state.params.make,
 		});
-		if (brand.id === '4') {
+		if (brand.id === 4) {
 			return <LuverneResults context={state.context} />;
 		}
 		return <VehicleResults context={state.context} />;
@@ -156,7 +156,7 @@ const router = new Router(on => {
 		}
 		// END TODO
 		state.context.params = state.params;
-		if (brand.id === '4') {
+		if (brand.id === 4) {
 			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 			return <LuverneResults context={state.context} win={state.win} />;
 		}

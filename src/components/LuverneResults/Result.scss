@@ -20,8 +20,8 @@
             margin: 0 10px;
             flex-direction: row;
             border-bottom: 2px solid $gray-lighter;
-            justify-content: space-between;
-            align-items: flex-end;
+            justify-content: flex-start;
+            align-items: center;
 
             span {
                 font-size: 1.3em;
@@ -30,7 +30,7 @@
             }
 
             > div {
-                margin: 0;
+                margin: 10px;
 
                 select {
                     min-width: 150px;
