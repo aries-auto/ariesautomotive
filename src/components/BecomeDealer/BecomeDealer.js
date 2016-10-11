@@ -19,6 +19,8 @@ class BecomeDealer extends Component {
 		enabled: PropTypes.bool,
 		countries: PropTypes.array,
 		inputs: PropTypes.object,
+		success: PropTypes.object,
+		error: PropTypes.object,
 	};
 
 	// static contextTypes = {
@@ -140,6 +142,19 @@ class BecomeDealer extends Component {
 		ContactActions.postContactData(28);
 	}
 
+	renderSuccess() {
+		if (this.props.error) {
+			return (
+				<div className={cx('form-group col-xs-12 alert alert-danger')}>
+					Error: {this.props.error.message}
+				</div>);
+		}
+		return (
+			<div className={cx('form-group col-xs-12 alert alert-success')}>
+				<a href="/">Thank you. We have received your request.</a>
+			</div>);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
@@ -156,6 +171,7 @@ class BecomeDealer extends Component {
 								<button type="submit" className="btn btn-primary" disabled={!this.props.enabled} onClick={this.submit}>SEND</button>
 							</div>
 						</form>
+						{(this.props.success || this.props.error) ? this.renderSuccess() : null}
 					</div>
 				</div>
 			</div>
