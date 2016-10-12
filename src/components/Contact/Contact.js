@@ -13,7 +13,6 @@ import { locations, main } from '../../data/locations';
 import { phone } from '../../data/contact';
 import MainLocation from './MainLocation';
 import SupportLocations from './SupportLocations';
-import Alert from '../Alert';
 
 const title = `Contact ${brand.name}`;
 
@@ -72,6 +71,19 @@ class Contact extends Component {
 		ContactActions.postContactData(this.props.inputs.reason ? this.props.inputs.reason : brand.defaultContactType);
 	}
 
+	renderSuccess() {
+		if (this.props.error) {
+			return (
+				<div className={cx('form-group col-xs-12 alert alert-danger')}>
+					Error: {this.props.error.message}
+				</div>);
+		}
+		return (
+			<div className={cx('form-group col-xs-12 alert alert-success')}>
+				<a href="/">Thank you. We have received your request.</a>
+			</div>);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
@@ -88,7 +100,7 @@ class Contact extends Component {
 								<button type="submit" className="btn btn-primary" disabled={!this.enabled}>SEND</button>
 							</div>
 						</form>
-						<Alert success={this.props.success} error={this.props.error} />
+						{(this.props.success || this.props.error) ? this.renderSuccess() : null}
 					</div>
 					<div className="col-xs-12 col-md-6 col-lg-6">
 						<div className={cx('head')}>

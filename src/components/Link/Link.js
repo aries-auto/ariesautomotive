@@ -67,7 +67,8 @@ class Link extends Component {
 
 	render() {
 		const { to, query, ...props } = this.props;
-		return <a href={Location.createHref(to, query)} onClick={this.handleClick} {...props} />;
+		const target = this.props.external ? '_blank' : '';
+		return <a href={Location.createHref(to, query)} target={target} onClick={this.handleClick} {...props} />;
 	}
 
 }

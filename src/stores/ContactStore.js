@@ -14,6 +14,7 @@ class ContactStore extends EventEmitter {
 			inputs: {},
 			error: null,
 			success: null,
+			enabled: false,
 		};
 
 		this.bindListeners({
@@ -21,11 +22,13 @@ class ContactStore extends EventEmitter {
 			handleFailedTypes: ContactActions.FAILED_TYPES,
 			handleSetInput: ContactActions.SET_INPUT,
 			postContactData: ContactActions.postContactData,
+			setFormValidation: ContactActions.setFormValidation,
 			all: ContactActions.fetchTypes,
 		});
 
 		this.exportPublicMethods({
 			getContactTypes: this.getContactTypes,
+			setFormValidation: this.setFormValidation,
 		});
 
 		this.exportAsync(ContactSource);
@@ -67,24 +70,32 @@ class ContactStore extends EventEmitter {
 	postContactData(args) {
 		const frm = this.state.inputs;
 		frm.reason = frm.reason ? frm.reason : args;
-
+		if (frm.businessType) {
+			const btype = frm.businessType;
+			delete frm.businessType;
+			frm.businessType = {
+				type: btype,
+			};
+		}
 		const inputs = JSON.stringify(frm);
 		try {
 			fetch(`${apiBase}/contact/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
-				method: 'post',
+				method: 'POST',
+				body: inputs,
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: inputs,
-			}).then((resp) => {
-				this.setState({
-					success: 'true',
-				});
+			})
+			.then((resp) => {
 				return resp.json();
+			}).then((data) => {
+				this.setState({
+					success: data,
+				});
 			});
 		} catch (err) {
 			this.setState({
-				error: err.message,
+				error: err.json(),
 			});
 		}
 	}
@@ -104,6 +115,12 @@ class ContactStore extends EventEmitter {
 				error: err,
 			});
 		}
+	}
+
+	setFormValidation(val) {
+		this.setState({
+			enabled: val,
+		});
 	}
 
 }
