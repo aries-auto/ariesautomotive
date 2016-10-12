@@ -26,7 +26,6 @@ export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !
 
 // Hides Where To Buy during development and review
 const hideBuy = process.env.HIDE_BUY ? true : false;
-console.log(hideBuy);
 
 const aries = {
 	id: 3,
