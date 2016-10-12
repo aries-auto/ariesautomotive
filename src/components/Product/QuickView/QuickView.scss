@@ -20,24 +20,26 @@
 		min-height: 45px;
 		margin-bottom: 2px;
 		overflow: hidden;
-	}
-
-	.header .desc {
-		font-family: $font-family-em;
-		font-size: 24px;
-		font-weight: 400;
-		line-height: 24px;
-
-		a {
-			text-decoration: none;
+		.desc {
+			font-family: $font-family-em;
+			font-size: 24px;
+			font-weight: 400;
+			line-height: 24px;
 		}
 
-		a:hover {
-			color: $gray-dark;
-			text-decoration: none;
+		.envisionBadge {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 25px;
+			background: $new-red;
+			color: $white-base;
+			font-size: 20px;
+			text-align: center;
+			border-radius: 0 0 0 3px;
 
-			.partNum {
-				color: $gray-darker;
+			&::before {
+				content: '+';
 			}
 		}
 	}

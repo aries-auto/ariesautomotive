@@ -86,6 +86,7 @@ class QuickView extends Component {
 						<span>{this.props.product.short_description}</span>
 						<span className={s.partNum}>{this.props.product.part_number}</span>
 					</span>
+					{(envision) ? <span className={s.envisionBadge} /> : null}
 				</div>
 
 				<div className={s.image}>
