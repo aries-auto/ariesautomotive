@@ -32,7 +32,12 @@ class Configurator extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<Display window={this.props.window} products={this.props.envision.matchedProducts} id={this.props.envision.vehicleID} />
+				<Display
+					window={this.props.window}
+					colorID={this.props.envision.colorID}
+					products={this.props.envision.matchedProducts}
+					id={this.props.envision.vehicleID}
+				/>
 				<PartList products={this.props.envision.matchedProducts} />
 			</div>
 		);

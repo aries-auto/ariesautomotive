@@ -3,6 +3,7 @@ import cx from 'classnames';
 import s from './Display.scss';
 import Alert from '../../Alert';
 import withStyles from '../../../decorators/withStyles';
+import VehicleActions from '../../../actions/VehicleActions';
 
 @withStyles(s)
 class Configurator extends Component {
@@ -12,6 +13,7 @@ class Configurator extends Component {
 		products: PropTypes.array,
 		className: PropTypes.string,
 		window: PropTypes.object,
+		colorID: PropTypes.number,
 	};
 
 	constructor() {
@@ -26,6 +28,21 @@ class Configurator extends Component {
 				error: `No image of vehicle with parts available.`,
 			});
 		};
+
+		const ul = document.getElementById('vehicle-ref-colors');
+		ul.addEventListener('click', (e) => {
+			let target = e.target;
+			while (target && target.parentNode !== ul) {
+				target = target.parentNode;
+				if (!target) {
+					return;
+				}
+			}
+			if (target.tagName === 'LI') {
+				const colorID = parseInt(target.getAttribute('data-id'), 0);
+				VehicleActions.setEnvisionColor(colorID || 0);
+			}
+		});
 	}
 
 	componentDidUpdate() {
@@ -48,10 +65,11 @@ class Configurator extends Component {
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
+				<script src="https://storage.googleapis.com/aries-website/site-assets/envision.js"></script>
 				<div
 					className={cx('vehicle-wrapper', s.vehicleWrapper)}
 					id="ic-vehicle-wrapper"
+					data-color={this.props.colorID || 0}
 					data-part={prods.join(',')}
 					data-vehicleid={this.props.id}
 					title="The Vehicle Accessory Desc"
