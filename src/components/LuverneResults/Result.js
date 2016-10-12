@@ -21,7 +21,6 @@ class Result extends Component {
 			React.PropTypes.array,
 		]),
 		configs: PropTypes.array,
-		products: PropTypes.array,
 		reqFits: PropTypes.array,
 		allProducts: PropTypes.array,
 	};
@@ -47,7 +46,6 @@ class Result extends Component {
 		if (this.props.configs && this.props.configs.length > 0) {
 			this.props.configs.map((c) => {
 				if (c.id === this.props.result.category.id) {
-					console.log('match');
 					LuverneStore.fetchFitments(c.products);
 				}
 			});
@@ -192,7 +190,7 @@ class Result extends Component {
 					<span>{this.props.result.category.title}</span>
 					{this.renderStyles()}
 				</div>
-				<LvPartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} />
+				<LvPartResults className={`test`} parts={this.state.products} />
 			</div>
 		);
 	}

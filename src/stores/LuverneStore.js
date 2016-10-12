@@ -104,6 +104,7 @@ class LuverneStore extends EventEmitter {
 		const t = (id === this.state.activeIndex) ? t : id;
 		this.setState({
 			activeIndex: t,
+			fitments: [],
 		});
 	}
 
