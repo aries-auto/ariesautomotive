@@ -123,7 +123,6 @@ class LuverneResults extends Component {
 			(c.children || []).map((cat) => {
 				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 				if (tmp.length > 0) {
-					console.log(tmp);
 					subs = subs.concat(tmp);
 				}
 			});
