@@ -23,6 +23,7 @@ class Result extends Component {
 		configs: PropTypes.array,
 		products: PropTypes.array,
 		reqFits: PropTypes.array,
+		allProducts: PropTypes.array,
 	};
 
 	constructor() {
@@ -42,6 +43,15 @@ class Result extends Component {
 			reqFits[fit.title.toLowerCase()] = '';
 		});
 		LuverneActions.setFits(reqFits);
+
+		if (this.props.configs && this.props.configs.length > 0) {
+			this.props.configs.map((c) => {
+				if (c.id === this.props.result.category.id) {
+					console.log('match');
+					LuverneStore.fetchFitments(c.products);
+				}
+			});
+		}
 	}
 
 	componentWillReceiveProps(props) {
@@ -93,6 +103,7 @@ class Result extends Component {
 			const conf = {
 				id: this.props.result.category.id,
 				selection: x,
+				products: prods,
 			};
 
 			figs.push(conf);

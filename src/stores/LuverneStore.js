@@ -31,7 +31,7 @@ class LuverneStore extends EventEmitter {
 			showIconMediaVehicle: true,
 			categories: [],
 			configs: [],
-			products: [],
+			allProducts: [],
 			reqFits: [],
 		};
 
