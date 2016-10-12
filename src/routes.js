@@ -48,7 +48,6 @@ const router = new Router(on => {
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
-
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
 			VehicleStore.fetchVehicle(),
@@ -137,7 +136,6 @@ const router = new Router(on => {
 	});
 
 	on('/about', async (state) => {
-		await SiteStore.fetchPageData('about');
 		return <About context={state.context} />;
 	});
 
