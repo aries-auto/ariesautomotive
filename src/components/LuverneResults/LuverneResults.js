@@ -123,10 +123,13 @@ class LuverneResults extends Component {
 			(c.children || []).map((cat) => {
 				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 				if (tmp.length > 0) {
+					console.log(tmp);
 					subs = subs.concat(tmp);
 				}
 			});
+
 			if (subs.length > 0) {
+				subs.sort((a, b) => a.category.sort > b.category.sort);
 				groups.push(
 					<CategorizedResult
 						activeIndex={this.props.activeIndex}

@@ -101,6 +101,7 @@ class LuverneStore extends EventEmitter {
 	}
 
 	handleSetActiveIndex(id) {
+		console.log('store', id);
 		const t = (id === this.state.activeIndex) ? t : id;
 		this.setState({
 			activeIndex: t,
