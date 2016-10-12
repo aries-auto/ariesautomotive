@@ -137,6 +137,7 @@ const router = new Router(on => {
 	});
 
 	on('/about', async (state) => {
+		await SiteStore.fetchPageData('about');
 		return <About context={state.context} />;
 	});
 
