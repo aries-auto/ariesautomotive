@@ -63,7 +63,7 @@ class Configurator extends Component {
 		const prods = this.props.products.map((p) => p.part_number);
 
 		return (
-			<div className={cx(s.root, this.props.className)}>
+			<div className={cx(s.root, this.props.className)} id="vehicle-display">
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 				<script src="https://storage.googleapis.com/aries-website/site-assets/envision.js"></script>
 				<div

@@ -62,6 +62,8 @@ class QuickView extends Component {
 
 	handleAddToVehicle() {
 		VehicleActions.addEnvisionPart(this.props.product);
+		const vehicleElement = document.getElementById('vehicle-display');
+		vehicleElement.scrollIntoView();
 	}
 
 	render() {
