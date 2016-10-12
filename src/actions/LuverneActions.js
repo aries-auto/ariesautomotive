@@ -12,6 +12,7 @@ class LuverneActions {
 
 			'setProducts',
 			'setConfigs',
+			'setFits',
 
 			'fetchFitments',
 			'fetchParts',

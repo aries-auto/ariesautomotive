@@ -32,6 +32,7 @@ class LuverneStore extends EventEmitter {
 			categories: [],
 			configs: [],
 			products: [],
+			reqFits: [],
 		};
 
 		this.bindListeners({
@@ -42,6 +43,7 @@ class LuverneStore extends EventEmitter {
 			handleFailedFitments: LuverneActions.FAILED_FITMENTS,
 			handleProducts: LuverneActions.SET_PRODUCTS,
 			handleConfigs: LuverneActions.SET_CONFIGS,
+			handleFits: LuverneActions.SET_FITS,
 		});
 
 		this.bindActions(LuverneActions);
@@ -154,18 +156,19 @@ class LuverneStore extends EventEmitter {
 		this.setState({ iconParts });
 	}
 
-	handleProducts(args) {
-		if (args.length === 2) {
-			const prods = args[0];
-			// const configs = args[1];
-
-			LuverneSource.fetchFitments(prods);
-		}
+	handleProducts(prods) {
+		LuverneSource.fetchFitments(prods);
 	}
 
 	handleConfigs(configs) {
 		this.setState({
 			configs,
+		});
+	}
+
+	handleFits(reqFits) {
+		this.setState({
+			reqFits,
 		});
 	}
 }

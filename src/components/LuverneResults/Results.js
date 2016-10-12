@@ -3,9 +3,11 @@ import cx from 'classnames';
 import s from './Results.scss';
 import Result from './Result';
 import withStyles from '../../decorators/withStyles';
-// import LuverneStore from '../../stores/LuverneStore';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import LuverneStore from '../../stores/LuverneStore';
 
 @withStyles(s)
+@connectToStores
 class Results extends Component {
 
 	static propTypes = {
@@ -17,7 +19,17 @@ class Results extends Component {
 			React.PropTypes.object,
 			React.PropTypes.array,
 		]),
+		configs: PropTypes.array,
 	};
+
+	static getStores() {
+		return [LuverneStore];
+	}
+
+	static getPropsFromStores() {
+		return LuverneStore.getState();
+	}
+
 
 	render() {
 		return (

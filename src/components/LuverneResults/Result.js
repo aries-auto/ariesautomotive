@@ -22,6 +22,7 @@ class Result extends Component {
 		]),
 		configs: PropTypes.array,
 		products: PropTypes.array,
+		reqFits: PropTypes.array,
 	};
 
 	constructor() {
@@ -29,7 +30,6 @@ class Result extends Component {
 
 		this.state = {
 			products: [],
-			reqFits: [],
 		};
 
 		this.updateStyle = this.updateStyle.bind(this);
@@ -41,9 +41,7 @@ class Result extends Component {
 		this.props.result.fitments.map((fit) => {
 			reqFits[fit.title.toLowerCase()] = '';
 		});
-		this.setState({
-			reqFits,
-		});
+		LuverneActions.setFits(reqFits);
 	}
 
 	componentWillReceiveProps(props) {
@@ -71,7 +69,7 @@ class Result extends Component {
 
 	setProducts() {
 		const prods = [];
-		const rq = this.state.reqFits;
+		const rq = this.props.reqFits;
 
 		this.props.result.products.map((p) => {
 			let matched = true;
@@ -89,7 +87,7 @@ class Result extends Component {
 
 		if (prods.length > 0) {
 			const figs = this.props.configs;
-			const sel = this.state.reqFits;
+			const sel = this.props.reqFits;
 			const x = [];
 			x.push(sel);
 			const conf = {
@@ -99,7 +97,6 @@ class Result extends Component {
 
 			figs.push(conf);
 			LuverneActions.setConfigs(figs);
-
 			LuverneStore.fetchFitments(prods);
 		}
 	}
@@ -108,12 +105,8 @@ class Result extends Component {
 		e.preventDefault();
 		let comp = true;
 
-		const sel = this.state.reqFits;
+		const sel = this.props.reqFits;
 		sel[e.target.id] = e.target.value;
-
-		this.setState({
-			reqFits: sel,
-		});
 
 		this.props.result.fitments.map((r) => {
 			if (sel[r.title.toLowerCase()] === '') {
