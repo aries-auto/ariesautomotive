@@ -38,16 +38,27 @@ class Result extends Component {
 
 	componentWillMount() {
 		const reqFits = [];
-		this.props.result.fitments.map((fit) => {
-			reqFits[fit.title.toLowerCase()] = '';
-		});
-		LuverneActions.setFits(reqFits);
+		// this.props.result.fitments.map((fit) => {
+		// 	reqFits[fit.title.toLowerCase()] = '';
+		// });
+		// LuverneActions.setFits(reqFits);
 
 		if (this.props.configs && this.props.configs.length > 0) {
 			this.props.configs.map((c) => {
 				if (c.id === this.props.result.category.id) {
 					LuverneStore.fetchFitments(c.products);
+
+					this.props.result.fitments.map((fit) => {
+						reqFits[fit.title.toLowerCase()] = c.selection[0][fit.title.toLowerCase()];
+					});
+					LuverneActions.setFits(reqFits);
+				} else {
+					this.props.result.fitments.map((fit) => {
+						reqFits[fit.title.toLowerCase()] = '';
+					});
+					LuverneActions.setFits(reqFits);
 				}
+				LuverneActions.setFits(reqFits);
 			});
 		}
 	}
