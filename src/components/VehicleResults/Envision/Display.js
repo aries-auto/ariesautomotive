@@ -46,7 +46,7 @@ class Configurator extends Component {
 		const prods = this.props.products.map((p) => p.part_number);
 
 		return (
-			<div className={cx(s.root, this.props.className)}>
+			<div className={cx(s.root, this.props.className)} id="vehicle-display">
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-2.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div
