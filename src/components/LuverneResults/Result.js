@@ -20,9 +20,7 @@ class Result extends Component {
 			React.PropTypes.object,
 			React.PropTypes.array,
 		]),
-		configs: PropTypes.array,
-		reqFits: PropTypes.array,
-		allProducts: PropTypes.array,
+		sels: PropTypes.array,
 	};
 
 	constructor() {
@@ -34,32 +32,20 @@ class Result extends Component {
 
 		this.updateStyle = this.updateStyle.bind(this);
 		this.setProducts = this.setProducts.bind(this);
+		this.isComplete = this.isComplete.bind(this);
 	}
 
 	componentWillMount() {
 		const reqFits = [];
-		// this.props.result.fitments.map((fit) => {
-		// 	reqFits[fit.title.toLowerCase()] = '';
-		// });
-		// LuverneActions.setFits(reqFits);
 
-		if (this.props.configs && this.props.configs.length > 0) {
-			this.props.configs.map((c) => {
-				if (c.id === this.props.result.category.id) {
-					LuverneStore.fetchFitments(c.products);
+		this.props.result.fitments.map((r) => {
+			reqFits.push(r.title.toLowerCase());
+		});
+		this.setState({ reqFits });
 
-					this.props.result.fitments.map((fit) => {
-						reqFits[fit.title.toLowerCase()] = c.selection[0][fit.title.toLowerCase()];
-					});
-					LuverneActions.setFits(reqFits);
-				} else {
-					this.props.result.fitments.map((fit) => {
-						reqFits[fit.title.toLowerCase()] = '';
-					});
-					LuverneActions.setFits(reqFits);
-				}
-				LuverneActions.setFits(reqFits);
-			});
+
+		if (this.isComplete(this.props.sels, reqFits)) {
+			this.setProducts();
 		}
 	}
 
@@ -88,13 +74,14 @@ class Result extends Component {
 
 	setProducts() {
 		const prods = [];
-		const rq = this.props.reqFits;
+		const sel = this.props.sels;
 
 		this.props.result.products.map((p) => {
 			let matched = true;
 			p.fitment_attributes.map((fa) => {
 				const k = fa.key.toLowerCase();
-				if (fa.value.toLowerCase() !== rq[k]) {
+				const v = fa.value.toLowerCase();
+				if (sel[k] !== v) {
 					matched = false;
 				}
 			});
@@ -104,39 +91,30 @@ class Result extends Component {
 			}
 		});
 
-		if (prods.length > 0) {
-			const figs = this.props.configs;
-			const sel = this.props.reqFits;
-			const x = [];
-			x.push(sel);
-			const conf = {
-				id: this.props.result.category.id,
-				selection: x,
-				products: prods,
-			};
-
-			figs.push(conf);
-			LuverneActions.setConfigs(figs);
-			LuverneStore.fetchFitments(prods);
-		}
+		LuverneStore.fetchFitments(prods);
 	}
 
 	updateStyle(e) {
 		e.preventDefault();
+
+		const sels = this.props.sels;
+		sels[e.target.id] = e.target.value;
+		LuverneActions.setSel(sels);
+
+		if (this.isComplete(sels, this.state.reqFits)) {
+			this.setProducts();
+		}
+	}
+
+	isComplete(sels, reqs) {
 		let comp = true;
-
-		const sel = this.props.reqFits;
-		sel[e.target.id] = e.target.value;
-
-		this.props.result.fitments.map((r) => {
-			if (sel[r.title.toLowerCase()] === '') {
+		reqs.map((r) => {
+			if (sels[r] === undefined) {
 				comp = false;
 			}
 		});
 
-		if (comp) {
-			this.setProducts();
-		}
+		return comp;
 	}
 
 	renderStyles() {
@@ -151,22 +129,16 @@ class Result extends Component {
 		this.props.result.fitments.map((fit) => {
 			let sel = '';
 			const opts = [];
-			if (fit.options.length > 0) {
-				fit.options.map((o, i) => {
-					const conf = this.props.configs.filter((c) => c.id === this.props.result.category.id);
-					if (conf.length > 0) {
-						conf.map((c) => {
-							if (c.selection[o.toLowerCase()] !== '') {
-								sel = o.toLowerCase();
-							}
-						});
-					}
 
-					opts.push(
-						<option key={i} value={o.toLowerCase()}>{o.toUpperCase()}</option>
-					);
-				});
-			}
+			fit.options.map((o, i) => {
+				if (this.props.sels && this.props.sels[fit.title.toLowerCase()] === o.toLowerCase()) {
+					sel = o.toLowerCase();
+				}
+
+				opts.push(
+					<option key={i} value={o.toLowerCase()}>{o.toUpperCase()}</option>
+				);
+			});
 
 			lst.push(
 				<div className={'form-group'}>

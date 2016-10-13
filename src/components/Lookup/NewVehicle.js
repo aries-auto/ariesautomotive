@@ -100,7 +100,7 @@ class NewVehicle extends Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-
+		console.log(this.props.vehicle);
 		this.props.onSubmit();
 	}
 
