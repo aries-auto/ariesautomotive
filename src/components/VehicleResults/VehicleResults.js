@@ -63,6 +63,25 @@ class VehicleResults extends Component {
 			children: [],
 		};
 
+		// const SeatDefenders = {
+		// 	category: {
+		// 		title: 'Seat Defenders',
+		// 		id: 320,
+		// 	},
+		// 	style_options: [{
+		// 		style: 'all',
+		// 	}],
+		// 	children: [],
+		// };
+		// const universals = {
+		// 	category: {
+		// 		title: 'Universal Products',
+		// 	},
+		// 	children: [],
+		// };
+		// universals.children.push(SeatDefenders);
+		// this.props.categories.push(universals);
+
 		if (this.props.categories && this.props.categories.length > 0) {
 			this.props.categories.sort((a, b) => a.sort > b.sort);
 		}
@@ -89,6 +108,19 @@ class VehicleResults extends Component {
 				});
 				if (tmp.length > 0) {
 					subs = subs.concat(tmp);
+				}
+				if (c.cat.id === 320) { // Seat Defenders
+					// normally we would grab the different category struct type from the
+					// lookup_category, but these are universal and dont exist in the lookup_category
+					// so we create the new category
+					const SeatDefender = {
+						category: c.cat,
+						style_options: [{
+							style: 'all',
+						}],
+						children: [],
+					};
+					subs = subs.concat(SeatDefender);
 				}
 			}
 

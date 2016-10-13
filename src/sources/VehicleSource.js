@@ -93,6 +93,11 @@ const VehicleSource = {
 			remote(st, result, style) {
 				let fits = [];
 
+				if (result.category.id === 320) {
+					return new Promise((res) => {
+						res(320);
+					});
+				}
 				// map fitments for all style options that fit the supplied style
 				// to back into the array.
 				result.style_options
@@ -113,7 +118,6 @@ const VehicleSource = {
 
 						ids.push(ft.product_identifier);
 					}
-
 					fetch(
 						`${apiBase}/part/multi?key=${KEY}&brandID=${brand.id}`,
 						{
@@ -145,6 +149,10 @@ const VehicleSource = {
 			local(st, result, style) {
 				const id = result.category.id;
 				let fits = [];
+
+				if (result.category.id === 320) {
+					return null;
+				}
 
 				// map fitments for all style options that fit the supplied style
 				// to back into the array.
