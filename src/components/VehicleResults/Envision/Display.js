@@ -45,6 +45,12 @@ class Configurator extends Component {
 		});
 	}
 
+	componentDidMount() {
+		if (window.ICAPP) {
+			window.ICAPP.getRefVehicle();
+		}
+	}
+
 	componentDidUpdate() {
 		if (window.ICAPP) {
 			window.ICAPP.getRefVehicle();
@@ -65,7 +71,7 @@ class Configurator extends Component {
 		return (
 			<div className={cx(s.root, this.props.className)} id="vehicle-display">
 				<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-				<script src="https://storage.googleapis.com/aries-website/site-assets/envision.js"></script>
+				<script src="https://www.iconfigurators.com/pop/src/iconfig-ar-3.cfm?key=539D7C9D0B8B72F4966C"></script>
 				<div
 					className={cx('vehicle-wrapper', s.vehicleWrapper)}
 					id="ic-vehicle-wrapper"

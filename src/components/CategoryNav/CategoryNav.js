@@ -11,6 +11,7 @@ class CategoryNav extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		categories: PropTypes.array,
+		categoryItems: PropTypes.array,
 		menu: PropTypes.array,
 		vehicle: PropTypes.object,
 		params: PropTypes.object,
@@ -19,46 +20,11 @@ class CategoryNav extends Component {
 	constructor(props) {
 		super(props);
 
-		this.categoryToItem = this.categoryToItem.bind(this);
 		this.clearOpen = this.clearOpen.bind(this);
 
 		this.state = {
-			items: [],
 			menusOpen: false,
 		};
-
-		if (!props.categories) {
-			return;
-		}
-
-		if (props.categories && props.categories.length > 0) {
-			props.categories.sort((a, b) => a.sort > b.sort);
-		}
-
-		props.categories.map((cat) => {
-			const tmp = this.categoryToItem(cat);
-			this.state.items.push(tmp);
-		});
-
-		this.state.items.push({
-			title: 'Application Guides',
-			to: '/appguides',
-			text: 'Application Guides',
-		});
-	}
-
-	categoryToItem(cat) {
-		if (cat.children && cat.children.length > 0) {
-			cat.children.sort((a, b) => a.sort > b.sort);
-		}
-		const item = {
-			title: cat.title,
-			to: `/category/${cat.id}/${cat.title}`,
-			text: cat.title,
-			children: cat.children.map(this.categoryToItem),
-		};
-
-		return item;
 	}
 
 	clearOpen(title) {
@@ -75,7 +41,14 @@ class CategoryNav extends Component {
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<nav itemScope itemType="http://www.schema.org/SiteNavigationElement">
-					<Menu openItem={this.clearOpen} open={this.state.menusOpen} openTitle={this.state.openTitle} isParent items={this.state.items} className={s.categories} />
+					<Menu
+						openItem={this.clearOpen}
+						open={this.state.menusOpen}
+						openTitle={this.state.openTitle}
+						isParent
+						items={this.props.categoryItems}
+						className={s.categories}
+					/>
 				</nav>
 				<Search className={s.search} />
 			</div>

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import s from './Header.scss';
 import withStyles from '../../decorators/withStyles';
 import Navigation from '../Navigation';
-import CategoryNav from '../CategoryNav';
+// import CategoryNav from '../CategoryNav';
 import CategoryStore from '../../stores/CategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -12,6 +12,7 @@ class Header extends Component {
 
 	static propTypes = {
 		categories: PropTypes.array,
+		categoryItems: PropTypes.array,
 		context: PropTypes.shape({
 			insertCss: PropTypes.func,
 			onSetTitle: PropTypes.func,
@@ -40,7 +41,7 @@ class Header extends Component {
 					vehicle={this.props.context.vehicle}
 					params={this.props.context.params}
 				/>
-				<CategoryNav categories={this.props.categories} />
+				{/* <CategoryNav categoryItems={this.props.categoryItems} categories={this.props.categories} /> */}
 			</div>
 		);
 	}
