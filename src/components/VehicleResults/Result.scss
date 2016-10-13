@@ -20,13 +20,14 @@
             margin: 0 10px;
             flex-direction: row;
             border-bottom: 2px solid $gray-lighter;
-            justify-content: space-between;
-            align-items: flex-end;
+            justify-content: flex-start;
+            align-items: center;
 
             span {
                 font-size: 1.3em;
                 line-height: 1.3em;
                 color: $black-base;
+				margin-right: 10px;
             }
 
             > div {

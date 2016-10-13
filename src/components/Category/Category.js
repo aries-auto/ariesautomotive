@@ -4,6 +4,7 @@ import cx from 'classnames';
 import PartResults from '../PartResults';
 import s from './Category.scss';
 import withStyles from '../../decorators/withStyles';
+import { brand } from '../../config';
 
 @withStyles(s)
 class SearchResults extends Component {
@@ -34,7 +35,7 @@ class SearchResults extends Component {
 			return;
 		}
 
-		const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : 'Aries Automotive Product Categories';
+		const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : `${brand.name} Product Categories`;
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
 		const image = this.props.context.category &&

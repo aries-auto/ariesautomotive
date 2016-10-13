@@ -8,8 +8,6 @@ import GeographyStore from '../../stores/GeographyStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { fields } from './fields';
 
-// const title = 'Become an Aries Dealer';
-
 @withStyles(s)
 @connectToStores
 class BecomeDealer extends Component {
