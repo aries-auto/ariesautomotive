@@ -3,8 +3,6 @@ import events from 'events';
 import ga from 'react-ga';
 import VehicleActions from '../actions/VehicleActions';
 import VehicleSource from '../sources/VehicleSource';
-import { apiBase, apiKey } from '../config';
-const KEY = apiKey;
 
 const EventEmitter = events.EventEmitter;
 
@@ -148,34 +146,11 @@ class VehicleStore extends EventEmitter {
 		});
 	}
 
-	async	handleUpdateFitments(fits) {
-		if (fits === 320) {
-			const seatFits = [];
-			let parts = [];
-			parts = await this.getSeatDefenders();
-			parts.map((p) => {
-				const tmp = {
-					product: p,
-					product_identifier: p.part_number,
-				};
-				seatFits.push(tmp);
-			});
-			this.setState({
-				fitments: seatFits,
-				error: null,
-			});
-		} else {
-			this.setState({
-				fitments: fits,
-				error: null,
-			});
-		}
-	}
-
-	async getSeatDefenders() {
-		const apiResp = await fetch(`${apiBase}/category/320/parts?key=${KEY}`);
-		const resp = await apiResp.json();
-		return resp.parts;
+	handleUpdateFitments(fits) {
+		this.setState({
+			fitments: fits,
+			error: null,
+		});
 	}
 
 	handleFailedFitments(err) {

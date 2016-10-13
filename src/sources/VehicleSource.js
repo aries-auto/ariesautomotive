@@ -92,12 +92,6 @@ const VehicleSource = {
 		return {
 			remote(st, result, style) {
 				let fits = [];
-
-				if (result.category.id === 320) {
-					return new Promise((res) => {
-						res(320);
-					});
-				}
 				// map fitments for all style options that fit the supplied style
 				// to back into the array.
 				result.style_options
@@ -109,6 +103,25 @@ const VehicleSource = {
 					);
 				});
 				return new Promise((res, rej) => {
+					if (result.category.id === 320) {
+						fetch(`${apiBase}/category/320/parts?key=${KEY}`)
+						.then((resp) => {
+							return resp.json();
+						/* eslint-disable no-loop-func */
+						}).then((data) => {
+							const seatFits = [];
+							data.parts.map((p) => {
+								const tmp = {
+									product: p,
+									product_identifier: p.part_number,
+								};
+								seatFits.push(tmp);
+							});
+							res(seatFits);
+						}).catch(rej);
+						return;
+					}
+
 					const ids = [];
 					for (let i = 0; i < fits.length; i++) {
 						const ft = fits[i];
@@ -151,7 +164,11 @@ const VehicleSource = {
 				let fits = [];
 
 				if (result.category.id === 320) {
-					return null;
+					if (st.fitments.length === 0) {
+						st.fitments = null;
+						return null;
+					}
+					return st.fitments;
 				}
 
 				// map fitments for all style options that fit the supplied style
