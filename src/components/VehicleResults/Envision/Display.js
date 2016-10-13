@@ -24,28 +24,31 @@ class Configurator extends Component {
 
 	componentDidMount() {
 		this.props.window.onerror = () => {
+			if (this.props.colorID > 0) {
+				VehicleActions.setEnvisionColor(0);
+				return;
+			}
 			this.setState({
 				error: `No image of vehicle with parts available.`,
 			});
 		};
 
-		const ul = document.getElementById('vehicle-ref-colors');
+		const ul = document.getElementById('vehicle-display');
 		ul.addEventListener('click', (e) => {
 			let target = e.target;
-			while (target && target.parentNode !== ul) {
+			while (target && target.parentNode.tagName !== 'UL') {
 				target = target.parentNode;
 				if (!target) {
 					return;
 				}
 			}
+
 			if (target.tagName === 'LI') {
 				const colorID = parseInt(target.getAttribute('data-id'), 0);
 				VehicleActions.setEnvisionColor(colorID || 0);
 			}
 		});
-	}
 
-	componentDidMount() {
 		if (window.ICAPP) {
 			window.ICAPP.getRefVehicle();
 		}

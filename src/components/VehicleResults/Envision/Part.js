@@ -45,7 +45,7 @@ class Part extends Component {
 						View Details
 					</Link>
 				</div>
-				<span className={cx('glyphicon glyphicon-remove', s.x)}></span>
+				<span onClick={this.handleRemovePart} className={cx('glyphicon glyphicon-remove', s.x)}></span>
 			</div>
 		);
 	}

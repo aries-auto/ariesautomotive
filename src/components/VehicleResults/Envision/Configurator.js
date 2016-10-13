@@ -29,6 +29,18 @@ class Configurator extends Component {
 		};
 	}
 
+	componentDidMount() {
+		if (window.ICAPP) {
+			window.ICAPP.getRefVehicle();
+		}
+	}
+
+	componentDidUpdate() {
+		if (window.ICAPP) {
+			window.ICAPP.getRefVehicle();
+		}
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
