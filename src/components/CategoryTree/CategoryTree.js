@@ -86,7 +86,13 @@ class CategoryTree extends Component {
 				subs = subs.concat(item);
 			}
 			if (subs.length > 0) {
-				itemElms.push(<CategoryItem key={item.cat.id} cat={item.cat} items={subs} isParent />);
+				const elm = (
+					<div className={cx(s.categoriesContainer, 'well')} key={item.cat.id}>
+						<h2 className={s.catHeading}>{item.cat.title}</h2>
+						<CategoryItem cat={item.cat} items={subs} isParent />
+					</div>
+				);
+				itemElms.push(elm);
 			}
 		});
 		return itemElms;
@@ -107,7 +113,9 @@ class CategoryTree extends Component {
 				<div className={'container'}>
 					{this.renderSiteContent()}
 				</div>
-				{this.renderCatItems()}
+				<div className={'container'}>
+					{this.renderCatItems()}
+				</div>
 			</div>
 		);
 	}

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './CategoryItem.scss';
 import withStyles from '../../decorators/withStyles';
+import Link from '../Link';
 import SubItem from './CategoryItem';
 
 @withStyles(s)
@@ -27,6 +28,17 @@ class CategoryItem extends Component {
 			return null;
 		}
 
+		if (!this.props.isParent) {
+			catItems.push(
+				<div className={s.cat} key={this.props.cat.id}>
+					<Link to={`/category/${this.props.cat.id}/${this.props.cat.title}`} title={this.props.cat.title}>
+						<img className={cx(s.catImage)} src={`${this.props.cat.image.Scheme}://${this.props.cat.image.Host}${this.props.cat.image.Path}`} />
+						<span className={cx(s.catTitle)}>{this.props.cat.title}</span>
+					</Link>
+				</div>
+			);
+		}
+
 		this.props.items.map((item, i) => {
 			catItems.push(
 				<SubItem
@@ -41,6 +53,7 @@ class CategoryItem extends Component {
 		return catItems;
 	}
 
+
 	render() {
 		return (
 			<div className={cx(
@@ -49,8 +62,9 @@ class CategoryItem extends Component {
 					this.props.isParent ? s.parent : '',
 				)}
 			>
-				<span className={cx(s.catTitle)}>{this.props.cat.title}</span>
-				{this.categoryItems()}
+				<div className={s.categories}>
+					{this.categoryItems()}
+				</div>
 			</div>
 		);
 	}
