@@ -1,0 +1,16 @@
+@import '../variables.scss';
+.root {
+	margin-left:15px;
+}
+.parent {
+	&.parent {
+		> .catTitle{
+			color: $new-red;
+			font-size:24px;
+		}
+	}
+}
+.catTitle{
+	color: $header-color;
+	font-size:16px;
+}

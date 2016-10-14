@@ -5,6 +5,7 @@ import App from './components/App';
 import BecomeDealer from './components/BecomeDealer';
 import Product from './components/Product';
 import Category from './components/Category';
+import CategoryTree from './components/CategoryTree';
 import Contact from './components/Contact';
 import CustomContent from './components/CustomContent';
 import Home from './components/Home';
@@ -72,6 +73,10 @@ const router = new Router(on => {
 		]);
 
 		return <Product {...state} />;
+	});
+
+	on('/category', async (state) => {
+		return <CategoryTree context={state.context} />;
 	});
 
 	on('/category/:id', async (state) => {

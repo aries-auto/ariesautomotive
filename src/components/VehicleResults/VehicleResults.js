@@ -63,25 +63,6 @@ class VehicleResults extends Component {
 			children: [],
 		};
 
-		// const SeatDefenders = {
-		// 	category: {
-		// 		title: 'Seat Defenders',
-		// 		id: 320,
-		// 	},
-		// 	style_options: [{
-		// 		style: 'all',
-		// 	}],
-		// 	children: [],
-		// };
-		// const universals = {
-		// 	category: {
-		// 		title: 'Universal Products',
-		// 	},
-		// 	children: [],
-		// };
-		// universals.children.push(SeatDefenders);
-		// this.props.categories.push(universals);
-
 		if (this.props.categories && this.props.categories.length > 0) {
 			this.props.categories.sort((a, b) => a.sort > b.sort);
 		}
