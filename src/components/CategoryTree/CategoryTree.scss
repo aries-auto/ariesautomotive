@@ -1,0 +1,16 @@
+@import '../variables.scss';
+.root {
+	margin-top:20px;
+	.categoriesContainer{
+		width: 100%;
+		display: inline-block;
+		margin-top: 15px;
+		background-color: #fff;
+
+		.catHeading{
+			color: $new-red;
+			font-size: 26px;
+			margin-top: 0px;
+		}
+	}
+}

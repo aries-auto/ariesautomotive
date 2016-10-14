@@ -1,0 +1,28 @@
+@import '../variables.scss';
+.root {
+	margin-left:15px;
+}
+
+.categories{
+	display:block;
+	margin-top:20px;
+	width:100%;
+	.cat {
+		width:200px;
+		max-width:200px;
+		margin-right:10px;
+		float:left;
+
+		.catTitle{
+			color: $gray-dark;
+			font-size:16px;
+			text-align:center;
+			font-weight:bold;
+			display:block;
+			margin: 0 auto;
+		}
+		.catImage{
+			width:200px;
+		}
+	}
+}
