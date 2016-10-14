@@ -36,7 +36,7 @@ class CategoryTree extends Component {
 
 		props.categories.map((cat) => {
 			const tmp = this.categoryToItem(cat);
-			this.state.items.push(tmp);
+			this.state.items = this.state.items.concat(tmp.items);
 		});
 	}
 
@@ -68,7 +68,20 @@ class CategoryTree extends Component {
 		}
 		const itemElms = [];
 		this.state.items.map((item) => {
-			itemElms.push(<CategoryItem cat={item.cat} items={item.children} isParent />);
+			if (!item.children || !item.children.length === 0) {
+				return;
+			}
+			let subs = [];
+			if (item.children && item.children.length > 0) {
+				(item.children || []).map((cat) => {
+					subs = subs.concat(cat);
+				});
+			} else {
+				subs = subs.concat(item);
+			}
+			if (subs.length > 0) {
+				itemElms.push(<CategoryItem cat={item.cat} items={subs} isParent />);
+			}
 		});
 		return itemElms;
 	}
