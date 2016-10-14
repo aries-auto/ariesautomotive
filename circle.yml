@@ -6,7 +6,6 @@ machine:
 
 dependencies:
   override:
-    - npm install --dev
     - npm run build -- --release
   pre:
     - echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
