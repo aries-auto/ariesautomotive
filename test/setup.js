@@ -3,7 +3,7 @@
 process.env.NODE_ENV = 'test';
 
 function noop() {
-  return null;
+  	return null;
 }
 
 require.extensions['.css'] = noop;
