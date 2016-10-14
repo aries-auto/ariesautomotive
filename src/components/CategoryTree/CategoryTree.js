@@ -3,6 +3,7 @@ import cx from 'classnames';
 import s from './CategoryTree.scss';
 import withStyles from '../../decorators/withStyles';
 import CategoryStore from '../../stores/CategoryStore';
+import SiteStore from '../../stores/SiteStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import CategoryItem from './CategoryItem';
 
@@ -14,6 +15,7 @@ class CategoryTree extends Component {
 		className: PropTypes.string,
 		categories: PropTypes.array,
 		params: PropTypes.object,
+		pageData: PropTypes.object,
 	};
 
 	constructor(props) {
@@ -21,6 +23,7 @@ class CategoryTree extends Component {
 
 		this.categoryToItem = this.categoryToItem.bind(this);
 		this.renderCatItems = this.renderCatItems.bind(this);
+		this.renderSiteContent = this.renderSiteContent.bind(this);
 
 		this.state = {
 			items: [],
@@ -41,11 +44,14 @@ class CategoryTree extends Component {
 	}
 
 	static getStores() {
-		return [CategoryStore];
+		return [CategoryStore, SiteStore];
 	}
 
 	static getPropsFromStores() {
-		return CategoryStore.getState();
+		return {
+			...SiteStore.getState(),
+			...CategoryStore.getState(),
+		};
 	}
 
 	categoryToItem(cat) {
@@ -80,15 +86,27 @@ class CategoryTree extends Component {
 				subs = subs.concat(item);
 			}
 			if (subs.length > 0) {
-				itemElms.push(<CategoryItem cat={item.cat} items={subs} isParent />);
+				itemElms.push(<CategoryItem key={item.cat.id} cat={item.cat} items={subs} isParent />);
 			}
 		});
 		return itemElms;
 	}
 
+	renderSiteContent() {
+		if (!this.props.pageData || !this.props.pageData.contentRevisions) {
+			return null;
+		}
+		return (
+			<div dangerouslySetInnerHTML={{ __html: this.props.pageData.contentRevisions[0].text }} />
+		);
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
+				<div className={'container'}>
+					{this.renderSiteContent()}
+				</div>
 				{this.renderCatItems()}
 			</div>
 		);
