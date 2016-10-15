@@ -7,7 +7,7 @@ machine:
 dependencies:
   override:
     - npm --version
-    - npm install --dev
+    - npm install --only=dev
     - npm run build -- --release
   pre:
     - npm install -g npm
@@ -29,4 +29,4 @@ deployment:
         branch: refactor/xhr-sourcing
         commands:
         # deploy to AppEngine
-        - gcloud -q app deploy app.yaml --version xhr
+        - gcloud -q app deploy --version xhr
