@@ -27,4 +27,4 @@ deployment:
         branch: refactor/xhr-sourcing
         commands:
         # deploy to AppEngine
-        - gcloud -q app deploy --version xhr
+        -  sudo -E env "PATH=$PATH" gcloud -q app deploy --version xhr
