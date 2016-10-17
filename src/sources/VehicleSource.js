@@ -1,6 +1,7 @@
 import VehicleActions from '../actions/VehicleActions';
 import fetch from '../core/fetch';
 import { apiBase, apiKey, brand } from '../config';
+// import cookie from 'react-cookie';
 
 const KEY = apiKey;
 
@@ -32,6 +33,7 @@ const VehicleSource = {
 			},
 
 			local(st, args) {
+				console.log(st.vehicle);
 				if (!args && (!st.vehicle.availableYears || st.vehicle.availableYears.length === 0)) {
 					return null;
 				} else if (args) {

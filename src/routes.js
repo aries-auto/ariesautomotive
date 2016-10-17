@@ -24,6 +24,7 @@ import ErrorPage from './components/ErrorPage';
 import { siteMenu, googleAnalyticsId } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
+import VehicleActions from './actions/VehicleActions';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
 import AppGuideStore from './stores/AppGuideStore';
@@ -31,6 +32,8 @@ import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
 import SearchStore from './stores/SearchStore';
+
+import cookie from 'react-cookie';
 
 const isBrowser = typeof window !== 'undefined';
 const gaOptions = { debug: true };
@@ -41,17 +44,19 @@ const router = new Router(on => {
 		if (!state.context) {
 			state.context = {};
 		}
-
 		state.context.params = state.params;
 		state.context.siteMenu = siteMenu;
 		const slug = state.params[0].replace(/\//g, '');
+
+		const cookieVehicle = cookie.load('vehicle');
+		console.log('cookie vehicle is:', cookieVehicle);
 
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
-			VehicleStore.fetchVehicle(),
+			cookieVehicle ? VehicleActions.updateVehicle(cookieVehicle) : VehicleStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);
