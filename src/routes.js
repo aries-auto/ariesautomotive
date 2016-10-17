@@ -24,7 +24,6 @@ import ErrorPage from './components/ErrorPage';
 import { siteMenu, googleAnalyticsId } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
-import VehicleActions from './actions/VehicleActions';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
 import AppGuideStore from './stores/AppGuideStore';
@@ -49,14 +48,13 @@ const router = new Router(on => {
 		const slug = state.params[0].replace(/\//g, '');
 
 		const cookieVehicle = cookie.load('vehicle');
-		console.log('cookie vehicle is:', cookieVehicle);
 
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
-			cookieVehicle ? VehicleActions.updateVehicle(cookieVehicle) : VehicleStore.fetchVehicle(),
+			cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);

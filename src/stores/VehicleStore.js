@@ -68,7 +68,6 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleUpdateVehicle(v) {
-		console.log('update vehicle', v);
 		if (v.base.year !== '' && !v.availableYears) {
 			v.availableYears = this.state.vehicle.availableYears;
 		}
@@ -78,10 +77,15 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
+		const cookieVehicle = cookie.load('vehicle');
 		// set cookie
-		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '') {
+		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '' && !cookieVehicle) {
+			v.availableMakes = [];
+			v.availableModels = [];
+			v.availableYears = [];
+			v.lookup_category = [];
+			v.products = null;
 			cookie.save('vehicle', v, { path: '/' });
-			console.log('saved vehicle cookie to:', v);
 		}
 		this.setState({
 			vehicle: v,
