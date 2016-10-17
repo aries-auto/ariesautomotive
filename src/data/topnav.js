@@ -6,9 +6,9 @@ module.exports = {
 			value: 'WHERE TO BUY',
 		},
 		{
-			href: 'http://orders.ariesautomotive.com/',
-			title: 'COMNET Login',
-			value: 'COMNET LOGIN',
+			href: 'http://dealers.ariesautomotive.com/',
+			title: 'Dealer Login',
+			value: 'DEALER LOGIN',
 		},
 		{
 			href: '/becomedealer',
