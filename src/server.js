@@ -13,6 +13,7 @@ import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
 import { apiBase, iapiBase, apiKey, brand } from './config';
+import cookie from 'react-cookie';
 
 const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
 const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
@@ -260,6 +261,7 @@ server.get('/api/products/featured.json', (req, res) => {
 // -----------------------------------------------------------------------------
 server.get('*', async (req, res, next) => {
 	try {
+		cookie.plugToRequest(req, res);
 		let statusCode = 200;
 		const data = {
 			title: 'Product Information',

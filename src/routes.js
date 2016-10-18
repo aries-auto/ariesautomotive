@@ -32,6 +32,8 @@ import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
 import SearchStore from './stores/SearchStore';
 
+import cookie from 'react-cookie';
+
 const isBrowser = typeof window !== 'undefined';
 const gaOptions = { debug: true };
 const MyWindowDependentLibrary = isBrowser ? ga.initialize(googleAnalyticsId, gaOptions) : undefined;
@@ -41,17 +43,18 @@ const router = new Router(on => {
 		if (!state.context) {
 			state.context = {};
 		}
-
 		state.context.params = state.params;
 		state.context.siteMenu = siteMenu;
 		const slug = state.params[0].replace(/\//g, '');
+
+		const cookieVehicle = cookie.load('vehicle');
 
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
-			VehicleStore.fetchVehicle(),
+			cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);
