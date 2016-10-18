@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Display.scss';
 import ColorSwatches from './ColorSwatches';
+import Spinner from '../../Spinner';
 import withStyles from '../../../decorators/withStyles';
 
 @withStyles(s)
@@ -23,10 +24,17 @@ class Configurator extends Component {
 
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<div>
-					<img src={img} alt={this.props.vehicle} />
+				<div className={this.props.loading ? s.loading : null}>
+					{ this.props.loading ? <Spinner className={s.spinner} /> : null}
 				</div>
-				<ColorSwatches click={this.props.click} colors={this.props.image.colors || []} />
+				<div>
+					<div>
+						<img src={img} alt={this.props.vehicle} />
+					</div>
+
+					<ColorSwatches click={this.props.click} colors={this.props.image.colors || []} />
+				</div>
+
 			</div>
 		);
 	}

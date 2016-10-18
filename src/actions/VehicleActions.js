@@ -13,6 +13,7 @@ class VehicleActions {
 			'fetchEnvision',
 			'updateEnvision',
 			'failedEnvision',
+			'loadingEnvision',
 			// 'fetchEnvisionImage',
 			// 'updateEnvisionImage',
 			// 'failedEnvisionImage',

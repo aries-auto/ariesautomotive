@@ -5,17 +5,46 @@
 }
 
 .root {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 
 	> div:first-child {
-		flex-grow: 1;
-		align-self: flex-end;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 20;
+		display: none;
 		width: 100%;
 		height: 100%;
+		background-color: $lookup-color-opacity;
 
-		img {
-			max-width: 100%;
+		justify-content: center;
+		align-items: center;
+
+		&.loading {
+			display: flex;
+		}
+	}
+
+	> div:last-child {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		padding: 15px;
+		flex-direction: column;
+
+		> div:first-child {
+			align-self: flex-end;
+
+			img {
+				max-width: 100%;
+			}
+		}
+
+		> div:last-child {
+			flex-direction: row;
 		}
 	}
 }
@@ -24,8 +53,18 @@
 	.root {
 		flex-direction: row;
 
-		> div:first-child {
-			order: 2;
+		> div:last-child {
+			flex-direction: row;
+
+			> div:first-child {
+				order: 2;
+			}
+
+			> div:last-child {
+				flex-direction: column;
+
+				order: 1;
+			}
 		}
 	}
 }

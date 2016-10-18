@@ -2,26 +2,27 @@
 
 .root {
 	display: flex;
+	width: 100%;
 	padding: 0;
 	text-align: center;
 	list-style-type: none;
 	flex-direction: row;
-	align-items: stretch;
-	width: 100%;
 	border: 1px solid $lookup-color;
 
-	> li:first-child, > li:first-child a, > li:first-child img {
+	align-items: stretch;
+
+	> div:first-child, > div:first-child a, > div:first-child img {
 		border-radius: 4px 4px 0 0;
 	}
 
-	> li:last-child, > li:last-child a, > li:last-child img {
+	> div:last-child, > div:last-child a, > div:last-child img {
 		border-radius: 0 0 4px 4px;
 	}
 }
 
 @media (min-width: $screen-md-min) {
 	.root {
-		flex-direction: column;
 		width: 100px;
+		flex-direction: column;
 	}
 }

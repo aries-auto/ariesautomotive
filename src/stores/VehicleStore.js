@@ -37,6 +37,7 @@ class VehicleStore extends EventEmitter {
 				mappable: [],
 				vehicle: null,
 				vehicleID: null,
+				loading: false,
 				colorID: null,
 				matchedProducts: [],
 				image: null,
@@ -48,9 +49,8 @@ class VehicleStore extends EventEmitter {
 			handleFailedVehicle: VehicleActions.FAILED_VEHICLE,
 
 			handleUpdateEnvision: VehicleActions.UPDATE_ENVISION,
+			handleLoadingEnvision: VehicleActions.LOADING_ENVISION,
 			handleFailedEnvision: VehicleActions.FAILED_ENVISION,
-			// handleUpdateEnvisionImage: VehicleActions.UPDATE_ENVISION_IMAGE,
-			// handleFailedEnvisionImage: VehicleActions.FAILED_ENVISION_IMAGE,
 			handleSetEnvisionVehicle: VehicleActions.SET_ENVISION_VEHICLE,
 			handleSetEnvisionColor: VehicleActions.SET_ENVISION_COLOR,
 
@@ -65,7 +65,6 @@ class VehicleStore extends EventEmitter {
 		this.exportPublicMethods({
 			getVehicle: this.getVehicle,
 			getEnvision: this.getEnvision,
-			// getEnvisionImage: this.getEnvisionImage,
 			getFitments: this.getFitments,
 		});
 
@@ -99,35 +98,6 @@ class VehicleStore extends EventEmitter {
 		return this.state.vehicle;
 	}
 
-	// handleUpdateEnvision(e) {
-	// 	// find the most vehicle that has the most product
-	// 	// fitments.
-	// 	(e.vehicleParts || []).sort((a, b) => {
-	// 		return Object.keys(b.parts).length - Object.keys(a.parts).length;
-	// 	});
-	//
-	// 	this.setState({
-	// 		envision: {
-	// 			vehicleParts: e.vehicleParts,
-	// 			partNumbers: e.partNumbers,
-	// 			vehicleID: (e.vehicleParts) ? e.vehicleParts[0].vehicle.intVehicleID : '0',
-	// 			colorID: this.state.envision.colorID,
-	// 			matchedProducts: this.state.envision.matchedProducts,
-	// 		},
-	// 		error: null,
-	// 	});
-	// }
-
-	// handleFailedEnvision(err) {
-	// 	this.setState({
-	// 		error: err,
-	// 	});
-	// }
-
-	// getEnvision() {
-	// 	return this.state.envision;
-	// }
-
 	handleUpdateEnvision(data) {
 		this.setState({
 			envision: {
@@ -136,9 +106,23 @@ class VehicleStore extends EventEmitter {
 				vehicle: data.vehicle,
 				image: data.image,
 				matchedProducts: this.state.envision.matchedProducts,
+				loading: false,
 			},
 			error: null,
-			imageLoading: false,
+		});
+	}
+
+	handleLoadingEnvision() {
+		this.setState({
+			envision: {
+				vehicleParts: this.state.envision.vehicleParts,
+				mappable: this.state.envision.mappable,
+				vehicle: this.state.envision.vehicle,
+				image: this.state.envision.image,
+				matchedProducts: this.state.envision.matchedProducts,
+				loading: true,
+			},
+			error: null,
 		});
 	}
 
@@ -180,17 +164,6 @@ class VehicleStore extends EventEmitter {
 			id,
 			this.state.envision.vehicleParts,
 		);
-		//
-		// this.setState({
-		// 	envision: {
-		// 		vehicleParts: this.state.envision.vehicleParts,
-		// 		mappable: this.state.envision.mappable,
-		// 		vehicle: this.state.envision.vehicle,
-		// 		image: this.state.envision.image,
-		// 		colorID: id,
-		// 		matchedProducts: this.state.envision.matchedProducts,
-		// 	},
-		// });
 	}
 
 	handleUpdateFitments(fits) {

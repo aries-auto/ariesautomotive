@@ -34,7 +34,7 @@ class Configurator extends Component {
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<Display click={this.handleColorClick} loading={(this.props.envision.image === null)} image={this.props.envision.image} />
+				<Display click={this.handleColorClick} loading={this.props.envision.loading || false} image={this.props.envision.image} />
 				<PartList products={this.props.envision.matchedProducts} />
 			</div>
 		);

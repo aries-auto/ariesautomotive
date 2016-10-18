@@ -27,11 +27,11 @@ class Configurator extends Component {
 
 	render() {
 		return (
-			<li className={s.root}>
+			<div className={s.root}>
 				<a href={`#${this.props.color.id}`} onClick={this.handleClick} title={this.props.color.name}>
 					<img src={`//${this.props.color.swatch.Host}${this.props.color.swatch.Path}`} />
 				</a>
-			</li>
+			</div>
 		);
 	}
 

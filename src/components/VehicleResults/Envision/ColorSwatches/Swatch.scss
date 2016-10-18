@@ -2,7 +2,7 @@
 
 .root {
 	display: block;
-	flex: 1;
+	min-width: 100px;
 	background: $lookup-color;
 
 	a {

@@ -129,7 +129,7 @@ const VehicleSource = {
 
 			success: VehicleActions.updateEnvision,
 			error: VehicleActions.failedEnvision,
-			loading: VehicleActions.fetchEnvision,
+			loading: VehicleActions.loadingEnvision,
 		};
 	},
 
