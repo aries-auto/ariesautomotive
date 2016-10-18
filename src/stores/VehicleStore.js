@@ -3,7 +3,6 @@ import events from 'events';
 import ga from 'react-ga';
 import VehicleActions from '../actions/VehicleActions';
 import VehicleSource from '../sources/VehicleSource';
-import cookie from 'react-cookie';
 
 const EventEmitter = events.EventEmitter;
 
@@ -77,16 +76,6 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
-		const cookieVehicle = cookie.load('vehicle');
-		// set cookie
-		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '' && !cookieVehicle) {
-			v.availableMakes = [];
-			v.availableModels = [];
-			v.availableYears = [];
-			v.lookup_category = [];
-			v.products = null;
-			cookie.save('vehicle', v, { path: '/' });
-		}
 		this.setState({
 			vehicle: v,
 			error: null,
@@ -94,7 +83,6 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleFailedVehicle(err) {
-		console.log('failed vehicle');
 		this.setState({
 			error: err,
 		});
