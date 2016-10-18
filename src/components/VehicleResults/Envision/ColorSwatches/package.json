@@ -1,0 +1,6 @@
+{
+  "name": "ColorSwatches",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ColorSwatches.js"
+}

@@ -1,0 +1,23 @@
+@import '../../../variables.scss';
+
+.root {
+	display: block;
+	flex: 1;
+	background: $lookup-color;
+
+	a {
+		width: 100%;
+		height: 100%;
+	}
+
+	img {
+		width: auto;
+		transition: transform .3s ease;
+	}
+
+	&:hover {
+		img {
+			transform: scale(.75);
+		}
+	}
+}
