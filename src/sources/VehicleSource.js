@@ -92,7 +92,6 @@ const VehicleSource = {
 		return {
 			remote(st, year, make, model, colorID, identifiers) {
 				return new Promise((res, rej) => {
-					console.log('fetching');
 					fetch(`${iapiBase}/envision/image?year=${year}&make=${make}&model=${model}&colorID=${colorID || ''}&skus=${identifiers || ''}&key=${KEY}`)
 					.then((resp) => {
 						return resp.json();
@@ -102,12 +101,10 @@ const VehicleSource = {
 
 			local(st, year, make, model, colorID, identifiers) {
 				if (!st.envision.image || !st.envision.vehicle) {
-					console.log('no here');
 					return null;
 				}
 
 				if (year !== st.envision.vehicle.year) {
-					console.log('here');
 					return null;
 				}
 				if (make !== st.envision.vehicle.make) {

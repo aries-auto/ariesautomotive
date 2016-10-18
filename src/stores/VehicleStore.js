@@ -173,15 +173,24 @@ class VehicleStore extends EventEmitter {
 			return;
 		}
 
-		this.setState({
-			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				partNumbers: this.state.envision.partNumbers,
-				vehicleID: this.state.envision.vehicleID,
-				colorID: id,
-				matchedProducts: this.state.envision.matchedProducts,
-			},
-		});
+		this.fetchEnvision(
+			this.state.envision.vehicle.year,
+			this.state.envision.vehicle.make,
+			this.state.envision.vehicle.model,
+			id,
+			this.state.envision.vehicleParts,
+		);
+		//
+		// this.setState({
+		// 	envision: {
+		// 		vehicleParts: this.state.envision.vehicleParts,
+		// 		mappable: this.state.envision.mappable,
+		// 		vehicle: this.state.envision.vehicle,
+		// 		image: this.state.envision.image,
+		// 		colorID: id,
+		// 		matchedProducts: this.state.envision.matchedProducts,
+		// 	},
+		// });
 	}
 
 	handleUpdateFitments(fits) {

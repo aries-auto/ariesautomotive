@@ -10,6 +10,7 @@ class Configurator extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		image: PropTypes.object.isRequired,
+		click: PropTypes.func.isRequired,
 		vehicle: PropTypes.string,
 		loading: PropTypes.bool,
 	};
@@ -25,7 +26,7 @@ class Configurator extends Component {
 				<div>
 					<img src={img} alt={this.props.vehicle} />
 				</div>
-				<ColorSwatches colors={this.props.image.colors || []} />
+				<ColorSwatches click={this.props.click} colors={this.props.image.colors || []} />
 			</div>
 		);
 	}

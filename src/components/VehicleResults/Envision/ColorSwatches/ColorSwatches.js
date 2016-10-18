@@ -9,13 +9,14 @@ class Configurator extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		click: PropTypes.func,
 		colors: PropTypes.array.isRequired,
 	};
 
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				{(this.props.colors || []).map((color, i) => <Swatch key={i} color={color} />)}
+				{(this.props.colors || []).map((color, i) => <Swatch click={this.props.click} key={i} color={color} />)}
 			</div>
 		);
 	}

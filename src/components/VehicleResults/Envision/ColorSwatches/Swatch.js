@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import s from './Swatch.scss';
-import VehicleActions from '../../../../actions/VehicleActions';
 import withStyles from '../../../../decorators/withStyles';
 
 @withStyles(s)
@@ -9,6 +8,7 @@ class Configurator extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		color: PropTypes.object,
+		click: PropTypes.func,
 	};
 
 	constructor() {
@@ -22,7 +22,7 @@ class Configurator extends Component {
 			e.preventDefault();
 		}
 
-		VehicleActions.setEnvisionColor(this.props.color.id);
+		this.props.click(this.props.color.id);
 	}
 
 	render() {
