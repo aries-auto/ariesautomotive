@@ -2,7 +2,7 @@
 
 .root {
 	display: flex;
-	width: 100%;
+	width: auto;
 	padding: 0;
 	text-align: center;
 	list-style-type: none;
@@ -10,6 +10,7 @@
 	border: 1px solid $lookup-color;
 
 	align-items: stretch;
+	align-self: flex-start;
 
 	> div:first-child, > div:first-child a, > div:first-child img {
 		border-radius: 4px 4px 0 0;
