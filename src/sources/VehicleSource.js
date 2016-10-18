@@ -1,6 +1,6 @@
 import VehicleActions from '../actions/VehicleActions';
 import fetch from '../core/fetch';
-import { apiBase, apiKey, brand } from '../config';
+import { apiBase, iapiBase, apiKey, brand } from '../config';
 
 const KEY = apiKey;
 
@@ -54,31 +54,79 @@ const VehicleSource = {
 		};
 	},
 
+	// fetchEnvision() {
+	// 	return {
+	// 		remote(st, year, make, model) {
+	// 			return new Promise((res, rej) => {
+	// 				fetch(`/api/envision.json?key=${KEY}&year=${year}&make=${make}&model=${model}`)
+	// 				.then((resp) => {
+	// 					return resp.json();
+	// 				}).then(res).catch(rej);
+	// 			});
+	// 		},
+	//
+	// 		local(st, args) {
+	// 			if (!args && !st.envision.vehicleParts) {
+	// 				return null;
+	// 			} else if (args) {
+	// 				if (args[0] && args[0] !== st.vehicle.base.year) {
+	// 					return null;
+	// 				}
+	// 				if (args[1] && args[1] !== st.vehicle.base.make) {
+	// 					return null;
+	// 				}
+	// 				if (args[2] && args[2] !== st.vehicle.base.model) {
+	// 					return null;
+	// 				}
+	// 			}
+	// 			return st.envision;
+	// 		},
+	//
+	// 		success: VehicleActions.updateEnvision,
+	// 		error: VehicleActions.failedEnvision,
+	// 		loading: VehicleActions.fetchEnvision,
+	// 	};
+	// },
+
 	fetchEnvision() {
 		return {
-			remote(st, year, make, model) {
+			remote(st, year, make, model, colorID, identifiers) {
 				return new Promise((res, rej) => {
-					fetch(`/api/envision.json?key=${KEY}&year=${year}&make=${make}&model=${model}`)
+					console.log('fetching');
+					fetch(`${iapiBase}/envision/image?year=${year}&make=${make}&model=${model}&colorID=${colorID || ''}&skus=${identifiers || ''}&key=${KEY}`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);
 				});
 			},
 
-			local(st, args) {
-				if (!args && !st.envision.vehicleParts) {
+			local(st, year, make, model, colorID, identifiers) {
+				if (!st.envision.image || !st.envision.vehicle) {
+					console.log('no here');
 					return null;
-				} else if (args) {
-					if (args[0] && args[0] !== st.vehicle.base.year) {
-						return null;
-					}
-					if (args[1] && args[1] !== st.vehicle.base.make) {
-						return null;
-					}
-					if (args[2] && args[2] !== st.vehicle.base.model) {
-						return null;
-					}
 				}
+
+				if (year !== st.envision.vehicle.year) {
+					console.log('here');
+					return null;
+				}
+				if (make !== st.envision.vehicle.make) {
+					return null;
+				}
+				if (model !== st.envision.vehicle.model) {
+					return null;
+				}
+
+				if (colorID !== st.envision.colorID) {
+					return null;
+				}
+
+				const stJS = JSON.stringify(st.envision.mappable);
+				const currentJS = JSON.stringify(identifiers);
+				if (stJS.localeCompare(currentJS) !== 0) {
+					return null;
+				}
+
 				return st.envision;
 			},
 

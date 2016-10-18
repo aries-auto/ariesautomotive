@@ -12,7 +12,7 @@ import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
-import { apiBase, iapiBase, apiKey, brand } from './config';
+import { apiBase, iapiBase, envisionAPI, apiKey, brand } from './config';
 
 const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
 const memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
@@ -76,6 +76,32 @@ server.get('/api/envision.json', (req, res) => {
 		}
 
 		fetch(`${iapiBase}/envision/vehicle?key=${KEY}&year=${year}&make=${make}&model=${model}&brandID=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set(key, data, 86400, () => {
+				res.json(data);
+			});
+		});
+	});
+});
+
+// http://www.iconfigurators.com/ap-json/ap-image-AR-part-id.aspx?usejson=1&vehicle=1354&part=2164000,204045&color=0&uid=49067876
+// /api/envision/image.json?vehicleID=${vehicleID}&colorID=${colorID}&ids=${identifiers}
+server.get('/api/envision/image.json', (req, res) => {
+	const vehicleID = req.query.vehicleID;
+	const colorID = req.query.colorID;
+	const ids = req.query.identifiers;
+	const key = `api:envision:${vehicleID}:${colorID}:${ids}`;
+	memcached.get(key, (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+
+		fetch(`${envisionAPI}?usejson=1&vehicle=${vehicleID}&part=${ids}&color=${colorID || 0}&uid=49067876`)
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {

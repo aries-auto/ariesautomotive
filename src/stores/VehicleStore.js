@@ -30,13 +30,16 @@ class VehicleStore extends EventEmitter {
 			partToAdd: null,
 			partToRemove: null,
 			showIconMediaVehicle: true,
+			imageLoading: false,
 			categories: [],
 			envision: {
 				vehicleParts: [],
-				partNumbers: [],
+				mappable: [],
+				vehicle: null,
 				vehicleID: null,
 				colorID: null,
 				matchedProducts: [],
+				image: null,
 			},
 		};
 
@@ -46,6 +49,8 @@ class VehicleStore extends EventEmitter {
 
 			handleUpdateEnvision: VehicleActions.UPDATE_ENVISION,
 			handleFailedEnvision: VehicleActions.FAILED_ENVISION,
+			// handleUpdateEnvisionImage: VehicleActions.UPDATE_ENVISION_IMAGE,
+			// handleFailedEnvisionImage: VehicleActions.FAILED_ENVISION_IMAGE,
 			handleSetEnvisionVehicle: VehicleActions.SET_ENVISION_VEHICLE,
 			handleSetEnvisionColor: VehicleActions.SET_ENVISION_COLOR,
 
@@ -60,6 +65,7 @@ class VehicleStore extends EventEmitter {
 		this.exportPublicMethods({
 			getVehicle: this.getVehicle,
 			getEnvision: this.getEnvision,
+			// getEnvisionImage: this.getEnvisionImage,
 			getFitments: this.getFitments,
 		});
 
@@ -93,22 +99,46 @@ class VehicleStore extends EventEmitter {
 		return this.state.vehicle;
 	}
 
-	handleUpdateEnvision(e) {
-		// find the most vehicle that has the most product
-		// fitments.
-		(e.vehicleParts || []).sort((a, b) => {
-			return Object.keys(b.parts).length - Object.keys(a.parts).length;
-		});
+	// handleUpdateEnvision(e) {
+	// 	// find the most vehicle that has the most product
+	// 	// fitments.
+	// 	(e.vehicleParts || []).sort((a, b) => {
+	// 		return Object.keys(b.parts).length - Object.keys(a.parts).length;
+	// 	});
+	//
+	// 	this.setState({
+	// 		envision: {
+	// 			vehicleParts: e.vehicleParts,
+	// 			partNumbers: e.partNumbers,
+	// 			vehicleID: (e.vehicleParts) ? e.vehicleParts[0].vehicle.intVehicleID : '0',
+	// 			colorID: this.state.envision.colorID,
+	// 			matchedProducts: this.state.envision.matchedProducts,
+	// 		},
+	// 		error: null,
+	// 	});
+	// }
 
+	// handleFailedEnvision(err) {
+	// 	this.setState({
+	// 		error: err,
+	// 	});
+	// }
+
+	// getEnvision() {
+	// 	return this.state.envision;
+	// }
+
+	handleUpdateEnvision(data) {
 		this.setState({
 			envision: {
-				vehicleParts: e.vehicleParts,
-				partNumbers: e.partNumbers,
-				vehicleID: (e.vehicleParts) ? e.vehicleParts[0].vehicle.intVehicleID : '0',
-				colorID: this.state.envision.colorID,
+				vehicleParts: this.state.envision.vehicleParts,
+				mappable: data.mappable,
+				vehicle: data.vehicle,
+				image: data.image,
 				matchedProducts: this.state.envision.matchedProducts,
 			},
 			error: null,
+			imageLoading: false,
 		});
 	}
 
@@ -123,6 +153,10 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleSetEnvisionVehicle(id) {
+		if (id === this.state.envision.vehicleID) {
+			return;
+		}
+
 		this.setState({
 			envision: {
 				vehicleParts: this.state.envision.vehicleParts,
@@ -135,6 +169,10 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleSetEnvisionColor(id) {
+		if (id === this.state.envision.colorID) {
+			return;
+		}
+
 		this.setState({
 			envision: {
 				vehicleParts: this.state.envision.vehicleParts,

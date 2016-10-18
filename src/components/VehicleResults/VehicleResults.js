@@ -154,7 +154,6 @@ class VehicleResults extends Component {
 					products={this.props.vehicle.products}
 					className={s.configurator}
 					envision={this.props.envision}
-					window={this.props.window}
 				/>
 				<div className={s.matched}>
 					{matched}

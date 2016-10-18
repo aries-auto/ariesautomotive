@@ -11,45 +11,13 @@ class Configurator extends Component {
 	static propTypes = {
 		products: PropTypes.array,
 		envision: PropTypes.object,
-		window: PropTypes.object,
 		className: PropTypes.string,
 	};
-
-	constructor(props) {
-		super(props);
-
-		let id = '';
-		if (props.envision && props.envision.vehicleParts) {
-			props.envision.vehicleParts.sort((a, b) => a.parts.length > b.parts.length);
-			id = props.envision.vehicleParts[0].vehicle.intVehicleID;
-		}
-
-		this.state = {
-			vehicleID: id,
-		};
-	}
-
-	componentDidMount() {
-		if (window.ICAPP) {
-			window.ICAPP.getRefVehicle();
-		}
-	}
-
-	componentDidUpdate() {
-		if (window.ICAPP) {
-			window.ICAPP.getRefVehicle();
-		}
-	}
 
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<Display
-					window={this.props.window}
-					colorID={this.props.envision.colorID}
-					products={this.props.envision.matchedProducts}
-					id={this.props.envision.vehicleID}
-				/>
+				<Display loading={(this.props.envision.image === null)} image={this.props.envision.image} />
 				<PartList products={this.props.envision.matchedProducts} />
 			</div>
 		);
