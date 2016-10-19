@@ -50,6 +50,7 @@ const router = new Router(on => {
 		const slug = state.params[0].replace(/\//g, '');
 
 		const cookieVehicle = cookie.load('vehicle');
+		const cookieVehicleLuverne = cookie.load('vehicleluverne');
 
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
@@ -57,7 +58,7 @@ const router = new Router(on => {
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
 			cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
-			LuverneStore.fetchVehicle(),
+			cookieVehicleLuverne ? LuverneStore.fetchVehicle(cookieVehicleLuverne.base_vehicle.year, cookieVehicleLuverne.base_vehicle.make, cookieVehicleLuverne.base_vehicle.model) : LuverneStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);

@@ -4,10 +4,10 @@ import parsePath from 'history/lib/parsePath';
 import Location from '../../core/Location';
 import s from './Lookup.scss';
 import NewLvVehicle from './NewLvVehicle';
-import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import cookie from 'react-cookie';
 
 @withStyles(s)
 @connectToStores
@@ -60,10 +60,18 @@ class Lookup extends Component {
 	}
 
 	viewParts() {
-		const vehicle = this.props.vehicle.base_vehicle || {};
+		const v = this.props.vehicle || {};
+		if (v.base_vehicle.year !== '' && v.base_vehicle.make !== '' && v.base_vehicle.model !== '') {
+			v.availableMakes = [];
+			v.availableModels = [];
+			v.availableYears = [];
+			v.lookup_category = [];
+			v.products = null;
+			cookie.save('vehicleluverne', v, { path: '/' });
+		}
 		Location.push({
 			...(parsePath(
-				`/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`
+				`/vehicle/${v.base_vehicle.year}/${v.base_vehicle.make}/${v.base_vehicle.model}`
 			)),
 			state: this.props,
 		});
@@ -71,7 +79,8 @@ class Lookup extends Component {
 
 	resetVehicle() {
 		this.vehicleSet = false;
-		LuverneActions.setVehicle('', '', '');
+		cookie.remove('vehicleluverne');
+		LuverneStore.fetchVehicle();
 	}
 
 	showVehicle() {
@@ -94,12 +103,13 @@ class Lookup extends Component {
 
 	render() {
 		let valid = <NewLvVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
+		const cookieVehicle = cookie.load('vehicleluverne');
 		if (
 			this.props.vehicle &&
 			this.props.vehicle.base_vehicle.year !== '' &&
 			this.props.vehicle.base_vehicle.make !== '' &&
 			this.props.vehicle.base_vehicle.model !== '' &&
-			this.props.vehicle.products
+			cookieVehicle
 		) {
 			valid = this.showVehicle();
 		}
