@@ -68,15 +68,12 @@ class QuickView extends Component {
 
 	render() {
 		let envision = false;
-		if (this.props.envision && this.props.envision.vehicleParts) {
-			for (let i = 0; i < this.props.envision.vehicleParts.length; i++) {
-				const vp = this.props.envision.vehicleParts[i];
-
-				if (vp.parts[this.props.product.part_number]) {
+		if (this.props.envision && this.props.envision.mappable) {
+			this.props.envision.mappable.map((p) => {
+				if (p.localeCompare(this.props.product.part_number) === 0) {
 					envision = true;
-					break;
 				}
-			}
+			});
 		}
 
 		return (

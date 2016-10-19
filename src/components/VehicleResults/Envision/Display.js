@@ -23,7 +23,7 @@ class Configurator extends Component {
 		}
 
 		return (
-			<div className={cx(s.root, this.props.className)}>
+			<div className={cx(s.root, this.props.className)} id="vehicle-display">
 				<div className={this.props.loading ? s.loading : null}>
 					{ this.props.loading ? <Spinner className={s.spinner} /> : null}
 				</div>

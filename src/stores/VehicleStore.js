@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-import ga from 'react-ga';
+// import ga from 'react-ga';
 import VehicleActions from '../actions/VehicleActions';
 import VehicleSource from '../sources/VehicleSource';
 
@@ -194,6 +194,7 @@ class VehicleStore extends EventEmitter {
 	// adds part to state.vehicle.parts; removes part of same layer
 	addEnvisionPart(part) {
 		// must have iconLayer - TODO is this true?
+		console.log(part);
 		if (part.iconLayer === '') {
 			return;
 		}
@@ -208,64 +209,66 @@ class VehicleStore extends EventEmitter {
 			matched.push(part);
 		}
 
+		console.log(matched);
+
 		// we need to make sure that the current vehicle image works for the
 		// updated part array.
-		let works = false;
-		this.state.envision.vehicleParts.map((vp) => {
-			if (vp.vehicle.intVehicleID !== this.state.envision.vehicleID) {
-				return;
-			}
+		// let works = false;
+		// this.state.envision.vehicleParts.map((vp) => {
+		// 	if (vp.vehicle.intVehicleID !== this.state.envision.vehicleID) {
+		// 		return;
+		// 	}
+		//
+		// 	let count = 0;
+		// 	matched.map((p) => {
+		// 		if (vp.parts[p.part_number]) {
+		// 			count++;
+		// 		}
+		// 	});
+		//
+		// 	if (count === matched.length) {
+		// 		works = true;
+		// 	}
+		// });
+		//
+		// let newVehicle = this.state.envision.vehicleID;
+		// if (!works) { // find new vehicle
+		// 	for (let i = 0; i < this.state.envision.vehicleParts.length; i++) {
+		// 		const vp = this.state.envision.vehicleParts[i];
+		// 		let count = 0;
+		// 		matched.map((p) => {
+		// 			if (vp.parts[p.part_number]) {
+		// 				count++;
+		// 			}
+		// 		});
+		//
+		// 		if (count === matched.length) {
+		// 			newVehicle = vp.vehicle.intVehicleID;
+		// 			break;
+		// 		}
+		// 	}
+		// }
 
-			let count = 0;
-			matched.map((p) => {
-				if (vp.parts[p.part_number]) {
-					count++;
-				}
-			});
-
-			if (count === matched.length) {
-				works = true;
-			}
-		});
-
-		let newVehicle = this.state.envision.vehicleID;
-		if (!works) { // find new vehicle
-			for (let i = 0; i < this.state.envision.vehicleParts.length; i++) {
-				const vp = this.state.envision.vehicleParts[i];
-				let count = 0;
-				matched.map((p) => {
-					if (vp.parts[p.part_number]) {
-						count++;
-					}
-				});
-
-				if (count === matched.length) {
-					newVehicle = vp.vehicle.intVehicleID;
-					break;
-				}
-			}
-		}
-
-		let lbl = part.part_number || '';
-		if (this.state.vehicle) {
-			lbl = `${this.state.vehicle.base.year} ${this.state.vehicle.base.make} ${this.state.vehicle.base.model} ${part.part_number}`;
-		}
-
-		ga.event({
-			category: 'Envision',
-			action: 'Add Part',
-			label: lbl,
-		});
-
-		this.setState({
-			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				partNumbers: this.state.envision.partNumbers,
-				vehicleID: newVehicle,
-				colorID: this.state.envision.colorID,
-				matchedProducts: matched,
-			},
-		});
+		// let lbl = part.part_number || '';
+		// if (this.state.vehicle) {
+		// 	lbl = `${this.state.vehicle.base.year} ${this.state.vehicle.base.make} ${this.state.vehicle.base.model} ${part.part_number}`;
+		// }
+		//
+		// ga.event({
+		// 	category: 'Envision',
+		// 	action: 'Add Part',
+		// 	label: lbl,
+		// });
+		//
+		// this.setState({
+		// 	envision: {
+		// 		vehicleParts: this.state.envision.vehicleParts,
+		// 		partNumbers: this.state.envision.partNumbers,
+		// 		vehicleID: newVehicle,
+		// 		colorID: this.state.envision.colorID,
+		// 		matchedProducts: matched,
+		// 	},
+		// });
 	}
 
 	// removes part from state.vehicle.parts
