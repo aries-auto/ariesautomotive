@@ -3,12 +3,11 @@ import cx from 'classnames';
 import parsePath from 'history/lib/parsePath';
 import Location from '../../core/Location';
 import s from './Lookup.scss';
-import NewVehicle from './NewVehicle';
-// import VehicleActions from '../../actions/VehicleActions';
-import VehicleStore from '../../stores/VehicleStore';
+import NewLvVehicle from './NewLvVehicle';
+import LuverneActions from '../../actions/LuverneActions';
+import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import cookie from 'react-cookie';
 
 @withStyles(s)
 @connectToStores
@@ -18,14 +17,14 @@ class Lookup extends Component {
 		className: PropTypes.string,
 		valid: PropTypes.bool,
 		vehicle: PropTypes.shape({
-			base: PropTypes.shape({
+			base_vehicle: PropTypes.shape({
 				year: PropTypes.string,
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
-			availableYears: PropTypes.array,
-			availableMakes: PropTypes.array,
-			availableModels: PropTypes.array,
+			available_years: PropTypes.array,
+			available_makes: PropTypes.array,
+			available_models: PropTypes.array,
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
@@ -45,7 +44,7 @@ class Lookup extends Component {
 		this.viewParts = this.viewParts.bind(this);
 		this.resetVehicle = this.resetVehicle.bind(this);
 
-		if (props.vehicle.base.model && props.vehicle.base.model !== '') {
+		if (props.vehicle.base_vehicle.model && props.vehicle.base_vehicle.model !== '') {
 			this.state = {
 				valid: true,
 			};
@@ -53,26 +52,18 @@ class Lookup extends Component {
 	}
 
 	static getStores() {
-		return [VehicleStore];
+		return [LuverneStore];
 	}
 
 	static getPropsFromStores() {
-		return VehicleStore.getState();
+		return LuverneStore.getState();
 	}
 
 	viewParts() {
-		const v = this.props.vehicle || {};
-		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '') {
-			v.availableMakes = [];
-			v.availableModels = [];
-			v.availableYears = [];
-			v.lookup_category = [];
-			v.products = null;
-			cookie.save('vehicle', v, { path: '/' });
-		}
+		const vehicle = this.props.vehicle.base_vehicle || {};
 		Location.push({
 			...(parsePath(
-				`/vehicle/${v.base.year}/${v.base.make}/${v.base.model}`
+				`/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`
 			)),
 			state: this.props,
 		});
@@ -80,13 +71,12 @@ class Lookup extends Component {
 
 	resetVehicle() {
 		this.vehicleSet = false;
-		cookie.remove('vehicle');
-		VehicleStore.fetchVehicle();
+		LuverneActions.setVehicle('', '', '');
 	}
 
 	showVehicle() {
-		const link = `/vehicle/${this.props.vehicle.base.year}/${this.props.vehicle.base.make}/${this.props.vehicle.base.model}`;
-		const v = `${this.props.vehicle.base.year} ${this.props.vehicle.base.make} ${this.props.vehicle.base.model}`;
+		const link = `/vehicle/${this.props.vehicle.base_vehicle.year}/${this.props.vehicle.base_vehicle.make}/${this.props.vehicle.base_vehicle.model}`;
+		const v = `${this.props.vehicle.base_vehicle.year} ${this.props.vehicle.base_vehicle.make} ${this.props.vehicle.base_vehicle.model}`;
 		return (
 			<div className={s.vehicleName}>
 				<a href={link}>
@@ -103,14 +93,13 @@ class Lookup extends Component {
 	}
 
 	render() {
-		let valid = <NewVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
-		const cookieVehicle = cookie.load('vehicle');
+		let valid = <NewLvVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
 		if (
 			this.props.vehicle &&
-			this.props.vehicle.base.year !== '' &&
-			this.props.vehicle.base.make !== '' &&
-			this.props.vehicle.base.model !== '' &&
-			cookieVehicle
+			this.props.vehicle.base_vehicle.year !== '' &&
+			this.props.vehicle.base_vehicle.make !== '' &&
+			this.props.vehicle.base_vehicle.model !== '' &&
+			this.props.vehicle.products
 		) {
 			valid = this.showVehicle();
 		}

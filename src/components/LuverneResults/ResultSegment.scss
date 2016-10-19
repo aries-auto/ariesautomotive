@@ -1,0 +1,18 @@
+@import '../variables.scss';
+
+.root {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+@media (min-width: $screen-md-min) {
+    .root {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .mobileResult {
+            display: none;
+        }
+    }
+}
