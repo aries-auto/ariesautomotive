@@ -23,16 +23,11 @@ test:
     - echo "no tests here.... :{"
 
 deployment:
-    staging:
-        branch: refactor/xhr-sourcing
-        commands:
-        # deploy to AppEngine
-        - gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
-        - gcloud config set project $GCLOUD_PROJECT
-        - sudo -E env "PATH=$PATH" gcloud -q app deploy --version xhr --no-promote
-        branch: refactor/xhr-envision
-        commands:
-        # deploy to AppEngine
-        - gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
-        - gcloud config set project $GCLOUD_PROJECT
-        - sudo -E env "PATH=$PATH" gcloud -q app deploy --version envision --no-promote
+  staging:
+    branch: refactor/xhr-sourcing
+    commands:
+      # deploy to AppEngine
+      - gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
+      - gcloud config set project $GCLOUD_PROJECT
+      - sudo -E env "PATH=$PATH" gcloud -q app deploy --version xhr --no-promote
+
