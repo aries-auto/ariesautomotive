@@ -4,34 +4,66 @@
 	float: none;
 }
 
-.vehicleWrapper {
+.root {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 
-	img {
-		max-width: 100%;
+	> div:first-child {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 20;
+		display: none;
+		width: 100%;
+		height: 100%;
+		background-color: $lookup-color-opacity;
+
+		justify-content: center;
+		align-items: center;
+
+		&.loading {
+			display: flex;
+		}
 	}
 
-	div {
-		ul {
-			display: flex;
-			padding: 0;
-			text-align: center;
-			list-style-type: none;
+	> div:last-child {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		padding: 15px;
+		flex-direction: column;
+
+		> div:first-child {
+			align-self: flex-end;
+
+			img {
+				max-width: 100%;
+			}
+		}
+
+		> div:last-child {
+			flex-direction: row;
+		}
+	}
+}
+
+@media (min-width: $screen-md-min) {
+	.root {
+		flex-direction: row;
+
+		> div:last-child {
 			flex-direction: row;
 
-			flex-wrap: wrap;
-			justify-content: center;
+			> div:first-child {
+				order: 2;
+			}
 
-			li {
-				display: block;
-				margin: 5px 0;
-				cursor: pointer;
-				border: 1px solid $gray-light;
+			> div:last-child {
+				flex-direction: column;
 
-				img {
-					max-width: 50px;
-				}
+				order: 1;
 			}
 		}
 	}

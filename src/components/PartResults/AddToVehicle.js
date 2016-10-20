@@ -10,7 +10,8 @@ class AddToVehicle extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		vehicle: PropTypes.object,
-		part: PropTypes.object,
+		part: PropTypes.object.isRequired,
+		layer: PropTypes.object.isRequired,
 		envision: PropTypes.object,
 	};
 
@@ -21,7 +22,7 @@ class AddToVehicle extends Component {
 	}
 
 	handler() {
-		VehicleActions.addEnvisionPart(this.props.part);
+		VehicleActions.addEnvisionPart(this.props.part, this.props.layer);
 	}
 
 	isActive() {
