@@ -81,7 +81,6 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
-
 		this.setState({
 			vehicle: v,
 			error: null,
@@ -128,7 +127,6 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleFailedEnvision(err) {
-		console.log(this.state, err);
 		this.setState({
 			error: err,
 		});

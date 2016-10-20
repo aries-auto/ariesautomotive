@@ -13,12 +13,30 @@
     align-items: center;
     flex-grow: 1;
     order: 3;
+
+		> button[type=submit].viewParts {
+				height: 100%;
+				max-height: 35px;
+				margin: 0 5px;
+				color: $off-white;
+				background: $black-base;
+				opacity: 1;
+				transition: opacity .2s ease-in;
+		margin-bottom: 0;
+		width: auto;
+		font-size: 14px;
+
+				&:disabled {
+						cursor: not-allowed;
+						opacity: .8;
+				}
+		}
 }
 
 .vehicleName {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 800;
-    text-align: center;
+		min-width:600px;
 
     a {
         padding: 0 .6em;

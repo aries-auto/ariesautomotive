@@ -4,10 +4,11 @@ import parsePath from 'history/lib/parsePath';
 import Location from '../../core/Location';
 import s from './Lookup.scss';
 import NewVehicle from './NewVehicle';
-import VehicleActions from '../../actions/VehicleActions';
+// import VehicleActions from '../../actions/VehicleActions';
 import VehicleStore from '../../stores/VehicleStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import cookie from 'react-cookie';
 
 @withStyles(s)
 @connectToStores
@@ -60,10 +61,18 @@ class Lookup extends Component {
 	}
 
 	viewParts() {
-		const vehicle = this.props.vehicle.base || {};
+		const v = this.props.vehicle || {};
+		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '') {
+			v.availableMakes = [];
+			v.availableModels = [];
+			v.availableYears = [];
+			v.lookup_category = [];
+			v.products = null;
+			cookie.save('vehicle', v, { path: '/' });
+		}
 		Location.push({
 			...(parsePath(
-				`/vehicle/${vehicle.year}/${vehicle.make}/${vehicle.model}`
+				`/vehicle/${v.base.year}/${v.base.make}/${v.base.model}`
 			)),
 			state: this.props,
 		});
@@ -71,7 +80,8 @@ class Lookup extends Component {
 
 	resetVehicle() {
 		this.vehicleSet = false;
-		VehicleActions.setVehicle('', '', '');
+		cookie.remove('vehicle');
+		VehicleStore.fetchVehicle();
 	}
 
 	showVehicle() {
@@ -94,12 +104,13 @@ class Lookup extends Component {
 
 	render() {
 		let valid = <NewVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
+		const cookieVehicle = cookie.load('vehicle');
 		if (
 			this.props.vehicle &&
 			this.props.vehicle.base.year !== '' &&
 			this.props.vehicle.base.make !== '' &&
 			this.props.vehicle.base.model !== '' &&
-			this.props.vehicle.products
+			cookieVehicle
 		) {
 			valid = this.showVehicle();
 		}
