@@ -32,7 +32,7 @@ class Configurator extends Component {
 						<img src={img} alt={this.props.vehicle} />
 					</div>
 
-					<ColorSwatches click={this.props.click} colors={this.props.image.colors || []} />
+					<ColorSwatches click={this.props.click} colors={this.props.image ? this.props.image.colors || [] : []} />
 				</div>
 
 			</div>

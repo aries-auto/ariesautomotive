@@ -95,7 +95,9 @@ const VehicleSource = {
 					fetch(`${iapiBase}/envision/image?year=${year}&make=${make}&model=${model}&colorID=${colorID || ''}&skus=${identifiers || ''}&key=${KEY}`)
 					.then((resp) => {
 						return resp.json();
-					}).then(res).catch(rej);
+					}).then((data) => {
+						res({ resp: data, colorID, identifiers });
+					}).catch(rej);
 				});
 			},
 
@@ -118,7 +120,7 @@ const VehicleSource = {
 					return null;
 				}
 
-				const stJS = JSON.stringify(st.envision.mappable);
+				const stJS = JSON.stringify(st.envision.layers || []);
 				const currentJS = JSON.stringify(identifiers);
 				if (stJS.localeCompare(currentJS) !== 0) {
 					return null;

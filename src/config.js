@@ -17,7 +17,7 @@ case 'production':
 	break;
 default:
 	iapi = 'http://104.154.72.47';
-	api = 'http://goapi.curtmfg.com';
+	api = 'http://104.155.147.144';
 }
 
 export const iapiBase = iapi;

@@ -61,29 +61,35 @@ class QuickView extends Component {
 	}
 
 	handleAddToVehicle() {
-		VehicleActions.addEnvisionPart(this.props.product);
+		let layer = null;
+		this.props.envision.layers.map((l) => {
+			if (l.strPartNumber.localeCompare(this.props.product.part_number) === 0) {
+				layer = l;
+			}
+		});
+		VehicleActions.addEnvisionPart(this.props.product, layer);
 		const vehicleElement = document.getElementById('vehicle-display');
 		vehicleElement.scrollIntoView();
 	}
 
 	render() {
-		let envision = false;
-		if (this.props.envision && this.props.envision.mappable) {
-			this.props.envision.mappable.map((p) => {
-				if (p.localeCompare(this.props.product.part_number) === 0) {
-					envision = true;
+		let layer = null;
+		if (this.props.envision && this.props.envision.layers) {
+			this.props.envision.layers.map((l) => {
+				if (l.strPartNumber.localeCompare(this.props.product.part_number) === 0) {
+					layer = l;
 				}
 			});
 		}
 
 		return (
-			<div className={cx(s.root, (envision ? s.envision : null))} onClick={envision ? this.handleAddToVehicle : null}>
+			<div className={cx(s.root, (layer ? s.envision : null))} onClick={layer ? this.handleAddToVehicle : null}>
 				<div className={s.header}>
 					<span className={s.desc}>
 						<span>{this.props.product.short_description}</span>
 						<span className={s.partNum}>{this.props.product.part_number}</span>
 					</span>
-					{(envision) ? <span className={s.envisionBadge} /> : null}
+					{(layer) ? <span className={s.envisionBadge} /> : null}
 				</div>
 
 				<div className={s.image}>
@@ -101,7 +107,7 @@ class QuickView extends Component {
 					</div>
 				</div>
 				<div className={s.nav}>
-					{ envision ? <AddToVehicle className={s.addToVehicle} envision={this.props.envision} vehicle={this.props.vehicle} part={this.props.product} /> : null }
+					{ layer ? <AddToVehicle className={s.addToVehicle} layer={layer} envision={this.props.envision} vehicle={this.props.vehicle} part={this.props.product} /> : null }
 					<Link
 						to={`/buy`}
 						className={cx('btn', 'red-transparent-button', s.whereToBuy)}

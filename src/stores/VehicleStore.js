@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
-// import ga from 'react-ga';
+import ga from 'react-ga';
 import VehicleActions from '../actions/VehicleActions';
 import VehicleSource from '../sources/VehicleSource';
 
@@ -34,7 +34,7 @@ class VehicleStore extends EventEmitter {
 			categories: [],
 			envision: {
 				vehicleParts: [],
-				mappable: [],
+				layers: [],
 				vehicle: null,
 				vehicleID: null,
 				loading: false,
@@ -101,12 +101,13 @@ class VehicleStore extends EventEmitter {
 	handleUpdateEnvision(data) {
 		this.setState({
 			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				mappable: data.mappable,
-				vehicle: data.vehicle,
-				image: data.image,
+				vehicleParts: this.state.envision.matchedProducts.map((p) => p.part_number),
+				layers: data.resp.layers,
+				vehicle: data.resp.vehicle,
+				image: data.resp.image,
 				matchedProducts: this.state.envision.matchedProducts,
 				loading: false,
+				colorID: data.colorID,
 			},
 			error: null,
 		});
@@ -116,7 +117,7 @@ class VehicleStore extends EventEmitter {
 		this.setState({
 			envision: {
 				vehicleParts: this.state.envision.vehicleParts,
-				mappable: this.state.envision.mappable,
+				layers: this.state.envision.layers,
 				vehicle: this.state.envision.vehicle,
 				image: this.state.envision.image,
 				matchedProducts: this.state.envision.matchedProducts,
@@ -127,6 +128,7 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleFailedEnvision(err) {
+		console.log(this.state, err);
 		this.setState({
 			error: err,
 		});
@@ -157,13 +159,15 @@ class VehicleStore extends EventEmitter {
 			return;
 		}
 
-		this.fetchEnvision(
-			this.state.envision.vehicle.year,
-			this.state.envision.vehicle.make,
-			this.state.envision.vehicle.model,
-			id,
-			this.state.envision.vehicleParts,
-		);
+		setTimeout(() => {
+			this.getInstance().fetchEnvision(
+				this.state.envision.vehicle.year,
+				this.state.envision.vehicle.make,
+				this.state.envision.vehicle.model,
+				id,
+				this.state.envision.vehicleParts,
+			);
+		}, 0);
 	}
 
 	handleUpdateFitments(fits) {
@@ -192,83 +196,52 @@ class VehicleStore extends EventEmitter {
 	}
 
 	// adds part to state.vehicle.parts; removes part of same layer
-	addEnvisionPart(part) {
+	addEnvisionPart(args) {
+		const part = args[0];
+		const layer = args[1];
 		// must have iconLayer - TODO is this true?
-		console.log(part);
-		if (part.iconLayer === '') {
+		if (!layer || layer.intLayerID === '') {
 			return;
 		}
 		const matched = this.state.envision.matchedProducts || [];
 		// remove part with same iconLayer
 		matched.map((m, i) => {
-			if (m.iconLayer === part.iconLayer && !this.partIsOnVehicle(part)) {
+			let mLayer = null;
+			this.state.envision.layers.map((l) => {
+				if (l.strPartNumber.localeCompare(m.part_number) === 0) {
+					mLayer = l;
+				}
+			});
+
+			if (mLayer.intLayerID === layer.intLayerID && !this.partIsOnVehicle(part)) {
 				matched.splice(i, 1);
 			}
 		});
+
 		if (!this.partIsOnVehicle(part)) {
 			matched.push(part);
 		}
 
-		console.log(matched);
+		let lbl = part.part_number || '';
+		if (this.state.vehicle) {
+			lbl = `${this.state.vehicle.base.year} ${this.state.vehicle.base.make} ${this.state.vehicle.base.model} ${part.part_number}`;
+		}
 
-		// we need to make sure that the current vehicle image works for the
-		// updated part array.
-		// let works = false;
-		// this.state.envision.vehicleParts.map((vp) => {
-		// 	if (vp.vehicle.intVehicleID !== this.state.envision.vehicleID) {
-		// 		return;
-		// 	}
-		//
-		// 	let count = 0;
-		// 	matched.map((p) => {
-		// 		if (vp.parts[p.part_number]) {
-		// 			count++;
-		// 		}
-		// 	});
-		//
-		// 	if (count === matched.length) {
-		// 		works = true;
-		// 	}
-		// });
-		//
-		// let newVehicle = this.state.envision.vehicleID;
-		// if (!works) { // find new vehicle
-		// 	for (let i = 0; i < this.state.envision.vehicleParts.length; i++) {
-		// 		const vp = this.state.envision.vehicleParts[i];
-		// 		let count = 0;
-		// 		matched.map((p) => {
-		// 			if (vp.parts[p.part_number]) {
-		// 				count++;
-		// 			}
-		// 		});
-		//
-		// 		if (count === matched.length) {
-		// 			newVehicle = vp.vehicle.intVehicleID;
-		// 			break;
-		// 		}
-		// 	}
-		// }
+		ga.event({
+			category: 'Envision',
+			action: 'Add Part',
+			label: lbl,
+		});
 
-		// let lbl = part.part_number || '';
-		// if (this.state.vehicle) {
-		// 	lbl = `${this.state.vehicle.base.year} ${this.state.vehicle.base.make} ${this.state.vehicle.base.model} ${part.part_number}`;
-		// }
-		//
-		// ga.event({
-		// 	category: 'Envision',
-		// 	action: 'Add Part',
-		// 	label: lbl,
-		// });
-		//
-		// this.setState({
-		// 	envision: {
-		// 		vehicleParts: this.state.envision.vehicleParts,
-		// 		partNumbers: this.state.envision.partNumbers,
-		// 		vehicleID: newVehicle,
-		// 		colorID: this.state.envision.colorID,
-		// 		matchedProducts: matched,
-		// 	},
-		// });
+		setTimeout(() => {
+			this.getInstance().fetchEnvision(
+				this.state.envision.vehicle.year,
+				this.state.envision.vehicle.make,
+				this.state.envision.vehicle.model,
+				this.state.envision.colorID,
+				matched.map((p) => p.part_number).join(','),
+			);
+		}, 0);
 	}
 
 	// removes part from state.vehicle.parts
@@ -280,15 +253,15 @@ class VehicleStore extends EventEmitter {
 			}
 		}
 
-		this.setState({
-			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				partNumbers: this.state.envision.partNumbers,
-				vehicleID: this.state.envision.vehicleID,
-				colorID: this.state.envision.colorID,
-				matchedProducts: matched,
-			},
-		});
+		setTimeout(() => {
+			this.getInstance().fetchEnvision(
+				this.state.envision.vehicle.year,
+				this.state.envision.vehicle.make,
+				this.state.envision.vehicle.model,
+				this.state.envision.colorID,
+				matched.map((p) => p.part_number).join(','),
+			);
+		}, 0);
 	}
 
 	// returns true if part is already in state.vehicle.parts; otherwise false

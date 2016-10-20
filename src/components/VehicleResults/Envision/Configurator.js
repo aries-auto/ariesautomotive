@@ -32,6 +32,10 @@ class Configurator extends Component {
 	}
 
 	render() {
+		if (!this.props.envision.image) {
+			return <div></div>;
+		}
+
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<Display click={this.handleColorClick} loading={this.props.envision.loading || false} image={this.props.envision.image} />
