@@ -10,9 +10,6 @@ const VehicleSource = {
 		return {
 			remote(st, year, make, model) {
 				let path = `${apiBase}/vehicle/category`;
-				if (brand.id === '4') {
-					path = `${apiBase}/luverne/vehicle`;
-				}
 
 				if (year && year !== '') {
 					path = `${path}/${year}`;

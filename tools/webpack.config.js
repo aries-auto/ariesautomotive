@@ -5,6 +5,7 @@ import AssetsPlugin from 'assets-webpack-plugin';
 
 const DEBUG = !process.argv.includes('--release');
 const LUVERNE = process.argv.includes('--luverne');
+const HIDE_BUY = process.argv.includes('--hide-buy');
 const VERBOSE = process.argv.includes('--verbose');
 const AUTOPREFIXER_BROWSERS = [
 	'Android 2.3',
@@ -19,6 +20,7 @@ const AUTOPREFIXER_BROWSERS = [
 const GLOBALS = {
 	'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
 	'process.env.BRAND': LUVERNE ? '"luverne"' : '"aries"',
+	'process.env.HIDE_BUY': HIDE_BUY ? true : false,
 	__DEV__: DEBUG,
 };
 

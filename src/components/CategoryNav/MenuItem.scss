@@ -68,6 +68,7 @@
             margin: 0;
             border: none;
             flex: 1;
+            background-color: $white-base;
 
             > a {
                 font-family: $font-family-base;
@@ -97,7 +98,7 @@
                 top: 0;
                 display: block !important;
                 padding: 0;
-                background-color: transparent;
+                background-color: $white-base;
 
                 > div {
                     padding: 0 0 0 10px;
@@ -124,6 +125,7 @@
 @media screen and (width >= $screen-md-min) {
     .root {
         border-right: 1px solid $black-base;
+        width: auto;
 
         &.parent {
             > a {

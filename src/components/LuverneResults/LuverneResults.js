@@ -1,45 +1,63 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../Link';
-import s from './VehicleResults.scss';
-import CategorizedResult from './CategorizedResult';
+import s from '../VehicleResults/VehicleResults.scss';
+import CategorizedResult from '../LuverneResults/CategorizedResult';
 import withStyles from '../../decorators/withStyles';
-import VehicleStore from '../../stores/VehicleStore';
-import CategoryStore from '../../stores/CategoryStore';
+import LuverneStore from '../../stores/LuverneStore';
+import CategoryStore from '../../stores/LvCategoryStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
-// import VehicleStyle from './VehicleStyle';
-// import Envision from './Envision';
-// import Configurator from './Configurator';
-import Configurator from './Envision/Configurator';
 
 @withStyles(s)
 @connectToStores
-class VehicleResults extends Component {
+class LuverneResults extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
 		activeIndex: PropTypes.number,
-		vehicle: PropTypes.shape({
-			base: PropTypes.shape({
+		context: PropTypes.shape({
+			params: PropTypes.shape({
 				year: PropTypes.string,
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
-			availableYears: PropTypes.array,
-			availableMakes: PropTypes.array,
-			availableModels: PropTypes.array,
+			iconMediaVehicle: PropTypes.object,
+			iconParts: PropTypes.oneOfType([
+				React.PropTypes.object,
+				React.PropTypes.array,
+			]),
+			vehicleParts: PropTypes.array,
+		}),
+		vehicle: PropTypes.shape({
+			base_vehicle: PropTypes.shape({
+				year: PropTypes.string,
+				make: PropTypes.string,
+				model: PropTypes.string,
+			}),
+			available_years: PropTypes.array,
+			available_makes: PropTypes.array,
+			available_models: PropTypes.array,
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
 		categories: PropTypes.array,
+		activeCategory: PropTypes.object,
 		fitments: PropTypes.array,
 		error: PropTypes.object,
-		envision: PropTypes.object,
-		window: PropTypes.object,
+		iconMediaVehicle: PropTypes.object,
+		win: PropTypes.object,
+	};
+
+	static contextTypes = {
+		onSetTitle: PropTypes.func.isRequired,
+		onPageNotFound: PropTypes.func.isRequired,
+		onSetMeta: PropTypes.func.isRequired,
+		seo: PropTypes.func.isRequired,
 	};
 
 	constructor() {
 		super();
 		this.state = {
+			context: {},
 			activeKey: '0',
 			activeCat: 0,
 		};
@@ -47,13 +65,27 @@ class VehicleResults extends Component {
 		this.createParentItem = this.createParentItem.bind(this);
 	}
 
+	componentWillMount() {
+		const base = this.props.context ? this.props.context.params : {};
+		let title = 'Vehicle Results';
+		if (base.year && base.make && base.model) {
+			title = `${base.year} ${base.make} ${base.model} Fitment Results`;
+		}
+		this.context.onSetTitle(title);
+		this.context.onSetMeta('description', title);
+		this.context.seo({
+			title,
+			description: 'ARIES Automotive parts for ' + title,
+		});
+	}
+
 	static getStores() {
-		return [VehicleStore, CategoryStore];
+		return [LuverneStore, CategoryStore];
 	}
 
 	static getPropsFromStores() {
 		return {
-			...VehicleStore.getState(),
+			...LuverneStore.getState(),
 			...CategoryStore.getState(),
 		};
 	}
@@ -79,44 +111,24 @@ class VehicleResults extends Component {
 		}
 		this.props.categories.map((cat) => {
 			const tmp = this.createParentItem(cat);
-			categoriesGroup.children = categoriesGroup.children.concat(tmp.children);
+			categoriesGroup.children = categoriesGroup.children.concat(tmp);
 		});
+
 		categoriesGroup.children.map((c) => {
 			if (!c.children || !c.children.length === 0) {
 				return;
 			}
 
 			let subs = [];
-			if (c.children && c.children.length > 0) {
-				(c.children || []).map((cat) => {
-					const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
-					if (tmp.length > 0) {
-						subs = subs.concat(tmp);
-					}
-				});
-			} else {
-				const tmp = this.props.vehicle.lookup_category.filter((t) => {
-					return t.category.id === c.cat.id;
-				});
+			(c.children || []).map((cat) => {
+				const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 				if (tmp.length > 0) {
 					subs = subs.concat(tmp);
 				}
-				if (c.cat.id === 320) { // Seat Defenders
-					// normally we would grab the different category struct type from the
-					// lookup_category, but these are universal and dont exist in the lookup_category
-					// so we create the new category
-					const SeatDefender = {
-						category: c.cat,
-						style_options: [{
-							style: 'all',
-						}],
-						children: [],
-					};
-					subs = subs.concat(SeatDefender);
-				}
-			}
+			});
 
 			if (subs.length > 0) {
+				subs.sort((a, b) => a.category.sort > b.category.sort);
 				groups.push(
 					<CategorizedResult
 						activeIndex={this.props.activeIndex}
@@ -124,7 +136,7 @@ class VehicleResults extends Component {
 						subs={subs}
 						fitments={this.props.fitments}
 						key={groups.length}
-						iconParts={this.props.envision.partNumbers}
+						iconParts={this.props.context.iconParts}
 					/>
 				);
 			}
@@ -160,12 +172,6 @@ class VehicleResults extends Component {
 						Some products may require the style of the vehicle to be specified.
 					</p>
 				</div>
-				<Configurator
-					products={this.props.vehicle.products}
-					className={s.configurator}
-					envision={this.props.envision}
-					window={this.props.window}
-				/>
 				<div className={s.matched}>
 					{matched}
 				</div>
@@ -175,4 +181,4 @@ class VehicleResults extends Component {
 
 }
 
-export default VehicleResults;
+export default LuverneResults;

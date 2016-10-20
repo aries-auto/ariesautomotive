@@ -1,0 +1,60 @@
+@import '../../variables.scss';
+
+.imageContainer {
+    display: inline-block;
+    width: 65%;
+
+    .image {
+        width: 65%;
+        max-width: 750px;
+    }
+}
+
+.partList {
+    width: 100%;
+
+    > div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.partContainer {
+    display: flex;
+    width: 250px;
+    padding: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    flex-direction: row;
+    background-color: $off-white;
+    border: 1px solid $gray-lighter;
+    border-radius: 4px;
+    justify-content: space-between;
+    align-items: center;
+
+    .partImage {
+        display: inline;
+        width: 60px;
+        height: 60px;
+        padding-right: .2em;
+    }
+
+    .partContent {
+        p {
+            margin: 0;
+        }
+
+        p:first-child {
+            font-weight: 600;
+            line-height: 1em;
+        }
+    }
+
+    .partClose {
+        font-weight: 800;
+    }
+}
+
+@media (min-width: $screen-md-min) {
+}

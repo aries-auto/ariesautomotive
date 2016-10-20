@@ -2,27 +2,27 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './NewVehicle.scss';
 import Select from './Select';
-import VehicleActions from '../../actions/VehicleActions';
-import VehicleStore from '../../stores/VehicleStore';
+import LuverneActions from '../../actions/LuverneActions';
+import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
 @withStyles(s)
 @connectToStores
-class NewVehicle extends Component {
+class NewLvVehicle extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
 		onSubmit: PropTypes.func.isRequired,
 		vehicle: PropTypes.shape({
-			base: PropTypes.shape({
+			base_vehicle: PropTypes.shape({
 				year: PropTypes.string,
 				make: PropTypes.string,
 				model: PropTypes.string,
 			}),
-			availableYears: PropTypes.array,
-			availableMakes: PropTypes.array,
-			availableModels: PropTypes.array,
+			available_years: PropTypes.array,
+			available_makes: PropTypes.array,
+			available_models: PropTypes.array,
 			lookup_category: PropTypes.array,
 			products: PropTypes.array,
 		}),
@@ -30,14 +30,14 @@ class NewVehicle extends Component {
 
 	static defaultProps = {
 		vehicle: {
-			base: {
+			base_vehicle: {
 				year: '',
 				make: '',
 				model: '',
 			},
-			availableYears: [],
-			availableMakes: [],
-			availableModels: [],
+			available_years: [],
+			available_makes: [],
+			available_models: [],
 			lookup_category: [],
 			products: [],
 		},
@@ -52,15 +52,15 @@ class NewVehicle extends Component {
 	}
 
 	static getStores() {
-		return [VehicleStore];
+		return [LuverneStore];
 	}
 
 	static getPropsFromStores() {
-		return VehicleStore.getState();
+		return LuverneStore.getState();
 	}
 
 	resetVehicle() {
-		VehicleActions.setVehicle('', '', '');
+		LuverneActions.setVehicle('', '', '');
 	}
 
 	changeVehicle(event) {
@@ -79,15 +79,15 @@ class NewVehicle extends Component {
 			break;
 		case 'make':
 			v = {
-				year: this.props.vehicle.base.year,
+				year: this.props.vehicle.base_vehicle.year,
 				make: event.target.value,
 				model: '',
 			};
 			break;
 		case 'model':
 			v = {
-				year: this.props.vehicle.base.year,
-				make: this.props.vehicle.base.make,
+				year: this.props.vehicle.base_vehicle.year,
+				make: this.props.vehicle.base_vehicle.make,
 				model: event.target.value,
 			};
 			break;
@@ -95,12 +95,12 @@ class NewVehicle extends Component {
 			break;
 		}
 
-		VehicleStore.fetchVehicle(v.year, v.make, v.model);
+		LuverneStore.fetchVehicle(v.year, v.make, v.model);
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-		// console.log(this.props.vehicle);
+
 		this.props.onSubmit();
 	}
 
@@ -146,7 +146,7 @@ class NewVehicle extends Component {
 					change={this.changeVehicle}
 					aria="year_lookup_label"
 					placeholder="- Select Year -"
-					values={this.props.vehicle.availableYears}
+					values={this.props.vehicle.available_years}
 				/>
 				<Select
 					className={cx(s.formGroup, this.isActive('make'))}
@@ -154,8 +154,8 @@ class NewVehicle extends Component {
 					change={this.changeVehicle}
 					aria="make_lookup_label"
 					placeholder="- Select Make -"
-					values={this.props.vehicle.availableMakes}
-					disabled={(!this.props.vehicle.availableMakes || this.props.vehicle.availableMakes.length === 0)}
+					values={this.props.vehicle.available_makes}
+					disabled={(!this.props.vehicle.available_makes || this.props.vehicle.available_makes.length === 0)}
 					disabledClassName={s.disabled}
 				/>
 				<Select
@@ -164,14 +164,14 @@ class NewVehicle extends Component {
 					change={this.changeVehicle}
 					aria="model_lookup_label"
 					placeholder="- Select Model -"
-					values={this.props.vehicle.availableModels}
-					disabled={(!this.props.vehicle.availableModels || this.props.vehicle.availableModels.length === 0)}
+					values={this.props.vehicle.available_models}
+					disabled={(!this.props.vehicle.available_models || this.props.vehicle.available_models.length === 0)}
 					disabledClassName={s.disabled}
 				/>
 				<button
 					className={cx('red-transparent-button', s.viewParts)}
 					type="submit"
-					disabled={(this.props.vehicle.base.model === '')}
+					disabled={(this.props.vehicle.base_vehicle.model === '')}
 				>
 					View Parts
 				</button>
@@ -181,4 +181,4 @@ class NewVehicle extends Component {
 
 }
 
-export default NewVehicle;
+export default NewLvVehicle;

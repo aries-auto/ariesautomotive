@@ -11,6 +11,7 @@ import CustomContent from './components/CustomContent';
 import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import VehicleResults from './components/VehicleResults';
+import LuverneResults from './components/LuverneResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
@@ -21,9 +22,10 @@ import LatestNewsItem from './components/LatestNewsItem';
 import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import { siteMenu, googleAnalyticsId } from './config';
+import { siteMenu, googleAnalyticsId, iapiBase, apiKey, brand } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
+import LuverneStore from './stores/LuverneStore';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
 import AppGuideStore from './stores/AppGuideStore';
@@ -55,6 +57,8 @@ const router = new Router(on => {
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
 			cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
+			VehicleStore.fetchVehicle(),
+			LuverneStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);
@@ -115,6 +119,9 @@ const router = new Router(on => {
 
 	on('/vehicle', async (state) => {
 		state.context.params = state.params;
+		if (brand.id === 4) {
+			return <LuverneResults context={state.context} />;
+		}
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -123,6 +130,9 @@ const router = new Router(on => {
 		LookupActions.set({
 			year: state.params.year,
 		});
+		if (brand.id === 4) {
+			return <LuverneResults context={state.context} />;
+		}
 		return <VehicleResults context={state.context} />;
 	});
 
@@ -132,15 +142,43 @@ const router = new Router(on => {
 			year: state.params.year,
 			make: state.params.make,
 		});
+		if (brand.id === 4) {
+			return <LuverneResults context={state.context} />;
+		}
 		return <VehicleResults context={state.context} />;
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
+		// TODO move this to vehicle source at some point
+		try {
+			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
+			const icon = await fetch(url, { method: 'get' }).then((result) => {
+				return result.json();
+			});
+			if (icon.vehicleParts.length > 0) {
+				state.context.vehicleParts = icon.vehicleParts;
+				state.context.iconParts = icon.partNumbers;
+			}
+		} catch (e) {
+			state.context.error = e.message;
+		}
+		// END TODO
+		state.context.params = state.params;
+		if (brand.id === 4) {
+			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
+			return <LuverneResults context={state.context} win={state.win} />;
+		}
 		await Promise.all([
 			VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
 			VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),
 		]);
-		return <VehicleResults context={state.context} window={state.win} />;
+		return <VehicleResults context={state.context} win={state.win} />;
+
+		// await Promise.all([
+		// 	VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
+		// 	VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),
+		// ]);
+		// return <VehicleResults context={state.context} window={state.win} />;
 	});
 
 	on('/about', async (state) => {
