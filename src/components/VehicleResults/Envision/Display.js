@@ -10,7 +10,7 @@ class Configurator extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		image: PropTypes.object.isRequired,
+		image: PropTypes.object,
 		click: PropTypes.func.isRequired,
 		vehicle: PropTypes.string,
 		loading: PropTypes.bool,

@@ -123,27 +123,31 @@ class NewVehicle extends Component {
 
 	isActive(prop) {
 		const v = this.props.vehicle;
+		if (!v.base) {
+			return '';
+		}
+
 		switch (prop) {
 		case 'year':
-			if (!v.year || v.year === '') {
+			if (!v.base.year || v.base.year === '') {
 				return s.active;
 			}
 			return '';
 		case 'make':
-			if (!v.year || v.year === '') {
+			if (!v.base.year || v.base.year === '') {
 				return '';
 			}
 
-			if (!v.make || v.make === '') {
+			if (!v.base.make || v.base.make === '') {
 				return s.active;
 			}
 			return '';
 		case 'model':
-			if (!v.year || v.year === '') {
+			if (!v.base.year || v.base.year === '') {
 				return '';
 			}
 
-			if (!v.make || v.make === '') {
+			if (!v.base.make || v.base.make === '') {
 				return '';
 			}
 

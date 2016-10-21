@@ -34,14 +34,13 @@
 	}
 
 	.vehicleName {
-		min-width: 600px;
 		font-size: 1.2em;
-		font-weight: 800;
+		font-weight: 600;
 
 		a {
 			padding: 0 .6em;
 			font-family: $font-family-em;
-			color: $white-base;
+			color: $black-base;
 			text-decoration: underline;
 		}
 	}
@@ -56,5 +55,11 @@
 
 		flex-grow: 0;
 		order: 2;
+
+		.vehicleName {
+			a {
+				color: $white-base;
+			}
+		}
 	}
 }
