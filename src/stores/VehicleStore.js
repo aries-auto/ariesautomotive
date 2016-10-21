@@ -103,6 +103,9 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleUpdateEnvision(data) {
+		if (!data.resp) {
+			return null;
+		}
 		this.setState({
 			envision: {
 				vehicleParts: this.state.envision.matchedProducts.map((p) => p.part_number),
