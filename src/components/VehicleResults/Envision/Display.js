@@ -17,9 +17,12 @@ class Configurator extends Component {
 	};
 
 	render() {
-		let img = '';
-		if (this.props.image && this.props.image.source && this.props.image.source.Host !== '') {
-			img = `//${this.props.image.source.Host}${this.props.image.source.Path}`;
+		if (!this.props.image || !this.props.image.source || this.props.image.source.Host === '') {
+			return (
+				<div className={cx(s.root, this.props.className, s.noImage)} id="vehicle-display">
+					<img src="//storage.googleapis.com/aries-website/site-assets/no-envision.svg" alt="No Image Available"/>
+				</div>
+			);
 		}
 
 		return (
@@ -29,7 +32,7 @@ class Configurator extends Component {
 				</div>
 				<div>
 					<div>
-						<img src={img} alt={this.props.vehicle} />
+						<img src={`//${this.props.image.source.Host}${this.props.image.source.Path}`} alt={this.props.vehicle} />
 					</div>
 
 					<ColorSwatches click={this.props.click} colors={this.props.image ? this.props.image.colors || [] : []} />
