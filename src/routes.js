@@ -55,10 +55,19 @@ const router = new Router(on => {
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
+
+		if (brand.id === 4) {
+			await Promise.all([
+				cookieVehicleLuverne ? LuverneStore.fetchVehicle(cookieVehicleLuverne.base_vehicle.year, cookieVehicleLuverne.base_vehicle.make, cookieVehicleLuverne.base_vehicle.model) : LuverneStore.fetchVehicle(),
+			]);
+		} else {
+			await Promise.all([
+				cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
+			]);
+		}
+
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
-			cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
-			cookieVehicleLuverne ? LuverneStore.fetchVehicle(cookieVehicleLuverne.base_vehicle.year, cookieVehicleLuverne.base_vehicle.make, cookieVehicleLuverne.base_vehicle.model) : LuverneStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);
@@ -154,7 +163,6 @@ const router = new Router(on => {
 			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 			return <LuverneResults context={state.context} win={state.win} />;
 		}
-
 		await Promise.all([
 			VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
 			VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),

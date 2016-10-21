@@ -81,7 +81,6 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
-
 		if (v.base.year === '' || v.base.make === '' || v.base.model === '') {
 			v.products = this.state.vehicle.products;
 			v.lookup_category = this.state.vehicle.lookup_category;
@@ -171,7 +170,7 @@ class VehicleStore extends EventEmitter {
 				this.state.envision.vehicle.make,
 				this.state.envision.vehicle.model,
 				id,
-				this.state.envision.vehicleParts,
+				(this.state.envision.matchedProducts || []).map((p) => p.part_number).join(','),
 			);
 		}, 0);
 	}
