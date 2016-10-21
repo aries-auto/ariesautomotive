@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+.root {
+	display: flex;
+	width: auto;
+	padding: 0;
+	text-align: center;
+	list-style-type: none;
+	flex-direction: row;
+	border: 1px solid $lookup-color;
+
+	align-items: stretch;
+	align-self: flex-start;
+
+	> div:first-child, > div:first-child a, > div:first-child img {
+		border-radius: 4px 4px 0 0;
+	}
+
+	> div:last-child, > div:last-child a, > div:last-child img {
+		border-radius: 0 0 4px 4px;
+	}
+}
+
+@media (min-width: $screen-md-min) {
+	.root {
+		width: 100px;
+		flex-direction: column;
+	}
+}

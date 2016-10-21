@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Configurator.scss';
 import withStyles from '../../../decorators/withStyles';
+import VehicleStore from '../../../stores/VehicleStore';
 import Display from './Display';
 import PartList from './PartList';
 
@@ -11,45 +12,33 @@ class Configurator extends Component {
 	static propTypes = {
 		products: PropTypes.array,
 		envision: PropTypes.object,
-		window: PropTypes.object,
 		className: PropTypes.string,
 	};
 
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 
-		let id = '';
-		if (props.envision && props.envision.vehicleParts) {
-			props.envision.vehicleParts.sort((a, b) => a.parts.length > b.parts.length);
-			id = props.envision.vehicleParts[0].vehicle.intVehicleID;
-		}
-
-		this.state = {
-			vehicleID: id,
-		};
+		this.handleColorClick = this.handleColorClick.bind(this);
 	}
 
-	componentDidMount() {
-		if (window.ICAPP) {
-			window.ICAPP.getRefVehicle();
-		}
-	}
-
-	componentDidUpdate() {
-		if (window.ICAPP) {
-			window.ICAPP.getRefVehicle();
-		}
+	handleColorClick(id) {
+		VehicleStore.fetchEnvision(
+			this.props.envision.vehicle.year,
+			this.props.envision.vehicle.make,
+			this.props.envision.vehicle.model,
+			id,
+			this.props.envision.matchedProducts,
+		);
 	}
 
 	render() {
+		if (!this.props.envision.image) {
+			return <div></div>;
+		}
+
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<Display
-					window={this.props.window}
-					colorID={this.props.envision.colorID}
-					products={this.props.envision.matchedProducts}
-					id={this.props.envision.vehicleID}
-				/>
+				<Display click={this.handleColorClick} loading={this.props.envision.loading || false} image={this.props.envision.image} />
 				<PartList products={this.props.envision.matchedProducts} />
 			</div>
 		);

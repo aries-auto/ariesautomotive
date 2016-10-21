@@ -4,7 +4,7 @@
     display: block;
     width: 100%;
     padding: 10px;
-	z-index: 1;
+		z-index: 9999999;
 
     > a {
         position: relative;
@@ -61,6 +61,7 @@
         justify-content: space-around;
 
         > div {
+						overflow:hidden;
             display: block;
             width: auto;
             min-width: 250px;

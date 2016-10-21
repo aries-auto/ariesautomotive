@@ -22,6 +22,7 @@ default:
 
 export const iapiBase = iapi;
 export const apiBase = api;
+export const envisionAPI = 'http://www.iconfigurators.com/ap-json/ap-image-AR-part-id.aspx';
 export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !== 'undefined' ? process.env.API_KEY : '9300f7bc-2ca6-11e4-8758-42010af0fd79';
 
 // Hides Where To Buy during development and review
@@ -33,12 +34,12 @@ const aries = {
 	description: 'ARIES Automotive - Whatever terrain you choose to conquer, do it with style and do it with ARIES.',
 	seoDesc: 'They change the rules, so we make up our own. They put up road blocks; we find a way around. They tell us there is no path ahead; we blaze a trail. At ARIES, we get revved up about going off the beaten path. From our Pro Series grille guards and modular Jeep bumpers to our StyleGuard™ floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.',
 	code: 'ARIES',
-	hideWTB: hideBuy,
 	facebook: {
 		link: 'https://www.facebook.com/pages/Aries-Automotive-Inc/113778149023',
 	},
 	youtube: 'AriesAutomotive',
 	twitter: '@ariesautomotive',
+	hideWTB: hideBuy,
 	defaultContactType: 28,
 	copyrightStart: 1997,
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
@@ -96,12 +97,12 @@ const luverne = {
 	description: 'LTE',
 	seoDesc: 'Luverne Truck Equipment',
 	code: 'LUVERNE',
-	hideWTB: hideBuy,
 	facebook: {
 		link: '',
 	},
 	youtube: '',
 	twitter: '@lte',
+	hideWTB: hideBuy,
 	defaultContactType: 28,
 	logo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_black%20on%20transparent).png',

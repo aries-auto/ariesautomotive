@@ -22,7 +22,7 @@ import LatestNewsItem from './components/LatestNewsItem';
 import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
-import { siteMenu, googleAnalyticsId, iapiBase, apiKey, brand } from './config';
+import { siteMenu, googleAnalyticsId, brand } from './config';
 import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import LuverneStore from './stores/LuverneStore';
@@ -50,15 +50,24 @@ const router = new Router(on => {
 		const slug = state.params[0].replace(/\//g, '');
 
 		const cookieVehicle = cookie.load('vehicle');
+		const cookieVehicleLuverne = cookie.load('vehicleluverne');
 
 		if (slug === '_ahhealth' || slug.indexOf('health') >= 0) {
 			return null;
 		}
+
+		if (brand.id === 4) {
+			await Promise.all([
+				cookieVehicleLuverne ? LuverneStore.fetchVehicle(cookieVehicleLuverne.base_vehicle.year, cookieVehicleLuverne.base_vehicle.make, cookieVehicleLuverne.base_vehicle.model) : LuverneStore.fetchVehicle(),
+			]);
+		} else {
+			await Promise.all([
+				cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
+			]);
+		}
+
 		await Promise.all([
 			SiteStore.fetchPageData(slug),
-			cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
-			VehicleStore.fetchVehicle(),
-			LuverneStore.fetchVehicle(),
 			CategoryStore.fetchCategories(),
 			SiteStore.fetchContentMenus(),
 		]);
@@ -149,20 +158,6 @@ const router = new Router(on => {
 	});
 
 	on('/vehicle/:year/:make/:model', async (state) => {
-		// TODO move this to vehicle source at some point
-		try {
-			const url = `${iapiBase}/envision/vehicle?key=${apiKey}&year=${state.params.year}&make=${state.params.make}&model=${state.params.model}`;
-			const icon = await fetch(url, { method: 'get' }).then((result) => {
-				return result.json();
-			});
-			if (icon.vehicleParts.length > 0) {
-				state.context.vehicleParts = icon.vehicleParts;
-				state.context.iconParts = icon.partNumbers;
-			}
-		} catch (e) {
-			state.context.error = e.message;
-		}
-		// END TODO
 		state.context.params = state.params;
 		if (brand.id === 4) {
 			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
@@ -172,13 +167,7 @@ const router = new Router(on => {
 			VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
 			VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),
 		]);
-		return <VehicleResults context={state.context} win={state.win} />;
-
-		// await Promise.all([
-		// 	VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
-		// 	VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),
-		// ]);
-		// return <VehicleResults context={state.context} window={state.win} />;
+		return <VehicleResults context={state.context} window={state.win} />;
 	});
 
 	on('/about', async (state) => {

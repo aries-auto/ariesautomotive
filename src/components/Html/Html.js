@@ -54,8 +54,8 @@ class Html extends Component {
 					<meta name="keywords" ng-bind="pageKywds" content="" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-					{(brand.favicons ? brand.favicons.apple || [] : []).map((fv) => <link rel={fv.rel} sizes={fv.sizes} href={`${fv.href}?v=${brand.favicons.version}`} />)}
-					{(brand.favicons ? brand.favicons.microsoft || [] : []).map((fv) => <meta name={fv.name} content={`${fv.content}?v=${brand.favicons.version}`} />)}
+					{(brand.favicons ? brand.favicons.apple || [] : []).map((fv, i) => <link key={i} rel={fv.rel} sizes={fv.sizes} href={`${fv.href}?v=${brand.favicons.version}`} />)}
+					{(brand.favicons ? brand.favicons.microsoft || [] : []).map((fv, i) => <meta key={i} name={fv.name} content={`${fv.content}?v=${brand.favicons.version}`} />)}
 
 					<style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
 				</head>

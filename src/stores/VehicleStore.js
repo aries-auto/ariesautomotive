@@ -30,13 +30,17 @@ class VehicleStore extends EventEmitter {
 			partToAdd: null,
 			partToRemove: null,
 			showIconMediaVehicle: true,
+			imageLoading: false,
 			categories: [],
 			envision: {
 				vehicleParts: [],
-				partNumbers: [],
+				layers: [],
+				vehicle: null,
 				vehicleID: null,
+				loading: false,
 				colorID: null,
 				matchedProducts: [],
+				image: null,
 			},
 		};
 
@@ -45,6 +49,7 @@ class VehicleStore extends EventEmitter {
 			handleFailedVehicle: VehicleActions.FAILED_VEHICLE,
 
 			handleUpdateEnvision: VehicleActions.UPDATE_ENVISION,
+			handleLoadingEnvision: VehicleActions.LOADING_ENVISION,
 			handleFailedEnvision: VehicleActions.FAILED_ENVISION,
 			handleSetEnvisionVehicle: VehicleActions.SET_ENVISION_VEHICLE,
 			handleSetEnvisionColor: VehicleActions.SET_ENVISION_COLOR,
@@ -92,20 +97,30 @@ class VehicleStore extends EventEmitter {
 		return this.state.vehicle;
 	}
 
-	handleUpdateEnvision(e) {
-		// find the most vehicle that has the most product
-		// fitments.
-		(e.vehicleParts || []).sort((a, b) => {
-			return Object.keys(b.parts).length - Object.keys(a.parts).length;
-		});
-
+	handleUpdateEnvision(data) {
 		this.setState({
 			envision: {
-				vehicleParts: e.vehicleParts,
-				partNumbers: e.partNumbers,
-				vehicleID: (e.vehicleParts) ? e.vehicleParts[0].vehicle.intVehicleID : '0',
-				colorID: this.state.envision.colorID,
+				vehicleParts: this.state.envision.matchedProducts.map((p) => p.part_number),
+				layers: data.resp.layers,
+				vehicle: data.resp.vehicle,
+				image: data.resp.image,
 				matchedProducts: this.state.envision.matchedProducts,
+				loading: false,
+				colorID: data.colorID,
+			},
+			error: null,
+		});
+	}
+
+	handleLoadingEnvision() {
+		this.setState({
+			envision: {
+				vehicleParts: this.state.envision.vehicleParts,
+				layers: this.state.envision.layers,
+				vehicle: this.state.envision.vehicle,
+				image: this.state.envision.image,
+				matchedProducts: this.state.envision.matchedProducts,
+				loading: true,
 			},
 			error: null,
 		});
@@ -122,6 +137,10 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleSetEnvisionVehicle(id) {
+		if (id === this.state.envision.vehicleID) {
+			return;
+		}
+
 		this.setState({
 			envision: {
 				vehicleParts: this.state.envision.vehicleParts,
@@ -134,15 +153,19 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleSetEnvisionColor(id) {
-		this.setState({
-			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				partNumbers: this.state.envision.partNumbers,
-				vehicleID: this.state.envision.vehicleID,
-				colorID: id,
-				matchedProducts: this.state.envision.matchedProducts,
-			},
-		});
+		if (id === this.state.envision.colorID) {
+			return;
+		}
+
+		setTimeout(() => {
+			this.getInstance().fetchEnvision(
+				this.state.envision.vehicle.year,
+				this.state.envision.vehicle.make,
+				this.state.envision.vehicle.model,
+				id,
+				this.state.envision.vehicleParts,
+			);
+		}, 0);
 	}
 
 	handleUpdateFitments(fits) {
@@ -171,58 +194,30 @@ class VehicleStore extends EventEmitter {
 	}
 
 	// adds part to state.vehicle.parts; removes part of same layer
-	addEnvisionPart(part) {
+	addEnvisionPart(args) {
+		const part = args[0];
+		const layer = args[1];
 		// must have iconLayer - TODO is this true?
-		if (part.iconLayer === '') {
+		if (!layer || layer.intLayerID === '') {
 			return;
 		}
 		const matched = this.state.envision.matchedProducts || [];
 		// remove part with same iconLayer
 		matched.map((m, i) => {
-			if (m.iconLayer === part.iconLayer && !this.partIsOnVehicle(part)) {
-				matched.splice(i, 1);
-			}
-		});
-		if (!this.partIsOnVehicle(part)) {
-			matched.push(part);
-		}
-
-		// we need to make sure that the current vehicle image works for the
-		// updated part array.
-		let works = false;
-		this.state.envision.vehicleParts.map((vp) => {
-			if (vp.vehicle.intVehicleID !== this.state.envision.vehicleID) {
-				return;
-			}
-
-			let count = 0;
-			matched.map((p) => {
-				if (vp.parts[p.part_number]) {
-					count++;
+			let mLayer = null;
+			this.state.envision.layers.map((l) => {
+				if (l.strPartNumber.localeCompare(m.part_number) === 0) {
+					mLayer = l;
 				}
 			});
 
-			if (count === matched.length) {
-				works = true;
+			if (mLayer.intLayerID === layer.intLayerID && !this.partIsOnVehicle(part)) {
+				matched.splice(i, 1);
 			}
 		});
 
-		let newVehicle = this.state.envision.vehicleID;
-		if (!works) { // find new vehicle
-			for (let i = 0; i < this.state.envision.vehicleParts.length; i++) {
-				const vp = this.state.envision.vehicleParts[i];
-				let count = 0;
-				matched.map((p) => {
-					if (vp.parts[p.part_number]) {
-						count++;
-					}
-				});
-
-				if (count === matched.length) {
-					newVehicle = vp.vehicle.intVehicleID;
-					break;
-				}
-			}
+		if (!this.partIsOnVehicle(part)) {
+			matched.push(part);
 		}
 
 		let lbl = part.part_number || '';
@@ -236,15 +231,15 @@ class VehicleStore extends EventEmitter {
 			label: lbl,
 		});
 
-		this.setState({
-			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				partNumbers: this.state.envision.partNumbers,
-				vehicleID: newVehicle,
-				colorID: this.state.envision.colorID,
-				matchedProducts: matched,
-			},
-		});
+		setTimeout(() => {
+			this.getInstance().fetchEnvision(
+				this.state.envision.vehicle.year,
+				this.state.envision.vehicle.make,
+				this.state.envision.vehicle.model,
+				this.state.envision.colorID,
+				matched.map((p) => p.part_number).join(','),
+			);
+		}, 0);
 	}
 
 	// removes part from state.vehicle.parts
@@ -256,15 +251,15 @@ class VehicleStore extends EventEmitter {
 			}
 		}
 
-		this.setState({
-			envision: {
-				vehicleParts: this.state.envision.vehicleParts,
-				partNumbers: this.state.envision.partNumbers,
-				vehicleID: this.state.envision.vehicleID,
-				colorID: this.state.envision.colorID,
-				matchedProducts: matched,
-			},
-		});
+		setTimeout(() => {
+			this.getInstance().fetchEnvision(
+				this.state.envision.vehicle.year,
+				this.state.envision.vehicle.make,
+				this.state.envision.vehicle.model,
+				this.state.envision.colorID,
+				matched.map((p) => p.part_number).join(','),
+			);
+		}, 0);
 	}
 
 	// returns true if part is already in state.vehicle.parts; otherwise false
