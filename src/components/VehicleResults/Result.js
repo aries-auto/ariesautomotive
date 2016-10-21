@@ -36,7 +36,6 @@ class Result extends Component {
 				if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
 					return;
 				}
-				console.log(ft);
 				const prod = ft.product.categories.filter((p) => p.id === props.result.category.id);
 				if (prod.length > 0) {
 					ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
@@ -45,7 +44,7 @@ class Result extends Component {
 			});
 		}
 
-		if (products.length !== this.state.products.length) {
+		if (products.length > 0) {
 			this.setState({
 				products,
 			});
@@ -54,7 +53,6 @@ class Result extends Component {
 
 	updateStyle(e) {
 		e.preventDefault();
-
 		VehicleStore.fetchFitments(this.props.result, this.refs.style.value);
 	}
 
