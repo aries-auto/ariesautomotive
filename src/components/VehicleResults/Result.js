@@ -36,8 +36,9 @@ class Result extends Component {
 				if (!ft.product || !ft.product.categories || ft.product.categories.length === 0) {
 					return;
 				}
-
-				if (ft.product.categories[0].id === props.result.category.id) {
+				console.log(ft);
+				const prod = ft.product.categories.filter((p) => p.id === props.result.category.id);
+				if (prod.length > 0) {
 					ft.product.iconLayer = this.props.iconParts ? this.props.iconParts[ft.product.part_number] : '';
 					products.push(ft.product);
 				}
@@ -67,7 +68,6 @@ class Result extends Component {
 		if (this.props.result.style_options[0].style.toLowerCase() === 'all') {
 			return null;
 		}
-
 		return (
 			<div className={'form-group'}>
 				<select ref="style" onChange={this.updateStyle} className="form-control">
