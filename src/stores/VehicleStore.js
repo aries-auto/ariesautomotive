@@ -81,6 +81,10 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
+		if (v.base.year === '' || v.base.make === '' || v.base.model === '') {
+			v.products = this.state.vehicle.products;
+			v.lookup_category = this.state.vehicle.lookup_category;
+		}
 		this.setState({
 			vehicle: v,
 			error: null,
