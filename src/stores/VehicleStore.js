@@ -163,7 +163,7 @@ class VehicleStore extends EventEmitter {
 				this.state.envision.vehicle.make,
 				this.state.envision.vehicle.model,
 				id,
-				this.state.envision.vehicleParts,
+				(this.state.envision.matchedProducts || []).map((p) => p.part_number).join(','),
 			);
 		}, 0);
 	}
