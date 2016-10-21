@@ -26,9 +26,9 @@ class Configurator extends Component {
 	}
 
 	render() {
-		if (!this.props.envision.image) {
-			return <div></div>;
-		}
+		// if (!this.props.envision.image) {
+		// 	return <div></div>;
+		// }
 
 		return (
 			<div className={cx(s.root, this.props.className)}>

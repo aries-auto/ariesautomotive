@@ -41,6 +41,7 @@ class VehicleStore extends EventEmitter {
 				colorID: null,
 				matchedProducts: [],
 				image: null,
+				error: null,
 			},
 		};
 
@@ -134,8 +135,10 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleFailedEnvision(err) {
+		const e = this.state.envision;
+		e.error = err;
 		this.setState({
-			error: err,
+			envision: e,
 		});
 	}
 
