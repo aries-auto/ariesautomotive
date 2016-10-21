@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import parsePath from 'history/lib/parsePath';
-import Location from '../../core/Location';
 import s from './Lookup.scss';
 import NewVehicle from './NewVehicle';
 // import VehicleActions from '../../actions/VehicleActions';
@@ -42,7 +40,6 @@ class Lookup extends Component {
 	constructor(props) {
 		super(props);
 
-		this.viewParts = this.viewParts.bind(this);
 		this.resetVehicle = this.resetVehicle.bind(this);
 
 		if (props.vehicle.base.model && props.vehicle.base.model !== '') {
@@ -60,23 +57,6 @@ class Lookup extends Component {
 		return VehicleStore.getState();
 	}
 
-	viewParts() {
-		const v = this.props.vehicle || {};
-		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '') {
-			v.availableMakes = [];
-			v.availableModels = [];
-			v.availableYears = [];
-			v.lookup_category = [];
-			v.products = null;
-			cookie.save('vehicle', v, { path: '/' });
-		}
-		Location.push({
-			...(parsePath(
-				`/vehicle/${v.base.year}/${v.base.make}/${v.base.model}`
-			)),
-			state: this.props,
-		});
-	}
 
 	resetVehicle() {
 		this.vehicleSet = false;
@@ -103,14 +83,17 @@ class Lookup extends Component {
 	}
 
 	render() {
-		let valid = <NewVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
+		let valid = <NewVehicle vehicle={this.props.vehicle} />;
 		const cookieVehicle = cookie.load('vehicle');
 		if (
 			this.props.vehicle &&
 			this.props.vehicle.base.year !== '' &&
 			this.props.vehicle.base.make !== '' &&
 			this.props.vehicle.base.model !== '' &&
-			cookieVehicle
+			cookieVehicle &&
+			cookieVehicle.base.year === this.props.vehicle.base.year &&
+			cookieVehicle.base.make === this.props.vehicle.base.make &&
+			cookieVehicle.base.model === this.props.vehicle.base.model
 		) {
 			valid = this.showVehicle();
 		}

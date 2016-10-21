@@ -6,6 +6,9 @@ import VehicleActions from '../../actions/VehicleActions';
 import VehicleStore from '../../stores/VehicleStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import Location from '../../core/Location';
+import parsePath from 'history/lib/parsePath';
+import cookie from 'react-cookie';
 
 @withStyles(s)
 @connectToStores
@@ -13,7 +16,6 @@ class NewVehicle extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		onSubmit: PropTypes.func.isRequired,
 		vehicle: PropTypes.shape({
 			base: PropTypes.shape({
 				year: PropTypes.string,
@@ -94,38 +96,58 @@ class NewVehicle extends Component {
 		default:
 			break;
 		}
-
-		VehicleStore.fetchVehicle(v.year, v.make, v.model);
+		this.setState({ v });
+		if (v.model === '') {
+			VehicleStore.fetchVehicle(v.year, v.make, v.model);
+		}
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.onSubmit();
+		const v = {};
+		v.base = this.state.v;
+		if (v.base.year !== '' && v.base.make !== '' && v.base.model !== '') {
+			v.availableMakes = [];
+			v.availableModels = [];
+			v.availableYears = [];
+			v.lookup_category = [];
+			v.products = null;
+			cookie.save('vehicle', v, { path: '/' });
+		}
+		Location.push({
+			...(parsePath(
+				`/vehicle/${v.base.year}/${v.base.make}/${v.base.model}`
+			)),
+		});
 	}
 
 	isActive(prop) {
 		const v = this.props.vehicle;
+		if (!v.base) {
+			return '';
+		}
+
 		switch (prop) {
 		case 'year':
-			if (!v.year || v.year === '') {
+			if (!v.base.year || v.base.year === '') {
 				return s.active;
 			}
 			return '';
 		case 'make':
-			if (!v.year || v.year === '') {
+			if (!v.base.year || v.base.year === '') {
 				return '';
 			}
 
-			if (!v.make || v.make === '') {
+			if (!v.base.make || v.base.make === '') {
 				return s.active;
 			}
 			return '';
 		case 'model':
-			if (!v.year || v.year === '') {
+			if (!v.base.year || v.base.year === '') {
 				return '';
 			}
 
-			if (!v.make || v.make === '') {
+			if (!v.base.make || v.base.make === '') {
 				return '';
 			}
 
@@ -158,6 +180,7 @@ class NewVehicle extends Component {
 					disabledClassName={s.disabled}
 				/>
 				<Select
+					id="selected-model"
 					className={cx(s.formGroup, this.isActive('model'))}
 					name="model"
 					change={this.changeVehicle}
@@ -170,7 +193,6 @@ class NewVehicle extends Component {
 				<button
 					className={cx('red-transparent-button', s.viewParts)}
 					type="submit"
-					disabled={(this.props.vehicle.base.model === '')}
 				>
 					View Parts
 				</button>

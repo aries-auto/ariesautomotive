@@ -15,7 +15,7 @@ class Applications extends Component {
 	constructor(props) {
 		super(props);
 
-		props.applications.sort(
+		(props.applications || []).sort(
 			this.sortBy(
 				{ name: 'year', primer: parseInt, reverse: true },
 				'make',

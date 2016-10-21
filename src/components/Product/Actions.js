@@ -16,7 +16,7 @@ class Actions extends Component {
 		(this.props.pricing || []).map((pr) => {
 			if (pr.type.toLowerCase() === 'list' && pr.price > 0) {
 				price = (
-					<span>${ pr.price }</span>
+					<span>${ pr.price.toFixed(2) }</span>
 				);
 			}
 		});

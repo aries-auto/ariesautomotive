@@ -41,6 +41,7 @@ class VehicleStore extends EventEmitter {
 				colorID: null,
 				matchedProducts: [],
 				image: null,
+				error: null,
 			},
 		};
 
@@ -81,6 +82,10 @@ class VehicleStore extends EventEmitter {
 		if (v.base.model !== '' && !v.availableModels) {
 			v.availableModels = this.state.vehicle.availableModels;
 		}
+		if (v.base.year === '' || v.base.make === '' || v.base.model === '') {
+			v.products = this.state.vehicle.products;
+			v.lookup_category = this.state.vehicle.lookup_category;
+		}
 		this.setState({
 			vehicle: v,
 			error: null,
@@ -98,6 +103,9 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleUpdateEnvision(data) {
+		if (!data.resp) {
+			return null;
+		}
 		this.setState({
 			envision: {
 				vehicleParts: this.state.envision.matchedProducts.map((p) => p.part_number),
@@ -127,8 +135,10 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleFailedEnvision(err) {
+		const e = this.state.envision;
+		e.error = err;
 		this.setState({
-			error: err,
+			envision: e,
 		});
 	}
 
@@ -163,7 +173,7 @@ class VehicleStore extends EventEmitter {
 				this.state.envision.vehicle.make,
 				this.state.envision.vehicle.model,
 				id,
-				this.state.envision.vehicleParts,
+				(this.state.envision.matchedProducts || []).map((p) => p.part_number).join(','),
 			);
 		}, 0);
 	}

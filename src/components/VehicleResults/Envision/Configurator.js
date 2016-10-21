@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Configurator.scss';
 import withStyles from '../../../decorators/withStyles';
-import VehicleStore from '../../../stores/VehicleStore';
+import VehicleActions from '../../../actions/VehicleActions';
 import Display from './Display';
 import PartList from './PartList';
 
@@ -22,20 +22,10 @@ class Configurator extends Component {
 	}
 
 	handleColorClick(id) {
-		VehicleStore.fetchEnvision(
-			this.props.envision.vehicle.year,
-			this.props.envision.vehicle.make,
-			this.props.envision.vehicle.model,
-			id,
-			this.props.envision.matchedProducts,
-		);
+		VehicleActions.setEnvisionColor(id);
 	}
 
 	render() {
-		if (!this.props.envision.image) {
-			return <div></div>;
-		}
-
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<Display click={this.handleColorClick} loading={this.props.envision.loading || false} image={this.props.envision.image} />
