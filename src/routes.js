@@ -159,6 +159,14 @@ const router = new Router(on => {
 
 	on('/vehicle/:year/:make/:model', async (state) => {
 		state.context.params = state.params;
+		const tmp = {
+			base: {
+				year: state.params.year,
+				make: state.params.make,
+				model: state.params.model,
+			},
+		};
+		cookie.save('vehicle', JSON.stringify(tmp), { path: '/' });
 		if (brand.id === 4) {
 			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 			return <LuverneResults context={state.context} win={state.win} />;
