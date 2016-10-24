@@ -64,6 +64,11 @@ class LuverneStore extends EventEmitter {
 			v.available_models = this.state.vehicle.available_models;
 		}
 
+		if (v.base_vehicle.year === '' || v.base_vehicle.make === '' || v.base_vehicle.model === '') {
+			v.products = this.state.vehicle.products;
+			v.lookup_category = this.state.vehicle.lookup_category;
+		}
+
 		this.setState({
 			vehicle: v,
 			error: null,

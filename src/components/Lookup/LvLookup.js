@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import parsePath from 'history/lib/parsePath';
-import Location from '../../core/Location';
 import s from './Lookup.scss';
 import NewLvVehicle from './NewLvVehicle';
 import LuverneStore from '../../stores/LuverneStore';
@@ -41,7 +39,6 @@ class Lookup extends Component {
 	constructor(props) {
 		super(props);
 
-		this.viewParts = this.viewParts.bind(this);
 		this.resetVehicle = this.resetVehicle.bind(this);
 
 		if (props.vehicle.base_vehicle.model && props.vehicle.base_vehicle.model !== '') {
@@ -59,23 +56,23 @@ class Lookup extends Component {
 		return LuverneStore.getState();
 	}
 
-	viewParts() {
-		const v = this.props.vehicle || {};
-		if (v.base_vehicle.year !== '' && v.base_vehicle.make !== '' && v.base_vehicle.model !== '') {
-			v.availableMakes = [];
-			v.availableModels = [];
-			v.availableYears = [];
-			v.lookup_category = [];
-			v.products = null;
-			cookie.save('vehicleluverne', v, { path: '/' });
-		}
-		Location.push({
-			...(parsePath(
-				`/vehicle/${v.base_vehicle.year}/${v.base_vehicle.make}/${v.base_vehicle.model}`
-			)),
-			state: this.props,
-		});
-	}
+	// viewParts() {
+	// 	const v = this.props.vehicle || {};
+	// 	if (v.base_vehicle.year !== '' && v.base_vehicle.make !== '' && v.base_vehicle.model !== '') {
+	// 		v.availableMakes = [];
+	// 		v.availableModels = [];
+	// 		v.availableYears = [];
+	// 		v.lookup_category = [];
+	// 		v.products = null;
+	// 		cookie.save('vehicleluverne', v, { path: '/' });
+	// 	}
+	// 	Location.push({
+	// 		...(parsePath(
+	// 			`/vehicle/${v.base_vehicle.year}/${v.base_vehicle.make}/${v.base_vehicle.model}`
+	// 		)),
+	// 		state: this.props,
+	// 	});
+	// }
 
 	resetVehicle() {
 		this.vehicleSet = false;
@@ -102,14 +99,17 @@ class Lookup extends Component {
 	}
 
 	render() {
-		let valid = <NewLvVehicle vehicle={this.props.vehicle} onSubmit={this.viewParts} />;
+		let valid = <NewLvVehicle vehicle={this.props.vehicle} />;
 		const cookieVehicle = cookie.load('vehicleluverne');
 		if (
 			this.props.vehicle &&
 			this.props.vehicle.base_vehicle.year !== '' &&
 			this.props.vehicle.base_vehicle.make !== '' &&
 			this.props.vehicle.base_vehicle.model !== '' &&
-			cookieVehicle
+			cookieVehicle &&
+			cookieVehicle.base_vehicle.year === this.props.vehicle.base_vehicle.year &&
+			cookieVehicle.base_vehicle.make === this.props.vehicle.base_vehicle.make &&
+			cookieVehicle.base_vehicle.model === this.props.vehicle.base_vehicle.model
 		) {
 			valid = this.showVehicle();
 		}

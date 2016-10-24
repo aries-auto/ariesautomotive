@@ -166,11 +166,14 @@ const router = new Router(on => {
 				model: state.params.model,
 			},
 		};
-		cookie.save('vehicle', JSON.stringify(tmp), { path: '/' });
 		if (brand.id === 4) {
+			tmp.base_vehicle = tmp.base;
+			tmp.base = [];
+			cookie.save('vehicleluverne', JSON.stringify(tmp), { path: '/' });
 			await LuverneStore.fetchVehicle(state.params.year, state.params.make, state.params.model);
 			return <LuverneResults context={state.context} win={state.win} />;
 		}
+		cookie.save('vehicle', JSON.stringify(tmp), { path: '/' });
 		await Promise.all([
 			VehicleStore.fetchVehicle(state.params.year, state.params.make, state.params.model),
 			VehicleStore.fetchEnvision(state.params.year, state.params.make, state.params.model),

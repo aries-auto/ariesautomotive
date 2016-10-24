@@ -6,6 +6,9 @@ import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import Location from '../../core/Location';
+import parsePath from 'history/lib/parsePath';
+import cookie from 'react-cookie';
 
 @withStyles(s)
 @connectToStores
@@ -13,7 +16,6 @@ class NewLvVehicle extends Component {
 
 	static propTypes = {
 		className: PropTypes.string,
-		onSubmit: PropTypes.func.isRequired,
 		vehicle: PropTypes.shape({
 			base_vehicle: PropTypes.shape({
 				year: PropTypes.string,
@@ -94,14 +96,29 @@ class NewLvVehicle extends Component {
 		default:
 			break;
 		}
-
-		LuverneStore.fetchVehicle(v.year, v.make, v.model);
+		this.setState({ v });
+		if (v.model === '') {
+			LuverneStore.fetchVehicle(v.year, v.make, v.model);
+		}
 	}
 
 	handleSubmit(e) {
 		e.preventDefault();
-
-		this.props.onSubmit();
+		const v = {};
+		v.base_vehicle = this.state.v;
+		if (v.base_vehicle.year !== '' && v.base_vehicle.make !== '' && v.base_vehicle.model !== '') {
+			v.availableMakes = [];
+			v.availableModels = [];
+			v.availableYears = [];
+			v.lookup_category = [];
+			v.products = null;
+			cookie.save('vehicleluverne', v, { path: '/' });
+		}
+		Location.push({
+			...(parsePath(
+				`/vehicle/${v.base_vehicle.year}/${v.base_vehicle.make}/${v.base_vehicle.model}`
+			)),
+		});
 	}
 
 	isActive(prop) {
@@ -171,7 +188,6 @@ class NewLvVehicle extends Component {
 				<button
 					className={cx('red-transparent-button', s.viewParts)}
 					type="submit"
-					disabled={(this.props.vehicle.base_vehicle.model === '')}
 				>
 					View Parts
 				</button>
