@@ -56,24 +56,6 @@ class Lookup extends Component {
 		return LuverneStore.getState();
 	}
 
-	// viewParts() {
-	// 	const v = this.props.vehicle || {};
-	// 	if (v.base_vehicle.year !== '' && v.base_vehicle.make !== '' && v.base_vehicle.model !== '') {
-	// 		v.availableMakes = [];
-	// 		v.availableModels = [];
-	// 		v.availableYears = [];
-	// 		v.lookup_category = [];
-	// 		v.products = null;
-	// 		cookie.save('vehicleluverne', v, { path: '/' });
-	// 	}
-	// 	Location.push({
-	// 		...(parsePath(
-	// 			`/vehicle/${v.base_vehicle.year}/${v.base_vehicle.make}/${v.base_vehicle.model}`
-	// 		)),
-	// 		state: this.props,
-	// 	});
-	// }
-
 	resetVehicle() {
 		this.vehicleSet = false;
 		cookie.remove('vehicleluverne');
