@@ -1,0 +1,6 @@
+{
+  "name": "CategoryParts",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CategoryParts.js"
+}
