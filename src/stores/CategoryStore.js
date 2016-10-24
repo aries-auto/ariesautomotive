@@ -2,6 +2,7 @@ import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
 import CategoryActions from '../actions/CategoryActions';
 import CategorySource from '../sources/CategorySource';
+import { brand } from '../config';
 
 const EventEmitter = events.EventEmitter;
 
@@ -39,12 +40,13 @@ class CategoryStore extends EventEmitter {
 				const c = cats[i];
 				items.push(this.categoryToItem(c));
 			}
-
-			items.push({
-				title: 'Application Guides',
-				to: '/appguides',
-				text: 'Application Guides',
-			});
+			if (brand.id !== 4) {
+				items.push({
+					title: 'Application Guides',
+					to: '/appguides',
+					text: 'Application Guides',
+				});
+			}
 			this.setState({
 				categories: cats,
 				categoryItems: items,
