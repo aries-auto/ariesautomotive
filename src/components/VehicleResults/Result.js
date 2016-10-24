@@ -12,6 +12,7 @@ class Result extends Component {
 		result: PropTypes.object.isRequired,
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
+		title: PropTypes.string,
 		fitments: PropTypes.array,
 		iconParts: PropTypes.oneOfType([
 			React.PropTypes.object,

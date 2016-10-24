@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ga from 'react-ga';
 import cx from 'classnames';
 import PartResults from '../PartResults';
+import CategoryParts from '../CategoryParts';
 import s from './Category.scss';
 import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
@@ -96,30 +97,9 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
-		if (this.props.category.vehicle_specific) {
-			return (
-				<div className="container">
-					<div className={cx(s.findProducts, 'col-lg-12')}>
-						<a onClick={this.scrollTo} className="red-transparent-button">
-							Find Products for Your Vehicle
-						</a>
-						<div className="clearfix"></div>
-					</div>
-				</div>
-			);
-		}
 		return (
-			<div className="container">
-				<h2 id="categoryProdHeader">{this.props.category.title} Products</h2>
-
-				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
-					{/* Products */}
-					{this.showParts()}
-				</div>
-
-				{/* Pagination */}
-				<div className="clearfix"></div>
-				{this.pagination()}
+			<div>
+				<CategoryParts catID={this.props.category.id}/>
 			</div>
 		);
 	}
