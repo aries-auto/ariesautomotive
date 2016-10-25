@@ -37,7 +37,6 @@ class Configurator extends Component {
 
 					<ColorSwatches click={this.props.click} colors={this.props.image ? this.props.image.colors || [] : []} />
 				</div>
-
 			</div>
 		);
 	}
