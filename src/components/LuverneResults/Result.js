@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import LuverneActions from '../../actions/LuverneActions';
+// import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import s from './Result.scss';
 import withStyles from '../../decorators/withStyles';
@@ -99,7 +99,7 @@ class Result extends Component {
 
 		const sels = this.props.sels;
 		sels[e.target.id] = e.target.value;
-		LuverneActions.setSel(sels);
+		// LuverneActions.setSel(sels);
 
 		if (this.isComplete(sels, this.state.reqFits)) {
 			this.setProducts();

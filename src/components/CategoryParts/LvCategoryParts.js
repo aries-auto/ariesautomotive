@@ -3,12 +3,13 @@ import cx from 'classnames';
 import s from './CategoryParts.scss';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import VehicleStore from '../../stores/VehicleStore';
-import Results from '../VehicleResults/Results';
+import LuverneStore from '../../stores/LuverneStore';
+import LuverneActions from '../../actions/LuverneActions';
+import Results from '../LuverneResults/Results';
 
 @withStyles(s)
 @connectToStores
-class CategoryParts extends Component {
+class LvCategoryParts extends Component {
 
 	static propTypes = {
 		catID: PropTypes.number,
@@ -18,11 +19,11 @@ class CategoryParts extends Component {
 	};
 
 	static getStores() {
-		return [VehicleStore];
+		return [LuverneStore];
 	}
 
 	static getPropsFromStores() {
-		return VehicleStore.getState();
+		return LuverneStore.getState();
 	}
 
 	renderParts() {
@@ -37,10 +38,12 @@ class CategoryParts extends Component {
 			}
 		});
 
+		LuverneActions.setActiveIndex(this.props.catID);
+
 		return (
 			<div>
 				<strong>Your Vehicle Parts</strong>
-				<Results className={'catres'} fitments={this.props.fitments} activeIndex={this.props.catID} results={res} />
+				<Results className={'catres'} fitments={this.props.fitments} results={res} />
 			</div>
 		);
 	}
@@ -55,4 +58,4 @@ class CategoryParts extends Component {
 
 }
 
-export default CategoryParts;
+export default LvCategoryParts;

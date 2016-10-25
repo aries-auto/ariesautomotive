@@ -70,6 +70,9 @@ const LuverneSource = {
 						return resp.json();
 					/* eslint-disable no-loop-func */
 					}).then((parts) => {
+						if (parts === null) {
+							return;
+						}
 						parts.map((p) => {
 							fits.push(p);
 						});

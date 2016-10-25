@@ -3,6 +3,7 @@ import ga from 'react-ga';
 import cx from 'classnames';
 import PartResults from '../PartResults';
 import CategoryParts from '../CategoryParts';
+import LvCategoryParts from '../CategoryParts/LvCategoryParts';
 import s from './Category.scss';
 import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
@@ -97,9 +98,15 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
+		let res;
+		res = <CategoryParts catID={this.props.category.id}/>;
+		if (brand.id === 4) {
+			res = <LvCategoryParts catID={this.props.category.id}/>;
+		}
+
 		return (
 			<div>
-				<CategoryParts catID={this.props.category.id}/>
+				{ res }
 			</div>
 		);
 	}
