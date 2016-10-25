@@ -12,7 +12,7 @@ import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
 import { port } from './config';
-import { apiBase, iapiBase, envisionAPI, apiKey, brand } from './config';
+import { apiBase, iapiBase, envisionAPI, apiKey, brand, memcachePrefix } from './config';
 import cookie from 'react-cookie';
 
 const memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
@@ -33,7 +33,7 @@ server.use(morgan('combined'));
 server.use(compression());
 
 server.get('/api/categories/:id.json', (req, res) => {
-	memcached.get(`api:categories:${req.params.id}:${brand.id}`, (err, val) => {
+	memcached.get(`${memcachePrefix}api:categories:${req.params.id}:${brand.id}`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -53,7 +53,7 @@ server.get('/api/categories/:id.json', (req, res) => {
 						res.status(200).json(JSON.parse(data.toString('utf8')));
 						return;
 					}
-					memcached.set(`api:categories:${req.params.id}:${brand.id}`, result, 86400, () => {
+					memcached.set(`${memcachePrefix}api:categories:${req.params.id}:${brand.id}`, result, 86400, () => {
 						res.status(200).json(data);
 						return;
 					});
@@ -67,7 +67,7 @@ server.get('/api/envision.json', (req, res) => {
 	const year = req.query.year;
 	const make = req.query.make;
 	const model = req.query.model;
-	const key = `api:envision:${year}:${make}:${model}`;
+	const key = `${memcachePrefix}api:envision:${year}:${make}:${model}`;
 	memcached.get(key, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.setHeader('Cache-Control', 'public, max-age=86400');
@@ -93,7 +93,7 @@ server.get('/api/envision/image.json', (req, res) => {
 	const vehicleID = req.query.vehicleID;
 	const colorID = req.query.colorID;
 	const ids = req.query.identifiers;
-	const key = `api:envision:${vehicleID}:${colorID}:${ids}`;
+	const key = `${memcachePrefix}api:envision:${vehicleID}:${colorID}:${ids}`;
 	memcached.get(key, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.setHeader('Cache-Control', 'public, max-age=86400');
@@ -114,7 +114,7 @@ server.get('/api/envision/image.json', (req, res) => {
 });
 
 server.get('/api/appguides.json', (req, res) => {
-	memcached.get('api:appguides', (err, val) => {
+	memcached.get(`${memcachePrefix}api:appguides`, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		if (!err && val) {
@@ -126,7 +126,7 @@ server.get('/api/appguides.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:appguides', data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:appguides`, data, 86400, () => {
 				res.json(data);
 			});
 		});
@@ -134,7 +134,7 @@ server.get('/api/appguides.json', (req, res) => {
 });
 
 server.get('/api/appguide/:collection/:page.json', async (req, res) => {
-	memcached.get(`api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, async (err, val) => {
+	memcached.get(`${memcachePrefix}api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, async (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		if (!err && val) {
@@ -161,7 +161,7 @@ server.get('/api/appguide/:collection/:page.json', async (req, res) => {
 		appGuideInfo = await appGuideInfoResponse.json();
 		guide.name = req.params.collection;
 		guide.appGuide = appGuideInfo;
-		memcached.set(`api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, guide, 86400, () => {
+		memcached.set(`${memcachePrefix}api:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, guide, 86400, () => {
 			res.status(200).json(guide);
 			return;
 		});
@@ -169,7 +169,7 @@ server.get('/api/appguide/:collection/:page.json', async (req, res) => {
 });
 
 server.get('/api/categories.json', (req, res) => {
-	memcached.get('api:categories', (err, val) => {
+	memcached.get(`${memcachePrefix}api:categories`, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		if (!err && val) {
@@ -181,7 +181,7 @@ server.get('/api/categories.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:categories', data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:categories`, data, 86400, () => {
 				res.json(data);
 			});
 		});
@@ -189,7 +189,7 @@ server.get('/api/categories.json', (req, res) => {
 });
 
 server.get('/api/content/all.json', (req, res) => {
-	memcached.get('api:content:all', (err, val) => {
+	memcached.get(`${memcachePrefix}api:content:all`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -201,7 +201,7 @@ server.get('/api/content/all.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:content:all', data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:content:all`, data, 86400, () => {
 				res.json(data);
 			});
 		});
@@ -221,7 +221,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 		return;
 	}
 
-	memcached.get(`api:content:${slug}`, (err, val) => {
+	memcached.get(`${memcachePrefix}api:content:${slug}`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -233,7 +233,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set(`api:content:${slug}`, data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:content:${slug}`, data, 86400, () => {
 				res.json(data);
 			});
 		}).catch((e) => {
@@ -243,7 +243,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 });
 
 server.get('/api/testimonials.json', (req, res) => {
-	memcached.get('api:testimonials', (err, val) => {
+	memcached.get(`${memcachePrefix}api:testimonials`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -255,7 +255,7 @@ server.get('/api/testimonials.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:testimonials', data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:testimonials`, data, 86400, () => {
 				res.json(data);
 			});
 		});
@@ -263,7 +263,7 @@ server.get('/api/testimonials.json', (req, res) => {
 });
 
 server.get('/api/products/featured.json', (req, res) => {
-	memcached.get('api:products:featured', (err, val) => {
+	memcached.get(`${memcachePrefix}api:products:featured`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -275,7 +275,7 @@ server.get('/api/products/featured.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set('api:products:featured', data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:products:featured`, data, 86400, () => {
 				res.json(data);
 			});
 		});

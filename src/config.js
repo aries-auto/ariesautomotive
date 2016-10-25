@@ -3,6 +3,7 @@ export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`;
 export const googleAnalyticsId = 'UA-61502306-1';
 export const googleApiKey = process.env.GOOGLE_API_KEY || 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA';
 export const hostAddress = process.env.WEBSITE_ADDRESS || `http://${host}`;
+export const memcachePrefix = 'staging:api:'; // prefix to every memcached key. Useful for switching api datasets. Example: staging vs production
 
 let iapi = '';
 let api = '';
