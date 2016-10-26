@@ -85,9 +85,12 @@ class Contact extends Component {
 	}
 
 	render() {
+		const heroImageStyle = {
+			backgroundImage: `url('${brand.contactHeroImage}')`,
+		};
 		return (
 			<div className={cx(s.root, this.props.className)}>
-				<div className={cx('visible-sm visible-md visible-lg internal-hero', s.hero)}></div>
+				<div className={cx('visible-sm visible-md visible-lg internal-hero', s.hero)} style={heroImageStyle}></div>
 				<div className={cx(s.container, 'container')}>
 
 					<div className="col-xs-12 col-md-6 col-lg-6">

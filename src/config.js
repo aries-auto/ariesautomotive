@@ -46,6 +46,7 @@ const aries = {
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
 	footerLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
+	contactHeroImage: 'http://storage.googleapis.com/aries-website/hero-images/truck.png',
 	website: 'http://www.ariesautomotive.com',
 	favicons: {
 		version: '2.1',
@@ -108,6 +109,7 @@ const luverne = {
 	logo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_black%20on%20transparent).png',
 	footerLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
+	contactHeroImage: 'https://storage.googleapis.com/luvere_site_content/Exterior%20-%20Luverne%20-%20Summer%20(4v1).jpg',
 	website: 'http://www.luvernetruck.com',
 	favicons: {
 		version: '2.1',
