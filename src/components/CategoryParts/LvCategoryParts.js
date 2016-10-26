@@ -40,6 +40,10 @@ class LvCategoryParts extends Component {
 
 		LuverneActions.setActiveIndex(this.props.catID);
 
+		if (res.length === 0) {
+			return <span></span>;
+		}
+
 		return (
 			<div>
 				<strong>Your Vehicle Parts</strong>
