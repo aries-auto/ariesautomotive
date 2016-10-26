@@ -13,12 +13,12 @@ case 'staging':
 	api = 'http://104.155.147.144';
 	break;
 case 'production':
-	iapi = 'http://104.154.72.47';
-	api = 'http://104.155.147.144';
+	iapi = 'http://iapi.curtmfg.com';
+	api = 'http://goapi.curtmfg.com';
 	break;
 default:
-	iapi = 'http://104.154.72.47';
-	api = 'http://104.155.147.144';
+	iapi = 'http://iapi.curtmfg.com';
+	api = 'http://goapi.curtmfg.com';
 }
 
 export const iapiBase = iapi;
