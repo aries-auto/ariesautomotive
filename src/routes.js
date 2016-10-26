@@ -83,7 +83,7 @@ const router = new Router(on => {
 	});
 
 	on('/part/:id', async (state) => {
-		Promise.all([
+		await Promise.all([
 			ProductStore.fetchFeatured(),
 			ProductStore.fetchProduct(state.params.id),
 		]);
