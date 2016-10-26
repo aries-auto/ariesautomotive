@@ -33,6 +33,7 @@ class Configurator extends Component {
 				<div>
 					<div>
 						<img src={`//${this.props.image.source.Host}${this.props.image.source.Path}`} alt={this.props.vehicle} />
+						<span>* Please note that this is a representative image and may not exactly match your trim package.</span>
 					</div>
 
 					<ColorSwatches click={this.props.click} colors={this.props.image ? this.props.image.colors || [] : []} />

@@ -29,9 +29,6 @@ class Configurator extends Component {
 		return (
 			<div className={cx(s.root, this.props.className)}>
 				<Display click={this.handleColorClick} loading={this.props.envision.loading || false} image={this.props.envision.image} />
-				<div className={s.disclaimer}>
-					<span>* Please note that this is a representative image and may not exactly match your trim package.</span>
-				</div>
 				<PartList products={this.props.envision.matchedProducts} />
 			</div>
 		);

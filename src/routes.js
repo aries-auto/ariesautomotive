@@ -56,14 +56,16 @@ const router = new Router(on => {
 			return null;
 		}
 
-		if (brand.id === 4) {
-			await Promise.all([
-				cookieVehicleLuverne ? LuverneStore.fetchVehicle(cookieVehicleLuverne.base_vehicle.year, cookieVehicleLuverne.base_vehicle.make, cookieVehicleLuverne.base_vehicle.model) : LuverneStore.fetchVehicle(),
-			]);
-		} else {
-			await Promise.all([
-				cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
-			]);
+		if (state.path.indexOf('/vehicle') === -1) { // don't want to request this here, since we'll be doing it in the route
+			if (brand.id === 4) {
+				await Promise.all([
+					cookieVehicleLuverne ? LuverneStore.fetchVehicle(cookieVehicleLuverne.base_vehicle.year, cookieVehicleLuverne.base_vehicle.make, cookieVehicleLuverne.base_vehicle.model) : LuverneStore.fetchVehicle(),
+				]);
+			} else {
+				await Promise.all([
+					cookieVehicle ? VehicleStore.fetchVehicle(cookieVehicle.base.year, cookieVehicle.base.make, cookieVehicle.base.model) : VehicleStore.fetchVehicle(),
+				]);
+			}
 		}
 
 		await Promise.all([

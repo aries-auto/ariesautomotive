@@ -12,7 +12,7 @@
     justify-content: space-between;
 
     > nav {
-        width: 100%;
+        width: auto;
         background-color: $white-base;
     }
 }
@@ -20,7 +20,6 @@
 @media screen and (width >= $screen-md-min) {
     .root {
 		padding: 0 15px;
-        flex-wrap: nowrap;
 
         > nav {
             background-color: transparent;

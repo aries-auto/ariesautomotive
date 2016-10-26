@@ -27,6 +27,18 @@ class CategoryNav extends Component {
 		};
 	}
 
+	componentDidMount() {
+		const children = document.getElementsByClassName('children');
+		if (!children || children.length === 0) {
+			return;
+		}
+		children[0].addEventListener('click', () => {
+			this.setState({
+				openTitle: '',
+			});
+		});
+	}
+
 	clearOpen(title) {
 		let update = title;
 		if (title === this.state.openTitle) {

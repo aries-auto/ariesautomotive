@@ -12,9 +12,9 @@
 	&.noImage {
 		> img {
 			width: 100%;
+			max-width: 600px;
 			height: 75%;
 			max-height: 300px;
-			max-width: 600px;
 		}
 	}
 
@@ -50,6 +50,13 @@
 			img {
 				max-width: 100%;
 			}
+
+			span {
+				display: block;
+				font-size: .9em;
+				font-style: italic;
+				text-align: center;
+			}
 		}
 
 		> div:last-child {
@@ -66,12 +73,15 @@
 			flex-direction: row;
 
 			> div:first-child {
+				margin-left: 35px;
+
 				order: 2;
 			}
 
 			> div:last-child {
 				flex-direction: column;
 
+				align-self: center;
 				order: 1;
 			}
 		}
