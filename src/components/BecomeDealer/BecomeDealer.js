@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './BecomeDealer.scss';
+import { brand } from '../../config';
 import withStyles from '../../decorators/withStyles';
 import ContactActions from '../../actions/ContactActions';
 import ContactStore from '../../stores/ContactStore';
@@ -137,7 +138,7 @@ class BecomeDealer extends Component {
 
 	submit(event) {
 		event.preventDefault();
-		ContactActions.postContactData(28);
+		ContactActions.postContactData(brand.defaultContactType);
 	}
 
 	renderSuccess() {
