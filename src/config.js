@@ -3,27 +3,31 @@ export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`;
 export const googleAnalyticsId = 'UA-61502306-1';
 export const googleApiKey = process.env.GOOGLE_API_KEY || 'AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA';
 export const hostAddress = process.env.WEBSITE_ADDRESS || `http://${host}`;
-export const memcachePrefix = 'staging:api:'; // prefix to every memcached key. Useful for switching api datasets. Example: staging vs production
 
 let iapi = '';
 let api = '';
+let cachePrefix = '';
 switch (process.env.NODE_ENV) {
 case 'staging':
 	iapi = 'http://104.154.72.47';
 	api = 'http://104.155.147.144';
+	cachePrefix = 'staging';
 	break;
 case 'production':
 	iapi = 'http://iapi.curtmfg.com';
 	api = 'http://goapi.curtmfg.com';
+	cachePrefix = 'production';
 	break;
 default:
 	iapi = 'http://iapi.curtmfg.com';
 	api = 'http://goapi.curtmfg.com';
+	cachePrefix = 'local';
 }
 
 export const iapiBase = iapi;
 export const apiBase = api;
 export const envisionAPI = 'http://www.iconfigurators.com/ap-json/ap-image-AR-part-id.aspx';
+export const memcachePrefix = cachePrefix;
 export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !== 'undefined' ? process.env.API_KEY : '9300f7bc-2ca6-11e4-8758-42010af0fd79';
 
 // Hides Where To Buy during development and review
