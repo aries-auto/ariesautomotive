@@ -37,6 +37,10 @@ class CategoryParts extends Component {
 			}
 		});
 
+		if (res.length === 0) {
+			return <span></span>;
+		}
+
 		return (
 			<div>
 				<strong>Your Vehicle Parts</strong>
