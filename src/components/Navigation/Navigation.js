@@ -4,8 +4,8 @@ import s from './Navigation.scss';
 import withStyles from '../../decorators/withStyles';
 import { brand } from '../../config';
 import Link from '../Link';
-// import Lookup from '../Lookup/Lookup';
-// import LvLookup from '../Lookup/LvLookup';
+import Lookup from '../Lookup/Lookup';
+import LvLookup from '../Lookup/LvLookup';
 import Menu from './Menu';
 
 @withStyles(s)
@@ -68,16 +68,16 @@ class Navigation extends Component {
 		return cats;
 	}
 	render() {
-		const lookup = null;
-		// switch (brand.id) {
-		// case 3:
-		// 	lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
-		// 	break;
-		// case 4:
-		// 	lookup = <LvLookup vehicle={this.props.vehicle} params={this.props.params} />;
-		// 	break;
-		// default:
-		// }
+		let lookup = null;
+		switch (brand.id) {
+		case 3:
+			lookup = <Lookup vehicle={this.props.vehicle} params={this.props.params} />;
+			break;
+		case 4:
+			lookup = <LvLookup vehicle={this.props.vehicle} params={this.props.params} />;
+			break;
+		default:
+		}
 
 		return (
 			<div
