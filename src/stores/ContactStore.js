@@ -79,7 +79,7 @@ class ContactStore extends EventEmitter {
 		}
 		const inputs = JSON.stringify(frm);
 		try {
-			fetch(`${apiBase}/contact/${frm.reason}?key=${apiKey}&brand=${brand.id}`, {
+			fetch(`${apiBase}/contact/${frm.reason}?key=${apiKey}&brandID=${brand.id}`, {
 				method: 'POST',
 				body: inputs,
 				headers: {
@@ -102,7 +102,7 @@ class ContactStore extends EventEmitter {
 
 	async all() {
 		try {
-			await fetch(`${apiBase}/contact/types?key=${apiKey}`)
+			await fetch(`${apiBase}/contact/types?key=${apiKey}&brandID=${brand.id}`)
 			.then((resp) => {
 				return resp.json();
 			}).then((data) => {

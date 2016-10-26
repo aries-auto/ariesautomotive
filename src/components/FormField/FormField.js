@@ -154,14 +154,11 @@ class FormField extends Component {
 				if (!this.props.contactTypes[j]) {
 					continue;
 				}
-
-				if (this.props.contactTypes[j].brandId === 3) {
-					contactOptions.push(
-						<option key={j} value={this.props.contactTypes[j].id}>
-							{this.props.contactTypes[j].name}
-						</option>
-					);
-				}
+				contactOptions.push(
+					<option key={j} value={this.props.contactTypes[j].id}>
+						{this.props.contactTypes[j].name}
+					</option>
+				);
 			}
 			output.push(
 				<div key={field.key} className={'form-group col-xs-' + field.width}>

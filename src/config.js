@@ -109,7 +109,7 @@ const luverne = {
 	youtube: '',
 	twitter: '@lte',
 	hideWTB: hideBuy,
-	defaultContactType: 28,
+	defaultContactType: 49,
 	logo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_black%20on%20transparent).png',
 	footerLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
