@@ -45,7 +45,7 @@ class Menu extends Component {
 					to={item.to}
 					title={item.title}
 					text={item.text}
-					children={item.children}
+					children={item.children || []}
 					open={this.props.openTitle === item.title}
 					openItem={this.props.isParent ? this.collapse : null}
 				/>
