@@ -170,6 +170,12 @@ export const siteMenu = [
 		value: 'WHERE TO BUY',
 	},
 	{
+		href: 'http://orders.ariesautomotive.com/',
+		title: 'ComNET',
+		value: 'COMNET',
+		external: true,
+	},
+	{
 		href: 'http://dealers.ariesautomotive.com/',
 		title: 'Dealer Portal',
 		value: 'DEALER PORTAL',
