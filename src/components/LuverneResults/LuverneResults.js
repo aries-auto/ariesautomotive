@@ -152,8 +152,11 @@ class LuverneResults extends Component {
 		const newCat = {
 			cat,
 			title: cat.title,
-			children: cat.children.map(this.createParentItem),
 		};
+
+		if (cat.children) {
+			newCat.children = cat.children.map(this.createParentItem);
+		}
 
 		return newCat;
 	}

@@ -70,9 +70,11 @@ class CategoryStore extends EventEmitter {
 			cat.children.sort((a, b) => a.sort > b.sort);
 		}
 		const children = [];
-		for (let i = 0; i < cat.children.length; i++) {
-			const ch = cat.children[i];
-			children.push(this.categoryToItem(ch));
+		if (cat.children) {
+			for (let i = 0; i < cat.children.length; i++) {
+				const ch = cat.children[i];
+				children.push(this.categoryToItem(ch));
+			}
 		}
 		const item = {
 			title: cat.title,
