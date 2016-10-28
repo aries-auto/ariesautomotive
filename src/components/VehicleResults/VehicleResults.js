@@ -137,11 +137,15 @@ class VehicleResults extends Component {
 		if (cat.children && cat.children.length > 0) {
 			cat.children.sort((a, b) => a.sort > b.sort);
 		}
+
 		const newCat = {
 			cat,
 			title: cat.title,
-			children: cat.children.map(this.createParentItem),
 		};
+
+		if (cat.children) {
+			newCat.children = cat.children.map(this.createParentItem);
+		}
 
 		return newCat;
 	}
