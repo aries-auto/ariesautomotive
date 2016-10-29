@@ -244,7 +244,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 
 server.get('/api/testimonials.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:testimonials`, (err, val) => {
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Cache-Control', 'public, max-age=604801');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
 			res.json(val);
@@ -264,7 +264,7 @@ server.get('/api/testimonials.json', (req, res) => {
 
 server.get('/api/products/featured.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:products:featured`, (err, val) => {
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Cache-Control', 'public, max-age=604801');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
 			res.json(val);
