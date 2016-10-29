@@ -69,10 +69,10 @@ class Home extends Component {
 						Jeep bumpers to our StyleGuard&trade; floor liners and Seat Defenders, ARIES offers freedom of customization and a perfect fit for your vehicle. So whatever terrain you choose to conquer, do it with style and do it with ARIES.
 					</p>
 					<div className={cx(s.ytWrapper)}>
-						<iframe allowFullScreen="" frameBorder="0" height="315" src="//www.youtube.com/embed/M7k7rhOtMY4?rel=0" width="420"></iframe>
+						<iframe allowFullScreen="" frameBorder="0" height="315" src="https://www.youtube.com/embed/M7k7rhOtMY4?rel=0" width="420"></iframe>
 					</div>
 					<div className={cx(s.ytWrapper)}>
-						<iframe allowFullScreen="" frameBorder="0" height="315" src="//www.youtube.com/embed/LDQEbHqWjfo?rel=0" width="420"></iframe>
+						<iframe allowFullScreen="" frameBorder="0" height="315" src="https://www.youtube.com/embed/LDQEbHqWjfo?rel=0" width="420"></iframe>
 					</div>
 				</div>
 				<div>
