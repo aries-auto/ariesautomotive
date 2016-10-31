@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
+import cookie from 'react-cookie';
 import LuverneActions from '../actions/LuverneActions';
 import LuverneSource from '../sources/LuverneSource';
 
@@ -36,6 +37,7 @@ class LuverneStore extends EventEmitter {
 		this.bindListeners({
 			handleUpdateVehicle: LuverneActions.UPDATE_VEHICLE,
 			handleFailedVehicle: LuverneActions.FAILED_VEHICLE,
+			handleResetVehicle: LuverneActions.RESET_VEHICLE,
 			handleSetActiveIndex: LuverneActions.SET_ACTIVE_INDEX,
 			handleUpdateFitments: LuverneActions.UPDATE_FITMENTS,
 			handleFailedFitments: LuverneActions.FAILED_FITMENTS,
@@ -79,6 +81,25 @@ class LuverneStore extends EventEmitter {
 		this.setState({
 			error: err,
 		});
+	}
+
+	handleResetVehicle() {
+		const v = this.state.vehicle;
+		v.availableMakes = [];
+		v.availableModels = [];
+		v.base_vehicle = {
+			year: '',
+			make: '',
+			model: '',
+		};
+
+		this.setState({
+			vehicle: v,
+		});
+		setTimeout(() => {
+			this.getInstance().fetchVehicle();
+		}, 0);
+		cookie.remove('vehicleluverne');
 	}
 
 	getVehicle() {

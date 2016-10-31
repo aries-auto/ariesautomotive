@@ -9,14 +9,13 @@ class VehicleActions {
 			'fetchVehicle',
 			'updateVehicle',
 			'failedVehicle',
+			'resetVehicle',
 
 			'fetchEnvision',
 			'updateEnvision',
 			'failedEnvision',
 			'loadingEnvision',
-			// 'fetchEnvisionImage',
-			// 'updateEnvisionImage',
-			// 'failedEnvisionImage',
+
 			'setEnvisionColor',
 			'setEnvisionVehicle',
 			'addEnvisionPart',
