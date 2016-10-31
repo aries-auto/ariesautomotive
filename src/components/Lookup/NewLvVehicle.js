@@ -122,7 +122,7 @@ class NewLvVehicle extends Component {
 	}
 
 	isActive(prop) {
-		const v = this.props.vehicle;
+		const v = this.props.vehicle ? this.props.vehicle.base_vehicle || null : null;
 		switch (prop) {
 		case 'year':
 			if (!v.year || v.year === '') {
