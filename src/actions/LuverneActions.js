@@ -9,7 +9,7 @@ class LuverneActions {
 			'fetchVehicle',
 			'updateVehicle',
 			'failedVehicle',
-            'resetVehicle',
+      'resetVehicle',
 
 			'setProducts',
 			'setSel',
