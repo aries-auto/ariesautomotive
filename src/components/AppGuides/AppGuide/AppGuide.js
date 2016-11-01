@@ -29,11 +29,13 @@ class AppGuide extends Component {
 
 	static defaultProps = {
 		guides: [],
+		guide: null,
 	};
 
 	constructor() {
 		super();
 		this.getAttr = this.getAttr.bind(this);
+		this.renderBreadCrumbs = this.renderBreadCrumbs.bind(this);
 	}
 
 	componentWillMount() {
@@ -110,6 +112,18 @@ class AppGuide extends Component {
 		}
 		const page = currentPage + inc;
 		AppGuideActions.set(this.props.guide.name, page);
+	}
+
+	renderBreadCrumbs() {
+		if (this.props.guide) {
+			return (
+				[
+					<li key="app"><a href={`/appguides`}>Application Guides</a></li>,
+					<li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>,
+				]
+			);
+		}
+		return <li key="apps" className="active">Application Guides</li>;
 	}
 
 	renderApplications() {
@@ -195,8 +209,17 @@ class AppGuide extends Component {
 	}
 
 	render() {
+		if (!this.props.guide) {
+			return null;
+		}
 		return (
 			<div className={s.appguideContainer}>
+				<div className={s.breadcrumbContainer}>
+					<ol className="breadcrumb">
+						<li><a href="/">Home</a></li>
+						{this.renderBreadCrumbs()}
+					</ol>
+				</div>
 				<h1 className={s.header}>{this.props.guide.name}</h1>
 				<div className={s.install}>Click the <Glyphicon glyph="wrench"/> next to a product for installation instructions.</div>
 				{this.renderDownloadLinks()}

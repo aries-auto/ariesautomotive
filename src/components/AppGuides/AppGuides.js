@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import s from './AppGuides.scss';
-import AppGuideActions from '../../actions/AppGuideActions';
 import AppGuideStore from '../../stores/AppGuideStore';
 import withStyles from '../../decorators/withStyles';
 import cx from 'classnames';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import AppGuide from './AppGuide/AppGuide';
 import { brand } from '../../config.js';
 
 const title = 'Application Guides';
@@ -33,12 +31,6 @@ class AppGuides extends Component {
 		guide: null,
 	};
 
-	constructor() {
-		super();
-
-		// AppGuideActions.all();
-	}
-
 	componentWillMount() {
 		this.context.onSetTitle(title);
 	}
@@ -49,14 +41,6 @@ class AppGuides extends Component {
 
 	static getPropsFromStores() {
 		return AppGuideStore.getState();
-	}
-
-	handleAppGuide(g) {
-		AppGuideActions.set(g.collection, 0);
-	}
-
-	handleAppguides() {
-		AppGuideActions.reset();
 	}
 
 	renderGuides() {
@@ -97,27 +81,14 @@ class AppGuides extends Component {
 		);
 	}
 
-	renderBreadCrumbs() {
-		if (this.props.guide) {
-			return (
-				[
-					<li key="app"><a href={`/appguides`}>Application Guides</a></li>,
-					<li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>,
-				]
-			);
-		}
-		return <li key="apps" className="active">Application Guides</li>;
-	}
-
 	render() {
 		return (
 			<div className={s.appguidesContainer}>
 				<div className="container">
 					<ol className="breadcrumb">
 						<li><a href="/">Home</a></li>
-						{this.renderBreadCrumbs()}
 					</ol>
-					{this.props.guide ? <AppGuide guide={this.props.guide} /> : this.renderGuides()}
+					{this.renderGuides()}
 				</div>
 			</div>
 		);

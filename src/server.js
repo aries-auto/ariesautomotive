@@ -121,7 +121,6 @@ server.get('/api/appguides.json', (req, res) => {
 			res.json(val);
 			return;
 		}
-
 		fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand.id}`)
 		.then((resp) => {
 			return resp.json();

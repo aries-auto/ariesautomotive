@@ -15,6 +15,7 @@ import LuverneResults from './components/LuverneResults';
 import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
+import AppGuide from './components/AppGuides/AppGuide';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -196,7 +197,7 @@ const router = new Router(on => {
 		const collection = state.params.guide;
 		const page = state.params.page;
 		await AppGuideStore.fetchAppGuide(collection, page);
-		return <AppGuides context={state.context} />;
+		return <AppGuide context={state.context} />;
 	});
 
 	on('/becomedealer', async (state) => {
