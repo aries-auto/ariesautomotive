@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './NewVehicle.scss';
 import Select from './Select';
-import VehicleActions from '../../actions/VehicleActions';
 import VehicleStore from '../../stores/VehicleStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -59,10 +58,6 @@ class NewVehicle extends Component {
 
 	static getPropsFromStores() {
 		return VehicleStore.getState();
-	}
-
-	resetVehicle() {
-		VehicleActions.setVehicle('', '', '');
 	}
 
 	changeVehicle(event) {

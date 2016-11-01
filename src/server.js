@@ -170,7 +170,7 @@ server.get('/api/appguide/:collection/:page.json', async (req, res) => {
 server.get('/api/categories.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:categories`, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Cache-Control', 'public, max-age=604801');
 		if (!err && val) {
 			res.json(val);
 			return;
@@ -189,7 +189,7 @@ server.get('/api/categories.json', (req, res) => {
 
 server.get('/api/content/all.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:content:all`, (err, val) => {
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Cache-Control', 'public, max-age=604801');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
 			res.json(val);
@@ -208,7 +208,7 @@ server.get('/api/content/all.json', (req, res) => {
 });
 
 server.get('/api/content/.json', (req, res) => {
-	res.setHeader('Cache-Control', 'public, max-age=86400');
+	res.setHeader('Cache-Control', 'public, max-age=6048010000000000000');
 	res.setHeader('Content-Type', 'application/json');
 	res.json('[]');
 });
@@ -243,7 +243,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 
 server.get('/api/testimonials.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:testimonials`, (err, val) => {
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Cache-Control', 'public, max-age=604801');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
 			res.json(val);
@@ -263,7 +263,7 @@ server.get('/api/testimonials.json', (req, res) => {
 
 server.get('/api/products/featured.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:products:featured`, (err, val) => {
-		res.setHeader('Cache-Control', 'public, max-age=86400');
+		res.setHeader('Cache-Control', 'public, max-age=604801');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
 			res.json(val);

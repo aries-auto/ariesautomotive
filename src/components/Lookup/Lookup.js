@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Lookup.scss';
 import NewVehicle from './NewVehicle';
-// import VehicleActions from '../../actions/VehicleActions';
+import VehicleActions from '../../actions/VehicleActions';
 import VehicleStore from '../../stores/VehicleStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -57,11 +57,8 @@ class Lookup extends Component {
 		return VehicleStore.getState();
 	}
 
-
 	resetVehicle() {
-		this.vehicleSet = false;
-		cookie.remove('vehicle');
-		VehicleStore.fetchVehicle();
+		VehicleActions.resetVehicle();
 	}
 
 	showVehicle() {

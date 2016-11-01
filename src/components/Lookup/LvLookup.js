@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Lookup.scss';
 import NewLvVehicle from './NewLvVehicle';
+import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -57,9 +58,7 @@ class Lookup extends Component {
 	}
 
 	resetVehicle() {
-		this.vehicleSet = false;
-		cookie.remove('vehicleluverne');
-		LuverneStore.fetchVehicle();
+		LuverneActions.resetVehicle();
 	}
 
 	showVehicle() {

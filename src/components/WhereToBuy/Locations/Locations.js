@@ -143,7 +143,7 @@ class Locations extends Component {
 				const location = tiers[tierName][i];
 				const url = `${location.website.Scheme !== '' ? location.website.Scheme : 'http'}://${location.website.Host}${location.website.Path}`;
 				locationHtml.push(
-					<div className={cx('col-md-3 col-sm-12 col-xs-12', s.location)} key={tierName + i}>
+					<div className={cx(s.location)} key={tierName + i}>
 						<a className={s.name}>{location.name}</a>
 						<div className={cx(s.actions)}>
 							<a href={url} target="_blank">
@@ -154,7 +154,7 @@ class Locations extends Component {
 					</div>
 				);
 			}
-			output.push(<div className={cx('container', s.onlinelocations)} key={tierName}><h2>{tierName}</h2>{locationHtml}</div>);
+			output.push(<div className={cx(s.onlinelocations)} key={tierName}><h2>{tierName}</h2>{locationHtml}</div>);
 		}
 		return output;
 	}

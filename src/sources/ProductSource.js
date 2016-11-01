@@ -41,8 +41,8 @@ const ProductSource = {
 				});
 			},
 
-			local(st) {
-				if (!st.product || !st.product.id) {
+			local(st, id) {
+				if (!st.product || !st.product.id || st.product.id !== id) {
 					return null;
 				}
 

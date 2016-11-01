@@ -24,7 +24,6 @@ import LandingPage from './components/LandingPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import { siteMenu, googleAnalyticsId, brand } from './config';
-import LookupActions from './actions/LookupActions';
 import VehicleStore from './stores/VehicleStore';
 import LuverneStore from './stores/LuverneStore';
 import ContactStore from './stores/ContactStore';
@@ -139,9 +138,6 @@ const router = new Router(on => {
 
 	on('/vehicle/:year', async (state) => {
 		state.context.params = state.params;
-		LookupActions.set({
-			year: state.params.year,
-		});
 		if (brand.id === 4) {
 			return <LuverneResults context={state.context} />;
 		}
@@ -150,10 +146,6 @@ const router = new Router(on => {
 
 	on('/vehicle/:year/:make', async (state) => {
 		state.context.params = state.params;
-		LookupActions.set({
-			year: state.params.year,
-			make: state.params.make,
-		});
 		if (brand.id === 4) {
 			return <LuverneResults context={state.context} />;
 		}
