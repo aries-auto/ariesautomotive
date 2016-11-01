@@ -10,6 +10,9 @@ class CategoryActions {
 			'fetchCategory',
 			'updateCategory',
 			'failedCategory',
+
+			'setProducts',
+			'failedProducts',
 		);
 	}
 }

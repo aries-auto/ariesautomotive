@@ -14,6 +14,7 @@ class SearchResults extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		category: PropTypes.object,
+		categoryProducts: PropTypes.object,
 		context: PropTypes.shape({
 			category: PropTypes.object,
 		}),
@@ -98,8 +99,13 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
+		console.log(this.props.categoryProducts);
+		if (!this.props.category.vehicle_specific && this.props.categoryProducts && this.props.categoryProducts.parts.length > 0) {
+			return <PartResults parts={this.props.categoryProducts.parts} />;
+		}
+
 		let res;
-		res = <CategoryParts catID={this.props.category.id}/>;
+		res = <CategoryParts catID={this.props.category.id} />;
 		if (brand.id === 4) {
 			res = <LvCategoryParts catID={this.props.category.id}/>;
 		}

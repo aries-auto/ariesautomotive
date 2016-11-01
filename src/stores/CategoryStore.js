@@ -13,6 +13,7 @@ class CategoryStore extends EventEmitter {
 			categories: [],
 			categoryMap: [],
 			categoryItems: [],
+			categoryProducts: {},
 		};
 
 		this.bindListeners({
@@ -21,11 +22,15 @@ class CategoryStore extends EventEmitter {
 
 			handleUpdateCategoryMap: CategoryActions.UPDATE_CATEGORY,
 			handleFailedCategoryMap: CategoryActions.FAILED_CATEGORY,
+
+			handleSetProducts: CategoryActions.SET_PRODUCTS,
+			handleFailedProducts: CategoryActions.FAILED_PRODUCTS,
 		});
 
 		this.exportPublicMethods({
 			getCategories: this.getCategories,
 			getCategory: this.getCategory,
+			getProducts: this.getProducts,
 			categoryToItem: this.categoryToItem,
 		});
 
@@ -104,6 +109,23 @@ class CategoryStore extends EventEmitter {
 
 	getCategory(id) {
 		return this.state.categoryMap[id];
+	}
+
+
+	handleSetProducts(prods) {
+		this.setState({
+			categoryProducts: prods,
+		});
+	}
+
+	handleFailedProducts(err) {
+		this.setState({
+			error: err,
+		});
+	}
+
+	getProducts() {
+		return this.state.categoryProducts;
 	}
 }
 

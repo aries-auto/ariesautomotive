@@ -1,5 +1,6 @@
 import CategoryActions from '../actions/CategoryActions';
 import fetch from '../core/fetch';
+import { apiBase, apiKey, brand } from '../config';
 
 const CategorySource = {
 	fetchCategories() {
@@ -52,6 +53,22 @@ const CategorySource = {
 		};
 	},
 
+	fetchProducts() {
+		return {
+			remote(state, id) {
+				return new Promise((res, rej) => {
+					fetch(`${apiBase}/category/${id}/parts?key=${apiKey}&brandID=${brand.id}`)
+					.then((resp) => {
+						return resp.json();
+					}).then(res).catch(rej);
+				});
+			},
+
+			success: CategoryActions.setProducts,
+			error: CategoryActions.failedProducts,
+			loading: CategoryActions.fetchProducts,
+		};
+	},
 };
 
 module.exports = CategorySource;

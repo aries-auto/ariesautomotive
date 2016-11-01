@@ -13,6 +13,7 @@ class Results extends Component {
 		activeIndex: PropTypes.number,
 		className: PropTypes.string,
 		fitments: PropTypes.array,
+		category: PropTypes.object,
 		iconParts: PropTypes.oneOfType([
 			React.PropTypes.object,
 			React.PropTypes.array,

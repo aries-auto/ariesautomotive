@@ -100,22 +100,40 @@ const router = new Router(on => {
 	on('/category/:id', async (state) => {
 		await CategoryStore.fetchCategory(state.params.id);
 		const cat = CategoryStore.getCategory(state.params.id);
+		let prods = [];
 
-		return <Category context={state.context} category={cat} />;
+		if (!cat.vehicle_specific) {
+			await	CategoryStore.fetchProducts(state.params.id);
+			prods = CategoryStore.getProducts();
+		}
+
+		return <Category context={state.context} category={cat} categoryProducts={prods} />;
 	});
 
 	on('/category/:id/:title', async (state) => {
 		await CategoryStore.fetchCategory(state.params.id);
 		const cat = CategoryStore.getCategory(state.params.id);
+		let prods = {};
 
-		return <Category context={state.context} category={cat} />;
+		if (!cat.vehicle_specific) {
+			await	CategoryStore.fetchProducts(state.params.id);
+			prods = CategoryStore.getProducts();
+		}
+
+		return <Category context={state.context} category={cat} categoryProducts={prods} />;
 	});
 
 	on('/category/:id/:title/:sub', async (state) => {
 		await CategoryStore.fetchCategory(state.params.id);
 		const cat = CategoryStore.getCategory(state.params.id);
+		let prods = [];
 
-		return <Category context={state.context} category={cat} />;
+		if (!cat.vehicle_specific) {
+			await	CategoryStore.fetchProducts(state.params.id);
+			prods = CategoryStore.getProducts();
+		}
+
+		return <Category context={state.context} category={cat} categoryProducts={prods} />;
 	});
 
 	on('/search/:term', async (state) => {
