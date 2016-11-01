@@ -14,10 +14,9 @@ const AppGuideSource = {
 			},
 
 			local(st) {
-				if (!st.guideGroups || !st.guideGroups.length) {
+				if (st.guideGroups.length === 0) {
 					return null;
 				}
-
 				return st.guideGroups;
 			},
 
@@ -39,7 +38,7 @@ const AppGuideSource = {
 			},
 
 			local(st) {
-				if (!st.guide || !st.guide.name) {
+				if (st.guide) {
 					return null;
 				}
 

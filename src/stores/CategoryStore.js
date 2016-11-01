@@ -13,7 +13,7 @@ class CategoryStore extends EventEmitter {
 			categories: [],
 			categoryMap: [],
 			categoryItems: [],
-			categoryProducts: {},
+			categoryProducts: null,
 		};
 
 		this.bindListeners({
@@ -112,11 +112,16 @@ class CategoryStore extends EventEmitter {
 	}
 
 
-	handleSetProducts(prods) {
+	handleSetProducts(data) {
 		this.setState({
-			categoryProducts: prods,
+			categoryProducts: {
+				parts: data.parts || [],
+				page: data.page || 0,
+				total_pages: data.total_pages || 0,
+				id: data.id,
+			},
 		});
-	}
+	}data
 
 	handleFailedProducts(err) {
 		this.setState({

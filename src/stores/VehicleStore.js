@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatchers/AppDispatcher';
 import events from 'events';
+import cookie from 'react-cookie';
 import ga from 'react-ga';
 import VehicleActions from '../actions/VehicleActions';
 import VehicleSource from '../sources/VehicleSource';
@@ -48,6 +49,7 @@ class VehicleStore extends EventEmitter {
 		this.bindListeners({
 			handleUpdateVehicle: VehicleActions.UPDATE_VEHICLE,
 			handleFailedVehicle: VehicleActions.FAILED_VEHICLE,
+			handleResetVehicle: VehicleActions.RESET_VEHICLE,
 
 			handleUpdateEnvision: VehicleActions.UPDATE_ENVISION,
 			handleLoadingEnvision: VehicleActions.LOADING_ENVISION,
@@ -96,6 +98,25 @@ class VehicleStore extends EventEmitter {
 		this.setState({
 			error: err,
 		});
+	}
+
+	handleResetVehicle() {
+		const v = this.state.vehicle;
+		v.availableMakes = [];
+		v.availableModels = [];
+		v.base = {
+			year: '',
+			make: '',
+			model: '',
+		};
+
+		this.setState({
+			vehicle: v,
+		});
+		setTimeout(() => {
+			this.getInstance().fetchVehicle();
+		}, 0);
+		cookie.remove('vehicle');
 	}
 
 	getVehicle() {

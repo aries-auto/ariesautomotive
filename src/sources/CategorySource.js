@@ -60,8 +60,20 @@ const CategorySource = {
 					fetch(`${apiBase}/category/${id}/parts?key=${apiKey}&brandID=${brand.id}`)
 					.then((resp) => {
 						return resp.json();
-					}).then(res).catch(rej);
+					}).then((data) => {
+						const temp = data;
+						temp.id = id;
+						res(temp);
+					}).catch(rej);
 				});
+			},
+
+			local(state, id) {
+				if (!state.categoryProducts || !state.categoryProducts.id || id !== state.categoryProducts.id) {
+					return null;
+				}
+
+				return state.categoryProducts;
 			},
 
 			success: CategoryActions.setProducts,

@@ -14,7 +14,7 @@ class AppGuideStore extends EventEmitter {
 		super();
 		this.state = {
 			guideGroups: [],
-			error: {},
+			guide: null,
 		};
 		this.bindListeners({
 			set: AppGuideActions.set,
@@ -29,12 +29,14 @@ class AppGuideStore extends EventEmitter {
 	}
 
 	handleUpdateAppGuides(groups) {
-		if (groups && (!this.state.guideGroups || groups.length > this.state.guideGroups.length)) {
-			this.setState({
-				guideGroups: groups,
-				error: null,
-			});
+		const grps = groups || [];
+		if (grps.length === this.state.guideGroups.length) {
+			return;
 		}
+		this.setState({
+			guideGroups: grps,
+			guide: null,
+		});
 	}
 
 	handleFailedAppGuides(err) {
@@ -44,10 +46,9 @@ class AppGuideStore extends EventEmitter {
 	}
 
 	handleUpdateAppGuide(guide) {
-		if (guide && (!this.state.guide)) {
+		if (guide) {
 			this.setState({
 				guide,
-				error: null,
 			});
 		}
 	}

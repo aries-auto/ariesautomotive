@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './NewVehicle.scss';
 import Select from './Select';
-import LuverneActions from '../../actions/LuverneActions';
 import LuverneStore from '../../stores/LuverneStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -59,10 +58,6 @@ class NewLvVehicle extends Component {
 
 	static getPropsFromStores() {
 		return LuverneStore.getState();
-	}
-
-	resetVehicle() {
-		LuverneActions.setVehicle('', '', '');
 	}
 
 	changeVehicle(event) {
@@ -122,7 +117,7 @@ class NewLvVehicle extends Component {
 	}
 
 	isActive(prop) {
-		const v = this.props.vehicle;
+		const v = this.props.vehicle ? this.props.vehicle.base_vehicle || null : null;
 		switch (prop) {
 		case 'year':
 			if (!v.year || v.year === '') {

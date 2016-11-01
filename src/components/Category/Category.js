@@ -99,7 +99,6 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
-		console.log(this.props.categoryProducts);
 		if (!this.props.category.vehicle_specific && this.props.categoryProducts && this.props.categoryProducts.parts.length > 0) {
 			return <PartResults parts={this.props.categoryProducts.parts} />;
 		}
