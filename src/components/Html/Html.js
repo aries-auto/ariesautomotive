@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { googleAnalyticsId, brand } from '../../config';
+import { brand } from '../../config';
 
 class Html extends Component {
 
@@ -25,7 +25,7 @@ class Html extends Component {
 			`e=o.createElement(i);r=o.getElementsByTagName(i)[0];` +
 			`e.src='https://www.google-analytics.com/analytics.js';` +
 			`r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));` +
-			`ga('create','${googleAnalyticsId}','auto');ga('send','pageview');`,
+			`ga('create','${brand.googleAnalyticsId}','auto');ga('send','pageview');`,
 		});
 	}
 
