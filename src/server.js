@@ -281,10 +281,16 @@ server.get('/api/products/featured.json', (req, res) => {
 	});
 });
 
+function nocache(req, res, next) {
+	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+	res.header('Pragma', 'no-cache');
+	next();
+}
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
-server.get('*', async (req, res, next) => {
+server.get('*', nocache, async (req, res, next) => {
 	try {
 		cookie.plugToRequest(req, res);
 		let statusCode = 200;
