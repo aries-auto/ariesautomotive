@@ -17,7 +17,7 @@ const SearchSource = {
 			},
 
 			local(st, term) {
-				if (st.searchTerm !== term || (!st.searchResults || !st.searchResults.length)) {
+				if (st.searchTerm !== term || !st.searchResults) {
 					return null;
 				}
 

@@ -2,7 +2,8 @@
 @import '../../classes.scss';
 
 .root {
-	min-height: 250px;
+	min-height: 600px;
+	width: 80%;
 	padding: 10px;
 	margin: 10px;
 	background: $lookup-color;
@@ -120,8 +121,8 @@
 	}
 }
 
-@media (min-width: $screen-md-min) {
+@media (min-width: $screen-sm-min) {
 	.root {
-		width: auto;
+		width: 300px;
 	}
 }

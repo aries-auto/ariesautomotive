@@ -9,7 +9,7 @@ class SearchStore extends EventEmitter {
 	constructor() {
 		super();
 		this.state = {
-			SearchResults: [],
+			searchResults: null,
 			searchTerm: '',
 		};
 
@@ -27,15 +27,12 @@ class SearchStore extends EventEmitter {
 	}
 
 	handleUpdateSearchResults(args) {
-		const results = args[0] || {};
-		if (results.hits && (args[1] && args[1] !== this.state.searchTerm)) {
-			this.setState({
-				searchResults: results,
-				searchTerm: args[1] || '',
-				error: null,
-				loading: false,
-			});
-		}
+		this.setState({
+			searchResults: args[0] || {},
+			searchTerm: args[1] || '',
+			error: null,
+			loading: false,
+		});
 	}
 
 	handleFailedSearchResults(err) {
