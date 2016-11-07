@@ -13,18 +13,18 @@ class Actions extends Component {
 	};
 
 	render() {
-		let price;
+		let price = <span></span>;
 		(this.props.pricing || []).map((pr) => {
 			if (pr.type.toLowerCase() === 'list' && pr.price > 0 && this.props.brand.pricing) {
 				price = (
-					<span>${ pr.price.toFixed(2) }</span>
+					<div><span>${ pr.price.toFixed(2) }</span></div>
 				);
 			}
 		});
 
 		return (
 			<div className={s.root}>
-				<div>{price}</div>
+				{ price }
 				<div>
 					<span><strong>Part #</strong>{ this.props.sku }</span>
 					<span>UPC: { this.props.upc }</span>
