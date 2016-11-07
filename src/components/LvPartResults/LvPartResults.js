@@ -39,7 +39,7 @@ class LvPartResults extends Component {
 	}
 
 	getPrice(p) {
-		if (!p.pricing || p.pricing.length > 0) {
+		if (!p.pricing || p.pricing.length > 0 || !brand.pricing) {
 			return;
 		}
 

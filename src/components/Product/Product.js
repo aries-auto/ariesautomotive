@@ -13,6 +13,7 @@ import Breadcrumbs from './Breadcrumbs';
 import ProductStore from '../../stores/ProductStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
+import { brand } from '../../config';
 
 @withStyles(s)
 @connectToStores
@@ -90,10 +91,11 @@ class Product extends Component {
 							videos={this.props.product.videos} className={s.images}
 						/>
 						<Actions
-							pricing={this.props.product.pricing}
+							pricing={this.props.product.pricnoming}
 							sku={this.props.product.part_number}
 							upc={this.props.product.upc}
 							className={s.actions}
+							brand={brand}
 						/>
 						<InstallButtons
 							installSheet={this.props.product.install_sheet}

@@ -9,12 +9,13 @@ class Actions extends Component {
 		pricing: PropTypes.array,
 		sku: PropTypes.string,
 		upc: PropTypes.string,
+		brand: PropTypes.object,
 	};
 
 	render() {
 		let price;
 		(this.props.pricing || []).map((pr) => {
-			if (pr.type.toLowerCase() === 'list' && pr.price > 0) {
+			if (pr.type.toLowerCase() === 'list' && pr.price > 0 && this.props.brand.pricing) {
 				price = (
 					<span>${ pr.price.toFixed(2) }</span>
 				);
