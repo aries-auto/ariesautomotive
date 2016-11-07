@@ -91,7 +91,7 @@ class Product extends Component {
 							videos={this.props.product.videos} className={s.images}
 						/>
 						<Actions
-							pricing={this.props.product.pricnoming}
+							pricing={this.props.product.pricing}
 							sku={this.props.product.part_number}
 							upc={this.props.product.upc}
 							className={s.actions}
