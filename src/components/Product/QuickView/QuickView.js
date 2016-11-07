@@ -61,6 +61,21 @@ class QuickView extends Component {
 		return attrs;
 	}
 
+	showSubDescription() {
+		let res = <span></span>;
+		if (this.props.product.content && this.props.product.content.length > 0) {
+			const temp = this.props.product.content.filter((c) => c.contentType.type.toLowerCase() === 'sub description');
+			if (temp.length > 0) {
+				res = (
+					<div className={s.subdesc}>
+						<SubDescription product={this.props.product} />
+					</div>
+				);
+			}
+		}
+		return res;
+	}
+
 	handleAddToVehicle() {
 		let layer = null;
 		this.props.envision.layers.map((l) => {
@@ -86,13 +101,14 @@ class QuickView extends Component {
 		return (
 			<div className={cx(s.root, (layer ? s.envision : null))} onClick={layer ? this.handleAddToVehicle : null}>
 				<div className={s.header}>
-					<span className={s.desc}>
+					<div className={s.desc}>
 						<span>{this.props.product.short_description}</span>
 						<span className={s.partNum}>{this.props.product.part_number}</span>
-					</span>
+					</div>
+					{ this.showSubDescription() }
 					{(layer) ? <span className={s.envisionBadge} /> : null}
 				</div>
-				<SubDescription product={this.props.product} />
+
 				<div className={s.image}>
 					<img className="img-responsive" src={this.partImages()} alt={'Image for ' + this.props.product.short_description} />
 				</div>

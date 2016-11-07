@@ -37,6 +37,12 @@
         min-height: 45px;
         margin-bottom: 2px;
         overflow: hidden;
+
+        .subdesc {
+          width: 100%;
+          margin-top: 5px;
+          border-top: 1px solid $black-base;
+        }
     }
 
     .header .desc {

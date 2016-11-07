@@ -89,6 +89,21 @@ class LvPartResults extends Component {
 		}
 	}
 
+	showSubDescription(part) {
+		let res = <span></span>;
+		if (part.content && part.content.length > 0) {
+			const temp = part.content.filter((c) => c.contentType.type.toLowerCase() === 'sub description');
+			if (temp.length > 0) {
+				res = (
+					<div className={s.subdesc}>
+						<SubDescription product={part} />
+					</div>
+				);
+			}
+		}
+		return res;
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className)} role="navigation">
@@ -104,9 +119,7 @@ class LvPartResults extends Component {
 													<span className={s.partNum}>{part.part_number}</span>
 												</a>
 											</span>
-										</div>
-										<div>
-											<SubDescription product={part} />
+											{ this.showSubDescription(part) }
 										</div>
 										<a href={'/part/' + part.part_number} title={`${part.short_description} - #${part.part_number}`} className={s.image}>
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
