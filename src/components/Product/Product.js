@@ -10,6 +10,7 @@ import Info from './Info';
 import Applications from './Applications';
 import ShadowboxVideo from '../ShadowboxVideo';
 import Breadcrumbs from './Breadcrumbs';
+import SubDescription from '../SubDescription';
 import ProductStore from '../../stores/ProductStore';
 import withStyles from '../../decorators/withStyles';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -85,6 +86,7 @@ class Product extends Component {
 					<div className={s.left}>
 						<Breadcrumbs categories={this.props.product.categories} partNumber={this.props.product.part_number} />
 						<h1>{this.props.product.short_description}</h1>
+						<SubDescription product={this.props.product} />
 						<Images
 							activeImageIndex={this.props.activeImageIndex}
 							images={this.props.product.images}

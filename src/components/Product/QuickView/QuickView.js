@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './QuickView.scss';
 import Link from '../../Link';
+import SubDescription from '../../SubDescription';
 import VehicleActions from '../../../actions/VehicleActions';
 import AddToVehicle from '../../PartResults/AddToVehicle';
 import withStyles from '../../../decorators/withStyles';
@@ -91,7 +92,7 @@ class QuickView extends Component {
 					</span>
 					{(layer) ? <span className={s.envisionBadge} /> : null}
 				</div>
-
+				<SubDescription product={this.props.product} />
 				<div className={s.image}>
 					<img className="img-responsive" src={this.partImages()} alt={'Image for ' + this.props.product.short_description} />
 				</div>

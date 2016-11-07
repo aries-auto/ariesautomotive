@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './PartResults.scss';
 // import QuickView from '../Product/QuickView';
+import SubDescription from '../SubDescription';
 import withStyles from '../../decorators/withStyles';
 import LuverneStore from '../../stores/LuverneStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
@@ -104,7 +105,9 @@ class LvPartResults extends Component {
 												</a>
 											</span>
 										</div>
-
+										<div>
+											<SubDescription product={part} />
+										</div>
 										<a href={'/part/' + part.part_number} title={`${part.short_description} - #${part.part_number}`} className={s.image}>
 											<img className="img-responsive" src={this.partImages(part)} alt={'Image for ' + part.short_description} />
 										</a>

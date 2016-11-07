@@ -1,0 +1,13 @@
+@import '../variables.scss';
+
+.root {
+  padding: 5px 0px;
+  width: 100%;
+  border-top: 1px solid $black-base;
+
+  span {
+    font-size: 14pt;
+    font-weight: normal;
+  }
+
+}
