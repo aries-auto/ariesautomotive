@@ -11,6 +11,7 @@ class SearchStore extends EventEmitter {
 		this.state = {
 			searchResults: null,
 			searchTerm: '',
+			page: 1,
 		};
 
 		this.bindListeners({
@@ -30,6 +31,7 @@ class SearchStore extends EventEmitter {
 		this.setState({
 			searchResults: args[0] || {},
 			searchTerm: args[1] || '',
+			page: args[2] || 1,
 			error: null,
 			loading: false,
 		});
