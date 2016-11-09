@@ -65,7 +65,7 @@ class AppGuideStore extends EventEmitter {
 		if (args.length > 1 && args[1] !== '') {
 			page = args[1];
 		}
-		const limit = 1000;
+		const limit = 100;
 		try {
 			await fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=3&collection=${collection}&limit=${limit}&page=${page}`, {
 				method: 'post',

@@ -226,7 +226,7 @@ class AppGuide extends Component {
 				<p className={s.subheading}>The application guides below will help you determine which {brand.code} parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
 
 				{this.renderApplications()}
-				{this.props.guide.applications && this.props.guide.applications.length > 99 ? this.renderPagination() : null}
+				{this.renderPagination()}
 			</div>
 		);
 	}

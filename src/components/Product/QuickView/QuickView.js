@@ -98,6 +98,10 @@ class QuickView extends Component {
 			});
 		}
 
+		if (!this.props.product) {
+			return null;
+		}
+
 		return (
 			<div className={cx(s.root, (layer ? s.envision : null))} onClick={layer ? this.handleAddToVehicle : null}>
 				<div className={s.header}>

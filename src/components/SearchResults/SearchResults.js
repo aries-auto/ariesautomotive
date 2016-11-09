@@ -3,7 +3,6 @@ import cx from 'classnames';
 import PartResults from '../PartResults';
 import s from './SearchResults.scss';
 import withStyles from '../../decorators/withStyles';
-import SearchActions from '../../actions/SearchActions';
 import SearchStore from '../../stores/SearchStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { brand } from '../../config';
@@ -67,7 +66,7 @@ class SearchResults extends Component {
 
 	loadMore(e) {
 		e.preventDefault();
-		SearchActions.search(this.props.searchTerm, this.props.page + 1, this.props.searchResults);
+		SearchStore.fetchSearchResults(this.props.searchTerm, this.props.page + 1);
 	}
 
 	took() {
@@ -119,7 +118,7 @@ class SearchResults extends Component {
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<h2 id="catTitleProds" ref="header">
 					SEARCH RESULTS
-					<span className="small">1 - {this.hits} of {this.total} results for "<em>{this.props.searchTerm}</em>" returned in {this.took()} seconds</span>
+					<span className="small">1 - {this.props.searchResults.hits.hits.length} of {this.total} results for "<em>{this.props.searchTerm}</em>" returned in {this.took()} seconds</span>
 				</h2>
 
 				<div className="col-sm-12 col-md-12 col-xs-12 col-lg-12">
