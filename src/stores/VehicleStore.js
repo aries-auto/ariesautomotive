@@ -101,6 +101,7 @@ class VehicleStore extends EventEmitter {
 	}
 
 	handleResetVehicle() {
+		const e = this.state.envision;
 		const v = this.state.vehicle;
 		v.availableMakes = [];
 		v.availableModels = [];
@@ -110,8 +111,12 @@ class VehicleStore extends EventEmitter {
 			model: '',
 		};
 
+		e.vehicleParts = [];
+		e.matchedProducts = [];
+
 		this.setState({
 			vehicle: v,
+			envision: e,
 		});
 		setTimeout(() => {
 			this.getInstance().fetchVehicle();
