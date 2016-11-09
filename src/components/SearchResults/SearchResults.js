@@ -3,7 +3,6 @@ import cx from 'classnames';
 import PartResults from '../PartResults';
 import s from './SearchResults.scss';
 import withStyles from '../../decorators/withStyles';
-// import SearchActions from '../../actions/SearchActions';
 import SearchStore from '../../stores/SearchStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import { brand } from '../../config';
