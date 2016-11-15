@@ -28,6 +28,7 @@ class Footer extends Component {
 	}
 
 	renderFooterNav() {
+		console.log(this.props.contentMenus);
 		const customContent = [];
 		if (this.props.contentMenus && this.props.contentMenus.length > 0) {
 			this.props.contentMenus.map((content, i) => {

@@ -40,5 +40,10 @@ module.exports = {
 			title: 'Contact Us',
 			value: 'CONTACT US',
 		},
+		{
+			href: '/category',
+			title: 'View All Products',
+			value: 'VIEW ALL PRODUCTS',
+		},
 	],
 };
