@@ -62,7 +62,7 @@ class CategoryTree extends Component {
 			cat,
 			to: `/category/${cat.id}/${cat.title}`,
 			text: cat.title,
-			children: cat.children.map(this.categoryToItem),
+			children: cat.children ? cat.children.map(this.categoryToItem) : [],
 		};
 		item.items = item.children;
 

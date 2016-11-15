@@ -6,9 +6,12 @@ import CategoryParts from '../CategoryParts';
 import LvCategoryParts from '../CategoryParts/LvCategoryParts';
 import s from './Category.scss';
 import withStyles from '../../decorators/withStyles';
+import connectToStores from 'alt-utils/lib/connectToStores';
 import { brand } from '../../config';
+import VehicleStore from '../../stores/VehicleStore';
 
 @withStyles(s)
+@connectToStores
 class SearchResults extends Component {
 
 	static propTypes = {
@@ -18,6 +21,8 @@ class SearchResults extends Component {
 		context: PropTypes.shape({
 			category: PropTypes.object,
 		}),
+		vehicle: PropTypes.object,
+		fitments: PropTypes.array,
 	};
 
 	static contextTypes = {
@@ -56,10 +61,18 @@ class SearchResults extends Component {
 		this.context.seo(seo);
 	}
 
-	componentWillUpdate() {
-		const node = this.getDOMNode();
-		this.scrollHeight = node.scrollHeight;
-		this.scrollTop = node.scrollTop;
+	// componentWillUpdate() {
+	// 	const node = this.getDOMNode();
+	// 	this.scrollHeight = node.scrollHeight;
+	// 	this.scrollTop = node.scrollTop;
+	// }
+
+	static getStores() {
+		return [VehicleStore];
+	}
+
+	static getPropsFromStores() {
+		return VehicleStore.getState();
 	}
 
 	getContent() {
@@ -75,12 +88,6 @@ class SearchResults extends Component {
 
 	loadMore() {
 		ga.pageview('/category/' + this.props.category.id + '#page=');
-	}
-
-	showParts() {
-		if (this.props.category && this.props.category.parts && this.props.category.parts.parts && this.props.category.parts.parts.length > 0) {
-			return <PartResults parts={this.props.category.parts.parts} />;
-		}
 	}
 
 	pagination() {
