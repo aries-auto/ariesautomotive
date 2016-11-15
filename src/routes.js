@@ -254,6 +254,7 @@ const router = new Router(on => {
 
 	on('/page/:id', async (state) => {
 		state.context.id = state.params.id;
+		console.log(state.context);
 		if (state.context.siteContents) {
 			for (let i = 0; i < state.context.siteContents.length; i++) {
 				if (state.context.siteContents[i].id.toString() === state.params.id) {
