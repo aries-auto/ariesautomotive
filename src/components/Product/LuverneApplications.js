@@ -129,9 +129,6 @@ class Applications extends Component {
 						</tbody>
 					</table>
 				</div>
-				<Link to={`/appguides`} title="Application Guides" className={s.appguideLink}>
-					VIEW APPLICATION GUIDES
-				</Link>
 			</div>
 		);
 	}}
