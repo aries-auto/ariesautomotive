@@ -8,6 +8,7 @@ import InstallButtons from './InstallButtons';
 import Images from './Images';
 import Info from './Info';
 import Applications from './Applications';
+import LuverneApplications from './LuverneApplications';
 import ShadowboxVideo from '../ShadowboxVideo';
 import Breadcrumbs from './Breadcrumbs';
 import SubDescription from '../SubDescription';
@@ -114,7 +115,11 @@ class Product extends Component {
 				</div>
 				<div className={cx(s.bottom, 'container-fluid')}>
 					<Info attributes={this.props.product.attributes} content={this.props.product.content} />
-					<Applications applications={this.props.product.vehicle_applications} />
+					{
+						(brand.id === 4) ?
+							<LuverneApplications applications={this.props.product.luverne_applications} /> :
+							<Applications applications={this.props.product.vehicle_applications} />
+					}
 					<FeaturedProducts
 						products={(this.props.product.related.length) ? this.props.product.related : this.props.featuredProducts}
 						className={s.upsell}
