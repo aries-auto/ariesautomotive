@@ -253,13 +253,20 @@ const router = new Router(on => {
 	});
 
 	on('/page/:id', async (state) => {
+		const siteMenus = SiteStore.getContentMenus();
 		state.context.id = state.params.id;
-		console.log(state.context);
-		if (state.context.siteContents) {
-			for (let i = 0; i < state.context.siteContents.length; i++) {
-				if (state.context.siteContents[i].id.toString() === state.params.id) {
-					state.context.customContent = state.context.siteContents[i];
-				}
+		const id = parseInt(state.context.id, 10) > 0 ? parseInt(state.context.id, 10) : 0;
+		if (siteMenus.length > 0) {
+			const temp = siteMenus.filter((c) => c.id === id);
+			if (temp.length > 0) {
+				state.context.customContent = temp[0];
+			}
+		}
+
+		if (state.context.siteContents && state.context.siteContents.length > 0) {
+			const temp = state.context.siteContents.filter((c) => c.id.toString() === state.params.id);
+			if (temp.length > 0) {
+				state.context.customContent = temp[0];
 			}
 		}
 		return <CustomContent context={state.context} />;

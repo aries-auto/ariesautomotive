@@ -2,14 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import s from './CustomContent.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
+import SiteStore from '../../stores/SiteStore';
 import { brand } from '../../config.js';
 
 @withStyles(s)
 class CustomContent extends Component {
 
 	static propTypes = {
-		customContent: PropTypes.object,
 		context: PropTypes.object,
+		pageData: PropTypes.object,
+		contentMenus: PropTypes.array,
 	}
 
 	static contextTypes = {
@@ -33,6 +35,14 @@ class CustomContent extends Component {
 			notusedstate: Math.random(),
 		});
 		return false;
+	}
+
+	static getStores() {
+		return [SiteStore];
+	}
+
+	static getPropsFromStores() {
+		return SiteStore.getState();
 	}
 
 	renderText() {

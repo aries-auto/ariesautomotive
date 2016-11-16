@@ -188,21 +188,12 @@ server.get('/api/categories.json', (req, res) => {
 });
 
 server.get('/api/content/all.json', (req, res) => {
-	memcached.get(`${memcachePrefix}api:content:all`, (err, val) => {
-		res.setHeader('Cache-Control', 'public, max-age=604801');
-		res.setHeader('Content-Type', 'application/json');
-		if (!err && val) {
-			res.json(val);
-			return;
-		}
-
-		fetch(`${apiBase}/site/content/all?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`)
-		.then((resp) => {
-			return resp.json();
-		}).then((data) => {
-			memcached.set(`${memcachePrefix}api:content:all`, data, 86400, () => {
-				res.json(data);
-			});
+	fetch(`${apiBase}/site/content/all?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`)
+	.then((resp) => {
+		return resp.json();
+	}).then((data) => {
+		memcached.set(`${memcachePrefix}api:content:all`, data, 86400, () => {
+			res.json(data);
 		});
 	});
 });
