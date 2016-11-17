@@ -1,42 +1,111 @@
+@import '../variables.scss';
 @import '../classes.scss';
 
 .root {
-    margin: 50px auto;
+	margin: 50px auto;
 
-    .vehicle {
-        margin-bottom: 0;
-        font-size: 18px;
+	.vehicle {
+		margin-bottom: 0;
+		font-size: 18px;
 
-        .applicationsTbl {
-            text-transform: uppercase;
-        }
-    }
+		.applicationsTbl {
+			text-transform: uppercase;
+		}
+	}
 
-    .appguideLink {
-        display: block;
-        margin-top: 10px;
-        font-size: 18px;
-        color: $alt-red;
-    }
+	.appguideLink {
+		display: block;
+		margin-top: 10px;
+		font-size: 18px;
+		color: $alt-red;
+	}
 }
 
-.responsiveTable {
-    width: 100%;
-    border-collapse: collapse;
+.table {
+	display: flex;
+	max-width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: top;
+	border-spacing: 0;
+	border-collapse: collapse;
+	background: none;
 
-    tr:nth-of-type(odd) {
-        background: #eee;
-    }
+	thead {
+		display: flex;
+		min-width: min-content;
 
-    th {
-        font-weight: bold;
-        color: white;
-        background: #333;
-    }
+		flex-shrink: 0;
+	}
 
-    td, th {
-        padding: 2px;
-        text-align: left;
-        border: 1px solid #ccc;
-    }
+	th {
+		font-size: 11px;
+		color: $white-base;
+		text-align: left;
+		text-transform: uppercase;
+		background: $black-base;
+		border: 1px solid $white-base;
+	}
+
+	tr {
+		display: flex;
+		min-width: min-content;
+		flex-direction: column;
+
+		flex-shrink: 0;
+
+		&:nth-child(even) {
+			background-color: $lookup-color;
+		}
+	}
+
+	td {
+		border: 1px solid $gray-light;
+	}
+
+	td, th {
+		display: block;
+		height: 35px;
+		padding: 5px;
+		font-size: 14px;
+	}
+
+	tbody {
+		position: relative;
+		display: flex;
+		overflow-x: auto;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+
+@media (min-width: $screen-md-min) {
+	.table {
+		display: table;
+		width: 100%;
+		overflow-x: auto;
+
+		thead, tbody {
+			display: table-row-group;
+			min-width: 100%;
+		}
+
+		tr {
+			display: table-row;
+			min-width: 100%;
+		}
+
+		th,td {
+			display: table-cell;
+			padding: 6px 12px;
+		}
+
+		td:first-child {
+			background-size: 20px 100%;
+		}
+		td:last-child {
+			background-position: 100% 0;
+			background-size: 20px 100%;
+		}
+	}
 }
