@@ -102,6 +102,7 @@ class Applications extends Component {
 					<td className="style">{ v.boxLength }</td>
 					<td className="style">{ v.cabLength }</td>
 					<td className="style">{ v.fuelType }</td>
+					<td className="style">{ v.wheelType }</td>
 				</tr>
 			);
 		});
@@ -121,6 +122,7 @@ class Applications extends Component {
 								<th>Box Length</th>
 								<th>Cab Length</th>
 								<th>Fuel Type</th>
+								<th>Wheel Type</th>
 							</tr>
 						</thead>
 						<tbody>
