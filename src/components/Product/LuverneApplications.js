@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-// import Link from '../Link';
 import s from './Applications.scss';
 import withStyles from '../../decorators/withStyles';
 
@@ -103,6 +102,7 @@ class Applications extends Component {
 					<td className="style">{ v.boxLength }</td>
 					<td className="style">{ v.cabLength }</td>
 					<td className="style">{ v.fuelType }</td>
+					<td className="style">{ v.wheelType }</td>
 				</tr>
 			);
 		});
@@ -112,7 +112,7 @@ class Applications extends Component {
 				<h3>Application</h3>
 				<p>Check out our Application Guides to see what fits your vehicle.</p>
 				<div className={s.vehicle}>
-					<table className={cx(s.responsiveTable, s.applicationsTbl)}>
+					<table className={s.table}>
 						<thead>
 							<tr>
 								<th>Year</th>
@@ -122,6 +122,7 @@ class Applications extends Component {
 								<th>Box Length</th>
 								<th>Cab Length</th>
 								<th>Fuel Type</th>
+								<th>Wheel Type</th>
 							</tr>
 						</thead>
 						<tbody>
