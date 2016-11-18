@@ -23,6 +23,7 @@ class SearchResults extends Component {
 		}),
 		vehicle: PropTypes.object,
 		fitments: PropTypes.array,
+		envision: PropTypes.object,
 	};
 
 	static contextTypes = {
@@ -42,7 +43,6 @@ class SearchResults extends Component {
 		if (!this.props || !this.props.context || !this.props.context.category) {
 			return;
 		}
-
 		const title = this.props.context.category && this.props.context.category.title ? this.props.context.category.title : `${brand.name} Product Categories`;
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', title);
@@ -60,12 +60,6 @@ class SearchResults extends Component {
 		};
 		this.context.seo(seo);
 	}
-
-	// componentWillUpdate() {
-	// 	const node = this.getDOMNode();
-	// 	this.scrollHeight = node.scrollHeight;
-	// 	this.scrollTop = node.scrollTop;
-	// }
 
 	static getStores() {
 		return [VehicleStore];

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import Link from '../Link';
+// import Link from '../Link';
 import s from './Applications.scss';
 import withStyles from '../../decorators/withStyles';
 

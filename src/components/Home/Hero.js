@@ -6,13 +6,13 @@ import withStyles from '../../decorators/withStyles';
 
 const carouselImages = [
 	{
-		image: 'http://storage.googleapis.com/aries-website/hero-images/jeep.png',
+		image: 'https://storage.googleapis.com/aries-website/hero-images/black-bull-bar.jpg',
 		text: 'Never Fear the Uncertain Road',
 		button_text: 'VIEW BULL BARS',
-		link: '/category/332',
+		link: '/category/342/AdvantEDGE%205.5%22%20Bull%20Bars',
 		order: 5,
 		styles: {
-			backgroundImage: 'url(http://storage.googleapis.com/aries-website/hero-images/jeep.png)',
+			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/black-bull-bar.jpg)',
 		},
 	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',

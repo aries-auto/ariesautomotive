@@ -21,7 +21,6 @@ class Result extends Component {
 
 	constructor() {
 		super();
-
 		this.state = {
 			products: [],
 		};
