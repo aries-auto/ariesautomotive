@@ -1,0 +1,65 @@
+@import '../../variables.scss';
+
+.breadcrumbContainer {
+    margin: 25px 0;
+}
+
+.wrench {
+	display: block;
+}
+
+.header {
+	display: inline;
+}
+
+.install {
+	display: inline-block;
+	margin: 15px 10px 5px;
+	font-size: 18px;
+	line-height: 30px;
+	color: #c73031;
+}
+
+.downloads {
+	display: inline;
+	float: right;
+	padding: 1em;
+	background-color: white;
+	span, a {
+		padding: .6em;
+	}
+	span {
+		font-weight: 800;
+	}
+}
+
+.appguideIcon {
+	max-height: 40px;
+}
+
+.subheading {
+	clear: both;
+}
+
+.pagination {
+	padding: 1em;
+	text-align: center;
+	.left {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		margin: 2em;
+		border-top: 20px solid transparent;
+		border-right: 100px solid $new-red;
+		border-bottom: 20px solid transparent;
+	}
+	.right {
+		display: inline-block;
+		width: 0;
+		height: 0;
+		margin: 2em;
+		border-top: 20px solid transparent;
+		border-bottom: 20px solid transparent;
+		border-left: 100px solid $new-red;
+	}
+}
