@@ -16,6 +16,7 @@ class CategoryTree extends Component {
 		categories: PropTypes.array,
 		params: PropTypes.object,
 		pageData: PropTypes.object,
+		linkOverride: PropTypes.string,
 	};
 
 	constructor(props) {
@@ -60,7 +61,7 @@ class CategoryTree extends Component {
 		}
 		const item = {
 			cat,
-			to: `/category/${cat.id}/${cat.title}`,
+			to: this.props.linkOverride ? `${this.props.linkOverride}/${cat.id}/${cat.title}` : `/category/${cat.id}/${cat.title}`,
 			text: cat.title,
 			children: cat.children ? cat.children.map(this.categoryToItem) : [],
 		};
@@ -89,7 +90,7 @@ class CategoryTree extends Component {
 				const elm = (
 					<div className={cx(s.categoriesContainer, 'well')} key={item.cat.id}>
 						<h2 className={s.catHeading}>{item.cat.title}</h2>
-						<CategoryItem cat={item.cat} items={subs} isParent />
+						<CategoryItem item={item} cat={item.cat} items={subs} isParent />
 					</div>
 				);
 				itemElms.push(elm);

@@ -143,7 +143,7 @@ server.get('/api/luverne/appguide/:collection/:page.json', async (req, res) => {
 		let guide = {};
 		let appGuideInfo = {};
 		const [guideResponse, appGuideInfoResponse] = await Promise.all([
-			fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=${brand.id}&collection=${req.params.collection}&limit=1000&page=${req.params.page}`, {
+			fetch(`${apiBase}/vehicle/luverne/mongo/apps?key=${KEY}&brandID=${brand.id}&catID=${req.params.collection}&limit=1000&page=${req.params.page}`, {
 				method: 'post',
 				headers: {
 					'Accept': 'application/json',
@@ -157,6 +157,7 @@ server.get('/api/luverne/appguide/:collection/:page.json', async (req, res) => {
 			}),
 		]);
 		guide = await guideResponse.json();
+		console.log(guide);
 		appGuideInfo = await appGuideInfoResponse.json();
 		guide.name = req.params.collection;
 		guide.appGuide = appGuideInfo;

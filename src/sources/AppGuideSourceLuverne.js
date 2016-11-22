@@ -28,9 +28,9 @@ const AppGuideSourceLuverne = {
 
 	fetchAppGuide() {
 		return {
-			remote(state, collection, page) {
+			remote(state, catID, page) {
 				return new Promise((res, rej) => {
-					fetch(`/api/luverne/appguide/${collection}/:${page}.json`)
+					fetch(`/api/luverne/appguide/${catID}/:${page}.json`)
 					.then((resp) => {
 						return resp.json();
 					}).then(res).catch(rej);

@@ -211,11 +211,13 @@ const router = new Router(on => {
 	});
 
 	on('/appguides/:guide/:page', async (state) => {
+		console.log('wrong route');
 		const collection = state.params.guide;
 		const page = state.params.page;
 		if (brand.id === 4) {
-			await AppGuideStoreLuverne.fetchAppGuide(collection, page);
-			return <AppGuideLuverne context={state.context} />;
+			const catID = collection;
+			await AppGuideStoreLuverne.fetchAppGuide(catID, 0);
+			return <AppGuideLuverne context={state.context} title={page} />;
 		}
 		await AppGuideStore.fetchAppGuide(collection, page);
 		return <AppGuide context={state.context} />;

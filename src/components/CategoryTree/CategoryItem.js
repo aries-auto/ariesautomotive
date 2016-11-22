@@ -12,6 +12,7 @@ class CategoryItem extends Component {
 		className: PropTypes.string,
 		items: PropTypes.array,
 		cat: PropTypes.object,
+		item: PropTypes.object,
 		isParent: PropTypes.bool,
 	};
 
@@ -31,7 +32,7 @@ class CategoryItem extends Component {
 		if (!this.props.isParent) {
 			catItems.push(
 				<div className={s.cat} key={this.props.cat.id}>
-					<Link to={`/category/${this.props.cat.id}/${this.props.cat.title}`} title={this.props.cat.title}>
+					<Link to={this.props.item.to} title={this.props.cat.title}>
 						<img className={cx(s.catImage)} src={`${this.props.cat.image.Scheme}://${this.props.cat.image.Host}${this.props.cat.image.Path}`} />
 						<span className={cx(s.catTitle)}>{this.props.cat.title}</span>
 					</Link>
@@ -44,6 +45,7 @@ class CategoryItem extends Component {
 				<SubItem
 					key={i}
 					cat={item.cat}
+					item={item}
 					items={item.items}
 					isParent={false}
 				/>

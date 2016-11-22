@@ -38,7 +38,7 @@ class AppGuideLuverne extends Component {
 	}
 
 	componentWillMount() {
-		const title = this.props.guide && this.props.guide.name ? this.props.guide.name : 'Application Guide';
+		const title = this.props.title;
 		this.context.onSetTitle(title);
 		this.context.onSetMeta('description', `${title} Application Guides`);
 	}
@@ -56,15 +56,10 @@ class AppGuideLuverne extends Component {
 		if (!this.props.guide.name) {
 			return null;
 		}
-		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
-			this.props.guide.colors.map((color, i) => {
-				output.push(<th key={i}>{color}</th>);
-			});
-		} else {
-			this.props.guide.finishes.map((finish, i) => {
-				output.push(<th key={i}>{finish}</th>);
-			});
-		}
+
+		this.props.guide.finishes.map((finish, i) => {
+			output.push(<th key={i}>{finish}</th>);
+		});
 		return output;
 	}
 
@@ -72,21 +67,15 @@ class AppGuideLuverne extends Component {
 		const appguideSlice = [];
 		const attrToAppguide = {};
 		let attrToSearch = [];
-		let isFloorLiner = false;
-		if (this.props.guide.name.toLowerCase().indexOf('floor liners') !== -1) {
-			isFloorLiner = true;
-			attrToSearch = this.props.guide.colors;
-		} else {
-			attrToSearch = this.props.guide.finishes;
-		}
+		attrToSearch = this.props.guide.finishes;
 
 		attrToSearch.map((attr) => {
 			attrToAppguide[attr] = [];
 			application.parts.map((part, j) => {
-				if ((part.color === attr && isFloorLiner) || (part.finish === attr && !isFloorLiner)) {
-					const url = `/part/${part.oldPartNumber}`;
-					const ins = `https://www.curtmfg.com/masterlibrary/01ARIES/206003-2/installsheet/${part.oldPartNumber}_INS.pdf`;
-					const appguideCell = (<div key={j}><a href={url}>{part.oldPartNumber} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></div>);
+				if (part.finish === attr) {
+					const url = `/part/${part.part_number}`;
+					const ins = `https://www.curtmfg.com/masterlibrary/01LUVERNE/${part.part_number}/installsheet/${part.part_number}.pdf`;
+					const appguideCell = (<div key={j}><a href={url}>{part.part_number} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></div>);
 					attrToAppguide[attr].push(appguideCell);
 				}
 			});
@@ -118,7 +107,7 @@ class AppGuideLuverne extends Component {
 			return (
 				[
 					<li key="app"><a href={`/appguides`}>Application Guides</a></li>,
-					<li key="apps" className="active">{this.props.guide ? this.props.guide.name : null}</li>,
+					<li key="apps" className="active">{this.props.guide ? this.props.title : null}</li>,
 				]
 			);
 		}
@@ -132,7 +121,11 @@ class AppGuideLuverne extends Component {
 					<tr>
 						<th>Make</th>
 						<th>Model</th>
-						<th>Style</th>
+						<th>Body</th>
+						<th>Box Length</th>
+						<th>Cab Length</th>
+						<th>Fuel Type</th>
+						<th>Wheel Type</th>
 						<th>Start Year</th>
 						<th>End Year</th>
 						{this.getAttrs()}
@@ -151,7 +144,18 @@ class AppGuideLuverne extends Component {
 		this.props.guide.applications.map((app, i) => {
 			let attr = {};
 			attr = this.getAttr(app);
-			output.push(<tr key={i}><td>{app.make}</td><td>{app.model}</td><td>{app.style}</td><td>{app.min_year}</td><td>{app.max_year}</td>{attr}</tr>);
+			output.push(
+				<tr key={i}>
+					<td>{app.make}</td>
+					<td>{app.model}</td>
+					<td>{app.body}</td>
+					<td>{app.boxLength}</td>
+					<td>{app.cabLength}</td>
+					<td>{app.fuelType}</td>
+					<td>{app.wheelType}</td>
+					<td>{app.min_year}</td>
+					<td>{app.max_year}</td>
+				{attr}</tr>);
 		});
 		return output;
 	}
@@ -219,7 +223,7 @@ class AppGuideLuverne extends Component {
 						{this.renderBreadCrumbs()}
 					</ol>
 				</div>
-				<h1 className={s.header}>{this.props.guide.name}</h1>
+				<h1 className={s.header}>{this.props.title}</h1>
 				<div className={s.install}>Click the <Glyphicon glyph="wrench"/> next to a product for installation instructions.</div>
 				{this.renderDownloadLinks()}
 				<p className={s.subheading}>The application guides below will help you determine which {brand.code} parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>

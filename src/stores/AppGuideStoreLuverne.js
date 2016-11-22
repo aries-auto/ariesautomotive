@@ -60,14 +60,14 @@ class AppGuideStoreLuverne extends EventEmitter {
 	}
 
 	async set(args) {
-		const collection = args[0];
+		const catID = args[0];
 		let page = 0;
 		if (args.length > 1 && args[1] !== '') {
 			page = args[1];
 		}
 		const limit = 100;
 		try {
-			await fetch(`${apiBase}/vehicle/mongo/apps?key=${KEY}&brandID=3&collection=${collection}&limit=${limit}&page=${page}`, {
+			await fetch(`${apiBase}/vehicle/luverne/mongo/apps?key=${KEY}&brandID=3&catID=${catID}&limit=${limit}&page=${page}`, {
 				method: 'post',
 				headers: {
 					'Accept': 'application/json',
@@ -79,7 +79,7 @@ class AppGuideStoreLuverne extends EventEmitter {
 				if (guide.applications.length === 0) {
 					return;
 				}
-				guide.name = collection;
+				guide.name = catID;
 				this.setState({
 					guide,
 					page,
