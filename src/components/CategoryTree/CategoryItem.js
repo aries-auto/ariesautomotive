@@ -30,10 +30,14 @@ class CategoryItem extends Component {
 		}
 
 		if (!this.props.isParent) {
+			let imgPath = '/img/partImgPlaceholder.jpg';
+			if (this.props.cat.image.Path !== '') {
+				imgPath = `${this.props.cat.image.Scheme}://${this.props.cat.image.Host}${this.props.cat.image.Path}`;
+			}
 			catItems.push(
 				<div className={s.cat} key={this.props.cat.id}>
 					<Link to={this.props.item.to} title={this.props.cat.title}>
-						<img className={cx(s.catImage)} src={`${this.props.cat.image.Scheme}://${this.props.cat.image.Host}${this.props.cat.image.Path}`} />
+						<img className={cx(s.catImage)} src={imgPath} />
 						<span className={cx(s.catTitle)}>{this.props.cat.title}</span>
 					</Link>
 				</div>

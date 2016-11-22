@@ -6,6 +6,7 @@ import CategoryStore from '../../stores/CategoryStore';
 import SiteStore from '../../stores/SiteStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import CategoryItem from './CategoryItem';
+import { brand } from '../../config.js';
 
 @withStyles(s)
 @connectToStores
@@ -40,7 +41,11 @@ class CategoryTree extends Component {
 
 		props.categories.map((cat) => {
 			const tmp = this.categoryToItem(cat);
-			this.state.items = this.state.items.concat(tmp.items);
+			if (brand.id === 4) {
+				this.state.items = this.state.items.concat(tmp);
+			} else {
+				this.state.items = this.state.items.concat(tmp.items);
+			}
 		});
 	}
 
@@ -75,6 +80,7 @@ class CategoryTree extends Component {
 		}
 		const itemElms = [];
 		this.state.items.map((item) => {
+			console.log('item is:', item);
 			if (!item.children || !item.children.length === 0) {
 				return;
 			}
@@ -87,6 +93,7 @@ class CategoryTree extends Component {
 				subs = subs.concat(item);
 			}
 			if (subs.length > 0) {
+				console.log(subs);
 				const elm = (
 					<div className={cx(s.categoriesContainer, 'well')} key={item.cat.id}>
 						<h2 className={s.catHeading}>{item.cat.title}</h2>

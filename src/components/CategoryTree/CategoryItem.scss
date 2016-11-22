@@ -10,6 +10,7 @@
 	.cat {
 		width:200px;
 		max-width:200px;
+		height:240px;
 		margin-right:10px;
 		float:left;
 
@@ -23,6 +24,8 @@
 		}
 		.catImage{
 			width:200px;
+			min-width:200px;
+			min-height:200px;
 		}
 	}
 }
