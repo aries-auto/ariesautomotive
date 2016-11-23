@@ -211,7 +211,6 @@ const router = new Router(on => {
 	});
 
 	on('/appguides/:guide/:page', async (state) => {
-		console.log('wrong route');
 		const collection = state.params.guide;
 		const page = state.params.page;
 		if (brand.id === 4) {

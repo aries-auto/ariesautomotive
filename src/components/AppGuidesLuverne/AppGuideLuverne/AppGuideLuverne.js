@@ -227,7 +227,6 @@ class AppGuideLuverne extends Component {
 				<div className={s.install}>Click the <Glyphicon glyph="wrench"/> next to a product for installation instructions.</div>
 				{this.renderDownloadLinks()}
 				<p className={s.subheading}>The application guides below will help you determine which {brand.code} parts will fit your vehicle. Each app guide is category-specific and broken down by vehicle make, model, year and style.</p>
-
 				{this.renderApplications()}
 				{this.renderPagination()}
 			</div>

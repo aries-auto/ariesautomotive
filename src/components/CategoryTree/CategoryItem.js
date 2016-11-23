@@ -22,7 +22,6 @@ class CategoryItem extends Component {
 		this.menuItems = this.categoryItems.bind(this);
 	}
 
-
 	categoryItems() {
 		const catItems = [];
 		if (!this.props.items) {
@@ -58,7 +57,6 @@ class CategoryItem extends Component {
 
 		return catItems;
 	}
-
 
 	render() {
 		return (

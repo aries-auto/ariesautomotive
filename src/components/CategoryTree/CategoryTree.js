@@ -80,7 +80,6 @@ class CategoryTree extends Component {
 		}
 		const itemElms = [];
 		this.state.items.map((item) => {
-			console.log('item is:', item);
 			if (!item.children || !item.children.length === 0) {
 				return;
 			}
@@ -93,7 +92,6 @@ class CategoryTree extends Component {
 				subs = subs.concat(item);
 			}
 			if (subs.length > 0) {
-				console.log(subs);
 				const elm = (
 					<div className={cx(s.categoriesContainer, 'well')} key={item.cat.id}>
 						<h2 className={s.catHeading}>{item.cat.title}</h2>

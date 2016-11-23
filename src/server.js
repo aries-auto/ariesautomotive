@@ -157,7 +157,6 @@ server.get('/api/luverne/appguide/:collection/:page.json', async (req, res) => {
 			}),
 		]);
 		guide = await guideResponse.json();
-		console.log(guide);
 		appGuideInfo = await appGuideInfoResponse.json();
 		guide.name = req.params.collection;
 		guide.appGuide = appGuideInfo;
