@@ -114,7 +114,7 @@ server.get('/api/envision/image.json', (req, res) => {
 });
 
 server.get('/api/appguides.json', (req, res) => {
-	memcached.get(`${memcachePrefix}api:appguides`, (err, val) => {
+	memcached.get(`${memcachePrefix}api:appguides:v2`, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		if (!err && val) {
@@ -125,7 +125,7 @@ server.get('/api/appguides.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set(`${memcachePrefix}api:appguides`, data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:appguides:v2`, data, 86400, () => {
 				res.json(data);
 			});
 		});
@@ -192,7 +192,7 @@ server.get('/api/content/all.json', (req, res) => {
 	.then((resp) => {
 		return resp.json();
 	}).then((data) => {
-		memcached.set(`${memcachePrefix}api:content:all`, data, 86400, () => {
+		memcached.set(`${memcachePrefix}api:content:all:v2`, data, 86400, () => {
 			res.json(data);
 		});
 	});
@@ -211,7 +211,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 		return;
 	}
 
-	memcached.get(`${memcachePrefix}api:content:${slug}`, (err, val) => {
+	memcached.get(`${memcachePrefix}api:content:${slug}:v2`, (err, val) => {
 		res.setHeader('Cache-Control', 'public, max-age=86400');
 		res.setHeader('Content-Type', 'application/json');
 		if (!err && val) {
@@ -223,7 +223,7 @@ server.get('/api/content/:slug.json', (req, res) => {
 		.then((resp) => {
 			return resp.json();
 		}).then((data) => {
-			memcached.set(`${memcachePrefix}api:content:${slug}`, data, 86400, () => {
+			memcached.set(`${memcachePrefix}api:content:${slug}:v2`, data, 86400, () => {
 				res.json(data);
 			});
 		}).catch((e) => {
@@ -275,6 +275,7 @@ server.get('/api/products/featured.json', (req, res) => {
 function nocache(req, res, next) {
 	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 	res.header('Pragma', 'no-cache');
+	res.header('Expires', '-1');
 	next();
 }
 
