@@ -61,6 +61,21 @@ class SearchResults extends Component {
 		this.context.seo(seo);
 	}
 
+	componentDidMount() {
+		// Decode entities in the URL
+		// Sometimes a URL like #/foo#bar will be encoded as #/foo%23bar
+		window.location.hash = window.decodeURIComponent(window.location.hash);
+		const scrollToAnchor = () => {
+			const hashParts = window.location.hash.split('#');
+			if (hashParts.length > 1) {
+				const hash = hashParts.slice(-1)[0];
+				document.querySelector(`#${hash}`).scrollIntoViewIfNeeded();
+			}
+		};
+		scrollToAnchor();
+		window.onhashchange = scrollToAnchor;
+	}
+
 	static getStores() {
 		return [VehicleStore];
 	}
