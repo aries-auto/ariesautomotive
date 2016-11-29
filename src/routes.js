@@ -216,7 +216,7 @@ const router = new Router(on => {
 	});
 
 	on('/contact', async (state) => {
-		Promise.all([
+		await Promise.all([
 			ContactStore.fetchTypes(),
 			GeographyStore.fetchCountries(),
 		]);
