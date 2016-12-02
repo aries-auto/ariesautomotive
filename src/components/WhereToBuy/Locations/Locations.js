@@ -52,11 +52,21 @@ class Locations extends Component {
 		BuyActions.setMarkers(this.props.markers);
 	}
 
+	shuffle(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			const temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+		return array;
+	}
+
 	sortTiers(tiers) {
 		const sortedTiers = {};
-		sortedTiers.Platinum = tiers.Platinum;
-		sortedTiers.Gold = tiers.Gold;
-		sortedTiers.Silver = tiers.Silver;
+		sortedTiers.Platinum = this.shuffle(tiers.Platinum);
+		sortedTiers.Gold = this.shuffle(tiers.Gold);
+		sortedTiers.Silver = this.shuffle(tiers.Silver);
 		return sortedTiers;
 	}
 
