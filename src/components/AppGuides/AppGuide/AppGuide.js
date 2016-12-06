@@ -85,9 +85,17 @@ class AppGuide extends Component {
 			attrToAppguide[attr] = [];
 			application.parts.map((part, j) => {
 				if ((part.color === attr && isFloorLiner) || (part.finish === attr && !isFloorLiner)) {
-					const url = `/part/${part.oldPartNumber}`;
-					const ins = `https://www.curtmfg.com/masterlibrary/01ARIES/206003-2/installsheet/${part.oldPartNumber}_INS.pdf`;
-					const appguideCell = (<div key={j}><a href={url}>{part.oldPartNumber} - {part.short_description}</a><a href={ins} target="_blank"><Glyphicon glyph="wrench" className={s.wrench} /></a></div>);
+					const appguideCell = (
+						<div key={j}>
+							<a href={`/part/${part.oldPartNumber}`}>{part.oldPartNumber} - {part.short_description}</a>
+							{ part.install_sheet && part.install_sheet.length > 0 ?
+								<a href={part.install_sheet} target="_blank">
+									<Glyphicon glyph="wrench" className={s.wrench} />
+								</a>
+								: null
+							}
+						</div>
+					);
 					attrToAppguide[attr].push(appguideCell);
 				}
 			});
@@ -152,7 +160,16 @@ class AppGuide extends Component {
 		this.props.guide.applications.map((app, i) => {
 			let attr = {};
 			attr = this.getAttr(app);
-			output.push(<tr key={i}><td>{app.make}</td><td>{app.model}</td><td>{app.style}</td><td>{app.min_year}</td><td>{app.max_year}</td>{attr}</tr>);
+			output.push(
+				<tr key={i}>
+					<td>{app.make}</td>
+					<td>{app.model}</td>
+					<td>{app.style}</td>
+					<td>{app.min_year}</td>
+					<td>{app.max_year}</td>
+					{attr}
+				</tr>
+			);
 		});
 		return output;
 	}
