@@ -92,7 +92,7 @@ class Footer extends Component {
 									<a href={`https://twitter.com/${brand.twitter}`} title="Visit us on Twitter">
 										<img src="https://storage.googleapis.com/aries-website/site-assets/twitter-icon.png" alt="Twitter Logo" />
 									</a>
-									<a href="http://www.youtube.com/user/${brand.youtube}" title="Visit us on YouTube">
+									<a href={`http://www.youtube.com/user/${brand.youtube}`} title="Visit us on YouTube">
 										<img src="https://storage.googleapis.com/aries-website/site-assets/youtube-icon.png" alt="YouTube Logo" />
 									</a>
 								</div>
