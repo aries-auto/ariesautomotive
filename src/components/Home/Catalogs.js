@@ -6,10 +6,10 @@ import Link from '../Link';
 
 const catalogs = [
 	{
-		title: '2016 Exterior Catalog',
-		image: 'https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png',
-		link: 'https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf',
-	}
+		title: '2017 Exterior Catalog',
+		image: 'https://storage.googleapis.com/aries_catalog/ARIES_2017_Cover.jpg',
+		link: 'https://storage.googleapis.com/aries_catalog/ARIES%202017%20Catalog.pdf',
+	},
 ];
 
 @withStyles(s)
