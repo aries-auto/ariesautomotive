@@ -52,12 +52,6 @@ const context = {
 function render(state) {
 	Router.dispatch(state, (newState, component) => {
 		ReactDOM.render(component, appContainer, () => {
-			// Restore the scroll position if it was saved into the state
-			if (state.scrollY !== undefined) {
-				window.scrollTo(state.scrollX, state.scrollY);
-			} else {
-				window.scrollTo(0, 0);
-			}
 			// Remove the pre-rendered CSS because it's no longer used
 			// after the React app is launched
 			if (cssContainer) {
