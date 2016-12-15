@@ -10,10 +10,6 @@ const catalogs = [
 		image: 'https://storage.googleapis.com/aries-website/ARIES-Exterior-Cover.png',
 		link: 'https://storage.googleapis.com/aries-website/2016-Exterior-Catalog.pdf',
 	}, {
-		title: '2016 Interior Catalog',
-		image: 'https://storage.googleapis.com/aries-website/ARIES-Interior-Cover.png',
-		link: 'https://storage.googleapis.com/aries-website/2016-Interior-Catalog.pdf',
-	}, {
 		title: '2016 Jeep Catalog',
 		image: 'https://storage.googleapis.com/aries-website/ARIES-Jeep-Cover.png',
 		link: 'https://storage.googleapis.com/aries-website/_2016%20ARIES%20Jeep%20Catalog-SFS.pdf',
