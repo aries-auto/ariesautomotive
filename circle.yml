@@ -7,7 +7,7 @@ machine:
 dependencies:
   override:
     - npm --version
-    - npm install
+    - npm install --dev
     - npm run build -- --release
   pre:
     - npm install -g npm
