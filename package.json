@@ -2,7 +2,7 @@
   "private": true,
   "engines": {
     "node": ">=5.0 <6",
-    "npm": ">=3.3 <4"
+    "npm": "=3.3.12"
   },
   "dependencies": {
     "@google/cloud-debug": "^0.8.2",
