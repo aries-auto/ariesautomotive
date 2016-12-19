@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Catalogs.scss';
 import withStyles from '../../decorators/withStyles';
-import Link from '../Link';
+import Catalog from './Catalog';
 
 const catalogs = [
 	{
@@ -29,21 +29,14 @@ class Catalogs extends Component {
 	}
 
 	render() {
-		const output = [];
-		catalogs.map((cat, i) => {
-			output.push(
-				<Link key={i} title={ `Download ${cat.title}` } external target="_blank" to={cat.link}>
-					<img src={ cat.image } alt={ cat.title } />
-					<div>
-						<h3>{ cat.title }</h3>
-						<button type="button" className={`red-transparent-button`} >Download</button>
-					</div>
-				</Link>
-			);
+		const catalogList = catalogs.map((catalog, index) => {
+			return <Catalog key={index} title={catalog.title} link={catalog.link} img={catalog.image} />;
 		});
 
 		return (
-			<div className={this.getContainerClasses()}>{ output }</div>
+			<div className={this.getContainerClasses()}>
+				{ catalogList }
+			</div>
 		);
 	}
 }
