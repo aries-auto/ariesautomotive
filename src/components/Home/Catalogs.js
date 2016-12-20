@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import cx from 'classnames';
 import s from './Catalogs.scss';
 import withStyles from '../../decorators/withStyles';
@@ -15,26 +15,13 @@ const catalogs = [
 @withStyles(s)
 class Catalogs extends Component {
 
-	static propTypes = {
-		fullWidth: PropTypes.bool,
-	};
-
-	getContainerClasses() {
-		let containerClasses;
-		containerClasses = [s.root];
-		if (this.props.fullWidth === 'true') {
-			containerClasses.push('container');
-		}
-		return cx.apply(null, containerClasses);
-	}
-
 	render() {
 		const catalogList = catalogs.map((catalog, index) => {
 			return <Catalog key={index} title={catalog.title} link={catalog.link} img={catalog.image} />;
 		});
 
 		return (
-			<div className={this.getContainerClasses()}>
+			<div className={cx(s.root)}>
 				{ catalogList }
 			</div>
 		);

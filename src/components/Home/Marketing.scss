@@ -40,6 +40,11 @@
 		width: 100%;
 	}
 
+	> :nth-child(3) {
+		/* <Catalogs /> */
+		flex-direction: column;
+	}
+
     .callout {
         position: relative;
 

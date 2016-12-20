@@ -83,7 +83,7 @@ class Home extends Component {
 							<img src="https://storage.googleapis.com/aries-website/whatsnew/ARIES-Floor-Liner-Artistic-Black%20(20).jpg" alt=" Introducing StyleGuard Floor Liners" className="styleguard" />
 							<span>Introducing StyleGuard&trade; Floor Liners</span>
 						</div>
-						<Catalogs fullWidth={false} />
+						<Catalogs />
 					</div>
 				</div>
 

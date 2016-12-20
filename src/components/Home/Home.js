@@ -57,7 +57,9 @@ class Home extends Component {
 
 				<Hero />
 				<Marketing />
-				{/* <Catalogs fullWidth="true" /> uncomment when there is more than one catalog */}
+				{/* <div className="container">
+					<Catalogs />
+				</div> */}
 				<FeaturedProducts products={this.props.featuredProducts} />
 				<Testimonials testimonials={this.props.testimonials} />
 
