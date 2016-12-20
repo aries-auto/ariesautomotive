@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Home.scss';
-import Catalogs from './Catalogs';
+// import Catalogs from './Catalogs';
 import FeaturedProducts from './FeaturedProducts';
 import Testimonials from './Testimonials';
 import Hero from './Hero';
@@ -57,7 +57,9 @@ class Home extends Component {
 
 				<Hero />
 				<Marketing />
-				<Catalogs />
+				{/* <div className="container">
+					<Catalogs />
+				</div> */}
 				<FeaturedProducts products={this.props.featuredProducts} />
 				<Testimonials testimonials={this.props.testimonials} />
 

@@ -21,6 +21,11 @@
 			text-align: center;
 		}
 	}
+
+	a:first-child:nth-last-child(1) {
+		/* Center catalogs when there is only one */
+		width: 100%;
+	}
 }
 
 @media (min-width: $screen-md-min) {
