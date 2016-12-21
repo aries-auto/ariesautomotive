@@ -12,6 +12,7 @@
     "babel-core": "=5.8.34",
     "bluebird": "3.1.1",
     "bootstrap": "^3.3.7",
+    "browser-resolve": "^1.11.2",
     "classnames": "2.2.1",
     "compression": "^1.6.2",
     "eventemitter3": "1.1.1",
