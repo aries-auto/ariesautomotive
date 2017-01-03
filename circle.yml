@@ -2,7 +2,7 @@ machine:
   node:
     version: 5.2.0
   environment:
-    GCLOUD_PROJECT: "aries-auto"
+    GCLOUD_PROJECT: "curt-dealers"
 
 dependencies:
   override:
