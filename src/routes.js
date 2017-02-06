@@ -244,6 +244,7 @@ const router = new Router(on => {
 
 	on('/warranties', async (state) => {
 		state.context.id = state.params.id;
+		await GeographyStore.fetchCountries();
 		return <Warranties context={state.context} />;
 	});
 
