@@ -153,6 +153,17 @@ class NewVehicle extends Component {
 	}
 
 	render() {
+		// const availableMakes = this.props.vehicle.availableMakes;
+		if (this.props.vehicle.availableMakes) {
+			this.props.vehicle.availableMakes.sort(function (a, b) {
+				return a.toLowerCase().localeCompare(b.toLowerCase());
+			});
+		}
+		if (this.props.vehicle.availableModels) {
+			this.props.vehicle.availableModels.sort(function (a, b) {
+				return a.toLowerCase().localeCompare(b.toLowerCase());
+			});
+		}
 		return (
 			<form className={s.root} onSubmit={this.handleSubmit}>
 				<label className={s.heading}>Vehicle Lookup</label>
