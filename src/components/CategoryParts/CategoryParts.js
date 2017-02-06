@@ -27,6 +27,12 @@ class CategoryParts extends Component {
 
 	renderParts() {
 		const res = [];
+		if (this.props.vehicle === null || this.props.vehicle === undefined) {
+			return <span></span>;
+		}
+		if (this.props.vehicle.lookup_category === null || this.props.vehicle.lookup_category === undefined) {
+			return <span></span>;
+		}
 		if (!this.props.vehicle.lookup_category.length > 0) {
 			return <span></span>;
 		}
