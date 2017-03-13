@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ga from 'react-ga';
 import cx from 'classnames';
 import s from './Marketing.scss';
+import Catalogs from './Catalogs';
 import withStyles from '../../decorators/withStyles';
 
 @withStyles(s)
@@ -80,9 +81,10 @@ class Home extends Component {
 						<div className={cx(s.callout)}>
 							<a href="http://www.ariesautomotive.com/category/344/3%22%20Rocker%20Steps">
 								<img src="https://storage.googleapis.com/aries-website/whatsnew/Rocker-Step.jpg" alt="Form and function. ARIES Rocker Steps." className="styleguard" />
-							<span>Form and function. ARIES Rocker Steps.</span>
+								<span>Form and function. ARIES Rocker Steps.</span>
 							</a>
 						</div>
+						<Catalogs />
 					</div>
 				</div>
 			</div>
