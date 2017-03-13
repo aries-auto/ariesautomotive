@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import ga from 'react-ga';
 import cx from 'classnames';
 import s from './Marketing.scss';
-import Modal from 'react-modal';
 import Catalogs from './Catalogs';
 import withStyles from '../../decorators/withStyles';
 
@@ -77,24 +76,17 @@ class Home extends Component {
 					</div>
 				</div>
 				<div>
-					<div onClick={this.openModal} className={cx(s.whatsNew, s.styleguard, 'row')}>
+					<div className={cx(s.whatsNew, s.styleguard, 'row')}>
 						<img src="https://storage.googleapis.com/aries-website/whatsnew/What's-New-Banner.png" alt="What's New with ARIES" className={cx(s.header)} />
 						<div className={cx(s.callout)}>
-							<img src="https://storage.googleapis.com/aries-website/whatsnew/ARIES-Floor-Liner-Artistic-Black%20(20).jpg" alt=" Introducing StyleGuard Floor Liners" className="styleguard" />
-							<span>Introducing StyleGuard&trade; Floor Liners</span>
+							<a href="http://www.ariesautomotive.com/category/344/3%22%20Rocker%20Steps">
+								<img src="https://storage.googleapis.com/aries-website/whatsnew/Rocker-Step.jpg" alt="Form and function. ARIES Rocker Steps." className="styleguard" />
+								<span>Form and function. ARIES Rocker Steps.</span>
+							</a>
 						</div>
 						<Catalogs />
 					</div>
 				</div>
-
-				{/* YouTube Modal */}
-				<Modal
-					isOpen={this.state.modalIsOpen}
-					onRequestClose={this.closeModal}
-					style={this.state.modalStyles}
-				>
-					<iframe className={s.modalIframe} src="https://www.youtube.com/v/8GzILyP_2BM" frameBorder="0" allowFullscreen></iframe>
-				</Modal>
 			</div>
 		);
 	}
