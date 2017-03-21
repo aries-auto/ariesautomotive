@@ -12,6 +12,7 @@ class CategoryItem extends Component {
 		className: PropTypes.string,
 		items: PropTypes.array,
 		cat: PropTypes.object,
+		item: PropTypes.object,
 		isParent: PropTypes.bool,
 	};
 
@@ -21,7 +22,6 @@ class CategoryItem extends Component {
 		this.menuItems = this.categoryItems.bind(this);
 	}
 
-
 	categoryItems() {
 		const catItems = [];
 		if (!this.props.items) {
@@ -29,10 +29,14 @@ class CategoryItem extends Component {
 		}
 
 		if (!this.props.isParent) {
+			let imgPath = '/img/partImgPlaceholder.jpg';
+			if (this.props.cat.image.Path !== '') {
+				imgPath = `${this.props.cat.image.Scheme}://${this.props.cat.image.Host}${this.props.cat.image.Path}`;
+			}
 			catItems.push(
 				<div className={s.cat} key={this.props.cat.id}>
-					<Link to={`/category/${this.props.cat.id}/${this.props.cat.title}`} title={this.props.cat.title}>
-						<img className={cx(s.catImage)} src={`${this.props.cat.image.Scheme}://${this.props.cat.image.Host}${this.props.cat.image.Path}`} />
+					<Link to={this.props.item.to} title={this.props.cat.title}>
+						<img className={cx(s.catImage)} src={imgPath} />
 						<span className={cx(s.catTitle)}>{this.props.cat.title}</span>
 					</Link>
 				</div>
@@ -44,6 +48,7 @@ class CategoryItem extends Component {
 				<SubItem
 					key={i}
 					cat={item.cat}
+					item={item}
 					items={item.items}
 					isParent={false}
 				/>
@@ -52,7 +57,6 @@ class CategoryItem extends Component {
 
 		return catItems;
 	}
-
 
 	render() {
 		return (

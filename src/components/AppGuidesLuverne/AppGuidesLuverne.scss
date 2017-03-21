@@ -1,0 +1,44 @@
+@import '../variables.scss';
+
+.appguidesContainer {
+    margin: 25px 0;
+
+    a.guide {
+        display: block;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-size: 1.2em;
+        text-transform: capitalize;
+        cursor: pointer;
+    }
+	.guideRow {
+		padding-left:0px;
+	}
+
+	.subGuides {
+		padding-left:0px;
+	}
+	a.guide {
+		display: block;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		margin-bottom: 5px;
+		font-size: 1.2em;
+		text-transform: capitalize;
+		cursor: pointer;
+
+		.guideImage {
+			display:block;
+			float:left;
+			max-width:80px;
+			min-width:60px;
+			height:auto;
+			margin-right:10px;
+		}
+		.guideTitle {
+			float:none;
+			min-height:81px;
+			padding-top:6%;
+		}
+	}
+}

@@ -113,6 +113,60 @@ server.get('/api/envision/image.json', (req, res) => {
 	});
 });
 
+server.get('/api/luverne/appguides.json', (req, res) => {
+	memcached.get(`${memcachePrefix}api:luverne:appguides`, (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+		fetch(`${iapiBase}/appguides/groups?key=${KEY}&brand=${brand.id}`)
+		.then((resp) => {
+			return resp.json();
+		}).then((data) => {
+			memcached.set(`${memcachePrefix}api:luverne:appguides`, data, 86400, () => {
+				res.json(data);
+			});
+		});
+	});
+});
+
+server.get('/api/luverne/appguide/:collection/:page.json', async (req, res) => {
+	memcached.get(`${memcachePrefix}api:luverne:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, async (err, val) => {
+		res.setHeader('Content-Type', 'application/json');
+		res.setHeader('Cache-Control', 'public, max-age=86400');
+		if (!err && val) {
+			res.json(val);
+			return;
+		}
+		let guide = {};
+		let appGuideInfo = {};
+		const [guideResponse, appGuideInfoResponse] = await Promise.all([
+			fetch(`${apiBase}/vehicle/luverne/mongo/apps?key=${KEY}&brandID=${brand.id}&catID=${req.params.collection}&limit=1000&page=${req.params.page}`, {
+				method: 'post',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}),
+			fetch(`${iapiBase}/appguides/guide?collection=${req.params.collection}&key=${KEY}&brandID=${brand.id}`, {
+				method: 'get',
+				headers: {
+					'Accept': 'application/json',
+				},
+			}),
+		]);
+		guide = await guideResponse.json();
+		appGuideInfo = await appGuideInfoResponse.json();
+		guide.name = req.params.collection;
+		guide.appGuide = appGuideInfo;
+		memcached.set(`${memcachePrefix}api:luverne:appguide:${req.params.collection}:${req.params.page}:${brand.id}`, guide, 86400, () => {
+			res.status(200).json(guide);
+			return;
+		});
+	});
+});
+
 server.get('/api/appguides.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:appguides:v2`, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
@@ -218,7 +272,6 @@ server.get('/api/content/:slug.json', (req, res) => {
 			res.json(val);
 			return;
 		}
-
 		fetch(`${apiBase}/site/content/${slug}?siteID=${brand.id}&brandID=${brand.id}&key=${KEY}`)
 		.then((resp) => {
 			return resp.json();

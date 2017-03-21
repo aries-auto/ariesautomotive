@@ -6,6 +6,7 @@ import CategoryStore from '../../stores/CategoryStore';
 import SiteStore from '../../stores/SiteStore';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import CategoryItem from './CategoryItem';
+import { brand } from '../../config.js';
 
 @withStyles(s)
 @connectToStores
@@ -16,6 +17,7 @@ class CategoryTree extends Component {
 		categories: PropTypes.array,
 		params: PropTypes.object,
 		pageData: PropTypes.object,
+		linkOverride: PropTypes.string,
 	};
 
 	constructor(props) {
@@ -39,7 +41,11 @@ class CategoryTree extends Component {
 
 		props.categories.map((cat) => {
 			const tmp = this.categoryToItem(cat);
-			this.state.items = this.state.items.concat(tmp.items);
+			if (brand.id === 4) {
+				this.state.items = this.state.items.concat(tmp);
+			} else {
+				this.state.items = this.state.items.concat(tmp.items);
+			}
 		});
 	}
 
@@ -60,7 +66,7 @@ class CategoryTree extends Component {
 		}
 		const item = {
 			cat,
-			to: `/category/${cat.id}/${cat.title}`,
+			to: this.props.linkOverride ? `${this.props.linkOverride}/${cat.id}/${cat.title}` : `/category/${cat.id}/${cat.title}`,
 			text: cat.title,
 			children: cat.children ? cat.children.map(this.categoryToItem) : [],
 		};
@@ -89,7 +95,7 @@ class CategoryTree extends Component {
 				const elm = (
 					<div className={cx(s.categoriesContainer, 'well')} key={item.cat.id}>
 						<h2 className={s.catHeading}>{item.cat.title}</h2>
-						<CategoryItem cat={item.cat} items={subs} isParent />
+						<CategoryItem item={item} cat={item.cat} items={subs} isParent />
 					</div>
 				);
 				itemElms.push(elm);

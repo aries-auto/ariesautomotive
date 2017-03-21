@@ -16,6 +16,8 @@ import WhereToBuy from './components/WhereToBuy';
 import About from './components/About';
 import AppGuides from './components/AppGuides';
 import AppGuide from './components/AppGuides/AppGuide';
+import AppGuidesLuverne from './components/AppGuidesLuverne';
+import AppGuideLuverne from './components/AppGuidesLuverne/AppGuideLuverne';
 import Terms from './components/Terms';
 import Warranties from './components/Warranties';
 import LatestNews from './components/LatestNews';
@@ -29,6 +31,7 @@ import LuverneStore from './stores/LuverneStore';
 import ContactStore from './stores/ContactStore';
 import ProductStore from './stores/ProductStore';
 import AppGuideStore from './stores/AppGuideStore';
+import AppGuideStoreLuverne from './stores/AppGuideStoreLuverne';
 import GeographyStore from './stores/GeographyStore';
 import CategoryStore from './stores/CategoryStore';
 import SiteStore from './stores/SiteStore';
@@ -199,6 +202,10 @@ const router = new Router(on => {
 	});
 
 	on('/appguides', async (state) => {
+		if (brand.id === 4) {
+			await AppGuideStoreLuverne.fetchAppGuides();
+			return <AppGuidesLuverne context={state.context} />;
+		}
 		await AppGuideStore.fetchAppGuides();
 		return <AppGuides context={state.context} />;
 	});
@@ -206,6 +213,11 @@ const router = new Router(on => {
 	on('/appguides/:guide/:page', async (state) => {
 		const collection = state.params.guide;
 		const page = state.params.page;
+		if (brand.id === 4) {
+			const catID = collection;
+			await AppGuideStoreLuverne.fetchAppGuide(catID, 0);
+			return <AppGuideLuverne context={state.context} title={page} />;
+		}
 		await AppGuideStore.fetchAppGuide(collection, page);
 		return <AppGuide context={state.context} />;
 	});
