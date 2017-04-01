@@ -65,6 +65,12 @@ class Menu extends Component {
 				)}
 			>
 				{this.menuItems()}
+
+				<div>
+					<a href="//www.teamaries.com">
+						<img src="//storage.googleapis.com/aries-website/site-assets/Team-ARIES-Logo.png" />
+					</a>
+				</div>
 			</div>
 		);
 	}
