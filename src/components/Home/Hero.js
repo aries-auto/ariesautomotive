@@ -6,6 +6,15 @@ import withStyles from '../../decorators/withStyles';
 
 const carouselImages = [
 	{
+		image: 'https://storage.googleapis.com/aries-website/hero-images/Team_ARIES.jpg',
+		text: 'Elite Pro Builders Join Team ARIES!',
+		button_text: 'READ MORE',
+		link: '/news/86',
+		order: 4,
+		styles: {
+			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/Team_ARIES.jpg)',
+		},
+	}, {
 		image: 'https://storage.googleapis.com/aries-website/hero-images/black-bull-bar.jpg',
 		text: 'Never Fear the Uncertain Road',
 		button_text: 'VIEW BULL BARS',
@@ -40,15 +49,6 @@ const carouselImages = [
 		order: 1,
 		styles: {
 			backgroundImage: `url('https://storage.googleapis.com/aries-website/hero-images/AdvantEDGE_with_LEDs.jpg')`,
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/Team_ARIES.jpg',
-		text: 'Elite Pro Builders Join Team ARIES!',
-		button_text: 'READ MORE',
-		link: '/news/86',
-		order: 4,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/Team_ARIES.jpg)',
 		},
 	},
 ];
