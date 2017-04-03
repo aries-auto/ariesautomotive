@@ -56,6 +56,16 @@ class Menu extends Component {
 	}
 
 	render() {
+		let teamAries = null;
+		if (this.props.isParent) {
+			teamAries = (
+				<div>
+					<a href="//www.teamaries.com">
+						<img src="//storage.googleapis.com/aries-website/site-assets/Team-ARIES-Logo.png" />
+					</a>
+				</div>
+			);
+		}
 		return (
 			<div className={cx(
 					s.root,
@@ -65,12 +75,7 @@ class Menu extends Component {
 				)}
 			>
 				{this.menuItems()}
-
-				<div>
-					<a href="//www.teamaries.com">
-						<img src="//storage.googleapis.com/aries-website/site-assets/Team-ARIES-Logo.png" />
-					</a>
-				</div>
+				{teamAries}
 			</div>
 		);
 	}
