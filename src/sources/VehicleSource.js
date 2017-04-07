@@ -1,5 +1,5 @@
 import VehicleActions from '../actions/VehicleActions';
-import fetch from '../core/fetch';
+import fetch from 'node-fetch';
 import { apiBase, iapiBase, apiKey, brand } from '../config';
 
 const KEY = apiKey;
@@ -20,11 +20,27 @@ const VehicleSource = {
 					path = `${path}/${model}`;
 				}
 
+				function retryFunc(urlpath, res, rej, tryNum) {
+					let p = Promise.race([
+						fetch(`${urlpath}?key=${KEY}&brandID=${brand.id}`, { timeout: 2000 })
+						.then((resp) => {
+							if (resp.ok) {
+								return resp.json();
+							}
+						}).then(res).catch(rej),
+						new Promise(function (resolve, reject) {
+							setTimeout(() => reject(new Error('request timeout')), 2500);
+						}),
+					]);
+					p.catch(function () {
+						if (tryNum < 5) {
+							return retryFunc(urlpath, res, rej, tryNum + 1);
+						}
+					});
+				}
+
 				return new Promise((res, rej) => {
-					fetch(`${path}?key=${KEY}&brandID=${brand.id}`)
-					.then((resp) => {
-						return resp.json();
-					}).then(res).catch(rej);
+					retryFunc(path, res, rej, 0);
 				});
 			},
 
