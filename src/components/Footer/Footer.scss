@@ -33,6 +33,24 @@
     }
 }
 
+.feedbackcontainer{
+	margin-left: auto;
+	margin-right: auto;
+	padding-top:12px;
+	width: 300px;
+	height: 60px;
+	color: $white-base;
+	background: url(https://storage.googleapis.com/luverne/website/misc-images/footerBackground.png);
+	text-align: center;
+	font-size: 22px;
+	text-decoration: underline;
+	font-weight: bold;
+	border-top: 4px solid #C73030;
+	border-left: 4px solid #C73030;
+	border-right: 4px solid #C73030;
+	cursor: pointer;
+}
+
 .container {
     padding: 20px 15px;
     margin: 0 auto;
