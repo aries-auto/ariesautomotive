@@ -75,6 +75,19 @@
 .semaLogo {
     margin-top: 10px;
 }
+.jiraFeedbackContainer {
+	font-size: 18px;
+
+	a {
+			padding: 0;
+	}
+
+	a:hover {
+			color: #ccc;
+			background: none;
+			text-decoration:none;
+	}
+}
 
 .footerNav {
     padding: 0 0;
