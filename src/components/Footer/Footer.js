@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import s from './Footer.scss';
 import cx from 'classnames';
 import withStyles from '../../decorators/withStyles';
+import { Glyphicon } from 'react-bootstrap';
 import { brand } from '../../config';
 import footer from '../../data/footer';
 import SiteStore from '../../stores/SiteStore';
@@ -57,7 +58,8 @@ class Footer extends Component {
 			<div>
 				<div className={s.feedbackcontainer}>
 					<div id="jirafeedback" className={s.feedbackbtn}>
-						<span>PROVIDE FEEDBACK</span>
+						<div className={s.feedbackGlyphContainer}><Glyphicon glyph="pencil" /></div>
+						<div className={s.feedbackTextContainer}><span>PROVIDE FEEDBACK</span></div>
 					</div>
 				</div>
 				<footer>
