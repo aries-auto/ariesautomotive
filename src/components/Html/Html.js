@@ -43,16 +43,6 @@ class Html extends Component {
 		});
 	}
 
-	collectorStyling() {
-		return ({ __html:
-			`
-			.aui-message:before{
-				background-color: #c73031;
-			}
-			`,
-		});
-	}
-
 	render() {
 		return (
 			<html className="no-js" lang="" style={{ maxWidth: '100%' }}>
@@ -87,7 +77,6 @@ class Html extends Component {
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
 					<script src={this.props.entry}></script>
 					<script type="text/javascript" src="https://curtmfg.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/y9kc0t/b/c/c8a734256c6dd2d1e4344e119e50264f/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=80171f66"></script>
-					<style dangerouslySetInnerHTML={this.collectorStyling()} />
 					<script type="text/javascript" dangerouslySetInnerHTML={this.collectorCode()} />
 
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
