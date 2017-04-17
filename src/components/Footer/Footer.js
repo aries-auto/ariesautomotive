@@ -107,14 +107,18 @@ class Footer extends Component {
 						</div>
 						<div className="col-xs-12 col-sm-3 col-md-3 col-lg-4">
 							<img src={brand.footerLogo} alt={brand.name} className={cx('img-responsive', s.footerLogo)} />
-							<div className="clearfix">&nbsp;</div>
+							<div className={cx(s.footerclear, 'clearfix')}>&nbsp;</div>
 							<br />
 							<span className={s.conditions}>
 								&copy;
 								{brand.copyrightStart ? `${brand.copyrightStart} - ${this.getYear()}` : this.getYear()}
 								{brand.name}
+								<br />
 								<a href="/terms" className={s.terms}>TERMS & CONDITIONS</a>
 							</span>
+							<br />
+							<br />
+							<span className={s.jiraFeedbackContainer}><a href="#" id="jirafeedback">PROVIDE FEEDBACK</a></span>
 						</div>
 					</div>
 				</div>

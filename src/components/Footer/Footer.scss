@@ -33,6 +33,40 @@
     }
 }
 
+.feedbackcontainer{
+	opacity: .5;
+	background: #fff;
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	z-index: 99999;
+	padding-top: 12px;
+	padding-bottom: 8px;
+	padding-left: 12px;
+	width: 160px;
+	color: $new-red;
+	font-size: 16px;
+	font-weight: 700;
+	border: 2px solid $new-red;
+	box-shadow: 1px 0 10px 2px #c7c7c7;
+	cursor: pointer;
+}
+.feedbackcontainer:hover{
+	-webkit-transition: opacity .3s ease-in;
+	-moz-transition: opacity .3s ease-in;
+	-o-transition: opacity .3s ease-in;
+	opacity:1;
+}
+.feedbackGlyphContainer{
+	font-size: 30px;
+  float: left;
+  padding-top: 5px;
+  padding-right: 10px;
+}
+.feedbackTextContainer{
+	text-align:left;
+}
+
 .container {
     padding: 20px 15px;
     margin: 0 auto;
@@ -40,6 +74,19 @@
 
 .semaLogo {
     margin-top: 10px;
+}
+.jiraFeedbackContainer {
+	font-size: 18px;
+
+	a {
+			padding: 0;
+	}
+
+	a:hover {
+			color: #ccc;
+			background: none;
+			text-decoration:none;
+	}
 }
 
 .footerNav {
@@ -62,6 +109,9 @@
             }
         }
     }
+}
+.footerclear{
+	height:1px;
 }
 
 .footerLogo {

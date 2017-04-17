@@ -28,6 +28,20 @@ class Html extends Component {
 			`ga('create','${brand.googleAnalyticsId}','auto');ga('send','pageview');`,
 		});
 	}
+	collectorCode() {
+		return ({ __html:
+			`
+			window.ATL_JQ_PAGE_PROPS =  {
+				"triggerFunction": function(showCollectorDialog) {
+				//Requires that jQuery is available!
+				jQuery("#jirafeedback").click(function(e) {
+					e.preventDefault();
+					showCollectorDialog();
+				});
+			}};
+			`,
+		});
+	}
 
 	render() {
 		return (
@@ -62,6 +76,9 @@ class Html extends Component {
 				<body>
 					<div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
 					<script src={this.props.entry}></script>
+					<script type="text/javascript" src="https://curtmfg.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e-T/y9kc0t/b/c/c8a734256c6dd2d1e4344e119e50264f/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=80171f66"></script>
+					<script type="text/javascript" dangerouslySetInnerHTML={this.collectorCode()} />
+
 					<script dangerouslySetInnerHTML={this.trackingCode()} />
 				</body>
 			</html>
