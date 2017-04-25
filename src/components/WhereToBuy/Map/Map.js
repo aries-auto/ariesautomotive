@@ -178,9 +178,16 @@ class Map extends Component {
 	}
 
 	render() {
+		if (typeof window === 'undefined') {
+			global.window = {};
+		}
+		if (typeof window.google !== 'object') {
+			return (
+				<div>Loading</div>
+			);
+		}
 		return (
 			<div className={cx(s.mapContainer)}>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing" async defer></script>
 				{ this.props.fetchDirections ? this.renderDirections() : this.renderMap() }
 			</div>
 		);
