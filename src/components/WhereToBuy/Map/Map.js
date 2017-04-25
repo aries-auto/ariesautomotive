@@ -178,14 +178,6 @@ class Map extends Component {
 	}
 
 	render() {
-		if (typeof window === 'undefined') {
-			global.window = {};
-		}
-		if (typeof window.google !== 'object') {
-			return (
-				<div>Loading</div>
-			);
-		}
 		return (
 			<div className={cx(s.mapContainer)}>
 				{ this.props.fetchDirections ? this.renderDirections() : this.renderMap() }

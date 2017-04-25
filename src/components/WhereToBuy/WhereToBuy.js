@@ -7,6 +7,7 @@ import BuyActions from '../../actions/BuyActions';
 import BuyStore from '../../stores/BuyStore';
 import Buymap from './Map/Map';
 import ControlPanel from './ControlPanel/ControlPanel';
+import Spinner from '../Spinner';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import Modal from 'react-modal';
 const customStyles = {
@@ -135,9 +136,20 @@ class WhereToBuy extends Component {
 	}
 
 	render() {
+		if (typeof window === 'undefined') {
+			global.window = {};
+		}
+		if (typeof window.google !== 'object') {
+			return (
+				<div>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing" async defer></script>
+					<span className={s.spinnerText}>Loading Map...</span>
+					<Spinner className={s.spinner} />
+				</div>
+			);
+		}
 		return (
 			<div className={cx(s.root, this.props.className, s.container)}>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing" async defer></script>
 				<ControlPanel {...this.props} />
 				{this.props.local === true ? <div><Buymap {...this.props} />{::this.renderMapFooter()}</div> : ''}
 				<Locations {...this.props} />
