@@ -10,6 +10,7 @@ import ControlPanel from './ControlPanel/ControlPanel';
 import Spinner from '../Spinner';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import Modal from 'react-modal';
+import Script from 'react-load-script';
 const customStyles = {
 	content: {
 		top: '50%',
@@ -36,6 +37,7 @@ class WhereToBuy extends Component {
 		markers: PropTypes.array,
 		checked: PropTypes.object,
 		fetchDirections: PropTypes.bool,
+		scriptLoaded: PropTypes.bool,
 	};
 
 	static contextTypes = {
@@ -93,6 +95,19 @@ class WhereToBuy extends Component {
 		BuyActions.showDirections(false);
 	}
 
+	handleScriptError() {
+		console.log('Could not load Google API');
+	}
+
+	handleScriptCreate() {
+		// do nothing on script create.
+	}
+
+	handleScriptLoad() {
+		// script has been loaded, update store properties to cause re-render
+		BuyActions.updateScriptLoaded();
+	}
+
 	renderLocationModal() {
 		return (
 			<Modal
@@ -136,24 +151,29 @@ class WhereToBuy extends Component {
 	}
 
 	render() {
-		if (typeof window === 'undefined') {
-			global.window = {};
-		}
-		if (typeof window.google !== 'object') {
+		if (this.props.scriptLoaded) {
 			return (
-				<div>
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing" async defer></script>
-					<span className={s.spinnerText}>Loading Map...</span>
-					<Spinner className={s.spinner} />
+				<div className={cx(s.root, this.props.className, s.container)}>
+					<ControlPanel {...this.props} />
+					{this.props.local === true ? <div><Buymap {...this.props} />{::this.renderMapFooter()}</div> : ''}
+					<Locations {...this.props} />
+					{this.props.showModal === true ? this.renderLocationModal() : ''}
 				</div>
 			);
 		}
+		if (typeof window === 'undefined') {
+			global.window = {};
+		}
 		return (
-			<div className={cx(s.root, this.props.className, s.container)}>
-				<ControlPanel {...this.props} />
-				{this.props.local === true ? <div><Buymap {...this.props} />{::this.renderMapFooter()}</div> : ''}
-				<Locations {...this.props} />
-				{this.props.showModal === true ? this.renderLocationModal() : ''}
+			<div>
+				<Script
+					url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing"
+					onCreate={this.handleScriptCreate.bind(this)}
+					onError={this.handleScriptError.bind(this)}
+					onLoad={this.handleScriptLoad.bind(this)}
+				/>
+				<span className={s.spinnerText}>Loading Map...</span>
+				<Spinner className={s.spinner} />
 			</div>
 		);
 	}

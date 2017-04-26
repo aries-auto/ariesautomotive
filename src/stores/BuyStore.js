@@ -41,6 +41,7 @@ class BuyStore extends EventEmitter {
 				gold: true,
 				silver: true,
 			},
+			scriptLoaded: false,
 		};
 		this.bindListeners({
 			setLocal: BuyActions.setLocal,
@@ -61,6 +62,7 @@ class BuyStore extends EventEmitter {
 			geocode: BuyActions.geocode,
 			markerVisibility: BuyActions.markerVisibility,
 			getAddressFromLatLng: BuyActions.getAddressFromLatLng,
+			updateScriptLoaded: BuyActions.updateScriptLoaded,
 		});
 	}
 
@@ -91,6 +93,9 @@ class BuyStore extends EventEmitter {
 
 	setError(error) {
 		this.setState({ error });
+	}
+	updateScriptLoaded() {
+		this.setState({ scriptLoaded: true, google: window.google });
 	}
 
 	setCenterAndZoom(args) {
