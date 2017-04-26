@@ -171,7 +171,7 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
-					{this.props.showRegions && this.props.regions ? ::this.renderRegions() : null}
+					{(this.props.showRegions && this.props.regions) ? ::this.renderRegions() : null}
 					</GoogleMap>
 				}
 			/>
