@@ -24,6 +24,7 @@ module.exports = {
 			href: 'http://dealers.ariesautomotive.com/',
 			title: 'Dealer Login',
 			value: 'DEALER LOGIN',
+			target: '_blank',
 		},
 		{
 			href: '/news',
@@ -44,6 +45,12 @@ module.exports = {
 			href: '/category',
 			title: 'View All Products',
 			value: 'VIEW ALL PRODUCTS',
+		},
+		{
+			href: 'http://careers.curtmfg.com',
+			title: 'Careers',
+			value: 'CAREERS',
+			target: '_blank',
 		},
 	],
 };

@@ -41,7 +41,7 @@ class Footer extends Component {
 			<ul className={cx(s.nav, 'nav')}>
 				{footer.links.map((link, i) => {
 					return (
-						<li key={i} className={s.item}><a href={link.href} title={link.title}>{link.value}</a></li>
+						<li key={i} className={s.item}><a href={link.href} title={link.title} target={(link.target ? link.target : '_self')}>{link.value}</a></li>
 					);
 				})}
 				{customContent}
