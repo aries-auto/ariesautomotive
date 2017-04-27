@@ -36,13 +36,14 @@ class Map extends Component {
 		super();
 	}
 
-	componentWillMount() {
-		BuyActions.regions();
-	}
+
+	// componentWillMount() {
+	// 	BuyActions.regions();
+	// }
 
 	componentDidMount() {
 		// initial map markers
-		BuyActions.bounds(this.props.center, this.props.bounds);
+		// BuyActions.bounds(this.props.center, this.props.bounds);
 	}
 
 	static getStores() {
@@ -170,7 +171,7 @@ class Map extends Component {
 							</ Marker>
 							);
 					})}
-					{this.props.showRegions ? ::this.renderRegions() : null}
+					{(this.props.showRegions && this.props.regions) ? ::this.renderRegions() : null}
 					</GoogleMap>
 				}
 			/>
@@ -180,7 +181,6 @@ class Map extends Component {
 	render() {
 		return (
 			<div className={cx(s.mapContainer)}>
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDn9YGVNo4kN7qqDD8t1qf613K6S0TTxuA&libraries=places,drawing" async defer></script>
 				{ this.props.fetchDirections ? this.renderDirections() : this.renderMap() }
 			</div>
 		);
