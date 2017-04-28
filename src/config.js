@@ -51,6 +51,7 @@ const aries = {
 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
 	footerLogo: 'https://storage.googleapis.com/aries-logo/aries_logo__web_footer_red_on_trans_sm.png',
 	contactHeroImage: 'http://storage.googleapis.com/aries-website/hero-images/truck.png',
+	shareImage: 'https://storage.googleapis.com/aries-logo/ariesshare.png',
 	website: 'http://www.ariesautomotive.com',
 	favicons: {
 		version: '2.1',
