@@ -44,7 +44,7 @@ class Actions extends Component {
 		const shareURL = brand.website + '/part/' + this.props.sku;
 		const primaryPic = this.props.primaryPic ? this.props.primaryPic : brand.shareImage;
 		const shareTitle = brand.code + ' Part #' + this.props.sku;
-		const hashtags = [brand.code, brand.code + 'products'];
+		const hashtags = [brand.code, brand.code + 'PRODUCTS']; // would be cool if it pulled hashtags from the product
 		return (
 			<div className={s.root}>
 				{ price }
