@@ -68,6 +68,23 @@ class Product extends Component {
 		this.context.seo(seo);
 	}
 
+	getPrimaryPic() {
+		let primaryPic = null;
+		if (this.props.product && this.props.product.images) {
+			this.props.product.images.map((i) => {
+				if (i.sort === 'a') {
+					if (!primaryPic) {
+						primaryPic = i;
+					}
+					if (i.height < primaryPic.height || !primaryPic.height) {
+						primaryPic = i;
+					}
+				}
+			});
+		}
+		return primaryPic;
+	}
+
 	static getStores() {
 		return [ProductStore];
 	}
@@ -80,7 +97,12 @@ class Product extends Component {
 		if (!this.props.product || !this.props.product.id) {
 			return <div></div>;
 		}
+		const primaryPic = this.getPrimaryPic();
 
+		let primaryPicPath = '';
+		if (primaryPic) {
+			primaryPicPath = `${primaryPic.path.Scheme}://${primaryPic.path.Host}${primaryPic.path.Path}`;
+		}
 		return (
 			<div className={s.root}>
 				<div className={cx(s.top, 'container')}>
@@ -97,6 +119,7 @@ class Product extends Component {
 							pricing={this.props.product.pricing}
 							sku={this.props.product.part_number}
 							upc={this.props.product.upc}
+							primaryPic={primaryPicPath}
 							className={s.actions}
 							brand={brand}
 						/>

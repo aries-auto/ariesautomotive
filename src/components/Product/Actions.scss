@@ -35,11 +35,17 @@
 
     > div:last-child {
         margin-left: auto;
-
-        > a > img {
-            width: 25px;
-        }
     }
+}
+.sharecount{
+	display:none;
+}
+.shareButton{
+	display:inline-block;
+	img {
+		width:25px;
+		cursor:pointer;
+	}
 }
 
 @media (min-width: $screen-md-min) {
