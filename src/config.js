@@ -50,7 +50,7 @@ const aries = {
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
 	footerLogo: 'https://storage.googleapis.com/aries-logo/aries_logo__web_footer_red_on_trans_sm.png',
-	contactHeroImage: 'http://storage.googleapis.com/aries-website/hero-images/truck.png',
+	contactHeroImage: 'https://storage.googleapis.com/aries-website/aries-building-1.png',
 	shareImage: 'https://storage.googleapis.com/aries-logo/ariesshare.png',
 	website: 'http://www.ariesautomotive.com',
 	favicons: {
