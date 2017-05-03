@@ -87,6 +87,9 @@ class Contact extends Component {
 	render() {
 		const heroImageStyle = {
 			backgroundImage: `url('${brand.contactHeroImage}')`,
+			backgroundRepeat: 'no-repeat',
+			backgroundAttachment: 'fixed',
+			backgroundPosition: 'center -300px',
 		};
 		return (
 			<div className={cx(s.root, this.props.className)}>
