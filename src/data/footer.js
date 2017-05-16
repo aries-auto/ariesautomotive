@@ -32,9 +32,10 @@ module.exports = {
 			value: 'NEWS',
 		},
 		{
-			href: '/warranties',
+			href: 'http://survey.curtmfg.com/surveys/5',
 			title: 'Online Warranties',
 			value: 'ONLINE WARRANTIES',
+			target: '_blank',
 		},
 		{
 			href: '/contact',
