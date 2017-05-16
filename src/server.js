@@ -272,6 +272,11 @@ server.get('/api/products/featured.json', (req, res) => {
 	});
 });
 
+// 301 redirect for warranties
+server.get('/warranties', (req, res) => {
+	res.redirect(301, 'http://survey.curtmfg.com/surveys/5');
+});
+
 function nocache(req, res, next) {
 	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 	res.header('Pragma', 'no-cache');
