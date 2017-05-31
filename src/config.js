@@ -15,7 +15,7 @@ case 'staging':
 case 'production':
 	iapi = 'http://iapi.curtmfg.com';
 	api = 'http://goapi.curtmfg.com';
-	cachePrefix = 'production';
+	cachePrefix = 'productionasdfasdfasdfasdf';
 	break;
 default:
 	iapi = 'http://iapi.curtmfg.com';
@@ -26,7 +26,7 @@ default:
 export const iapiBase = iapi;
 export const apiBase = api;
 export const envisionAPI = 'http://www.iconfigurators.com/ap-json/ap-image-AR-part-id.aspx';
-export const memcachePrefix = cachePrefix + "uglymanualprocess";
+export const memcachePrefix = cachePrefix;
 export const apiKey = process.env.API_KEY !== undefined && process.env.API_KEY !== 'undefined' ? process.env.API_KEY : '9300f7bc-2ca6-11e4-8758-42010af0fd79';
 
 // Hides Where To Buy during development and review
@@ -50,8 +50,7 @@ const aries = {
 	logo: 'https://storage.googleapis.com/aries-logo/SVG_Logo%20(2c_white%20with%20black%20outline%20on%20transparent).svg',
 	seoLogo: 'https://storage.googleapis.com/aries-logo/ARIES%20Logo%20(1c_red%20on%20transparent_small).png',
 	footerLogo: 'https://storage.googleapis.com/aries-logo/aries_logo__web_footer_red_on_trans_sm.png',
-	contactHeroImage: 'https://storage.googleapis.com/aries-website/aries-building-1.png',
-	shareImage: 'https://storage.googleapis.com/aries-logo/ariesshare.png',
+	contactHeroImage: 'http://storage.googleapis.com/aries-website/hero-images/truck.png',
 	website: 'http://www.ariesautomotive.com',
 	favicons: {
 		version: '2.1',
