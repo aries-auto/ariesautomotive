@@ -15,7 +15,7 @@ case 'staging':
 case 'production':
 	iapi = 'http://iapi.curtmfg.com';
 	api = 'http://goapi.curtmfg.com';
-	cachePrefix = 'productionasdfasdfasdfasdf';
+	cachePrefix = 'production';
 	break;
 default:
 	iapi = 'http://iapi.curtmfg.com';

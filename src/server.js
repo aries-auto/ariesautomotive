@@ -170,7 +170,7 @@ server.get('/api/appguide/:collection/:page.json', async (req, res) => {
 server.get('/api/categories.json', (req, res) => {
 	memcached.get(`${memcachePrefix}api:categories`, (err, val) => {
 		res.setHeader('Content-Type', 'application/json');
-		res.setHeader('Cache-Control', 'public, max-age=604801');
+		res.setHeader('Cache-Control', 'max-age=172800');
 		if (!err && val) {
 			res.json(val);
 			return;
