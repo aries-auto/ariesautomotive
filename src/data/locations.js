@@ -14,7 +14,7 @@ export const locations = [
 	{
 		name: 'ARIES AUTOMOTIVE EDMONTON AREA',
 		address: [{
-			address1: '12820 184th Street NW',
+			address1: '#27, 12632 - 184 St. NW',
 			address2: '',
 			city: 'Edmonton',
 			state: 'Alberta',
