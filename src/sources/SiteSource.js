@@ -64,12 +64,8 @@ const SiteSource = {
 				});
 			},
 
-			local(st) {
-				if (!st.newsItem || !st.newsItem.id) {
-					return null;
-				}
-
-				return st.landingPage;
+			local() {
+				return null;
 			},
 
 			success: SiteActions.updateNewsItem,
