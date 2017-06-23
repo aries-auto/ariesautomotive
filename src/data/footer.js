@@ -48,7 +48,7 @@ module.exports = {
 			value: 'VIEW ALL PRODUCTS',
 		},
 		{
-			href: 'http://www.curtmfg.com/careers',
+			href: 'http://www.curtgroup.com/careers',
 			title: 'Careers',
 			value: 'CAREERS',
 			target: '_blank',
