@@ -39,12 +39,8 @@ const SiteSource = {
 				});
 			},
 
-			local(st) {
-				if (!st.landingPage || !st.landingPage.Id) {
-					return null;
-				}
-
-				return st.landingPage;
+			local() {
+				return null;
 			},
 
 			success: SiteActions.updateLandingPage,
@@ -110,12 +106,8 @@ const SiteSource = {
 				});
 			},
 
-			local(st) {
-				if (!st.pageData.id) {
-					return null;
-				}
-
-				return st.pageData;
+			local() {
+				return null;
 			},
 
 			success: SiteActions.updatePageData,
