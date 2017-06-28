@@ -32,7 +32,7 @@ module.exports = {
 			value: 'NEWS',
 		},
 		{
-			href: 'http://survey.curtmfg.com/surveys/5',
+			href: 'http://warranty.curtgroup.com/surveys/5',
 			title: 'Online Warranties',
 			value: 'ONLINE WARRANTIES',
 			target: '_blank',
