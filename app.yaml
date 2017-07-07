@@ -1,5 +1,10 @@
 runtime: custom
-vm: true
+env: flex
+
+automatic_scaling:
+  min_num_instances: 2
+  max_num_instances: 4
+  cool_down_period_sec: 120 # default value
 
 env_variables:
   NODE_ENV: 'production'
