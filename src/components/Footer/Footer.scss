@@ -33,6 +33,76 @@
     }
 }
 
+
+.brandsIcons{
+	list-style: none;
+	padding-left:0px;
+	margin-left:-106px;
+}
+
+.brandItem>a>.fadeContainer{
+	width:106px;
+	height: 36px;
+}
+
+.groupLogoItem{
+	margin-right:25px;
+}
+
+.groupLogo{
+	height:35px;
+	border-right:2px solid #444444;
+	padding-right:20px;
+}
+
+.brandItem{
+	margin-top:0px;
+	display:inline-block;
+	margin-left:15px;
+}
+
+.brand {
+	margin-bottom:30px;
+}
+
+.brand>a>img {
+	margin-bottom:8px;
+}
+
+.fadeContainer{
+	position:relative;
+}
+
+.fadeContainer img {
+	position:absolute;
+	-webkit-transition: opacity .5s ease-in-out;
+	-moz-transition: opacity .5s ease-in-out;
+	-o-transition: opacity .5s ease-in-out;
+	transition: opacity .5s ease-in-out;
+}
+
+.fadeContainer img.top:hover {
+	opacity:0;
+}
+
+.brandLink{
+	font-size:20px;
+	font-weight:bold;
+	text-decoration:underline;
+	padding-left:10px;
+}
+
+.container {
+    padding: 20px 15px;
+    margin: 0 auto;
+		padding-bottom:0px;
+}
+
+.brandsContainer{
+	padding:0px;
+	text-align:center;
+}
+
 .feedbackcontainer{
 	opacity: .5;
 	background: #fff;
@@ -91,7 +161,6 @@
 
 .footerNav {
     padding: 0 0;
-    padding-bottom: 70px;
 
     ul {
         li {

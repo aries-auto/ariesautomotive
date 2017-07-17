@@ -122,6 +122,60 @@ class Footer extends Component {
 						</div>
 					</div>
 				</div>
+				<div className={cx(s.root, 'row', 'footer-outer-row')} style={styles}>
+					<div className={cx('container', s.container, s.brandsContainer)}>
+						<ul className={s.brandsIcons}>
+							<li className={cx(s.brandItem, s.groupLogoItem)}>
+								<a href="https://curtgroup.com/" alt="CURT Group" target="_blank">
+									<div className={s.fadeContainer}>
+										<img className={cx(s.bottom, s.groupLogo)} src="https://storage.googleapis.com/curt-groups/CURT-Group-Logo.png" alt="CURT Group" title="CURT Group" />
+										<img className={cx(s.top, s.groupLogo)} src="https://storage.googleapis.com/curt-groups/CURT-Group-Logo.png" alt="CURT Group" title="CURT Group" />
+									</div>
+								</a>
+							</li>
+							<li className={s.brandItem}>
+								<a href="https://curtmfg.com/" alt="CURT Manufacturing" target="_blank">
+									<div className={s.fadeContainer}>
+										<img className={s.bottom} src="https://storage.googleapis.com/curt-groups/new-brand-logos/CURT-Logo-Orange.png" alt="CURT" title="CURT" />
+										<img className={s.top} src="https://storage.googleapis.com/curt-groups/new-brand-logos/CURT-Logo-40-Grey.png" alt="CURT" title="CURT" />
+									</div>
+								</a>
+							</li>
+							<li className={s.brandItem}>
+								<a href="http://ariesautomotive.com/" alt="ARIES Automotive" target="_blank">
+									<div className={s.fadeContainer}>
+										<img className={s.bottom} src="https://storage.googleapis.com/curt-groups/new-brand-logos/ARIES-Logo-Red.png" alt="ARIES" title="ARIES" />
+										<img className={s.top} src="https://storage.googleapis.com/curt-groups/new-brand-logos/ARIES-Logo-40-Grey.png" alt="ARIES" title="ARIES" />
+									</div>
+								</a>
+							</li>
+							<li className={s.brandItem}>
+								<a href="http://www.luvernetruck.com/" alt="Luverne Truck Equipment" target="_blank">
+									<div className={s.fadeContainer}>
+										<img className={s.bottom} src="https://storage.googleapis.com/curt-groups/new-brand-logos/LUVERNE-Logo-Blue.png" alt="LUVERNE" title="LUVERNE" />
+										<img className={s.top} src="https://storage.googleapis.com/curt-groups/new-brand-logos/LUVERNE-Logo-40-Grey.png" alt="LUVERNE" title="LUVERNE" />
+									</div>
+								</a>
+							</li>
+							<li className={s.brandItem}>
+								<a href="http://www.retracmirrors.com/" alt="Retrac Mirrors" target="_blank">
+									<div className={s.fadeContainer}>
+										<img className={s.bottom} src="https://storage.googleapis.com/curt-groups/new-brand-logos/RETRAC-Logo-White.png" alt="RETRAC" title="RETRAC" />
+										<img className={s.top} src="https://storage.googleapis.com/curt-groups/new-brand-logos/RETRAC-Logo-40-Grey.png" alt="RETRAC" title="RETRAC" />
+									</div>
+								</a>
+							</li>
+							<li className={s.brandItem}>
+								<a href="http://www.uwsta.com/" alt="UWS Truck Accessories" target="_blank">
+									<div className={s.fadeContainer}>
+										<img className={s.bottom} src="https://storage.googleapis.com/curt-groups/new-brand-logos/UWS-Logo-Blue.png" alt="UWS" title="UWS" />
+										<img className={s.top} src="https://storage.googleapis.com/curt-groups/new-brand-logos/UWS-Logo-40-Grey.png" alt="UWS" title="UWS" />
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</footer>
 		);
 	}
