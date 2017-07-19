@@ -36,8 +36,15 @@
 
 .brandsIcons{
 	list-style: none;
-	padding-left:0px;
-	margin-left:-106px;
+	padding-left:30px;
+	margin-left:106px;
+}
+
+@media (max-width: $screen-sm-min) {
+	.brandsIcons{
+		padding-left:0px;
+		margin-left:5px;
+	}
 }
 
 .brandItem>a>.fadeContainer{
@@ -100,7 +107,6 @@
 
 .brandsContainer{
 	padding:0px;
-	text-align:center;
 }
 
 .feedbackcontainer{
