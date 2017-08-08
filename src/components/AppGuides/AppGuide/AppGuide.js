@@ -136,7 +136,7 @@ class AppGuide extends Component {
 
 	renderApplications() {
 		return (
-			<table className={cx('table table-hover table-bordered')}>
+			<table className={cx('table table-hover table-bordered', s.appGuideTable)}>
 				<thead>
 					<tr>
 						<th>Make</th>
