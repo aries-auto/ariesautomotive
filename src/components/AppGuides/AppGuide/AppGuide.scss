@@ -3,9 +3,18 @@
 .breadcrumbContainer {
     margin: 25px 0;
 }
+.appGuideTable {
+	margin: 0 5px 0 5px;
+	width: 95%;
+}
+.appGuideTable>tbody>tr>td, .appGuideTable>thead>tr>th,
+ .appGuideTable>thead>tr>td, .appGuideTable>thead:first-child>tr:first-child>th{
+	border: 1px solid #5f5c5c;
+}
 
 .wrench {
-	display: block;
+	display: inline;
+	margin-left: 5px;
 }
 
 .header {
