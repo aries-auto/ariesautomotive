@@ -70,7 +70,6 @@ const VehicleSource = {
 	fetchEnvision() {
 		return {
 			remote(st, year, make, model, colorID, identifiers) {
-				console.log(`${iapiBase}/envision/image?year=${year}&make=${make}&model=${model}&colorID=${colorID || ''}&skus=${identifiers || ''}&key=${KEY}`);
 				return new Promise((res, rej) => {
 					fetch(`${iapiBase}/envision/image?year=${year}&make=${make}&model=${model}&colorID=${colorID || ''}&skus=${identifiers || ''}&key=${KEY}`)
 					.then((resp) => {
