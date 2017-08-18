@@ -16,6 +16,7 @@ class PartResults extends Component {
 		parts: PropTypes.array,
 		vehicle: PropTypes.object,
 		envision: PropTypes.object,
+		searchResults: PropTypes.boolean,
 	};
 
 	static getStores() {
@@ -34,6 +35,7 @@ class PartResults extends Component {
 					key={i}
 					envision={this.props.envision}
 					vehicle={this.props.vehicle}
+					searchResults={this.props.searchResults}
 				/>
 			);
 		});

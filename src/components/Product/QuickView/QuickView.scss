@@ -52,6 +52,19 @@
 		}
 	}
 
+	.activeLink{
+		color: inherit;
+		text-decoration: inherit;
+		cursor:pointer;
+	}
+
+	.disabledLink{
+		color: inherit;
+		text-decoration: inherit;
+		cursor:auto;
+		pointer-events: none;
+	}
+
 	.header .partNum {
 		margin: 0 5px;
 		font-size: 24px;

@@ -91,6 +91,7 @@ class SearchResults extends Component {
 	}
 
 	renderParts() {
+		const searchResults = true;
 		if (!this.props.searchResults || !this.props.searchResults.hits || !this.props.searchResults.hits.hits) {
 			return null;
 		}
@@ -102,7 +103,7 @@ class SearchResults extends Component {
 			parts.push(this.props.searchResults.hits.hits[i]._source);
 		}
 
-		return <PartResults parts={parts} />;
+		return <PartResults parts={parts} searchResults={searchResults} />;
 	}
 
 	renderScrollTo() {

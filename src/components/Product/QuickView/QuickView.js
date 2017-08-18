@@ -15,6 +15,7 @@ class QuickView extends Component {
 		product: PropTypes.object,
 		vehicle: PropTypes.object,
 		envision: PropTypes.object,
+		searchResults: PropTypes.boolean,
 	};
 
 	constructor() {
@@ -106,15 +107,19 @@ class QuickView extends Component {
 			<div className={cx(s.root, (layer ? s.envision : null))} onClick={layer ? this.handleAddToVehicle : null}>
 				<div className={s.header}>
 					<div className={s.desc}>
-						<span>{this.props.product.short_description}</span>
-						<span className={s.partNum}>{this.props.product.part_number}</span>
+						<a href={(this.props.searchResults) ? `/part/${this.props.product.part_number}` : '#'} className={(this.props.searchResults) ? s.activeLink : s.disabledLink}>
+							<span>{this.props.product.short_description}</span>
+							<span className={s.partNum}>{this.props.product.part_number}</span>
+						</a>
 					</div>
 					{ this.showSubDescription() }
 					{(layer) ? <span className={s.envisionBadge} /> : null}
 				</div>
 
 				<div className={s.image}>
-					<img className="img-responsive" src={this.partImages()} alt={'Image for ' + this.props.product.short_description} />
+					<a href={(this.props.searchResults) ? `/part/${this.props.product.part_number}` : '#'} className={(this.props.searchResults) ? s.activeLink : s.disabledLink}>
+						<img className="img-responsive" src={this.partImages()} alt={'Image for ' + this.props.product.short_description} />
+					</a>
 				</div>
 
 				<div className={s.partBox}>

@@ -95,7 +95,7 @@ class Result extends Component {
 					<span>{this.props.result.category.title}</span>
 					{this.renderStyles()}
 				</div>
-				<PartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} />
+				<PartResults className={`test`} parts={this.state.products} iconParts={this.props.iconParts} searchResults={false} />
 			</div>
 		);
 	}
