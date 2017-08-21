@@ -45,6 +45,7 @@ class VehicleResults extends Component {
 		};
 		this.getMatched = this.getMatched.bind(this);
 		this.createParentItem = this.createParentItem.bind(this);
+		this.catSortFunc = this.catSortFunc.bind(this);
 	}
 
 	static getStores() {
@@ -88,6 +89,7 @@ class VehicleResults extends Component {
 
 			let subs = [];
 			if (c.children && c.children.length > 0) {
+				c.children.sort((a, b) => a.sort > b.sort);
 				(c.children || []).map((cat) => {
 					const tmp = this.props.vehicle.lookup_category.filter((t) => t.category.id === cat.cat.id);
 					if (tmp.length > 0) {
@@ -115,13 +117,15 @@ class VehicleResults extends Component {
 					subs = subs.concat(SeatDefender);
 				}
 			}
-
+			// sort subs which is an array of array
+			let newSubs = [];
+			newSubs = subs.sort(this.catSortFunc);
 			if (subs.length > 0) {
 				groups.push(
 					<CategorizedResult
 						activeIndex={this.props.activeIndex}
 						parent={c}
-						subs={subs}
+						subs={newSubs}
 						fitments={this.props.fitments}
 						key={groups.length}
 						iconParts={this.props.envision.partNumbers}
@@ -131,6 +135,13 @@ class VehicleResults extends Component {
 		});
 
 		return groups;
+	}
+
+	catSortFunc(a, b) {
+		if (a.category.sort < b.category.sort) {
+			return -1;
+		}
+		return 1;
 	}
 
 	createParentItem(cat) {
@@ -145,6 +156,7 @@ class VehicleResults extends Component {
 
 		if (cat.children) {
 			newCat.children = cat.children.map(this.createParentItem);
+			newCat.children.sort((a, b) => a.sort > b.sort);
 		}
 
 		return newCat;
