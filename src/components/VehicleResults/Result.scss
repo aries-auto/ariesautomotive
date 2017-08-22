@@ -2,12 +2,14 @@
 
 .root {
     display: flex;
-	flex-direction: column;
+		flex-direction: column;
     width: 0;
     height: 0;
     overflow: hidden;
     transition: height .5s ease-in;
-
+		.header{
+			min-height:60px;
+		}
     &.active {
         width: 100%;
         height: auto;
@@ -29,7 +31,8 @@
                 font-size: 1.3em;
                 line-height: 1.3em;
                 color: $black-base;
-				margin-right: 10px;
+								margin-right: 10px;
+								max-width:50%;
             }
 
             > div {
