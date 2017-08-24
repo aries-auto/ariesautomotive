@@ -21,6 +21,12 @@
 	}
 }
 
+@media (max-width: $screen-md-min) {
+	.root {
+		display:inline-block;
+	}
+}
+
 @media (min-width: $screen-md-min) {
 	.root {
 		width: 100px;
