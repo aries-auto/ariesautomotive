@@ -2,8 +2,8 @@
 @import '../../classes.scss';
 
 .root {
-	min-height: 600px;
-	width: 80%;
+	min-height: 620px;
+	width: 90%;
 	padding: 10px;
 	margin: 10px;
 	background: $lookup-color;
@@ -87,6 +87,11 @@
 			margin: 0 auto;
 			box-shadow: 1px 0 10px 2px $gray-lighter;
 		}
+	}
+
+	.partBox{
+		min-height:100px;
+		height:auto;
 	}
 
 	.attr {
