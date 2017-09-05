@@ -140,10 +140,14 @@ class SearchResults extends Component {
 		return (
 			<div className={cx(s.root, this.props.className, 'container')} role="navigation">
 				<div className="category-content container">
-					<h1 id="catTitle">{this.props.category.title}</h1>
+					<h1 className={s.catTitle} id="catTitle">{this.props.category.title}</h1>
+					<a className={s.partsLink} href="#partsContainer"><button type="button" className={`red-transparent-button`} >Jump to Products</button></a>
+					<div className={s.clearFix}></div>
 					<div dangerouslySetInnerHTML={this.getContent()} />
 				</div>
-				{this.renderParts()}
+				<div id="partsContainer">
+					{this.renderParts()}
+				</div>
 			</div>
 		);
 	}
