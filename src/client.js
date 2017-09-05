@@ -54,7 +54,9 @@ function render(state) {
 		ReactDOM.render(component, appContainer, () => {
 			// Remove the pre-rendered CSS because it's no longer used
 			// after the React app is launched
-			window.scrollTo(0, 0);
+			if (!window.location.hash) {
+				window.scrollTo(0, 0);
+			}
 			if (cssContainer) {
 				cssContainer.parentNode.removeChild(cssContainer);
 				cssContainer = null;
