@@ -294,6 +294,7 @@ server.get('*', nocache, async (req, res, next) => {
 		const data = {
 			title: 'Product Information',
 			description: brand.description,
+			canonical: `https://www.${brand.domain}${req.url}`,
 			css: '',
 			body: '',
 			entry: assets.main.js,
