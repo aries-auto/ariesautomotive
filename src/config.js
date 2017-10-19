@@ -53,6 +53,7 @@ const aries = {
 	contactHeroImage: 'https://storage.googleapis.com/aries-website/aries-building-1.png',
 	shareImage: 'https://storage.googleapis.com/aries-logo/ariesshare.png',
 	website: 'http://www.ariesautomotive.com',
+	domain: 'ariesautomotive.com',
 	favicons: {
 		version: '2.1',
 		apple: [
@@ -118,6 +119,7 @@ const luverne = {
 	footerLogo: 'https://storage.googleapis.com/luverne/logos/Luverne%20Logo%20(1c_white%20on%20transparent).svg',
 	contactHeroImage: 'https://storage.googleapis.com/luvere_site_content/Exterior%20-%20Luverne%20-%20Summer%20(4v1).jpg',
 	website: 'http://www.luvernetruck.com',
+	domain: 'luvernetruck.com',
 	favicons: {
 		version: '2.1',
 		apple: [
