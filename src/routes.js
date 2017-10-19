@@ -106,7 +106,7 @@ const router = new Router(on => {
 			await	CategoryStore.fetchProducts(state.params.id);
 			prods = CategoryStore.getProducts();
 		}
-
+		state.context.canonical = encodeURI(`https://www.ariesautomotive.com/category/${state.params.id}/${cat.title}`);
 		return <Category context={state.context} category={cat} categoryProducts={prods} />;
 	});
 
@@ -119,7 +119,7 @@ const router = new Router(on => {
 			await	CategoryStore.fetchProducts(state.params.id);
 			prods = CategoryStore.getProducts();
 		}
-
+		state.context.canonical = encodeURI(`https://www.ariesautomotive.com/category/${state.params.id}/${cat.title}`);
 		return <Category context={state.context} category={cat} categoryProducts={prods} />;
 	});
 

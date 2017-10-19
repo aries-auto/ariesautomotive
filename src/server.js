@@ -337,7 +337,12 @@ server.get('*', nocache, async (req, res, next) => {
 		};
 
 		let redirect = null;
+		let stateCanonical = '';
 		await Router.dispatch({ path: req.path, query: req.query, context }, (state, component) => {
+			stateCanonical = state.context.canonical;
+			if (stateCanonical) {
+				data.canonical = stateCanonical;
+			}
 			if (state.redirect) {
 				redirect = state.redirect;
 			}
@@ -349,7 +354,6 @@ server.get('*', nocache, async (req, res, next) => {
 			res.redirect(redirect);
 			return;
 		}
-
 		const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
 		res.status(statusCode).send('<!doctype html>\n' + html);
 	} catch (err) {
