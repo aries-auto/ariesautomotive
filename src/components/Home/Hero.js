@@ -6,49 +6,44 @@ import withStyles from '../../decorators/withStyles';
 
 const carouselImages = [
 	{
-		image: 'https://storage.googleapis.com/aries-website/hero-images/Team_ARIES.jpg',
-		text: 'Elite Pro Builders Join Team ARIES!',
-		button_text: 'READ MORE',
-		link: '/news/86',
-		order: 4,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/Team_ARIES.jpg)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/black-bull-bar.jpg',
-		text: 'Never Fear the Uncertain Road',
-		button_text: 'VIEW BULL BARS',
-		link: '/category/342/AdvantEDGE%205.5%22%20Bull%20Bars',
-		order: 5,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/black-bull-bar.jpg)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png',
-		text: 'Find Out What It Means to Be a Pro',
-		button_text: 'VIEW PRO SERIES',
-		link: '/category/331',
-		order: 2,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/GrandCherokee.png)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/TrailerChaser_Bumpers.jpg',
-		text: 'Ready to Customize. Ready for the Trail.',
-		button_text: 'VIEW TRAILCHASER',
-		link: '/category/397',
-		order: 3,
-		styles: {
-			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/TrailerChaser_Bumpers.jpg)',
-		},
-	}, {
-		image: 'https://storage.googleapis.com/aries-website/hero-images/AdvantEDGE_with_LEDs.jpg',
-		text: 'Unique Design. All-Aluminum. Integrated LEDs.',
-		button_text: 'VIEW ADVANTEDGE',
-		link: '/category/342/',
+		image: 'https://storage.googleapis.com/aries-website/hero-images/new/Switchback-Banner.jpg',
+		text: 'Aggressive Style. All Aluminum.',
+		button_text: 'View Switchback™',
+		link: '/category/432/Switchback%20Headache%20Racks',
+		external: false,
 		order: 1,
 		styles: {
-			backgroundImage: `url('https://storage.googleapis.com/aries-website/hero-images/AdvantEDGE_with_LEDs.jpg')`,
+			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/new/Switchback-Banner.jpg)',
+		},
+	}, {
+		image: 'https://storage.googleapis.com/aries-website/hero-images/new/TrailChaser-Banner.jpg',
+		text: '24 Configurations. Front and Rear Options.',
+		button_text: 'View TrailChaser™',
+		link: '/category/397/Jeep%20TrailChaser%20Bumpers',
+		external: false,
+		order: 2,
+		styles: {
+			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/new/TrailChaser-Banner.jpg)',
+		},
+	}, {
+		image: 'https://storage.googleapis.com/aries-website/hero-images/new/Tire-Carrier-Banner.jpg',
+		text: 'Tires up to 37”. Fully Adjustable.',
+		button_text: 'View HD Tire Carrier',
+		link: '/category/400/Jeep%20Tire%20Carriers',
+		external: false,
+		order: 3,
+		styles: {
+			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/new/Tire-Carrier-Banner.jpg)',
+		},
+	}, {
+		image: 'https://storage.googleapis.com/aries-website/hero-images/new/TeamARIES-Banner.jpg',
+		text: 'Find Out What It Means to Be a Pro.',
+		button_text: 'Join Team ARIES',
+		link: 'https://www.teamaries.com/',
+		external: true,
+		order: 4,
+		styles: {
+			backgroundImage: `url('https://storage.googleapis.com/aries-website/hero-images/new/TeamARIES-Banner.jpg')`,
 		},
 	},
 ];
@@ -70,7 +65,7 @@ class Hero extends Component {
 							<div className="carousel-caption">
 								<span className={cx('big-text')}>{img.text}</span>
 								<div className="clearfix"></div>
-								<a className="white-transparent-button" href={img.link}>{img.button_text}</a>
+								<a className="white-transparent-button" href={img.link} target={(img.external ? '_blank' : '_self')}>{img.button_text}</a>
 							</div>
 						</CarouselItem>
 					);
