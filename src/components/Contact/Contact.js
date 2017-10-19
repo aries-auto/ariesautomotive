@@ -10,7 +10,7 @@ import ContactActions from '../../actions/ContactActions';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import Form from '../Form/Form';
 import { locations, main } from '../../data/locations';
-import { phone } from '../../data/contact';
+import { phone, techPhone } from '../../data/contact';
 import MainLocation from './MainLocation';
 import SupportLocations from './SupportLocations';
 
@@ -113,7 +113,8 @@ class Contact extends Component {
 							<h1>OUR LOCATIONS</h1>
 						</div>
 						<div className={s.addresses}>
-							<div className={s.techsupport}><h4>TECH SUPPORT HOTLINE: {phone}</h4></div>
+							<div className={s.techsupport}><h4>PRODUCT SUPPORT: {techPhone}</h4></div>
+							<div className={s.techsupport}><h4>CUSTOMER SERVICE: {phone}</h4></div>
 							<MainLocation location={main} className={s.mainLocation} />
 							<SupportLocations locations={locations} />
 						</div>

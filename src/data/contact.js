@@ -59,6 +59,10 @@ module.exports.fields = [
 	},
 ];
 
+module.exports.techPhone = (
+	<a rel="canonical" href="tel:+18442784357">(844) 278-4357</a>
+);
+
 module.exports.phone = (
 	<a rel="canonical" href="tel:+18888002743">(888) 800-2743</a>
 );
