@@ -9,7 +9,7 @@ Setup Local Development
 The steps to setup a developer environment.
 > This document assumes you have already setup your local databases.
 
-####Required Software:
+### Required Software:
 
 - npm
 
@@ -17,7 +17,7 @@ The steps to setup a developer environment.
 - [nvm](https://github.com/creationix/nvm/blob/master/README.markdown) - This requires an old version of node, so you want to be able to manage versions
 
 
-####Start project:
+### Start project:
 
 	`~ $ nvm install v5.2.0`
 	`~ $ npm install`
