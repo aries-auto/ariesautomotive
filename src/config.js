@@ -13,13 +13,13 @@ case 'staging':
 	cachePrefix = 'staging';
 	break;
 case 'production':
-	iapi = 'http://iapi.curtmfg.com';
-	api = 'http://goapi.curtmfg.com';
+	iapi = 'https://iapi.curtmfg.com';
+	api = 'https://goapi.curtmfg.com';
 	cachePrefix = 'production';
 	break;
 default:
-	iapi = 'http://iapi.curtmfg.com';
-	api = 'http://goapi.curtmfg.com';
+	iapi = 'https://iapi.curtmfg.com';
+	api = 'https://goapi.curtmfg.com';
 	cachePrefix = 'local';
 }
 
