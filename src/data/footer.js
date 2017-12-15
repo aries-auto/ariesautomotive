@@ -33,8 +33,8 @@ module.exports = {
 		},
 		{
 			href: 'http://warranty.curtgroup.com/surveys/5',
-			title: 'Online Warranties',
-			value: 'ONLINE WARRANTIES',
+			title: 'Product Registration',
+			value: 'PRODUCT REGISTRATION',
 			target: '_blank',
 		},
 		{
