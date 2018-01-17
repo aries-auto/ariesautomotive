@@ -64,7 +64,7 @@ class Footer extends Component {
 									<img src="https://storage.googleapis.com/aries-website/site-assets/phone.png" alt="phone image" />
 									<span className={s.phone}>
 										CALL
-										<a itemProp="telephone" href="tel:+18882655615" title="Call Us (888) 265-5615">
+										<a itemProp="telephone" href="tel:+18772878634" title="Call Us (877) 287-8634">
 											(888) 265-5615
 										</a>
 									</span>
