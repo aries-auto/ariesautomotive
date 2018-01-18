@@ -17,20 +17,11 @@ class Contact extends Component {
 				<div className={s.physical} itemProp="address" itemType="//schema.org/PostalAddress">
 					<strong>Physical Address</strong><br />
 					<span itemProp="streetAddress">{this.props.location.physical.address.address1}</span>
-					<br />
 					<span itemProp="suite">{this.props.location.physical.address.address2}</span>
 					<br />
 					<span itemProp="addressLocality">{this.props.location.physical.address.city}</span>,
 					<span itemProp="addressRegion"> {this.props.location.physical.address.state}</span>
 					<span itemProp="postalCode"> {this.props.location.physical.address.zip}</span>
-				</div>
-				<div className={s.mailing} itemProp="address" itemType="//schema.org/PostalAddress">
-					<strong>Mailing Address</strong><br />
-					<span itemProp="streetAddress">{this.props.location.mailing.address.address1}</span>
-					<br />
-					<span itemProp="addressLocality">{this.props.location.mailing.address.city}</span>,
-					<span itemProp="addressRegion"> {this.props.location.mailing.address.state}</span>
-					<span itemProp="postalCode"> {this.props.location.mailing.address.zip}</span>
 				</div>
 				<div className={s.mainTelephone}>
 					Toll Free: <a href={this.props.location.phone.ugly} itemProp="telephone">{this.props.location.phone.pretty}</a><br />

@@ -47,26 +47,29 @@ export const locations = [
 		phone: '(877) 287-8634',
 		fax: '(715) 831-8712',
 	},
-];
-
-module.exports.main = {
-	physical: {
-		name: 'ARIES AUTOMOTIVE HEADQUARTERS - DALLAS AREA',
-		address: {
+	{
+		name: 'ARIES AUTOMOTIVE DALLAS AREA',
+		address: [{
 			address1: '2611 Regent Boulevard',
 			address2: 'Suite 300',
 			city: 'DFW Airport',
 			state: 'TX',
 			zip: '75261',
-		},
+		}],
+		phone: '(972) 456-0222',
+		fax: '(972) 352-2617',
 	},
-	mailing: {
+];
+
+module.exports.main = {
+	physical: {
+		name: 'ARIES AUTOMOTIVE HEADQUARTERS',
 		address: {
-			address1: 'PO BOX 1598',
+			address1: '6208 Industrial Drive',
 			address2: '',
-			city: 'Grapevine',
-			state: 'TX',
-			zip: '76051',
+			city: 'Eau Claire',
+			state: 'WI',
+			zip: '54701',
 		},
 	},
 	phone: {
@@ -74,11 +77,11 @@ module.exports.main = {
 		ugly: 'tel:+18882655615',
 	},
 	local: {
-		pretty: '(972) 456-0222',
-		ugly: 'tel:+19724560222',
+		pretty: '(715) 831-8713',
+		ugly: 'tel:+17158318713',
 	},
 	fax: {
-		pretty: '(972) 352-2617',
-		ugly: 'tel:+19723522617',
+		pretty: '(715) 831-8712',
+		ugly: 'tel:+17158318712',
 	},
 };

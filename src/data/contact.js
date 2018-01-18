@@ -64,7 +64,7 @@ module.exports.techPhone = (
 );
 
 module.exports.customerService = (
-	<a rel="canonical" href="tel:+18882655615">(888) 265-5615</a>
+	<a rel="canonical" href="tel:+18772878634">(877) 287-8634</a>
 );
 
 module.exports.phone = (
