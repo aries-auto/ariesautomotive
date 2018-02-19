@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import s from './Home.scss';
+// import ga from 'react-ga';
 // import Catalogs from './Catalogs';
 import FeaturedProducts from './FeaturedProducts';
 import Testimonials from './Testimonials';
@@ -9,6 +10,7 @@ import Marketing from './Marketing';
 import withStyles from '../../decorators/withStyles';
 import ProductStore from '../../stores/ProductStore';
 import SiteStore from '../../stores/SiteStore';
+import Modal from 'react-modal';
 import { brand } from '../../config';
 import connectToStores from 'alt-utils/lib/connectToStores';
 
@@ -34,10 +36,51 @@ class Home extends Component {
 		seo: PropTypes.func.isRequired,
 	};
 
+	constructor(props) {
+		super(props);
+		this.openModal = this.openModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+		this.state = {
+			modalStyles: {
+				overlay: {
+					position: 'fixed',
+					top: 0,
+					left: 0,
+					right: 0,
+					bottom: 0,
+					backgroundColor: 'rgba(0, 0, 0, 0.75)',
+					zIndex: '9999',
+				},
+				content: {
+					top: '30%',
+					left: '32%',
+					right: 'auto',
+					bottom: 'auto',
+					padding: '0',
+					transform: 'translate(-25%, -25%)',
+					width: '70%',
+					height: 'auto',
+					borderRadius: '0',
+					border: '0',
+				},
+			},
+			modalIsOpen: false,
+		};
+	}
+
 	componentWillMount() {
 		this.context.onSetTitle(brand.name);
 		this.context.onSetMeta('description', brand.description);
 		this.context.seo(seo);
+	}
+
+	componentDidMount() {
+		// delay and function call to open modal on page load.
+		// let that = this;
+		// setTimeout(function () {
+		// 	that.openModal();
+		// }, 1000);
+		this.openModal();
 	}
 
 	static getStores() {
@@ -51,10 +94,35 @@ class Home extends Component {
 		};
 	}
 
+	openModal() {
+		// ga.event({ category: 'Ariect:HP', action: 'Open Modal', label: 'ActionTrack' });
+		this.setState({
+			context: this.state.context,
+			modalIsOpen: true,
+		});
+	}
+
+	closeModal() {
+		this.setState({
+			context: this.state.context,
+			modalIsOpen: false,
+		});
+	}
+
 	render() {
 		return (
 			<div className={cx(s.root, this.props.className, 'home-container')} role="navigation">
-
+				{/* YouTube Modal */}
+				<Modal
+					isOpen={this.state.modalIsOpen}
+					onRequestClose={this.closeModal}
+					style={this.state.modalStyles}
+					ariaHideApp={false}
+				>
+					<div className={s.videoWrapper}>
+						<iframe className={s.modalIframe} src="https://www.youtube.com/embed/xHVtJ6STy1I?rel=0&autoplay=1" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+					</div>
+				</Modal>
 				<Hero />
 				<Marketing />
 				{/* <div className="container">

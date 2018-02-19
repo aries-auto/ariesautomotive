@@ -7,11 +7,22 @@ import withStyles from '../../decorators/withStyles';
 const carouselImages = [
 	{
 		image: 'https://storage.googleapis.com/aries-website/hero-images/new/Switchback-Banner.jpg',
+		text: 'Innovative Step within a Step.',
+		button_text: 'View ActionTrac™ Powered Running Boards',
+		link: '/category/467/ActionTrack%20Powered%20Running%20Boards',
+		external: false,
+		order: 1,
+		styles: {
+			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/Current-Site---Header-Image.jpg)',
+		},
+	},
+	{
+		image: 'https://storage.googleapis.com/aries-website/hero-images/new/Switchback-Banner.jpg',
 		text: 'Aggressive Style. All Aluminum.',
 		button_text: 'View Switchback™',
 		link: '/category/432/Switchback%20Headache%20Racks',
 		external: false,
-		order: 1,
+		order: 2,
 		styles: {
 			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/new/Switchback-Banner.jpg)',
 		},
@@ -21,7 +32,7 @@ const carouselImages = [
 		button_text: 'View TrailChaser™',
 		link: '/category/397/Jeep%20TrailChaser%20Bumpers',
 		external: false,
-		order: 2,
+		order: 3,
 		styles: {
 			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/new/TrailChaser-Banner.jpg)',
 		},
@@ -31,7 +42,7 @@ const carouselImages = [
 		button_text: 'View HD Tire Carrier',
 		link: '/category/400/Jeep%20Tire%20Carriers',
 		external: false,
-		order: 3,
+		order: 4,
 		styles: {
 			backgroundImage: 'url(https://storage.googleapis.com/aries-website/hero-images/new/Tire-Carrier-Banner.jpg)',
 		},
@@ -41,7 +52,7 @@ const carouselImages = [
 		button_text: 'Join Team ARIES',
 		link: 'https://www.teamaries.com/',
 		external: true,
-		order: 4,
+		order: 5,
 		styles: {
 			backgroundImage: `url('https://storage.googleapis.com/aries-website/hero-images/new/TeamARIES-Banner.jpg')`,
 		},
