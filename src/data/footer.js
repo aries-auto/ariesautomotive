@@ -33,8 +33,8 @@ module.exports = {
 		},
 		{
 			href: 'https://storage.googleapis.com/curt-group-warranties/ARIES_Warranty_2018.02.09.pdf',
-			title: 'Warranty Information',
-			value: 'WARRANTY INFORMATION',
+			title: 'Warranty',
+			value: 'WARRANTY',
 			target: '_blank',
 		},
 		{
