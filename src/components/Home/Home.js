@@ -4,6 +4,7 @@ import s from './Home.scss';
 // import ga from 'react-ga';
 // import Catalogs from './Catalogs';
 import FeaturedProducts from './FeaturedProducts';
+import cookie from 'react-cookie';
 import Testimonials from './Testimonials';
 import Hero from './Hero';
 import Marketing from './Marketing';
@@ -75,12 +76,15 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
+		const cookieModal = cookie.load('modal');
 		// delay and function call to open modal on page load.
 		// let that = this;
 		// setTimeout(function () {
 		// 	that.openModal();
 		// }, 1000);
-		this.openModal();
+		if (!cookieModal) {
+			this.openModal();
+		}
 	}
 
 	static getStores() {
@@ -107,6 +111,7 @@ class Home extends Component {
 			context: this.state.context,
 			modalIsOpen: false,
 		});
+		cookie.save('modal', 'hide', { path: '/', maxAge: 86400 });
 	}
 
 	render() {
@@ -117,7 +122,6 @@ class Home extends Component {
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}
 					style={this.state.modalStyles}
-					ariaHideApp={false}
 				>
 					<div className={s.videoWrapper}>
 						<iframe className={s.modalIframe} src="https://www.youtube.com/embed/xHVtJ6STy1I?rel=0&autoplay=1" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
