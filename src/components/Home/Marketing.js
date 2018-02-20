@@ -20,9 +20,9 @@ class Home extends Component {
 		return (
 			<div className={cx(s.root, 'container', this.props.className)}>
 				<div>
-					<h1>Unique, New Step-in-Step</h1>
+					<h1>Unique, New Step-within-a-Step™</h1>
 					<p>
-						ARIES all-new ActionTrac™ powered running boards offer an innovative step-within-a-step design. They’re actually two steps in one, providing the easiest possible access, especially on larger, lifted trucks and Jeeps.
+						ARIES all-new ActionTrac™ powered running boards offer an innovative Step-within-a-Step™ design. They’re actually two steps in one, providing the easiest possible access, especially on larger, lifted trucks and Jeeps.
 					</p>
 					<p>
 						ActionTrac™ running boards also feature smart sensors for automated operation, powder-coated aluminum construction for maximum corrosion resistance and an easy, no-drill installation.
@@ -39,8 +39,8 @@ class Home extends Component {
 						<img src="https://storage.googleapis.com/aries-website/whatsnew/What's-New-Banner.png" alt="What's New with ARIES" className={cx(s.header)} />
 						<div className={cx(s.callout)}>
 							<a href="/category/467/ActionTrack%20Powered%20Running%20Boards">
-								<img src="https://storage.googleapis.com/aries-website/whatsnew/Current%20Site%20-%20Whats%20New%20with%20ARIES.gif" alt="Innovative Step within a Step" className="styleguard" />
-								<span>Innovative Step within a Step.</span>
+								<img src="https://storage.googleapis.com/aries-website/whatsnew/Current%20Site%20-%20Whats%20New%20with%20ARIES.gif" alt="Innovative Step-within-a-Step™" className="styleguard" />
+								<span>Innovative Step-within-a-Step™.</span>
 							</a>
 						</div>
 						<Catalogs />

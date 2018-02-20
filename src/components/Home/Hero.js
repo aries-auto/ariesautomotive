@@ -7,7 +7,7 @@ import withStyles from '../../decorators/withStyles';
 const carouselImages = [
 	{
 		image: 'https://storage.googleapis.com/aries-website/hero-images/new/Switchback-Banner.jpg',
-		text: 'Innovative Step within a Step.',
+		text: 'Innovative Step-within-a-Step™.',
 		button_text: 'View ActionTrac™ Powered Running Boards',
 		link: '/category/467/ActionTrack%20Powered%20Running%20Boards',
 		external: false,
