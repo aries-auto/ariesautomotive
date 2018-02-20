@@ -126,7 +126,7 @@ class Home extends Component {
 					style={this.state.modalStyles}
 				>
 					<div className={s.videoWrapper}>
-						<iframe className={s.modalIframe} src="https://www.youtube.com/embed/xHVtJ6STy1I?rel=0&autoplay=1" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+						<iframe className={s.modalIframe} src="https://www.youtube.com/embed/prkOqQtWvVw?rel=0&autoplay=1&mute=1" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
 					</div>
 				</Modal>
 				<Hero />
