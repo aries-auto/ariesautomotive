@@ -111,7 +111,9 @@ class Home extends Component {
 			context: this.state.context,
 			modalIsOpen: false,
 		});
-		cookie.save('modal', 'hide', { path: '/', maxAge: 86400 });
+		// once the modal is closed, set a cookie for 7 days
+		// so the popup modal doesnt automatically open on the homepage again for 7 days
+		cookie.save('modal', 'hide', { path: '/', maxAge: 604800 });
 	}
 
 	render() {
