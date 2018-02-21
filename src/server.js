@@ -277,6 +277,10 @@ server.get('/warranties', (req, res) => {
 	res.redirect(301, 'http://survey.curtmfg.com/surveys/5');
 });
 
+server.get('/buy', (req, res) => {
+	res.redirect(302, '/');
+});
+
 function nocache(req, res, next) {
 	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 	res.header('Pragma', 'no-cache');
