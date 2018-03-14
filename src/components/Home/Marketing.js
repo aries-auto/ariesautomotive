@@ -28,7 +28,7 @@ class Home extends Component {
 						ActionTrac™ running boards also feature smart sensors for automated operation, powder-coated aluminum construction for maximum corrosion resistance and an easy, no-drill installation.
 					</p>
 					<div className={cx(s.ytWrapper)}>
-						<iframe allowFullScreen="" frameBorder="0" height="315" src="https://www.youtube.com/embed/aAeQvvZN-GE?rel=0" width="420"></iframe>
+						<iframe allowFullScreen="" frameBorder="0" height="315" src="https://www.youtube.com/embed/iZ3Z_R6rBrQ?rel=0" width="420"></iframe>
 					</div>
 					<div className={cx(s.ytWrapper)}>
 						<iframe allowFullScreen="" frameBorder="0" height="315" src="https://www.youtube.com/embed/lkxKCr3Gx5I?rel=0" width="420"></iframe>
