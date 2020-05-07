@@ -57,6 +57,19 @@ class App extends Component {
 		const styles = {
 			background: "url('https://storage.googleapis.com/aries-website/site-assets/bgtexture.png')",
 		};
+
+		const noticeStyles = {
+			minHeight: '45px',
+			backgroundColor: '#444',
+			textAlign: 'center',
+			color: 'white',
+			padding: '10px',
+			fontStyle: 'italic',
+		};
+		const noticeLink = {
+			color: 'white',
+			textDecoration: 'underline',
+		};
 		return (
 			<div className={cx(s.root)} style={styles}>
 				<Header context={this.props.context} />
@@ -64,6 +77,11 @@ class App extends Component {
 					{this.props.children}
 				</div>
 				<Footer siteContents={this.props.context.siteContents} />
+				<div style={noticeStyles}>
+					<span>
+						This Website will be deprecated as of November 1, 2020. Please visit our <a href="https://www.ariesautomotive.com" style={noticeLink}>New Website</a> and contact us if there are any missing features.
+					</span>
+				</div>
 			</div>
 		);
 	}
