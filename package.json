@@ -72,7 +72,7 @@
     "jest-cli": "^0.8.2",
     "jscs": "^2.7.0",
     "json-loader": "^0.5.4",
-    "lodash.merge": "^3.3.2",
+    "lodash.merge": "^4.6.2",
     "mkdirp": "^0.5.1",
     "mocha": "^2.4.5",
     "ncp": "^2.0.0",
